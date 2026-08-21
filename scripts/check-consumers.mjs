@@ -29,6 +29,13 @@ const packageTarball = (name) => {
   return `file:${join(packsDirectory, filename)}`
 }
 
+const packedDependencies = Object.fromEntries(
+  ['astro', 'elements', 'icons', 'react', 'tokens'].map((name) => [
+    `@caderno-ui/${name}`,
+    packageTarball(name),
+  ]),
+)
+
 await rm(artifact, { force: true, recursive: true })
 await mkdir(artifact, { recursive: true })
 for (const directory of ['astro', 'node', 'react', 'typescript', 'vite']) {
@@ -42,11 +49,7 @@ const packageJson = {
   private: true,
   type: 'module',
   dependencies: {
-    '@caderno-ui/astro': packageTarball('astro'),
-    '@caderno-ui/elements': packageTarball('elements'),
-    '@caderno-ui/icons': packageTarball('icons'),
-    '@caderno-ui/react': packageTarball('react'),
-    '@caderno-ui/tokens': packageTarball('tokens'),
+    ...packedDependencies,
     '@types/react': reactMajor === '18' ? '^18.3.0' : '^19.2.0',
     '@types/react-dom': reactMajor === '18' ? '^18.3.0' : '^19.2.0',
     astro: astroVersion,
@@ -54,6 +57,9 @@ const packageJson = {
     'react-dom': reactVersion,
     typescript: astroVersion.startsWith('5.') ? '^5.9.3' : '^6.0.3',
     vite: '^8.2.2',
+  },
+  pnpm: {
+    overrides: packedDependencies,
   },
 }
 await writeFile(

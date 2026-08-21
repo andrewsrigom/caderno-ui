@@ -25,7 +25,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:packages": "pnpm --recursive --filter './packages/*' exec publint",
-    "manifest": "cem analyze --litelement --globs \"packages/elements/src/**/*.ts\" --outdir packages/elements",
+    "manifest": "cem analyze --litelement --globs \"packages/elements/src/**/*.ts\" --outdir packages/elements && node scripts/normalize-manifest.mjs",
     "test": "pnpm -r --if-present test",
     "test:e2e": "playwright test",
     "typecheck": "pnpm -r --if-present typecheck",

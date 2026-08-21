@@ -6,9 +6,12 @@ on:
     paths:
       - '.github/workflows/pages.yml'
       - 'apps/docs/**'
+      - 'package.json'
       - 'packages/**'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
+      - 'scripts/check-docs.mjs'
+      - 'tsconfig.base.json'
   workflow_dispatch:
 
 permissions:

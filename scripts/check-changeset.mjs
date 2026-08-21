@@ -4,6 +4,15 @@ import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 
+const isVersionPullRequest =
+  process.env.GITHUB_EVENT_NAME === 'pull_request' &&
+  process.env.GITHUB_HEAD_REF?.startsWith('changeset-release/')
+
+if (isVersionPullRequest) {
+  console.log('Version pull request contains already-consumed Changesets.')
+  process.exit(0)
+}
+
 function git(...args) {
   return execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim()
 }

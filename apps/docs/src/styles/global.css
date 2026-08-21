@@ -1,4 +1,4 @@
-@import '@caderno-ui/elements/fallback.css';
+@import url('@caderno-ui/elements/fallback.css');
 
 :root {
   --docs-header-height: 4.75rem;
@@ -7,6 +7,7 @@
   --docs-blue: #2450c5;
   --docs-blue-soft: #dbe7ff;
   --docs-grid: color-mix(in srgb, var(--cad-line-strong) 42%, transparent);
+
   scroll-behavior: smooth;
 }
 
@@ -22,7 +23,7 @@ body {
     linear-gradient(
       90deg,
       transparent 0 4.5rem,
-      rgb(226 81 96 / 0.12) 4.5rem 4.6rem,
+      rgb(226 81 96 / 12%) 4.5rem 4.6rem,
       transparent 4.6rem
     ),
     repeating-linear-gradient(
@@ -98,7 +99,7 @@ pre {
   color: #18345d;
   background: var(--cad-post-it-blue-bg);
   border: 1px solid color-mix(in srgb, #18345d 28%, transparent);
-  box-shadow: 0.18rem 0.2rem 0 rgb(var(--cad-shadow-rgb) / 0.14);
+  box-shadow: 0.18rem 0.2rem 0 rgb(var(--cad-shadow-rgb) / 14%);
   font-family: var(--cad-font-book);
   font-size: 1.55rem;
   font-weight: 700;
@@ -275,7 +276,7 @@ main {
   background: var(--cad-post-it-mint-bg);
   border: 1px solid color-mix(in srgb, #173d2c 28%, transparent);
   border-radius: 0.55rem 0.7rem 0.6rem 0.8rem;
-  box-shadow: 0.2rem 0.25rem 0 rgb(var(--cad-shadow-rgb) / 0.16);
+  box-shadow: 0.2rem 0.25rem 0 rgb(var(--cad-shadow-rgb) / 16%);
   font-weight: 750;
   text-decoration: none;
 }
@@ -292,7 +293,7 @@ main {
   padding: 2rem;
   color: #49370d;
   background: var(--cad-post-it-lemon-bg);
-  box-shadow: 0.7rem 0.8rem 0 rgb(var(--cad-shadow-rgb) / 0.13);
+  box-shadow: 0.7rem 0.8rem 0 rgb(var(--cad-shadow-rgb) / 13%);
   font-family: var(--cad-font-hand);
   font-size: var(--cad-hand-lg);
   line-height: 1.25;
@@ -548,7 +549,7 @@ pre {
   padding: 1rem;
   border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
   border-radius: 0.6rem 0.85rem 0.65rem 0.9rem;
-  box-shadow: 0.2rem 0.25rem 0 rgb(var(--cad-shadow-rgb) / 0.12);
+  box-shadow: 0.2rem 0.25rem 0 rgb(var(--cad-shadow-rgb) / 12%);
 }
 
 .token-swatch strong {
@@ -718,7 +719,7 @@ pre {
   display: none;
 }
 
-@media (max-width: 920px) {
+@media (width <= 920px) {
   .docs-shell {
     display: block;
   }
@@ -774,7 +775,7 @@ pre {
   }
 }
 
-@media (max-width: 680px) {
+@media (width <= 680px) {
   body {
     background:
       repeating-linear-gradient(

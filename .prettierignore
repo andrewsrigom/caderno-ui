@@ -5,4 +5,5 @@ node_modules
 playwright-report
 pnpm-lock.yaml
 packages/elements/custom-elements.json
+packages/*/etc/*.api.md
 test-results

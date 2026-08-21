@@ -1,5 +1,5 @@
 import { cadIcons, type CadIconName } from '@caderno-ui/icons'
-import { css, html, LitElement, svg } from 'lit'
+import { css, html, LitElement, nothing, svg } from 'lit'
 
 /**
  * A typed, hand-drawn Caderno UI SVG icon.
@@ -59,11 +59,11 @@ export class CadIcon extends LitElement {
     return html`
       <svg
         aria-hidden=${isDecorative ? 'true' : 'false'}
-        aria-label=${isDecorative ? undefined : this.label}
+        aria-label=${isDecorative ? nothing : this.label}
         fill="none"
         height=${this.size}
         part="svg"
-        role=${isDecorative ? undefined : 'img'}
+        role=${isDecorative ? nothing : 'img'}
         viewBox="0 0 24 24"
         width=${this.size}
         xmlns="http://www.w3.org/2000/svg"

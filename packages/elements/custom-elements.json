@@ -789,6 +789,16 @@
             },
             {
               "kind": "method",
+              "name": "applyAriaRelationships",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
               "name": "panelId",
               "privacy": "private",
               "return": {

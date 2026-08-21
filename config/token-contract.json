@@ -1,0 +1,69 @@
+{
+  "semanticRequired": [
+    "--cad-bg",
+    "--cad-surface",
+    "--cad-surface-strong",
+    "--cad-ink",
+    "--cad-ink-soft",
+    "--cad-ink-muted",
+    "--cad-line",
+    "--cad-line-strong",
+    "--cad-link",
+    "--cad-focus-ring",
+    "--cad-control-hover",
+    "--cad-post-it-lemon-bg",
+    "--cad-post-it-lemon-ink",
+    "--cad-post-it-pink-bg",
+    "--cad-post-it-pink-ink",
+    "--cad-post-it-mint-bg",
+    "--cad-post-it-mint-ink",
+    "--cad-post-it-blue-bg",
+    "--cad-post-it-blue-ink",
+    "--cad-post-it-coral-bg",
+    "--cad-post-it-coral-ink",
+    "--cad-sticker-violet-bg",
+    "--cad-sticker-violet-ink",
+    "--cad-tape-paper-bg",
+    "--cad-shadow-rgb",
+    "--cad-transition-smooth"
+  ],
+  "contrastPairs": [
+    { "background": "--cad-bg", "foreground": "--cad-ink", "minimum": 4.5 },
+    { "background": "--cad-bg", "foreground": "--cad-link", "minimum": 4.5 },
+    {
+      "background": "--cad-bg",
+      "foreground": "--cad-focus-ring",
+      "minimum": 4.5
+    },
+    {
+      "background": "--cad-post-it-lemon-bg",
+      "foreground": "--cad-post-it-lemon-ink",
+      "minimum": 4.5
+    },
+    {
+      "background": "--cad-post-it-pink-bg",
+      "foreground": "--cad-post-it-pink-ink",
+      "minimum": 4.5
+    },
+    {
+      "background": "--cad-post-it-mint-bg",
+      "foreground": "--cad-post-it-mint-ink",
+      "minimum": 4.5
+    },
+    {
+      "background": "--cad-post-it-blue-bg",
+      "foreground": "--cad-post-it-blue-ink",
+      "minimum": 4.5
+    },
+    {
+      "background": "--cad-post-it-coral-bg",
+      "foreground": "--cad-post-it-coral-ink",
+      "minimum": 4.5
+    },
+    {
+      "background": "--cad-sticker-violet-bg",
+      "foreground": "--cad-sticker-violet-ink",
+      "minimum": 4.5
+    }
+  ]
+}

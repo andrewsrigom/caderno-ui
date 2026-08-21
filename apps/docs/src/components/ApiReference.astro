@@ -1,0 +1,245 @@
+---
+import manifest from '../../../../packages/elements/custom-elements.json'
+
+type ApiItem = {
+  name: string
+  description?: string
+  type?: { text?: string }
+  default?: string
+  fieldName?: string
+}
+
+type Member = ApiItem & {
+  attribute?: string
+  kind?: string
+  privacy?: string
+  reflects?: boolean
+}
+
+type Declaration = {
+  attributes?: ApiItem[]
+  cssParts?: ApiItem[]
+  cssProperties?: ApiItem[]
+  description?: string
+  events?: ApiItem[]
+  members?: Member[]
+  slots?: ApiItem[]
+  tagName?: string
+}
+
+type Props = {
+  tagName: string
+}
+
+const { tagName } = Astro.props
+const declarations = (
+  manifest as { modules: { declarations?: Declaration[] }[] }
+).modules.flatMap((module) => module.declarations ?? [])
+const declaration = declarations.find(
+  (candidate) => candidate.tagName === tagName,
+)
+
+if (!declaration) {
+  throw new Error(
+    `Unknown custom element requested by API reference: ${tagName}`,
+  )
+}
+
+const properties = (declaration.members ?? []).filter(
+  (member) => member.kind === 'field' && member.privacy === 'public',
+)
+const displayDefault = (value?: string) => value ?? '—'
+const displayDescription = (value?: string) => value ?? '—'
+const id = `${tagName}-api`
+---
+
+<section class="content-section api-reference" aria-labelledby={id}>
+  <h2 id={id}>API reference: <code>{`<${tagName}>`}</code></h2>
+  <p>{declaration.description}</p>
+
+  {
+    (declaration.attributes?.length ?? 0) > 0 && (
+      <>
+        <h3>Attributes</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            {declaration.attributes?.map((attribute) => (
+              <tr>
+                <td>
+                  <code>{attribute.name}</code>
+                </td>
+                <td>
+                  <code>{attribute.fieldName}</code>
+                </td>
+                <td>
+                  <code>{attribute.type?.text ?? 'unknown'}</code>
+                </td>
+                <td>
+                  <code>{displayDefault(attribute.default)}</code>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+
+  {
+    properties.length > 0 && (
+      <>
+        <h3>Properties</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Attribute</th>
+              <th>Reflected</th>
+            </tr>
+          </thead>
+          <tbody>
+            {properties.map((property) => (
+              <tr>
+                <td>
+                  <code>{property.name}</code>
+                </td>
+                <td>
+                  <code>{property.type?.text ?? 'unknown'}</code>
+                </td>
+                <td>
+                  <code>{property.attribute ?? '—'}</code>
+                </td>
+                <td>{property.reflects ? 'yes' : 'no'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+
+  {
+    (declaration.events?.length ?? 0) > 0 && (
+      <>
+        <h3>Events</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </>
+            </tr>
+          </thead>
+          <tbody>
+            {declaration.events?.map((event) => (
+              <tr>
+                <td>
+                  <code>{event.name}</code>
+                </td>
+                <td>
+                  <code>{event.type?.text ?? 'CustomEvent'}</code>
+                </td>
+                <td>{displayDescription(event.description)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+
+  {
+    (declaration.slots?.length ?? 0) > 0 && (
+      <>
+        <h3>Slots</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <>
+                <th>Name</th>
+                <th>Description</th>
+              </>
+            </tr>
+          </thead>
+          <tbody>
+            {declaration.slots?.map((slot) => (
+              <tr>
+                <td>
+                  <code>{slot.name || '(default)'}</code>
+                </td>
+                <td>{displayDescription(slot.description)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+
+  {
+    (declaration.cssParts?.length ?? 0) > 0 && (
+      <>
+        <h3>CSS Parts</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <>
+                <th>Name</th>
+                <th>Description</th>
+              </>
+            </tr>
+          </thead>
+          <tbody>
+            {declaration.cssParts?.map((part) => (
+              <tr>
+                <td>
+                  <code>{part.name}</code>
+                </td>
+                <td>{displayDescription(part.description)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+
+  {
+    (declaration.cssProperties?.length ?? 0) > 0 && (
+      <>
+        <h3>CSS custom properties</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <>
+                <th>Name</th>
+                <th>Description</th>
+              </>
+            </tr>
+          </thead>
+          <tbody>
+            {declaration.cssProperties?.map((property) => (
+              <tr>
+                <td>
+                  <code>{property.name}</code>
+                </td>
+                <td>{displayDescription(property.description)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+</section>

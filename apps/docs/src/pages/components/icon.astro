@@ -3,6 +3,7 @@ import { cadIcons, cadIconCategories } from '@caderno-ui/icons'
 
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ApiReference from '../../components/ApiReference.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-icon name="rocket" size="28"></cad-icon>
@@ -63,33 +64,19 @@ const names = Object.keys(cadIcons) as (keyof typeof cadIcons)[]
     </output>
   </section>
 
-  <section class="content-section" aria-labelledby="api-title">
-    <h2 id="api-title">Attributes</h2>
-    <table class="api-table">
-      <thead
-        ><tr><th>Name</th><th>Type</th><th>Default</th><th>Purpose</th></tr
-        ></thead
-      >
-      <tbody>
-        <tr
-          ><td><code>name</code></td><td><code>CadIconName</code></td><td
-            ><code>spark</code></td
-          ><td>Selects a published icon.</td></tr
-        >
-        <tr
-          ><td><code>size</code></td><td><code>string</code></td><td
-            ><code>24</code></td
-          ><td>Sets SVG width and height.</td></tr
-        >
-        <tr
-          ><td><code>label</code></td><td><code>string</code></td><td>empty</td
-          ><td>Makes the icon a labeled image; otherwise it is decorative.</td
-          ></tr
-        >
-        <tr><td>CSS part</td><td colspan="3"><code>svg</code></td></tr>
-      </tbody>
-    </table>
+  <ApiReference tagName="cad-icon" />
+  <section class="content-section" aria-labelledby="typed-api-title">
+    <h2 id="typed-api-title">Typed icon registry</h2>
     <CodeBlock code={typed} language="typescript" />
+  </section>
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Icons are hidden from the accessibility tree by default. Add a
+      <code>label</code> only when the icon conveys meaning that nearby text does
+      not already provide; labelled icons receive an image role and accessible name.
+    </p>
   </section>
 
   <script>

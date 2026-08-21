@@ -5,5 +5,8 @@ dist/
 coverage/
 playwright-report/
 test-results/
+.vitest-attachments/
+**/temp/
+packages/elements/test/__screenshots__/
 .artifacts/
 *.tsbuildinfo

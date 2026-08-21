@@ -1,0 +1,61 @@
+:root {
+  --cad-font-ui:
+    'Helvetica Neue', 'SF Pro Display', Arial, Roboto, system-ui, sans-serif;
+  --cad-font-book: Georgia, 'Times New Roman', 'DejaVu Serif', serif;
+  --cad-font-hand:
+    'Caveat', 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
+  --cad-font-mono:
+    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --cad-hand-sm: 1.05rem;
+  --cad-hand-md: 1.2rem;
+  --cad-hand-lg: 1.55rem;
+  --cad-hand-xl: 2.1rem;
+  --cad-hand-weight-regular: 500;
+  --cad-hand-weight-strong: 700;
+  --cad-space-1: 0.25rem;
+  --cad-space-2: 0.5rem;
+  --cad-space-3: 0.75rem;
+  --cad-space-4: 1rem;
+  --cad-space-5: 1.25rem;
+  --cad-radius-sm: 0.45rem;
+  --cad-radius-md: 0.75rem;
+  --cad-radius-lg: 1rem;
+  --cad-duration-fast: 140ms;
+  --cad-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --cad-color-night-bg: #1a1b26;
+  --cad-color-night-surface: #1f2335;
+  --cad-color-night-surface-strong: #24283b;
+  --cad-color-night-ink: #e0e0ff;
+  --cad-color-night-link: #a8b8ff;
+  --cad-color-day-bg: #f6f7fb;
+  --cad-color-day-surface: #fff;
+  --cad-color-day-surface-strong: #eef2ff;
+  --cad-color-day-ink: #162033;
+  --cad-color-day-link: #2450c5;
+  --cad-color-night-lemon-bg: #51491f;
+  --cad-color-night-lemon-ink: #fff1ac;
+  --cad-color-day-lemon-bg: #fff1a8;
+  --cad-color-day-lemon-ink: #49370d;
+  --cad-color-night-pink-bg: #5a3449;
+  --cad-color-night-pink-ink: #ffdceb;
+  --cad-color-day-pink-bg: #ffb7d5;
+  --cad-color-day-pink-ink: #52233a;
+  --cad-color-night-mint-bg: #274f41;
+  --cad-color-night-mint-ink: #d8ffec;
+  --cad-color-day-mint-bg: #a9eacb;
+  --cad-color-day-mint-ink: #173d2c;
+  --cad-color-night-blue-bg: #293f64;
+  --cad-color-night-blue-ink: #deebff;
+  --cad-color-day-blue-bg: #b8d5ff;
+  --cad-color-day-blue-ink: #18345d;
+  --cad-color-night-coral-bg: #633b32;
+  --cad-color-night-coral-ink: #ffe1da;
+  --cad-color-day-coral-bg: #ffb19f;
+  --cad-color-day-coral-ink: #55251b;
+  --cad-color-night-violet-bg: #58419b;
+  --cad-color-night-violet-ink: #f5efff;
+  --cad-color-day-violet-bg: #bba0ff;
+  --cad-color-day-violet-ink: #30205e;
+  --cad-color-night-tape: #65614f;
+  --cad-color-day-tape: #d5cfb9;
+}

@@ -47,6 +47,7 @@ export class CadBookmark extends LitElement {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
+      min-height: 2.75rem;
       padding: 0.45rem 0.75rem 0.5rem 0.55rem;
       color: var(--_bookmark-ink);
       background: color-mix(
@@ -76,16 +77,29 @@ export class CadBookmark extends LitElement {
     }
 
     button:focus-visible {
-      outline: 2px dashed var(--_bookmark-ink);
+      outline: 2px dashed var(--cad-focus-ring, currentColor);
       outline-offset: 3px;
     }
 
     cad-icon {
-      transition: transform 140ms var(--cad-transition-smooth, ease);
+      transition: transform var(--cad-duration-fast, 140ms)
+        var(--cad-transition-smooth, ease);
     }
 
     button[aria-pressed='true'] cad-icon {
       transform: translateY(0.15rem);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      cad-icon {
+        transition: none;
+      }
+    }
+
+    @media (forced-colors: active) {
+      button {
+        border-color: ButtonText;
+      }
     }
 
     slot[name='fallback'] {

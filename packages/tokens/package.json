@@ -21,7 +21,7 @@
   },
   "type": "module",
   "files": [
-    "src/notebook.css"
+    "src"
   ],
   "exports": {
     "./notebook.css": "./src/notebook.css"

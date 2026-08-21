@@ -1,6 +1,7 @@
 ---
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ApiReference from '../../components/ApiReference.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-bookmark
@@ -47,47 +48,7 @@ const eventCode = `bookmark.addEventListener('cad-bookmark-change', (event) => {
   </DemoFrame>
   <CodeBlock code={usage} language="html" />
 
-  <section class="content-section" aria-labelledby="attributes-title">
-    <h2 id="attributes-title">Attributes</h2>
-    <table class="api-table">
-      <thead
-        ><tr><th>Name</th><th>Type</th><th>Default</th><th>Purpose</th></tr
-        ></thead
-      >
-      <tbody>
-        <tr
-          ><td><code>bookmark-id</code></td><td><code>string</code></td><td
-            >empty</td
-          ><td>Identity included in events and storage keys.</td></tr
-        >
-        <tr
-          ><td><code>bookmarked</code></td><td><code>boolean</code></td><td
-            ><code>false</code></td
-          ><td>Current pressed state.</td></tr
-        >
-        <tr
-          ><td><code>label</code></td><td><code>string</code></td><td
-            ><code>Save bookmark</code></td
-          ><td>Label for the inactive state.</td></tr
-        >
-        <tr
-          ><td><code>active-label</code></td><td><code>string</code></td><td
-            ><code>Remove bookmark</code></td
-          ><td>Label for the active state.</td></tr
-        >
-        <tr
-          ><td><code>persist</code></td><td><code>boolean</code></td><td
-            ><code>false</code></td
-          ><td>Persists state in local storage.</td></tr
-        >
-        <tr
-          ><td><code>storage-prefix</code></td><td><code>string</code></td><td
-            ><code>caderno-ui:bookmark</code></td
-          ><td>Namespaces the local storage key.</td></tr
-        >
-      </tbody>
-    </table>
-  </section>
+  <ApiReference tagName="cad-bookmark" />
 
   <section class="content-section" aria-labelledby="events-title">
     <h2 id="events-title">Events</h2>
@@ -98,27 +59,14 @@ const eventCode = `bookmark.addEventListener('cad-bookmark-change', (event) => {
     <CodeBlock code={eventCode} language="typescript" />
   </section>
 
-  <section class="content-section" aria-labelledby="styling-title">
-    <h2 id="styling-title">Slots and styling</h2>
-    <table class="api-table">
-      <thead><tr><th>Surface</th><th>Names</th></tr></thead>
-      <tbody>
-        <tr
-          ><td>Slots</td><td><code>fallback</code> for pre-upgrade content</td
-          ></tr
-        >
-        <tr
-          ><td>CSS parts</td><td
-            ><code>button</code>, <code>icon</code>, <code>label</code></td
-          ></tr
-        >
-        <tr
-          ><td>CSS properties</td><td
-            ><code>--cad-bookmark-bg</code>, <code>--cad-bookmark-ink</code></td
-          ></tr
-        >
-      </tbody>
-    </table>
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Bookmark uses a native button and exposes its state with
+      <code>aria-pressed</code>. The inactive and active labels should describe
+      the resulting action, and the fallback keeps that action readable before
+      upgrade.
+    </p>
   </section>
 
   <script>

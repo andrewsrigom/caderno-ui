@@ -1,0 +1,79 @@
+{
+  "entries": [
+    {
+      "name": "alert",
+      "elements": [
+        {
+          "className": "CadAlert",
+          "tagName": "cad-alert",
+          "events": [
+            {
+              "eventName": "cad-dismiss",
+              "propName": "onDismiss",
+              "typeName": "CadDismissEvent"
+            }
+          ]
+        }
+      ],
+      "typeExports": ["CadAlertVariant", "CadDismissDetail", "CadDismissEvent"],
+      "astroFacades": ["Alert.astro"],
+      "docsPage": "alert.astro"
+    },
+    {
+      "name": "bookmark",
+      "elements": [
+        {
+          "className": "CadBookmark",
+          "tagName": "cad-bookmark",
+          "events": [
+            {
+              "eventName": "cad-bookmark-change",
+              "propName": "onBookmarkChange",
+              "typeName": "CadBookmarkChangeEvent"
+            }
+          ]
+        }
+      ],
+      "typeExports": ["CadBookmarkChangeDetail", "CadBookmarkChangeEvent"],
+      "astroFacades": ["Bookmark.astro"],
+      "docsPage": "bookmark.astro"
+    },
+    {
+      "name": "icon",
+      "elements": [
+        {
+          "className": "CadIcon",
+          "tagName": "cad-icon",
+          "events": []
+        }
+      ],
+      "typeExports": [],
+      "astroFacades": ["Icon.astro"],
+      "docsPage": "icon.astro"
+    },
+    {
+      "name": "tabs",
+      "elements": [
+        {
+          "className": "CadTab",
+          "tagName": "cad-tab",
+          "events": []
+        },
+        {
+          "className": "CadTabs",
+          "tagName": "cad-tabs",
+          "events": [
+            {
+              "eventName": "cad-tab-change",
+              "propName": "onTabChange",
+              "typeName": "CadTabChangeEvent"
+            }
+          ]
+        }
+      ],
+      "typeExports": ["CadTabChangeDetail", "CadTabChangeEvent", "CadTabTone"],
+      "astroFacades": ["Tab.astro", "Tabs.astro"],
+      "docsPage": "tabs.astro"
+    }
+  ]
+}

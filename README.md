@@ -28,6 +28,9 @@ pnpm dev
 
 Node.js 20 or newer is required. Published packages are ESM-only.
 
+See the [support policy](./docs/support.md) for the tested Node, browser,
+React, Astro, TypeScript, and compatibility matrix.
+
 ## HTML usage
 
 ```html
@@ -50,7 +53,7 @@ Import individual element entry points in application code. The `@caderno-ui/ele
 React consumes the same elements through typed wrappers:
 
 ```tsx
-import { CadAlert } from '@caderno-ui/react'
+import { CadAlert } from '@caderno-ui/react/alert'
 
 export function ReviewNotice() {
   return (
@@ -88,6 +91,10 @@ This follows the useful part of the shadcn model—clear, composable primitives 
 
 ## Releases
 
-Changes to public packages require a Changeset. The initial `0.1.0` release is published from a maintainer workstation; subsequent releases use the manual GitHub Release workflow after npm Trusted Publishing is configured for each package.
+Changes to public packages require a Changeset. The release workflow creates a
+version pull request and, after it is merged, publishes the exact tarballs that
+passed package validation and npm's dry run. Publishing is restricted to GitHub
+Actions with Trusted Publishing and provenance; maintainers can exercise the
+same path without mutation through `pnpm release:dry-run`.
 
-See [architecture](./docs/architecture.md) for package boundaries and [migration](./docs/migration.md) for the SeniorPath rollout strategy.
+See [architecture](./docs/architecture.md), [architecture decisions](./docs/decisions/README.md), [tokens](./docs/tokens.md), [accessibility](./docs/accessibility.md), [release and recovery](./docs/release.md), [icon scaling](./docs/icons.md), and [migration](./docs/migration.md) for the SeniorPath rollout strategy.

@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { userEvent } from 'vitest/browser'
 
 import type { CadTabChangeEvent } from '../src/tabs/cad-tabs.js'
 import '../src/tabs/index.js'
+import { expectRegistered, nextFrame } from './contract.js'
 
 afterEach(() => {
   document.body.replaceChildren()
@@ -14,7 +16,12 @@ const settleTabs = async (tabs: HTMLElementTagNameMap['cad-tabs']) => {
 }
 
 describe('cad-tabs', () => {
-  it('connects declarative panels and supports keyboard navigation', async () => {
+  it('registers the controller and panel through the individual tabs entrypoint', () => {
+    expectRegistered('cad-tabs')
+    expectRegistered('cad-tab')
+  })
+
+  it('connects declarative panels and supports real keyboard navigation', async () => {
     const tabs = document.createElement('cad-tabs')
     tabs.defaultTab = 'contract'
 
@@ -38,16 +45,57 @@ describe('cad-tabs', () => {
     expect(contract.hidden).toBe(false)
 
     const listener = vi.fn<(event: CadTabChangeEvent) => void>()
-    tabs.addEventListener('cad-tab-change', listener)
-    buttons?.[1]?.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
-    )
+    document.body.addEventListener('cad-tab-change', listener, { once: true })
+    const user = userEvent.setup()
+    await user.click(buttons![1]!)
+    await user.keyboard('{ArrowLeft}')
     await tabs.updateComplete
 
     expect(tabs.activeTab).toBe('problem')
+    expect(tabs.getAttribute('active-tab')).toBe('problem')
+    expect(tabs.shadowRoot?.activeElement).toBe(buttons?.[0])
+    expect(listener.mock.calls[0]?.[0].bubbles).toBe(true)
+    expect(listener.mock.calls[0]?.[0].composed).toBe(true)
     expect(listener.mock.calls[0]?.[0].detail).toEqual({
       activeTab: 'problem',
       previousTab: 'contract',
     })
+  })
+
+  it('tracks dynamic direct children and disconnects cleanly', async () => {
+    const tabs = document.createElement('cad-tabs')
+    const first = document.createElement('cad-tab')
+    first.name = 'first'
+    first.label = 'First'
+    tabs.append(first)
+    document.body.append(tabs)
+    await settleTabs(tabs)
+
+    const second = document.createElement('cad-tab')
+    second.name = 'second'
+    second.label = 'Second'
+    tabs.append(second)
+    await nextFrame()
+    await tabs.updateComplete
+    expect(tabs.shadowRoot?.querySelectorAll('[role="tab"]')).toHaveLength(2)
+
+    tabs.remove()
+    second.label = 'Changed while disconnected'
+    await nextFrame()
+    expect(tabs.isConnected).toBe(false)
+  })
+
+  it('fails open for duplicate panel names', async () => {
+    const tabs = document.createElement('cad-tabs')
+    const first = document.createElement('cad-tab')
+    const duplicate = document.createElement('cad-tab')
+    first.name = duplicate.name = 'same'
+    tabs.append(first, duplicate)
+    document.body.append(tabs)
+    await settleTabs(tabs)
+
+    expect(tabs.dataset.invalid).toBe('true')
+    expect(first.hidden).toBe(false)
+    expect(duplicate.hidden).toBe(false)
   })
 })

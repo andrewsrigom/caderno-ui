@@ -86,7 +86,7 @@ export class CadAlert extends LitElement {
     .tape {
       position: absolute;
       top: -0.45rem;
-      left: 1.4rem;
+      inset-inline-start: 1.4rem;
       width: 3.8rem;
       height: 0.85rem;
       background: color-mix(
@@ -139,8 +139,8 @@ export class CadAlert extends LitElement {
     .close {
       display: inline-grid;
       place-items: center;
-      width: 2rem;
-      height: 2rem;
+      width: 2.75rem;
+      height: 2.75rem;
       padding: 0;
       color: var(--_alert-ink);
       background: transparent;
@@ -153,8 +153,15 @@ export class CadAlert extends LitElement {
     }
 
     .close:focus-visible {
-      outline: 2px dashed var(--_alert-ink);
+      outline: 2px dashed var(--cad-focus-ring, currentColor);
       outline-offset: 3px;
+    }
+
+    @media (forced-colors: active) {
+      .base,
+      .close {
+        border-color: CanvasText;
+      }
     }
   `
 

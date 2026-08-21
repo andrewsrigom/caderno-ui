@@ -1,0 +1,20 @@
+---
+import '@caderno-ui/tokens/notebook.css'
+
+import Alert from '@caderno-ui/astro/Alert.astro'
+import Bookmark from '@caderno-ui/astro/Bookmark.astro'
+import Tab from '@caderno-ui/astro/Tab.astro'
+import Tabs from '@caderno-ui/astro/Tabs.astro'
+---
+
+<!doctype html>
+<html lang="en">
+  <head><title>Caderno UI packed Astro consumer</title></head>
+  <body>
+    <Alert title="Packed Astro facade">Static fallback remains readable.</Alert>
+    <Bookmark id="packed" label="Save packed fixture" />
+    <Tabs label="Packed tabs">
+      <Tab label="Notes" name="notes">Static tab content.</Tab>
+    </Tabs>
+  </body>
+</html>

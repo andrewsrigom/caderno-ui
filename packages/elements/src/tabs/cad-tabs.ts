@@ -1,7 +1,7 @@
 import { css, html, LitElement, type PropertyValues } from 'lit'
 
 import '../icon/cad-icon.js'
-import { type CadTab } from './cad-tab.js'
+import type { CadTab } from './cad-tab.js'
 
 export type CadTabChangeDetail = {
   activeTab: string
@@ -51,6 +51,7 @@ export class CadTabs extends LitElement {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
+      min-height: 2.75rem;
       padding: 0.55rem 1rem 0.85rem;
       margin: 0;
       color: var(--_tab-ink);
@@ -67,9 +68,10 @@ export class CadTabs extends LitElement {
       font-weight: var(--cad-hand-weight-regular, 500);
       line-height: 1;
       transition:
-        transform 140ms var(--cad-transition-smooth, ease),
-        background 140ms var(--cad-transition-smooth, ease),
-        padding 140ms var(--cad-transition-smooth, ease);
+        transform var(--cad-duration-fast, 140ms)
+          var(--cad-transition-smooth, ease),
+        padding var(--cad-duration-fast, 140ms)
+          var(--cad-transition-smooth, ease);
       transform: translateY(0);
     }
 
@@ -96,7 +98,7 @@ export class CadTabs extends LitElement {
     }
 
     .tab:focus-visible {
-      outline: 2px dashed var(--_tab-ink);
+      outline: 2px dashed var(--cad-focus-ring, currentColor);
       outline-offset: 3px;
     }
 
@@ -142,6 +144,24 @@ export class CadTabs extends LitElement {
       border: 1.5px solid
         color-mix(in srgb, var(--cad-ink-muted, currentColor) 32%, transparent);
       border-radius: 0.35rem 0.85rem 0.85rem 0.85rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tab {
+        transition: none;
+      }
+    }
+
+    @media (forced-colors: active) {
+      .panels,
+      .tab {
+        border-color: CanvasText;
+      }
+
+      .tab[aria-selected='true'] {
+        outline: 2px solid Highlight;
+        outline-offset: -4px;
+      }
     }
   `
 
@@ -190,6 +210,7 @@ export class CadTabs extends LitElement {
     if (changedProperties.has('activeTab')) {
       this.applyPanelState()
     }
+    this.applyAriaRelationships()
   }
 
   private get directItems(): CadTab[] {
@@ -265,6 +286,16 @@ export class CadTabs extends LitElement {
     })
   }
 
+  private applyAriaRelationships(): void {
+    this.items.forEach((item) => {
+      const button = this.shadowRoot?.querySelector<HTMLButtonElement>(
+        `#${this.tabId(item.name)}`,
+      )
+      if (!button || !('ariaControlsElements' in button)) return
+      button.ariaControlsElements = [item]
+    })
+  }
+
   private panelId(name: string): string {
     return `${this.id || this.instanceId}-panel-${name}`
   }
@@ -303,7 +334,7 @@ export class CadTabs extends LitElement {
   }
 
   private handleKeydown(event: KeyboardEvent, index: number): void {
-    let nextIndex = index
+    let nextIndex: number
 
     if (event.key === 'ArrowRight') nextIndex = (index + 1) % this.items.length
     else if (event.key === 'ArrowLeft')

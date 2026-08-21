@@ -1,0 +1,51 @@
+{
+  "entrypoints": {
+    "elements-alert": {
+      "bytes": 30102,
+      "gzip": 11527
+    },
+    "elements-bookmark": {
+      "bytes": 28765,
+      "gzip": 11167
+    },
+    "elements-icon": {
+      "bytes": 25483,
+      "gzip": 10194
+    },
+    "elements-root": {
+      "bytes": 41623,
+      "gzip": 14014
+    },
+    "elements-tabs": {
+      "bytes": 33684,
+      "gzip": 12553
+    },
+    "icons-root": {
+      "bytes": 9224,
+      "gzip": 3599
+    },
+    "react-alert": {
+      "bytes": 31575,
+      "gzip": 12121
+    },
+    "react-bookmark": {
+      "bytes": 30259,
+      "gzip": 11759
+    },
+    "react-icon": {
+      "bytes": 26923,
+      "gzip": 10740
+    },
+    "react-root": {
+      "bytes": 43567,
+      "gzip": 14729
+    },
+    "react-tabs": {
+      "bytes": 35235,
+      "gzip": 13144
+    }
+  },
+  "icons": {
+    "names": 40
+  }
+}

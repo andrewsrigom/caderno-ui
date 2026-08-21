@@ -83,7 +83,7 @@ section {
   position: sticky;
   bottom: 1rem;
   display: block;
-  box-shadow: 0 0.8rem 2rem rgb(var(--cad-shadow-rgb) / 0.2);
+  box-shadow: 0 0.8rem 2rem rgb(var(--cad-shadow-rgb) / 20%);
   font-family: var(--cad-font-mono);
   font-size: 0.85rem;
 }

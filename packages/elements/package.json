@@ -58,7 +58,8 @@
   ],
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "test": "vitest run",
+    "test": "pnpm test:browser",
+    "test:browser": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
@@ -66,7 +67,7 @@
     "lit": "^3.3.3"
   },
   "devDependencies": {
-    "jsdom": "^30.0.1",
+    "@vitest/browser-playwright": "^4.1.11",
     "typescript": "^6.0.3",
     "vitest": "^4.1.11"
   },

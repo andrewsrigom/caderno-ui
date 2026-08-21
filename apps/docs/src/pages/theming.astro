@@ -59,7 +59,8 @@ const colorTokens = [
     <h2 id="palette-title">Notebook palette</h2>
     <p>
       Post-it and sticker pairs include a background and a foreground, keeping
-      text contrast part of the token contract.
+      text contrast part of the token contract. The shipped pairs are checked in
+      both themes at 4.5:1 or better; override both values together.
     </p>
     <div class="token-grid">
       {
@@ -78,7 +79,8 @@ const colorTokens = [
     <p>
       Put brand tokens on the application root, a feature boundary, or one
       component. Shadow DOM inherits custom properties without leaking internal
-      selectors.
+      selectors. When changing a color, test the resulting pair in every theme
+      where that scope can appear.
     </p>
     <CodeBlock code={override} language="css" />
     <DemoFrame title="A locally themed alert">

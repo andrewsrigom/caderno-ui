@@ -1,0 +1,40 @@
+{
+  "entrypoints": {
+    "elements-alert": {
+      "maxGzip": 13357
+    },
+    "elements-bookmark": {
+      "maxGzip": 12943
+    },
+    "elements-icon": {
+      "maxGzip": 11824
+    },
+    "elements-root": {
+      "maxGzip": 16217
+    },
+    "elements-tabs": {
+      "maxGzip": 14536
+    },
+    "icons-root": {
+      "maxGzip": 4239
+    },
+    "react-alert": {
+      "maxGzip": 14040
+    },
+    "react-bookmark": {
+      "maxGzip": 13623
+    },
+    "react-icon": {
+      "maxGzip": 12451
+    },
+    "react-root": {
+      "maxGzip": 17039
+    },
+    "react-tabs": {
+      "maxGzip": 15216
+    }
+  },
+  "icons": {
+    "maxNames": 64
+  }
+}

@@ -10,4 +10,10 @@ pnpm add @caderno-ui/tokens
 import '@caderno-ui/tokens/notebook.css'
 ```
 
-The default theme is dark. Set `data-theme="light"` on the document root for the light theme, or override the documented `--cad-*` custom properties in your own stylesheet.
+The default theme is dark. Set `data-theme="light"` on the document root for
+the light theme, or override the documented `--cad-*` custom properties in your
+own stylesheet. Override matching background/foreground pairs together so the
+contrast guarantee remains intact.
+
+The token taxonomy, checked color pairs, and extension rules are documented in
+the repository's token contract.

@@ -1,9 +1,12 @@
 import { readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const manifestPath = new URL(
-  '../packages/elements/custom-elements.json',
-  import.meta.url,
-)
+const manifestPath = process.argv[2]
+  ? path.resolve(process.argv[2])
+  : fileURLToPath(
+      new URL('../packages/elements/custom-elements.json', import.meta.url),
+    )
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
 
 manifest.modules.sort((left, right) => {

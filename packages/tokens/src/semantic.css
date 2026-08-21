@@ -1,0 +1,68 @@
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --cad-bg: var(--cad-color-night-bg);
+  --cad-surface: var(--cad-color-night-surface);
+  --cad-surface-strong: var(--cad-color-night-surface-strong);
+  --cad-ink: var(--cad-color-night-ink);
+  --cad-ink-soft: rgb(224 224 255 / 76%);
+  --cad-ink-muted: rgb(224 224 255 / 64%);
+  --cad-line: rgb(124 124 255 / 14%);
+  --cad-line-strong: rgb(124 124 255 / 28%);
+  --cad-link: var(--cad-color-night-link);
+  --cad-focus-ring: var(--cad-color-night-link);
+  --cad-control-hover: color-mix(
+    in srgb,
+    var(--cad-surface-strong) 90%,
+    var(--cad-link) 10%
+  );
+  --cad-post-it-lemon-bg: var(--cad-color-night-lemon-bg);
+  --cad-post-it-lemon-ink: var(--cad-color-night-lemon-ink);
+  --cad-post-it-pink-bg: var(--cad-color-night-pink-bg);
+  --cad-post-it-pink-ink: var(--cad-color-night-pink-ink);
+  --cad-post-it-mint-bg: var(--cad-color-night-mint-bg);
+  --cad-post-it-mint-ink: var(--cad-color-night-mint-ink);
+  --cad-post-it-blue-bg: var(--cad-color-night-blue-bg);
+  --cad-post-it-blue-ink: var(--cad-color-night-blue-ink);
+  --cad-post-it-coral-bg: var(--cad-color-night-coral-bg);
+  --cad-post-it-coral-ink: var(--cad-color-night-coral-ink);
+  --cad-sticker-violet-bg: var(--cad-color-night-violet-bg);
+  --cad-sticker-violet-ink: var(--cad-color-night-violet-ink);
+  --cad-tape-paper-bg: var(--cad-color-night-tape);
+  --cad-shadow-rgb: 0 0 0;
+  --cad-transition-smooth: var(--cad-ease-out);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --cad-bg: var(--cad-color-day-bg);
+  --cad-surface: var(--cad-color-day-surface);
+  --cad-surface-strong: var(--cad-color-day-surface-strong);
+  --cad-ink: var(--cad-color-day-ink);
+  --cad-ink-soft: rgb(22 32 51 / 80%);
+  --cad-ink-muted: rgb(22 32 51 / 62%);
+  --cad-line: rgb(55 76 119 / 14%);
+  --cad-line-strong: rgb(55 76 119 / 24%);
+  --cad-link: var(--cad-color-day-link);
+  --cad-focus-ring: var(--cad-color-day-link);
+  --cad-control-hover: color-mix(
+    in srgb,
+    var(--cad-surface-strong) 82%,
+    var(--cad-link) 18%
+  );
+  --cad-post-it-lemon-bg: var(--cad-color-day-lemon-bg);
+  --cad-post-it-lemon-ink: var(--cad-color-day-lemon-ink);
+  --cad-post-it-pink-bg: var(--cad-color-day-pink-bg);
+  --cad-post-it-pink-ink: var(--cad-color-day-pink-ink);
+  --cad-post-it-mint-bg: var(--cad-color-day-mint-bg);
+  --cad-post-it-mint-ink: var(--cad-color-day-mint-ink);
+  --cad-post-it-blue-bg: var(--cad-color-day-blue-bg);
+  --cad-post-it-blue-ink: var(--cad-color-day-blue-ink);
+  --cad-post-it-coral-bg: var(--cad-color-day-coral-bg);
+  --cad-post-it-coral-ink: var(--cad-color-day-coral-ink);
+  --cad-sticker-violet-bg: var(--cad-color-day-violet-bg);
+  --cad-sticker-violet-ink: var(--cad-color-day-violet-ink);
+  --cad-tape-paper-bg: var(--cad-color-day-tape);
+  --cad-shadow-rgb: 15 23 42;
+  --cad-transition-smooth: var(--cad-ease-out);
+}

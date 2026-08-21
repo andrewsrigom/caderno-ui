@@ -1,7 +1,7 @@
 import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
 
-import { CadAlert } from '../dist/index.js'
+import { CadAlert } from '../dist/alert.js'
 
 const markup = renderToString(
   createElement(

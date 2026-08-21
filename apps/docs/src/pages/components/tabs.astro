@@ -1,6 +1,7 @@
 ---
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ApiReference from '../../components/ApiReference.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-tabs default-tab="notes" label="Project sections">
@@ -53,63 +54,8 @@ const eventCode = `tabs.addEventListener('cad-tab-change', (event) => {
   </DemoFrame>
   <CodeBlock code={usage} language="html" />
 
-  <section class="content-section" aria-labelledby="tabs-api-title">
-    <h2 id="tabs-api-title">Tabs attributes</h2>
-    <table class="api-table">
-      <thead
-        ><tr><th>Name</th><th>Type</th><th>Default</th><th>Purpose</th></tr
-        ></thead
-      >
-      <tbody>
-        <tr
-          ><td><code>active-tab</code></td><td><code>string</code></td><td
-            >first item</td
-          ><td>Current panel name; reflected for external state.</td></tr
-        >
-        <tr
-          ><td><code>default-tab</code></td><td><code>string</code></td><td
-            >first item</td
-          ><td>Initial panel when active-tab is empty.</td></tr
-        >
-        <tr
-          ><td><code>label</code></td><td><code>string</code></td><td
-            ><code>Tabs</code></td
-          ><td>Accessible name for the tab list.</td></tr
-        >
-      </tbody>
-    </table>
-  </section>
-
-  <section class="content-section" aria-labelledby="tab-api-title">
-    <h2 id="tab-api-title">Tab attributes</h2>
-    <table class="api-table">
-      <thead
-        ><tr><th>Name</th><th>Type</th><th>Default</th><th>Purpose</th></tr
-        ></thead
-      >
-      <tbody>
-        <tr
-          ><td><code>name</code></td><td><code>string</code></td><td
-            >required</td
-          ><td>Unique identity inside the parent.</td></tr
-        >
-        <tr
-          ><td><code>label</code></td><td><code>string</code></td><td>empty</td
-          ><td>Visible tab label.</td></tr
-        >
-        <tr
-          ><td><code>icon</code></td><td><code>CadIconName</code></td><td
-            >empty</td
-          ><td>Optional icon before the label.</td></tr
-        >
-        <tr
-          ><td><code>tone</code></td><td
-            ><code>accent | coral | lemon | mint | pink | violet</code></td
-          ><td><code>accent</code></td><td>Notebook tab color.</td></tr
-        >
-      </tbody>
-    </table>
-  </section>
+  <ApiReference tagName="cad-tabs" />
+  <ApiReference tagName="cad-tab" />
 
   <section class="content-section" aria-labelledby="events-title">
     <h2 id="events-title">Events and styling</h2>
@@ -123,5 +69,15 @@ const eventCode = `tabs.addEventListener('cad-tab-change', (event) => {
       its <code class="inline-code">panel</code> part.
     </p>
     <CodeBlock code={eventCode} language="typescript" />
+  </section>
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      The parent creates the tablist, selected state, roving focus, and
+      tab-to-panel relationships. Every tab needs a unique name and meaningful
+      label. Arrow Left/Right, Home, and End move and activate focus without a
+      pointer.
+    </p>
   </section>
 </DocsLayout>

@@ -1,0 +1,84 @@
+---
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const components = [
+  {
+    description: 'Semantic status messages with four variants and dismissal.',
+    href: '/components/alert/',
+    icon: 'exclamation',
+    label: 'Alert',
+    tag: '<cad-alert>',
+  },
+  {
+    description:
+      'A pressed-state save control with optional local persistence.',
+    href: '/components/bookmark/',
+    icon: 'bookmark',
+    label: 'Bookmark',
+    tag: '<cad-bookmark>',
+  },
+  {
+    description: 'Forty typed, hand-drawn symbols that inherit current color.',
+    href: '/components/icon/',
+    icon: 'spark',
+    label: 'Icon',
+    tag: '<cad-icon>',
+  },
+  {
+    description: 'Keyboard-accessible tabs with declarative panel children.',
+    href: '/components/tabs/',
+    icon: 'layers',
+    label: 'Tabs',
+    tag: '<cad-tabs>',
+  },
+] as const
+---
+
+<DocsLayout
+  description="Explore the accessible, framework-agnostic components available in Caderno UI."
+  title="Components"
+>
+  <header class="page-header">
+    <p class="eyebrow">Component index</p>
+    <h1>Small set. Explicit contracts.</h1>
+    <p>
+      Caderno UI starts with the components that already proved useful in a real
+      product. Each page documents attributes, events, slots, parts, and design
+      tokens as public API.
+    </p>
+  </header>
+
+  <div class="component-grid">
+    {
+      components.map((component) => (
+        <a class="component-card" href={`${base}${component.href}`}>
+          <cad-icon name={component.icon} size="28" />
+          <h2>{component.label}</h2>
+          <code>{component.tag}</code>
+          <p>{component.description}</p>
+        </a>
+      ))
+    }
+  </div>
+
+  <DemoFrame
+    title="The components together"
+    description="All behavior below comes from the same Lit-based element package."
+  >
+    <cad-alert heading="Study plan" variant="info">
+      Save the note, then move between the implementation and review panels.
+    </cad-alert>
+    <cad-bookmark bookmark-id="component-index-demo" label="Save this plan"
+    ></cad-bookmark>
+    <cad-tabs default-tab="build" label="Study plan stages">
+      <cad-tab icon="code" label="Build" name="build" tone="mint">
+        Implement the smallest complete behavior and keep its contract typed.
+      </cad-tab>
+      <cad-tab icon="checklist" label="Review" name="review" tone="lemon">
+        Verify semantics, keyboard behavior, events, and package boundaries.
+      </cad-tab>
+    </cad-tabs>
+  </DemoFrame>
+</DocsLayout>

@@ -1,0 +1,128 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const nativeExample = `import '@caderno-ui/elements/alert'
+import '@caderno-ui/tokens/notebook.css'
+
+document.body.innerHTML = \
+  '<cad-alert heading="Hello" variant="info">Portable by default.</cad-alert>'`
+
+const reactExample = `import { CadAlert, CadBookmark } from '@caderno-ui/react'
+import '@caderno-ui/tokens/notebook.css'
+
+export function Notes() {
+  return (
+    <>
+      <CadAlert heading="Typed React adapter" variant="success">
+        Properties and events are mapped by @lit/react.
+      </CadAlert>
+      <CadBookmark
+        bookmarkId="react-notes"
+        label="Save note"
+        onBookmarkChange={(event) => console.log(event.detail)}
+      />
+    </>
+  )
+}`
+
+const astroExample = `---
+import { Alert, Bookmark } from '@caderno-ui/astro'
+import '@caderno-ui/tokens/notebook.css'
+---
+
+<Alert heading="Server-friendly" variant="info">
+  Useful content remains in the HTML before the element upgrades.
+</Alert>
+<Bookmark bookmarkId="astro-notes" label="Save note" />`
+
+const vueExample = `// vite.config.ts
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('cad-'),
+        },
+      },
+    }),
+  ],
+})
+
+// main.ts
+import '@caderno-ui/elements'
+import '@caderno-ui/tokens/notebook.css'`
+---
+
+<DocsLayout
+  description="Use Caderno UI as native custom elements or through its React and Astro adapters."
+  title="Integrations"
+>
+  <header class="page-header">
+    <p class="eyebrow">Frameworks are adapters</p>
+    <h1>One runtime, several ways in.</h1>
+    <p>
+      The <code class="inline-code">cad-*</code> elements are the product. Framework
+      packages improve typing and server rendering without copying behavior.
+    </p>
+  </header>
+
+  <div class="integration-grid">
+    <article>
+      <cad-icon name="brackets" size="26"></cad-icon>
+      <h2>HTML &amp; JavaScript</h2>
+      <p>Use the platform directly in Vite, Svelte, Solid, or plain HTML.</p>
+    </article>
+    <article>
+      <cad-icon name="code" size="26"></cad-icon>
+      <h2>React</h2>
+      <p>Typed JSX properties and idiomatic custom-event callbacks.</p>
+    </article>
+    <article>
+      <cad-icon name="rocket" size="26"></cad-icon>
+      <h2>Astro</h2>
+      <p>Declarative facades with useful pre-upgrade server HTML.</p>
+    </article>
+    <article>
+      <cad-icon name="layers" size="26"></cad-icon>
+      <h2>Vue</h2>
+      <p>Native use after teaching the compiler about the tag prefix.</p>
+    </article>
+  </div>
+
+  <section class="content-section" aria-labelledby="native-title">
+    <h2 id="native-title">Native elements</h2>
+    <CodeBlock code={nativeExample} language="typescript" />
+  </section>
+
+  <section class="content-section" aria-labelledby="react-title">
+    <h2 id="react-title">React</h2>
+    <p>
+      The React package uses the official Lit adapter, so property assignment
+      and event typing stay aligned with the element classes.
+    </p>
+    <CodeBlock code={reactExample} language="tsx" />
+  </section>
+
+  <section class="content-section" aria-labelledby="astro-title">
+    <h2 id="astro-title">Astro</h2>
+    <p>
+      Astro facades render resilient fallback content and register only the
+      element used by the component.
+    </p>
+    <CodeBlock code={astroExample} language="astro" />
+  </section>
+
+  <section class="content-section" aria-labelledby="vue-title">
+    <h2 id="vue-title">Vue</h2>
+    <p>
+      Vue does not need a Caderno-specific runtime wrapper. Configure
+      <code class="inline-code">cad-</code> as a custom-element prefix and use the
+      tags in templates.
+    </p>
+    <CodeBlock code={vueExample} language="typescript" />
+  </section>
+</DocsLayout>

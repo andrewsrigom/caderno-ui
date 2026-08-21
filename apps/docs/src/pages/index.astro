@@ -1,0 +1,139 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import DemoFrame from '../components/DemoFrame.astro'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const install = 'pnpm add @caderno-ui/elements @caderno-ui/tokens'
+const alertExample = `<cad-alert variant="warning" dismissible>
+  <span slot="title">Review the contract</span>
+  Complex values belong to properties; attributes stay serializable.
+</cad-alert>
+
+<script type="module">
+  import '@caderno-ui/elements/alert'
+</script>`
+---
+
+<DocsLayout
+  description="Notebook-inspired, framework-agnostic web components built with Lit and designed for real applications."
+  title="Caderno UI"
+>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Framework-agnostic · Lit-powered · Accessible</p>
+      <h1>Interfaces that read like notes.</h1>
+      <p class="hero-copy">
+        Caderno UI is a small, typed component system with notebook character.
+        One canonical implementation works in HTML, React, Astro, Vue, Svelte,
+        and whatever comes next.
+      </p>
+      <div class="hero-actions">
+        <a class="button-link" href={`${base}/getting-started/`}>Get started</a>
+        <a class="button-link secondary" href={`${base}/components/`}>
+          Explore components
+        </a>
+      </div>
+      <div class="install-line">
+        <span>{install}</span>
+        <cad-icon aria-hidden="true" name="arrow-right" size="18"></cad-icon>
+      </div>
+    </div>
+    <aside class="hero-note">
+      <strong>Design once.</strong><br />
+      Adapt at the edges.<br />
+      Keep behavior in one place.
+    </aside>
+  </section>
+
+  <section aria-labelledby="principles-title">
+    <div class="section-heading">
+      <p class="eyebrow">Why Caderno UI</p>
+      <h2 id="principles-title">A library with clear boundaries.</h2>
+      <p>
+        Components own semantics, behavior, and accessibility. Applications own
+        product rules. Framework adapters stay deliberately thin.
+      </p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <cad-icon name="layers" size="26"></cad-icon>
+        <h2>One implementation</h2>
+        <p>
+          Lit custom elements are the canonical runtime—no copied component
+          logic.
+        </p>
+      </article>
+      <article class="feature-card">
+        <cad-icon name="brackets" size="26"></cad-icon>
+        <h2>Typed contracts</h2>
+        <p>
+          Attributes, properties, events, slots, CSS parts, and a published
+          manifest.
+        </p>
+      </article>
+      <article class="feature-card">
+        <cad-icon name="spark" size="26"></cad-icon>
+        <h2>Designed to extend</h2>
+        <p>
+          Change tokens and parts while preserving tested behavior and
+          semantics.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <DemoFrame
+    title="An alert with a public event"
+    description="Dismiss the alert. The composed event can be handled outside its shadow root."
+  >
+    <cad-alert dismissible heading="Check the trade-off" variant="warning">
+      The implementation and its public contract should evolve together.
+    </cad-alert>
+  </DemoFrame>
+  <CodeBlock code={alertExample} language="html" />
+
+  <section aria-labelledby="packages-title">
+    <div class="section-heading">
+      <p class="eyebrow">Package map</p>
+      <h2 id="packages-title">Install only the layer you need.</h2>
+    </div>
+    <div class="package-grid">
+      <article class="package-card">
+        <cad-icon name="box" size="25"></cad-icon>
+        <h2>@caderno-ui/elements</h2>
+        <p>
+          Canonical custom elements with individual registration entry points.
+        </p>
+      </article>
+      <article class="package-card">
+        <cad-icon name="highlight" size="25"></cad-icon>
+        <h2>@caderno-ui/tokens</h2>
+        <p>
+          Light and dark defaults expressed as portable CSS custom properties.
+        </p>
+      </article>
+      <article class="package-card">
+        <cad-icon name="star" size="25"></cad-icon>
+        <h2>@caderno-ui/icons</h2>
+        <p>
+          Forty typed, hand-drawn SVG path definitions with no framework
+          runtime.
+        </p>
+      </article>
+      <article class="package-card">
+        <cad-icon name="code" size="25"></cad-icon>
+        <h2>@caderno-ui/react</h2>
+        <p>
+          Typed property and custom-event mapping through the official Lit
+          adapter.
+        </p>
+      </article>
+      <article class="package-card">
+        <cad-icon name="rocket" size="25"></cad-icon>
+        <h2>@caderno-ui/astro</h2>
+        <p>Declarative facades that preserve useful server-rendered content.</p>
+      </article>
+    </div>
+  </section>
+</DocsLayout>

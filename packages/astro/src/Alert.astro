@@ -1,0 +1,39 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadAlertVariant } from '@caderno-ui/elements/alert'
+
+type SharedProps = {
+  class?: string
+  dismissLabel?: string
+  dismissible?: boolean
+  variant?: CadAlertVariant
+}
+
+type Props = SharedProps &
+  ({ heading: string; title?: never } | { heading?: never; title: string })
+
+const {
+  class: className,
+  dismissLabel = 'Dismiss alert',
+  dismissible = false,
+  heading,
+  title,
+  variant = 'info',
+} = Astro.props
+const resolvedHeading = heading ?? title
+---
+
+<cad-alert
+  class={className}
+  dismiss-label={dismissLabel}
+  dismissible={dismissible || undefined}
+  variant={variant}
+>
+  <span slot="title">{resolvedHeading}</span>
+  <slot />
+</cad-alert>
+
+<script>
+  import '@caderno-ui/elements/alert'
+</script>

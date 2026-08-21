@@ -1,0 +1,50 @@
+{
+  "name": "@caderno-ui/icons",
+  "version": "0.1.0",
+  "description": "Typed hand-drawn SVG path data for Caderno UI.",
+  "keywords": [
+    "caderno-ui",
+    "icons",
+    "svg",
+    "typescript"
+  ],
+  "author": "Andrews Ribeiro Gomes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewsrigom/caderno-ui.git",
+    "directory": "packages/icons"
+  },
+  "homepage": "https://github.com/andrewsrigom/caderno-ui/tree/main/packages/icons#readme",
+  "bugs": {
+    "url": "https://github.com/andrewsrigom/caderno-ui/issues"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

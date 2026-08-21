@@ -1,0 +1,8 @@
+.artifacts
+coverage
+dist
+node_modules
+playwright-report
+pnpm-lock.yaml
+packages/elements/custom-elements.json
+test-results

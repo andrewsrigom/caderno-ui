@@ -1,0 +1,127 @@
+---
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-tabs default-tab="notes" label="Project sections">
+  <cad-tab icon="note" label="Notes" name="notes" tone="lemon">
+    Decisions and open questions.
+  </cad-tab>
+  <cad-tab icon="code" label="Code" name="code" tone="mint">
+    Implementation details.
+  </cad-tab>
+</cad-tabs>
+
+<script type="module">
+  import '@caderno-ui/elements/tabs'
+</script>`
+const eventCode = `tabs.addEventListener('cad-tab-change', (event) => {
+  const { activeTab, previousTab } = event.detail
+  console.log({ activeTab, previousTab })
+})`
+---
+
+<DocsLayout
+  description="CadTabs coordinates declarative tab panels with keyboard navigation and typed change events."
+  title="Tabs"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-tabs&gt; + &lt;cad-tab&gt;</p>
+    <h1>Organize the page like a notebook.</h1>
+    <p>
+      Tabs owns the accessible controller while each direct
+      <code class="inline-code">cad-tab</code> child owns its panel content and public
+      identity.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Declarative tabs"
+    description="Use Arrow Left/Right, Home, and End while focus is on a tab."
+  >
+    <cad-tabs default-tab="notes" label="Project sections">
+      <cad-tab icon="note" label="Notes" name="notes" tone="lemon">
+        <p>Decisions, context, and open questions belong here.</p>
+      </cad-tab>
+      <cad-tab icon="code" label="Code" name="code" tone="mint">
+        <p>Keep implementation details close without mixing concerns.</p>
+      </cad-tab>
+      <cad-tab icon="checklist" label="Review" name="review" tone="violet">
+        <p>Verify the public contract before publishing.</p>
+      </cad-tab>
+    </cad-tabs>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <section class="content-section" aria-labelledby="tabs-api-title">
+    <h2 id="tabs-api-title">Tabs attributes</h2>
+    <table class="api-table">
+      <thead
+        ><tr><th>Name</th><th>Type</th><th>Default</th><th>Purpose</th></tr
+        ></thead
+      >
+      <tbody>
+        <tr
+          ><td><code>active-tab</code></td><td><code>string</code></td><td
+            >first item</td
+          ><td>Current panel name; reflected for external state.</td></tr
+        >
+        <tr
+          ><td><code>default-tab</code></td><td><code>string</code></td><td
+            >first item</td
+          ><td>Initial panel when active-tab is empty.</td></tr
+        >
+        <tr
+          ><td><code>label</code></td><td><code>string</code></td><td
+            ><code>Tabs</code></td
+          ><td>Accessible name for the tab list.</td></tr
+        >
+      </tbody>
+    </table>
+  </section>
+
+  <section class="content-section" aria-labelledby="tab-api-title">
+    <h2 id="tab-api-title">Tab attributes</h2>
+    <table class="api-table">
+      <thead
+        ><tr><th>Name</th><th>Type</th><th>Default</th><th>Purpose</th></tr
+        ></thead
+      >
+      <tbody>
+        <tr
+          ><td><code>name</code></td><td><code>string</code></td><td
+            >required</td
+          ><td>Unique identity inside the parent.</td></tr
+        >
+        <tr
+          ><td><code>label</code></td><td><code>string</code></td><td>empty</td
+          ><td>Visible tab label.</td></tr
+        >
+        <tr
+          ><td><code>icon</code></td><td><code>CadIconName</code></td><td
+            >empty</td
+          ><td>Optional icon before the label.</td></tr
+        >
+        <tr
+          ><td><code>tone</code></td><td
+            ><code>accent | coral | lemon | mint | pink | violet</code></td
+          ><td><code>accent</code></td><td>Notebook tab color.</td></tr
+        >
+      </tbody>
+    </table>
+  </section>
+
+  <section class="content-section" aria-labelledby="events-title">
+    <h2 id="events-title">Events and styling</h2>
+    <p>
+      <code class="inline-code">cad-tab-change</code> includes
+      <code class="inline-code">{'{ activeTab, previousTab }'}</code>. The
+      parent exposes <code class="inline-code">list</code>,
+      <code class="inline-code">panels</code>, and
+      <code class="inline-code">tab</code> parts plus
+      <code class="inline-code">--cad-tabs-panel-bg</code>. Each child exposes
+      its <code class="inline-code">panel</code> part.
+    </p>
+    <CodeBlock code={eventCode} language="typescript" />
+  </section>
+</DocsLayout>

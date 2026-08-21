@@ -1,0 +1,19 @@
+---
+import type { CadIconName } from '@caderno-ui/icons'
+
+type Props = {
+  class?: string
+  label?: string
+  name: CadIconName
+  size?: number | string
+}
+
+const { class: className, label, name, size = 24 } = Astro.props
+---
+
+<cad-icon class={className} label={label} name={name} size={String(size)}
+></cad-icon>
+
+<script>
+  import '@caderno-ui/elements/icon'
+</script>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Caderno UI component laboratory" />
+    <title>Caderno UI · Laboratory</title>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Caderno UI · Lit laboratory</p>
+          <h1>Interfaces that read like notes.</h1>
+          <p>
+            Framework-agnostic primitives with typed contracts and notebook
+            character.
+          </p>
+        </div>
+        <button class="theme-toggle" type="button" data-theme-toggle>
+          Toggle theme
+        </button>
+      </header>
+
+      <section>
+        <h2>Alerts</h2>
+        <div class="grid">
+          <cad-alert heading="Context matters" variant="info">
+            Components should preserve meaning before decoration.
+          </cad-alert>
+          <cad-alert heading="Contract reviewed" variant="success">
+            The public event crosses the shadow boundary.
+          </cad-alert>
+          <cad-alert
+            dismissible
+            heading="Check the trade-off"
+            variant="warning"
+          >
+            Dismiss me to inspect the event log.
+          </cad-alert>
+          <cad-alert dismissible heading="Contract broken" variant="danger">
+            Duplicate tab names are rejected.
+          </cad-alert>
+        </div>
+      </section>
+
+      <section>
+        <h2>Bookmark</h2>
+        <cad-bookmark
+          active-label="Remove bookmark"
+          bookmark-id="laboratory"
+          label="Save laboratory"
+          persist
+        ></cad-bookmark>
+      </section>
+
+      <section>
+        <h2>Tabs</h2>
+        <cad-tabs default-tab="contract" label="Component design stages">
+          <cad-tab icon="question" label="Problem" name="problem" tone="coral">
+            Define the user need and the semantic baseline.
+          </cad-tab>
+          <cad-tab
+            icon="brackets"
+            label="Contract"
+            name="contract"
+            tone="lemon"
+          >
+            Choose attributes, properties, slots, events and CSS customization
+            points.
+          </cad-tab>
+          <cad-tab icon="check" label="Proof" name="proof" tone="mint">
+            Verify behavior in a real browser and every supported framework.
+          </cad-tab>
+        </cad-tabs>
+      </section>
+
+      <output aria-live="polite" class="event-log" data-event-log>
+        Interact with a component to inspect its event contract.
+      </output>
+    </main>
+  </body>
+</html>

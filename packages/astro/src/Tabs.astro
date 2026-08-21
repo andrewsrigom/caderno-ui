@@ -1,0 +1,67 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadTabTone } from '@caderno-ui/elements/tabs'
+import type { CadIconName } from '@caderno-ui/icons'
+
+type Tab = {
+  icon?: CadIconName
+  id: string
+  label: string
+  tone?: CadTabTone
+}
+
+type Props = {
+  ariaLabel?: string
+  class?: string
+  defaultTab?: string
+  groupId?: string
+  id?: string
+  label?: string
+  tabs?: Tab[]
+}
+
+const {
+  ariaLabel,
+  class: className,
+  defaultTab,
+  groupId,
+  id,
+  label,
+  tabs = [],
+} = Astro.props
+const resolvedId = groupId ?? id
+const resolvedLabel = ariaLabel ?? label ?? 'Tabs'
+
+const ids = tabs.map((tab) => tab.id)
+if (new Set(ids).size !== ids.length) {
+  throw new Error(
+    `Tabs received duplicate tab ids in group "${resolvedId ?? 'anonymous'}".`,
+  )
+}
+---
+
+<cad-tabs
+  class={className}
+  default-tab={defaultTab}
+  id={resolvedId}
+  label={resolvedLabel}
+>
+  {
+    tabs.map((tab) => (
+      <span
+        data-cad-tab-definition
+        data-icon={tab.icon}
+        data-label={tab.label}
+        data-name={tab.id}
+        data-tone={tab.tone ?? 'accent'}
+        hidden
+      />
+    ))
+  }
+  <slot />
+</cad-tabs>
+
+<script>
+  import '@caderno-ui/elements/tabs'
+</script>

@@ -1,0 +1,80 @@
+{
+  "name": "@caderno-ui/elements",
+  "version": "0.1.0",
+  "description": "Framework-agnostic Caderno UI custom elements implemented with Lit.",
+  "keywords": [
+    "caderno-ui",
+    "custom-elements",
+    "design-system",
+    "lit",
+    "web-components"
+  ],
+  "author": "Andrews Ribeiro Gomes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewsrigom/caderno-ui.git",
+    "directory": "packages/elements"
+  },
+  "homepage": "https://github.com/andrewsrigom/caderno-ui/tree/main/packages/elements#readme",
+  "bugs": {
+    "url": "https://github.com/andrewsrigom/caderno-ui/issues"
+  },
+  "type": "module",
+  "files": [
+    "custom-elements.json",
+    "dist",
+    "src"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./alert": {
+      "types": "./dist/alert/cad-alert.d.ts",
+      "import": "./dist/alert/cad-alert.js"
+    },
+    "./bookmark": {
+      "types": "./dist/bookmark/cad-bookmark.d.ts",
+      "import": "./dist/bookmark/cad-bookmark.js"
+    },
+    "./icon": {
+      "types": "./dist/icon/cad-icon.d.ts",
+      "import": "./dist/icon/cad-icon.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.js"
+    },
+    "./fallback.css": "./src/styles/fallback.css"
+  },
+  "sideEffects": [
+    "**/*.js",
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@caderno-ui/icons": "workspace:^",
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "customElements": "./custom-elements.json"
+}

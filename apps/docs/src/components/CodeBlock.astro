@@ -1,0 +1,16 @@
+---
+type Props = {
+  code: string
+  language?: string
+}
+
+const { code, language = 'html' } = Astro.props
+---
+
+<div class="code-block">
+  <div class="code-toolbar">
+    <span>{language}</span>
+    <button data-copy-code type="button">Copy</button>
+  </div>
+  <pre><code>{code}</code></pre>
+</div>

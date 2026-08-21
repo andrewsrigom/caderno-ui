@@ -1,0 +1,109 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import DemoFrame from '../components/DemoFrame.astro'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const themeImport = `import '@caderno-ui/tokens/notebook.css'`
+const override = `.product-surface {
+  --cad-font-book: Charter, Georgia, serif;
+  --cad-link: #6d35c5;
+  --cad-post-it-blue-bg: #d9c8ff;
+  --cad-post-it-blue-ink: #321b59;
+}`
+const partExample = `cad-alert.release-note::part(base) {
+  border-width: 2px;
+  box-shadow: 0.35rem 0.4rem 0 rgb(16 24 40 / 0.14);
+}
+
+cad-alert.release-note::part(title) {
+  text-decoration: underline wavy;
+  text-underline-offset: 0.25em;
+}`
+
+const colorTokens = [
+  ['Lemon', 'var(--cad-post-it-lemon-bg)', 'var(--cad-post-it-lemon-ink)'],
+  ['Pink', 'var(--cad-post-it-pink-bg)', 'var(--cad-post-it-pink-ink)'],
+  ['Mint', 'var(--cad-post-it-mint-bg)', 'var(--cad-post-it-mint-ink)'],
+  ['Blue', 'var(--cad-post-it-blue-bg)', 'var(--cad-post-it-blue-ink)'],
+  ['Coral', 'var(--cad-post-it-coral-bg)', 'var(--cad-post-it-coral-ink)'],
+  ['Violet', 'var(--cad-sticker-violet-bg)', 'var(--cad-sticker-violet-ink)'],
+] as const
+---
+
+<DocsLayout
+  description="Theme Caderno UI with portable CSS custom properties and precise CSS parts."
+  title="Theming"
+>
+  <header class="page-header">
+    <p class="eyebrow">Design tokens</p>
+    <h1>Keep the character. Change the voice.</h1>
+    <p>
+      Every visual decision is exposed through CSS custom properties. Start with
+      the notebook defaults, override tokens at any scope, then reach for CSS
+      parts when a component needs surgical styling.
+    </p>
+  </header>
+
+  <section class="content-section" aria-labelledby="defaults-title">
+    <h2 id="defaults-title">Load the defaults</h2>
+    <p>
+      Import the token sheet once near your application root. It defines a dark
+      default and a light palette for <code class="inline-code"
+        >data-theme="light"</code
+      >.
+    </p>
+    <CodeBlock code={themeImport} language="typescript" />
+  </section>
+
+  <section class="content-section" aria-labelledby="palette-title">
+    <h2 id="palette-title">Notebook palette</h2>
+    <p>
+      Post-it and sticker pairs include a background and a foreground, keeping
+      text contrast part of the token contract.
+    </p>
+    <div class="token-grid">
+      {
+        colorTokens.map(([name, background, color]) => (
+          <article class="token-swatch" style={{ background, color }}>
+            <strong>{name}</strong>
+            <code>--cad-{name.toLowerCase()}</code>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="content-section" aria-labelledby="scope-title">
+    <h2 id="scope-title">Override at the right scope</h2>
+    <p>
+      Put brand tokens on the application root, a feature boundary, or one
+      component. Shadow DOM inherits custom properties without leaking internal
+      selectors.
+    </p>
+    <CodeBlock code={override} language="css" />
+    <DemoFrame title="A locally themed alert">
+      <div class="product-surface">
+        <cad-alert heading="Scoped tokens" variant="info">
+          This component inherits a product-specific blue without changing the
+          rest of the page.
+        </cad-alert>
+      </div>
+    </DemoFrame>
+  </section>
+
+  <section class="content-section" aria-labelledby="parts-title">
+    <h2 id="parts-title">Style public parts</h2>
+    <p>
+      Parts are stable styling hooks, not access to implementation markup. Each
+      component page lists its supported parts.
+    </p>
+    <CodeBlock code={partExample} language="css" />
+  </section>
+
+  <style>
+    .product-surface {
+      --cad-post-it-blue-bg: #d9c8ff;
+      --cad-post-it-blue-ink: #321b59;
+    }
+  </style>
+</DocsLayout>

@@ -1,0 +1,961 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/alert/cad-alert.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/bookmark/cad-bookmark.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/icon/cad-icon.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/tabs/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/alert/cad-alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A notebook-styled status message with an optional dismiss action.",
+          "name": "CadAlert",
+          "cssProperties": [
+            {
+              "description": "Per-instance alert background.",
+              "name": "--cad-alert-bg"
+            },
+            {
+              "description": "Per-instance alert foreground.",
+              "name": "--cad-alert-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Alert container.",
+              "name": "base"
+            },
+            {
+              "description": "Dismiss button.",
+              "name": "close-button"
+            },
+            {
+              "description": "Alert body.",
+              "name": "content"
+            },
+            {
+              "description": "Status icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Alert heading.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Alert body content.",
+              "name": ""
+            },
+            {
+              "description": "Visible alert heading. Falls back to the `heading` attribute.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "dismissible",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "dismissible",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dismissLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Dismiss alert'",
+              "attribute": "dismiss-label"
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadAlertVariant"
+              },
+              "default": "'info'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "dismiss",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "cad-dismiss",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired after the dismiss button hides the alert."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "dismissible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "dismissible"
+            },
+            {
+              "name": "dismiss-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Dismiss alert'",
+              "fieldName": "dismissLabel"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "heading"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadAlertVariant"
+              },
+              "default": "'info'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadAlert",
+          "declaration": {
+            "name": "CadAlert",
+            "module": "packages/elements/src/alert/cad-alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-alert",
+          "declaration": {
+            "name": "CadAlert",
+            "module": "packages/elements/src/alert/cad-alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/bookmark/cad-bookmark.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A persistent, pressed-state bookmark control.",
+          "name": "CadBookmark",
+          "cssProperties": [
+            {
+              "description": "Bookmark paper color.",
+              "name": "--cad-bookmark-bg"
+            },
+            {
+              "description": "Bookmark foreground color.",
+              "name": "--cad-bookmark-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native bookmark button.",
+              "name": "button"
+            },
+            {
+              "description": "Bookmark icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Visible button label.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Optional pre-upgrade fallback hidden after definition.",
+              "name": "fallback"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "activeLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove bookmark'",
+              "attribute": "active-label"
+            },
+            {
+              "kind": "field",
+              "name": "bookmarkId",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "bookmark-id"
+            },
+            {
+              "kind": "field",
+              "name": "bookmarked",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "bookmarked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Save bookmark'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "persist",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "persist",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "storagePrefix",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'caderno-ui:bookmark'",
+              "attribute": "storage-prefix"
+            },
+            {
+              "kind": "field",
+              "name": "storageKey",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "restore",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "cad-bookmark-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired whenever the bookmark state changes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove bookmark'",
+              "fieldName": "activeLabel"
+            },
+            {
+              "name": "bookmark-id",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "bookmarkId"
+            },
+            {
+              "name": "bookmarked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "bookmarked"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Save bookmark'",
+              "fieldName": "label"
+            },
+            {
+              "name": "persist",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "persist"
+            },
+            {
+              "name": "storage-prefix",
+              "type": {
+                "text": "string"
+              },
+              "default": "'caderno-ui:bookmark'",
+              "fieldName": "storagePrefix"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-bookmark",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadBookmark",
+          "declaration": {
+            "name": "CadBookmark",
+            "module": "packages/elements/src/bookmark/cad-bookmark.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-bookmark",
+          "declaration": {
+            "name": "CadBookmark",
+            "module": "packages/elements/src/bookmark/cad-bookmark.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/icon/cad-icon.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A typed, hand-drawn Caderno UI SVG icon.",
+          "name": "CadIcon",
+          "cssParts": [
+            {
+              "description": "The rendered SVG element.",
+              "name": "svg"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "privacy": "public",
+              "type": {
+                "text": "CadIconName"
+              },
+              "default": "'spark'",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'24'",
+              "attribute": "size"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "CadIconName"
+              },
+              "default": "'spark'",
+              "fieldName": "name"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "'24'",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadIcon",
+          "declaration": {
+            "name": "CadIcon",
+            "module": "packages/elements/src/icon/cad-icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-icon",
+          "declaration": {
+            "name": "CadIcon",
+            "module": "packages/elements/src/icon/cad-icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/tabs/cad-tab.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A declarative panel consumed by `cad-tabs`.",
+          "name": "CadTab",
+          "cssParts": [
+            {
+              "description": "Panel content container.",
+              "name": "panel"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Panel content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "icon",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadTabTone"
+              },
+              "default": "'accent'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "icon"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadTabTone"
+              },
+              "default": "'accent'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-tab",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadTab",
+          "declaration": {
+            "name": "CadTab",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-tab",
+          "declaration": {
+            "name": "CadTab",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/tabs/cad-tabs.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An accessible tabs controller for declarative `cad-tab` children.",
+          "name": "CadTabs",
+          "cssProperties": [
+            {
+              "description": "Panel surface.",
+              "name": "--cad-tabs-panel-bg"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Tab list.",
+              "name": "list"
+            },
+            {
+              "description": "Panel container.",
+              "name": "panels"
+            },
+            {
+              "description": "Every native tab button.",
+              "name": "tab"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Direct `cad-tab` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "activeTab",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "active-tab",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "defaultTab",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "default-tab"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Tabs'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "CadTab[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "instanceId",
+              "privacy": "private",
+              "readonly": true,
+              "default": "`cad-tabs-${++tabsInstance}`"
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "directItems",
+              "type": {
+                "text": "CadTab[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "definitions",
+              "type": {
+                "text": "Map<string, HTMLElement>"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "syncItems",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "applyPanelState",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "panelId",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "tabId",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "activate",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "focus",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "cad-tab-change",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired after the active panel changes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active-tab",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "activeTab"
+            },
+            {
+              "name": "default-tab",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "defaultTab"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Tabs'",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-tabs",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadTabs",
+          "declaration": {
+            "name": "CadTabs",
+            "module": "packages/elements/src/tabs/cad-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-tabs",
+          "declaration": {
+            "name": "CadTabs",
+            "module": "packages/elements/src/tabs/cad-tabs.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/tabs/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/tabs/cad-tab.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/tabs/cad-tabs.js"
+          }
+        }
+      ]
+    }
+  ]
+}

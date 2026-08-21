@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10.32.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+
+      - name: Verify workspace
+        run: pnpm verify
+
+      - name: Create release pull request or publish
+        uses: changesets/action@v2
+        with:
+          publish: pnpm release
+          version: pnpm version-packages
+          commit: 'chore: release packages'
+          title: 'chore: release packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

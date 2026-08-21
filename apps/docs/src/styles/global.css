@@ -1,0 +1,840 @@
+@import '@caderno-ui/elements/fallback.css';
+
+:root {
+  --docs-header-height: 4.75rem;
+  --docs-sidebar-width: 17rem;
+  --docs-content-width: 74rem;
+  --docs-blue: #2450c5;
+  --docs-blue-soft: #dbe7ff;
+  --docs-grid: color-mix(in srgb, var(--cad-line-strong) 42%, transparent);
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 20rem;
+  margin: 0;
+  color: var(--cad-ink);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 4.5rem,
+      rgb(226 81 96 / 0.12) 4.5rem 4.6rem,
+      transparent 4.6rem
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 31px,
+      var(--docs-grid) 31px 32px
+    ),
+    var(--cad-bg);
+  font-family: var(--cad-font-ui);
+  line-height: 1.65;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: var(--cad-link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+code,
+pre {
+  font-family: var(--cad-font-mono);
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  color: var(--cad-bg);
+  background: var(--cad-ink);
+  border-radius: 0.5rem;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.topbar {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  min-height: var(--docs-header-height);
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.7rem clamp(1rem, 3vw, 2rem);
+  background: color-mix(in srgb, var(--cad-bg) 90%, transparent);
+  border-bottom: 1px solid var(--cad-line-strong);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--cad-ink);
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 2.7rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: #18345d;
+  background: var(--cad-post-it-blue-bg);
+  border: 1px solid color-mix(in srgb, #18345d 28%, transparent);
+  box-shadow: 0.18rem 0.2rem 0 rgb(var(--cad-shadow-rgb) / 0.14);
+  font-family: var(--cad-font-book);
+  font-size: 1.55rem;
+  font-weight: 700;
+  transform: rotate(-2deg);
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand strong {
+  font-family: var(--cad-font-book);
+  font-size: 1.12rem;
+}
+
+.brand small {
+  color: var(--cad-ink-muted);
+  font-size: 0.73rem;
+}
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.topbar nav a {
+  color: var(--cad-ink-soft);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.topbar nav a:hover {
+  color: var(--cad-link);
+}
+
+.topbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.72rem;
+  color: var(--cad-ink);
+  background: var(--cad-surface);
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.docs-shell {
+  display: grid;
+  grid-template-columns: var(--docs-sidebar-width) minmax(0, 1fr);
+  width: min(100%, calc(var(--docs-content-width) + var(--docs-sidebar-width)));
+  min-height: calc(100vh - var(--docs-header-height));
+  margin-inline: auto;
+}
+
+.sidebar {
+  position: sticky;
+  top: var(--docs-header-height);
+  align-self: start;
+  height: calc(100vh - var(--docs-header-height));
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--cad-line);
+  overflow-y: auto;
+}
+
+.sidebar nav {
+  display: grid;
+  gap: 2rem;
+}
+
+.sidebar section {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.sidebar h2 {
+  margin: 0 0 0.45rem;
+  color: var(--cad-ink-muted);
+  font-family: var(--cad-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sidebar a {
+  padding: 0.42rem 0.65rem;
+  color: var(--cad-ink-soft);
+  border-radius: 0.45rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  color: var(--cad-ink);
+  background: var(--cad-control-hover);
+}
+
+.sidebar a[aria-current='page'] {
+  color: var(--cad-link);
+  background: color-mix(in srgb, var(--cad-link) 9%, transparent);
+  font-weight: 700;
+}
+
+.version-note {
+  margin-top: 2.2rem;
+  padding-top: 1rem;
+  color: var(--cad-ink-muted);
+  border-top: 1px dashed var(--cad-line-strong);
+  font-size: 0.76rem;
+}
+
+main {
+  width: min(100%, var(--docs-content-width));
+  padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.25rem, 5vw, 5rem);
+}
+
+.page-header {
+  max-width: 52rem;
+  margin-bottom: 3.5rem;
+}
+
+.eyebrow,
+.demo-label {
+  margin: 0 0 0.55rem;
+  color: var(--cad-link);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-md);
+  font-weight: var(--cad-hand-weight-strong);
+}
+
+.page-header h1,
+.hero h1 {
+  max-width: 15ch;
+  margin: 0;
+  font-family: var(--cad-font-book);
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.page-header > p:last-child,
+.hero-copy {
+  max-width: 60ch;
+  margin: 1.35rem 0 0;
+  color: var(--cad-ink-soft);
+  font-size: clamp(1.02rem, 2vw, 1.22rem);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.75fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  min-height: 30rem;
+  margin-bottom: 5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  color: #173d2c;
+  background: var(--cad-post-it-mint-bg);
+  border: 1px solid color-mix(in srgb, #173d2c 28%, transparent);
+  border-radius: 0.55rem 0.7rem 0.6rem 0.8rem;
+  box-shadow: 0.2rem 0.25rem 0 rgb(var(--cad-shadow-rgb) / 0.16);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.button-link.secondary {
+  color: var(--cad-ink);
+  background: var(--cad-surface);
+  border-color: var(--cad-line-strong);
+  box-shadow: none;
+}
+
+.hero-note {
+  position: relative;
+  padding: 2rem;
+  color: #49370d;
+  background: var(--cad-post-it-lemon-bg);
+  box-shadow: 0.7rem 0.8rem 0 rgb(var(--cad-shadow-rgb) / 0.13);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-lg);
+  line-height: 1.25;
+  transform: rotate(1.5deg);
+}
+
+.hero-note::before {
+  position: absolute;
+  top: -0.6rem;
+  left: 35%;
+  width: 4.8rem;
+  height: 1.3rem;
+  background: color-mix(in srgb, var(--cad-tape-paper-bg) 72%, transparent);
+  content: '';
+  transform: rotate(-3deg);
+}
+
+.install-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  color: var(--cad-ink);
+  background: var(--cad-surface);
+  border: 1px solid var(--cad-line-strong);
+  border-radius: 0.7rem;
+  font-family: var(--cad-font-mono);
+  font-size: 0.84rem;
+}
+
+.feature-grid,
+.package-grid,
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 2rem 4rem;
+}
+
+.feature-card,
+.package-card,
+.component-card {
+  padding: 1.35rem;
+  background: color-mix(in srgb, var(--cad-surface) 94%, transparent);
+  border: 1px solid var(--cad-line);
+  border-radius: 0.65rem 0.9rem 0.75rem 1rem;
+}
+
+.feature-card cad-icon,
+.package-card cad-icon,
+.component-card cad-icon {
+  color: var(--cad-link);
+}
+
+.feature-card h2,
+.package-card h2,
+.component-card h2 {
+  margin: 0.8rem 0 0.45rem;
+  font-family: var(--cad-font-book);
+  font-size: 1.25rem;
+}
+
+.feature-card p,
+.package-card p,
+.component-card p {
+  margin: 0;
+  color: var(--cad-ink-soft);
+  font-size: 0.9rem;
+}
+
+.component-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.component-card:hover {
+  border-color: var(--cad-line-strong);
+  transform: translateY(-2px);
+}
+
+.section-heading {
+  max-width: 54rem;
+  margin: 5rem 0 1.4rem;
+}
+
+.section-heading h2,
+.content-section > h2 {
+  margin: 0;
+  font-family: var(--cad-font-book);
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+}
+
+.section-heading p,
+.content-section > p {
+  max-width: 64ch;
+  color: var(--cad-ink-soft);
+}
+
+.demo-frame {
+  margin-block: 2rem 3rem;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--cad-surface) 92%, transparent);
+  border: 1px solid var(--cad-line-strong);
+  border-radius: 0.9rem;
+}
+
+.demo-frame > header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--cad-line);
+}
+
+.demo-frame h2,
+.demo-frame p {
+  margin: 0;
+}
+
+.demo-frame h2 {
+  font-size: 1rem;
+}
+
+.demo-frame .demo-label {
+  font-size: var(--cad-hand-sm);
+}
+
+.demo-frame > header > p {
+  max-width: 44ch;
+  color: var(--cad-ink-muted);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.demo-canvas {
+  display: grid;
+  gap: 1rem;
+  min-height: 12rem;
+  align-content: center;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  background:
+    radial-gradient(
+      circle at 18% 12%,
+      color-mix(in srgb, var(--cad-link) 8%, transparent),
+      transparent 32%
+    ),
+    var(--cad-bg);
+}
+
+.code-block {
+  margin-block: 1.2rem 2rem;
+  overflow: hidden;
+  color: #deebff;
+  background: #171a27;
+  border: 1px solid #30364d;
+  border-radius: 0.75rem;
+}
+
+.code-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.48rem 0.75rem;
+  color: #9ca8ca;
+  background: #1f2335;
+  border-bottom: 1px solid #30364d;
+  font-family: var(--cad-font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.code-toolbar button {
+  padding: 0.25rem 0.5rem;
+  color: #deebff;
+  background: transparent;
+  border: 1px solid #46506e;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+pre {
+  margin: 0;
+  padding: 1rem 1.15rem 1.2rem;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.content-section {
+  margin-block: 4rem;
+}
+
+.steps {
+  padding: 0;
+  margin: 2.5rem 0 1rem;
+  list-style: none;
+}
+
+.steps li {
+  display: flex;
+  max-width: 52rem;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.steps li > span {
+  display: grid;
+  width: 2.4rem;
+  flex: 0 0 2.4rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: var(--cad-sticker-violet-ink);
+  background: var(--cad-sticker-violet-bg);
+  border-radius: 48% 52% 46% 54%;
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-md);
+  font-weight: 700;
+  transform: rotate(-3deg);
+}
+
+.steps h2,
+.steps p {
+  margin: 0;
+}
+
+.steps h2 {
+  font-family: var(--cad-font-book);
+  font-size: 1.45rem;
+}
+
+.steps p {
+  max-width: 64ch;
+  margin-top: 0.25rem;
+  color: var(--cad-ink-soft);
+}
+
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-block: 1.5rem 2.5rem;
+}
+
+.token-swatch {
+  display: grid;
+  min-height: 8rem;
+  align-content: space-between;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: 0.6rem 0.85rem 0.65rem 0.9rem;
+  box-shadow: 0.2rem 0.25rem 0 rgb(var(--cad-shadow-rgb) / 0.12);
+}
+
+.token-swatch strong {
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-lg);
+}
+
+.token-swatch code {
+  font-size: 0.67rem;
+}
+
+.integration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 2rem 4rem;
+}
+
+.integration-grid article {
+  padding: 1.35rem;
+  background: color-mix(in srgb, var(--cad-surface) 94%, transparent);
+  border: 1px solid var(--cad-line);
+  border-radius: 0.75rem;
+}
+
+.integration-grid cad-icon {
+  color: var(--cad-link);
+}
+
+.integration-grid h2 {
+  margin: 0.6rem 0 0.3rem;
+  font-family: var(--cad-font-book);
+  font-size: 1.3rem;
+}
+
+.integration-grid p {
+  margin: 0;
+  color: var(--cad-ink-soft);
+}
+
+.component-card code {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--cad-link);
+  font-size: 0.75rem;
+}
+
+.icon-scale {
+  display: flex;
+  min-height: 6rem;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  color: var(--cad-link);
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-block: 1.5rem;
+}
+
+.icon-grid button {
+  display: grid;
+  min-width: 0;
+  min-height: 5.5rem;
+  place-items: center;
+  gap: 0.35rem;
+  padding: 0.7rem 0.35rem;
+  color: var(--cad-ink);
+  background: var(--cad-surface);
+  border: 1px solid var(--cad-line);
+  border-radius: 0.55rem;
+  cursor: pointer;
+}
+
+.icon-grid button:hover,
+.icon-grid button:focus-visible {
+  color: var(--cad-link);
+  background: var(--cad-control-hover);
+  border-color: var(--cad-line-strong);
+}
+
+.icon-grid span {
+  max-width: 100%;
+  overflow: hidden;
+  font-family: var(--cad-font-mono);
+  font-size: 0.62rem;
+  text-overflow: ellipsis;
+}
+
+.event-output {
+  display: block;
+  width: fit-content;
+  padding: 0.45rem 0.7rem;
+  color: var(--cad-ink-soft);
+  background: var(--cad-surface);
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: 0.45rem;
+  font-family: var(--cad-font-mono);
+  font-size: 0.72rem;
+}
+
+.api-table {
+  width: 100%;
+  margin-block: 1.5rem 3rem;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.api-table th,
+.api-table td {
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--cad-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.api-table th {
+  color: var(--cad-ink-muted);
+  font-family: var(--cad-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.api-table code,
+.inline-code {
+  padding: 0.15em 0.38em;
+  color: var(--cad-link);
+  background: color-mix(in srgb, var(--cad-link) 8%, var(--cad-surface));
+  border: 1px solid var(--cad-line);
+  border-radius: 0.3rem;
+  font-size: 0.86em;
+}
+
+.callout {
+  margin-block: 1.5rem;
+  padding: 1rem 1.15rem;
+  color: var(--cad-post-it-blue-ink);
+  background: var(--cad-post-it-blue-bg);
+  border-radius: 0.65rem;
+}
+
+.callout strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 6rem;
+  padding-top: 1.5rem;
+  color: var(--cad-ink-muted);
+  border-top: 1px dashed var(--cad-line-strong);
+  font-size: 0.8rem;
+}
+
+.page-footer p {
+  margin: 0;
+}
+
+.mobile-navigation {
+  display: none;
+}
+
+@media (max-width: 920px) {
+  .docs-shell {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mobile-navigation {
+    display: block;
+    margin: 1rem;
+    background: var(--cad-surface);
+    border: 1px solid var(--cad-line-strong);
+    border-radius: 0.65rem;
+  }
+
+  .mobile-navigation summary {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .mobile-navigation nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+    padding: 0 1rem 1rem;
+  }
+
+  .mobile-navigation nav div,
+  .mobile-navigation nav a,
+  .mobile-navigation nav strong {
+    display: block;
+  }
+
+  .mobile-navigation nav strong {
+    margin-bottom: 0.35rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .mobile-navigation nav a {
+    padding-block: 0.22rem;
+    text-decoration: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-note {
+    max-width: 26rem;
+  }
+}
+
+@media (max-width: 680px) {
+  body {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 31px,
+        var(--docs-grid) 31px 32px
+      ),
+      var(--cad-bg);
+  }
+
+  .topbar nav > a,
+  .topbar button span {
+    display: none;
+  }
+
+  main {
+    padding-inline: 1.1rem;
+  }
+
+  .feature-grid,
+  .package-grid,
+  .component-grid,
+  .token-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .integration-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .icon-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .demo-frame > header,
+  .page-footer {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .demo-frame > header > p {
+    text-align: left;
+  }
+
+  .mobile-navigation nav {
+    grid-template-columns: 1fr;
+  }
+
+  .api-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

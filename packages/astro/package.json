@@ -1,0 +1,54 @@
+{
+  "name": "@caderno-ui/astro",
+  "version": "0.1.0",
+  "description": "Astro facades for Caderno UI custom elements.",
+  "keywords": [
+    "astro",
+    "caderno-ui",
+    "lit",
+    "web-components"
+  ],
+  "author": "Andrews Ribeiro Gomes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewsrigom/caderno-ui.git",
+    "directory": "packages/astro"
+  },
+  "homepage": "https://github.com/andrewsrigom/caderno-ui/tree/main/packages/astro#readme",
+  "bugs": {
+    "url": "https://github.com/andrewsrigom/caderno-ui/issues"
+  },
+  "type": "module",
+  "files": [
+    "src"
+  ],
+  "exports": {
+    "./Alert.astro": "./src/Alert.astro",
+    "./Bookmark.astro": "./src/Bookmark.astro",
+    "./Icon.astro": "./src/Icon.astro",
+    "./Tab.astro": "./src/Tab.astro",
+    "./Tabs.astro": "./src/Tabs.astro"
+  },
+  "scripts": {
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@caderno-ui/elements": "workspace:^",
+    "@caderno-ui/icons": "workspace:^"
+  },
+  "peerDependencies": {
+    "astro": ">=5 <8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "astro": "^7.2.4",
+    "typescript": "^6.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

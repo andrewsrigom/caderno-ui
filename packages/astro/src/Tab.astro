@@ -1,0 +1,33 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadTabTone } from '@caderno-ui/elements/tabs'
+import type { CadIconName } from '@caderno-ui/icons'
+
+type SharedProps = {
+  class?: string
+  icon?: CadIconName
+  label?: string
+  tone?: CadTabTone
+}
+
+type Props = SharedProps &
+  ({ id: string; name?: never } | { id?: never; name: string })
+
+const { class: className, icon, id, label, name, tone = 'accent' } = Astro.props
+const resolvedName = id ?? name
+---
+
+<cad-tab
+  class={className}
+  icon={icon}
+  label={label}
+  name={resolvedName}
+  tone={tone}
+>
+  <slot />
+</cad-tab>
+
+<script>
+  import '@caderno-ui/elements/tabs'
+</script>

@@ -1,0 +1,38 @@
+{
+  "name": "@caderno-ui/tokens",
+  "version": "0.1.0",
+  "description": "Theme tokens for Caderno UI.",
+  "keywords": [
+    "caderno-ui",
+    "css",
+    "design-tokens",
+    "themes"
+  ],
+  "author": "Andrews Ribeiro Gomes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewsrigom/caderno-ui.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://github.com/andrewsrigom/caderno-ui/tree/main/packages/tokens#readme",
+  "bugs": {
+    "url": "https://github.com/andrewsrigom/caderno-ui/issues"
+  },
+  "type": "module",
+  "files": [
+    "src/notebook.css"
+  ],
+  "exports": {
+    "./notebook.css": "./src/notebook.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

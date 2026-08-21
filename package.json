@@ -1,0 +1,54 @@
+{
+  "name": "caderno-ui",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Framework-agnostic notebook-inspired UI built with Lit.",
+  "author": "Andrews Ribeiro Gomes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewsrigom/caderno-ui.git"
+  },
+  "homepage": "https://github.com/andrewsrigom/caderno-ui#readme",
+  "bugs": {
+    "url": "https://github.com/andrewsrigom/caderno-ui/issues"
+  },
+  "type": "module",
+  "packageManager": "pnpm@10.32.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "dev": "pnpm --filter @caderno-ui/laboratory dev",
+    "docs:dev": "pnpm --filter @caderno-ui/docs dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:packages": "pnpm --recursive --filter './packages/*' exec publint",
+    "manifest": "cem analyze --litelement --globs \"packages/elements/src/**/*.ts\" --outdir packages/elements",
+    "test": "pnpm -r --if-present test",
+    "test:e2e": "playwright test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "verify": "pnpm format:check && pnpm build && pnpm typecheck && pnpm test && pnpm test:e2e && pnpm manifest && pnpm lint:packages",
+    "version-packages": "changeset version",
+    "release": "pnpm verify && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.1",
+    "@custom-elements-manifest/analyzer": "^0.11.0",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "publint": "^0.3.12",
+    "rimraf": "^6.0.1",
+    "typescript": "^6.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "rs-module-lexer"
+    ]
+  },
+  "customElements": "packages/elements/custom-elements.json"
+}

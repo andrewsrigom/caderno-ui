@@ -1,0 +1,66 @@
+{
+  "name": "@caderno-ui/react",
+  "version": "0.1.0",
+  "description": "Typed React adapters for Caderno UI custom elements.",
+  "keywords": [
+    "caderno-ui",
+    "lit",
+    "react",
+    "web-components"
+  ],
+  "author": "Andrews Ribeiro Gomes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewsrigom/caderno-ui.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/andrewsrigom/caderno-ui/tree/main/packages/react#readme",
+  "bugs": {
+    "url": "https://github.com/andrewsrigom/caderno-ui/issues"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": [
+    "**/*.js"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "test": "pnpm build && vitest run && node test/ssr-smoke.mjs",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@caderno-ui/elements": "workspace:^",
+    "@lit/react": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": ">=18 <20"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.3",
+    "jsdom": "^30.0.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "vitest": "^4.1.11",
+    "typescript": "^6.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

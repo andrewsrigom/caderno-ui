@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 20rem;
+  margin: 0;
+  color: var(--cad-ink);
+  background: var(--cad-bg);
+  font-family: var(--cad-font-ui);
+}
+
+button {
+  font: inherit;
+}
+
+main {
+  display: grid;
+  gap: 4rem;
+  width: min(100% - 2rem, 70rem);
+  margin-inline: auto;
+  padding-block: 4rem;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero > div {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--cad-link);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-md);
+  font-weight: var(--cad-hand-weight-strong);
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-family: var(--cad-font-book);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 0.95;
+}
+
+h2 {
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-xl);
+}
+
+section {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  gap: 1rem;
+}
+
+.theme-toggle,
+.event-log {
+  padding: 0.65rem 0.9rem;
+  color: var(--cad-ink);
+  background: var(--cad-surface);
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: 0.65rem;
+}
+
+.event-log {
+  position: sticky;
+  bottom: 1rem;
+  display: block;
+  box-shadow: 0 0.8rem 2rem rgb(var(--cad-shadow-rgb) / 0.2);
+  font-family: var(--cad-font-mono);
+  font-size: 0.85rem;
+}

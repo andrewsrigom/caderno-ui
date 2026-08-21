@@ -1,0 +1,110 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import DemoFrame from '../components/DemoFrame.astro'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const install = `pnpm add @caderno-ui/elements @caderno-ui/tokens
+
+# Optional framework adapters
+pnpm add @caderno-ui/react     # React
+pnpm add @caderno-ui/astro     # Astro`
+
+const register = `// Register every component
+import '@caderno-ui/elements'
+
+// Or register only what this page uses
+import '@caderno-ui/elements/alert'
+import '@caderno-ui/elements/bookmark'
+
+// Load the notebook theme once in your application
+import '@caderno-ui/tokens/notebook.css'`
+
+const markup = `<cad-alert heading="Your first note" variant="success">
+  Caderno UI works anywhere the Custom Elements standard works.
+</cad-alert>`
+
+const eventExample = `const bookmark = document.querySelector('cad-bookmark')
+
+bookmark.addEventListener('cad-bookmark-change', (event) => {
+  console.log(event.detail)
+  // { active: true, id: 'architecture-notes' }
+})`
+---
+
+<DocsLayout
+  description="Install Caderno UI, register only the elements you need, and use its typed custom events."
+  title="Getting started"
+>
+  <header class="page-header">
+    <p class="eyebrow">Start here</p>
+    <h1>From package to page in minutes.</h1>
+    <p>
+      Caderno UI publishes standard custom elements. Add the canonical runtime,
+      load its design tokens, and write ordinary HTML—or choose a thin adapter
+      for stronger framework ergonomics.
+    </p>
+  </header>
+
+  <ol class="steps" aria-label="Installation steps">
+    <li>
+      <span>1</span>
+      <div>
+        <h2>Install the runtime</h2>
+        <p>
+          The elements package contains behavior and styles. Tokens provide the
+          light and dark notebook themes.
+        </p>
+      </div>
+    </li>
+  </ol>
+  <CodeBlock code={install} language="shell" />
+
+  <ol class="steps" start="2">
+    <li>
+      <span>2</span>
+      <div>
+        <h2>Register components and tokens</h2>
+        <p>
+          Scoped entry points keep registrations explicit and make the browser
+          download only the components used by that surface.
+        </p>
+      </div>
+    </li>
+  </ol>
+  <CodeBlock code={register} language="typescript" />
+
+  <ol class="steps" start="3">
+    <li>
+      <span>3</span>
+      <div>
+        <h2>Use semantic markup</h2>
+        <p>
+          Attributes carry serializable values. Slots carry content. Complex
+          values should be assigned as JavaScript properties.
+        </p>
+      </div>
+    </li>
+  </ol>
+  <CodeBlock code={markup} language="html" />
+
+  <DemoFrame title="Your first Caderno component">
+    <cad-alert heading="Your first note" variant="success">
+      Caderno UI works anywhere the Custom Elements standard works.
+    </cad-alert>
+  </DemoFrame>
+
+  <section class="content-section" aria-labelledby="events-title">
+    <h2 id="events-title">Listen to public events</h2>
+    <p>
+      Events bubble and cross the shadow boundary, so application code can
+      handle them from a component, a form, or a page-level controller.
+    </p>
+    <CodeBlock code={eventExample} language="typescript" />
+  </section>
+
+  <aside class="callout">
+    <strong>ES modules only</strong>
+    Packages target modern build tools and browsers. Caderno UI does not ship a CommonJS
+    build or require a global runtime.
+  </aside>
+</DocsLayout>

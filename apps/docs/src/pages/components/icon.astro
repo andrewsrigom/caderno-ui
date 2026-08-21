@@ -1,0 +1,108 @@
+---
+import { cadIcons, cadIconCategories } from '@caderno-ui/icons'
+
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-icon name="rocket" size="28"></cad-icon>
+<cad-icon name="check" label="Completed" size="28"></cad-icon>
+
+<script type="module">
+  import '@caderno-ui/elements/icon'
+</script>`
+const typed = `import { cadIcons, type CadIconName } from '@caderno-ui/icons'
+
+const icon: CadIconName = 'rocket'
+const paths = cadIcons[icon]`
+const names = Object.keys(cadIcons) as (keyof typeof cadIcons)[]
+---
+
+<DocsLayout
+  description="CadIcon renders typed, hand-drawn SVG symbols that inherit the surrounding text color."
+  title="Icon"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-icon&gt;</p>
+    <h1>Hand-drawn marks, typed by name.</h1>
+    <p>
+      Icons are SVG paths with no framework runtime. The element renders them
+      accessibly, inherits <code class="inline-code">currentColor</code>, and
+      remains decorative unless given a label.
+    </p>
+  </header>
+
+  <DemoFrame title="Icon sizing and semantics">
+    <div class="icon-scale">
+      <cad-icon name="spark" size="18"></cad-icon>
+      <cad-icon name="book" size="28"></cad-icon>
+      <cad-icon label="Launch" name="rocket" size="40"></cad-icon>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <section class="content-section" aria-labelledby="gallery-title">
+    <h2 id="gallery-title">Icon gallery</h2>
+    <p>
+      The package exports {names.length} names across {
+        Object.keys(cadIconCategories).length
+      } categories. Select a name to copy it.
+    </p>
+    <div class="icon-grid">
+      {
+        names.map((name) => (
+          <button data-copy-icon={name} title={`Copy ${name}`} type="button">
+            <cad-icon name={name} size="26" />
+            <span>{name}</span>
+          </button>
+        ))
+      }
+    </div>
+    <output class="event-output" data-icon-output aria-live="polite">
+      Click an icon to copy its name.
+    </output>
+  </section>
+
+  <section class="content-section" aria-labelledby="api-title">
+    <h2 id="api-title">Attributes</h2>
+    <table class="api-table">
+      <thead
+        ><tr><th>Name</th><th>Type</th><th>Default</th><th>Purpose</th></tr
+        ></thead
+      >
+      <tbody>
+        <tr
+          ><td><code>name</code></td><td><code>CadIconName</code></td><td
+            ><code>spark</code></td
+          ><td>Selects a published icon.</td></tr
+        >
+        <tr
+          ><td><code>size</code></td><td><code>string</code></td><td
+            ><code>24</code></td
+          ><td>Sets SVG width and height.</td></tr
+        >
+        <tr
+          ><td><code>label</code></td><td><code>string</code></td><td>empty</td
+          ><td>Makes the icon a labeled image; otherwise it is decorative.</td
+          ></tr
+        >
+        <tr><td>CSS part</td><td colspan="3"><code>svg</code></td></tr>
+      </tbody>
+    </table>
+    <CodeBlock code={typed} language="typescript" />
+  </section>
+
+  <script>
+    const output = document.querySelector('[data-icon-output]')
+    for (const button of document.querySelectorAll<HTMLButtonElement>(
+      '[data-copy-icon]',
+    )) {
+      button.addEventListener('click', async () => {
+        const name = button.dataset.copyIcon
+        if (!name) return
+        await navigator.clipboard.writeText(name)
+        if (output) output.textContent = `Copied “${name}”.`
+      })
+    }
+  </script>
+</DocsLayout>

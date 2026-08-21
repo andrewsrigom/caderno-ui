@@ -1,0 +1,22 @@
+{
+  "name": "@caderno-ui/docs",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "astro build",
+    "dev": "astro dev",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@caderno-ui/astro": "workspace:^",
+    "@caderno-ui/elements": "workspace:^",
+    "@caderno-ui/icons": "workspace:^",
+    "@caderno-ui/tokens": "workspace:^"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "astro": "^7.2.4",
+    "typescript": "^6.0.3"
+  }
+}

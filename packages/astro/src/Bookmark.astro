@@ -1,0 +1,63 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type SharedProps = {
+  activeLabel?: string
+  bookmarked?: boolean
+  class?: string
+  label: string
+  persist?: boolean
+  storagePrefix?: string
+}
+
+type Props = SharedProps &
+  ({ bookmarkId: string; id?: never } | { bookmarkId?: never; id: string })
+
+const {
+  activeLabel = 'Remove bookmark',
+  bookmarkId,
+  bookmarked = false,
+  class: className,
+  id,
+  label,
+  persist = false,
+  storagePrefix = 'caderno-ui:bookmark',
+} = Astro.props
+const resolvedId = bookmarkId ?? id
+---
+
+<cad-bookmark
+  active-label={activeLabel}
+  bookmark-id={resolvedId}
+  bookmarked={bookmarked || undefined}
+  class={className}
+  label={label}
+  persist={persist || undefined}
+  storage-prefix={storagePrefix}
+>
+  <button
+    aria-label={bookmarked ? activeLabel : label}
+    aria-pressed={bookmarked ? 'true' : 'false'}
+    class="cad-bookmark-fallback"
+    slot="fallback"
+    type="button"
+  >
+    {bookmarked ? activeLabel : label}
+  </button>
+</cad-bookmark>
+
+<script>
+  import '@caderno-ui/elements/bookmark'
+</script>
+
+<style>
+  .cad-bookmark-fallback {
+    align-items: center;
+    padding: 0.45rem 0.75rem 0.5rem;
+    color: var(--cad-bookmark-ink, currentColor);
+    background: var(--cad-bookmark-bg, transparent);
+    border: 1.5px dashed currentColor;
+    border-radius: 0.45rem 0.6rem 0.45rem 0.55rem;
+    font: inherit;
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+type Props = {
+  description?: string
+  title: string
+}
+
+const { description, title } = Astro.props
+---
+
+<section aria-label={title} class="demo-frame">
+  <header>
+    <div>
+      <p class="demo-label">Live example</p>
+      <h2>{title}</h2>
+    </div>
+    {description && <p>{description}</p>}
+  </header>
+  <div class="demo-canvas">
+    <slot />
+  </div>
+</section>

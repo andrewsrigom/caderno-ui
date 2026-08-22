@@ -4,17 +4,33 @@
       "bytes": 30102,
       "gzip": 11527
     },
+    "elements-badge": {
+      "bytes": 28249,
+      "gzip": 10953
+    },
     "elements-bookmark": {
       "bytes": 28765,
       "gzip": 11167
+    },
+    "elements-chart": {
+      "bytes": 53644,
+      "gzip": 18230
     },
     "elements-icon": {
       "bytes": 25483,
       "gzip": 10194
     },
+    "elements-note": {
+      "bytes": 19373,
+      "gzip": 7227
+    },
+    "elements-progress": {
+      "bytes": 20163,
+      "gzip": 7282
+    },
     "elements-root": {
-      "bytes": 41623,
-      "gzip": 14014
+      "bytes": 53072,
+      "gzip": 15960
     },
     "elements-tabs": {
       "bytes": 33684,
@@ -28,17 +44,33 @@
       "bytes": 31575,
       "gzip": 12121
     },
+    "react-badge": {
+      "bytes": 29689,
+      "gzip": 11540
+    },
     "react-bookmark": {
       "bytes": 30259,
       "gzip": 11759
+    },
+    "react-chart": {
+      "bytes": 55172,
+      "gzip": 18874
     },
     "react-icon": {
       "bytes": 26923,
       "gzip": 10740
     },
+    "react-note": {
+      "bytes": 20812,
+      "gzip": 7783
+    },
+    "react-progress": {
+      "bytes": 21510,
+      "gzip": 7839
+    },
     "react-root": {
-      "bytes": 43567,
-      "gzip": 14729
+      "bytes": 55224,
+      "gzip": 16723
     },
     "react-tabs": {
       "bytes": 35235,

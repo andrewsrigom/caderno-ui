@@ -40,6 +40,9 @@ test('removes optional motion when reduced motion is requested', async ({
     .getByRole('tab', { name: 'Contract' })
     .evaluate((element) => getComputedStyle(element).transitionDuration)
   expect(transitionDuration).toBe('0s')
+  await expect(
+    page.getByRole('progressbar', { name: 'Indexing notes' }),
+  ).toHaveCSS('animation-name', 'none')
 })
 
 test('remains operable in forced colors', async ({ page }) => {
@@ -51,6 +54,11 @@ test('remains operable in forced colors', async ({ page }) => {
     page.getByRole('button', { name: 'Save laboratory' }),
   ).toBeVisible()
   await expect(page.getByRole('tab', { name: 'Contract' })).toBeVisible()
+  await expect(
+    page
+      .locator('cad-chart[heading="Notes reviewed"]')
+      .getByRole('table', { name: 'Notes reviewed' }),
+  ).toBeAttached()
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
 })
 
@@ -70,6 +78,7 @@ test('reflows at 200 percent text zoom without horizontal page overflow', async 
   await expect(
     page.getByRole('button', { name: 'Save laboratory' }),
   ).toBeVisible()
+  await expect(page.locator('cad-chart').first()).toBeVisible()
 })
 
 test('interactive component targets are at least 44 CSS pixels', async ({

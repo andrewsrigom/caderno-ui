@@ -3,14 +3,26 @@
     "elements-alert": {
       "maxGzip": 13357
     },
+    "elements-badge": {
+      "maxGzip": 12696
+    },
     "elements-bookmark": {
       "maxGzip": 12943
+    },
+    "elements-chart": {
+      "maxGzip": 21065
     },
     "elements-icon": {
       "maxGzip": 11824
     },
+    "elements-note": {
+      "maxGzip": 8412
+    },
+    "elements-progress": {
+      "maxGzip": 8475
+    },
     "elements-root": {
-      "maxGzip": 16217
+      "maxGzip": 18454
     },
     "elements-tabs": {
       "maxGzip": 14536
@@ -21,14 +33,26 @@
     "react-alert": {
       "maxGzip": 14040
     },
+    "react-badge": {
+      "maxGzip": 13371
+    },
     "react-bookmark": {
       "maxGzip": 13623
+    },
+    "react-chart": {
+      "maxGzip": 21806
     },
     "react-icon": {
       "maxGzip": 12451
     },
+    "react-note": {
+      "maxGzip": 9051
+    },
+    "react-progress": {
+      "maxGzip": 9115
+    },
     "react-root": {
-      "maxGzip": 17039
+      "maxGzip": 19332
     },
     "react-tabs": {
       "maxGzip": 15216

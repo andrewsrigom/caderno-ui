@@ -2,7 +2,12 @@
 import '@caderno-ui/tokens/notebook.css'
 
 import Alert from '@caderno-ui/astro/Alert.astro'
+import Badge from '@caderno-ui/astro/Badge.astro'
 import Bookmark from '@caderno-ui/astro/Bookmark.astro'
+import Chart from '@caderno-ui/astro/Chart.astro'
+import ChartItem from '@caderno-ui/astro/ChartItem.astro'
+import Note from '@caderno-ui/astro/Note.astro'
+import Progress from '@caderno-ui/astro/Progress.astro'
 import Tab from '@caderno-ui/astro/Tab.astro'
 import Tabs from '@caderno-ui/astro/Tabs.astro'
 ---
@@ -12,7 +17,13 @@ import Tabs from '@caderno-ui/astro/Tabs.astro'
   <head><title>Caderno UI packed Astro consumer</title></head>
   <body>
     <Alert title="Packed Astro facade">Static fallback remains readable.</Alert>
+    <Badge tone="mint">Ready</Badge>
     <Bookmark id="packed" label="Save packed fixture" />
+    <Note heading="Packed note">Static note content.</Note>
+    <Progress label="Packed progress" value={75} />
+    <Chart heading="Packed chart">
+      <ChartItem label="Notes" value={4}>Notes: 4</ChartItem>
+    </Chart>
     <Tabs label="Packed tabs">
       <Tab label="Notes" name="notes">Static tab content.</Tab>
     </Tabs>

@@ -14,14 +14,22 @@ const errors = []
 
 const entrypoints = {
   'elements-alert': './packages/elements/dist/alert/cad-alert.js',
+  'elements-badge': './packages/elements/dist/badge/cad-badge.js',
   'elements-bookmark': './packages/elements/dist/bookmark/cad-bookmark.js',
+  'elements-chart': './packages/elements/dist/chart/cad-chart.js',
   'elements-icon': './packages/elements/dist/icon/cad-icon.js',
+  'elements-note': './packages/elements/dist/note/cad-note.js',
+  'elements-progress': './packages/elements/dist/progress/cad-progress.js',
   'elements-root': './packages/elements/dist/index.js',
   'elements-tabs': './packages/elements/dist/tabs/index.js',
   'icons-root': './packages/icons/dist/index.js',
   'react-alert': './packages/react/dist/alert.js',
+  'react-badge': './packages/react/dist/badge.js',
   'react-bookmark': './packages/react/dist/bookmark.js',
+  'react-chart': './packages/react/dist/chart.js',
   'react-icon': './packages/react/dist/icon.js',
+  'react-note': './packages/react/dist/note.js',
+  'react-progress': './packages/react/dist/progress.js',
   'react-root': './packages/react/dist/index.js',
   'react-tabs': './packages/react/dist/tabs.js',
 }
@@ -37,6 +45,7 @@ const isolationRules = {
     '/tabs/cad-tab.',
     '/tabs/cad-tabs.',
   ],
+  'elements-root': ['/chart/cad-chart.', '/roughjs/'],
   'react-alert': ['/react/dist/bookmark.', '/react/dist/tabs.'],
   'react-bookmark': ['/react/dist/alert.', '/react/dist/tabs.'],
   'react-icon': [
@@ -44,6 +53,7 @@ const isolationRules = {
     '/react/dist/bookmark.',
     '/react/dist/tabs.',
   ],
+  'react-root': ['/react/dist/chart.', '/roughjs/'],
 }
 
 const report = {}

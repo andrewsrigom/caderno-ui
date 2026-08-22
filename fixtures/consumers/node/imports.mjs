@@ -1,14 +1,22 @@
 const imports = [
   '@caderno-ui/elements',
   '@caderno-ui/elements/alert',
+  '@caderno-ui/elements/badge',
   '@caderno-ui/elements/bookmark',
+  '@caderno-ui/elements/chart',
   '@caderno-ui/elements/icon',
+  '@caderno-ui/elements/note',
+  '@caderno-ui/elements/progress',
   '@caderno-ui/elements/tabs',
   '@caderno-ui/icons',
   '@caderno-ui/react',
   '@caderno-ui/react/alert',
+  '@caderno-ui/react/badge',
   '@caderno-ui/react/bookmark',
+  '@caderno-ui/react/chart',
   '@caderno-ui/react/icon',
+  '@caderno-ui/react/note',
+  '@caderno-ui/react/progress',
   '@caderno-ui/react/tabs',
 ]
 

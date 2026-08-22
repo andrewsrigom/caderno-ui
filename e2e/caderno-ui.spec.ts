@@ -19,9 +19,18 @@ test('loads and registers the public custom elements without browser errors', as
   ).toBeVisible()
 
   const definitions = await page.evaluate(() =>
-    ['cad-alert', 'cad-bookmark', 'cad-icon', 'cad-tab', 'cad-tabs'].every(
-      (tagName) => customElements.get(tagName) !== undefined,
-    ),
+    [
+      'cad-alert',
+      'cad-badge',
+      'cad-bookmark',
+      'cad-chart',
+      'cad-chart-item',
+      'cad-icon',
+      'cad-note',
+      'cad-progress',
+      'cad-tab',
+      'cad-tabs',
+    ].every((tagName) => customElements.get(tagName) !== undefined),
   )
 
   expect(definitions).toBe(true)
@@ -97,5 +106,10 @@ test.describe('without JavaScript', () => {
     await expect(
       page.getByText('Choose attributes, properties, slots, events'),
     ).toBeVisible()
+    await expect(
+      page.getByText('Keep data contracts declarative'),
+    ).toBeVisible()
+    await expect(page.getByText('Reading plan: 63%')).toBeVisible()
+    await expect(page.getByText('Thu: 9')).toBeVisible()
   })
 })

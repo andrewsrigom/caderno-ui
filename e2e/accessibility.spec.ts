@@ -5,7 +5,14 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/')
 })
 
-for (const component of ['alerts', 'bookmark', 'tabs']) {
+for (const component of [
+  'alerts',
+  'badges-and-notes',
+  'bookmark',
+  'charts',
+  'progress',
+  'tabs',
+]) {
   test(`${component} has no detectable accessibility violations in isolation`, async ({
     page,
   }) => {
@@ -44,6 +51,16 @@ test('interactive states expose names, roles, states, and relationships', async 
   await expect(
     page.locator('cad-alert[variant="danger"]').getByRole('alert'),
   ).toBeVisible()
+
+  const progress = page.getByRole('progressbar', { name: 'Reading plan' })
+  await expect(progress).toHaveAttribute('value', '5')
+  await expect(progress).toHaveAttribute('max', '8')
+
+  const chartTable = page
+    .locator('cad-chart[heading="Notes reviewed"]')
+    .getByRole('table', { name: 'Notes reviewed' })
+  await expect(chartTable.getByRole('row')).toHaveCount(6)
+  await expect(chartTable.getByRole('row', { name: 'Thu 9' })).toBeAttached()
 
   const results = await new AxeBuilder({ page }).analyze()
   expect(results.violations).toEqual([])

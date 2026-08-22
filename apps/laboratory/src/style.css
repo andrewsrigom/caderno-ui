@@ -70,6 +70,25 @@ section {
   gap: 1rem;
 }
 
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.progress-stack {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 46rem;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+  gap: 1rem;
+}
+
 .theme-toggle,
 .event-log {
   padding: 0.65rem 0.9rem;
@@ -80,8 +99,6 @@ section {
 }
 
 .event-log {
-  position: sticky;
-  bottom: 1rem;
   display: block;
   box-shadow: 0 0.8rem 2rem rgb(var(--cad-shadow-rgb) / 20%);
   font-family: var(--cad-font-mono);

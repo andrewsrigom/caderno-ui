@@ -38,13 +38,29 @@
       "types": "./dist/alert/cad-alert.d.ts",
       "import": "./dist/alert/cad-alert.js"
     },
+    "./badge": {
+      "types": "./dist/badge/cad-badge.d.ts",
+      "import": "./dist/badge/cad-badge.js"
+    },
     "./bookmark": {
       "types": "./dist/bookmark/cad-bookmark.d.ts",
       "import": "./dist/bookmark/cad-bookmark.js"
     },
+    "./chart": {
+      "types": "./dist/chart/cad-chart.d.ts",
+      "import": "./dist/chart/cad-chart.js"
+    },
     "./icon": {
       "types": "./dist/icon/cad-icon.d.ts",
       "import": "./dist/icon/cad-icon.js"
+    },
+    "./note": {
+      "types": "./dist/note/cad-note.d.ts",
+      "import": "./dist/note/cad-note.js"
+    },
+    "./progress": {
+      "types": "./dist/progress/cad-progress.d.ts",
+      "import": "./dist/progress/cad-progress.js"
     },
     "./tabs": {
       "types": "./dist/tabs/index.d.ts",
@@ -64,7 +80,8 @@
   },
   "dependencies": {
     "@caderno-ui/icons": "workspace:^",
-    "lit": "^3.3.3"
+    "lit": "^3.3.3",
+    "roughjs": "4.6.6"
   },
   "devDependencies": {
     "@vitest/browser-playwright": "^4.1.11",

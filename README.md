@@ -46,7 +46,7 @@ React, Astro, TypeScript, and compatibility matrix.
 </script>
 ```
 
-Import individual element entry points in application code. The `@caderno-ui/elements` root entry point intentionally registers every element and is primarily useful for the laboratory.
+Import individual element entry points in application code. The `@caderno-ui/elements` root entry point registers the lightweight core set. Charts stay behind `@caderno-ui/elements/chart`, so Rough.js is only loaded by applications that opt into data visualization.
 
 ## Framework adapters
 

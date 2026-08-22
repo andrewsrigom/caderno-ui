@@ -1,0 +1,63 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-note folded heading="Architecture note" tone="lemon">
+  Keep data contracts declarative and rendering deterministic.
+  <small slot="footer">Reviewed today</small>
+</cad-note>
+
+<script type="module">
+  import '@caderno-ui/elements/note'
+</script>`
+---
+
+<DocsLayout
+  description="CadNote groups supporting content in a notebook-styled semantic note."
+  title="Note"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-note&gt;</p>
+    <h1>Give supporting context its own piece of paper.</h1>
+    <p>
+      Note is a calm content container for annotations, examples, and related
+      context. Use Alert instead when information needs status semantics.
+    </p>
+  </header>
+
+  <DemoFrame title="Notebook tones">
+    <div class="note-grid">
+      <cad-note folded heading="Architecture note" tone="lemon">
+        Keep data contracts declarative and rendering deterministic.
+        <small slot="footer">Reviewed today</small>
+      </cad-note>
+      <cad-note heading="Research note" tone="blue">
+        Rough.js supplies drawing primitives; Caderno UI owns chart semantics.
+      </cad-note>
+      <cad-note heading="Decision" tone="mint">
+        The accessible table and visual plot always share the same source data.
+      </cad-note>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-note" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      The container exposes <code>role="note"</code>. Give every note a concise
+      heading and do not rely on its paper color to communicate meaning.
+    </p>
+  </section>
+
+  <style>
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+      gap: 1rem;
+    }
+  </style>
+</DocsLayout>

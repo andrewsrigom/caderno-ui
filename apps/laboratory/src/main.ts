@@ -1,6 +1,7 @@
 import '@caderno-ui/tokens/notebook.css'
 import '@caderno-ui/elements/fallback.css'
 import '@caderno-ui/elements'
+import '@caderno-ui/elements/chart'
 
 import './style.css'
 

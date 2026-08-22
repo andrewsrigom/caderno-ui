@@ -1,6 +1,6 @@
 # ADR 0001: auto-registering element entrypoints
 
-**Status:** accepted
+**Status:** superseded by [ADR 0006](./0006-optional-heavy-entrypoints.md)
 
 ## Decision
 

@@ -3,11 +3,23 @@ import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const update = process.argv.includes('--update')
-const packages = ['elements', 'icons', 'react']
+const reports = [
+  { config: 'packages/elements/api-extractor.json', label: 'elements' },
+  {
+    config: 'packages/elements/api-extractor.chart.json',
+    label: 'elements chart',
+  },
+  { config: 'packages/icons/api-extractor.json', label: 'icons' },
+  { config: 'packages/react/api-extractor.json', label: 'react' },
+  {
+    config: 'packages/react/api-extractor.chart.json',
+    label: 'react chart',
+  },
+]
 
-for (const packageName of packages) {
+for (const report of reports) {
   console.log(
-    `${update ? 'Updating' : 'Checking'} ${packageName} API report...`,
+    `${update ? 'Updating' : 'Checking'} ${report.label} API report...`,
   )
   execFileSync(
     'pnpm',
@@ -16,7 +28,7 @@ for (const packageName of packages) {
       'api-extractor',
       'run',
       '--config',
-      `packages/${packageName}/api-extractor.json`,
+      report.config,
       ...(update ? ['--local'] : []),
     ],
     { cwd: root, stdio: 'inherit' },

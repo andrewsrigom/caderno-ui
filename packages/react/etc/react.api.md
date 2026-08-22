@@ -6,12 +6,19 @@
 
 import { CadAlert as CadAlert_2 } from '@caderno-ui/elements/alert';
 import { CadAlertVariant } from '@caderno-ui/elements/alert';
+import { CadBadge as CadBadge_2 } from '@caderno-ui/elements/badge';
+import { CadBadgeTone } from '@caderno-ui/elements/badge';
+import { CadBadgeVariant } from '@caderno-ui/elements/badge';
 import { CadBookmark as CadBookmark_2 } from '@caderno-ui/elements/bookmark';
 import { CadBookmarkChangeDetail } from '@caderno-ui/elements/bookmark';
 import { CadBookmarkChangeEvent } from '@caderno-ui/elements/bookmark';
 import { CadDismissDetail } from '@caderno-ui/elements/alert';
 import { CadDismissEvent } from '@caderno-ui/elements/alert';
 import { CadIcon as CadIcon_2 } from '@caderno-ui/elements/icon';
+import { CadNote as CadNote_2 } from '@caderno-ui/elements/note';
+import { CadNoteTone } from '@caderno-ui/elements/note';
+import { CadProgress as CadProgress_2 } from '@caderno-ui/elements/progress';
+import { CadProgressTone } from '@caderno-ui/elements/progress';
 import { CadTab as CadTab_2 } from '@caderno-ui/elements/tabs';
 import { CadTabChangeDetail } from '@caderno-ui/elements/tabs';
 import { CadTabChangeEvent } from '@caderno-ui/elements/tabs';
@@ -28,6 +35,13 @@ onDismiss: EventName<CadDismissEvent>;
 export { CadAlertVariant }
 
 // @public (undocumented)
+export const CadBadge: ReactWebComponent<CadBadge_2, {}>;
+
+export { CadBadgeTone }
+
+export { CadBadgeVariant }
+
+// @public (undocumented)
 export const CadBookmark: ReactWebComponent<CadBookmark_2, {
 onBookmarkChange: EventName<CadBookmarkChangeEvent>;
 }>;
@@ -42,6 +56,16 @@ export { CadDismissEvent }
 
 // @public (undocumented)
 export const CadIcon: ReactWebComponent<CadIcon_2, {}>;
+
+// @public (undocumented)
+export const CadNote: ReactWebComponent<CadNote_2, {}>;
+
+export { CadNoteTone }
+
+// @public (undocumented)
+export const CadProgress: ReactWebComponent<CadProgress_2, {}>;
+
+export { CadProgressTone }
 
 // @public (undocumented)
 export const CadTab: ReactWebComponent<CadTab_2, {}>;

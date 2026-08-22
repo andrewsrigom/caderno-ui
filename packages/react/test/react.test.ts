@@ -6,7 +6,12 @@ import {
   CadAlert as CadAlertElement,
   type CadDismissEvent,
 } from '@caderno-ui/elements/alert'
+import {
+  CadChart as CadChartElement,
+  CadChartItem as CadChartItemElement,
+} from '@caderno-ui/elements/chart'
 import { CadAlert } from '../src/alert.js'
+import { CadChart, CadChartItem } from '../src/chart.js'
 
 describe('@caderno-ui/react', () => {
   let container: HTMLDivElement
@@ -57,5 +62,26 @@ describe('@caderno-ui/react', () => {
     expect(onDismiss.mock.calls[0]?.[0].detail).toEqual({
       variant: 'warning',
     })
+  })
+
+  it('maps declarative chart data without a parallel React implementation', () => {
+    act(() => {
+      root.render(
+        createElement(
+          CadChart,
+          { heading: 'Review trend', seed: 7, type: 'line' },
+          createElement(CadChartItem, { label: 'Ready', value: 9 }, 'Ready: 9'),
+        ),
+      )
+    })
+
+    const chart = container.querySelector('cad-chart')
+    const item = container.querySelector('cad-chart-item')
+    expect(chart).toBeInstanceOf(CadChartElement)
+    expect(item).toBeInstanceOf(CadChartItemElement)
+    expect(chart?.heading).toBe('Review trend')
+    expect(chart?.seed).toBe(7)
+    expect(item?.label).toBe('Ready')
+    expect(item?.value).toBe(9)
   })
 })

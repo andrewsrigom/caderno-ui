@@ -3,6 +3,8 @@
     "--cad-bg",
     "--cad-surface",
     "--cad-surface-strong",
+    "--cad-surface-raised",
+    "--cad-surface-sunken",
     "--cad-ink",
     "--cad-ink-soft",
     "--cad-ink-muted",

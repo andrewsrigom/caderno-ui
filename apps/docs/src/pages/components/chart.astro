@@ -1,0 +1,116 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-chart heading="Notes reviewed" type="bar" value-label="Notes">
+  <cad-chart-item label="Mon" value="4">Mon: 4</cad-chart-item>
+  <cad-chart-item label="Tue" value="7">Tue: 7</cad-chart-item>
+  <cad-chart-item label="Wed" value="5">Wed: 5</cad-chart-item>
+</cad-chart>
+
+<script type="module">
+  import '@caderno-ui/elements/chart'
+</script>`
+---
+
+<DocsLayout
+  description="CadChart renders accessible bar, line, and donut charts with deterministic Rough.js SVG."
+  title="Chart"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-chart&gt; + &lt;cad-chart-item&gt;</p>
+    <h1>Sketch the trend without losing the data.</h1>
+    <p>
+      Chart uses Rough.js for the visual marks while Caderno UI owns the
+      responsive layout, deterministic output, declarative data, and accessible
+      table.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Bar chart"
+    description="Best for comparing discrete values."
+  >
+    <cad-chart heading="Notes reviewed" type="bar" value-label="Notes">
+      <cad-chart-item label="Mon" value="4">Mon: 4</cad-chart-item>
+      <cad-chart-item label="Tue" value="7">Tue: 7</cad-chart-item>
+      <cad-chart-item label="Wed" value="5">Wed: 5</cad-chart-item>
+      <cad-chart-item label="Thu" value="9">Thu: 9</cad-chart-item>
+      <cad-chart-item label="Fri" value="6">Fri: 6</cad-chart-item>
+    </cad-chart>
+  </DemoFrame>
+
+  <div class="chart-grid">
+    <DemoFrame title="Line chart" description="Best for ordered trends.">
+      <cad-chart
+        fill-style="solid"
+        heading="Review confidence"
+        type="line"
+        value-label="Score"
+      >
+        <cad-chart-item label="Draft" value="3">Draft: 3</cad-chart-item>
+        <cad-chart-item label="Test" value="6">Test: 6</cad-chart-item>
+        <cad-chart-item label="Review" value="8">Review: 8</cad-chart-item>
+        <cad-chart-item label="Ready" value="9">Ready: 9</cad-chart-item>
+      </cad-chart>
+    </DemoFrame>
+    <DemoFrame
+      title="Donut chart"
+      description="Best for a small part-to-whole set."
+    >
+      <cad-chart
+        fill-style="cross-hatch"
+        heading="Study time"
+        type="donut"
+        value-label="Hours"
+      >
+        <cad-chart-item label="Build" value="7">Build: 7</cad-chart-item>
+        <cad-chart-item label="Read" value="4">Read: 4</cad-chart-item>
+        <cad-chart-item label="Review" value="3">Review: 3</cad-chart-item>
+      </cad-chart>
+    </DemoFrame>
+  </div>
+
+  <CodeBlock code={usage} language="html" />
+
+  <section class="content-section" aria-labelledby="loading-title">
+    <h2 id="loading-title">Loaded only when requested</h2>
+    <p>
+      Chart is intentionally excluded from the elements root entry point. Import
+      <code>@caderno-ui/elements/chart</code> (or the matching React or Astro subpath)
+      to keep Rough.js out of applications that only use the core components.
+    </p>
+  </section>
+
+  <ApiReference tagName="cad-chart" />
+  <ApiReference tagName="cad-chart-item" />
+
+  <section class="content-section" aria-labelledby="choosing-title">
+    <h2 id="choosing-title">Choosing a chart</h2>
+    <p>
+      Use bars for comparison, lines for ordered change, and donut only for a
+      small part-to-whole set. Keep labels short and provide units through
+      <code>value-label</code>. Negative values are clamped to zero in this
+      first chart contract.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      The visual SVG is decorative. Assistive technology receives a real table
+      generated from the same items, while item text remains readable before
+      JavaScript upgrades the component. Color is never the only data label.
+    </p>
+  </section>
+
+  <style>
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+      gap: 1rem;
+    }
+  </style>
+</DocsLayout>

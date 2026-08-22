@@ -1,0 +1,40 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadNoteTone } from '@caderno-ui/elements/note'
+
+type Props = {
+  class?: string
+  folded?: boolean
+  heading: string
+  tone?: CadNoteTone
+}
+
+const {
+  class: className,
+  folded = false,
+  heading,
+  tone = 'paper',
+} = Astro.props
+const hasFooter = Astro.slots.has('footer')
+---
+
+<cad-note
+  class={className}
+  folded={folded || undefined}
+  heading={heading}
+  tone={tone}
+>
+  <slot />
+  {
+    hasFooter && (
+      <span slot="footer">
+        <slot name="footer" />
+      </span>
+    )
+  }
+</cad-note>
+
+<script>
+  import '@caderno-ui/elements/note'
+</script>

@@ -1,0 +1,189 @@
+import { css, html, LitElement } from 'lit'
+
+export type CadNoteTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper'
+
+/**
+ * A notebook-styled note for grouping supporting content.
+ *
+ * @slot - Note body content.
+ * @slot title - Visible note heading. Falls back to the `heading` attribute.
+ * @slot footer - Supporting actions or metadata.
+ * @csspart base - Note container.
+ * @csspart content - Note body.
+ * @csspart footer - Note footer.
+ * @csspart tape - Decorative tape.
+ * @csspart title - Note heading.
+ * @cssprop --cad-note-bg - Per-instance paper color.
+ * @cssprop --cad-note-ink - Per-instance foreground color.
+ */
+export class CadNote extends LitElement {
+  static override properties = {
+    folded: { reflect: true, type: Boolean },
+    heading: { type: String },
+    tone: { reflect: true, type: String },
+  }
+
+  static override styles = css`
+    :host {
+      --_note-bg: var(--cad-note-bg, var(--cad-surface-raised, #f7f0dc));
+      --_note-ink: var(--cad-note-ink, var(--cad-ink, #25202a));
+      display: block;
+    }
+
+    :host([tone='blue']) {
+      --_note-bg: var(--cad-note-bg, var(--cad-post-it-blue-bg, #cfe2ff));
+      --_note-ink: var(--cad-note-ink, var(--cad-post-it-blue-ink, #20375d));
+    }
+
+    :host([tone='coral']) {
+      --_note-bg: var(--cad-note-bg, var(--cad-post-it-coral-bg, #ffd8ce));
+      --_note-ink: var(--cad-note-ink, var(--cad-post-it-coral-ink, #633b32));
+    }
+
+    :host([tone='lemon']) {
+      --_note-bg: var(--cad-note-bg, var(--cad-post-it-lemon-bg, #fff1ac));
+      --_note-ink: var(--cad-note-ink, var(--cad-post-it-lemon-ink, #51491f));
+    }
+
+    :host([tone='mint']) {
+      --_note-bg: var(--cad-note-bg, var(--cad-post-it-mint-bg, #d8ffec));
+      --_note-ink: var(--cad-note-ink, var(--cad-post-it-mint-ink, #274f41));
+    }
+
+    .base {
+      position: relative;
+      display: grid;
+      gap: 0.85rem;
+      min-height: 100%;
+      padding: 1.4rem 1.35rem 1.25rem;
+      overflow: hidden;
+      color: var(--_note-ink);
+      background: color-mix(
+        in srgb,
+        var(--_note-bg) 90%,
+        var(--cad-surface, white)
+      );
+      border: 1.5px solid color-mix(in srgb, var(--_note-ink) 28%, transparent);
+      border-radius: 0.55rem 0.8rem 0.65rem 0.7rem;
+      box-shadow: 0 0.65rem 1.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
+    }
+
+    :host([folded]) .base::after {
+      position: absolute;
+      right: -0.1rem;
+      bottom: -0.1rem;
+      width: 2.2rem;
+      height: 2.2rem;
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--_note-bg) 58%, transparent) 49%,
+        color-mix(in srgb, var(--_note-ink) 18%, var(--_note-bg)) 51%
+      );
+      border-start-start-radius: 0.45rem;
+      content: '';
+    }
+
+    .tape {
+      position: absolute;
+      top: -0.35rem;
+      left: 50%;
+      width: 4.5rem;
+      height: 1rem;
+      background: color-mix(
+        in srgb,
+        var(--cad-tape-paper-bg, #eee5bf) 72%,
+        transparent
+      );
+      transform: translateX(-50%) rotate(-1.2deg);
+    }
+
+    .title {
+      margin: 0;
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-lg, 1.55rem);
+      font-weight: var(--cad-hand-weight-strong, 700);
+      line-height: 1.05;
+    }
+
+    .content {
+      min-width: 0;
+      font-family: var(--cad-font-book, serif);
+      line-height: 1.6;
+    }
+
+    .footer {
+      font-family: var(--cad-font-ui, sans-serif);
+      font-size: 0.9em;
+    }
+
+    .footer[hidden] {
+      display: none;
+    }
+
+    ::slotted(:first-child) {
+      margin-top: 0;
+    }
+
+    ::slotted(:last-child) {
+      margin-bottom: 0;
+    }
+
+    @media (forced-colors: active) {
+      .base {
+        border-color: CanvasText;
+      }
+
+      .tape {
+        border: 1px solid CanvasText;
+      }
+    }
+  `
+
+  declare folded: boolean
+  declare heading: string
+  declare tone: CadNoteTone
+
+  constructor() {
+    super()
+    this.folded = false
+    this.heading = 'Note'
+    this.tone = 'paper'
+  }
+
+  override render() {
+    return html`
+      <section class="base" part="base" role="note">
+        <span aria-hidden="true" class="tape" part="tape"></span>
+        <h3 class="title" part="title">
+          <slot name="title">${this.heading}</slot>
+        </h3>
+        <div class="content" part="content"><slot></slot></div>
+        <div
+          class="footer"
+          ?hidden=${!this.querySelector('[slot="footer"]')}
+          part="footer"
+        >
+          <slot name="footer" @slotchange=${this.handleFooterChange}></slot>
+        </div>
+      </section>
+    `
+  }
+
+  private handleFooterChange(event: Event): void {
+    const slot = event.target as HTMLSlotElement
+    slot.parentElement?.toggleAttribute(
+      'hidden',
+      slot.assignedNodes({ flatten: true }).length === 0,
+    )
+  }
+}
+
+if (typeof customElements !== 'undefined' && !customElements.get('cad-note')) {
+  customElements.define('cad-note', CadNote)
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'cad-note': CadNote
+  }
+}

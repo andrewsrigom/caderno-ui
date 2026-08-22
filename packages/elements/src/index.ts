@@ -1,4 +1,7 @@
 export * from './alert/cad-alert.js'
+export * from './badge/cad-badge.js'
 export * from './bookmark/cad-bookmark.js'
 export * from './icon/cad-icon.js'
+export * from './note/cad-note.js'
+export * from './progress/cad-progress.js'
 export * from './tabs/index.js'

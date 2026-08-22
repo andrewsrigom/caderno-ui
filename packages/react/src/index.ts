@@ -1,4 +1,7 @@
 export * from './alert.js'
+export * from './badge.js'
 export * from './bookmark.js'
 export * from './icon.js'
+export * from './note.js'
+export * from './progress.js'
 export * from './tabs.js'

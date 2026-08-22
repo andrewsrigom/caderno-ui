@@ -1,0 +1,57 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-badge icon="check" tone="mint">Reviewed</cad-badge>
+<cad-badge tone="coral" variant="outline">Needs work</cad-badge>
+
+<script type="module">
+  import '@caderno-ui/elements/badge'
+</script>`
+---
+
+<DocsLayout
+  description="CadBadge is a compact, non-interactive label for status and metadata."
+  title="Badge"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-badge&gt;</p>
+    <h1>Label the margin without adding interaction.</h1>
+    <p>
+      Badge keeps short statuses, categories, and metadata visually distinct. It
+      deliberately adds no ARIA role and should never replace a button.
+    </p>
+  </header>
+
+  <DemoFrame title="Tones and emphasis">
+    <div class="badge-row">
+      <cad-badge icon="check" tone="mint">Reviewed</cad-badge>
+      <cad-badge icon="spark" tone="blue">New idea</cad-badge>
+      <cad-badge tone="lemon">In progress</cad-badge>
+      <cad-badge tone="coral" variant="outline">Needs work</cad-badge>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-badge" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Keep labels concise and include the same meaning in text; tone and icon
+      are supporting cues. Use Alert for status announcements and a native
+      control for actions.
+    </p>
+  </section>
+
+  <style>
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+  </style>
+</DocsLayout>

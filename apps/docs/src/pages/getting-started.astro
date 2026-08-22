@@ -9,12 +9,15 @@ const install = `pnpm add @caderno-ui/elements @caderno-ui/tokens
 pnpm add @caderno-ui/react     # React
 pnpm add @caderno-ui/astro     # Astro`
 
-const register = `// Register every component
+const register = `// Register the lightweight core components
 import '@caderno-ui/elements'
 
 // Or register only what this page uses
 import '@caderno-ui/elements/alert'
 import '@caderno-ui/elements/bookmark'
+
+// Opt into charts and Rough.js explicitly
+import '@caderno-ui/elements/chart'
 
 // Load the notebook theme once in your application
 import '@caderno-ui/tokens/notebook.css'`

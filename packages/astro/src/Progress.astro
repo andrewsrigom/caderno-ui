@@ -1,0 +1,47 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadProgressTone } from '@caderno-ui/elements/progress'
+
+type Props = {
+  class?: string
+  label: string
+  max?: number
+  showValue?: boolean
+  tone?: CadProgressTone
+  value?: number
+  valueLabel?: string
+}
+
+const {
+  class: className,
+  label,
+  max = 100,
+  showValue = true,
+  tone = 'blue',
+  value,
+  valueLabel,
+} = Astro.props
+const normalizedMax = max > 0 ? max : 100
+const fallbackValue =
+  valueLabel ??
+  (value === undefined
+    ? 'In progress'
+    : `${Math.round((value / normalizedMax) * 100)}%`)
+---
+
+<cad-progress
+  class={className}
+  label={label}
+  max={normalizedMax}
+  show-value={showValue || undefined}
+  tone={tone}
+  value={value}
+  value-label={valueLabel}
+>
+  <span slot="fallback">{label}: {fallbackValue}</span>
+</cad-progress>
+
+<script>
+  import '@caderno-ui/elements/progress'
+</script>

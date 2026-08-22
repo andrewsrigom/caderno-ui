@@ -20,6 +20,19 @@
       "docsPage": "alert.astro"
     },
     {
+      "name": "badge",
+      "elements": [
+        {
+          "className": "CadBadge",
+          "tagName": "cad-badge",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadBadgeTone", "CadBadgeVariant"],
+      "astroFacades": ["Badge.astro"],
+      "docsPage": "badge.astro"
+    },
+    {
       "name": "bookmark",
       "elements": [
         {
@@ -39,6 +52,25 @@
       "docsPage": "bookmark.astro"
     },
     {
+      "name": "chart",
+      "rootExport": false,
+      "elements": [
+        {
+          "className": "CadChart",
+          "tagName": "cad-chart",
+          "events": []
+        },
+        {
+          "className": "CadChartItem",
+          "tagName": "cad-chart-item",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadChartFillStyle", "CadChartType"],
+      "astroFacades": ["Chart.astro", "ChartItem.astro"],
+      "docsPage": "chart.astro"
+    },
+    {
       "name": "icon",
       "elements": [
         {
@@ -50,6 +82,32 @@
       "typeExports": [],
       "astroFacades": ["Icon.astro"],
       "docsPage": "icon.astro"
+    },
+    {
+      "name": "note",
+      "elements": [
+        {
+          "className": "CadNote",
+          "tagName": "cad-note",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadNoteTone"],
+      "astroFacades": ["Note.astro"],
+      "docsPage": "note.astro"
+    },
+    {
+      "name": "progress",
+      "elements": [
+        {
+          "className": "CadProgress",
+          "tagName": "cad-progress",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadProgressTone"],
+      "astroFacades": ["Progress.astro"],
+      "docsPage": "progress.astro"
     },
     {
       "name": "tabs",

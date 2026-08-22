@@ -25,8 +25,13 @@
   ],
   "exports": {
     "./Alert.astro": "./src/Alert.astro",
+    "./Badge.astro": "./src/Badge.astro",
     "./Bookmark.astro": "./src/Bookmark.astro",
+    "./Chart.astro": "./src/Chart.astro",
+    "./ChartItem.astro": "./src/ChartItem.astro",
     "./Icon.astro": "./src/Icon.astro",
+    "./Note.astro": "./src/Note.astro",
+    "./Progress.astro": "./src/Progress.astro",
     "./Tab.astro": "./src/Tab.astro",
     "./Tabs.astro": "./src/Tabs.astro"
   },

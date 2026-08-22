@@ -178,6 +178,131 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/badge/cad-badge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A compact notebook label for statuses, categories, and metadata.",
+          "name": "CadBadge",
+          "cssProperties": [
+            {
+              "description": "Per-instance badge color.",
+              "name": "--cad-badge-bg"
+            },
+            {
+              "description": "Per-instance foreground color.",
+              "name": "--cad-badge-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Badge container.",
+              "name": "base"
+            },
+            {
+              "description": "Optional leading icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Badge text.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Badge label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "icon",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadBadgeTone"
+              },
+              "default": "'neutral'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadBadgeVariant"
+              },
+              "default": "'solid'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "icon"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadBadgeTone"
+              },
+              "default": "'neutral'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadBadgeVariant"
+              },
+              "default": "'solid'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-badge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadBadge",
+          "declaration": {
+            "name": "CadBadge",
+            "module": "packages/elements/src/badge/cad-badge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-badge",
+          "declaration": {
+            "name": "CadBadge",
+            "module": "packages/elements/src/badge/cad-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/bookmark/cad-bookmark.ts",
       "declarations": [
         {
@@ -395,6 +520,645 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/chart/cad-chart-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A declarative data point consumed by `cad-chart`.",
+          "name": "CadChartItem",
+          "slots": [
+            {
+              "description": "Progressive fallback text shown before the element upgrades.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "color",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "color",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "value",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "color"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "value"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-chart-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadChartItem",
+          "declaration": {
+            "name": "CadChartItem",
+            "module": "packages/elements/src/chart/cad-chart-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-chart-item",
+          "declaration": {
+            "name": "CadChartItem",
+            "module": "packages/elements/src/chart/cad-chart-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/chart/cad-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A responsive, accessible hand-drawn chart rendered with Rough.js.",
+          "name": "CadChart",
+          "cssProperties": [
+            {
+              "description": "First series color.",
+              "name": "--cad-chart-color-1"
+            },
+            {
+              "description": "Second series color.",
+              "name": "--cad-chart-color-2"
+            },
+            {
+              "description": "Third series color.",
+              "name": "--cad-chart-color-3"
+            },
+            {
+              "description": "Fourth series color.",
+              "name": "--cad-chart-color-4"
+            },
+            {
+              "description": "Fifth series color.",
+              "name": "--cad-chart-color-5"
+            },
+            {
+              "description": "Sixth series color.",
+              "name": "--cad-chart-color-6"
+            },
+            {
+              "description": "Grid line color.",
+              "name": "--cad-chart-grid"
+            },
+            {
+              "description": "Chart foreground color.",
+              "name": "--cad-chart-ink"
+            },
+            {
+              "description": "Chart paper color.",
+              "name": "--cad-chart-paper"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Chart container.",
+              "name": "base"
+            },
+            {
+              "description": "Empty-state message.",
+              "name": "empty"
+            },
+            {
+              "description": "Chart legend.",
+              "name": "legend"
+            },
+            {
+              "description": "Individual legend entry.",
+              "name": "legend-item"
+            },
+            {
+              "description": "Visual SVG plot, hidden from assistive technology.",
+              "name": "plot"
+            },
+            {
+              "description": "Visible chart title.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Declarative `cad-chart-item` data points.",
+              "name": ""
+            },
+            {
+              "description": "Visible chart title. Falls back to the `heading` attribute.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "fillStyle",
+              "privacy": "public",
+              "type": {
+                "text": "CadChartFillStyle"
+              },
+              "default": "'hachure'",
+              "attribute": "fill-style",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Chart'",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "roughness",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "1.2",
+              "attribute": "roughness",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "seed",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "42",
+              "attribute": "seed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "showLegend",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "show-legend",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "showValues",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "show-values",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "privacy": "public",
+              "type": {
+                "text": "CadChartType"
+              },
+              "default": "'bar'",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "valueLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Value'",
+              "attribute": "value-label"
+            },
+            {
+              "kind": "field",
+              "name": "dataObserver",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "chartType",
+              "type": {
+                "text": "CadChartType"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "chartFillStyle",
+              "type": {
+                "text": "CadChartFillStyle"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "normalizedRoughness",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "normalizedSeed",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "ChartDatum[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "colorFor",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "ChartDatum"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "format",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "maxValue",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "data",
+                  "type": {
+                    "text": "ChartDatum[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "draw",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "options",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "ChartDatum"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "drawBars",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "roughSvg",
+                  "type": {
+                    "text": "ReturnType<typeof rough.svg>"
+                  }
+                },
+                {
+                  "name": "drawing",
+                  "type": {
+                    "text": "SVGGElement"
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": {
+                    "text": "ChartDatum[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "drawLine",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "roughSvg",
+                  "type": {
+                    "text": "ReturnType<typeof rough.svg>"
+                  }
+                },
+                {
+                  "name": "drawing",
+                  "type": {
+                    "text": "SVGGElement"
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": {
+                    "text": "ChartDatum[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "drawDonut",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "roughSvg",
+                  "type": {
+                    "text": "ReturnType<typeof rough.svg>"
+                  }
+                },
+                {
+                  "name": "drawing",
+                  "type": {
+                    "text": "SVGGElement"
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": {
+                    "text": "ChartDatum[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderGrid",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "data",
+                  "type": {
+                    "text": "ChartDatum[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderLabels",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "data",
+                  "type": {
+                    "text": "ChartDatum[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDataChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "fill-style",
+              "type": {
+                "text": "CadChartFillStyle"
+              },
+              "default": "'hachure'",
+              "fieldName": "fillStyle"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Chart'",
+              "fieldName": "heading"
+            },
+            {
+              "name": "roughness",
+              "type": {
+                "text": "number"
+              },
+              "default": "1.2",
+              "fieldName": "roughness"
+            },
+            {
+              "name": "seed",
+              "type": {
+                "text": "number"
+              },
+              "default": "42",
+              "fieldName": "seed"
+            },
+            {
+              "name": "show-legend",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "showLegend"
+            },
+            {
+              "name": "show-values",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "showValues"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "CadChartType"
+              },
+              "default": "'bar'",
+              "fieldName": "type"
+            },
+            {
+              "name": "value-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Value'",
+              "fieldName": "valueLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadChartItem",
+          "declaration": {
+            "name": "CadChartItem",
+            "module": "./cad-chart-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadChart",
+          "declaration": {
+            "name": "CadChart",
+            "module": "packages/elements/src/chart/cad-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-chart",
+          "declaration": {
+            "name": "CadChart",
+            "module": "packages/elements/src/chart/cad-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/icon/cad-icon.ts",
       "declarations": [
         {
@@ -511,6 +1275,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "module": "packages/elements/src/badge/cad-badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "module": "packages/elements/src/bookmark/cad-bookmark.js"
           }
         },
@@ -527,7 +1299,398 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "module": "packages/elements/src/note/cad-note.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/progress/cad-progress.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "module": "packages/elements/src/tabs/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/note/cad-note.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A notebook-styled note for grouping supporting content.",
+          "name": "CadNote",
+          "cssProperties": [
+            {
+              "description": "Per-instance paper color.",
+              "name": "--cad-note-bg"
+            },
+            {
+              "description": "Per-instance foreground color.",
+              "name": "--cad-note-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Note container.",
+              "name": "base"
+            },
+            {
+              "description": "Note body.",
+              "name": "content"
+            },
+            {
+              "description": "Note footer.",
+              "name": "footer"
+            },
+            {
+              "description": "Decorative tape.",
+              "name": "tape"
+            },
+            {
+              "description": "Note heading.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Note body content.",
+              "name": ""
+            },
+            {
+              "description": "Visible note heading. Falls back to the `heading` attribute.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting actions or metadata.",
+              "name": "footer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "folded",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "folded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Note'",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadNoteTone"
+              },
+              "default": "'paper'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleFooterChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "folded"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Note'",
+              "fieldName": "heading"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadNoteTone"
+              },
+              "default": "'paper'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-note",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadNote",
+          "declaration": {
+            "name": "CadNote",
+            "module": "packages/elements/src/note/cad-note.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-note",
+          "declaration": {
+            "name": "CadNote",
+            "module": "packages/elements/src/note/cad-note.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/progress/cad-progress.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A labeled progress indicator with determinate and indeterminate states.",
+          "name": "CadProgress",
+          "cssProperties": [
+            {
+              "description": "Per-instance track color.",
+              "name": "--cad-progress-bg"
+            },
+            {
+              "description": "Per-instance fill color.",
+              "name": "--cad-progress-fill"
+            },
+            {
+              "description": "Per-instance foreground color.",
+              "name": "--cad-progress-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native progress element.",
+              "name": "bar"
+            },
+            {
+              "description": "Progress container.",
+              "name": "base"
+            },
+            {
+              "description": "Visible progress label.",
+              "name": "label"
+            },
+            {
+              "description": "Visible progress value.",
+              "name": "value"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Readable progress shown before the component upgrades.",
+              "name": "fallback"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Progress'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "attribute": "max",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "showValue",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "show-value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadProgressTone"
+              },
+              "default": "'blue'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "privacy": "public",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "undefined",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "valueLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value-label"
+            },
+            {
+              "kind": "field",
+              "name": "normalizedMax",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "normalizedValue",
+              "type": {
+                "text": "number | undefined"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "visibleValue",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Progress'",
+              "fieldName": "label"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "fieldName": "max"
+            },
+            {
+              "name": "show-value",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "showValue"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadProgressTone"
+              },
+              "default": "'blue'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "undefined",
+              "fieldName": "value"
+            },
+            {
+              "name": "value-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "valueLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-progress",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadProgress",
+          "declaration": {
+            "name": "CadProgress",
+            "module": "packages/elements/src/progress/cad-progress.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-progress",
+          "declaration": {
+            "name": "CadProgress",
+            "module": "packages/elements/src/progress/cad-progress.ts"
           }
         }
       ]

@@ -1,7 +1,20 @@
 cad-alert:not(:defined),
+cad-badge:not(:defined),
+cad-chart:not(:defined),
+cad-note:not(:defined),
+cad-progress:not(:defined),
 cad-tab:not(:defined),
 cad-tabs:not(:defined) {
   box-sizing: border-box;
+}
+
+cad-badge:not(:defined) {
+  display: inline-flex;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
 }
 
 cad-alert:not(:defined) {
@@ -21,6 +34,59 @@ cad-alert:not(:defined) > [slot='title'] {
 }
 
 cad-bookmark:not(:defined) > [slot='fallback'] {
+  display: inline-flex;
+}
+
+cad-chart:not(:defined) {
+  display: block;
+  padding: 1.25rem;
+  color: var(--cad-ink, currentColor);
+  background: var(--cad-surface, transparent);
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.75rem;
+}
+
+cad-chart:not(:defined)::before {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: var(--cad-font-hand, inherit);
+  font-size: var(--cad-hand-lg, 1.4rem);
+  font-weight: 700;
+  content: attr(heading);
+}
+
+cad-chart:not(:defined) > cad-chart-item:not(:defined) {
+  display: list-item;
+  margin-inline-start: 1.5rem;
+  font-family: var(--cad-font-mono, monospace);
+}
+
+cad-note:not(:defined) {
+  display: block;
+  padding: 1.25rem;
+  color: var(--cad-note-ink, var(--cad-ink, currentColor));
+  background: var(--cad-note-bg, var(--cad-surface, transparent));
+  border: 1px solid var(--cad-line-strong, currentColor);
+  border-radius: 0.7rem;
+}
+
+cad-note:not(:defined)::before {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--cad-font-hand, inherit);
+  font-size: var(--cad-hand-lg, 1.4rem);
+  font-weight: 700;
+  content: attr(heading);
+}
+
+cad-progress:not(:defined) {
+  display: block;
+  padding: 0.65rem 0.8rem;
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.6rem;
+}
+
+cad-progress:not(:defined) > [slot='fallback'] {
   display: inline-flex;
 }
 

@@ -1,0 +1,50 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadChartFillStyle,
+  CadChartType,
+} from '@caderno-ui/elements/chart'
+
+type Props = {
+  class?: string
+  fillStyle?: CadChartFillStyle
+  heading: string
+  roughness?: number
+  seed?: number
+  showLegend?: boolean
+  showValues?: boolean
+  type?: CadChartType
+  valueLabel?: string
+}
+
+const {
+  class: className,
+  fillStyle = 'hachure',
+  heading,
+  roughness = 1.2,
+  seed = 42,
+  showLegend = true,
+  showValues = true,
+  type = 'bar',
+  valueLabel = 'Value',
+} = Astro.props
+---
+
+<cad-chart
+  class={className}
+  fill-style={fillStyle}
+  heading={heading}
+  roughness={roughness}
+  seed={seed}
+  show-legend={showLegend || undefined}
+  show-values={showValues || undefined}
+  type={type}
+  value-label={valueLabel}
+>
+  <slot />
+</cad-chart>
+
+<script>
+  import '@caderno-ui/elements/chart'
+</script>

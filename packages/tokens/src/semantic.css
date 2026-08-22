@@ -4,6 +4,8 @@
   --cad-bg: var(--cad-color-night-bg);
   --cad-surface: var(--cad-color-night-surface);
   --cad-surface-strong: var(--cad-color-night-surface-strong);
+  --cad-surface-raised: var(--cad-color-night-surface-strong);
+  --cad-surface-sunken: var(--cad-color-night-bg);
   --cad-ink: var(--cad-color-night-ink);
   --cad-ink-soft: rgb(224 224 255 / 76%);
   --cad-ink-muted: rgb(224 224 255 / 64%);
@@ -38,6 +40,8 @@
   --cad-bg: var(--cad-color-day-bg);
   --cad-surface: var(--cad-color-day-surface);
   --cad-surface-strong: var(--cad-color-day-surface-strong);
+  --cad-surface-raised: var(--cad-color-day-surface);
+  --cad-surface-sunken: var(--cad-color-day-surface-strong);
   --cad-ink: var(--cad-color-day-ink);
   --cad-ink-soft: rgb(22 32 51 / 80%);
   --cad-ink-muted: rgb(22 32 51 / 62%);

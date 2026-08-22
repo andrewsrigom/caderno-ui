@@ -49,6 +49,41 @@ export class CadAlert extends LitElement {
 export type CadAlertVariant = 'danger' | 'info' | 'success' | 'warning';
 
 // @public
+export class CadBadge extends LitElement {
+    constructor();
+    // (undocumented)
+    icon: string;
+    // (undocumented)
+    static properties: {
+        icon: {
+            type: StringConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        variant: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadBadgeTone;
+    // (undocumented)
+    variant: CadBadgeVariant;
+}
+
+// @public (undocumented)
+export type CadBadgeTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'neutral';
+
+// @public (undocumented)
+export type CadBadgeVariant = 'outline' | 'solid';
+
+// @public
 export class CadBookmark extends LitElement {
     constructor();
     // (undocumented)
@@ -141,6 +176,89 @@ export class CadIcon extends LitElement {
     // (undocumented)
     static styles: CSSResult;
 }
+
+// @public
+export class CadNote extends LitElement {
+    constructor();
+    // (undocumented)
+    folded: boolean;
+    // (undocumented)
+    heading: string;
+    // (undocumented)
+    static properties: {
+        folded: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        heading: {
+            type: StringConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadNoteTone;
+}
+
+// @public (undocumented)
+export type CadNoteTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper';
+
+// @public
+export class CadProgress extends LitElement {
+    constructor();
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    max: number;
+    // (undocumented)
+    static properties: {
+        label: {
+            type: StringConstructor;
+        };
+        max: {
+            reflect: boolean;
+            type: NumberConstructor;
+        };
+        showValue: {
+            attribute: string;
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        value: {
+            reflect: boolean;
+            type: NumberConstructor;
+        };
+        valueLabel: {
+            attribute: string;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    showValue: boolean;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadProgressTone;
+    // (undocumented)
+    value: number | undefined;
+    // (undocumented)
+    valueLabel: string;
+}
+
+// @public (undocumented)
+export type CadProgressTone = 'blue' | 'coral' | 'lemon' | 'mint';
 
 // @public
 export class CadTab extends LitElement {

@@ -29,6 +29,7 @@ Framework adapters must stay thin:
 - State changes emit typed DOM events that bubble and cross shadow boundaries.
 - Visual customization uses `--cad-*` properties and documented CSS parts.
 - Individual entry points register only the elements a consumer imports.
+- Features with material dependency cost, such as charts, remain optional subpaths and are excluded from package root entry points.
 - Meaningful content remains readable before upgrade and without JavaScript.
 
 ## Extensibility

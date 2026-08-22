@@ -1,0 +1,19 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = {
+  color?: string
+  label: string
+  value: number
+}
+
+const { color, label, value } = Astro.props
+---
+
+<cad-chart-item color={color} label={label} value={value}>
+  {label}: {value}
+</cad-chart-item>
+
+<script>
+  import '@caderno-ui/elements/chart'
+</script>

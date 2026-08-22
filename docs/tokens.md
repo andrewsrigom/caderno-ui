@@ -10,7 +10,7 @@ consistent and are not theme roles by themselves.
 | Layer     | Pattern                                                                                | Purpose                                             |
 | --------- | -------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | Primitive | `--cad-color-*`, `--cad-space-*`, `--cad-radius-*`, `--cad-duration-*`, `--cad-ease-*` | Raw scales and palette values                       |
-| Semantic  | `--cad-bg`, `--cad-ink`, `--cad-focus-ring`, `--cad-post-it-*-bg`                      | Theme roles consumed by components and applications |
+| Semantic  | `--cad-bg`, `--cad-ink`, `--cad-surface-raised`, `--cad-post-it-*-bg`                  | Theme roles consumed by components and applications |
 | Component | `--cad-alert-bg`, `--cad-tabs-panel-bg`                                                | Optional, documented overrides for one component    |
 | Private   | `--_*` inside a shadow root                                                            | Implementation detail; never a consumer contract    |
 
@@ -18,6 +18,10 @@ New public variables use the `--cad-` prefix. Semantic colors are named by
 purpose, while palette families publish background and foreground together.
 Avoid consuming a raw `--cad-color-*` value from a component: doing so bypasses
 the light/dark mapping.
+
+Use `--cad-surface-raised` for cards and paper placed above the page, and
+`--cad-surface-sunken` for tracks or inset regions. These roles keep elevation
+meaning stable even when their concrete colors change between themes.
 
 ## Contrast-safe pairs
 

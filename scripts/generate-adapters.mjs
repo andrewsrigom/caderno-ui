@@ -51,7 +51,10 @@ function renderReactEntry(entry) {
 }
 
 function renderIndex(entries) {
-  return `${entries.map(({ name }) => `export * from './${name}.js'`).join('\n')}\n`
+  return `${entries
+    .filter(({ rootExport }) => rootExport !== false)
+    .map(({ name }) => `export * from './${name}.js'`)
+    .join('\n')}\n`
 }
 
 function tagNames(source) {

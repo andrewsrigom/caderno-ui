@@ -1,0 +1,27 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadBadgeTone, CadBadgeVariant } from '@caderno-ui/elements/badge'
+
+type Props = {
+  class?: string
+  icon?: string
+  tone?: CadBadgeTone
+  variant?: CadBadgeVariant
+}
+
+const {
+  class: className,
+  icon,
+  tone = 'neutral',
+  variant = 'solid',
+} = Astro.props
+---
+
+<cad-badge class={className} icon={icon} tone={tone} variant={variant}>
+  <slot />
+</cad-badge>
+
+<script>
+  import '@caderno-ui/elements/badge'
+</script>

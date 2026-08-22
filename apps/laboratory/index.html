@@ -23,6 +23,26 @@
         </button>
       </header>
 
+      <section data-component="badges-and-notes">
+        <h2>Badges and notes</h2>
+        <div class="cluster" aria-label="Badge variants">
+          <cad-badge icon="check" tone="mint">Reviewed</cad-badge>
+          <cad-badge icon="spark" tone="blue">New idea</cad-badge>
+          <cad-badge tone="lemon">In progress</cad-badge>
+          <cad-badge tone="coral" variant="outline">Needs work</cad-badge>
+        </div>
+        <div class="grid">
+          <cad-note folded heading="Architecture note" tone="lemon">
+            Keep data contracts declarative and rendering deterministic.
+            <small slot="footer">Reviewed today</small>
+          </cad-note>
+          <cad-note heading="Chart decision" tone="mint">
+            Rough.js draws the marks. Caderno UI owns semantics, tokens, and
+            framework adapters.
+          </cad-note>
+        </div>
+      </section>
+
       <section data-component="alerts">
         <h2>Alerts</h2>
         <div class="grid">
@@ -55,6 +75,24 @@
         ></cad-bookmark>
       </section>
 
+      <section data-component="progress">
+        <h2>Progress</h2>
+        <div class="progress-stack">
+          <cad-progress
+            label="Reading plan"
+            max="8"
+            show-value
+            tone="mint"
+            value="5"
+          >
+            <span slot="fallback">Reading plan: 63%</span>
+          </cad-progress>
+          <cad-progress label="Indexing notes" show-value tone="blue">
+            <span slot="fallback">Indexing notes: in progress</span>
+          </cad-progress>
+        </div>
+      </section>
+
       <section data-component="tabs">
         <h2>Tabs</h2>
         <cad-tabs default-tab="contract" label="Component design stages">
@@ -74,6 +112,40 @@
             Verify behavior in a real browser and every supported framework.
           </cad-tab>
         </cad-tabs>
+      </section>
+
+      <section data-component="charts">
+        <h2>Charts</h2>
+        <div class="chart-grid">
+          <cad-chart heading="Notes reviewed" type="bar" value-label="Notes">
+            <cad-chart-item label="Mon" value="4">Mon: 4</cad-chart-item>
+            <cad-chart-item label="Tue" value="7">Tue: 7</cad-chart-item>
+            <cad-chart-item label="Wed" value="5">Wed: 5</cad-chart-item>
+            <cad-chart-item label="Thu" value="9">Thu: 9</cad-chart-item>
+            <cad-chart-item label="Fri" value="6">Fri: 6</cad-chart-item>
+          </cad-chart>
+          <cad-chart
+            fill-style="solid"
+            heading="Review confidence"
+            type="line"
+            value-label="Score"
+          >
+            <cad-chart-item label="Draft" value="3">Draft: 3</cad-chart-item>
+            <cad-chart-item label="Test" value="6">Test: 6</cad-chart-item>
+            <cad-chart-item label="Review" value="8">Review: 8</cad-chart-item>
+            <cad-chart-item label="Ready" value="9">Ready: 9</cad-chart-item>
+          </cad-chart>
+          <cad-chart
+            fill-style="cross-hatch"
+            heading="Study time"
+            type="donut"
+            value-label="Hours"
+          >
+            <cad-chart-item label="Build" value="7">Build: 7</cad-chart-item>
+            <cad-chart-item label="Read" value="4">Read: 4</cad-chart-item>
+            <cad-chart-item label="Review" value="3">Review: 3</cad-chart-item>
+          </cad-chart>
+        </div>
       </section>
 
       <output aria-live="polite" class="event-log" data-event-log>

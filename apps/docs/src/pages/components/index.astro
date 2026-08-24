@@ -5,6 +5,14 @@ import DocsLayout from '../../layouts/DocsLayout.astro'
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const components = [
   {
+    description:
+      'Native details disclosures with optional single-open coordination.',
+    href: '/components/accordion/',
+    icon: 'layers',
+    label: 'Accordion',
+    tag: '<cad-accordion>',
+  },
+  {
     description: 'Semantic status messages with four variants and dismissal.',
     href: '/components/alert/',
     icon: 'exclamation',
@@ -56,6 +64,13 @@ const components = [
     tag: '<cad-chart>',
   },
   {
+    description: 'Form-associated checklist state with native validation.',
+    href: '/components/checkbox/',
+    icon: 'check',
+    label: 'Checkbox',
+    tag: '<cad-checkbox>',
+  },
+  {
     description: 'Decorative or semantic dashed, dotted, and wavy separators.',
     href: '/components/divider/',
     icon: 'underline',
@@ -68,6 +83,14 @@ const components = [
     icon: 'spark',
     label: 'Icon',
     tag: '<cad-icon>',
+  },
+  {
+    description:
+      'Form-associated text input with native validation and reset behavior.',
+    href: '/components/input/',
+    icon: 'pencil',
+    label: 'Input',
+    tag: '<cad-input>',
   },
   {
     description: 'Native anchors with marker, underline, and plain treatments.',
@@ -91,11 +114,26 @@ const components = [
     tag: '<cad-progress>',
   },
   {
+    description:
+      'Cross-shadow radio grouping with native forms and arrow keys.',
+    href: '/components/radio/',
+    icon: 'target',
+    label: 'Radio',
+    tag: '<cad-radio>',
+  },
+  {
     description: 'Keyboard-accessible tabs with declarative panel children.',
     href: '/components/tabs/',
     icon: 'layers',
     label: 'Tabs',
     tag: '<cad-tabs>',
+  },
+  {
+    description: 'Form-associated ruled writing surface for longer responses.',
+    href: '/components/textarea/',
+    icon: 'note',
+    label: 'Textarea',
+    tag: '<cad-textarea>',
   },
 ] as const
 ---

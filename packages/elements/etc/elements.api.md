@@ -11,6 +11,78 @@ import { PropertyValues } from 'lit';
 import { TemplateResult } from 'lit';
 
 // @public
+export class CadAccordion extends LitElement {
+    constructor();
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    mode: CadAccordionMode;
+    // (undocumented)
+    static properties: {
+        label: {
+            type: StringConstructor;
+        };
+        mode: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+}
+
+// @public
+export class CadAccordionItem extends LitElement {
+    constructor();
+    // (undocumented)
+    disabled: boolean;
+    // (undocumented)
+    heading: string;
+    // (undocumented)
+    open: boolean;
+    // (undocumented)
+    static properties: {
+        disabled: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        heading: {
+            type: StringConstructor;
+        };
+        open: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadAccordionTone;
+}
+
+// @public (undocumented)
+export type CadAccordionMode = 'multiple' | 'single';
+
+// @public (undocumented)
+export type CadAccordionToggleDetail = {
+    open: boolean;
+};
+
+// @public (undocumented)
+export type CadAccordionToggleEvent = CustomEvent<CadAccordionToggleDetail>;
+
+// @public (undocumented)
+export type CadAccordionTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'violet';
+
+// @public
 export class CadAlert extends LitElement {
     constructor();
     // (undocumented)
@@ -322,6 +394,112 @@ export type CadCardTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'neutral' | 'pin
 // @public (undocumented)
 export type CadCardVariant = 'outlined' | 'paper';
 
+// @public
+export class CadCheckbox extends LitElement {
+    constructor();
+    // (undocumented)
+    checked: boolean;
+    // (undocumented)
+    checkValidity(): boolean;
+    // (undocumented)
+    click(): void;
+    // (undocumented)
+    connectedCallback(): void;
+    // (undocumented)
+    disabled: boolean;
+    // (undocumented)
+    protected firstUpdated(): void;
+    // (undocumented)
+    focus(options?: FocusOptions): void;
+    // (undocumented)
+    get form(): HTMLFormElement | null;
+    // (undocumented)
+    static formAssociated: boolean;
+    // (undocumented)
+    formDisabledCallback(disabled: boolean): void;
+    // (undocumented)
+    formResetCallback(): void;
+    // (undocumented)
+    formStateRestoreCallback(state: File | FormData | string | null): void;
+    // (undocumented)
+    hint: string;
+    // (undocumented)
+    indeterminate: boolean;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    static properties: {
+        checked: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        disabled: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        hint: {
+            type: StringConstructor;
+        };
+        indeterminate: {
+            type: BooleanConstructor;
+        };
+        label: {
+            type: StringConstructor;
+        };
+        name: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        required: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        value: {
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    reportValidity(): boolean;
+    // (undocumented)
+    required: boolean;
+    // (undocumented)
+    setCustomValidity(message: string): void;
+    // (undocumented)
+    static shadowRootOptions: {
+        delegatesFocus: boolean;
+        clonable?: boolean;
+        customElementRegistry?: CustomElementRegistry | null;
+        mode: ShadowRootMode;
+        serializable?: boolean;
+        slotAssignment?: SlotAssignmentMode;
+    };
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadCheckboxTone;
+    // (undocumented)
+    protected updated(changed: PropertyValues<this>): void;
+    // (undocumented)
+    get validationMessage(): string;
+    // (undocumented)
+    get validity(): ValidityState;
+    // (undocumented)
+    value: string;
+    // (undocumented)
+    get willValidate(): boolean;
+}
+
+// @public (undocumented)
+export type CadCheckboxTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
 // @public (undocumented)
 export type CadDismissDetail = {
     variant: CadAlertVariant;
@@ -411,6 +589,175 @@ export class CadIcon extends LitElement {
     // (undocumented)
     static styles: CSSResult;
 }
+
+// @public
+export class CadInput extends LitElement {
+    constructor();
+    // (undocumented)
+    autocomplete: string;
+    // (undocumented)
+    checkValidity(): boolean;
+    // (undocumented)
+    connectedCallback(): void;
+    // (undocumented)
+    disabled: boolean;
+    // (undocumented)
+    error: string;
+    // (undocumented)
+    protected firstUpdated(): void;
+    // (undocumented)
+    focus(options?: FocusOptions): void;
+    // (undocumented)
+    get form(): HTMLFormElement | null;
+    // (undocumented)
+    static formAssociated: boolean;
+    // (undocumented)
+    formDisabledCallback(disabled: boolean): void;
+    // (undocumented)
+    formResetCallback(): void;
+    // (undocumented)
+    formStateRestoreCallback(state: File | FormData | string | null): void;
+    // (undocumented)
+    hint: string;
+    // (undocumented)
+    icon: string;
+    // (undocumented)
+    inputMode: string;
+    // (undocumented)
+    invalid: boolean;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    maxLength: number;
+    // (undocumented)
+    minLength: number;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    pattern: string;
+    // (undocumented)
+    placeholder: string;
+    // (undocumented)
+    static properties: {
+        autocomplete: {
+            type: StringConstructor;
+        };
+        disabled: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        error: {
+            type: StringConstructor;
+        };
+        hint: {
+            type: StringConstructor;
+        };
+        icon: {
+            type: StringConstructor;
+        };
+        inputMode: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        invalid: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        label: {
+            type: StringConstructor;
+        };
+        maxLength: {
+            attribute: string;
+            type: NumberConstructor;
+        };
+        minLength: {
+            attribute: string;
+            type: NumberConstructor;
+        };
+        name: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        pattern: {
+            type: StringConstructor;
+        };
+        placeholder: {
+            type: StringConstructor;
+        };
+        readOnly: {
+            attribute: string;
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        required: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        size: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        type: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        value: {
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    readOnly: boolean;
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    reportValidity(): boolean;
+    // (undocumented)
+    required: boolean;
+    // (undocumented)
+    select(): void;
+    // (undocumented)
+    setCustomValidity(message: string): void;
+    // (undocumented)
+    static shadowRootOptions: {
+        delegatesFocus: boolean;
+        clonable?: boolean;
+        customElementRegistry?: CustomElementRegistry | null;
+        mode: ShadowRootMode;
+        serializable?: boolean;
+        slotAssignment?: SlotAssignmentMode;
+    };
+    // (undocumented)
+    size: CadInputSize;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadInputTone;
+    // (undocumented)
+    type: CadInputType;
+    // (undocumented)
+    protected updated(changed: PropertyValues<this>): void;
+    // (undocumented)
+    get validationMessage(): string;
+    // (undocumented)
+    get validity(): ValidityState;
+    // (undocumented)
+    value: string;
+    // (undocumented)
+    get willValidate(): boolean;
+}
+
+// @public (undocumented)
+export type CadInputSize = 'lg' | 'md' | 'sm';
+
+// @public (undocumented)
+export type CadInputTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public (undocumented)
+export type CadInputType = 'email' | 'password' | 'search' | 'tel' | 'text' | 'url';
 
 // @public
 export class CadLink extends LitElement {
@@ -552,6 +899,107 @@ export class CadProgress extends LitElement {
 export type CadProgressTone = 'blue' | 'coral' | 'lemon' | 'mint';
 
 // @public
+export class CadRadio extends LitElement {
+    constructor();
+    // (undocumented)
+    checked: boolean;
+    // (undocumented)
+    checkValidity(): boolean;
+    // (undocumented)
+    click(): void;
+    // (undocumented)
+    connectedCallback(): void;
+    // (undocumented)
+    disabled: boolean;
+    // (undocumented)
+    protected firstUpdated(): void;
+    // (undocumented)
+    focus(options?: FocusOptions): void;
+    // (undocumented)
+    get form(): HTMLFormElement | null;
+    // (undocumented)
+    static formAssociated: boolean;
+    // (undocumented)
+    formDisabledCallback(disabled: boolean): void;
+    // (undocumented)
+    formResetCallback(): void;
+    // (undocumented)
+    formStateRestoreCallback(state: File | FormData | string | null): void;
+    // (undocumented)
+    hint: string;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    static properties: {
+        checked: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        disabled: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        hint: {
+            type: StringConstructor;
+        };
+        label: {
+            type: StringConstructor;
+        };
+        name: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        required: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        value: {
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    reportValidity(): boolean;
+    // (undocumented)
+    required: boolean;
+    // (undocumented)
+    setCustomValidity(message: string): void;
+    // (undocumented)
+    static shadowRootOptions: {
+        delegatesFocus: boolean;
+        clonable?: boolean;
+        customElementRegistry?: CustomElementRegistry | null;
+        mode: ShadowRootMode;
+        serializable?: boolean;
+        slotAssignment?: SlotAssignmentMode;
+    };
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadRadioTone;
+    // (undocumented)
+    protected updated(changed: PropertyValues<this>): void;
+    // (undocumented)
+    get validationMessage(): string;
+    // (undocumented)
+    get validity(): ValidityState;
+    // (undocumented)
+    value: string;
+    // (undocumented)
+    get willValidate(): boolean;
+}
+
+// @public (undocumented)
+export type CadRadioTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public
 export class CadTab extends LitElement {
     constructor();
     // (undocumented)
@@ -634,6 +1082,166 @@ export class CadTabs extends LitElement {
 
 // @public (undocumented)
 export type CadTabTone = 'accent' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public
+export class CadTextarea extends LitElement {
+    constructor();
+    // (undocumented)
+    autocomplete: string;
+    // (undocumented)
+    checkValidity(): boolean;
+    // (undocumented)
+    cols: number;
+    // (undocumented)
+    connectedCallback(): void;
+    // (undocumented)
+    disabled: boolean;
+    // (undocumented)
+    error: string;
+    // (undocumented)
+    protected firstUpdated(): void;
+    // (undocumented)
+    focus(options?: FocusOptions): void;
+    // (undocumented)
+    get form(): HTMLFormElement | null;
+    // (undocumented)
+    static formAssociated: boolean;
+    // (undocumented)
+    formDisabledCallback(disabled: boolean): void;
+    // (undocumented)
+    formResetCallback(): void;
+    // (undocumented)
+    formStateRestoreCallback(state: File | FormData | string | null): void;
+    // (undocumented)
+    hint: string;
+    // (undocumented)
+    invalid: boolean;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    maxLength: number;
+    // (undocumented)
+    minLength: number;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    placeholder: string;
+    // (undocumented)
+    static properties: {
+        autocomplete: {
+            type: StringConstructor;
+        };
+        cols: {
+            type: NumberConstructor;
+        };
+        disabled: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        error: {
+            type: StringConstructor;
+        };
+        hint: {
+            type: StringConstructor;
+        };
+        invalid: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        label: {
+            type: StringConstructor;
+        };
+        maxLength: {
+            attribute: string;
+            type: NumberConstructor;
+        };
+        minLength: {
+            attribute: string;
+            type: NumberConstructor;
+        };
+        name: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        placeholder: {
+            type: StringConstructor;
+        };
+        readOnly: {
+            attribute: string;
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        required: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        resize: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        rows: {
+            type: NumberConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        value: {
+            type: StringConstructor;
+        };
+        wrap: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    readOnly: boolean;
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    reportValidity(): boolean;
+    // (undocumented)
+    required: boolean;
+    // (undocumented)
+    resize: CadTextareaResize;
+    // (undocumented)
+    rows: number;
+    // (undocumented)
+    select(): void;
+    // (undocumented)
+    setCustomValidity(message: string): void;
+    // (undocumented)
+    static shadowRootOptions: {
+        delegatesFocus: boolean;
+        clonable?: boolean;
+        customElementRegistry?: CustomElementRegistry | null;
+        mode: ShadowRootMode;
+        serializable?: boolean;
+        slotAssignment?: SlotAssignmentMode;
+    };
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadTextareaTone;
+    // (undocumented)
+    protected updated(changed: PropertyValues<this>): void;
+    // (undocumented)
+    get validationMessage(): string;
+    // (undocumented)
+    get validity(): ValidityState;
+    // (undocumented)
+    value: string;
+    // (undocumented)
+    get willValidate(): boolean;
+    // (undocumented)
+    wrap: 'hard' | 'soft';
+}
+
+// @public (undocumented)
+export type CadTextareaResize = 'both' | 'horizontal' | 'none' | 'vertical';
+
+// @public (undocumented)
+export type CadTextareaTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
 
 // (No @packageDocumentation comment for this package)
 

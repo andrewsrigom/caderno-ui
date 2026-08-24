@@ -20,6 +20,8 @@ test('loads and registers the public custom elements without browser errors', as
 
   const definitions = await page.evaluate(() =>
     [
+      'cad-accordion',
+      'cad-accordion-item',
       'cad-alert',
       'cad-badge',
       'cad-bookmark',
@@ -28,13 +30,17 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-card',
       'cad-chart',
       'cad-chart-item',
+      'cad-checkbox',
       'cad-divider',
       'cad-icon',
+      'cad-input',
       'cad-link',
       'cad-note',
       'cad-progress',
+      'cad-radio',
       'cad-tab',
       'cad-tabs',
+      'cad-textarea',
     ].every((tagName) => customElements.get(tagName) !== undefined),
   )
 
@@ -82,6 +88,43 @@ test('supports accessible tab keyboard navigation and composed events', async ({
   await expect(page.locator('cad-tab[name="contract"]')).toHaveAttribute(
     'hidden',
     '',
+  )
+})
+
+test('submits form-associated controls and coordinates radio groups', async ({
+  page,
+}) => {
+  await page
+    .getByRole('textbox', { name: 'Interview topic' })
+    .fill('Distributed systems')
+  await page
+    .getByRole('textbox', { name: 'Review notes' })
+    .fill('Prefer an explicit consistency trade-off.')
+  await page
+    .locator('cad-checkbox[label="Keyboard flow verified"] > [slot="label"]')
+    .click()
+  await page.locator('cad-radio[label="Algorithms"] > [slot="label"]').click()
+  await page.getByRole('button', { name: 'Inspect FormData' }).click()
+
+  const result = page.locator('[data-form-result]')
+  await expect(result).toContainText('Distributed systems')
+  await expect(result).toContainText('"track":"algorithms"')
+  await expect(result).toContainText('"keyboard":"yes"')
+})
+
+test('coordinates native accordion disclosures and composed events', async ({
+  page,
+}) => {
+  const first = page.locator('cad-accordion-item').first()
+  const second = page.locator('cad-accordion-item').nth(1)
+  await expect(first.locator('details')).toHaveAttribute('open', '')
+
+  await second.getByText('When is the simple loop better?').click()
+
+  await expect(second.locator('details')).toHaveAttribute('open', '')
+  await expect(first.locator('details')).not.toHaveAttribute('open', '')
+  await expect(page.locator('[data-event-log]')).toContainText(
+    'cad-accordion-toggle',
   )
 })
 
@@ -138,5 +181,7 @@ test.describe('without JavaScript', () => {
     await expect(page.getByText('Thu: 9')).toBeVisible()
     await expect(page.getByText('Save review')).toBeVisible()
     await expect(page.getByText('Static guidance')).toBeVisible()
+    await expect(page.getByText('Interview topic')).toBeVisible()
+    await expect(page.getByText('Why use a Map?')).toBeVisible()
   })
 })

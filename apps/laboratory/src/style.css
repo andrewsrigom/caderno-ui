@@ -16,6 +16,7 @@ button {
 
 main {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 4rem;
   width: min(100% - 2rem, 70rem);
   margin-inline: auto;
@@ -61,6 +62,7 @@ h2 {
 
 section {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
 }
 
@@ -113,6 +115,52 @@ section {
   max-width: 46rem;
 }
 
+.form-demo,
+.form-grid,
+.choice-grid,
+.choice-grid fieldset {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-demo {
+  min-width: 0;
+  max-width: 52rem;
+  padding: 1.25rem;
+  background: var(--cad-surface);
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: var(--cad-radius-md);
+}
+
+.form-grid,
+.choice-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.choice-grid fieldset {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: var(--cad-radius-sm);
+}
+
+.choice-grid legend {
+  padding-inline: 0.35rem;
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-md);
+  font-weight: var(--cad-hand-weight-strong);
+}
+
+.form-result {
+  min-height: 2.5rem;
+  padding: 0.65rem 0.8rem;
+  overflow-wrap: anywhere;
+  background: var(--cad-surface-sunken);
+  border-radius: var(--cad-radius-sm);
+  font-family: var(--cad-font-mono);
+  font-size: 0.85rem;
+}
+
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
@@ -133,4 +181,11 @@ section {
   box-shadow: 0 0.8rem 2rem rgb(var(--cad-shadow-rgb) / 20%);
   font-family: var(--cad-font-mono);
   font-size: 0.85rem;
+}
+
+@media (width <= 700px) {
+  .form-grid,
+  .choice-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

@@ -86,7 +86,27 @@
       "types": "./dist/tabs/index.d.ts",
       "import": "./dist/tabs/index.js"
     },
-    "./fallback.css": "./src/styles/fallback.css"
+    "./fallback.css": "./src/styles/fallback.css",
+    "./input": {
+      "types": "./dist/input/cad-input.d.ts",
+      "import": "./dist/input/cad-input.js"
+    },
+    "./textarea": {
+      "types": "./dist/textarea/cad-textarea.d.ts",
+      "import": "./dist/textarea/cad-textarea.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/cad-checkbox.d.ts",
+      "import": "./dist/checkbox/cad-checkbox.js"
+    },
+    "./radio": {
+      "types": "./dist/radio/cad-radio.d.ts",
+      "import": "./dist/radio/cad-radio.js"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/cad-accordion.d.ts",
+      "import": "./dist/accordion/cad-accordion.js"
+    }
   },
   "sideEffects": [
     "**/*.js",

@@ -7,12 +7,14 @@ test.beforeEach(async ({ page }) => {
 
 for (const component of [
   'actions',
+  'accordion',
   'alerts',
   'badges-and-notes',
   'bookmark',
   'cards-and-callouts',
   'charts',
   'dividers',
+  'form-controls',
   'icons',
   'progress',
   'tabs',
@@ -83,6 +85,58 @@ test('all interactive component controls are reachable by keyboard', async ({
   await expect(
     page.getByRole('button', { name: 'Save laboratory' }),
   ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('textbox', { name: 'Interview topic' }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('textbox', { name: 'Contact email' }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('textbox', { name: 'Review notes' }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('checkbox', { name: 'Public API reviewed' }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('checkbox', { name: /Keyboard flow verified/ }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('radio', { name: 'Architecture' })).toBeFocused()
+
+  for (const label of ['Algorithms', 'Behavioral']) {
+    await page.keyboard.press('ArrowRight')
+    await expect(page.getByRole('radio', { name: label })).toBeFocused()
+  }
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('button', { name: 'Inspect FormData' }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('button', { name: 'Reset' })).toBeFocused()
+
+  for (const [index] of [
+    'Why use a Map?',
+    'When is the simple loop better?',
+    'What belongs in the explanation?',
+  ].entries()) {
+    await page.keyboard.press('Tab')
+    await expect(
+      page.locator('cad-accordion-item').nth(index).locator('summary'),
+    ).toBeFocused()
+  }
 
   await page.keyboard.press('Tab')
   await expect(page.getByRole('tab', { name: 'Contract' })).toBeFocused()

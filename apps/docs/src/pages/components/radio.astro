@@ -1,0 +1,62 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-radio checked label="Architecture" name="track" value="architecture"></cad-radio>
+<cad-radio label="Algorithms" name="track" value="algorithms"></cad-radio>
+
+<script type="module">
+  import '@caderno-ui/elements/radio'
+</script>`
+---
+
+<DocsLayout
+  description="CadRadio is a form-associated notebook radio that coordinates grouping and arrow keys across shadow roots."
+  title="Radio"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-radio&gt;</p>
+    <h1>Choose one option across real shadow boundaries.</h1>
+    <p>
+      Radios with the same <code>name</code> and form coordinate selection even though
+      each control owns a shadow root. Arrow keys move and select within the group.
+    </p>
+  </header>
+
+  <DemoFrame title="Interview track">
+    <div aria-label="Interview track" class="choice-stack" role="radiogroup">
+      <cad-radio
+        checked
+        label="Architecture"
+        name="track"
+        tone="blue"
+        value="architecture"></cad-radio>
+      <cad-radio label="Algorithms" name="track" tone="mint" value="algorithms"
+      ></cad-radio>
+      <cad-radio
+        label="Behavioral"
+        name="track"
+        tone="violet"
+        value="behavioral"></cad-radio>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-radio" />
+
+  <section class="content-section" aria-labelledby="keyboard-title">
+    <h2 id="keyboard-title">Keyboard and validation</h2>
+    <p>
+      Left/Up and Right/Down move cyclically among enabled peers. If any peer is
+      required, the group remains invalid until one value is selected.
+    </p>
+  </section>
+
+  <style>
+    .choice-stack {
+      display: grid;
+      gap: 0.9rem;
+    }
+  </style>
+</DocsLayout>

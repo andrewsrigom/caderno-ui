@@ -124,7 +124,7 @@ for (const module of manifest.modules ?? []) {
 
     const implementedEvents = new Map()
     for (const match of source.matchAll(
-      /new CustomEvent(?:<[^>]+>)?\(['"]([^'"]+)['"]\s*,([\s\S]*?)\n\s*}\),/g,
+      /new (?:Custom)?Event(?:<[^>]+>)?\(['"]([^'"]+)['"]\s*,([\s\S]*?)\n\s*}\),/g,
     )) {
       implementedEvents.set(match[1], match[2])
     }

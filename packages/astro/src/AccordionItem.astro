@@ -1,0 +1,36 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadAccordionTone } from '@caderno-ui/elements/accordion'
+
+type Props = {
+  class?: string
+  disabled?: boolean
+  open?: boolean
+  title: string
+  tone?: CadAccordionTone
+}
+
+const {
+  class: className,
+  disabled = false,
+  open = false,
+  title,
+  tone = 'paper',
+} = Astro.props
+---
+
+<cad-accordion-item
+  class={className}
+  disabled={disabled}
+  heading={title}
+  open={open}
+  tone={tone}
+>
+  <span slot="title">{title}</span>
+  <slot />
+</cad-accordion-item>
+
+<script>
+  import '@caderno-ui/elements/accordion'
+</script>

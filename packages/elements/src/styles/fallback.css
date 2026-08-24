@@ -1,16 +1,98 @@
 cad-alert:not(:defined),
+cad-accordion:not(:defined),
+cad-accordion-item:not(:defined),
 cad-badge:not(:defined),
 cad-button:not(:defined),
 cad-callout:not(:defined),
 cad-card:not(:defined),
 cad-chart:not(:defined),
+cad-checkbox:not(:defined),
 cad-divider:not(:defined),
+cad-input:not(:defined),
 cad-link:not(:defined),
 cad-note:not(:defined),
 cad-progress:not(:defined),
+cad-radio:not(:defined),
 cad-tab:not(:defined),
-cad-tabs:not(:defined) {
+cad-tabs:not(:defined),
+cad-textarea:not(:defined) {
   box-sizing: border-box;
+}
+
+cad-input:not(:defined),
+cad-textarea:not(:defined) {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 12rem;
+  color: var(--cad-ink, currentColor);
+  font-family: var(--cad-font-hand, inherit);
+}
+
+cad-input:not(:defined)::after {
+  min-height: 1.6rem;
+  padding: 0.3rem 0.15rem;
+  color: var(--cad-ink-muted, currentColor);
+  border-bottom: 1px dashed var(--cad-line-strong, currentColor);
+  content: attr(placeholder);
+}
+
+cad-textarea:not(:defined)::after {
+  min-height: 6rem;
+  padding: 0.6rem;
+  color: var(--cad-ink-muted, currentColor);
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.55rem;
+  content: attr(placeholder);
+}
+
+cad-checkbox:not(:defined),
+cad-radio:not(:defined) {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+  font-family: var(--cad-font-hand, inherit);
+}
+
+cad-checkbox:not(:defined)::before,
+cad-radio:not(:defined)::before {
+  display: inline-grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 1px solid currentColor;
+  content: '';
+}
+
+cad-checkbox[checked]:not(:defined)::before {
+  content: '✓';
+}
+
+cad-radio:not(:defined)::before {
+  border-radius: 50%;
+}
+
+cad-radio[checked]:not(:defined)::before {
+  content: '•';
+}
+
+cad-accordion:not(:defined) {
+  display: grid;
+  gap: 0.75rem;
+}
+
+cad-accordion-item:not(:defined) {
+  display: block;
+  padding: 0.85rem 1rem;
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.65rem;
+}
+
+cad-accordion-item:not(:defined) > [slot='title'] {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
 }
 
 cad-button:not(:defined) {

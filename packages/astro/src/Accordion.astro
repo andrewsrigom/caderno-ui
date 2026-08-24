@@ -1,0 +1,21 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadAccordionMode } from '@caderno-ui/elements/accordion'
+
+type Props = {
+  class?: string
+  label?: string
+  mode?: CadAccordionMode
+}
+
+const { class: className, label, mode = 'multiple' } = Astro.props
+---
+
+<cad-accordion class={className} label={label} mode={mode}>
+  <slot />
+</cad-accordion>
+
+<script>
+  import '@caderno-ui/elements/accordion'
+</script>

@@ -167,6 +167,125 @@
         ></cad-bookmark>
       </section>
 
+      <section data-component="form-controls">
+        <h2>Form controls</h2>
+        <form class="form-demo" data-form-demo>
+          <div class="form-grid">
+            <cad-input
+              hint="Use a concrete subject."
+              icon="search"
+              label="Interview topic"
+              name="topic"
+              placeholder="System design"
+              required
+            >
+              <span slot="label">Interview topic</span>
+            </cad-input>
+            <cad-input
+              hint="Used only for the local form demonstration."
+              label="Contact email"
+              name="email"
+              tone="coral"
+              type="email"
+              value="review@example.com"
+            >
+              <span slot="label">Contact email</span>
+            </cad-input>
+          </div>
+          <cad-textarea
+            hint="Name the decision, evidence, and trade-off."
+            label="Review notes"
+            name="notes"
+            placeholder="The simpler option works here because…"
+            rows="4"
+            tone="mint"
+          >
+            <span slot="label">Review notes</span>
+          </cad-textarea>
+          <div class="choice-grid">
+            <fieldset>
+              <legend>Checklist</legend>
+              <cad-checkbox
+                checked
+                label="Public API reviewed"
+                name="reviewed"
+                value="api"
+              >
+                <span slot="label">Public API reviewed</span>
+              </cad-checkbox>
+              <cad-checkbox
+                hint="Required before publication."
+                label="Keyboard flow verified"
+                name="keyboard"
+                required
+                tone="mint"
+                value="yes"
+              >
+                <span slot="label">Keyboard flow verified</span>
+                <span slot="hint">Required before publication.</span>
+              </cad-checkbox>
+            </fieldset>
+            <fieldset>
+              <legend>Interview track</legend>
+              <cad-radio
+                checked
+                label="Architecture"
+                name="track"
+                value="architecture"
+              >
+                <span slot="label">Architecture</span>
+              </cad-radio>
+              <cad-radio
+                label="Algorithms"
+                name="track"
+                tone="mint"
+                value="algorithms"
+              >
+                <span slot="label">Algorithms</span>
+              </cad-radio>
+              <cad-radio
+                label="Behavioral"
+                name="track"
+                tone="violet"
+                value="behavioral"
+              >
+                <span slot="label">Behavioral</span>
+              </cad-radio>
+            </fieldset>
+          </div>
+          <div class="cluster">
+            <cad-button icon="check" tone="mint" type="submit">
+              Inspect FormData
+            </cad-button>
+            <cad-button type="reset" variant="secondary">Reset</cad-button>
+          </div>
+          <output class="form-result" data-form-result>
+            Submit the form to inspect its native payload.
+          </output>
+        </form>
+      </section>
+
+      <section data-component="accordion">
+        <h2>Accordion</h2>
+        <cad-accordion label="Review questions" mode="single">
+          <cad-accordion-item open tone="blue">
+            <span slot="title">Why use a Map?</span>
+            It turns repeated lookup into an explicit index and makes the
+            complexity visible.
+          </cad-accordion-item>
+          <cad-accordion-item tone="mint">
+            <span slot="title">When is the simple loop better?</span>
+            When the input is small, the operation is one-off, and clarity
+            dominates.
+          </cad-accordion-item>
+          <cad-accordion-item tone="lemon">
+            <span slot="title">What belongs in the explanation?</span>
+            State the invariant, trade-off, and verification strategy before
+            optimizing.
+          </cad-accordion-item>
+        </cad-accordion>
+      </section>
+
       <section data-component="progress">
         <h2>Progress</h2>
         <div class="progress-stack">

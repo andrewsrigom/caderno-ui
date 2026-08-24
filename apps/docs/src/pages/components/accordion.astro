@@ -1,0 +1,74 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-accordion label="Review questions" mode="single">
+  <cad-accordion-item open tone="blue">
+    <span slot="title">Why use a Map?</span>
+    It turns repeated lookup into an explicit index.
+  </cad-accordion-item>
+  <cad-accordion-item tone="mint">
+    <span slot="title">When is the simple loop better?</span>
+    When the input is small and clarity dominates.
+  </cad-accordion-item>
+</cad-accordion>
+
+<script type="module">
+  import '@caderno-ui/elements/accordion'
+</script>`
+---
+
+<DocsLayout
+  description="CadAccordion coordinates native details disclosures in single or multiple mode."
+  title="Accordion"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-accordion&gt; + &lt;cad-accordion-item&gt;</p>
+    <h1>Disclose supporting material with native foundations.</h1>
+    <p>
+      Each item renders <code>details</code> and <code>summary</code>. The
+      parent adds optional single-open coordination without replacing native
+      keyboard behavior.
+    </p>
+  </header>
+
+  <DemoFrame title="Single-open review questions">
+    <cad-accordion label="Review questions" mode="single">
+      <cad-accordion-item open tone="blue">
+        <span slot="title">Why use a Map?</span>
+        <p>
+          It turns repeated lookup into an explicit index and makes the
+          complexity visible.
+        </p>
+      </cad-accordion-item>
+      <cad-accordion-item tone="mint">
+        <span slot="title">When is the simple loop better?</span>
+        <p>
+          When the input is small, the operation is one-off, and clarity
+          dominates.
+        </p>
+      </cad-accordion-item>
+      <cad-accordion-item tone="lemon">
+        <span slot="title">What belongs in the explanation?</span>
+        <p>
+          State the invariant, trade-off, and verification strategy before
+          optimizing.
+        </p>
+      </cad-accordion-item>
+    </cad-accordion>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-accordion" />
+  <ApiReference tagName="cad-accordion-item" />
+
+  <section class="content-section" aria-labelledby="events-title">
+    <h2 id="events-title">Event</h2>
+    <p>
+      Items emit the composed <code>cad-accordion-toggle</code> event with
+      <code>{'{ open }'}</code> after native state changes. Disabled items leave the
+      reading content in place but remove the summary from the tab order.
+    </p>
+  </section>
+</DocsLayout>

@@ -1,0 +1,88 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadInputSize,
+  CadInputTone,
+  CadInputType,
+} from '@caderno-ui/elements/input'
+import type { CadIconName } from '@caderno-ui/icons'
+
+type Props = {
+  autocomplete?: string
+  class?: string
+  disabled?: boolean
+  error?: string
+  hint?: string
+  icon?: CadIconName
+  id?: string
+  inputmode?: string
+  invalid?: boolean
+  label: string
+  maxlength?: number
+  minlength?: number
+  name?: string
+  pattern?: string
+  placeholder?: string
+  readonly?: boolean
+  required?: boolean
+  size?: CadInputSize
+  tone?: CadInputTone
+  type?: CadInputType
+  value?: string
+}
+
+const {
+  autocomplete,
+  class: className,
+  disabled = false,
+  error,
+  hint,
+  icon,
+  id,
+  inputmode,
+  invalid = false,
+  label,
+  maxlength,
+  minlength,
+  name,
+  pattern,
+  placeholder,
+  readonly = false,
+  required = false,
+  size = 'md',
+  tone = 'blue',
+  type = 'text',
+  value,
+} = Astro.props
+---
+
+<cad-input
+  autocomplete={autocomplete}
+  class={className}
+  disabled={disabled}
+  error={error}
+  hint={hint}
+  icon={icon}
+  id={id}
+  inputmode={inputmode}
+  invalid={invalid}
+  label={label}
+  maxlength={maxlength}
+  minlength={minlength}
+  name={name}
+  pattern={pattern}
+  placeholder={placeholder}
+  readonly={readonly}
+  required={required}
+  size={size}
+  tone={tone}
+  type={type}
+  value={value}
+>
+  <span slot="label">{label}</span>
+</cad-input>
+
+<script>
+  import '@caderno-ui/elements/input'
+</script>

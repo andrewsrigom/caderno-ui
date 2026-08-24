@@ -1,0 +1,67 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-checkbox
+  label="I reviewed the public API"
+  name="reviewed"
+  value="yes"
+  required
+></cad-checkbox>
+
+<script type="module">
+  import '@caderno-ui/elements/checkbox'
+</script>`
+---
+
+<DocsLayout
+  description="CadCheckbox is a form-associated notebook checkbox with native required and reset semantics."
+  title="Checkbox"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-checkbox&gt;</p>
+    <h1>Turn a checklist mark into real form state.</h1>
+    <p>
+      Checkbox supports checked, unchecked, and programmatic indeterminate
+      states, while submitting only its checked value.
+    </p>
+  </header>
+
+  <DemoFrame title="Checklist states">
+    <div class="choice-stack">
+      <cad-checkbox
+        checked
+        label="Public contract reviewed"
+        name="review"
+        value="api"></cad-checkbox>
+      <cad-checkbox
+        hint="Required before publication."
+        label="Keyboard flow verified"
+        name="keyboard"
+        required
+        tone="mint"
+        value="yes"></cad-checkbox>
+      <cad-checkbox disabled label="Release published" tone="violet"
+      ></cad-checkbox>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-checkbox" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      The visible label wraps a native checkbox, preserving Space activation,
+      focus indication, required validity, and a 44-pixel-friendly target.
+    </p>
+  </section>
+
+  <style>
+    .choice-stack {
+      display: grid;
+      gap: 0.9rem;
+    }
+  </style>
+</DocsLayout>

@@ -1,0 +1,76 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<form>
+  <cad-input
+    icon="search"
+    label="Interview topic"
+    name="topic"
+    placeholder="System design"
+    required
+  ></cad-input>
+</form>
+
+<script type="module">
+  import '@caderno-ui/elements/input'
+</script>`
+---
+
+<DocsLayout
+  description="CadInput is a form-associated notebook input with native validation, reset, and composed events."
+  title="Input"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-input&gt;</p>
+    <h1>Keep the notebook line and the native form contract.</h1>
+    <p>
+      Input uses <code>ElementInternals</code>, so its value participates in
+      <code>FormData</code>, constraint validation, fieldset disabling, and form
+      reset across the shadow boundary.
+    </p>
+  </header>
+
+  <DemoFrame title="Sizes, hints, and validation">
+    <div class="field-stack">
+      <cad-input
+        hint="Use a concrete subject."
+        icon="search"
+        label="Interview topic"
+        name="topic"
+        placeholder="System design"
+        required></cad-input>
+      <cad-input
+        error="Use a valid address."
+        invalid
+        label="Contact email"
+        name="email"
+        tone="coral"
+        type="email"
+        value="review@"></cad-input>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-input" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility and forms</h2>
+    <p>
+      Always provide a visible <code>label</code>. The internal native input
+      owns focus and validation semantics; <code>input</code> and <code
+        >change</code
+      >
+      leave the shadow root as composed events.
+    </p>
+  </section>
+
+  <style>
+    .field-stack {
+      display: grid;
+      gap: 1.25rem;
+      max-width: 34rem;
+    }
+  </style>
+</DocsLayout>

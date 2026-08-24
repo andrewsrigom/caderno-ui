@@ -1,0 +1,54 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-textarea
+  hint="Name the trade-off and the evidence."
+  label="Review notes"
+  name="notes"
+  required
+  rows="5"
+></cad-textarea>
+
+<script type="module">
+  import '@caderno-ui/elements/textarea'
+</script>`
+---
+
+<DocsLayout
+  description="CadTextarea is a form-associated ruled writing surface with native validation and reset behavior."
+  title="Textarea"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-textarea&gt;</p>
+    <h1>Give longer answers a ruled writing surface.</h1>
+    <p>
+      Textarea preserves native editing, selection, validation, and resize
+      behavior while contributing its value directly to a containing form.
+    </p>
+  </header>
+
+  <DemoFrame title="Ruled response">
+    <cad-textarea
+      hint="Name the decision, evidence, and trade-off."
+      label="Review notes"
+      name="notes"
+      placeholder="The simpler option works here because…"
+      required
+      rows="5"
+      tone="mint"></cad-textarea>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-textarea" />
+
+  <section class="content-section" aria-labelledby="forms-title">
+    <h2 id="forms-title">Form behavior</h2>
+    <p>
+      <code>FormData</code>, reset, required validation, disabled fieldsets, and
+      custom validity work through <code>ElementInternals</code>. Use
+      <code>resize</code> only when the surrounding layout genuinely needs a constraint.
+    </p>
+  </section>
+</DocsLayout>

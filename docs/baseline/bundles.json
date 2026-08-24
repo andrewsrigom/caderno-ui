@@ -29,8 +29,8 @@
       "gzip": 7282
     },
     "elements-root": {
-      "bytes": 78349,
-      "gzip": 19650
+      "bytes": 115266,
+      "gzip": 24424
     },
     "elements-tabs": {
       "bytes": 33684,
@@ -69,8 +69,8 @@
       "gzip": 7839
     },
     "react-root": {
-      "bytes": 81016,
-      "gzip": 20593
+      "bytes": 118614,
+      "gzip": 25559
     },
     "react-tabs": {
       "bytes": 35235,

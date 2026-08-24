@@ -38,7 +38,13 @@
     "./Note.astro": "./src/Note.astro",
     "./Progress.astro": "./src/Progress.astro",
     "./Tab.astro": "./src/Tab.astro",
-    "./Tabs.astro": "./src/Tabs.astro"
+    "./Tabs.astro": "./src/Tabs.astro",
+    "./Input.astro": "./src/Input.astro",
+    "./Textarea.astro": "./src/Textarea.astro",
+    "./Checkbox.astro": "./src/Checkbox.astro",
+    "./Radio.astro": "./src/Radio.astro",
+    "./Accordion.astro": "./src/Accordion.astro",
+    "./AccordionItem.astro": "./src/AccordionItem.astro"
   },
   "scripts": {
     "typecheck": "astro check"

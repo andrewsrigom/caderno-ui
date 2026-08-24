@@ -208,6 +208,87 @@
       "typeExports": ["CadTabChangeDetail", "CadTabChangeEvent", "CadTabTone"],
       "astroFacades": ["Tab.astro", "Tabs.astro"],
       "docsPage": "tabs.astro"
+    },
+    {
+      "astroFacades": ["Input.astro"],
+      "docsPage": "input.astro",
+      "elements": [
+        {
+          "className": "CadInput",
+          "events": [],
+          "tagName": "cad-input"
+        }
+      ],
+      "name": "input",
+      "typeExports": ["CadInputSize", "CadInputTone", "CadInputType"]
+    },
+    {
+      "astroFacades": ["Textarea.astro"],
+      "docsPage": "textarea.astro",
+      "elements": [
+        {
+          "className": "CadTextarea",
+          "events": [],
+          "tagName": "cad-textarea"
+        }
+      ],
+      "name": "textarea",
+      "typeExports": ["CadTextareaResize", "CadTextareaTone"]
+    },
+    {
+      "astroFacades": ["Checkbox.astro"],
+      "docsPage": "checkbox.astro",
+      "elements": [
+        {
+          "className": "CadCheckbox",
+          "events": [],
+          "tagName": "cad-checkbox"
+        }
+      ],
+      "name": "checkbox",
+      "typeExports": ["CadCheckboxTone"]
+    },
+    {
+      "astroFacades": ["Radio.astro"],
+      "docsPage": "radio.astro",
+      "elements": [
+        {
+          "className": "CadRadio",
+          "events": [],
+          "tagName": "cad-radio"
+        }
+      ],
+      "name": "radio",
+      "typeExports": ["CadRadioTone"]
+    },
+    {
+      "astroFacades": ["Accordion.astro", "AccordionItem.astro"],
+      "docsPage": "accordion.astro",
+      "elements": [
+        {
+          "className": "CadAccordion",
+          "events": [],
+          "tagName": "cad-accordion"
+        },
+        {
+          "className": "CadAccordionItem",
+          "events": [
+            {
+              "eventName": "cad-accordion-toggle",
+              "propName": "onAccordionToggle",
+              "typeName": "CadAccordionToggleEvent"
+            }
+          ],
+          "tagName": "cad-accordion-item"
+        }
+      ],
+      "name": "accordion",
+      "typeExports": [
+        "CadAccordionMode",
+        "CadAccordionToggleDetail",
+        "CadAccordionToggleEvent",
+        "CadAccordionTone"
+      ]
     }
   ]
 }

@@ -1,0 +1,51 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadRadioTone } from '@caderno-ui/elements/radio'
+
+type Props = {
+  checked?: boolean
+  class?: string
+  disabled?: boolean
+  hint?: string
+  id?: string
+  label: string
+  name: string
+  required?: boolean
+  tone?: CadRadioTone
+  value: string
+}
+
+const {
+  checked = false,
+  class: className,
+  disabled = false,
+  hint,
+  id,
+  label,
+  name,
+  required = false,
+  tone = 'blue',
+  value,
+} = Astro.props
+---
+
+<cad-radio
+  checked={checked}
+  class={className}
+  disabled={disabled}
+  hint={hint}
+  id={id}
+  label={label}
+  name={name}
+  required={required}
+  tone={tone}
+  value={value}
+>
+  <span slot="label">{label}</span>
+  {hint ? <span slot="hint">{hint}</span> : null}
+</cad-radio>
+
+<script>
+  import '@caderno-ui/elements/radio'
+</script>

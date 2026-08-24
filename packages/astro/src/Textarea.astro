@@ -1,0 +1,83 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadTextareaResize,
+  CadTextareaTone,
+} from '@caderno-ui/elements/textarea'
+
+type Props = {
+  autocomplete?: string
+  class?: string
+  cols?: number
+  disabled?: boolean
+  error?: string
+  hint?: string
+  id?: string
+  invalid?: boolean
+  label: string
+  maxlength?: number
+  minlength?: number
+  name?: string
+  placeholder?: string
+  readonly?: boolean
+  required?: boolean
+  resize?: CadTextareaResize
+  rows?: number
+  tone?: CadTextareaTone
+  value?: string
+  wrap?: 'hard' | 'soft'
+}
+
+const {
+  autocomplete,
+  class: className,
+  cols,
+  disabled = false,
+  error,
+  hint,
+  id,
+  invalid = false,
+  label,
+  maxlength,
+  minlength,
+  name,
+  placeholder,
+  readonly = false,
+  required = false,
+  resize = 'vertical',
+  rows = 4,
+  tone = 'blue',
+  value,
+  wrap = 'soft',
+} = Astro.props
+---
+
+<cad-textarea
+  autocomplete={autocomplete}
+  class={className}
+  cols={cols}
+  disabled={disabled}
+  error={error}
+  hint={hint}
+  id={id}
+  invalid={invalid}
+  label={label}
+  maxlength={maxlength}
+  minlength={minlength}
+  name={name}
+  placeholder={placeholder}
+  readonly={readonly}
+  required={required}
+  resize={resize}
+  rows={rows}
+  tone={tone}
+  value={value}
+  wrap={wrap}
+>
+  <span slot="label">{label}</span>
+</cad-textarea>
+
+<script>
+  import '@caderno-ui/elements/textarea'
+</script>

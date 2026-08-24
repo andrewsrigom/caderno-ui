@@ -1,0 +1,69 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-button icon="check" tone="mint">Save review</cad-button>
+<cad-button href="/components" variant="secondary">Browse components</cad-button>
+
+<script type="module">
+  import '@caderno-ui/elements/button'
+</script>`
+---
+
+<DocsLayout
+  description="CadButton renders a native button or anchor with notebook styling and form-aware submit behavior."
+  title="Button"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-button&gt;</p>
+    <h1>Make the action obvious without losing native behavior.</h1>
+    <p>
+      Button selects a native button or anchor from its contract, supports form
+      submission across the shadow boundary, and keeps disabled links out of the
+      tab order.
+    </p>
+  </header>
+
+  <DemoFrame title="Variants, sizes, and links">
+    <div class="demo-row">
+      <cad-button icon="check" tone="mint">Save review</cad-button>
+      <cad-button icon="spark" tone="lemon" variant="secondary"
+        >New idea</cad-button
+      >
+      <cad-button
+        href="/components"
+        icon="arrow-right"
+        icon-position="end"
+        variant="ghost"
+      >
+        Browse components
+      </cad-button>
+      <cad-button size="sm" tone="coral" variant="link"
+        >Read the contract</cad-button
+      >
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-button" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Visible text is the preferred accessible name. Supply <code>label</code>
+      for icon-only actions. Use <code>href</code> for navigation and a button without
+      <code>href</code> for actions; visual variants never change that semantic distinction.
+    </p>
+  </section>
+
+  <style>
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+  </style>
+</DocsLayout>

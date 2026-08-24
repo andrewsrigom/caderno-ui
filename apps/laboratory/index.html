@@ -23,6 +23,98 @@
         </button>
       </header>
 
+      <section data-component="actions">
+        <h2>Buttons and links</h2>
+        <div class="cluster" aria-label="Button variants">
+          <cad-button icon="check" tone="mint">Save review</cad-button>
+          <cad-button icon="spark" tone="lemon" variant="secondary">
+            New idea
+          </cad-button>
+          <cad-button icon="arrow-right" icon-position="end" variant="ghost">
+            Continue
+          </cad-button>
+          <cad-button size="sm" tone="coral" variant="link">
+            Inspect contract
+          </cad-button>
+        </div>
+        <p class="link-line">
+          Read the
+          <cad-link href="#charts" tone="lemon">chart evidence</cad-link>,
+          compare the
+          <cad-link href="#cards" tone="mint" variant="underline">
+            composition surfaces </cad-link
+          >, or open an
+          <cad-link
+            external
+            href="https://github.com/andrewsrigom/caderno-ui"
+            tone="violet"
+            variant="plain"
+          >
+            external reference </cad-link
+          >.
+        </p>
+      </section>
+
+      <section id="cards" data-component="cards-and-callouts">
+        <h2>Cards and callouts</h2>
+        <div class="grid">
+          <cad-card
+            folded
+            heading="Typed contracts"
+            icon="brackets"
+            kicker="Architecture"
+            tone="blue"
+          >
+            Primitive values use attributes; composition uses slots.
+            <small slot="footer">Reviewed today</small>
+          </cad-card>
+          <cad-card
+            heading="Explore charts"
+            href="#charts"
+            icon="gauge"
+            tone="mint"
+            variant="outlined"
+          >
+            Compare accessible bar, line, and donut contracts.
+          </cad-card>
+        </div>
+        <div class="grid">
+          <cad-callout variant="info">
+            <span slot="title">Static guidance</span>
+            Callouts belong to the document and do not announce themselves as
+            live status changes.
+          </cad-callout>
+          <cad-callout variant="tip">
+            Compose native semantics before adding a new property.
+          </cad-callout>
+        </div>
+      </section>
+
+      <section data-component="dividers">
+        <h2>Dividers</h2>
+        <div class="divider-stack">
+          <cad-divider density="dense"></cad-divider>
+          <cad-divider tone="accent" variant="dotted"></cad-divider>
+          <cad-divider
+            density="loose"
+            tone="strong"
+            variant="wavy"
+          ></cad-divider>
+        </div>
+      </section>
+
+      <section data-component="icons">
+        <h2>Icons</h2>
+        <div class="icon-grid" aria-label="Representative icon set">
+          <cad-icon label="Idea" name="lightbulb" size="30"></cad-icon>
+          <cad-icon label="Architecture" name="layers" size="30"></cad-icon>
+          <cad-icon label="Code" name="code" size="30"></cad-icon>
+          <cad-icon label="Review" name="checklist" size="30"></cad-icon>
+          <cad-icon label="Chart" name="gauge" size="30"></cad-icon>
+          <cad-icon label="Release" name="rocket" size="30"></cad-icon>
+        </div>
+      </section>
+
       <section data-component="badges-and-notes">
         <h2>Badges and notes</h2>
         <div class="cluster" aria-label="Badge variants">
@@ -114,7 +206,7 @@
         </cad-tabs>
       </section>
 
-      <section data-component="charts">
+      <section id="charts" data-component="charts">
         <h2>Charts</h2>
         <div class="chart-grid">
           <cad-chart heading="Notes reviewed" type="bar" value-label="Notes">

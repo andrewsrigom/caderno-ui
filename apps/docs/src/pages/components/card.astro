@@ -1,0 +1,74 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-card folded heading="Typed contracts" icon="brackets" kicker="Architecture" tone="blue">
+  Primitive values use attributes; composition uses slots.
+  <span slot="footer">Reviewed today</span>
+</cad-card>
+
+<script type="module">
+  import '@caderno-ui/elements/card'
+</script>`
+---
+
+<DocsLayout
+  description="CadCard groups related content and can optionally become a single native link."
+  title="Card"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-card&gt;</p>
+    <h1>Group one idea on one sheet of paper.</h1>
+    <p>
+      Card provides title, body, and footer composition without deciding the
+      product layout. Adding <code>href</code> turns the complete surface into a native
+      link.
+    </p>
+  </header>
+
+  <DemoFrame title="Paper and linked cards">
+    <div class="card-grid">
+      <cad-card
+        folded
+        heading="Typed contracts"
+        icon="brackets"
+        kicker="Architecture"
+        tone="blue"
+      >
+        Primitive values use attributes; composition uses slots.
+        <span slot="footer">Reviewed today</span>
+      </cad-card>
+      <cad-card
+        heading="Explore charts"
+        href="/components/chart/"
+        icon="gauge"
+        tone="mint"
+        variant="outlined"
+      >
+        Compare the accessible bar, line, and donut contracts.
+      </cad-card>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-card" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Do not put nested interactive controls inside a linked card. For a card
+      with several actions, omit <code>href</code> and place explicit controls in
+      the footer slot.
+    </p>
+  </section>
+
+  <style>
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+      gap: 1rem;
+    }
+  </style>
+</DocsLayout>

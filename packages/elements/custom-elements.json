@@ -520,6 +520,710 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/button/cad-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A notebook-styled action that renders a native button or link.",
+          "name": "CadButton",
+          "cssProperties": [
+            {
+              "description": "Per-instance action color.",
+              "name": "--cad-button-bg"
+            },
+            {
+              "description": "Per-instance foreground color.",
+              "name": "--cad-button-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native button or anchor.",
+              "name": "base"
+            },
+            {
+              "description": "Optional leading or trailing icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Action label.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Action label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "form"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "iconPosition",
+              "privacy": "public",
+              "type": {
+                "text": "CadButtonIconPosition"
+              },
+              "default": "'start'",
+              "attribute": "icon-position",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "rel"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "privacy": "public",
+              "type": {
+                "text": "CadButtonSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "target"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadButtonTone"
+              },
+              "default": "'blue'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "privacy": "public",
+              "type": {
+                "text": "CadButtonType"
+              },
+              "default": "'button'",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadButtonVariant"
+              },
+              "default": "'primary'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "targetForm",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "handleButtonClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleDisabledLink",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderIcon",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "position",
+                  "type": {
+                    "text": "CadButtonIconPosition"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "form",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "form"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "href"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "icon"
+            },
+            {
+              "name": "icon-position",
+              "type": {
+                "text": "CadButtonIconPosition"
+              },
+              "default": "'start'",
+              "fieldName": "iconPosition"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "rel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "rel"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "CadButtonSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "target"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadButtonTone"
+              },
+              "default": "'blue'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "CadButtonType"
+              },
+              "default": "'button'",
+              "fieldName": "type"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadButtonVariant"
+              },
+              "default": "'primary'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadButton",
+          "declaration": {
+            "name": "CadButton",
+            "module": "packages/elements/src/button/cad-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-button",
+          "declaration": {
+            "name": "CadButton",
+            "module": "packages/elements/src/button/cad-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/callout/cad-callout.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A static notebook callout for supporting editorial content.\n\nUnlike `cad-alert`, this component does not create a live region.",
+          "name": "CadCallout",
+          "cssProperties": [
+            {
+              "description": "Per-instance callout color.",
+              "name": "--cad-callout-bg"
+            },
+            {
+              "description": "Per-instance foreground color.",
+              "name": "--cad-callout-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Callout container.",
+              "name": "base"
+            },
+            {
+              "description": "Callout body.",
+              "name": "content"
+            },
+            {
+              "description": "Callout icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Marker stripe.",
+              "name": "stripe"
+            },
+            {
+              "description": "Callout heading.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Callout body.",
+              "name": ""
+            },
+            {
+              "description": "Visible heading. Falls back to the `heading` attribute.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadCalloutVariant"
+              },
+              "default": "'info'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "heading"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "icon"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadCalloutVariant"
+              },
+              "default": "'info'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-callout",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadCallout",
+          "declaration": {
+            "name": "CadCallout",
+            "module": "packages/elements/src/callout/cad-callout.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-callout",
+          "declaration": {
+            "name": "CadCallout",
+            "module": "packages/elements/src/callout/cad-callout.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/card/cad-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A composable notebook card that can optionally act as a link.",
+          "name": "CadCard",
+          "cssProperties": [
+            {
+              "description": "Per-instance paper color.",
+              "name": "--cad-card-bg"
+            },
+            {
+              "description": "Per-instance foreground color.",
+              "name": "--cad-card-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Card article or anchor.",
+              "name": "base"
+            },
+            {
+              "description": "Card body.",
+              "name": "body"
+            },
+            {
+              "description": "Card footer.",
+              "name": "footer"
+            },
+            {
+              "description": "Card header.",
+              "name": "header"
+            },
+            {
+              "description": "Optional heading icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Optional eyebrow text.",
+              "name": "kicker"
+            },
+            {
+              "description": "Card heading.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Card body.",
+              "name": ""
+            },
+            {
+              "description": "Card heading. Falls back to the `heading` attribute.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting actions or metadata.",
+              "name": "footer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "folded",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "folded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "kicker",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "kicker"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadCardTone"
+              },
+              "default": "'neutral'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadCardVariant"
+              },
+              "default": "'paper'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "renderContent",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "folded"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "heading"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "href"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "icon"
+            },
+            {
+              "name": "kicker",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "kicker"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadCardTone"
+              },
+              "default": "'neutral'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadCardVariant"
+              },
+              "default": "'paper'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadCard",
+          "declaration": {
+            "name": "CadCard",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-card",
+          "declaration": {
+            "name": "CadCard",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/chart/cad-chart-item.ts",
       "declarations": [
         {
@@ -1159,6 +1863,152 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/divider/cad-divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A hand-drawn visual or semantic separator.",
+          "name": "CadDivider",
+          "cssProperties": [
+            {
+              "description": "Per-instance separator color.",
+              "name": "--cad-divider-color"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Separator line.",
+              "name": "base"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "decorative",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "decorative",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "density",
+              "privacy": "public",
+              "type": {
+                "text": "CadDividerDensity"
+              },
+              "default": "'regular'",
+              "attribute": "density",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "privacy": "public",
+              "type": {
+                "text": "CadDividerOrientation"
+              },
+              "default": "'horizontal'",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadDividerTone"
+              },
+              "default": "'muted'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadDividerVariant"
+              },
+              "default": "'dashed'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "decorative",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "decorative"
+            },
+            {
+              "name": "density",
+              "type": {
+                "text": "CadDividerDensity"
+              },
+              "default": "'regular'",
+              "fieldName": "density"
+            },
+            {
+              "name": "orientation",
+              "type": {
+                "text": "CadDividerOrientation"
+              },
+              "default": "'horizontal'",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadDividerTone"
+              },
+              "default": "'muted'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadDividerVariant"
+              },
+              "default": "'dashed'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadDivider",
+          "declaration": {
+            "name": "CadDivider",
+            "module": "packages/elements/src/divider/cad-divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-divider",
+          "declaration": {
+            "name": "CadDivider",
+            "module": "packages/elements/src/divider/cad-divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/icon/cad-icon.ts",
       "declarations": [
         {
@@ -1291,7 +2141,47 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "module": "packages/elements/src/button/cad-button.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/callout/cad-callout.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/card/cad-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/divider/cad-divider.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "module": "packages/elements/src/icon/cad-icon.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/link/cad-link.js"
           }
         },
         {
@@ -1316,6 +2206,200 @@
           "declaration": {
             "name": "*",
             "module": "packages/elements/src/tabs/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/link/cad-link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A notebook link with marker and hand-drawn underline treatments.",
+          "name": "CadLink",
+          "cssProperties": [
+            {
+              "description": "Per-instance marker color.",
+              "name": "--cad-link-mark"
+            },
+            {
+              "description": "Per-instance text color.",
+              "name": "--cad-link-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native anchor.",
+              "name": "base"
+            },
+            {
+              "description": "External-link indicator.",
+              "name": "external"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Link label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "external",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "external",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "rel"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "target"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadLinkTone"
+              },
+              "default": "'blue'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadLinkVariant"
+              },
+              "default": "'highlight'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "external",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "external"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "href"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "rel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "rel"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "target"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadLinkTone"
+              },
+              "default": "'blue'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadLinkVariant"
+              },
+              "default": "'highlight'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadLink",
+          "declaration": {
+            "name": "CadLink",
+            "module": "packages/elements/src/link/cad-link.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-link",
+          "declaration": {
+            "name": "CadLink",
+            "module": "packages/elements/src/link/cad-link.ts"
           }
         }
       ]

@@ -1,0 +1,40 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadDividerDensity,
+  CadDividerOrientation,
+  CadDividerTone,
+  CadDividerVariant,
+} from '@caderno-ui/elements/divider'
+
+type Props = {
+  class?: string
+  decorative?: boolean
+  density?: CadDividerDensity
+  orientation?: CadDividerOrientation
+  tone?: CadDividerTone
+  variant?: CadDividerVariant
+}
+
+const {
+  class: className,
+  decorative = true,
+  density = 'regular',
+  orientation = 'horizontal',
+  tone = 'muted',
+  variant = 'dashed',
+} = Astro.props
+---
+
+<cad-divider
+  class={className}
+  decorative={decorative || undefined}
+  density={density}
+  orientation={orientation}
+  tone={tone}
+  variant={variant}></cad-divider>
+
+<script>
+  import '@caderno-ui/elements/divider'
+</script>

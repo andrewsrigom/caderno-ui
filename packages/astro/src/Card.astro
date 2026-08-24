@@ -1,0 +1,46 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadCardTone, CadCardVariant } from '@caderno-ui/elements/card'
+
+type Props = {
+  class?: string
+  folded?: boolean
+  heading?: string
+  href?: string
+  icon?: string
+  kicker?: string
+  tone?: CadCardTone
+  variant?: CadCardVariant
+}
+
+const {
+  class: className,
+  folded = true,
+  heading,
+  href,
+  icon,
+  kicker,
+  tone = 'neutral',
+  variant = 'paper',
+} = Astro.props
+---
+
+<cad-card
+  class={className}
+  folded={folded || undefined}
+  heading={heading}
+  href={href}
+  icon={icon}
+  kicker={kicker}
+  tone={tone}
+  variant={variant}
+>
+  <slot name="title" slot="title" />
+  <slot />
+  <slot name="footer" slot="footer" />
+</cad-card>
+
+<script>
+  import '@caderno-ui/elements/card'
+</script>

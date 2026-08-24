@@ -1,0 +1,23 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadCalloutVariant } from '@caderno-ui/elements/callout'
+
+type Props = {
+  class?: string
+  heading?: string
+  icon?: string
+  variant?: CadCalloutVariant
+}
+
+const { class: className, heading, icon, variant = 'info' } = Astro.props
+---
+
+<cad-callout class={className} heading={heading} icon={icon} variant={variant}>
+  <slot name="title" slot="title" />
+  <slot />
+</cad-callout>
+
+<script>
+  import '@caderno-ui/elements/callout'
+</script>

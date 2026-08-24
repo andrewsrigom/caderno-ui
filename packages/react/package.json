@@ -44,13 +44,33 @@
       "types": "./dist/bookmark.d.ts",
       "import": "./dist/bookmark.js"
     },
+    "./button": {
+      "types": "./dist/button.d.ts",
+      "import": "./dist/button.js"
+    },
+    "./callout": {
+      "types": "./dist/callout.d.ts",
+      "import": "./dist/callout.js"
+    },
+    "./card": {
+      "types": "./dist/card.d.ts",
+      "import": "./dist/card.js"
+    },
     "./chart": {
       "types": "./dist/chart.d.ts",
       "import": "./dist/chart.js"
     },
+    "./divider": {
+      "types": "./dist/divider.d.ts",
+      "import": "./dist/divider.js"
+    },
     "./icon": {
       "types": "./dist/icon.d.ts",
       "import": "./dist/icon.js"
+    },
+    "./link": {
+      "types": "./dist/link.d.ts",
+      "import": "./dist/link.js"
     },
     "./note": {
       "types": "./dist/note.d.ts",

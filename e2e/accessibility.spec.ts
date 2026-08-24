@@ -6,10 +6,14 @@ test.beforeEach(async ({ page }) => {
 })
 
 for (const component of [
+  'actions',
   'alerts',
   'badges-and-notes',
   'bookmark',
+  'cards-and-callouts',
   'charts',
+  'dividers',
+  'icons',
   'progress',
   'tabs',
 ]) {
@@ -72,7 +76,10 @@ test('all interactive component controls are reachable by keyboard', async ({
   await page.keyboard.press('Tab')
   await expect(page.getByRole('button', { name: 'Toggle theme' })).toBeFocused()
 
-  for (let index = 0; index < 3; index += 1) await page.keyboard.press('Tab')
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('button', { name: 'Save review' })).toBeFocused()
+
+  for (let index = 0; index < 10; index += 1) await page.keyboard.press('Tab')
   await expect(
     page.getByRole('button', { name: 'Save laboratory' }),
   ).toBeFocused()

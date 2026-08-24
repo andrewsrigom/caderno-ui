@@ -52,6 +52,51 @@
       "docsPage": "bookmark.astro"
     },
     {
+      "name": "button",
+      "elements": [
+        {
+          "className": "CadButton",
+          "tagName": "cad-button",
+          "events": []
+        }
+      ],
+      "typeExports": [
+        "CadButtonIconPosition",
+        "CadButtonSize",
+        "CadButtonTone",
+        "CadButtonType",
+        "CadButtonVariant"
+      ],
+      "astroFacades": ["Button.astro"],
+      "docsPage": "button.astro"
+    },
+    {
+      "name": "callout",
+      "elements": [
+        {
+          "className": "CadCallout",
+          "tagName": "cad-callout",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadCalloutVariant"],
+      "astroFacades": ["Callout.astro"],
+      "docsPage": "callout.astro"
+    },
+    {
+      "name": "card",
+      "elements": [
+        {
+          "className": "CadCard",
+          "tagName": "cad-card",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadCardTone", "CadCardVariant"],
+      "astroFacades": ["Card.astro"],
+      "docsPage": "card.astro"
+    },
+    {
       "name": "chart",
       "rootExport": false,
       "elements": [
@@ -71,6 +116,24 @@
       "docsPage": "chart.astro"
     },
     {
+      "name": "divider",
+      "elements": [
+        {
+          "className": "CadDivider",
+          "tagName": "cad-divider",
+          "events": []
+        }
+      ],
+      "typeExports": [
+        "CadDividerDensity",
+        "CadDividerOrientation",
+        "CadDividerTone",
+        "CadDividerVariant"
+      ],
+      "astroFacades": ["Divider.astro"],
+      "docsPage": "divider.astro"
+    },
+    {
       "name": "icon",
       "elements": [
         {
@@ -82,6 +145,19 @@
       "typeExports": [],
       "astroFacades": ["Icon.astro"],
       "docsPage": "icon.astro"
+    },
+    {
+      "name": "link",
+      "elements": [
+        {
+          "className": "CadLink",
+          "tagName": "cad-link",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadLinkTone", "CadLinkVariant"],
+      "astroFacades": ["Link.astro"],
+      "docsPage": "link.astro"
     },
     {
       "name": "note",

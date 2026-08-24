@@ -1,0 +1,65 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-callout heading="Keep the contract small" variant="tip">
+  Add a property only when composition and native semantics cannot express the requirement.
+</cad-callout>
+
+<script type="module">
+  import '@caderno-ui/elements/callout'
+</script>`
+---
+
+<DocsLayout
+  description="CadCallout presents static supporting guidance without announcing it as a live alert."
+  title="Callout"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-callout&gt;</p>
+    <h1>Annotate the page without interrupting the reader.</h1>
+    <p>
+      Callout is editorial content already present in the document. Use Alert
+      when status changes dynamically; use Callout for notes, tips, warnings,
+      and cautions that belong to the page.
+    </p>
+  </header>
+
+  <DemoFrame title="Editorial variants">
+    <div class="callout-grid">
+      <cad-callout variant="info"
+        >Explain the surrounding concept with supporting context.</cad-callout
+      >
+      <cad-callout variant="tip"
+        >Prefer composition over a component-specific data format.</cad-callout
+      >
+      <cad-callout variant="success"
+        >The implementation and public contract agree.</cad-callout
+      >
+      <cad-callout variant="warning"
+        >Check keyboard behavior before publishing.</cad-callout
+      >
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-callout" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Callout deliberately has no live-region role. Its heading and body remain
+      ordinary document content, and every variant communicates its meaning in
+      text rather than color alone.
+    </p>
+  </section>
+
+  <style>
+    .callout-grid {
+      display: grid;
+      gap: 0.85rem;
+    }
+  </style>
+</DocsLayout>

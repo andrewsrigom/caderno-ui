@@ -1,11 +1,61 @@
 cad-alert:not(:defined),
 cad-badge:not(:defined),
+cad-button:not(:defined),
+cad-callout:not(:defined),
+cad-card:not(:defined),
 cad-chart:not(:defined),
+cad-divider:not(:defined),
+cad-link:not(:defined),
 cad-note:not(:defined),
 cad-progress:not(:defined),
 cad-tab:not(:defined),
 cad-tabs:not(:defined) {
   box-sizing: border-box;
+}
+
+cad-button:not(:defined) {
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  color: var(--cad-button-ink, var(--cad-ink, currentColor));
+  background: var(--cad-button-bg, var(--cad-post-it-blue-bg, transparent));
+  border: 1px solid currentColor;
+  border-radius: 0.75rem;
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
+}
+
+cad-link:not(:defined) {
+  color: var(--cad-link, currentColor);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 0.2em;
+}
+
+cad-card:not(:defined),
+cad-callout:not(:defined) {
+  display: block;
+  padding: 1.15rem 1.25rem;
+  color: var(--cad-ink, currentColor);
+  background: var(--cad-surface, transparent);
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.8rem;
+}
+
+cad-card:not(:defined)::before,
+cad-callout:not(:defined)::before {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--cad-font-hand, inherit);
+  font-size: var(--cad-hand-lg, 1.4rem);
+  font-weight: 700;
+  content: attr(heading);
+}
+
+cad-divider:not(:defined) {
+  display: block;
+  width: 100%;
+  min-height: 1px;
+  border-top: 1px dashed var(--cad-line-strong, currentColor);
 }
 
 cad-badge:not(:defined) {

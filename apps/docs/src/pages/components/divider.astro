@@ -1,0 +1,55 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-divider variant="wavy"></cad-divider>
+<cad-divider decorative="false" density="loose" tone="strong"></cad-divider>
+
+<script type="module">
+  import '@caderno-ui/elements/divider'
+</script>`
+---
+
+<DocsLayout
+  description="CadDivider separates content visually or semantically with dashed, dotted, and wavy lines."
+  title="Divider"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-divider&gt;</p>
+    <h1>Separate sections with one quiet pencil line.</h1>
+    <p>
+      Divider is decorative by default. Opt into separator semantics only when
+      the line communicates structure that headings and spacing do not already
+      express.
+    </p>
+  </header>
+
+  <DemoFrame title="Line treatments">
+    <div class="divider-stack">
+      <cad-divider density="dense"></cad-divider>
+      <cad-divider tone="accent" variant="dotted"></cad-divider>
+      <cad-divider density="loose" tone="strong" variant="wavy"></cad-divider>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-divider" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Keep <code>decorative</code> for visual rhythm. Set it to false only when assistive
+      technology also needs the separator; orientation is then exposed through ARIA.
+    </p>
+  </section>
+
+  <style>
+    .divider-stack {
+      display: grid;
+      gap: 2rem;
+      padding-block: 1rem;
+    }
+  </style>
+</DocsLayout>

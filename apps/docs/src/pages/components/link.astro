@@ -1,0 +1,63 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-link href="/architecture" tone="lemon">Read the architecture</cad-link>
+<cad-link external href="https://example.com" variant="underline">External reference</cad-link>
+
+<script type="module">
+  import '@caderno-ui/elements/link'
+</script>`
+---
+
+<DocsLayout
+  description="CadLink renders a native anchor with marker, underline, or plain treatments."
+  title="Link"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-link&gt;</p>
+    <h1>Mark the reference, not the whole paragraph.</h1>
+    <p>
+      Link preserves native anchor behavior and adds notebook emphasis without
+      making navigation look like an action button.
+    </p>
+  </header>
+
+  <DemoFrame title="Treatments">
+    <p class="link-demo">
+      <cad-link href="/architecture" tone="lemon"
+        >Read the architecture</cad-link
+      >,
+      <cad-link href="/components" tone="mint" variant="underline"
+        >compare components</cad-link
+      >, or <cad-link
+        external
+        href="https://example.com"
+        tone="violet"
+        variant="plain">open a reference</cad-link
+      >.
+    </p>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-link" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      External links receive safe target and relationship defaults plus a
+      visible indicator. Link text should describe the destination without
+      relying on color or decoration.
+    </p>
+  </section>
+
+  <style>
+    .link-demo {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 2;
+    }
+  </style>
+</DocsLayout>

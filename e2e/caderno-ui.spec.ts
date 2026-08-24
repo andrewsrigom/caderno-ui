@@ -23,9 +23,14 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-alert',
       'cad-badge',
       'cad-bookmark',
+      'cad-button',
+      'cad-callout',
+      'cad-card',
       'cad-chart',
       'cad-chart-item',
+      'cad-divider',
       'cad-icon',
+      'cad-link',
       'cad-note',
       'cad-progress',
       'cad-tab',
@@ -35,6 +40,26 @@ test('loads and registers the public custom elements without browser errors', as
 
   expect(definitions).toBe(true)
   expect(errors).toEqual([])
+})
+
+test('renders the extracted SeniorPath primitives with native semantics', async ({
+  page,
+}) => {
+  await expect(
+    page.locator('cad-button').first().getByRole('button'),
+  ).toHaveAccessibleName('Save review')
+  await expect(
+    page.locator('cad-link').first().getByRole('link'),
+  ).toHaveAttribute('href', '#charts')
+  await expect(
+    page.locator('cad-card[href="#charts"]').getByRole('link'),
+  ).toBeVisible()
+  await expect(
+    page.locator('cad-callout').first().getByRole('complementary'),
+  ).toBeVisible()
+  await expect(
+    page.locator('cad-divider').first().locator('[part="base"]'),
+  ).toHaveAttribute('role', 'none')
 })
 
 test('supports accessible tab keyboard navigation and composed events', async ({
@@ -111,5 +136,7 @@ test.describe('without JavaScript', () => {
     ).toBeVisible()
     await expect(page.getByText('Reading plan: 63%')).toBeVisible()
     await expect(page.getByText('Thu: 9')).toBeVisible()
+    await expect(page.getByText('Save review')).toBeVisible()
+    await expect(page.getByText('Static guidance')).toBeVisible()
   })
 })

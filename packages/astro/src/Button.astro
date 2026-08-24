@@ -1,0 +1,65 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadButtonIconPosition,
+  CadButtonSize,
+  CadButtonTone,
+  CadButtonType,
+  CadButtonVariant,
+} from '@caderno-ui/elements/button'
+
+type Props = {
+  class?: string
+  disabled?: boolean
+  form?: string
+  href?: string
+  icon?: string
+  iconPosition?: CadButtonIconPosition
+  label?: string
+  rel?: string
+  size?: CadButtonSize
+  target?: string
+  tone?: CadButtonTone
+  type?: CadButtonType
+  variant?: CadButtonVariant
+}
+
+const {
+  class: className,
+  disabled = false,
+  form,
+  href,
+  icon,
+  iconPosition = 'start',
+  label,
+  rel,
+  size = 'md',
+  target,
+  tone = 'blue',
+  type = 'button',
+  variant = 'primary',
+} = Astro.props
+---
+
+<cad-button
+  class={className}
+  disabled={disabled || undefined}
+  form={form}
+  href={href}
+  icon={icon}
+  icon-position={iconPosition}
+  label={label}
+  rel={rel}
+  size={size}
+  target={target}
+  tone={tone}
+  type={type}
+  variant={variant}
+>
+  <slot />
+</cad-button>
+
+<script>
+  import '@caderno-ui/elements/button'
+</script>

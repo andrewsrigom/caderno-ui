@@ -289,6 +289,92 @@
         "CadAccordionToggleEvent",
         "CadAccordionTone"
       ]
+    },
+    {
+      "astroFacades": ["Spinner.astro"],
+      "docsPage": "spinner.astro",
+      "elements": [
+        {
+          "className": "CadSpinner",
+          "events": [],
+          "tagName": "cad-spinner"
+        }
+      ],
+      "name": "spinner",
+      "typeExports": ["CadSpinnerSize", "CadSpinnerTone"]
+    },
+    {
+      "astroFacades": ["Tooltip.astro"],
+      "docsPage": "tooltip.astro",
+      "elements": [
+        {
+          "className": "CadTooltip",
+          "events": [],
+          "tagName": "cad-tooltip"
+        }
+      ],
+      "name": "tooltip",
+      "typeExports": ["CadTooltipPosition"]
+    },
+    {
+      "astroFacades": ["Modal.astro"],
+      "docsPage": "modal.astro",
+      "elements": [
+        {
+          "className": "CadModal",
+          "events": [
+            {
+              "eventName": "cad-modal-close",
+              "propName": "onModalClose",
+              "typeName": "CadModalCloseEvent"
+            },
+            {
+              "eventName": "cad-modal-open",
+              "propName": "onModalOpen",
+              "typeName": "CadModalOpenEvent"
+            }
+          ],
+          "tagName": "cad-modal"
+        }
+      ],
+      "name": "modal",
+      "typeExports": [
+        "CadModalCloseDetail",
+        "CadModalCloseEvent",
+        "CadModalOpenEvent",
+        "CadModalSize"
+      ]
+    },
+    {
+      "astroFacades": ["Toast.astro", "ToastHost.astro"],
+      "docsPage": "toast.astro",
+      "elements": [
+        {
+          "className": "CadToast",
+          "events": [
+            {
+              "eventName": "cad-toast-dismiss",
+              "propName": "onToastDismiss",
+              "typeName": "CadToastDismissEvent"
+            }
+          ],
+          "tagName": "cad-toast"
+        },
+        {
+          "className": "CadToastHost",
+          "events": [],
+          "tagName": "cad-toast-host"
+        }
+      ],
+      "name": "toast",
+      "typeExports": [
+        "CadToastDismissDetail",
+        "CadToastDismissEvent",
+        "CadToastDismissReason",
+        "CadToastOptions",
+        "CadToastPlacement",
+        "CadToastVariant"
+      ]
     }
   ]
 }

@@ -1,0 +1,51 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-modal heading="Review contract" size="md">
+  <button slot="trigger" type="button">Open review</button>
+  <p>Confirm the public API before publishing.</p>
+  <button slot="footer" type="button">Continue</button>
+</cad-modal>
+
+<script type="module">
+  import '@caderno-ui/elements/modal'
+</script>`
+---
+
+<DocsLayout
+  description="CadModal wraps native dialog behavior with notebook styling and composed lifecycle events."
+  title="Modal"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-modal&gt;</p>
+    <h1>Use the platform dialog, then restore the reader’s place.</h1>
+    <p>
+      Modal delegates focus trapping and Escape to <code>&lt;dialog&gt;</code>,
+      supports backdrop dismissal, and returns focus to the opener.
+    </p>
+  </header>
+
+  <DemoFrame title="Native modal">
+    <cad-modal heading="Review contract">
+      <cad-button slot="trigger" variant="primary">Open review</cad-button>
+      <p>
+        Confirm the public attributes, slots, parts, and events before release.
+      </p>
+      <cad-button slot="footer" variant="secondary">Continue</cad-button>
+    </cad-modal>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-modal" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Always provide <code>heading</code> or a title slot. The close button is named,
+      Escape remains native, and <code>cad-modal-close</code> crosses the shadow boundary
+      with the dialog return value.
+    </p>
+  </section>
+</DocsLayout>

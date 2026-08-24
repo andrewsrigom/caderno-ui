@@ -9,7 +9,7 @@ consistent and are not theme roles by themselves.
 
 | Layer     | Pattern                                                                                | Purpose                                             |
 | --------- | -------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| Primitive | `--cad-color-*`, `--cad-space-*`, `--cad-radius-*`, `--cad-duration-*`, `--cad-ease-*` | Raw scales and palette values                       |
+| Primitive | `--cad-color-*`, `--cad-space-*`, `--cad-radius-*`, `--cad-duration-*`, `--cad-ease-*` | Raw scales, timing, and palette values              |
 | Semantic  | `--cad-bg`, `--cad-ink`, `--cad-surface-raised`, `--cad-post-it-*-bg`                  | Theme roles consumed by components and applications |
 | Component | `--cad-alert-bg`, `--cad-tabs-panel-bg`                                                | Optional, documented overrides for one component    |
 | Private   | `--_*` inside a shadow root                                                            | Implementation detail; never a consumer contract    |

@@ -1,0 +1,68 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-tooltip position="top" text="Opens the API contract">
+  <button type="button">Inspect</button>
+</cad-tooltip>
+
+<script type="module">
+  import '@caderno-ui/elements/tooltip'
+</script>`
+---
+
+<DocsLayout
+  description="CadTooltip provides short hover and focus descriptions with Escape dismissal."
+  title="Tooltip"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-tooltip&gt;</p>
+    <h1>Add a hint without inventing another focus stop.</h1>
+    <p>
+      Tooltip connects its bubble to the slotted trigger through
+      <code>aria-describedby</code> and follows hover, focus, blur, and Escape.
+    </p>
+  </header>
+
+  <DemoFrame title="Focus or hover">
+    <div class="tooltip-row">
+      <cad-tooltip position="top" text="Review the public contract">
+        <button type="button">Inspect contract</button>
+      </cad-tooltip>
+      <cad-tooltip position="right" text="Keeps the current draft">
+        <button type="button">Save note</button>
+      </cad-tooltip>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-tooltip" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Slot one naturally focusable trigger. Keep tooltip content short and
+      non-interactive; use a modal or disclosure for actions and longer help.
+    </p>
+  </section>
+
+  <style>
+    .tooltip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-block: 3rem;
+    }
+
+    button {
+      min-height: 2.75rem;
+      padding: 0.55rem 0.9rem;
+      color: var(--cad-ink);
+      background: var(--cad-surface);
+      border: 1px dashed var(--cad-line-strong);
+      border-radius: var(--cad-radius-sm);
+      font: inherit;
+    }
+  </style>
+</DocsLayout>

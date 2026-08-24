@@ -10,12 +10,17 @@ cad-checkbox:not(:defined),
 cad-divider:not(:defined),
 cad-input:not(:defined),
 cad-link:not(:defined),
+cad-modal:not(:defined),
 cad-note:not(:defined),
 cad-progress:not(:defined),
 cad-radio:not(:defined),
+cad-spinner:not(:defined),
 cad-tab:not(:defined),
 cad-tabs:not(:defined),
-cad-textarea:not(:defined) {
+cad-textarea:not(:defined),
+cad-toast:not(:defined),
+cad-toast-host:not(:defined),
+cad-tooltip:not(:defined) {
   box-sizing: border-box;
 }
 
@@ -229,4 +234,58 @@ cad-tab:not(:defined) {
 
 cad-tab:not(:defined) + cad-tab:not(:defined) {
   border-top: 1px dashed var(--cad-line-strong, currentColor);
+}
+
+cad-spinner:not(:defined) {
+  display: inline-flex;
+  font-family: var(--cad-font-hand, inherit);
+}
+
+cad-tooltip:not(:defined) {
+  display: inline-flex;
+}
+
+cad-tooltip:not(:defined) > [slot='content'] {
+  display: none;
+}
+
+cad-modal:not(:defined) {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.75rem;
+}
+
+cad-modal:not(:defined)::before {
+  font-family: var(--cad-font-hand, inherit);
+  font-size: var(--cad-hand-lg, 1.4rem);
+  font-weight: 700;
+  content: attr(heading);
+}
+
+cad-modal:not(:defined) > [slot='trigger'] {
+  order: -1;
+}
+
+cad-toast:not(:defined) {
+  display: grid;
+  gap: 0.35rem;
+  width: min(22rem, calc(100vw - 2rem));
+  padding: 1rem;
+  background: var(--cad-post-it-blue-bg, var(--cad-surface, transparent));
+  border: 1px solid var(--cad-line-strong, currentColor);
+  border-radius: 0.65rem;
+}
+
+cad-toast:not(:defined)::before {
+  font-family: var(--cad-font-hand, inherit);
+  font-size: var(--cad-hand-md, 1.2rem);
+  font-weight: 700;
+  content: attr(heading);
+}
+
+cad-toast-host:not(:defined) {
+  display: grid;
+  gap: 0.75rem;
 }

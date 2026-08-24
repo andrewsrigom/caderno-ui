@@ -106,6 +106,22 @@
     "./accordion": {
       "types": "./dist/accordion/cad-accordion.d.ts",
       "import": "./dist/accordion/cad-accordion.js"
+    },
+    "./spinner": {
+      "types": "./dist/spinner/cad-spinner.d.ts",
+      "import": "./dist/spinner/cad-spinner.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/cad-tooltip.d.ts",
+      "import": "./dist/tooltip/cad-tooltip.js"
+    },
+    "./modal": {
+      "types": "./dist/modal/cad-modal.d.ts",
+      "import": "./dist/modal/cad-modal.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/cad-toast.d.ts",
+      "import": "./dist/toast/cad-toast.js"
     }
   },
   "sideEffects": [

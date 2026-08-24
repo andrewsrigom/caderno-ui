@@ -3090,6 +3090,38 @@
             "name": "*",
             "module": "packages/elements/src/accordion/cad-accordion.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/spinner/cad-spinner.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/tooltip/cad-tooltip.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/modal/cad-modal.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/toast/cad-toast.js"
+          }
         }
       ]
     },
@@ -3994,6 +4026,337 @@
           "declaration": {
             "name": "CadLink",
             "module": "packages/elements/src/link/cad-link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/modal/cad-modal.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A native modal dialog with focus management, Escape handling, and restoration.",
+          "name": "CadModal",
+          "cssParts": [
+            {
+              "description": "Native dialog element.",
+              "name": "base"
+            },
+            {
+              "description": "Scrollable dialog body.",
+              "name": "body"
+            },
+            {
+              "description": "Native close button.",
+              "name": "close-button"
+            },
+            {
+              "description": "Dialog action area.",
+              "name": "footer"
+            },
+            {
+              "description": "Dialog heading area.",
+              "name": "header"
+            },
+            {
+              "description": "Notebook paper surface.",
+              "name": "paper"
+            },
+            {
+              "description": "Decorative tape strip.",
+              "name": "tape"
+            },
+            {
+              "description": "Dialog heading.",
+              "name": "title"
+            },
+            {
+              "description": "Trigger slot container.",
+              "name": "trigger"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Dialog body.",
+              "name": ""
+            },
+            {
+              "description": "Element that opens the modal when activated.",
+              "name": "trigger"
+            },
+            {
+              "description": "Dialog heading. Falls back to the `heading` attribute.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting actions.",
+              "name": "footer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "closeLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Close dialog'",
+              "attribute": "close-label"
+            },
+            {
+              "kind": "field",
+              "name": "closeOnBackdrop",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "close-on-backdrop",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "privacy": "public",
+              "type": {
+                "text": "CadModalSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasFooter",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "returnFocus",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "triggerBound",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "dialog",
+              "type": {
+                "text": "HTMLDialogElement | null"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "showModal",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "returnValue",
+                  "default": "''"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleCloseClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "handleTriggerClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleBackdropClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleFooterChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleNativeClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "cad-modal-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired after the native modal opens."
+            },
+            {
+              "name": "cad-modal-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired after the native dialog closes."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "close-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Close dialog'",
+              "fieldName": "closeLabel"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "heading"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "CadModalSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "close-on-backdrop",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "closeOnBackdrop"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-modal",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadModal",
+          "declaration": {
+            "name": "CadModal",
+            "module": "packages/elements/src/modal/cad-modal.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-modal",
+          "declaration": {
+            "name": "CadModal",
+            "module": "packages/elements/src/modal/cad-modal.ts"
           }
         }
       ]
@@ -4931,6 +5294,127 @@
           "declaration": {
             "name": "CadRadio",
             "module": "packages/elements/src/radio/cad-radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/spinner/cad-spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A compact, named progress indicator for indeterminate work.",
+          "name": "CadSpinner",
+          "cssProperties": [
+            {
+              "description": "Per-instance spinner color.",
+              "name": "--cad-spinner-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Status container.",
+              "name": "base"
+            },
+            {
+              "description": "Rotating notebook icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Visually hidden status text.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Accessible status text shown before the element upgrades.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "privacy": "public",
+              "type": {
+                "text": "CadSpinnerSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadSpinnerTone"
+              },
+              "default": "'blue'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "CadSpinnerSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadSpinnerTone"
+              },
+              "default": "'blue'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadSpinner",
+          "declaration": {
+            "name": "CadSpinner",
+            "module": "packages/elements/src/spinner/cad-spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-spinner",
+          "declaration": {
+            "name": "CadSpinner",
+            "module": "packages/elements/src/spinner/cad-spinner.ts"
           }
         }
       ]
@@ -6051,6 +6535,649 @@
           "declaration": {
             "name": "CadTextarea",
             "module": "packages/elements/src/textarea/cad-textarea.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/toast/cad-toast-host.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A fixed notification region that creates and stacks `cad-toast` messages.",
+          "name": "CadToastHost",
+          "cssProperties": [
+            {
+              "description": "Notification region stacking level.",
+              "name": "--cad-toast-host-z-index"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Live notification region.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Declarative `cad-toast` notifications.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Notifications'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "privacy": "public",
+              "type": {
+                "text": "CadToastPlacement"
+              },
+              "default": "'top-right'",
+              "attribute": "placement",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "return": {
+                "type": {
+                  "text": "CadToast"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "CadToastOptions"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Notifications'",
+              "fieldName": "label"
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "CadToastPlacement"
+              },
+              "default": "'top-right'",
+              "fieldName": "placement"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-toast-host",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadToastHost",
+          "declaration": {
+            "name": "CadToastHost",
+            "module": "packages/elements/src/toast/cad-toast-host.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-toast-host",
+          "declaration": {
+            "name": "CadToastHost",
+            "module": "packages/elements/src/toast/cad-toast-host.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/toast/cad-toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A dismissible notebook notification with optional automatic timeout.",
+          "name": "CadToast",
+          "cssProperties": [
+            {
+              "description": "Per-instance toast background.",
+              "name": "--cad-toast-bg"
+            },
+            {
+              "description": "Per-instance toast foreground.",
+              "name": "--cad-toast-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Notification article.",
+              "name": "base"
+            },
+            {
+              "description": "Notification text container.",
+              "name": "body"
+            },
+            {
+              "description": "Dismiss button.",
+              "name": "close-button"
+            },
+            {
+              "description": "Notification body.",
+              "name": "content"
+            },
+            {
+              "description": "Status icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Decorative tape strip.",
+              "name": "tape"
+            },
+            {
+              "description": "Notification heading.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Notification body.",
+              "name": ""
+            },
+            {
+              "description": "Notification heading. Falls back to the `heading` attribute.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "dismissible",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "dismissible",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dismissLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Dismiss notification'",
+              "attribute": "dismiss-label"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "duration",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadToastVariant"
+              },
+              "default": "'info'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "timeout",
+              "type": {
+                "text": "number | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "dismiss",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "reason",
+                  "default": "'manual'",
+                  "type": {
+                    "text": "CadToastDismissReason"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDismiss",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clearTimer",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "scheduleDismissal",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "cad-toast-dismiss",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired after manual or timed dismissal."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "dismissible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "dismissible"
+            },
+            {
+              "name": "dismiss-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Dismiss notification'",
+              "fieldName": "dismissLabel"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "duration"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "heading"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "fieldName": "open"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadToastVariant"
+              },
+              "default": "'info'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-toast",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadToastHost",
+          "declaration": {
+            "name": "CadToastHost",
+            "module": "./cad-toast-host.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadToastOptions",
+          "declaration": {
+            "name": "CadToastOptions",
+            "module": "./cad-toast-host.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadToastPlacement",
+          "declaration": {
+            "name": "CadToastPlacement",
+            "module": "./cad-toast-host.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadToast",
+          "declaration": {
+            "name": "CadToast",
+            "module": "packages/elements/src/toast/cad-toast.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-toast",
+          "declaration": {
+            "name": "CadToast",
+            "module": "packages/elements/src/toast/cad-toast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/tooltip/cad-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A short, non-interactive description revealed on hover or keyboard focus.",
+          "name": "CadTooltip",
+          "cssProperties": [
+            {
+              "description": "Per-instance tooltip background.",
+              "name": "--cad-tooltip-bg"
+            },
+            {
+              "description": "Per-instance tooltip foreground.",
+              "name": "--cad-tooltip-ink"
+            },
+            {
+              "description": "Per-instance tooltip stacking level.",
+              "name": "--cad-tooltip-z-index"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Tooltip positioning container.",
+              "name": "base"
+            },
+            {
+              "description": "Tooltip surface.",
+              "name": "bubble"
+            },
+            {
+              "description": "Trigger slot container.",
+              "name": "trigger"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Tooltip trigger. Use one naturally focusable element.",
+              "name": ""
+            },
+            {
+              "description": "Rich tooltip text. Falls back to the `text` attribute.",
+              "name": "content"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "privacy": "public",
+              "type": {
+                "text": "CadTooltipPosition"
+              },
+              "default": "'top'",
+              "attribute": "position",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "text",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "text"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipId",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "`cad-tooltip-${tooltipSequence}`"
+            },
+            {
+              "kind": "field",
+              "name": "describedElement",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleFocusOut",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "FocusEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handlePointerLeave",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "syncDescription",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "removeDescription",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "position",
+              "type": {
+                "text": "CadTooltipPosition"
+              },
+              "default": "'top'",
+              "fieldName": "position"
+            },
+            {
+              "name": "text",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "text"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadTooltip",
+          "declaration": {
+            "name": "CadTooltip",
+            "module": "packages/elements/src/tooltip/cad-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-tooltip",
+          "declaration": {
+            "name": "CadTooltip",
+            "module": "packages/elements/src/tooltip/cad-tooltip.ts"
           }
         }
       ]

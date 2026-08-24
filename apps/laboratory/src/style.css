@@ -115,6 +115,36 @@ section {
   max-width: 46rem;
 }
 
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+.feedback-sample {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  min-width: 0;
+  padding: 1rem;
+  background: var(--cad-surface);
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: var(--cad-radius-md);
+}
+
+.feedback-sample h3 {
+  margin: 0;
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-lg);
+}
+
+.toast-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
 .form-demo,
 .form-grid,
 .choice-grid,

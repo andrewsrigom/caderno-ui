@@ -1,0 +1,59 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-spinner label="Indexing notes" size="md" tone="blue">
+  Indexing notes
+</cad-spinner>
+
+<script type="module">
+  import '@caderno-ui/elements/spinner'
+</script>`
+---
+
+<DocsLayout
+  description="CadSpinner is a named indeterminate status with reduced-motion support."
+  title="Spinner"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-spinner&gt;</p>
+    <h1>Show indeterminate work without losing its name.</h1>
+    <p>
+      Spinner exposes a polite status, scales without layout assumptions, and
+      stops rotating when the user prefers reduced motion.
+    </p>
+  </header>
+
+  <DemoFrame title="Sizes and tones">
+    <div class="spinner-row">
+      <cad-spinner label="Small sync" size="sm" tone="mint"
+        >Small sync</cad-spinner
+      >
+      <cad-spinner label="Indexing notes" size="md">Indexing notes</cad-spinner>
+      <cad-spinner label="Publishing release" size="lg" tone="violet">
+        Publishing release
+      </cad-spinner>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-spinner" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Provide a concise <code>label</code>. The same text can remain in the
+      default slot as a meaningful pre-upgrade fallback.
+    </p>
+  </section>
+
+  <style>
+    .spinner-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+  </style>
+</DocsLayout>

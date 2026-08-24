@@ -1,0 +1,25 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadToastPlacement } from '@caderno-ui/elements/toast'
+
+type Props = {
+  class?: string
+  label?: string
+  placement?: CadToastPlacement
+}
+
+const {
+  class: className,
+  label = 'Notifications',
+  placement = 'top-right',
+}: Props = Astro.props
+---
+
+<cad-toast-host class={className} label={label} placement={placement}>
+  <slot />
+</cad-toast-host>
+
+<script>
+  import '@caderno-ui/elements/toast'
+</script>

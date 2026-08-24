@@ -1,0 +1,47 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadModalSize } from '@caderno-ui/elements/modal'
+
+type Props = {
+  class?: string
+  closeLabel?: string
+  closeOnBackdrop?: boolean
+  heading: string
+  open?: boolean
+  size?: CadModalSize
+}
+
+const {
+  class: className,
+  closeLabel = 'Close dialog',
+  closeOnBackdrop = true,
+  heading,
+  open = false,
+  size = 'md',
+}: Props = Astro.props
+const hasFooter = Astro.slots.has('footer')
+---
+
+<cad-modal
+  class={className}
+  close-label={closeLabel}
+  close-on-backdrop={closeOnBackdrop || undefined}
+  heading={heading}
+  open={open || undefined}
+  size={size}
+>
+  <span slot="trigger"><slot name="trigger" /></span>
+  <slot />
+  {
+    hasFooter ? (
+      <span slot="footer">
+        <slot name="footer" />
+      </span>
+    ) : null
+  }
+</cad-modal>
+
+<script>
+  import '@caderno-ui/elements/modal'
+</script>

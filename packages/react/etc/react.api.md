@@ -46,12 +46,20 @@ import { CadInputType } from '@caderno-ui/elements/input';
 import { CadLink as CadLink_2 } from '@caderno-ui/elements/link';
 import { CadLinkTone } from '@caderno-ui/elements/link';
 import { CadLinkVariant } from '@caderno-ui/elements/link';
+import { CadModal as CadModal_2 } from '@caderno-ui/elements/modal';
+import { CadModalCloseDetail } from '@caderno-ui/elements/modal';
+import { CadModalCloseEvent } from '@caderno-ui/elements/modal';
+import { CadModalOpenEvent } from '@caderno-ui/elements/modal';
+import { CadModalSize } from '@caderno-ui/elements/modal';
 import { CadNote as CadNote_2 } from '@caderno-ui/elements/note';
 import { CadNoteTone } from '@caderno-ui/elements/note';
 import { CadProgress as CadProgress_2 } from '@caderno-ui/elements/progress';
 import { CadProgressTone } from '@caderno-ui/elements/progress';
 import { CadRadio as CadRadio_2 } from '@caderno-ui/elements/radio';
 import { CadRadioTone } from '@caderno-ui/elements/radio';
+import { CadSpinner as CadSpinner_2 } from '@caderno-ui/elements/spinner';
+import { CadSpinnerSize } from '@caderno-ui/elements/spinner';
+import { CadSpinnerTone } from '@caderno-ui/elements/spinner';
 import { CadTab as CadTab_2 } from '@caderno-ui/elements/tabs';
 import { CadTabChangeDetail } from '@caderno-ui/elements/tabs';
 import { CadTabChangeEvent } from '@caderno-ui/elements/tabs';
@@ -60,6 +68,16 @@ import { CadTabTone } from '@caderno-ui/elements/tabs';
 import { CadTextarea as CadTextarea_2 } from '@caderno-ui/elements/textarea';
 import { CadTextareaResize } from '@caderno-ui/elements/textarea';
 import { CadTextareaTone } from '@caderno-ui/elements/textarea';
+import { CadToast as CadToast_2 } from '@caderno-ui/elements/toast';
+import { CadToastDismissDetail } from '@caderno-ui/elements/toast';
+import { CadToastDismissEvent } from '@caderno-ui/elements/toast';
+import { CadToastDismissReason } from '@caderno-ui/elements/toast';
+import { CadToastHost as CadToastHost_2 } from '@caderno-ui/elements/toast';
+import { CadToastOptions } from '@caderno-ui/elements/toast';
+import { CadToastPlacement } from '@caderno-ui/elements/toast';
+import { CadToastVariant } from '@caderno-ui/elements/toast';
+import { CadTooltip as CadTooltip_2 } from '@caderno-ui/elements/tooltip';
+import { CadTooltipPosition } from '@caderno-ui/elements/tooltip';
 import { EventName } from '@lit/react';
 import { ReactWebComponent } from '@lit/react';
 
@@ -167,6 +185,20 @@ export { CadLinkTone }
 export { CadLinkVariant }
 
 // @public (undocumented)
+export const CadModal: ReactWebComponent<CadModal_2, {
+onModalClose: EventName<CadModalCloseEvent>;
+onModalOpen: EventName<CadModalOpenEvent>;
+}>;
+
+export { CadModalCloseDetail }
+
+export { CadModalCloseEvent }
+
+export { CadModalOpenEvent }
+
+export { CadModalSize }
+
+// @public (undocumented)
 export const CadNote: ReactWebComponent<CadNote_2, {}>;
 
 export { CadNoteTone }
@@ -180,6 +212,13 @@ export { CadProgressTone }
 export const CadRadio: ReactWebComponent<CadRadio_2, {}>;
 
 export { CadRadioTone }
+
+// @public (undocumented)
+export const CadSpinner: ReactWebComponent<CadSpinner_2, {}>;
+
+export { CadSpinnerSize }
+
+export { CadSpinnerTone }
 
 // @public (undocumented)
 export const CadTab: ReactWebComponent<CadTab_2, {}>;
@@ -201,6 +240,31 @@ export const CadTextarea: ReactWebComponent<CadTextarea_2, {}>;
 export { CadTextareaResize }
 
 export { CadTextareaTone }
+
+// @public (undocumented)
+export const CadToast: ReactWebComponent<CadToast_2, {
+onToastDismiss: EventName<CadToastDismissEvent>;
+}>;
+
+export { CadToastDismissDetail }
+
+export { CadToastDismissEvent }
+
+export { CadToastDismissReason }
+
+// @public (undocumented)
+export const CadToastHost: ReactWebComponent<CadToastHost_2, {}>;
+
+export { CadToastOptions }
+
+export { CadToastPlacement }
+
+export { CadToastVariant }
+
+// @public (undocumented)
+export const CadTooltip: ReactWebComponent<CadTooltip_2, {}>;
+
+export { CadTooltipPosition }
 
 // (No @packageDocumentation comment for this package)
 

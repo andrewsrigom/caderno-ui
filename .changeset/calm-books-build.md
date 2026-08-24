@@ -17,3 +17,6 @@ Add form-associated Input, Textarea, Checkbox, and Radio controls with native
 FormData, validation, reset, fieldset, and keyboard behavior. Add Accordion and
 AccordionItem on native details/summary semantics with optional single-open
 coordination and a composed toggle event.
+Add Spinner, Tooltip, Modal, Toast, and ToastHost feedback primitives with
+accessible native semantics, typed public events, focus management, safe
+imperative notifications, framework adapters, and cross-browser examples.

@@ -35,12 +35,17 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-icon',
       'cad-input',
       'cad-link',
+      'cad-modal',
       'cad-note',
       'cad-progress',
       'cad-radio',
+      'cad-spinner',
       'cad-tab',
       'cad-tabs',
       'cad-textarea',
+      'cad-toast',
+      'cad-toast-host',
+      'cad-tooltip',
     ].every((tagName) => customElements.get(tagName) !== undefined),
   )
 
@@ -128,6 +133,41 @@ test('coordinates native accordion disclosures and composed events', async ({
   )
 })
 
+test('coordinates tooltip, modal, and hosted toast behavior', async ({
+  page,
+}) => {
+  const tooltip = page.locator('cad-tooltip')
+  const tooltipTrigger = tooltip.getByRole('button', { name: 'Inspect help' })
+  await tooltipTrigger.focus()
+  await expect(tooltip).toHaveAttribute('open', '')
+  await expect(tooltip.getByRole('tooltip')).toHaveText(
+    'Opens the typed public contract',
+  )
+  await tooltipTrigger.press('Escape')
+  await expect(tooltip).not.toHaveAttribute('open', '')
+
+  const modal = page.locator('cad-modal')
+  await modal.getByRole('button', { name: 'Open review' }).click()
+  await expect(modal.locator('dialog')).toHaveAttribute('open', '')
+  await modal.getByRole('button', { name: 'Confirm review' }).click()
+  await expect(modal.locator('dialog')).not.toHaveAttribute('open', '')
+  await expect(page.locator('[data-event-log]')).toContainText(
+    'cad-modal-close',
+  )
+
+  await page.getByRole('button', { name: 'Send hosted toast' }).click()
+  const hostedToast = page.locator('cad-toast-host cad-toast')
+  await expect(hostedToast).toContainText(
+    'The hosted notification uses safe plain text.',
+  )
+  await hostedToast
+    .getByRole('button', { name: 'Dismiss notification' })
+    .click()
+  await expect(page.locator('[data-event-log]')).toContainText(
+    'cad-toast-dismiss',
+  )
+})
+
 test('persists bookmarks and restores them after navigation', async ({
   page,
 }) => {
@@ -183,5 +223,12 @@ test.describe('without JavaScript', () => {
     await expect(page.getByText('Static guidance')).toBeVisible()
     await expect(page.getByText('Interview topic')).toBeVisible()
     await expect(page.getByText('Why use a Map?')).toBeVisible()
+    await expect(page.getByText('Publishing release')).toBeVisible()
+    await expect(
+      page.getByText('Confirm semantics, package exports'),
+    ).toBeVisible()
+    await expect(
+      page.getByText('The public review is available locally.'),
+    ).toBeVisible()
   })
 })

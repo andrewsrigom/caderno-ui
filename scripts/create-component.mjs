@@ -271,12 +271,12 @@ export async function createComponent({
     typeExports: [],
   })
   const elementsExport = {
-    import: `./dist/${name}/cad-${name}.js`,
     types: `./dist/${name}/cad-${name}.d.ts`,
+    import: `./dist/${name}/cad-${name}.js`,
   }
   const reactExport = {
-    import: `./dist/${name}.js`,
     types: `./dist/${name}.d.ts`,
+    import: `./dist/${name}.js`,
   }
 
   await Promise.all([

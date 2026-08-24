@@ -1,0 +1,41 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadToastVariant } from '@caderno-ui/elements/toast'
+
+type Props = {
+  class?: string
+  dismissible?: boolean
+  dismissLabel?: string
+  duration?: number
+  heading?: string
+  open?: boolean
+  variant?: CadToastVariant
+}
+
+const {
+  class: className,
+  dismissible = true,
+  dismissLabel = 'Dismiss notification',
+  duration = 0,
+  heading,
+  open = true,
+  variant = 'info',
+}: Props = Astro.props
+---
+
+<cad-toast
+  class={className}
+  dismiss-label={dismissLabel}
+  dismissible={dismissible || undefined}
+  duration={duration}
+  heading={heading}
+  open={open || undefined}
+  variant={variant}
+>
+  <slot />
+</cad-toast>
+
+<script>
+  import '@caderno-ui/elements/toast'
+</script>

@@ -15,6 +15,7 @@ for (const component of [
   'charts',
   'dividers',
   'form-controls',
+  'feedback',
   'icons',
   'progress',
   'tabs',
@@ -137,6 +138,22 @@ test('all interactive component controls are reachable by keyboard', async ({
       page.locator('cad-accordion-item').nth(index).locator('summary'),
     ).toBeFocused()
   }
+
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('button', { name: 'Inspect help' })).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('button', { name: 'Open review' })).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('button', { name: 'Dismiss notification' }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('button', { name: 'Send hosted toast' }),
+  ).toBeFocused()
 
   await page.keyboard.press('Tab')
   await expect(page.getByRole('tab', { name: 'Contract' })).toBeFocused()

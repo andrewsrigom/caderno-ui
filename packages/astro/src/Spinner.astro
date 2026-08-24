@@ -1,0 +1,30 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadSpinnerSize,
+  CadSpinnerTone,
+} from '@caderno-ui/elements/spinner'
+
+type Props = {
+  class?: string
+  label: string
+  size?: CadSpinnerSize
+  tone?: CadSpinnerTone
+}
+
+const {
+  class: className,
+  label,
+  size = 'md',
+  tone = 'blue',
+}: Props = Astro.props
+---
+
+<cad-spinner class={className} label={label} size={size} tone={tone}
+  >{label}</cad-spinner
+>
+
+<script>
+  import '@caderno-ui/elements/spinner'
+</script>

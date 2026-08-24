@@ -1,0 +1,63 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-toast-host label="Notifications"></cad-toast-host>
+
+<script type="module">
+  import '@caderno-ui/elements/toast'
+
+  document.querySelector('cad-toast-host').show({
+    heading: 'Published',
+    message: 'The component contract is public.',
+    variant: 'success'
+  })
+</script>`
+---
+
+<DocsLayout
+  description="CadToast and CadToastHost provide safe, named notifications with composed dismissal events."
+  title="Toast"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-toast&gt; · &lt;cad-toast-host&gt;</p>
+    <h1>Announce the outcome and let the reader dismiss it.</h1>
+    <p>
+      Render a toast declaratively or ask a host to create one from plain text.
+      Timers pause while the notification is hovered or focused.
+    </p>
+  </header>
+
+  <DemoFrame title="Notification variants">
+    <div class="toast-stack">
+      <cad-toast heading="Contract saved" variant="success">
+        The review is available to the whole team.
+      </cad-toast>
+      <cad-toast heading="Check the trade-off" variant="warning">
+        The bundle grew beyond the previous baseline.
+      </cad-toast>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-toast" />
+  <ApiReference tagName="cad-toast-host" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Information uses a polite status; danger uses an assertive alert. Set
+      <code>duration="0"</code> for persistent content and avoid timing critical actions
+      inside notifications.
+    </p>
+  </section>
+
+  <style>
+    .toast-stack {
+      display: grid;
+      gap: 1rem;
+      justify-items: start;
+    }
+  </style>
+</DocsLayout>

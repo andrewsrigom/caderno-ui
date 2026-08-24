@@ -1,0 +1,41 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadTooltipPosition } from '@caderno-ui/elements/tooltip'
+
+type Props = {
+  class?: string
+  open?: boolean
+  position?: CadTooltipPosition
+  text: string
+}
+
+const {
+  class: className,
+  open = false,
+  position = 'top',
+  text,
+}: Props = Astro.props
+const hasContent = Astro.slots.has('content')
+---
+
+<cad-tooltip
+  class={className}
+  open={open || undefined}
+  position={position}
+  text={text}
+  title={text}
+>
+  <slot />
+  {
+    hasContent ? (
+      <span slot="content">
+        <slot name="content" />
+      </span>
+    ) : null
+  }
+</cad-tooltip>
+
+<script>
+  import '@caderno-ui/elements/tooltip'
+</script>

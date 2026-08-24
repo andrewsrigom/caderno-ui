@@ -816,6 +816,70 @@ export type CadLinkTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet
 export type CadLinkVariant = 'highlight' | 'plain' | 'underline';
 
 // @public
+export class CadModal extends LitElement {
+    constructor();
+    // (undocumented)
+    close(returnValue?: string): void;
+    // (undocumented)
+    closeLabel: string;
+    // (undocumented)
+    closeOnBackdrop: boolean;
+    // (undocumented)
+    get dialog(): HTMLDialogElement | null;
+    // (undocumented)
+    heading: string;
+    // (undocumented)
+    open: boolean;
+    // (undocumented)
+    static properties: {
+        closeLabel: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        heading: {
+            type: StringConstructor;
+        };
+        open: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        size: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        closeOnBackdrop: {
+            attribute: string;
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    showModal(): void;
+    // (undocumented)
+    size: CadModalSize;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    updated(changed: PropertyValues<this>): void;
+}
+
+// @public (undocumented)
+export type CadModalCloseDetail = {
+    returnValue: string;
+};
+
+// @public (undocumented)
+export type CadModalCloseEvent = CustomEvent<CadModalCloseDetail>;
+
+// @public (undocumented)
+export type CadModalOpenEvent = CustomEvent<void>;
+
+// @public (undocumented)
+export type CadModalSize = 'lg' | 'md' | 'sm';
+
+// @public
 export class CadNote extends LitElement {
     constructor();
     // (undocumented)
@@ -998,6 +1062,41 @@ export class CadRadio extends LitElement {
 
 // @public (undocumented)
 export type CadRadioTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public
+export class CadSpinner extends LitElement {
+    constructor();
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    static properties: {
+        label: {
+            type: StringConstructor;
+        };
+        size: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    size: CadSpinnerSize;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadSpinnerTone;
+}
+
+// @public (undocumented)
+export type CadSpinnerSize = 'lg' | 'md' | 'sm';
+
+// @public (undocumented)
+export type CadSpinnerTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet';
 
 // @public
 export class CadTab extends LitElement {
@@ -1242,6 +1341,145 @@ export type CadTextareaResize = 'both' | 'horizontal' | 'none' | 'vertical';
 
 // @public (undocumented)
 export type CadTextareaTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public
+export class CadToast extends LitElement {
+    constructor();
+    // (undocumented)
+    disconnectedCallback(): void;
+    // (undocumented)
+    dismiss(reason?: CadToastDismissReason): void;
+    // (undocumented)
+    dismissible: boolean;
+    // (undocumented)
+    dismissLabel: string;
+    // (undocumented)
+    duration: number;
+    // (undocumented)
+    heading: string;
+    // (undocumented)
+    open: boolean;
+    // (undocumented)
+    static properties: {
+        dismissible: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        dismissLabel: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        duration: {
+            reflect: boolean;
+            type: NumberConstructor;
+        };
+        heading: {
+            type: StringConstructor;
+        };
+        open: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        variant: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    updated(changed: PropertyValues<this>): void;
+    // (undocumented)
+    variant: CadToastVariant;
+}
+
+// @public (undocumented)
+export type CadToastDismissDetail = {
+    reason: CadToastDismissReason;
+    variant: CadToastVariant;
+};
+
+// @public (undocumented)
+export type CadToastDismissEvent = CustomEvent<CadToastDismissDetail>;
+
+// @public (undocumented)
+export type CadToastDismissReason = 'manual' | 'timeout';
+
+// @public
+export class CadToastHost extends LitElement {
+    constructor();
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    placement: CadToastPlacement;
+    // (undocumented)
+    static properties: {
+        label: {
+            type: StringConstructor;
+        };
+        placement: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    show(options: CadToastOptions): CadToast;
+    // (undocumented)
+    static styles: CSSResult;
+}
+
+// @public (undocumented)
+export type CadToastOptions = {
+    dismissible?: boolean;
+    duration?: number;
+    heading?: string;
+    message: string;
+    variant?: CadToastVariant;
+};
+
+// @public (undocumented)
+export type CadToastPlacement = 'bottom-right' | 'top-right';
+
+// @public (undocumented)
+export type CadToastVariant = 'danger' | 'info' | 'success' | 'warning';
+
+// @public
+export class CadTooltip extends LitElement {
+    constructor();
+    // (undocumented)
+    disconnectedCallback(): void;
+    // (undocumented)
+    open: boolean;
+    // (undocumented)
+    position: CadTooltipPosition;
+    // (undocumented)
+    static properties: {
+        open: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        position: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        text: {
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    text: string;
+}
+
+// @public (undocumented)
+export type CadTooltipPosition = 'bottom' | 'left' | 'right' | 'top';
 
 // (No @packageDocumentation comment for this package)
 

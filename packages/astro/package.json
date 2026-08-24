@@ -44,7 +44,12 @@
     "./Checkbox.astro": "./src/Checkbox.astro",
     "./Radio.astro": "./src/Radio.astro",
     "./Accordion.astro": "./src/Accordion.astro",
-    "./AccordionItem.astro": "./src/AccordionItem.astro"
+    "./AccordionItem.astro": "./src/AccordionItem.astro",
+    "./Spinner.astro": "./src/Spinner.astro",
+    "./Tooltip.astro": "./src/Tooltip.astro",
+    "./Modal.astro": "./src/Modal.astro",
+    "./Toast.astro": "./src/Toast.astro",
+    "./ToastHost.astro": "./src/ToastHost.astro"
   },
   "scripts": {
     "typecheck": "astro check"

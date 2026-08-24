@@ -21,6 +21,7 @@
   --cad-radius-md: 0.75rem;
   --cad-radius-lg: 1rem;
   --cad-duration-fast: 140ms;
+  --cad-duration-normal: 220ms;
   --cad-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --cad-color-night-bg: #1a1b26;
   --cad-color-night-surface: #1f2335;

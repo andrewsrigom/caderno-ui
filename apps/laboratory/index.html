@@ -286,6 +286,58 @@
         </cad-accordion>
       </section>
 
+      <section data-component="feedback">
+        <h2>Feedback and overlays</h2>
+        <div class="feedback-grid">
+          <div class="feedback-sample">
+            <h3>Busy states</h3>
+            <div class="cluster">
+              <cad-spinner label="Syncing note" size="sm" tone="mint">
+                Syncing note
+              </cad-spinner>
+              <cad-spinner label="Indexing notebook" tone="blue">
+                Indexing notebook
+              </cad-spinner>
+              <cad-spinner label="Publishing release" size="lg" tone="violet">
+                Publishing release
+              </cad-spinner>
+            </div>
+          </div>
+          <div class="feedback-sample">
+            <h3>Contextual help</h3>
+            <cad-tooltip
+              position="right"
+              text="Opens the typed public contract"
+            >
+              <cad-button variant="secondary">Inspect help</cad-button>
+            </cad-tooltip>
+          </div>
+          <div class="feedback-sample">
+            <h3>Modal task</h3>
+            <cad-modal heading="Review release contract">
+              <cad-button icon="layers" slot="trigger" tone="lemon">
+                Open review
+              </cad-button>
+              <p>
+                Confirm semantics, package exports, adapters, and browser
+                behavior before publication.
+              </p>
+              <cad-button data-modal-confirm slot="footer" tone="mint">
+                Confirm review
+              </cad-button>
+            </cad-modal>
+          </div>
+        </div>
+        <div class="toast-demo">
+          <cad-toast heading="Contract saved" variant="success">
+            The public review is available locally.
+          </cad-toast>
+          <cad-button data-toast-trigger icon="spark" variant="secondary">
+            Send hosted toast
+          </cad-button>
+        </div>
+      </section>
+
       <section data-component="progress">
         <h2>Progress</h2>
         <div class="progress-stack">
@@ -362,6 +414,8 @@
       <output aria-live="polite" class="event-log" data-event-log>
         Interact with a component to inspect its event contract.
       </output>
+      <cad-toast-host label="Laboratory notifications" data-toast-host>
+      </cad-toast-host>
     </main>
   </body>
 </html>

@@ -1,83 +1,101 @@
 ---
+import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
-import ApiReference from '../../components/ApiReference.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-tabs default-tab="notes" label="Project sections">
-  <cad-tab icon="note" label="Notes" name="notes" tone="lemon">
-    Decisions and open questions.
-  </cad-tab>
-  <cad-tab icon="code" label="Code" name="code" tone="mint">
-    Implementation details.
-  </cad-tab>
+const usage = `<cad-tabs default-value="notes">
+  <cad-tabs-list label="Implementation workspace">
+    <cad-tab-trigger label="Notes" tone="lemon" value="notes">
+      <cad-icon aria-hidden="true" name="note" slot="start"></cad-icon>
+      Notes
+    </cad-tab-trigger>
+    <cad-tab-trigger label="Code" tone="mint" value="code">Code</cad-tab-trigger>
+  </cad-tabs-list>
+
+  <cad-tab-content value="notes">Document the invariant first.</cad-tab-content>
+  <cad-tab-content value="code">Implement the smallest complete path.</cad-tab-content>
 </cad-tabs>
 
 <script type="module">
   import '@caderno-ui/elements/tabs'
+  import '@caderno-ui/elements/icon'
 </script>`
-const eventCode = `tabs.addEventListener('cad-tab-change', (event) => {
-  const { activeTab, previousTab } = event.detail
-  console.log({ activeTab, previousTab })
-})`
 ---
 
 <DocsLayout
-  description="CadTabs coordinates declarative tab panels with keyboard navigation and typed change events."
+  description="Compound keyboard-accessible tabs with composable triggers and panels."
   title="Tabs"
 >
   <header class="page-header">
-    <p class="eyebrow">&lt;cad-tabs&gt; + &lt;cad-tab&gt;</p>
-    <h1>Organize the page like a notebook.</h1>
+    <p class="eyebrow">&lt;cad-tabs&gt; family</p>
+    <h1>Compose the controls and content as explicit peers.</h1>
     <p>
-      Tabs owns the accessible controller while each direct
-      <code class="inline-code">cad-tab</code> child owns its panel content and public
-      identity.
+      Tabs coordinates a list, native trigger buttons, and matching content
+      panels by value. Trigger visuals are ordinary slots, so tabs never import
+      or prescribe the icon library.
     </p>
   </header>
 
   <DemoFrame
-    title="Declarative tabs"
-    description="Use Arrow Left/Right, Home, and End while focus is on a tab."
+    title="Architecture review workspace"
+    description="Switch between the decision, evidence, and rollout plan with arrow keys, Home, or End."
   >
-    <cad-tabs default-tab="notes" label="Project sections">
-      <cad-tab icon="note" label="Notes" name="notes" tone="lemon">
-        <p>Decisions, context, and open questions belong here.</p>
-      </cad-tab>
-      <cad-tab icon="code" label="Code" name="code" tone="mint">
-        <p>Keep implementation details close without mixing concerns.</p>
-      </cad-tab>
-      <cad-tab icon="checklist" label="Review" name="review" tone="violet">
-        <p>Verify the public contract before publishing.</p>
-      </cad-tab>
+    <cad-tabs default-value="decision">
+      <cad-tabs-list label="Architecture review workspace">
+        <cad-tab-trigger label="Decision" tone="lemon" value="decision">
+          <cad-icon aria-hidden="true" name="note" size="16" slot="start"
+          ></cad-icon>
+          Decision
+        </cad-tab-trigger>
+        <cad-tab-trigger label="Evidence" tone="mint" value="evidence">
+          <cad-icon aria-hidden="true" name="gauge" size="16" slot="start"
+          ></cad-icon>
+          Evidence
+        </cad-tab-trigger>
+        <cad-tab-trigger label="Rollout" tone="violet" value="rollout">
+          Rollout
+        </cad-tab-trigger>
+      </cad-tabs-list>
+
+      <cad-tab-content value="decision">
+        <h2>Use an asynchronous search index</h2>
+        <p>
+          Keep the transactional database authoritative and expose index lag as
+          an observable product state.
+        </p>
+      </cad-tab-content>
+      <cad-tab-content value="evidence">
+        <h2>What supports the decision</h2>
+        <p>
+          Peak query latency fell while write throughput remained inside the
+          recovery budget.
+        </p>
+      </cad-tab-content>
+      <cad-tab-content value="rollout">
+        <h2>How to ship it safely</h2>
+        <p>
+          Dual-read a sampled cohort, compare result sets, then expand behind a
+          reversible flag.
+        </p>
+      </cad-tab-content>
     </cad-tabs>
   </DemoFrame>
   <CodeBlock code={usage} language="html" />
 
   <ApiReference tagName="cad-tabs" />
-  <ApiReference tagName="cad-tab" />
-
-  <section class="content-section" aria-labelledby="events-title">
-    <h2 id="events-title">Events and styling</h2>
-    <p>
-      <code class="inline-code">cad-tab-change</code> includes
-      <code class="inline-code">{'{ activeTab, previousTab }'}</code>. The
-      parent exposes <code class="inline-code">list</code>,
-      <code class="inline-code">panels</code>, and
-      <code class="inline-code">tab</code> parts plus
-      <code class="inline-code">--cad-tabs-panel-bg</code>. Each child exposes
-      its <code class="inline-code">panel</code> part.
-    </p>
-    <CodeBlock code={eventCode} language="typescript" />
-  </section>
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      The parent creates the tablist, selected state, roving focus, and
-      tab-to-panel relationships. Every tab needs a unique name and meaningful
-      label. Arrow Left/Right, Home, and End move and activate focus without a
-      pointer.
+      Trigger labels provide both visible and accessible names. The controller
+      implements roving focus and skips disabled triggers; content stays a named
+      tab panel and fails open when values are missing or duplicated.
     </p>
   </section>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/tabs'
+</script>

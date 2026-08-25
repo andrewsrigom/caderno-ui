@@ -128,6 +128,11 @@ export class CadChart extends LitElement {
       line-height: 1.05;
     }
 
+    .title ::slotted(*) {
+      margin: 0;
+      font: inherit;
+    }
+
     .plot {
       display: block;
       width: 100%;
@@ -475,9 +480,9 @@ export class CadChart extends LitElement {
 
     return html`
       <figure aria-labelledby="chart-title" class="base" part="base">
-        <h3 class="title" id="chart-title" part="title">
-          <slot name="title">${this.heading}</slot>
-        </h3>
+        <div class="title" id="chart-title" part="title">
+          <slot name="title"><strong>${this.heading}</strong></slot>
+        </div>
         ${
           data.length === 0
             ? html`

@@ -14,12 +14,15 @@ for (const component of [
   'cards-and-callouts',
   'charts',
   'dividers',
+  'editorial-patterns',
   'form-controls',
   'feedback',
   'icons',
   'navigation-and-annotations',
+  'planning-patterns',
   'progress',
   'tabs',
+  'tables',
 ]) {
   test(`${component} has no detectable accessibility violations in isolation`, async ({
     page,

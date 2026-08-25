@@ -61,7 +61,6 @@
         }
       ],
       "typeExports": [
-        "CadButtonIconPosition",
         "CadButtonSize",
         "CadButtonTone",
         "CadButtonType",
@@ -90,10 +89,42 @@
           "className": "CadCard",
           "tagName": "cad-card",
           "events": []
+        },
+        {
+          "className": "CadCardHeader",
+          "tagName": "cad-card-header",
+          "events": []
+        },
+        {
+          "className": "CadCardKicker",
+          "tagName": "cad-card-kicker",
+          "events": []
+        },
+        {
+          "className": "CadCardTitle",
+          "tagName": "cad-card-title",
+          "events": []
+        },
+        {
+          "className": "CadCardContent",
+          "tagName": "cad-card-content",
+          "events": []
+        },
+        {
+          "className": "CadCardFooter",
+          "tagName": "cad-card-footer",
+          "events": []
         }
       ],
       "typeExports": ["CadCardTone", "CadCardVariant"],
-      "astroFacades": ["Card.astro"],
+      "astroFacades": [
+        "Card.astro",
+        "CardContent.astro",
+        "CardFooter.astro",
+        "CardHeader.astro",
+        "CardKicker.astro",
+        "CardTitle.astro"
+      ],
       "docsPage": "card.astro"
     },
     {
@@ -189,11 +220,6 @@
       "name": "tabs",
       "elements": [
         {
-          "className": "CadTab",
-          "tagName": "cad-tab",
-          "events": []
-        },
-        {
           "className": "CadTabs",
           "tagName": "cad-tabs",
           "events": [
@@ -203,11 +229,59 @@
               "typeName": "CadTabChangeEvent"
             }
           ]
+        },
+        {
+          "className": "CadTabsList",
+          "tagName": "cad-tabs-list",
+          "events": []
+        },
+        {
+          "className": "CadTabTrigger",
+          "tagName": "cad-tab-trigger",
+          "events": []
+        },
+        {
+          "className": "CadTabContent",
+          "tagName": "cad-tab-content",
+          "events": []
         }
       ],
       "typeExports": ["CadTabChangeDetail", "CadTabChangeEvent", "CadTabTone"],
-      "astroFacades": ["Tab.astro", "Tabs.astro"],
+      "astroFacades": [
+        "TabContent.astro",
+        "Tabs.astro",
+        "TabsList.astro",
+        "TabTrigger.astro"
+      ],
       "docsPage": "tabs.astro"
+    },
+    {
+      "name": "table",
+      "elements": [
+        {
+          "className": "CadTable",
+          "tagName": "cad-table",
+          "events": []
+        },
+        {
+          "className": "CadTableColumn",
+          "tagName": "cad-table-column",
+          "events": []
+        },
+        {
+          "className": "CadTableRow",
+          "tagName": "cad-table-row",
+          "events": []
+        },
+        {
+          "className": "CadTableCell",
+          "tagName": "cad-table-cell",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadTableDensity", "CadTableVariant"],
+      "astroFacades": ["Table.astro"],
+      "docsPage": "table.astro"
     },
     {
       "astroFacades": ["Input.astro"],
@@ -458,6 +532,112 @@
       ],
       "name": "sticker",
       "typeExports": ["CadStickerShape", "CadStickerSize", "CadStickerTone"]
+    },
+    {
+      "astroFacades": ["Blockquote.astro"],
+      "docsPage": "blockquote.astro",
+      "elements": [
+        {
+          "className": "CadBlockquote",
+          "events": [],
+          "tagName": "cad-blockquote"
+        }
+      ],
+      "name": "blockquote",
+      "typeExports": ["CadBlockquoteTone"]
+    },
+    {
+      "astroFacades": ["Checklist.astro", "ChecklistItem.astro"],
+      "docsPage": "checklist.astro",
+      "elements": [
+        {
+          "className": "CadChecklist",
+          "events": [],
+          "tagName": "cad-checklist"
+        },
+        {
+          "className": "CadChecklistItem",
+          "events": [],
+          "tagName": "cad-checklist-item"
+        }
+      ],
+      "name": "checklist",
+      "typeExports": [
+        "CadChecklistItemKind",
+        "CadChecklistTone",
+        "CadChecklistVariant"
+      ]
+    },
+    {
+      "astroFacades": ["CodeBlock.astro"],
+      "docsPage": "code-block.astro",
+      "elements": [
+        {
+          "className": "CadCodeBlock",
+          "events": [],
+          "tagName": "cad-code-block"
+        }
+      ],
+      "name": "code-block",
+      "typeExports": ["CadCodeBlockTone"]
+    },
+    {
+      "astroFacades": ["EmptyState.astro"],
+      "docsPage": "empty-state.astro",
+      "elements": [
+        {
+          "className": "CadEmptyState",
+          "events": [],
+          "tagName": "cad-empty-state"
+        }
+      ],
+      "name": "empty-state",
+      "typeExports": ["CadEmptyStateVariant"]
+    },
+    {
+      "astroFacades": [
+        "Kanban.astro",
+        "KanbanCard.astro",
+        "KanbanColumn.astro"
+      ],
+      "docsPage": "kanban.astro",
+      "elements": [
+        {
+          "className": "CadKanban",
+          "events": [],
+          "tagName": "cad-kanban"
+        },
+        {
+          "className": "CadKanbanColumn",
+          "events": [],
+          "tagName": "cad-kanban-column"
+        },
+        {
+          "className": "CadKanbanCard",
+          "events": [],
+          "tagName": "cad-kanban-card"
+        }
+      ],
+      "name": "kanban",
+      "typeExports": ["CadKanbanCardTone"]
+    },
+    {
+      "astroFacades": ["Step.astro", "Steps.astro"],
+      "docsPage": "steps.astro",
+      "elements": [
+        {
+          "className": "CadSteps",
+          "events": [],
+          "tagName": "cad-steps"
+        },
+        {
+          "className": "CadStep",
+          "events": [],
+          "tagName": "cad-step"
+        }
+      ],
+      "name": "steps",
+      "typeExports": ["CadStepTone", "CadStepsOrientation"]
     }
   ]
 }

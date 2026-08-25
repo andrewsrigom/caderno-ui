@@ -8,27 +8,53 @@ afterEach(() => {
 })
 
 describe('cad-card', () => {
-  it('renders an article with heading, body, footer, and public parts', async () => {
-    expectRegistered('cad-card')
-    const element = document.createElement('cad-card')
-    element.heading = 'Architecture'
-    element.innerHTML = 'Typed contracts<span slot="footer">Reviewed</span>'
-    document.body.append(element)
-    await element.updateComplete
+  it('registers the composable card family without registering icons', async () => {
+    for (const tagName of [
+      'cad-card',
+      'cad-card-content',
+      'cad-card-footer',
+      'cad-card-header',
+      'cad-card-kicker',
+      'cad-card-title',
+    ] as const) {
+      expectRegistered(tagName)
+    }
+    expect(customElements.get('cad-icon')).toBeUndefined()
+
+    const card = document.createElement('cad-card')
+    const header = document.createElement('cad-card-header')
+    const title = document.createElement('cad-card-title')
+    const heading = document.createElement('h2')
+    const content = document.createElement('cad-card-content')
+    const footer = document.createElement('cad-card-footer')
+    heading.textContent = 'Architecture'
+    title.append(heading)
+    header.append(title)
+    content.textContent = 'Typed contracts'
+    footer.textContent = 'Reviewed'
+    card.append(header, content, footer)
+    document.body.append(card)
+    await Promise.all([
+      card.updateComplete,
+      header.updateComplete,
+      title.updateComplete,
+      content.updateComplete,
+      footer.updateComplete,
+    ])
 
     expect(
-      element.shadowRoot?.querySelector('article[part="base"]'),
+      card.shadowRoot?.querySelector('article[part="base"]'),
     ).not.toBeNull()
-    expect(
-      element.shadowRoot?.querySelector('[part="title"]')?.textContent,
-    ).toContain('Architecture')
-    expect(element.shadowRoot?.querySelector('[part="footer"]')).not.toBeNull()
+    expect(header.shadowRoot?.querySelector('header')).not.toBeNull()
+    expect(title.textContent).toContain('Architecture')
+    expect(content.textContent).toContain('Typed contracts')
+    expect(footer.shadowRoot?.querySelector('footer')).not.toBeNull()
   })
 
   it('renders a native anchor when href is provided', async () => {
     const element = document.createElement('cad-card')
     element.href = '/components'
-    element.heading = 'Components'
+    element.textContent = 'Components'
     document.body.append(element)
     await element.updateComplete
 

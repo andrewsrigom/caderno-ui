@@ -10,7 +10,6 @@ export const CadButton = createComponent({
 })
 
 export type {
-  CadButtonIconPosition,
   CadButtonSize,
   CadButtonTone,
   CadButtonType,

@@ -1,6 +1,9 @@
 import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
+import {
+  renderSystemIcon,
+  type CadSystemIconName,
+} from '../internal/system-icon.js'
 
 export type CadAlertVariant = 'danger' | 'info' | 'success' | 'warning'
 
@@ -10,12 +13,12 @@ export type CadDismissDetail = {
 
 export type CadDismissEvent = CustomEvent<CadDismissDetail>
 
-const icons = {
-  danger: 'bug',
-  info: 'spark',
+const icons: Record<CadAlertVariant, CadSystemIconName> = {
+  danger: 'danger',
+  info: 'info',
   success: 'check',
-  warning: 'exclamation',
-} as const
+  warning: 'warning',
+}
 
 /**
  * A notebook-styled status message with an optional dismiss action.
@@ -104,6 +107,11 @@ export class CadAlert extends LitElement {
       transform: rotate(-2deg);
     }
 
+    .icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
     .body {
       display: grid;
       gap: 0.3rem;
@@ -116,6 +124,11 @@ export class CadAlert extends LitElement {
       font-size: var(--cad-hand-lg, 1.55rem);
       font-weight: var(--cad-hand-weight-strong, 700);
       line-height: 1;
+    }
+
+    .title ::slotted(*) {
+      margin: 0;
+      font: inherit;
     }
 
     .content {
@@ -155,6 +168,11 @@ export class CadAlert extends LitElement {
     .close:focus-visible {
       outline: 2px dashed var(--cad-focus-ring, currentColor);
       outline-offset: 3px;
+    }
+
+    .close svg {
+      width: 1.1rem;
+      height: 1.1rem;
     }
 
     @media (forced-colors: active) {
@@ -199,12 +217,12 @@ export class CadAlert extends LitElement {
       <div class="base" part="base" role=${role}>
         <span aria-hidden="true" class="tape"></span>
         <span aria-hidden="true" class="icon" part="icon">
-          <cad-icon name=${icons[this.variant]} size="24"></cad-icon>
+          ${renderSystemIcon(icons[this.variant])}
         </span>
         <div class="body">
-          <h3 class="title" part="title">
-            <slot name="title">${this.heading}</slot>
-          </h3>
+          <div class="title" part="title">
+            <slot name="title"><strong>${this.heading}</strong></slot>
+          </div>
           <div class="content" part="content"><slot></slot></div>
         </div>
         ${
@@ -217,7 +235,7 @@ export class CadAlert extends LitElement {
                   type="button"
                   @click=${this.dismiss}
                 >
-                  <cad-icon name="cross" size="18"></cad-icon>
+                  ${renderSystemIcon('close')}
                 </button>
               `
             : null

@@ -27,19 +27,32 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-alert',
       'cad-avatar',
       'cad-badge',
+      'cad-blockquote',
       'cad-bookmark',
       'cad-breadcrumb',
       'cad-breadcrumb-item',
       'cad-button',
       'cad-callout',
       'cad-card',
+      'cad-card-content',
+      'cad-card-footer',
+      'cad-card-header',
+      'cad-card-kicker',
+      'cad-card-title',
       'cad-chart',
       'cad-chart-item',
       'cad-checkbox',
+      'cad-checklist',
+      'cad-checklist-item',
+      'cad-code-block',
       'cad-divider',
+      'cad-empty-state',
       'cad-highlight',
       'cad-icon',
       'cad-input',
+      'cad-kanban',
+      'cad-kanban-card',
+      'cad-kanban-column',
       'cad-link',
       'cad-modal',
       'cad-note',
@@ -47,9 +60,17 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-progress',
       'cad-radio',
       'cad-spinner',
+      'cad-step',
+      'cad-steps',
       'cad-sticker',
-      'cad-tab',
+      'cad-tab-content',
+      'cad-tab-trigger',
       'cad-tabs',
+      'cad-tabs-list',
+      'cad-table',
+      'cad-table-cell',
+      'cad-table-column',
+      'cad-table-row',
       'cad-tape',
       'cad-textarea',
       'cad-toast',
@@ -80,6 +101,12 @@ test('renders the extracted SeniorPath primitives with native semantics', async 
   await expect(
     page.locator('cad-divider').first().locator('[part="base"]'),
   ).toHaveAttribute('role', 'none')
+  await expect(
+    page.locator('cad-blockquote').getByRole('blockquote'),
+  ).toBeVisible()
+  await expect(
+    page.locator('cad-kanban').getByRole('list', { name: 'Release readiness' }),
+  ).toBeVisible()
 })
 
 test('exposes the complete typed icon palette', async ({ page }) => {
@@ -108,14 +135,12 @@ test('supports accessible tab keyboard navigation and composed events', async ({
 
   await expect(problem).toHaveAttribute('aria-selected', 'true')
   await expect(page.locator('[data-event-log]')).toContainText('cad-tab-change')
-  await expect(page.locator('cad-tab[name="problem"]')).not.toHaveAttribute(
-    'hidden',
-    '',
-  )
-  await expect(page.locator('cad-tab[name="contract"]')).toHaveAttribute(
-    'hidden',
-    '',
-  )
+  await expect(
+    page.locator('cad-tab-content[value="problem"]'),
+  ).toHaveAttribute('active', '')
+  await expect(
+    page.locator('cad-tab-content[value="contract"]'),
+  ).not.toHaveAttribute('active', '')
 })
 
 test('submits form-associated controls and coordinates radio groups', async ({
@@ -269,6 +294,8 @@ test.describe('without JavaScript', () => {
     ).toBeVisible()
     await expect(page.getByText('Reading plan: 63%')).toBeVisible()
     await expect(page.getByText('Thu: 9')).toBeVisible()
+    await expect(page.getByText('No matching decisions')).toBeVisible()
+    await expect(page.getByText('Validate selective bundles')).toBeVisible()
     await expect(page.getByText('Save review')).toBeVisible()
     await expect(page.getByText('Static guidance')).toBeVisible()
     await expect(page.getByText('Interview topic')).toBeVisible()

@@ -1,0 +1,22 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadStepTone } from '@caderno-ui/elements/steps'
+
+type Props = {
+  class?: string
+  title?: string
+  tone?: CadStepTone
+  value?: string
+}
+const { class: className, title, tone = 'blue', value } = Astro.props
+---
+
+<cad-step class={className} title={title} tone={tone} value={value}>
+  <slot name="title" slot="title" />
+  <slot />
+  <slot name="meta" slot="meta" />
+</cad-step>
+
+<script>
+  import '@caderno-ui/elements/steps'
+</script>

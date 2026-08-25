@@ -37,6 +37,14 @@ const components = [
   },
   {
     description:
+      'Semantic quotations and decision excerpts with optional attribution.',
+    href: '/components/blockquote/',
+    icon: 'note',
+    label: 'Blockquote',
+    tag: '<cad-blockquote>',
+  },
+  {
+    description:
       'A pressed-state save control with optional local persistence.',
     href: '/components/bookmark/',
     icon: 'bookmark',
@@ -86,11 +94,34 @@ const components = [
     tag: '<cad-checkbox>',
   },
   {
+    description: 'Composable checklists and do/don’t review guidance.',
+    href: '/components/checklist/',
+    icon: 'checklist',
+    label: 'Checklist',
+    tag: '<cad-checklist>',
+  },
+  {
+    description:
+      'Native preformatted code with optional filename and line numbers.',
+    href: '/components/code-block/',
+    icon: 'brackets',
+    label: 'Code block',
+    tag: '<cad-code-block>',
+  },
+  {
     description: 'Decorative or semantic dashed, dotted, and wavy separators.',
     href: '/components/divider/',
     icon: 'underline',
     label: 'Divider',
     tag: '<cad-divider>',
+  },
+  {
+    description:
+      'Empty collection, search, and access states with recovery slots.',
+    href: '/components/empty-state/',
+    icon: 'search',
+    label: 'Empty state',
+    tag: '<cad-empty-state>',
   },
   {
     description: 'Semantic inline marks with hand-drawn marker treatments.',
@@ -113,6 +144,14 @@ const components = [
     icon: 'pencil',
     label: 'Input',
     tag: '<cad-input>',
+  },
+  {
+    description:
+      'Composable planning boards with independent columns and cards.',
+    href: '/components/kanban/',
+    icon: 'grid',
+    label: 'Kanban',
+    tag: '<cad-kanban>',
   },
   {
     description: 'Native anchors with marker, underline, and plain treatments.',
@@ -167,6 +206,14 @@ const components = [
   },
   {
     description:
+      'Responsive numbered sequences for methods, timelines, and rollouts.',
+    href: '/components/steps/',
+    icon: 'checklist',
+    label: 'Steps',
+    tag: '<cad-steps>',
+  },
+  {
+    description:
       'Decorative labels for categories, milestones, and annotations.',
     href: '/components/sticker/',
     icon: 'spark',
@@ -179,6 +226,14 @@ const components = [
     icon: 'layers',
     label: 'Tabs',
     tag: '<cad-tabs>',
+  },
+  {
+    description:
+      'Responsive native tables with declarative rows and notebook treatments.',
+    href: '/components/table/',
+    icon: 'grid',
+    label: 'Table',
+    tag: '<cad-table>',
   },
   {
     description: 'Decorative translucent tape for notebook compositions.',
@@ -248,13 +303,21 @@ const components = [
     </cad-alert>
     <cad-bookmark bookmark-id="component-index-demo" label="Save this plan"
     ></cad-bookmark>
-    <cad-tabs default-tab="build" label="Study plan stages">
-      <cad-tab icon="code" label="Build" name="build" tone="mint">
+    <cad-tabs default-value="build">
+      <cad-tabs-list label="Study plan stages">
+        <cad-tab-trigger label="Build" tone="mint" value="build">
+          Build
+        </cad-tab-trigger>
+        <cad-tab-trigger label="Review" tone="lemon" value="review">
+          Review
+        </cad-tab-trigger>
+      </cad-tabs-list>
+      <cad-tab-content value="build">
         Implement the smallest complete behavior and keep its contract typed.
-      </cad-tab>
-      <cad-tab icon="checklist" label="Review" name="review" tone="lemon">
+      </cad-tab-content>
+      <cad-tab-content value="review">
         Verify semantics, keyboard behavior, events, and package boundaries.
-      </cad-tab>
+      </cad-tab-content>
     </cad-tabs>
   </DemoFrame>
 </DocsLayout>

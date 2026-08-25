@@ -1,0 +1,70 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadTableDensity,
+  CadTableVariant,
+} from '@caderno-ui/elements/table'
+
+export type TableColumn = { key: string; label: string }
+export type TableRow = Record<
+  string,
+  boolean | number | string | null | undefined
+>
+
+type Props = {
+  caption?: string
+  class?: string
+  columns?: readonly TableColumn[]
+  density?: CadTableDensity
+  emptyText?: string
+  minWidth?: string
+  rows?: readonly TableRow[]
+  variant?: CadTableVariant
+  zebra?: boolean
+}
+
+const {
+  caption,
+  class: className,
+  columns = [],
+  density = 'regular',
+  emptyText,
+  minWidth,
+  rows = [],
+  variant = 'grid',
+  zebra = false,
+} = Astro.props
+---
+
+<cad-table
+  caption={caption}
+  class={className}
+  density={density}
+  empty-text={emptyText}
+  min-width={minWidth}
+  variant={variant}
+  zebra={zebra || undefined}
+>
+  {
+    columns.map((column) => (
+      <cad-table-column key={column.key} label={column.label} />
+    ))
+  }
+  {
+    rows.map((row) => (
+      <cad-table-row>
+        {columns.map((column) => (
+          <cad-table-cell column={column.key}>
+            {row[column.key] ?? ''}
+          </cad-table-cell>
+        ))}
+      </cad-table-row>
+    ))
+  }
+  <slot />
+</cad-table>
+
+<script>
+  import '@caderno-ui/elements/table'
+</script>

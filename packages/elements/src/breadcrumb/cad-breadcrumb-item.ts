@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
+import { renderSystemIcon } from '../internal/system-icon.js'
 
 /**
  * One link or current-page label inside a `cad-breadcrumb`.
@@ -81,6 +81,11 @@ export class CadBreadcrumbItem extends LitElement {
       color: var(--cad-ink-muted, currentColor);
       transform: rotate(-2deg);
     }
+
+    .separator svg {
+      width: 0.95rem;
+      height: 0.95rem;
+    }
     @media (forced-colors: active) {
       a,
       .current {
@@ -108,7 +113,7 @@ export class CadBreadcrumbItem extends LitElement {
     const label = html`<slot></slot>`
     return html`
       <span class="item" part="base" role="listitem">
-        ${this.first ? null : html`<span aria-hidden="true" class="separator" part="separator"><cad-icon name="arrow-right" size="15"></cad-icon></span>`}
+        ${this.first ? null : html`<span aria-hidden="true" class="separator" part="separator">${renderSystemIcon('arrow-right')}</span>`}
         ${this.href && !this.current ? html`<a href=${this.href} part="link" rel=${this.rel || undefined} target=${this.target || undefined}>${label}</a>` : html`<span aria-current=${this.current ? 'page' : undefined} class="current" part="current">${label}</span>`}
       </span>
     `

@@ -26,3 +26,9 @@ code while preserving native links, list semantics, visible fallbacks, and
 theme-safe decoration.
 Expand Progress with accessible bar, segmented, and ring variants, and align
 the pink and violet tone contracts used by notebook notes and annotations.
+Refine Card and Tabs into compound component families, replace implicit icon
+properties with explicit composition slots, and enforce per-entrypoint icon and
+Rough.js isolation in CI. Recover semantic Table, Blockquote, Checklist,
+CodeBlock, EmptyState, Steps, and Kanban families from proven application
+patterns, with framework adapters, progressive fallbacks, realistic docs, and
+cross-browser accessibility coverage.

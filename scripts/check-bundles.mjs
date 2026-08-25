@@ -12,26 +12,34 @@ const baselinePath = join(root, 'docs/baseline/bundles.json')
 const reportPath = join(root, '.artifacts/bundle-report.json')
 const errors = []
 
+const elementsPackage = JSON.parse(
+  await readFile(join(root, 'packages/elements/package.json'), 'utf8'),
+)
+const reactPackage = JSON.parse(
+  await readFile(join(root, 'packages/react/package.json'), 'utf8'),
+)
+
+function publicEntrypoints(packageJson, packageDirectory, prefix) {
+  return Object.fromEntries(
+    Object.entries(packageJson.exports).flatMap(([key, value]) => {
+      if (key === '.' || typeof value !== 'object' || !value.import) return []
+      const name = key.slice(2)
+      return [
+        [
+          `${prefix}-${name}`,
+          `./packages/${packageDirectory}/${value.import.slice(2)}`,
+        ],
+      ]
+    }),
+  )
+}
+
 const entrypoints = {
-  'elements-alert': './packages/elements/dist/alert/cad-alert.js',
-  'elements-badge': './packages/elements/dist/badge/cad-badge.js',
-  'elements-bookmark': './packages/elements/dist/bookmark/cad-bookmark.js',
-  'elements-chart': './packages/elements/dist/chart/cad-chart.js',
-  'elements-icon': './packages/elements/dist/icon/cad-icon.js',
-  'elements-note': './packages/elements/dist/note/cad-note.js',
-  'elements-progress': './packages/elements/dist/progress/cad-progress.js',
+  ...publicEntrypoints(elementsPackage, 'elements', 'elements'),
+  ...publicEntrypoints(reactPackage, 'react', 'react'),
   'elements-root': './packages/elements/dist/index.js',
-  'elements-tabs': './packages/elements/dist/tabs/index.js',
   'icons-root': './packages/icons/dist/index.js',
-  'react-alert': './packages/react/dist/alert.js',
-  'react-badge': './packages/react/dist/badge.js',
-  'react-bookmark': './packages/react/dist/bookmark.js',
-  'react-chart': './packages/react/dist/chart.js',
-  'react-icon': './packages/react/dist/icon.js',
-  'react-note': './packages/react/dist/note.js',
-  'react-progress': './packages/react/dist/progress.js',
   'react-root': './packages/react/dist/index.js',
-  'react-tabs': './packages/react/dist/tabs.js',
 }
 
 const isolationRules = {
@@ -54,6 +62,32 @@ const isolationRules = {
     '/react/dist/tabs.',
   ],
   'react-root': ['/react/dist/chart.', '/roughjs/'],
+}
+
+for (const name of Object.keys(entrypoints)) {
+  if (
+    name.startsWith('elements-') &&
+    !['elements-icon', 'elements-root'].includes(name)
+  ) {
+    isolationRules[name] = [
+      ...(isolationRules[name] ?? []),
+      '/elements/dist/icon/cad-icon.',
+      '/packages/icons/dist/',
+    ]
+  }
+  if (
+    name.startsWith('react-') &&
+    !['react-icon', 'react-root'].includes(name)
+  ) {
+    isolationRules[name] = [
+      ...(isolationRules[name] ?? []),
+      '/elements/dist/icon/cad-icon.',
+      '/packages/icons/dist/',
+    ]
+  }
+  if (!['elements-chart', 'react-chart'].includes(name)) {
+    isolationRules[name] = [...(isolationRules[name] ?? []), '/roughjs/']
+  }
 }
 
 const report = {}

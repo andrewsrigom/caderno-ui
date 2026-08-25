@@ -1,11 +1,15 @@
-import { css, html, LitElement, type PropertyValues } from 'lit'
+import { html, LitElement, type PropertyValues } from 'lit'
 
-import '../icon/cad-icon.js'
-import type { CadTab } from './cad-tab.js'
+import type {
+  CadTabContent,
+  CadTabRequestEvent,
+  CadTabTrigger,
+  CadTabsList,
+} from './cad-tab.js'
 
 export type CadTabChangeDetail = {
-  activeTab: string
-  previousTab: string
+  previousValue: string
+  value: string
 }
 
 export type CadTabChangeEvent = CustomEvent<CadTabChangeDetail>
@@ -13,188 +17,36 @@ export type CadTabChangeEvent = CustomEvent<CadTabChangeDetail>
 let tabsInstance = 0
 
 /**
- * An accessible tabs controller for declarative `cad-tab` children.
+ * Coordinates compound tab-list, trigger, and content primitives.
  *
- * @slot - Direct `cad-tab` children.
- * @fires cad-tab-change - Fired after the active panel changes.
- * @csspart list - Tab list.
- * @csspart panels - Panel container.
- * @csspart tab - Every native tab button.
- * @cssprop --cad-tabs-panel-bg - Panel surface.
+ * @slot - One `cad-tabs-list` and matching `cad-tab-content` children.
+ * @fires cad-tab-change - Fired after an interactive value change.
  */
 export class CadTabs extends LitElement {
   static override properties = {
-    activeTab: { attribute: 'active-tab', reflect: true, type: String },
-    defaultTab: { attribute: 'default-tab', type: String },
-    label: { type: String },
+    defaultValue: { attribute: 'default-value', type: String },
+    value: { reflect: true, type: String },
   }
 
-  static override styles = css`
-    :host {
-      display: grid;
-      gap: 0;
-    }
+  declare defaultValue: string
+  declare value: string
 
-    .list {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      gap: 0.35rem;
-      padding: 0 0.15rem;
-    }
-
-    .tab {
-      --_tab-bg: var(--cad-post-it-blue-bg, #293f64);
-      --_tab-ink: var(--cad-post-it-blue-ink, #deebff);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      min-height: 2.75rem;
-      padding: 0.55rem 1rem 0.85rem;
-      margin: 0;
-      color: var(--_tab-ink);
-      background: color-mix(
-        in srgb,
-        var(--_tab-bg) 40%,
-        var(--cad-surface, #1f2335)
-      );
-      border: 1.5px solid color-mix(in srgb, var(--_tab-ink) 32%, transparent);
-      border-bottom-width: 0;
-      border-radius: 0.7rem 0.95rem 0 0;
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-md, 1.2rem);
-      font-weight: var(--cad-hand-weight-regular, 500);
-      line-height: 1;
-      transition:
-        transform var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease),
-        padding var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease);
-      transform: translateY(0);
-    }
-
-    .tab:hover {
-      background: color-mix(
-        in srgb,
-        var(--_tab-bg) 55%,
-        var(--cad-surface, #1f2335)
-      );
-      transform: translateY(-1px);
-    }
-
-    .tab[aria-selected='true'] {
-      padding-bottom: 1.05rem;
-      color: var(--_tab-ink);
-      background: var(--_tab-bg);
-      border-color: color-mix(in srgb, var(--_tab-ink) 55%, transparent);
-      box-shadow:
-        inset 0 -0.18rem 0.32rem
-          color-mix(in srgb, var(--_tab-ink) 22%, transparent),
-        inset 0 0.14rem 0 color-mix(in srgb, white 32%, transparent);
-      font-weight: 700;
-      transform: translateY(2px);
-    }
-
-    .tab:focus-visible {
-      outline: 2px dashed var(--cad-focus-ring, currentColor);
-      outline-offset: 3px;
-    }
-
-    .tab[data-tone='coral'] {
-      --_tab-bg: var(--cad-post-it-coral-bg, #633b32);
-      --_tab-ink: var(--cad-post-it-coral-ink, #ffe1da);
-    }
-
-    .tab[data-tone='mint'] {
-      --_tab-bg: var(--cad-post-it-mint-bg, #274f41);
-      --_tab-ink: var(--cad-post-it-mint-ink, #d8ffec);
-    }
-
-    .tab[data-tone='lemon'] {
-      --_tab-bg: var(--cad-post-it-lemon-bg, #51491f);
-      --_tab-ink: var(--cad-post-it-lemon-ink, #fff1ac);
-    }
-
-    .tab[data-tone='pink'] {
-      --_tab-bg: var(--cad-post-it-pink-bg, #5a3449);
-      --_tab-ink: var(--cad-post-it-pink-ink, #ffdceb);
-    }
-
-    .tab[data-tone='violet'] {
-      --_tab-bg: var(--cad-sticker-violet-bg, #58419b);
-      --_tab-ink: var(--cad-sticker-violet-ink, #f5efff);
-    }
-
-    .tab-icon {
-      display: inline-grid;
-      place-items: center;
-      transform: rotate(-4deg);
-    }
-
-    .panels {
-      position: relative;
-      padding: 1.35rem 1.5rem 1.4rem;
-      color: var(--cad-ink, currentColor);
-      background: var(
-        --cad-tabs-panel-bg,
-        color-mix(in srgb, var(--cad-surface, #1f2335) 92%, transparent)
-      );
-      border: 1.5px solid
-        color-mix(in srgb, var(--cad-ink-muted, currentColor) 32%, transparent);
-      border-radius: 0.35rem 0.85rem 0.85rem 0.85rem;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .tab {
-        transition: none;
-      }
-    }
-
-    @media (forced-colors: active) {
-      .panels,
-      .tab {
-        border-color: CanvasText;
-      }
-
-      .tab[aria-selected='true'] {
-        outline: 2px solid Highlight;
-        outline-offset: -4px;
-      }
-    }
-  `
-
-  declare activeTab: string
-  declare defaultTab: string
-  declare label: string
-  declare private items: CadTab[]
-
-  private readonly instanceId = `cad-tabs-${++tabsInstance}`
   private observer?: MutationObserver
+  private syncing = false
+  private readonly instanceId = `cad-tabs-${++tabsInstance}`
 
   constructor() {
     super()
-    this.activeTab = ''
-    this.defaultTab = ''
-    this.items = []
-    this.label = 'Tabs'
+    this.defaultValue = ''
+    this.value = ''
   }
 
   override connectedCallback(): void {
     super.connectedCallback()
-    this.observer = new MutationObserver(() => this.syncItems())
+    this.addEventListener('cad-tab-request', this.handleRequest)
+    this.observer = new MutationObserver(() => this.sync())
     this.observer.observe(this, {
-      attributeFilter: [
-        'data-icon',
-        'data-label',
-        'data-name',
-        'data-tone',
-        'icon',
-        'label',
-        'name',
-        'tone',
-      ],
+      attributeFilter: ['disabled', 'label', 'value'],
       attributes: true,
       childList: true,
       subtree: true,
@@ -202,187 +54,144 @@ export class CadTabs extends LitElement {
   }
 
   override disconnectedCallback(): void {
+    this.removeEventListener('cad-tab-request', this.handleRequest)
     this.observer?.disconnect()
     super.disconnectedCallback()
   }
 
-  protected override updated(changedProperties: PropertyValues<this>): void {
-    if (changedProperties.has('activeTab')) {
-      this.applyPanelState()
-    }
-    this.applyAriaRelationships()
+  protected override willUpdate(changed: PropertyValues<this>): void {
+    if (changed.has('defaultValue') || changed.has('value')) this.sync()
   }
 
-  private get directItems(): CadTab[] {
-    return Array.from(this.children).filter(
-      (child): child is CadTab => child.tagName.toLowerCase() === 'cad-tab',
+  override render() {
+    return html`<slot @slotchange=${this.sync}></slot>`
+  }
+
+  private get list(): CadTabsList | null {
+    return this.querySelector(':scope > cad-tabs-list')
+  }
+
+  private get triggers(): CadTabTrigger[] {
+    return Array.from(
+      this.list?.querySelectorAll(':scope > cad-tab-trigger') ?? [],
     )
   }
 
-  private get definitions(): Map<string, HTMLElement> {
-    const definitions = Array.from(
-      this.querySelectorAll<HTMLElement>(':scope > [data-cad-tab-definition]'),
-    )
-
-    return new Map(
-      definitions.flatMap((definition) => {
-        const name = definition.dataset.name
-        return name ? [[name, definition]] : []
-      }),
-    )
+  private get contents(): CadTabContent[] {
+    return Array.from(this.querySelectorAll(':scope > cad-tab-content'))
   }
 
-  private syncItems(): void {
-    const items = this.directItems
-    const definitions = this.definitions
+  private sync = (): void => {
+    if (this.syncing) return
+    this.syncing = true
 
-    items.forEach((item) => {
-      const definition = definitions.get(item.name)
-      if (!definition) return
-      item.label = definition.dataset.label ?? item.label
-      item.icon = definition.dataset.icon ?? item.icon
-      item.tone =
-        (definition.dataset.tone as CadTab['tone'] | undefined) ?? item.tone
-    })
+    const triggers = this.triggers
+    const contents = this.contents
+    const triggerValues = triggers
+      .map((trigger) => trigger.value)
+      .filter(Boolean)
+    const contentValues = contents
+      .map((content) => content.value)
+      .filter(Boolean)
+    const invalid =
+      !this.list ||
+      triggerValues.length !== triggers.length ||
+      contentValues.length !== contents.length ||
+      new Set(triggerValues).size !== triggerValues.length ||
+      new Set(contentValues).size !== contentValues.length ||
+      triggerValues.length !== contentValues.length ||
+      triggerValues.some((value) => !contentValues.includes(value))
 
-    const names = items.map((item) => item.name).filter(Boolean)
-
-    if (items.length === 0) {
-      this.items = []
-      this.activeTab = ''
-      delete this.dataset.invalid
-      this.requestUpdate()
-      return
-    }
-
-    if (names.length !== items.length || new Set(names).size !== names.length) {
+    if (invalid) {
       this.dataset.invalid = 'true'
-      this.items = []
-      this.activeTab = ''
-      items.forEach((item) => {
-        item.hidden = false
+      triggers.forEach((trigger) => {
+        trigger.active = false
       })
-      this.requestUpdate()
+      contents.forEach((content) => {
+        content.active = true
+      })
+      this.syncing = false
       return
     }
 
     delete this.dataset.invalid
-    this.items = items
+    const enabled = triggers.filter((trigger) => !trigger.disabled)
+    const requested = this.value || this.defaultValue
+    const next =
+      enabled.find((trigger) => trigger.value === requested)?.value ??
+      enabled[0]?.value ??
+      ''
 
-    const requested = this.activeTab || this.defaultTab
-    this.activeTab = names.includes(requested) ? requested : (names[0] ?? '')
-    this.applyPanelState()
-    this.requestUpdate()
-  }
-
-  private applyPanelState(): void {
-    this.items.forEach((item) => {
-      const active = item.name === this.activeTab
-      item.hidden = !active
-      item.id = this.panelId(item.name)
-      item.role = 'tabpanel'
-      item.tabIndex = 0
-      item.setAttribute('aria-label', item.label)
-    })
-  }
-
-  private applyAriaRelationships(): void {
-    this.items.forEach((item) => {
-      const button = this.shadowRoot?.querySelector<HTMLButtonElement>(
-        `#${this.tabId(item.name)}`,
+    if (this.value !== next) this.value = next
+    triggers.forEach((trigger) => {
+      trigger.active = trigger.value === next
+      trigger.controls = this.panelId(trigger.value)
+      const content = contents.find(
+        (candidate) => candidate.value === trigger.value,
       )
-      if (!button || !('ariaControlsElements' in button)) return
-      button.ariaControlsElements = [item]
+      if (content) {
+        void trigger.updateComplete.then(() =>
+          trigger.setControlledPanel(content),
+        )
+      }
     })
-  }
-
-  private panelId(name: string): string {
-    return `${this.id || this.instanceId}-panel-${name}`
-  }
-
-  private tabId(name: string): string {
-    return `${this.id || this.instanceId}-tab-${name}`
-  }
-
-  private activate(index: number, focus: boolean): void {
-    const item = this.items[index]
-    if (!item) return
-
-    const previousTab = this.activeTab
-    this.activeTab = item.name
-
-    if (previousTab !== this.activeTab) {
-      this.dispatchEvent(
-        new CustomEvent<CadTabChangeDetail>('cad-tab-change', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            activeTab: this.activeTab,
-            previousTab,
-          },
-        }),
+    contents.forEach((content) => {
+      const trigger = triggers.find(
+        (candidate) => candidate.value === content.value,
       )
-    }
-
-    if (focus) {
-      void this.updateComplete.then(() => {
-        this.shadowRoot
-          ?.querySelector<HTMLButtonElement>(`#${this.tabId(item.name)}`)
-          ?.focus()
-      })
-    }
+      content.active = content.value === next
+      content.label =
+        trigger?.label || trigger?.textContent?.trim() || content.value
+      content.id = this.panelId(content.value)
+      content.role = 'tabpanel'
+      content.tabIndex = 0
+      content.setAttribute('aria-label', content.label)
+    })
+    this.syncing = false
   }
 
-  private handleKeydown(event: KeyboardEvent, index: number): void {
-    let nextIndex: number
-
-    if (event.key === 'ArrowRight') nextIndex = (index + 1) % this.items.length
-    else if (event.key === 'ArrowLeft')
-      nextIndex = (index - 1 + this.items.length) % this.items.length
-    else if (event.key === 'Home') nextIndex = 0
-    else if (event.key === 'End') nextIndex = this.items.length - 1
-    else return
-
-    event.preventDefault()
-    this.activate(nextIndex, true)
+  private panelId(value: string): string {
+    return `${this.id || this.instanceId}-panel-${value}`
   }
 
-  override render() {
-    return html`
-      <div aria-label=${this.label} class="list" part="list" role="tablist">
-        ${this.items.map((item, index) => {
-          const active = item.name === this.activeTab
-          return html`
-            <button
-              aria-selected=${String(active)}
-              class="tab"
-              data-tone=${item.tone}
-              id=${this.tabId(item.name)}
-              part="tab"
-              role="tab"
-              tabindex=${active ? 0 : -1}
-              type="button"
-              @click=${() => this.activate(index, true)}
-              @keydown=${(event: KeyboardEvent) => this.handleKeydown(event, index)}
-            >
-              ${
-                item.icon
-                  ? html`
-                      <span aria-hidden="true" class="tab-icon">
-                        <cad-icon name=${item.icon} size="16"></cad-icon>
-                      </span>
-                    `
-                  : null
-              }
-              <span>${item.label}</span>
-            </button>
-          `
-        })}
-      </div>
-      <div class="panels" part="panels">
-        <slot @slotchange=${this.syncItems}></slot>
-      </div>
-    `
+  private handleRequest = (event: CadTabRequestEvent): void => {
+    const source = event.target
+    if (
+      !(source instanceof HTMLElement) ||
+      source.tagName !== 'CAD-TAB-TRIGGER'
+    ) {
+      return
+    }
+    const triggers = this.triggers.filter((trigger) => !trigger.disabled)
+    const currentIndex = triggers.indexOf(source as CadTabTrigger)
+    if (currentIndex < 0) return
+
+    const key = event.detail.key
+    let target = source as CadTabTrigger
+    if (key === 'ArrowRight')
+      target = triggers[(currentIndex + 1) % triggers.length]!
+    if (key === 'ArrowLeft') {
+      target = triggers[(currentIndex - 1 + triggers.length) % triggers.length]!
+    }
+    if (key === 'Home') target = triggers[0]!
+    if (key === 'End') target = triggers.at(-1)!
+    this.activate(target.value, target)
+  }
+
+  private activate(value: string, focusTarget: CadTabTrigger): void {
+    const previousValue = this.value
+    this.value = value
+    this.sync()
+    void this.updateComplete.then(() => focusTarget.focusControl())
+
+    if (previousValue === value) return
+    this.dispatchEvent(
+      new CustomEvent<CadTabChangeDetail>('cad-tab-change', {
+        bubbles: true,
+        composed: true,
+        detail: { previousValue, value },
+      }),
+    )
   }
 }
 

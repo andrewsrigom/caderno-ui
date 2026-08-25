@@ -1,0 +1,23 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadStepsOrientation } from '@caderno-ui/elements/steps'
+
+type Props = {
+  class?: string
+  label?: string
+  orientation?: CadStepsOrientation
+}
+const {
+  class: className,
+  label = 'Steps',
+  orientation = 'vertical',
+} = Astro.props
+---
+
+<cad-steps class={className} label={label} orientation={orientation}>
+  <slot />
+</cad-steps>
+
+<script>
+  import '@caderno-ui/elements/steps'
+</script>

@@ -19,8 +19,8 @@ describe('cad-spinner', () => {
     const status = spinner.shadowRoot?.querySelector('[role="status"]')
     expect(status?.textContent).toContain('Indexing notes')
     expect(status?.getAttribute('aria-live')).toBe('polite')
-    expect(
-      spinner.shadowRoot?.querySelector('cad-icon')?.getAttribute('size'),
-    ).toBe('42')
+    expect(spinner.getAttribute('size')).toBe('lg')
+    expect(spinner.shadowRoot?.querySelector('[part="icon"]')).not.toBeNull()
+    expect(customElements.get('cad-icon')).toBeUndefined()
   })
 })

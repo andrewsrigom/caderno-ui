@@ -2,7 +2,6 @@
 import '@caderno-ui/elements/fallback.css'
 
 import type {
-  CadButtonIconPosition,
   CadButtonSize,
   CadButtonTone,
   CadButtonType,
@@ -14,8 +13,6 @@ type Props = {
   disabled?: boolean
   form?: string
   href?: string
-  icon?: string
-  iconPosition?: CadButtonIconPosition
   label?: string
   rel?: string
   size?: CadButtonSize
@@ -30,8 +27,6 @@ const {
   disabled = false,
   form,
   href,
-  icon,
-  iconPosition = 'start',
   label,
   rel,
   size = 'md',
@@ -47,8 +42,6 @@ const {
   disabled={disabled || undefined}
   form={form}
   href={href}
-  icon={icon}
-  icon-position={iconPosition}
   label={label}
   rel={rel}
   size={size}
@@ -57,7 +50,9 @@ const {
   type={type}
   variant={variant}
 >
+  <slot name="start" slot="start" />
   <slot />
+  <slot name="end" slot="end" />
 </cad-button>
 
 <script>

@@ -116,6 +116,11 @@ export class CadNote extends LitElement {
       line-height: 1.05;
     }
 
+    .title ::slotted(*) {
+      margin: 0;
+      font: inherit;
+    }
+
     .content {
       min-width: 0;
       font-family: var(--cad-font-book, serif);
@@ -165,9 +170,9 @@ export class CadNote extends LitElement {
     return html`
       <section class="base" part="base" role="note">
         <span aria-hidden="true" class="tape" part="tape"></span>
-        <h3 class="title" part="title">
-          <slot name="title">${this.heading}</slot>
-        </h3>
+        <div class="title" part="title">
+          <slot name="title"><strong>${this.heading}</strong></slot>
+        </div>
         <div class="content" part="content"><slot></slot></div>
         <div
           class="footer"

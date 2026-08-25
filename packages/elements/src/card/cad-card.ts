@@ -1,43 +1,31 @@
-import { css, html, LitElement, nothing } from 'lit'
-
-import '../icon/cad-icon.js'
+import { css, html, LitElement } from 'lit'
 
 export type CadCardTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'neutral' | 'pink' | 'violet'
 export type CadCardVariant = 'outlined' | 'paper'
 
 /**
- * A composable notebook card that can optionally act as a link.
+ * A notebook paper surface that delegates content hierarchy to composable children.
  *
- * @slot - Card body.
- * @slot title - Card heading. Falls back to the `heading` attribute.
- * @slot footer - Supporting actions or metadata.
+ * @slot - Card composition, usually header, content, and footer elements.
  * @csspart base - Card article or anchor.
- * @csspart body - Card body.
- * @csspart footer - Card footer.
- * @csspart header - Card header.
- * @csspart icon - Optional heading icon.
- * @csspart kicker - Optional eyebrow text.
- * @csspart title - Card heading.
+ * @cssprop --cad-card-accent - Per-instance accent color.
  * @cssprop --cad-card-bg - Per-instance paper color.
  * @cssprop --cad-card-ink - Per-instance foreground color.
  */
 export class CadCard extends LitElement {
   static override properties = {
     folded: { reflect: true, type: Boolean },
-    heading: { type: String },
     href: { type: String },
-    icon: { type: String },
-    kicker: { type: String },
-    tone: { reflect: true, type: String },
     variant: { reflect: true, type: String },
+    tone: { reflect: true, type: String },
   }
 
   static override styles = css`
     :host {
       --_card-bg: var(--cad-card-bg, var(--cad-surface-raised, #fff));
       --_card-ink: var(--cad-card-ink, var(--cad-ink, #162033));
-      --_card-accent: var(--cad-ink-muted, #596273);
+      --_card-accent: var(--cad-card-accent, var(--cad-ink-muted, #596273));
       display: block;
     }
 
@@ -98,7 +86,7 @@ export class CadCard extends LitElement {
     .base {
       position: relative;
       display: grid;
-      gap: 0.75rem;
+      gap: 1rem;
       min-height: 100%;
       padding: 1.25rem 1.35rem 1.35rem;
       overflow: hidden;
@@ -147,57 +135,6 @@ export class CadCard extends LitElement {
       content: '';
     }
 
-    .header {
-      display: grid;
-      gap: 0.25rem;
-    }
-
-    .kicker {
-      margin: 0;
-      color: var(--_card-accent);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .title-row {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      color: var(--_card-accent);
-    }
-
-    .title {
-      margin: 0;
-      color: var(--_card-ink);
-      font-family: var(--cad-font-book, serif);
-      font-size: 1.25rem;
-      line-height: 1.2;
-    }
-
-    .body {
-      min-width: 0;
-      font-family: var(--cad-font-book, serif);
-      line-height: 1.6;
-    }
-
-    .footer {
-      padding-top: 0.35rem;
-      color: var(--cad-ink-muted, currentColor);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-    }
-
-    ::slotted(:first-child) {
-      margin-top: 0;
-    }
-
-    ::slotted(:last-child) {
-      margin-bottom: 0;
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .base {
         transition: none;
@@ -212,77 +149,195 @@ export class CadCard extends LitElement {
   `
 
   declare folded: boolean
-  declare heading: string
   declare href: string
-  declare icon: string
-  declare kicker: string
   declare tone: CadCardTone
   declare variant: CadCardVariant
 
   constructor() {
     super()
     this.folded = true
-    this.heading = ''
     this.href = ''
-    this.icon = ''
-    this.kicker = ''
     this.tone = 'neutral'
     this.variant = 'paper'
   }
 
-  private renderContent() {
-    const hasTitle = Boolean(
-      this.heading ||
-      this.icon ||
-      this.kicker ||
-      this.querySelector('[slot="title"]'),
-    )
-    const hasFooter = Boolean(this.querySelector('[slot="footer"]'))
-
-    return html`
-      ${
-        hasTitle
-          ? html`
-              <header class="header" part="header">
-                ${this.kicker ? html`<p class="kicker" part="kicker">${this.kicker}</p>` : nothing}
-                <div class="title-row">
-                  ${
-                    this.icon
-                      ? html`<span aria-hidden="true" part="icon"
-                          ><cad-icon name=${this.icon} size="20"></cad-icon
-                        ></span>`
-                      : nothing
-                  }
-                  <h3 class="title" part="title">
-                    <slot name="title">${this.heading}</slot>
-                  </h3>
-                </div>
-              </header>
-            `
-          : nothing
-      }
-      <div class="body" part="body"><slot></slot></div>
-      ${hasFooter ? html`<footer class="footer" part="footer"><slot name="footer"></slot></footer>` : nothing}
-    `
-  }
-
   override render() {
+    const content = html`<slot></slot>`
+
     return this.href
-      ? html`<a class="base" href=${this.href} part="base"
-          >${this.renderContent()}</a
-        >`
-      : html`<article class="base" part="base">
-          ${this.renderContent()}
-        </article>`
+      ? html`<a class="base" href=${this.href} part="base">${content}</a>`
+      : html`<article class="base" part="base">${content}</article>`
   }
 }
 
-if (typeof customElements !== 'undefined' && !customElements.get('cad-card')) {
-  customElements.define('cad-card', CadCard)
+abstract class CadCardSection extends LitElement {
+  protected abstract readonly element: 'div' | 'footer' | 'header'
+
+  override render() {
+    if (this.element === 'header') {
+      return html`<header part="base"><slot></slot></header>`
+    }
+    if (this.element === 'footer') {
+      return html`<footer part="base"><slot></slot></footer>`
+    }
+    return html`<div part="base"><slot></slot></div>`
+  }
+}
+
+/**
+ * Groups the card's leading hierarchy without prescribing its content.
+ *
+ * @slot - Kicker, title, description, actions, or custom content.
+ * @csspart base - Native card header.
+ */
+export class CadCardHeader extends CadCardSection {
+  protected readonly element = 'header'
+
+  static override styles = css`
+    header {
+      display: grid;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+  `
+}
+
+/**
+ * Applies title typography while leaving heading level to native slotted markup.
+ *
+ * @slot - A native heading element.
+ * @csspart base - Title wrapper.
+ */
+export class CadCardTitle extends CadCardSection {
+  protected readonly element = 'div'
+
+  static override styles = css`
+    div {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      min-width: 0;
+      color: var(--_card-ink, var(--cad-card-ink, var(--cad-ink, #162033)));
+      font-family: var(--cad-font-book, serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    ::slotted(*) {
+      margin: 0;
+      color: inherit;
+      font: inherit;
+    }
+  `
+}
+
+/**
+ * Styles compact eyebrow content above a card title.
+ *
+ * @slot - Kicker text.
+ * @csspart base - Kicker wrapper.
+ */
+export class CadCardKicker extends CadCardSection {
+  protected readonly element = 'div'
+
+  static override styles = css`
+    div {
+      color: var(
+        --_card-accent,
+        var(--cad-card-accent, var(--cad-ink-muted, #596273))
+      );
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-sm, 1.05rem);
+      font-weight: var(--cad-hand-weight-strong, 700);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    ::slotted(*) {
+      margin: 0;
+      font: inherit;
+    }
+  `
+}
+
+/**
+ * Groups the primary card content.
+ *
+ * @slot - Card body.
+ * @csspart base - Content wrapper.
+ */
+export class CadCardContent extends CadCardSection {
+  protected readonly element = 'div'
+
+  static override styles = css`
+    div {
+      min-width: 0;
+      font-family: var(--cad-font-book, serif);
+      line-height: 1.6;
+    }
+
+    ::slotted(:first-child) {
+      margin-top: 0;
+    }
+
+    ::slotted(:last-child) {
+      margin-bottom: 0;
+    }
+  `
+}
+
+/**
+ * Groups card actions or supporting metadata.
+ *
+ * @slot - Footer actions or metadata.
+ * @csspart base - Native card footer.
+ */
+export class CadCardFooter extends CadCardSection {
+  protected readonly element = 'footer'
+
+  static override styles = css`
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+      padding-top: 0.25rem;
+      color: var(--cad-ink-muted, currentColor);
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-sm, 1.05rem);
+    }
+  `
+}
+
+if (typeof customElements !== 'undefined') {
+  if (!customElements.get('cad-card')) {
+    customElements.define('cad-card', CadCard)
+  }
+  if (!customElements.get('cad-card-content')) {
+    customElements.define('cad-card-content', CadCardContent)
+  }
+  if (!customElements.get('cad-card-footer')) {
+    customElements.define('cad-card-footer', CadCardFooter)
+  }
+  if (!customElements.get('cad-card-header')) {
+    customElements.define('cad-card-header', CadCardHeader)
+  }
+  if (!customElements.get('cad-card-kicker')) {
+    customElements.define('cad-card-kicker', CadCardKicker)
+  }
+  if (!customElements.get('cad-card-title')) {
+    customElements.define('cad-card-title', CadCardTitle)
+  }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
     'cad-card': CadCard
+    'cad-card-content': CadCardContent
+    'cad-card-footer': CadCardFooter
+    'cad-card-header': CadCardHeader
+    'cad-card-kicker': CadCardKicker
+    'cad-card-title': CadCardTitle
   }
 }

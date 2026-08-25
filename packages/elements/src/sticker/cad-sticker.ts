@@ -1,7 +1,5 @@
 import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
-
 export type CadStickerShape = 'banner' | 'bubble' | 'burst' | 'label' | 'round'
 export type CadStickerSize = 'md' | 'sm'
 export type CadStickerTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet'
@@ -10,8 +8,9 @@ export type CadStickerTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet'
  * A compact decorative label for categories, milestones, and annotations.
  *
  * @slot - Sticker label. Falls back to the `label` attribute.
+ * @slot start - Optional leading visual.
  * @csspart base - Sticker container.
- * @csspart icon - Optional leading icon.
+ * @csspart start - Leading composition slot.
  * @csspart surface - Colored sticker surface.
  * @csspart text - Sticker text.
  * @cssprop --cad-sticker-bg - Per-instance sticker background.
@@ -19,7 +18,6 @@ export type CadStickerTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet'
  */
 export class CadSticker extends LitElement {
   static override properties = {
-    icon: { type: String },
     label: { type: String },
     shape: { reflect: true, type: String },
     size: { reflect: true, type: String },
@@ -102,11 +100,6 @@ export class CadSticker extends LitElement {
       font-size: 0.78rem;
       font-weight: var(--cad-hand-weight-strong, 700);
       line-height: 1.1;
-    }
-    .icon {
-      display: inline-grid;
-      flex: 0 0 auto;
-      place-items: center;
     }
     :host([size='sm']) .surface {
       min-height: 1.65rem;
@@ -200,28 +193,26 @@ export class CadSticker extends LitElement {
     }
   `
 
-  declare icon: string
   declare label: string
   declare shape: CadStickerShape
   declare size: CadStickerSize
   declare tone: CadStickerTone
   constructor() {
     super()
-    this.icon = ''
     this.label = ''
     this.shape = 'label'
     this.size = 'md'
     this.tone = 'blue'
   }
   override render() {
-    return html`<span class="base" part="base"
-      ><span class="surface" part="surface"
-        >${this.icon ? html`<span aria-hidden="true" class="icon" part="icon"><cad-icon name=${this.icon} size=${this.size === 'sm' ? '14' : '18'}></cad-icon></span>` : null}<span
-          part="text"
-          ><slot>${this.label}</slot></span
-        ></span
-      ></span
-    >`
+    return html`
+      <span class="base" part="base">
+        <span class="surface" part="surface">
+          <slot name="start" part="start"></slot>
+          <span part="text"><slot>${this.label}</slot></span>
+        </span>
+      </span>
+    `
   }
 }
 

@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
+import { renderSystemIcon } from '../internal/system-icon.js'
 
 export type CadBookmarkChangeDetail = {
   active: boolean
@@ -81,17 +81,19 @@ export class CadBookmark extends LitElement {
       outline-offset: 3px;
     }
 
-    cad-icon {
+    .icon {
+      width: 1.35rem;
+      height: 1.35rem;
       transition: transform var(--cad-duration-fast, 140ms)
         var(--cad-transition-smooth, ease);
     }
 
-    button[aria-pressed='true'] cad-icon {
+    button[aria-pressed='true'] .icon {
       transform: translateY(0.15rem);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      cad-icon {
+      .icon {
         transition: none;
       }
     }
@@ -177,7 +179,9 @@ export class CadBookmark extends LitElement {
         type="button"
         @click=${this.toggle}
       >
-        <cad-icon name="bookmark" part="icon" size="22"></cad-icon>
+        <span aria-hidden="true" class="icon" part="icon">
+          ${renderSystemIcon('bookmark')}
+        </span>
         <span part="label">${visibleLabel}</span>
       </button>
       <slot name="fallback"></slot>

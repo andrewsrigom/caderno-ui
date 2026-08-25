@@ -1,16 +1,22 @@
-import { css, html, LitElement, nothing } from 'lit'
+import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
+import {
+  renderSystemIcon,
+  type CadSystemIconName,
+} from '../internal/system-icon.js'
 
 export type CadCalloutVariant =
   'danger' | 'info' | 'success' | 'tip' | 'warning'
 
-const defaults: Record<CadCalloutVariant, { heading: string; icon: string }> = {
-  danger: { heading: 'Caution', icon: 'cross' },
-  info: { heading: 'Note', icon: 'note' },
+const defaults: Record<
+  CadCalloutVariant,
+  { heading: string; icon: CadSystemIconName }
+> = {
+  danger: { heading: 'Caution', icon: 'danger' },
+  info: { heading: 'Note', icon: 'info' },
   success: { heading: 'Verified', icon: 'check' },
-  tip: { heading: 'Tip', icon: 'lightbulb' },
-  warning: { heading: 'Attention', icon: 'exclamation' },
+  tip: { heading: 'Tip', icon: 'tip' },
+  warning: { heading: 'Attention', icon: 'warning' },
 }
 
 /**
@@ -19,6 +25,7 @@ const defaults: Record<CadCalloutVariant, { heading: string; icon: string }> = {
  * Unlike `cad-alert`, this component does not create a live region.
  *
  * @slot - Callout body.
+ * @slot icon - Optional visual that replaces the intrinsic variant mark.
  * @slot title - Visible heading. Falls back to the `heading` attribute.
  * @csspart base - Callout container.
  * @csspart content - Callout body.
@@ -31,7 +38,6 @@ const defaults: Record<CadCalloutVariant, { heading: string; icon: string }> = {
 export class CadCallout extends LitElement {
   static override properties = {
     heading: { type: String },
-    icon: { type: String },
     variant: { reflect: true, type: String },
   }
 
@@ -123,6 +129,11 @@ export class CadCallout extends LitElement {
       transform: rotate(-4deg);
     }
 
+    .icon svg {
+      width: 1.35rem;
+      height: 1.35rem;
+    }
+
     .body {
       display: grid;
       gap: 0.35rem;
@@ -136,6 +147,11 @@ export class CadCallout extends LitElement {
       font-size: var(--cad-hand-lg, 1.55rem);
       font-weight: var(--cad-hand-weight-strong, 700);
       line-height: 1.1;
+    }
+
+    .title ::slotted(*) {
+      margin: 0;
+      font: inherit;
     }
 
     .content {
@@ -160,31 +176,28 @@ export class CadCallout extends LitElement {
   `
 
   declare heading: string
-  declare icon: string
   declare variant: CadCalloutVariant
 
   constructor() {
     super()
     this.heading = ''
-    this.icon = ''
     this.variant = 'info'
   }
 
   override render() {
     const definition = defaults[this.variant] ?? defaults.info
     const heading = this.heading || definition.heading
-    const icon = this.icon || definition.icon
 
     return html`
       <aside class="base" part="base">
         <span aria-hidden="true" class="stripe" part="stripe"></span>
         <span aria-hidden="true" class="icon" part="icon">
-          ${icon ? html`<cad-icon name=${icon} size="22"></cad-icon>` : nothing}
+          <slot name="icon">${renderSystemIcon(definition.icon)}</slot>
         </span>
         <div class="body">
-          <h3 class="title" part="title">
-            <slot name="title">${heading}</slot>
-          </h3>
+          <div class="title" part="title">
+            <slot name="title"><strong>${heading}</strong></slot>
+          </div>
           <div class="content" part="content"><slot></slot></div>
         </div>
       </aside>

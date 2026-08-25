@@ -1,0 +1,54 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-blockquote author="Platform team" source="Decision 014" tone="violet">
+  The component boundary should describe a capability, not one screen's current layout.
+</cad-blockquote>
+
+<script type="module">
+  import '@caderno-ui/elements/blockquote'
+</script>`
+---
+
+<DocsLayout
+  description="Semantic quotations and decision excerpts with optional attribution."
+  title="Blockquote"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-blockquote&gt;</p>
+    <h1>Keep the quotation semantic and the attribution optional.</h1>
+    <p>
+      Blockquote renders a native figure, blockquote, and figcaption without
+      forcing a testimonial-shaped content model.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Architecture decision excerpt"
+    description="A review note attributed to the team and decision that established the boundary."
+  >
+    <cad-blockquote author="Platform team" source="Decision 014" tone="violet">
+      The component boundary should describe a capability, not one screen’s
+      current layout. Product-specific copy and actions stay in the application.
+    </cad-blockquote>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-blockquote" />
+
+  <section class="content-section" aria-labelledby="quote-accessibility">
+    <h2 id="quote-accessibility">Accessibility</h2>
+    <p>
+      Use this element only for quoted material. Use the caption slot when the
+      attribution needs richer markup, and provide <code>cite</code> when a stable
+      source URL exists.
+    </p>
+  </section>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/blockquote'
+</script>

@@ -3,16 +3,29 @@ cad-accordion:not(:defined),
 cad-accordion-item:not(:defined),
 cad-avatar:not(:defined),
 cad-badge:not(:defined),
+cad-blockquote:not(:defined),
 cad-breadcrumb:not(:defined),
 cad-breadcrumb-item:not(:defined),
 cad-button:not(:defined),
 cad-callout:not(:defined),
 cad-card:not(:defined),
+cad-card-content:not(:defined),
+cad-card-footer:not(:defined),
+cad-card-header:not(:defined),
+cad-card-kicker:not(:defined),
+cad-card-title:not(:defined),
 cad-chart:not(:defined),
 cad-checkbox:not(:defined),
+cad-checklist:not(:defined),
+cad-checklist-item:not(:defined),
+cad-code-block:not(:defined),
 cad-divider:not(:defined),
+cad-empty-state:not(:defined),
 cad-highlight:not(:defined),
 cad-input:not(:defined),
+cad-kanban:not(:defined),
+cad-kanban-card:not(:defined),
+cad-kanban-column:not(:defined),
 cad-link:not(:defined),
 cad-modal:not(:defined),
 cad-note:not(:defined),
@@ -20,9 +33,17 @@ cad-pagination:not(:defined),
 cad-progress:not(:defined),
 cad-radio:not(:defined),
 cad-spinner:not(:defined),
+cad-step:not(:defined),
+cad-steps:not(:defined),
 cad-sticker:not(:defined),
-cad-tab:not(:defined),
+cad-tab-content:not(:defined),
+cad-tab-trigger:not(:defined),
 cad-tabs:not(:defined),
+cad-tabs-list:not(:defined),
+cad-table:not(:defined),
+cad-table-cell:not(:defined),
+cad-table-column:not(:defined),
+cad-table-row:not(:defined),
 cad-tape:not(:defined),
 cad-textarea:not(:defined),
 cad-toast:not(:defined),
@@ -192,7 +213,54 @@ cad-link:not(:defined) {
   text-underline-offset: 0.2em;
 }
 
-cad-card:not(:defined),
+cad-card:not(:defined) {
+  display: block;
+  padding: 1.15rem 1.25rem;
+  color: var(--cad-ink, currentColor);
+  background: var(--cad-surface, transparent);
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.8rem;
+}
+
+cad-card-header:not(:defined) {
+  display: grid;
+  gap: 0.35rem;
+}
+
+cad-card-kicker:not(:defined) {
+  display: block;
+  font-family: var(--cad-font-hand, inherit);
+  font-size: var(--cad-hand-sm, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+cad-card-title:not(:defined) {
+  display: block;
+  font-family: var(--cad-font-book, inherit);
+  font-size: var(--cad-hand-lg, 1.4rem);
+  font-weight: 700;
+}
+
+cad-card-title:not(:defined) > :is(h2, h3, h4, h5, h6) {
+  margin: 0;
+  font: inherit;
+}
+
+cad-card-content:not(:defined) {
+  display: block;
+  line-height: 1.6;
+}
+
+cad-card-footer:not(:defined) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  font-family: var(--cad-font-hand, inherit);
+}
+
 cad-callout:not(:defined) {
   display: block;
   padding: 1.15rem 1.25rem;
@@ -202,7 +270,6 @@ cad-callout:not(:defined) {
   border-radius: 0.8rem;
 }
 
-cad-card:not(:defined)::before,
 cad-callout:not(:defined)::before {
   display: block;
   margin-bottom: 0.65rem;
@@ -210,6 +277,180 @@ cad-callout:not(:defined)::before {
   font-size: var(--cad-hand-lg, 1.4rem);
   font-weight: 700;
   content: attr(heading);
+}
+
+cad-blockquote:not(:defined) {
+  display: block;
+  padding: 1rem 1.2rem;
+  border-inline-start: 0.35rem solid var(--cad-link, currentColor);
+  font-family: var(--cad-font-book, inherit);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+cad-blockquote:not(:defined)::after {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--cad-ink-muted, currentColor);
+  content: attr(author) ' · ' attr(source);
+  font-family: var(--cad-font-hand, inherit);
+  font-style: normal;
+}
+
+cad-checklist:not(:defined) {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem 1.2rem;
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.8rem;
+}
+
+cad-checklist:not(:defined)::before {
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
+  content: attr(title);
+}
+
+cad-checklist-item:not(:defined) {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0.5rem;
+}
+
+cad-checklist-item:not(:defined)::before {
+  content: '✓';
+}
+
+cad-checklist[variant='dont']:not(:defined)
+  > cad-checklist-item:not(:defined)::before,
+cad-checklist-item[kind='cross']:not(:defined)::before {
+  content: '×';
+}
+
+cad-code-block:not(:defined) {
+  display: block;
+  padding: 1.3rem 1rem 1rem;
+  overflow: auto;
+  color: var(--cad-code-ink, currentColor);
+  background: var(--cad-code-bg, transparent);
+  border: 1px solid var(--cad-line-strong, currentColor);
+  border-radius: 0.75rem;
+  font-family: var(--cad-font-mono, monospace);
+  white-space: pre;
+}
+
+cad-empty-state:not(:defined) {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  padding: 2rem 1.25rem;
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.8rem;
+  font-family: var(--cad-font-book, inherit);
+  text-align: center;
+}
+
+cad-empty-state:not(:defined)::before {
+  content: attr(title);
+  font-family: var(--cad-font-hand, inherit);
+  font-size: var(--cad-hand-xl, 2rem);
+  font-weight: 700;
+}
+
+cad-empty-state:not(:defined)::after {
+  color: var(--cad-ink-muted, currentColor);
+  content: attr(description);
+}
+
+cad-steps:not(:defined) {
+  display: grid;
+  gap: 0.8rem;
+  counter-reset: cad-step;
+}
+
+cad-step:not(:defined) {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.7rem;
+  counter-increment: cad-step;
+}
+
+cad-step:not(:defined)::before {
+  display: inline-grid;
+  place-items: center;
+  height: 2rem;
+  background: var(--cad-post-it-blue-bg, transparent);
+  border-radius: 50%;
+  content: counter(cad-step);
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
+}
+
+cad-kanban:not(:defined) {
+  display: grid;
+  grid-auto-columns: minmax(13rem, 1fr);
+  grid-auto-flow: column;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+cad-kanban-column:not(:defined) {
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+  padding: 0.8rem;
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.75rem;
+}
+
+cad-kanban-column:not(:defined)::before {
+  content: attr(title);
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
+}
+
+cad-kanban-card:not(:defined) {
+  display: block;
+  padding: 0.75rem;
+  background: var(--cad-post-it-lemon-bg, transparent);
+  font-family: var(--cad-font-hand, inherit);
+}
+
+cad-table:not(:defined) {
+  display: block;
+  min-height: 8rem;
+  padding: 1rem;
+  overflow-x: auto;
+  color: var(--cad-ink, currentColor);
+  background: var(--cad-surface, transparent);
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.75rem;
+}
+
+cad-table:not(:defined)::before {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
+  content: attr(caption);
+}
+
+cad-table-column:not(:defined),
+cad-table-row:not(:defined) {
+  display: block;
+  font-family: var(--cad-font-mono, monospace);
+}
+
+cad-table-column:not(:defined) {
+  font-weight: 700;
+}
+
+cad-table-cell:not(:defined) {
+  display: inline;
+}
+
+cad-table-cell:not(:defined) + cad-table-cell:not(:defined)::before {
+  content: ' · ';
 }
 
 cad-divider:not(:defined) {
@@ -301,13 +542,35 @@ cad-progress:not(:defined) > [slot='fallback'] {
   display: inline-flex;
 }
 
-cad-tab:not(:defined) {
-  display: block;
-  padding-block: 1rem;
+cad-tabs:not(:defined) {
+  display: grid;
+  gap: 0;
 }
 
-cad-tab:not(:defined) + cad-tab:not(:defined) {
-  border-top: 1px dashed var(--cad-line-strong, currentColor);
+cad-tabs-list:not(:defined) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: end;
+}
+
+cad-tab-trigger:not(:defined) {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.55rem 1rem 0.85rem;
+  background: var(--cad-post-it-blue-bg, transparent);
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.7rem 0.95rem 0 0;
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
+}
+
+cad-tab-content:not(:defined) {
+  display: block;
+  padding: 1.35rem 1.5rem;
+  border: 1px dashed var(--cad-line-strong, currentColor);
+  border-radius: 0.35rem 0.85rem 0.85rem;
 }
 
 cad-spinner:not(:defined) {

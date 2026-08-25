@@ -4,11 +4,15 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-badge icon="check" tone="mint">Reviewed</cad-badge>
+const usage = `<cad-badge tone="mint">
+  <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
+  Reviewed
+</cad-badge>
 <cad-badge tone="coral" variant="outline">Needs work</cad-badge>
 
 <script type="module">
   import '@caderno-ui/elements/badge'
+  import '@caderno-ui/elements/icon'
 </script>`
 ---
 
@@ -25,10 +29,18 @@ const usage = `<cad-badge icon="check" tone="mint">Reviewed</cad-badge>
     </p>
   </header>
 
-  <DemoFrame title="Tones and emphasis">
+  <DemoFrame title="Review status vocabulary">
     <div class="badge-row">
-      <cad-badge icon="check" tone="mint">Reviewed</cad-badge>
-      <cad-badge icon="spark" tone="blue">New idea</cad-badge>
+      <cad-badge tone="mint">
+        <cad-icon aria-hidden="true" name="check" size="15" slot="start"
+        ></cad-icon>
+        Reviewed
+      </cad-badge>
+      <cad-badge tone="blue">
+        <cad-icon aria-hidden="true" name="spark" size="15" slot="start"
+        ></cad-icon>
+        New idea
+      </cad-badge>
       <cad-badge tone="lemon">In progress</cad-badge>
       <cad-badge tone="coral" variant="outline">Needs work</cad-badge>
     </div>
@@ -55,3 +67,8 @@ const usage = `<cad-badge icon="check" tone="mint">Reviewed</cad-badge>
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/badge'
+  import '@caderno-ui/elements/icon'
+</script>

@@ -6,7 +6,6 @@ import type {
   CadInputTone,
   CadInputType,
 } from '@caderno-ui/elements/input'
-import type { CadIconName } from '@caderno-ui/icons'
 
 type Props = {
   autocomplete?: string
@@ -14,7 +13,6 @@ type Props = {
   disabled?: boolean
   error?: string
   hint?: string
-  icon?: CadIconName
   id?: string
   inputmode?: string
   invalid?: boolean
@@ -38,7 +36,6 @@ const {
   disabled = false,
   error,
   hint,
-  icon,
   id,
   inputmode,
   invalid = false,
@@ -63,7 +60,6 @@ const {
   disabled={disabled}
   error={error}
   hint={hint}
-  icon={icon}
   id={id}
   inputmode={inputmode}
   invalid={invalid}
@@ -81,6 +77,7 @@ const {
   value={value}
 >
   <span slot="label">{label}</span>
+  <slot name="prefix" slot="prefix" />
 </cad-input>
 
 <script>

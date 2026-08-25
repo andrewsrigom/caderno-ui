@@ -1,0 +1,37 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type { CadTabTone } from '@caderno-ui/elements/tabs'
+
+type Props = {
+  class?: string
+  disabled?: boolean
+  label?: string
+  tone?: CadTabTone
+  value: string
+}
+
+const {
+  class: className,
+  disabled = false,
+  label,
+  tone = 'accent',
+  value,
+} = Astro.props
+---
+
+<cad-tab-trigger
+  class={className}
+  disabled={disabled || undefined}
+  label={label}
+  tone={tone}
+  value={value}
+>
+  <slot name="start" slot="start" />
+  <slot>{label}</slot>
+  <slot name="end" slot="end" />
+</cad-tab-trigger>
+
+<script>
+  import '@caderno-ui/elements/tabs'
+</script>

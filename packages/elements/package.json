@@ -86,6 +86,10 @@
       "types": "./dist/tabs/index.d.ts",
       "import": "./dist/tabs/index.js"
     },
+    "./table": {
+      "types": "./dist/table/cad-table.d.ts",
+      "import": "./dist/table/cad-table.js"
+    },
     "./fallback.css": "./src/styles/fallback.css",
     "./input": {
       "types": "./dist/input/cad-input.d.ts",
@@ -146,6 +150,30 @@
     "./sticker": {
       "types": "./dist/sticker/cad-sticker.d.ts",
       "import": "./dist/sticker/cad-sticker.js"
+    },
+    "./blockquote": {
+      "types": "./dist/blockquote/cad-blockquote.d.ts",
+      "import": "./dist/blockquote/cad-blockquote.js"
+    },
+    "./checklist": {
+      "types": "./dist/checklist/cad-checklist.d.ts",
+      "import": "./dist/checklist/cad-checklist.js"
+    },
+    "./code-block": {
+      "types": "./dist/code-block/cad-code-block.d.ts",
+      "import": "./dist/code-block/cad-code-block.js"
+    },
+    "./empty-state": {
+      "types": "./dist/empty-state/cad-empty-state.d.ts",
+      "import": "./dist/empty-state/cad-empty-state.js"
+    },
+    "./kanban": {
+      "types": "./dist/kanban/cad-kanban.d.ts",
+      "import": "./dist/kanban/cad-kanban.js"
+    },
+    "./steps": {
+      "types": "./dist/steps/cad-steps.d.ts",
+      "import": "./dist/steps/cad-steps.js"
     }
   },
   "sideEffects": [

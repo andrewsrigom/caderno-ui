@@ -6,14 +6,14 @@ import type { CadCalloutVariant } from '@caderno-ui/elements/callout'
 type Props = {
   class?: string
   heading?: string
-  icon?: string
   variant?: CadCalloutVariant
 }
 
-const { class: className, heading, icon, variant = 'info' } = Astro.props
+const { class: className, heading, variant = 'info' } = Astro.props
 ---
 
-<cad-callout class={className} heading={heading} icon={icon} variant={variant}>
+<cad-callout class={className} heading={heading} variant={variant}>
+  <slot name="icon" slot="icon" />
   <slot name="title" slot="title" />
   <slot />
 </cad-callout>

@@ -1,0 +1,12 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = { class?: string; label?: string }
+const { class: className, label = 'Kanban board' } = Astro.props
+---
+
+<cad-kanban class={className} label={label}><slot /></cad-kanban>
+
+<script>
+  import '@caderno-ui/elements/kanban'
+</script>

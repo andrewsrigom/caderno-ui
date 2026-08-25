@@ -11,17 +11,23 @@ describe('cad-badge', () => {
   it('registers individually and reflects visual variants without adding a role', async () => {
     expectRegistered('cad-badge')
     const badge = document.createElement('cad-badge')
-    badge.icon = 'check'
+    const start = document.createElement('span')
+    start.slot = 'start'
+    start.textContent = '✓'
     badge.tone = 'mint'
     badge.variant = 'outline'
-    badge.textContent = 'Reviewed'
+    badge.append(start, 'Reviewed')
     document.body.append(badge)
     await badge.updateComplete
 
     expect(badge.getAttribute('tone')).toBe('mint')
     expect(badge.getAttribute('variant')).toBe('outline')
     expect(badge.shadowRoot?.querySelector('[role]')).toBeNull()
-    expect(badge.shadowRoot?.querySelector('cad-icon')).not.toBeNull()
+    expect(
+      badge.shadowRoot
+        ?.querySelector<HTMLSlotElement>('slot[name="start"]')
+        ?.assignedElements(),
+    ).toEqual([start])
     expect(badge.shadowRoot?.querySelector('slot')).not.toBeNull()
   })
 })

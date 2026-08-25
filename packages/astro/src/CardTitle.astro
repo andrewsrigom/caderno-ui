@@ -1,0 +1,14 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type HeadingLevel = 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+type Props = { as?: HeadingLevel; class?: string }
+
+const { as: Tag = 'h2', class: className }: Props = Astro.props
+---
+
+<cad-card-title class={className}><Tag><slot /></Tag></cad-card-title>
+
+<script>
+  import '@caderno-ui/elements/card'
+</script>

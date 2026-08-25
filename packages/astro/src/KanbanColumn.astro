@@ -1,0 +1,15 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = { class?: string; title?: string }
+const { class: className, title } = Astro.props
+---
+
+<cad-kanban-column class={className} title={title}>
+  <slot name="title" slot="title" />
+  <slot />
+</cad-kanban-column>
+
+<script>
+  import '@caderno-ui/elements/kanban'
+</script>

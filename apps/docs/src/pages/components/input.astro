@@ -6,16 +6,18 @@ import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<form>
   <cad-input
-    icon="search"
     label="Interview topic"
     name="topic"
     placeholder="System design"
     required
-  ></cad-input>
+  >
+    <cad-icon aria-hidden="true" name="search" slot="prefix"></cad-icon>
+  </cad-input>
 </form>
 
 <script type="module">
   import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/icon'
 </script>`
 ---
 
@@ -37,11 +39,14 @@ const usage = `<form>
     <div class="field-stack">
       <cad-input
         hint="Use a concrete subject."
-        icon="search"
         label="Interview topic"
         name="topic"
         placeholder="System design"
-        required></cad-input>
+        required
+      >
+        <cad-icon aria-hidden="true" name="search" size="18" slot="prefix"
+        ></cad-icon>
+      </cad-input>
       <cad-input
         error="Use a valid address."
         invalid
@@ -74,3 +79,8 @@ const usage = `<form>
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/input'
+</script>

@@ -1,0 +1,79 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-kanban label="Release readiness">
+  <cad-kanban-column title="In review">
+    <cad-kanban-card tone="blue">Validate selective bundles</cad-kanban-card>
+    <cad-kanban-card tone="lemon">Review keyboard navigation</cad-kanban-card>
+  </cad-kanban-column>
+  <cad-kanban-column title="Ready">
+    <cad-kanban-card tone="mint">Compound card contract</cad-kanban-card>
+  </cad-kanban-column>
+</cad-kanban>
+
+<script type="module">
+  import '@caderno-ui/elements/kanban'
+</script>`
+---
+
+<DocsLayout
+  description="Composable Kanban boards with independent columns, cards, counts, and accessible list structure."
+  title="Kanban"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-kanban&gt; family</p>
+    <h1>A planning surface, not a hidden task model.</h1>
+    <p>
+      Kanban provides the visual and semantic board structure. Applications own
+      drag-and-drop, persistence, filtering, and domain-specific card content.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Release readiness"
+    description="A static release view whose counts follow the composed cards."
+  >
+    <cad-kanban label="Release readiness">
+      <cad-kanban-column title="Planned">
+        <cad-kanban-card tone="coral">
+          Replace temporary package links with public versions
+        </cad-kanban-card>
+      </cad-kanban-column>
+      <cad-kanban-column title="In review">
+        <cad-kanban-card tone="blue">
+          Validate selective bundles
+        </cad-kanban-card>
+        <cad-kanban-card tone="lemon">
+          Review keyboard navigation
+        </cad-kanban-card>
+      </cad-kanban-column>
+      <cad-kanban-column title="Ready">
+        <cad-kanban-card tone="mint"> Compound card contract </cad-kanban-card>
+        <cad-kanban-card tone="mint">
+          Responsive semantic table
+        </cad-kanban-card>
+      </cad-kanban-column>
+    </cad-kanban>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-kanban" />
+  <ApiReference tagName="cad-kanban-column" />
+  <ApiReference tagName="cad-kanban-card" />
+
+  <section class="content-section" aria-labelledby="kanban-boundary">
+    <h2 id="kanban-boundary">Deliberate boundary</h2>
+    <p>
+      This primitive intentionally has no drag-and-drop runtime. If an
+      application adds movement, it must also provide keyboard movement,
+      announcements, persistence, and undo as one product behavior.
+    </p>
+  </section>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/kanban'
+</script>

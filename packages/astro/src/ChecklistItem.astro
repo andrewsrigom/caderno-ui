@@ -1,0 +1,13 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadChecklistItemKind } from '@caderno-ui/elements/checklist'
+
+type Props = { class?: string; kind?: CadChecklistItemKind }
+const { class: className, kind } = Astro.props
+---
+
+<cad-checklist-item class={className} kind={kind}><slot /></cad-checklist-item>
+
+<script>
+  import '@caderno-ui/elements/checklist'
+</script>

@@ -1,6 +1,9 @@
 import { css, html, LitElement, type PropertyValues } from 'lit'
 
-import '../icon/cad-icon.js'
+import {
+  renderSystemIcon,
+  type CadSystemIconName,
+} from '../internal/system-icon.js'
 
 export { CadToastHost } from './cad-toast-host.js'
 export type { CadToastOptions, CadToastPlacement } from './cad-toast-host.js'
@@ -15,12 +18,12 @@ export type CadToastDismissDetail = {
 
 export type CadToastDismissEvent = CustomEvent<CadToastDismissDetail>
 
-const icons = {
-  danger: 'bug',
-  info: 'spark',
+const icons: Record<CadToastVariant, CadSystemIconName> = {
+  danger: 'danger',
+  info: 'info',
   success: 'check',
-  warning: 'exclamation',
-} as const
+  warning: 'warning',
+}
 
 /**
  * A dismissible notebook notification with optional automatic timeout.
@@ -111,6 +114,11 @@ export class CadToast extends LitElement {
       transform: rotate(-2deg);
     }
 
+    .icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
     .body {
       display: grid;
       gap: 0.15rem;
@@ -159,6 +167,11 @@ export class CadToast extends LitElement {
     .close:focus-visible {
       outline: 2px dashed var(--cad-focus-ring, var(--_toast-ink));
       outline-offset: 3px;
+    }
+
+    .close svg {
+      width: 1rem;
+      height: 1rem;
     }
 
     @keyframes enter {
@@ -242,7 +255,7 @@ export class CadToast extends LitElement {
       >
         <span aria-hidden="true" class="tape" part="tape"></span>
         <span aria-hidden="true" class="icon" part="icon">
-          <cad-icon name=${icons[this.variant]} size="20"></cad-icon>
+          ${renderSystemIcon(icons[this.variant])}
         </span>
         <span class="body" part="body">
           <strong class="title" part="title">
@@ -260,7 +273,7 @@ export class CadToast extends LitElement {
                   type="button"
                   @click=${this.handleDismiss}
                 >
-                  <cad-icon name="cross" size="16"></cad-icon>
+                  ${renderSystemIcon('close')}
                 </button>
               `
             : null

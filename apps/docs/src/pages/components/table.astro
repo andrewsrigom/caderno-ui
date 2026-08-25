@@ -1,0 +1,111 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-table caption="Interview preparation" min-width="38rem" zebra>
+  <cad-table-column key="chapter" label="Chapter"></cad-table-column>
+  <cad-table-column key="status" label="Status"></cad-table-column>
+  <cad-table-column key="minutes" label="Est. minutes"></cad-table-column>
+
+  <cad-table-row>
+    <cad-table-cell column="chapter">System design fundamentals</cad-table-cell>
+    <cad-table-cell column="status">In review</cad-table-cell>
+    <cad-table-cell column="minutes">45</cad-table-cell>
+  </cad-table-row>
+</cad-table>
+
+<script type="module">
+  import '@caderno-ui/elements/table'
+</script>`
+---
+
+<DocsLayout
+  description="Responsive native data tables with declarative columns, rows, and notebook variants."
+  title="Table"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-table&gt; family</p>
+    <h1>Structured evidence that remains a real table.</h1>
+    <p>
+      Table turns declarative column and row children into native table
+      semantics, keeps wide datasets scrollable, and covers both grid and ruled
+      notebook treatments without duplicating an implementation.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Interview preparation tracker"
+    description="A realistic dataset with scan-friendly status and numeric columns."
+  >
+    <cad-table caption="Interview preparation" min-width="40rem" zebra>
+      <cad-table-column key="chapter" label="Chapter"></cad-table-column>
+      <cad-table-column key="status" label="Status"></cad-table-column>
+      <cad-table-column key="owner" label="Owner"></cad-table-column>
+      <cad-table-column key="minutes" label="Est. minutes"></cad-table-column>
+
+      <cad-table-row>
+        <cad-table-cell column="chapter"
+          >System design fundamentals</cad-table-cell
+        >
+        <cad-table-cell column="status">In review</cad-table-cell>
+        <cad-table-cell column="owner">Andrews</cad-table-cell>
+        <cad-table-cell column="minutes">45</cad-table-cell>
+      </cad-table-row>
+      <cad-table-row>
+        <cad-table-cell column="chapter">Behavioral story bank</cad-table-cell>
+        <cad-table-cell column="status">Ready</cad-table-cell>
+        <cad-table-cell column="owner">Andrews</cad-table-cell>
+        <cad-table-cell column="minutes">30</cad-table-cell>
+      </cad-table-row>
+      <cad-table-row>
+        <cad-table-cell column="chapter">Concurrency trade-offs</cad-table-cell>
+        <cad-table-cell column="status">Planned</cad-table-cell>
+        <cad-table-cell column="owner">—</cad-table-cell>
+        <cad-table-cell column="minutes">60</cad-table-cell>
+      </cad-table-row>
+    </cad-table>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <DemoFrame
+    title="Ruled comparison notes"
+    description="The same semantic component can use a lighter notebook treatment."
+  >
+    <cad-table caption="Storage trade-offs" variant="ruled">
+      <cad-table-column key="option" label="Option"></cad-table-column>
+      <cad-table-column key="strength" label="Best when"></cad-table-column>
+      <cad-table-column key="cost" label="Trade-off"></cad-table-column>
+      <cad-table-row>
+        <cad-table-cell column="option">Relational database</cad-table-cell>
+        <cad-table-cell column="strength"
+          >Integrity and rich queries matter</cad-table-cell
+        >
+        <cad-table-cell column="cost">Schema coordination</cad-table-cell>
+      </cad-table-row>
+      <cad-table-row>
+        <cad-table-cell column="option">Document store</cad-table-cell>
+        <cad-table-cell column="strength"
+          >Aggregate shape changes often</cad-table-cell
+        >
+        <cad-table-cell column="cost">Cross-document guarantees</cad-table-cell>
+      </cad-table-row>
+    </cad-table>
+  </DemoFrame>
+
+  <ApiReference tagName="cad-table" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Provide a concise caption that identifies the dataset. Column keys connect
+      declarative cells to native scoped headers; the visual overflow container
+      preserves the table rather than replacing it with non-semantic cards.
+    </p>
+  </section>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/table'
+</script>

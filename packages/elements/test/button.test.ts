@@ -8,11 +8,13 @@ afterEach(() => {
 })
 
 describe('cad-button', () => {
-  it('renders a native button with its public parts and icon', async () => {
+  it('renders a native button with composable start and end slots', async () => {
     expectRegistered('cad-button')
     const element = document.createElement('cad-button')
-    element.icon = 'check'
-    element.textContent = 'Save'
+    const start = document.createElement('span')
+    start.slot = 'start'
+    start.textContent = '✓'
+    element.append(start, 'Save')
     document.body.append(element)
     await element.updateComplete
 
@@ -20,12 +22,17 @@ describe('cad-button', () => {
     expect(button?.getAttribute('part')).toBe('base')
     expect(
       element.shadowRoot
-        ?.querySelector<HTMLSlotElement>('slot')
+        ?.querySelector<HTMLSlotElement>('slot:not([name])')
         ?.assignedNodes()
         .map((node) => node.textContent)
         .join(''),
     ).toContain('Save')
-    expect(element.shadowRoot?.querySelector('[part="icon"]')).not.toBeNull()
+    expect(
+      element.shadowRoot
+        ?.querySelector<HTMLSlotElement>('slot[name="start"]')
+        ?.assignedElements(),
+    ).toEqual([start])
+    expect(customElements.get('cad-icon')).toBeUndefined()
   })
 
   it('renders a disabled link without an href or keyboard stop', async () => {

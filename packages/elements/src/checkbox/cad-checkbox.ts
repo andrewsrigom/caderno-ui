@@ -1,6 +1,6 @@
 import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
 
-import '../icon/cad-icon.js'
+import { renderSystemIcon } from '../internal/system-icon.js'
 
 export type CadCheckboxTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
@@ -159,6 +159,11 @@ export class CadCheckbox extends LitElement {
       content: '';
     }
 
+    .mark svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
     .control:checked + .box,
     .control:indeterminate + .box {
       background: color-mix(in srgb, var(--_check-bg) 68%, transparent);
@@ -171,7 +176,7 @@ export class CadCheckbox extends LitElement {
       transform: scale(1) rotate(-6deg);
     }
 
-    .control:indeterminate + .box .mark cad-icon {
+    .control:indeterminate + .box .mark svg {
       display: none;
     }
 
@@ -348,9 +353,7 @@ export class CadCheckbox extends LitElement {
           @input=${this.handleInput}
         />
         <span aria-hidden="true" class="box" part="box">
-          <span class="mark" part="mark">
-            <cad-icon name="check" size="16"></cad-icon>
-          </span>
+          <span class="mark" part="mark"> ${renderSystemIcon('check')} </span>
         </span>
         <span class="body">
           <span class="label" part="label">

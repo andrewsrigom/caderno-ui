@@ -18,13 +18,14 @@ import { CadAvatarStatus } from '@caderno-ui/elements/avatar';
 import { CadBadge as CadBadge_2 } from '@caderno-ui/elements/badge';
 import { CadBadgeTone } from '@caderno-ui/elements/badge';
 import { CadBadgeVariant } from '@caderno-ui/elements/badge';
+import { CadBlockquote as CadBlockquote_2 } from '@caderno-ui/elements/blockquote';
+import { CadBlockquoteTone } from '@caderno-ui/elements/blockquote';
 import { CadBookmark as CadBookmark_2 } from '@caderno-ui/elements/bookmark';
 import { CadBookmarkChangeDetail } from '@caderno-ui/elements/bookmark';
 import { CadBookmarkChangeEvent } from '@caderno-ui/elements/bookmark';
 import { CadBreadcrumb as CadBreadcrumb_2 } from '@caderno-ui/elements/breadcrumb';
 import { CadBreadcrumbItem as CadBreadcrumbItem_2 } from '@caderno-ui/elements/breadcrumb';
 import { CadButton as CadButton_2 } from '@caderno-ui/elements/button';
-import { CadButtonIconPosition } from '@caderno-ui/elements/button';
 import { CadButtonSize } from '@caderno-ui/elements/button';
 import { CadButtonTone } from '@caderno-ui/elements/button';
 import { CadButtonType } from '@caderno-ui/elements/button';
@@ -32,10 +33,22 @@ import { CadButtonVariant } from '@caderno-ui/elements/button';
 import { CadCallout as CadCallout_2 } from '@caderno-ui/elements/callout';
 import { CadCalloutVariant } from '@caderno-ui/elements/callout';
 import { CadCard as CadCard_2 } from '@caderno-ui/elements/card';
+import { CadCardContent as CadCardContent_2 } from '@caderno-ui/elements/card';
+import { CadCardFooter as CadCardFooter_2 } from '@caderno-ui/elements/card';
+import { CadCardHeader as CadCardHeader_2 } from '@caderno-ui/elements/card';
+import { CadCardKicker as CadCardKicker_2 } from '@caderno-ui/elements/card';
+import { CadCardTitle as CadCardTitle_2 } from '@caderno-ui/elements/card';
 import { CadCardTone } from '@caderno-ui/elements/card';
 import { CadCardVariant } from '@caderno-ui/elements/card';
 import { CadCheckbox as CadCheckbox_2 } from '@caderno-ui/elements/checkbox';
 import { CadCheckboxTone } from '@caderno-ui/elements/checkbox';
+import { CadChecklist as CadChecklist_2 } from '@caderno-ui/elements/checklist';
+import { CadChecklistItem as CadChecklistItem_2 } from '@caderno-ui/elements/checklist';
+import { CadChecklistItemKind } from '@caderno-ui/elements/checklist';
+import { CadChecklistTone } from '@caderno-ui/elements/checklist';
+import { CadChecklistVariant } from '@caderno-ui/elements/checklist';
+import { CadCodeBlock as CadCodeBlock_2 } from '@caderno-ui/elements/code-block';
+import { CadCodeBlockTone } from '@caderno-ui/elements/code-block';
 import { CadDismissDetail } from '@caderno-ui/elements/alert';
 import { CadDismissEvent } from '@caderno-ui/elements/alert';
 import { CadDivider as CadDivider_2 } from '@caderno-ui/elements/divider';
@@ -43,6 +56,8 @@ import { CadDividerDensity } from '@caderno-ui/elements/divider';
 import { CadDividerOrientation } from '@caderno-ui/elements/divider';
 import { CadDividerTone } from '@caderno-ui/elements/divider';
 import { CadDividerVariant } from '@caderno-ui/elements/divider';
+import { CadEmptyState as CadEmptyState_2 } from '@caderno-ui/elements/empty-state';
+import { CadEmptyStateVariant } from '@caderno-ui/elements/empty-state';
 import { CadHighlight as CadHighlight_2 } from '@caderno-ui/elements/highlight';
 import { CadHighlightTone } from '@caderno-ui/elements/highlight';
 import { CadHighlightVariant } from '@caderno-ui/elements/highlight';
@@ -51,6 +66,10 @@ import { CadInput as CadInput_2 } from '@caderno-ui/elements/input';
 import { CadInputSize } from '@caderno-ui/elements/input';
 import { CadInputTone } from '@caderno-ui/elements/input';
 import { CadInputType } from '@caderno-ui/elements/input';
+import { CadKanban as CadKanban_2 } from '@caderno-ui/elements/kanban';
+import { CadKanbanCard as CadKanbanCard_2 } from '@caderno-ui/elements/kanban';
+import { CadKanbanCardTone } from '@caderno-ui/elements/kanban';
+import { CadKanbanColumn as CadKanbanColumn_2 } from '@caderno-ui/elements/kanban';
 import { CadLink as CadLink_2 } from '@caderno-ui/elements/link';
 import { CadLinkTone } from '@caderno-ui/elements/link';
 import { CadLinkVariant } from '@caderno-ui/elements/link';
@@ -70,15 +89,27 @@ import { CadRadioTone } from '@caderno-ui/elements/radio';
 import { CadSpinner as CadSpinner_2 } from '@caderno-ui/elements/spinner';
 import { CadSpinnerSize } from '@caderno-ui/elements/spinner';
 import { CadSpinnerTone } from '@caderno-ui/elements/spinner';
+import { CadStep as CadStep_2 } from '@caderno-ui/elements/steps';
+import { CadSteps as CadSteps_2 } from '@caderno-ui/elements/steps';
+import { CadStepsOrientation } from '@caderno-ui/elements/steps';
+import { CadStepTone } from '@caderno-ui/elements/steps';
 import { CadSticker as CadSticker_2 } from '@caderno-ui/elements/sticker';
 import { CadStickerShape } from '@caderno-ui/elements/sticker';
 import { CadStickerSize } from '@caderno-ui/elements/sticker';
 import { CadStickerTone } from '@caderno-ui/elements/sticker';
-import { CadTab as CadTab_2 } from '@caderno-ui/elements/tabs';
 import { CadTabChangeDetail } from '@caderno-ui/elements/tabs';
 import { CadTabChangeEvent } from '@caderno-ui/elements/tabs';
+import { CadTabContent as CadTabContent_2 } from '@caderno-ui/elements/tabs';
+import { CadTable as CadTable_2 } from '@caderno-ui/elements/table';
+import { CadTableCell as CadTableCell_2 } from '@caderno-ui/elements/table';
+import { CadTableColumn as CadTableColumn_2 } from '@caderno-ui/elements/table';
+import { CadTableDensity } from '@caderno-ui/elements/table';
+import { CadTableRow as CadTableRow_2 } from '@caderno-ui/elements/table';
+import { CadTableVariant } from '@caderno-ui/elements/table';
 import { CadTabs as CadTabs_2 } from '@caderno-ui/elements/tabs';
+import { CadTabsList as CadTabsList_2 } from '@caderno-ui/elements/tabs';
 import { CadTabTone } from '@caderno-ui/elements/tabs';
+import { CadTabTrigger as CadTabTrigger_2 } from '@caderno-ui/elements/tabs';
 import { CadTape as CadTape_2 } from '@caderno-ui/elements/tape';
 import { CadTapeSize } from '@caderno-ui/elements/tape';
 import { CadTapeTone } from '@caderno-ui/elements/tape';
@@ -136,6 +167,11 @@ export { CadBadgeTone }
 export { CadBadgeVariant }
 
 // @public (undocumented)
+export const CadBlockquote: ReactWebComponent<CadBlockquote_2, {}>;
+
+export { CadBlockquoteTone }
+
+// @public (undocumented)
 export const CadBookmark: ReactWebComponent<CadBookmark_2, {
 onBookmarkChange: EventName<CadBookmarkChangeEvent>;
 }>;
@@ -153,8 +189,6 @@ export const CadBreadcrumbItem: ReactWebComponent<CadBreadcrumbItem_2, {}>;
 // @public (undocumented)
 export const CadButton: ReactWebComponent<CadButton_2, {}>;
 
-export { CadButtonIconPosition }
-
 export { CadButtonSize }
 
 export { CadButtonTone }
@@ -171,6 +205,21 @@ export { CadCalloutVariant }
 // @public (undocumented)
 export const CadCard: ReactWebComponent<CadCard_2, {}>;
 
+// @public (undocumented)
+export const CadCardContent: ReactWebComponent<CadCardContent_2, {}>;
+
+// @public (undocumented)
+export const CadCardFooter: ReactWebComponent<CadCardFooter_2, {}>;
+
+// @public (undocumented)
+export const CadCardHeader: ReactWebComponent<CadCardHeader_2, {}>;
+
+// @public (undocumented)
+export const CadCardKicker: ReactWebComponent<CadCardKicker_2, {}>;
+
+// @public (undocumented)
+export const CadCardTitle: ReactWebComponent<CadCardTitle_2, {}>;
+
 export { CadCardTone }
 
 export { CadCardVariant }
@@ -179,6 +228,23 @@ export { CadCardVariant }
 export const CadCheckbox: ReactWebComponent<CadCheckbox_2, {}>;
 
 export { CadCheckboxTone }
+
+// @public (undocumented)
+export const CadChecklist: ReactWebComponent<CadChecklist_2, {}>;
+
+// @public (undocumented)
+export const CadChecklistItem: ReactWebComponent<CadChecklistItem_2, {}>;
+
+export { CadChecklistItemKind }
+
+export { CadChecklistTone }
+
+export { CadChecklistVariant }
+
+// @public (undocumented)
+export const CadCodeBlock: ReactWebComponent<CadCodeBlock_2, {}>;
+
+export { CadCodeBlockTone }
 
 export { CadDismissDetail }
 
@@ -194,6 +260,11 @@ export { CadDividerOrientation }
 export { CadDividerTone }
 
 export { CadDividerVariant }
+
+// @public (undocumented)
+export const CadEmptyState: ReactWebComponent<CadEmptyState_2, {}>;
+
+export { CadEmptyStateVariant }
 
 // @public (undocumented)
 export const CadHighlight: ReactWebComponent<CadHighlight_2, {}>;
@@ -213,6 +284,17 @@ export { CadInputSize }
 export { CadInputTone }
 
 export { CadInputType }
+
+// @public (undocumented)
+export const CadKanban: ReactWebComponent<CadKanban_2, {}>;
+
+// @public (undocumented)
+export const CadKanbanCard: ReactWebComponent<CadKanbanCard_2, {}>;
+
+export { CadKanbanCardTone }
+
+// @public (undocumented)
+export const CadKanbanColumn: ReactWebComponent<CadKanbanColumn_2, {}>;
 
 // @public (undocumented)
 export const CadLink: ReactWebComponent<CadLink_2, {}>;
@@ -263,6 +345,16 @@ export { CadSpinnerSize }
 export { CadSpinnerTone }
 
 // @public (undocumented)
+export const CadStep: ReactWebComponent<CadStep_2, {}>;
+
+// @public (undocumented)
+export const CadSteps: ReactWebComponent<CadSteps_2, {}>;
+
+export { CadStepsOrientation }
+
+export { CadStepTone }
+
+// @public (undocumented)
 export const CadSticker: ReactWebComponent<CadSticker_2, {}>;
 
 export { CadStickerShape }
@@ -271,19 +363,41 @@ export { CadStickerSize }
 
 export { CadStickerTone }
 
-// @public (undocumented)
-export const CadTab: ReactWebComponent<CadTab_2, {}>;
-
 export { CadTabChangeDetail }
 
 export { CadTabChangeEvent }
+
+// @public (undocumented)
+export const CadTabContent: ReactWebComponent<CadTabContent_2, {}>;
+
+// @public (undocumented)
+export const CadTable: ReactWebComponent<CadTable_2, {}>;
+
+// @public (undocumented)
+export const CadTableCell: ReactWebComponent<CadTableCell_2, {}>;
+
+// @public (undocumented)
+export const CadTableColumn: ReactWebComponent<CadTableColumn_2, {}>;
+
+export { CadTableDensity }
+
+// @public (undocumented)
+export const CadTableRow: ReactWebComponent<CadTableRow_2, {}>;
+
+export { CadTableVariant }
 
 // @public (undocumented)
 export const CadTabs: ReactWebComponent<CadTabs_2, {
 onTabChange: EventName<CadTabChangeEvent>;
 }>;
 
+// @public (undocumented)
+export const CadTabsList: ReactWebComponent<CadTabsList_2, {}>;
+
 export { CadTabTone }
+
+// @public (undocumented)
+export const CadTabTrigger: ReactWebComponent<CadTabTrigger_2, {}>;
 
 // @public (undocumented)
 export const CadTape: ReactWebComponent<CadTape_2, {}>;

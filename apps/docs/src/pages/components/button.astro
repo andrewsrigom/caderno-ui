@@ -4,11 +4,15 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-button icon="check" tone="mint">Save review</cad-button>
+const usage = `<cad-button tone="mint">
+  <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
+  Save review
+</cad-button>
 <cad-button href="/components" variant="secondary">Browse components</cad-button>
 
 <script type="module">
   import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/icon'
 </script>`
 ---
 
@@ -22,23 +26,30 @@ const usage = `<cad-button icon="check" tone="mint">Save review</cad-button>
     <p>
       Button selects a native button or anchor from its contract, supports form
       submission across the shadow boundary, and keeps disabled links out of the
-      tab order.
+      tab order. Leading and trailing content are slots, so Button does not load
+      the icon catalog unless the application chooses one.
     </p>
   </header>
 
-  <DemoFrame title="Variants, sizes, and links">
+  <DemoFrame
+    title="A realistic action group"
+    description="Primary save, secondary draft, navigation, and a low-emphasis reference use native semantics."
+  >
     <div class="demo-row">
-      <cad-button icon="check" tone="mint">Save review</cad-button>
-      <cad-button icon="spark" tone="lemon" variant="secondary"
-        >New idea</cad-button
-      >
-      <cad-button
-        href="/components"
-        icon="arrow-right"
-        icon-position="end"
-        variant="ghost"
-      >
+      <cad-button tone="mint">
+        <cad-icon aria-hidden="true" name="check" size="18" slot="start"
+        ></cad-icon>
+        Save review
+      </cad-button>
+      <cad-button tone="lemon" variant="secondary">
+        <cad-icon aria-hidden="true" name="spark" size="18" slot="start"
+        ></cad-icon>
+        Save draft
+      </cad-button>
+      <cad-button href="/caderno-ui/components/" variant="ghost">
         Browse components
+        <cad-icon aria-hidden="true" name="arrow-right" size="18" slot="end"
+        ></cad-icon>
       </cad-button>
       <cad-button size="sm" tone="coral" variant="link"
         >Read the contract</cad-button
@@ -67,3 +78,8 @@ const usage = `<cad-button icon="check" tone="mint">Save review</cad-button>
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/icon'
+</script>

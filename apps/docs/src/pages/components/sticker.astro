@@ -4,8 +4,14 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-sticker icon="spark" shape="burst" tone="lemon">New</cad-sticker>
-<script type="module">import '@caderno-ui/elements/sticker'</script>`
+const usage = `<cad-sticker shape="burst" tone="lemon">
+  <cad-icon aria-hidden="true" name="spark" slot="start"></cad-icon>
+  New
+</cad-sticker>
+<script type="module">
+  import '@caderno-ui/elements/sticker'
+  import '@caderno-ui/elements/icon'
+</script>`
 ---
 
 <DocsLayout
@@ -16,16 +22,20 @@ const usage = `<cad-sticker icon="spark" shape="burst" tone="lemon">New</cad-sti
     <p class="eyebrow">&lt;cad-sticker&gt;</p><h1>
       Label the margin with personality.
     </h1><p>
-      Sticker combines concise text with optional decorative icons and five
-      reusable notebook shapes.
+      Sticker combines concise text with five reusable notebook shapes. A
+      leading illustration is composed through a slot instead of being coupled
+      to the icon registry.
     </p>
   </header>
   <DemoFrame title="Shapes and tones"
     ><div class="demo-row">
-      <cad-sticker icon="check" tone="mint">Reviewed</cad-sticker><cad-sticker
-        shape="banner"
-        tone="blue">Architecture</cad-sticker
-      ><cad-sticker icon="spark" shape="burst" tone="lemon">New</cad-sticker
+      <cad-sticker tone="mint">
+        <cad-icon aria-hidden="true" name="check" size="17" slot="start"
+        ></cad-icon>Reviewed</cad-sticker
+      ><cad-sticker shape="banner" tone="blue">Architecture</cad-sticker
+      ><cad-sticker shape="burst" tone="lemon">
+        <cad-icon aria-hidden="true" name="spark" size="17" slot="start"
+        ></cad-icon>New</cad-sticker
       ><cad-sticker shape="bubble" tone="violet">Ask why</cad-sticker>
     </div></DemoFrame
   >
@@ -46,3 +56,8 @@ const usage = `<cad-sticker icon="spark" shape="burst" tone="lemon">New</cad-sti
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/sticker'
+</script>

@@ -1,6 +1,9 @@
 import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
+import {
+  renderSystemIcon,
+  type CadSystemIconName,
+} from '../internal/system-icon.js'
 
 type CadPaginationItem = number | 'ellipsis'
 
@@ -79,6 +82,11 @@ export class CadPagination extends LitElement {
     }
     .disabled {
       opacity: 0.42;
+    }
+    .direction svg,
+    .disabled svg {
+      width: 1.05rem;
+      height: 1.05rem;
     }
     @media (forced-colors: active) {
       a,
@@ -171,7 +179,7 @@ export class CadPagination extends LitElement {
   private renderDirection(
     target: number,
     disabled: boolean,
-    icon: string,
+    icon: CadSystemIconName,
     label: string,
   ) {
     return disabled
@@ -180,15 +188,15 @@ export class CadPagination extends LitElement {
           aria-label=${label}
           class="disabled"
           part="direction"
-          ><cad-icon name=${icon} size="17"></cad-icon
-        ></span>`
+          >${renderSystemIcon(icon)}</span
+        >`
       : html`<a
           aria-label=${label}
           class="direction"
           href=${this.pageHref(target)}
           part="direction"
-          ><cad-icon name=${icon} size="17"></cad-icon
-        ></a>`
+          >${renderSystemIcon(icon)}</a
+        >`
   }
 }
 

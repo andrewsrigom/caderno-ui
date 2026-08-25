@@ -1,7 +1,5 @@
 import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
-
 export type CadBadgeTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'neutral'
 export type CadBadgeVariant = 'outline' | 'solid'
 
@@ -9,15 +7,15 @@ export type CadBadgeVariant = 'outline' | 'solid'
  * A compact notebook label for statuses, categories, and metadata.
  *
  * @slot - Badge label.
+ * @slot start - Optional leading visual.
  * @csspart base - Badge container.
- * @csspart icon - Optional leading icon.
  * @csspart label - Badge text.
+ * @csspart start - Leading composition slot.
  * @cssprop --cad-badge-bg - Per-instance badge color.
  * @cssprop --cad-badge-ink - Per-instance foreground color.
  */
 export class CadBadge extends LitElement {
   static override properties = {
-    icon: { type: String },
     tone: { reflect: true, type: String },
     variant: { reflect: true, type: String },
   }
@@ -80,12 +78,6 @@ export class CadBadge extends LitElement {
       white-space: nowrap;
     }
 
-    .icon {
-      display: inline-grid;
-      flex: 0 0 auto;
-      place-items: center;
-    }
-
     @media (forced-colors: active) {
       .base {
         color: CanvasText;
@@ -95,13 +87,11 @@ export class CadBadge extends LitElement {
     }
   `
 
-  declare icon: string
   declare tone: CadBadgeTone
   declare variant: CadBadgeVariant
 
   constructor() {
     super()
-    this.icon = ''
     this.tone = 'neutral'
     this.variant = 'solid'
   }
@@ -109,15 +99,7 @@ export class CadBadge extends LitElement {
   override render() {
     return html`
       <span class="base" part="base">
-        ${
-          this.icon
-            ? html`
-                <span aria-hidden="true" class="icon" part="icon">
-                  <cad-icon name=${this.icon} size="15"></cad-icon>
-                </span>
-              `
-            : null
-        }
+        <slot name="start" part="start"></slot>
         <span class="label" part="label"><slot></slot></span>
       </span>
     `

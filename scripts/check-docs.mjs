@@ -45,6 +45,9 @@ for (const file of (await collectFiles(docsRoot)).filter((path) =>
 )) {
   const source = await readFile(file, 'utf8')
   const displayPath = file.slice(root.length)
+  const frontmatterEnd = source.indexOf('\n---\n', 4)
+  const templateSource =
+    frontmatterEnd === -1 ? source : source.slice(frontmatterEnd + 5)
 
   for (const match of source.matchAll(
     /(?:from\s+|import\s*(?:\(|))['"](@caderno-ui\/[^'"]+)['"]/g,
@@ -73,6 +76,16 @@ for (const file of (await collectFiles(docsRoot)).filter((path) =>
         `${displayPath}: references unknown custom element ${match[1]}`,
       )
     }
+  }
+
+  if (
+    templateSource.includes('<cad-chart') &&
+    !templateSource.includes("import '@caderno-ui/elements/chart'") &&
+    !templateSource.includes('import "@caderno-ui/elements/chart"')
+  ) {
+    errors.push(
+      `${displayPath}: renders cad-chart without loading the optional @caderno-ui/elements/chart entry point`,
+    )
   }
 }
 

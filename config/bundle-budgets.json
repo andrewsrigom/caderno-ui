@@ -1,61 +1,223 @@
 {
   "entrypoints": {
     "elements-alert": {
-      "maxGzip": 13357
+      "maxGzip": 9243
     },
     "elements-badge": {
-      "maxGzip": 12696
+      "maxGzip": 7900
     },
     "elements-bookmark": {
-      "maxGzip": 12943
+      "maxGzip": 8837
+    },
+    "elements-button": {
+      "maxGzip": 9037
+    },
+    "elements-callout": {
+      "maxGzip": 8938
+    },
+    "elements-card": {
+      "maxGzip": 8821
     },
     "elements-chart": {
-      "maxGzip": 21065
+      "maxGzip": 21098
+    },
+    "elements-divider": {
+      "maxGzip": 7964
     },
     "elements-icon": {
       "maxGzip": 11824
     },
+    "elements-link": {
+      "maxGzip": 8275
+    },
     "elements-note": {
-      "maxGzip": 8487
+      "maxGzip": 8502
     },
     "elements-progress": {
-      "maxGzip": 9394
-    },
-    "elements-root": {
-      "maxGzip": 37520
+      "maxGzip": 9414
     },
     "elements-tabs": {
-      "maxGzip": 14536
+      "maxGzip": 10038
     },
-    "icons-root": {
-      "maxGzip": 4239
+    "elements-table": {
+      "maxGzip": 8930
+    },
+    "elements-input": {
+      "maxGzip": 9426
+    },
+    "elements-textarea": {
+      "maxGzip": 9392
+    },
+    "elements-checkbox": {
+      "maxGzip": 10012
+    },
+    "elements-radio": {
+      "maxGzip": 9673
+    },
+    "elements-accordion": {
+      "maxGzip": 8844
+    },
+    "elements-spinner": {
+      "maxGzip": 7900
+    },
+    "elements-tooltip": {
+      "maxGzip": 8645
+    },
+    "elements-modal": {
+      "maxGzip": 9886
+    },
+    "elements-toast": {
+      "maxGzip": 10040
+    },
+    "elements-breadcrumb": {
+      "maxGzip": 8854
+    },
+    "elements-pagination": {
+      "maxGzip": 9125
+    },
+    "elements-avatar": {
+      "maxGzip": 8267
+    },
+    "elements-highlight": {
+      "maxGzip": 7736
+    },
+    "elements-tape": {
+      "maxGzip": 7799
+    },
+    "elements-sticker": {
+      "maxGzip": 8568
+    },
+    "elements-blockquote": {
+      "maxGzip": 8017
+    },
+    "elements-checklist": {
+      "maxGzip": 8966
+    },
+    "elements-code-block": {
+      "maxGzip": 8487
+    },
+    "elements-empty-state": {
+      "maxGzip": 8177
+    },
+    "elements-kanban": {
+      "maxGzip": 8341
+    },
+    "elements-steps": {
+      "maxGzip": 8339
     },
     "react-alert": {
-      "maxGzip": 14040
+      "maxGzip": 9909
     },
     "react-badge": {
-      "maxGzip": 13371
+      "maxGzip": 8533
     },
     "react-bookmark": {
-      "maxGzip": 13623
+      "maxGzip": 9489
+    },
+    "react-button": {
+      "maxGzip": 9690
+    },
+    "react-callout": {
+      "maxGzip": 9582
+    },
+    "react-card": {
+      "maxGzip": 9566
     },
     "react-chart": {
-      "maxGzip": 21806
+      "maxGzip": 21839
+    },
+    "react-divider": {
+      "maxGzip": 8602
     },
     "react-icon": {
       "maxGzip": 12451
     },
+    "react-link": {
+      "maxGzip": 8919
+    },
     "react-note": {
-      "maxGzip": 9122
+      "maxGzip": 9137
     },
     "react-progress": {
-      "maxGzip": 10036
-    },
-    "react-root": {
-      "maxGzip": 39140
+      "maxGzip": 10054
     },
     "react-tabs": {
-      "maxGzip": 15216
+      "maxGzip": 10739
+    },
+    "react-table": {
+      "maxGzip": 9622
+    },
+    "react-input": {
+      "maxGzip": 10068
+    },
+    "react-textarea": {
+      "maxGzip": 10040
+    },
+    "react-checkbox": {
+      "maxGzip": 10659
+    },
+    "react-radio": {
+      "maxGzip": 10316
+    },
+    "react-accordion": {
+      "maxGzip": 9518
+    },
+    "react-spinner": {
+      "maxGzip": 8533
+    },
+    "react-tooltip": {
+      "maxGzip": 9281
+    },
+    "react-modal": {
+      "maxGzip": 10547
+    },
+    "react-toast": {
+      "maxGzip": 10722
+    },
+    "react-breadcrumb": {
+      "maxGzip": 9519
+    },
+    "react-pagination": {
+      "maxGzip": 9767
+    },
+    "react-avatar": {
+      "maxGzip": 8903
+    },
+    "react-highlight": {
+      "maxGzip": 8371
+    },
+    "react-tape": {
+      "maxGzip": 8429
+    },
+    "react-sticker": {
+      "maxGzip": 9213
+    },
+    "react-blockquote": {
+      "maxGzip": 8660
+    },
+    "react-checklist": {
+      "maxGzip": 9628
+    },
+    "react-code-block": {
+      "maxGzip": 9120
+    },
+    "react-empty-state": {
+      "maxGzip": 8813
+    },
+    "react-kanban": {
+      "maxGzip": 9015
+    },
+    "react-steps": {
+      "maxGzip": 8990
+    },
+    "elements-root": {
+      "maxGzip": 43426
+    },
+    "icons-root": {
+      "maxGzip": 4239
+    },
+    "react-root": {
+      "maxGzip": 45546
     }
   },
   "icons": {

@@ -4,71 +4,124 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-card folded heading="Typed contracts" icon="brackets" kicker="Architecture" tone="blue">
-  Primitive values use attributes; composition uses slots.
-  <span slot="footer">Reviewed today</span>
+const usage = `<cad-card folded tone="blue">
+  <cad-card-header>
+    <cad-card-kicker>Architecture review</cad-card-kicker>
+    <cad-card-title>
+      <h2>Search indexing strategy</h2>
+    </cad-card-title>
+  </cad-card-header>
+  <cad-card-content>
+    <p>Compare write amplification, query latency, and failure recovery.</p>
+  </cad-card-content>
+  <cad-card-footer>
+    <cad-badge tone="mint">Ready for review</cad-badge>
+    <time datetime="2026-08-24">Updated today</time>
+  </cad-card-footer>
 </cad-card>
 
 <script type="module">
   import '@caderno-ui/elements/card'
+  import '@caderno-ui/elements/badge'
 </script>`
 ---
 
 <DocsLayout
-  description="CadCard groups related content and can optionally become a single native link."
+  description="Compose accessible paper surfaces from independent Caderno UI card primitives."
   title="Card"
 >
   <header class="page-header">
-    <p class="eyebrow">&lt;cad-card&gt;</p>
-    <h1>Group one idea on one sheet of paper.</h1>
+    <p class="eyebrow">&lt;cad-card&gt; family</p>
+    <h1>A surface, not a preassembled content model.</h1>
     <p>
-      Card provides title, body, and footer composition without deciding the
-      product layout. Adding <code>href</code> turns the complete surface into a native
-      link.
+      Card owns the paper surface. Header, kicker, title, content, and footer
+      are small compound primitives you can arrange—or omit—without paying for
+      an icon, heading level, or action the card did not choose.
     </p>
   </header>
 
-  <DemoFrame title="Paper and linked cards">
+  <DemoFrame
+    title="A real review queue"
+    description="The first card composes metadata and actions; the second turns the whole surface into one native link."
+  >
     <div class="card-grid">
-      <cad-card
-        folded
-        heading="Typed contracts"
-        icon="brackets"
-        kicker="Architecture"
-        tone="blue"
-      >
-        Primitive values use attributes; composition uses slots.
-        <span slot="footer">Reviewed today</span>
+      <cad-card folded tone="blue">
+        <cad-card-header>
+          <cad-card-kicker>Architecture review</cad-card-kicker>
+          <cad-card-title>
+            <h2>
+              <cad-icon name="brackets" size="22"></cad-icon>
+              Search indexing strategy
+            </h2>
+          </cad-card-title>
+        </cad-card-header>
+        <cad-card-content>
+          <p>
+            Compare write amplification, query latency, and failure recovery
+            before choosing the index boundary.
+          </p>
+        </cad-card-content>
+        <cad-card-footer>
+          <cad-badge tone="mint">Ready for review</cad-badge>
+          <time datetime="2026-08-24">Updated today</time>
+        </cad-card-footer>
       </cad-card>
+
       <cad-card
-        heading="Explore charts"
-        href="/components/chart/"
-        icon="gauge"
+        href="/caderno-ui/components/chart/"
         tone="mint"
         variant="outlined"
       >
-        Compare the accessible bar, line, and donut contracts.
+        <cad-card-header>
+          <cad-card-kicker>Evidence</cad-card-kicker>
+          <cad-card-title><h2>Inspect delivery metrics</h2></cad-card-title>
+        </cad-card-header>
+        <cad-card-content>
+          <p>Open the accessible bar, line, and donut chart contracts.</p>
+        </cad-card-content>
+        <cad-card-footer>7 data points · 3 visualizations</cad-card-footer>
       </cad-card>
     </div>
   </DemoFrame>
   <CodeBlock code={usage} language="html" />
+
+  <section class="content-section" aria-labelledby="composition-title">
+    <h2 id="composition-title">Composition contract</h2>
+    <p>
+      Put a native heading inside <code>cad-card-title</code> so the page—not the
+      component—chooses the correct heading level. Icons and badges are separate entrypoints
+      and only enter the bundle when the application imports them.
+    </p>
+  </section>
 
   <ApiReference tagName="cad-card" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Do not put nested interactive controls inside a linked card. For a card
-      with several actions, omit <code>href</code> and place explicit controls in
-      the footer slot.
+      Do not put nested interactive controls inside a linked card. For several
+      actions, omit <code>href</code> and compose explicit controls in
+      <code>cad-card-footer</code>.
     </p>
   </section>
 
   <style>
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
       gap: 1rem;
+    }
+
+    cad-card-title h2 {
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/badge'
+  import '@caderno-ui/elements/card'
+  import '@caderno-ui/elements/icon'
+</script>

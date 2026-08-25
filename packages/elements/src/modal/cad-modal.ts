@@ -1,6 +1,6 @@
 import { css, html, LitElement, type PropertyValues } from 'lit'
 
-import '../icon/cad-icon.js'
+import { renderSystemIcon } from '../internal/system-icon.js'
 
 export type CadModalSize = 'lg' | 'md' | 'sm'
 
@@ -147,6 +147,11 @@ export class CadModal extends LitElement {
       outline-offset: 3px;
     }
 
+    .close svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
     .body {
       min-width: 0;
       padding: 1.25rem 1.5rem;
@@ -280,7 +285,7 @@ export class CadModal extends LitElement {
               type="button"
               @click=${this.handleCloseClick}
             >
-              <cad-icon name="cross" size="20"></cad-icon>
+              ${renderSystemIcon('close')}
             </button>
           </header>
           <div class="body" part="body"><slot></slot></div>

@@ -26,12 +26,21 @@
       <section data-component="actions">
         <h2>Buttons and links</h2>
         <div class="cluster" aria-label="Button variants">
-          <cad-button icon="check" tone="mint">Save review</cad-button>
-          <cad-button icon="spark" tone="lemon" variant="secondary">
+          <cad-button tone="mint">
+            <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
+            Save review
+          </cad-button>
+          <cad-button tone="lemon" variant="secondary">
+            <cad-icon aria-hidden="true" name="spark" slot="start"></cad-icon>
             New idea
           </cad-button>
-          <cad-button icon="arrow-right" icon-position="end" variant="ghost">
+          <cad-button variant="ghost">
             Continue
+            <cad-icon
+              aria-hidden="true"
+              name="arrow-right"
+              slot="end"
+            ></cad-icon>
           </cad-button>
           <cad-button size="sm" tone="coral" variant="link">
             Inspect contract
@@ -58,24 +67,25 @@
       <section id="cards" data-component="cards-and-callouts">
         <h2>Cards and callouts</h2>
         <div class="grid">
-          <cad-card
-            folded
-            heading="Typed contracts"
-            icon="brackets"
-            kicker="Architecture"
-            tone="blue"
-          >
-            Primitive values use attributes; composition uses slots.
-            <small slot="footer">Reviewed today</small>
+          <cad-card folded tone="blue">
+            <cad-card-header>
+              <cad-card-kicker>Architecture</cad-card-kicker>
+              <cad-card-title><h3>Typed contracts</h3></cad-card-title>
+            </cad-card-header>
+            <cad-card-content>
+              Primitive values use attributes; composition uses compound
+              primitives.
+            </cad-card-content>
+            <cad-card-footer><small>Reviewed today</small></cad-card-footer>
           </cad-card>
-          <cad-card
-            heading="Explore charts"
-            href="#charts"
-            icon="gauge"
-            tone="mint"
-            variant="outlined"
-          >
-            Compare accessible bar, line, and donut contracts.
+          <cad-card href="#charts" tone="mint" variant="outlined">
+            <cad-card-header>
+              <cad-card-kicker>Evidence</cad-card-kicker>
+              <cad-card-title><h3>Explore charts</h3></cad-card-title>
+            </cad-card-header>
+            <cad-card-content>
+              Compare accessible bar, line, and donut contracts.
+            </cad-card-content>
           </cad-card>
         </div>
         <div class="grid">
@@ -119,8 +129,14 @@
       <section data-component="badges-and-notes">
         <h2>Badges and notes</h2>
         <div class="cluster" aria-label="Badge variants">
-          <cad-badge icon="check" tone="mint">Reviewed</cad-badge>
-          <cad-badge icon="spark" tone="blue">New idea</cad-badge>
+          <cad-badge tone="mint">
+            <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
+            Reviewed
+          </cad-badge>
+          <cad-badge tone="blue">
+            <cad-icon aria-hidden="true" name="spark" slot="start"></cad-icon>
+            New idea
+          </cad-badge>
           <cad-badge tone="lemon">In progress</cad-badge>
           <cad-badge tone="coral" variant="outline">Needs work</cad-badge>
         </div>
@@ -174,13 +190,17 @@
           <div class="form-grid">
             <cad-input
               hint="Use a concrete subject."
-              icon="search"
               label="Interview topic"
               name="topic"
               placeholder="System design"
               required
             >
               <span slot="label">Interview topic</span>
+              <cad-icon
+                aria-hidden="true"
+                name="search"
+                slot="prefix"
+              ></cad-icon>
             </cad-input>
             <cad-input
               hint="Used only for the local form demonstration."
@@ -255,7 +275,8 @@
             </fieldset>
           </div>
           <div class="cluster">
-            <cad-button icon="check" tone="mint" type="submit">
+            <cad-button tone="mint" type="submit">
+              <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
               Inspect FormData
             </cad-button>
             <cad-button type="reset" variant="secondary">Reset</cad-button>
@@ -316,7 +337,12 @@
           <div class="feedback-sample">
             <h3>Modal task</h3>
             <cad-modal heading="Review release contract">
-              <cad-button icon="layers" slot="trigger" tone="lemon">
+              <cad-button slot="trigger" tone="lemon">
+                <cad-icon
+                  aria-hidden="true"
+                  name="layers"
+                  slot="start"
+                ></cad-icon>
                 Open review
               </cad-button>
               <p>
@@ -333,7 +359,8 @@
           <cad-toast heading="Contract saved" variant="success">
             The public review is available locally.
           </cad-toast>
-          <cad-button data-toast-trigger icon="spark" variant="secondary">
+          <cad-button data-toast-trigger variant="secondary">
+            <cad-icon aria-hidden="true" name="spark" slot="start"></cad-icon>
             Send hosted toast
           </cad-button>
         </div>
@@ -374,10 +401,22 @@
             <h3>Decorative language</h3>
             <div class="cluster">
               <cad-tape aria-hidden="true" tone="paper"></cad-tape>
-              <cad-sticker icon="check" tone="mint">Reviewed</cad-sticker>
-              <cad-sticker icon="spark" shape="burst" size="sm" tone="lemon"
-                >New</cad-sticker
-              >
+              <cad-sticker tone="mint">
+                <cad-icon
+                  aria-hidden="true"
+                  name="check"
+                  slot="start"
+                ></cad-icon>
+                Reviewed
+              </cad-sticker>
+              <cad-sticker shape="burst" size="sm" tone="lemon">
+                <cad-icon
+                  aria-hidden="true"
+                  name="spark"
+                  slot="start"
+                ></cad-icon>
+                New
+              </cad-sticker>
             </div>
           </div>
         </div>
@@ -430,23 +469,154 @@
 
       <section data-component="tabs">
         <h2>Tabs</h2>
-        <cad-tabs default-tab="contract" label="Component design stages">
-          <cad-tab icon="question" label="Problem" name="problem" tone="coral">
+        <cad-tabs default-value="contract">
+          <cad-tabs-list label="Component design stages">
+            <cad-tab-trigger label="Problem" tone="coral" value="problem">
+              <cad-icon
+                aria-hidden="true"
+                name="question"
+                slot="start"
+              ></cad-icon>
+              Problem
+            </cad-tab-trigger>
+            <cad-tab-trigger label="Contract" tone="lemon" value="contract">
+              <cad-icon
+                aria-hidden="true"
+                name="brackets"
+                slot="start"
+              ></cad-icon>
+              Contract
+            </cad-tab-trigger>
+            <cad-tab-trigger label="Proof" tone="mint" value="proof">
+              <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
+              Proof
+            </cad-tab-trigger>
+          </cad-tabs-list>
+          <cad-tab-content value="problem">
             Define the user need and the semantic baseline.
-          </cad-tab>
-          <cad-tab
-            icon="brackets"
-            label="Contract"
-            name="contract"
-            tone="lemon"
-          >
+          </cad-tab-content>
+          <cad-tab-content value="contract">
             Choose attributes, properties, slots, events and CSS customization
             points.
-          </cad-tab>
-          <cad-tab icon="check" label="Proof" name="proof" tone="mint">
+          </cad-tab-content>
+          <cad-tab-content value="proof">
             Verify behavior in a real browser and every supported framework.
-          </cad-tab>
+          </cad-tab-content>
         </cad-tabs>
+      </section>
+
+      <section data-component="tables">
+        <h2>Tables</h2>
+        <cad-table caption="Release readiness" min-width="38rem" zebra>
+          <cad-table-column key="area" label="Area"></cad-table-column>
+          <cad-table-column key="evidence" label="Evidence"></cad-table-column>
+          <cad-table-column key="status" label="Status"></cad-table-column>
+          <cad-table-row>
+            <cad-table-cell column="area">Public API</cad-table-cell>
+            <cad-table-cell column="evidence"
+              >Typed manifest and adapters</cad-table-cell
+            >
+            <cad-table-cell column="status">Ready</cad-table-cell>
+          </cad-table-row>
+          <cad-table-row>
+            <cad-table-cell column="area">Accessibility</cad-table-cell>
+            <cad-table-cell column="evidence"
+              >Browser and keyboard checks</cad-table-cell
+            >
+            <cad-table-cell column="status">In review</cad-table-cell>
+          </cad-table-row>
+          <cad-table-row>
+            <cad-table-cell column="area">Delivery</cad-table-cell>
+            <cad-table-cell column="evidence"
+              >Entrypoint bundle budgets</cad-table-cell
+            >
+            <cad-table-cell column="status">Ready</cad-table-cell>
+          </cad-table-row>
+        </cad-table>
+      </section>
+
+      <section data-component="editorial-patterns">
+        <h2>Editorial patterns</h2>
+        <div class="grid">
+          <cad-blockquote
+            author="Platform team"
+            source="Decision 014"
+            tone="violet"
+          >
+            The component boundary should describe a capability, not one
+            screen’s current layout.
+          </cad-blockquote>
+          <cad-checklist title="Review contract" tone="mint" variant="mixed">
+            <cad-checklist-item>Keep native semantics.</cad-checklist-item>
+            <cad-checklist-item
+              >Import selective entrypoints.</cad-checklist-item
+            >
+            <cad-checklist-item kind="cross">
+              Encode product copy in primitive props.
+            </cad-checklist-item>
+          </cad-checklist>
+        </div>
+        <cad-empty-state
+          description="Try a broader owner or status filter."
+          title="No matching decisions"
+          variant="no-results"
+        >
+          <cad-icon
+            aria-hidden="true"
+            name="search"
+            size="48"
+            slot="icon"
+          ></cad-icon>
+          <h3 slot="title">No matching decisions</h3>
+          <p slot="description">Try a broader owner or status filter.</p>
+          <cad-button slot="actions" variant="secondary">
+            Clear filters
+          </cad-button>
+        </cad-empty-state>
+      </section>
+
+      <section data-component="planning-patterns">
+        <h2>Planning patterns</h2>
+        <cad-steps label="Package release" orientation="horizontal">
+          <cad-step title="Verify contracts" tone="blue">
+            Run type, browser, accessibility, and bundle checks.
+            <span slot="meta">Automated · 8 min</span>
+          </cad-step>
+          <cad-step title="Publish packages" tone="violet">
+            Publish the synchronized public package versions.
+            <span slot="meta">Owner · maintainer</span>
+          </cad-step>
+          <cad-step title="Validate consumers" tone="mint">
+            Install the release in SeniorPath and rerun critical flows.
+            <span slot="meta">Required before announcement</span>
+          </cad-step>
+        </cad-steps>
+        <cad-kanban label="Release readiness">
+          <cad-kanban-column title="Planned">
+            <cad-kanban-card tone="coral">
+              Replace temporary package links
+            </cad-kanban-card>
+          </cad-kanban-column>
+          <cad-kanban-column title="In review">
+            <cad-kanban-card tone="blue">
+              Validate selective bundles
+            </cad-kanban-card>
+            <cad-kanban-card tone="lemon">
+              Review keyboard navigation
+            </cad-kanban-card>
+          </cad-kanban-column>
+          <cad-kanban-column title="Ready">
+            <cad-kanban-card tone="mint">
+              Compound card contract
+            </cad-kanban-card>
+          </cad-kanban-column>
+        </cad-kanban>
+        <cad-code-block
+          code="import '@caderno-ui/elements/card'"
+          filename="review-queue.ts"
+          language="ts"
+          show-line-numbers
+        ></cad-code-block>
       </section>
 
       <section id="charts" data-component="charts">

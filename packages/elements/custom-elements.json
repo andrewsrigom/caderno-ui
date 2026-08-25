@@ -718,31 +718,25 @@
               "name": "base"
             },
             {
-              "description": "Optional leading icon.",
-              "name": "icon"
-            },
-            {
               "description": "Badge text.",
               "name": "label"
+            },
+            {
+              "description": "Leading composition slot.",
+              "name": "start"
             }
           ],
           "slots": [
             {
               "description": "Badge label.",
               "name": ""
+            },
+            {
+              "description": "Optional leading visual.",
+              "name": "start"
             }
           ],
           "members": [
-            {
-              "kind": "field",
-              "name": "icon",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "icon"
-            },
             {
               "kind": "field",
               "name": "tone",
@@ -767,14 +761,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "icon"
-            },
             {
               "name": "tone",
               "type": {
@@ -815,6 +801,142 @@
           "declaration": {
             "name": "CadBadge",
             "module": "packages/elements/src/badge/cad-badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/blockquote/cad-blockquote.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A semantic quotation with optional attribution and source link.",
+          "name": "CadBlockquote",
+          "cssParts": [
+            {
+              "description": "Native figure.",
+              "name": "base"
+            },
+            {
+              "description": "Native figcaption.",
+              "name": "caption"
+            },
+            {
+              "description": "Native blockquote.",
+              "name": "quote"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Quoted content.",
+              "name": ""
+            },
+            {
+              "description": "Custom attribution content.",
+              "name": "caption"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "author",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "author"
+            },
+            {
+              "kind": "field",
+              "name": "cite",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "cite"
+            },
+            {
+              "kind": "field",
+              "name": "source",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "source"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadBlockquoteTone"
+              },
+              "default": "'accent'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "author"
+            },
+            {
+              "name": "cite",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "cite"
+            },
+            {
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "source"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadBlockquoteTone"
+              },
+              "default": "'accent'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-blockquote",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadBlockquote",
+          "declaration": {
+            "name": "CadBlockquote",
+            "module": "packages/elements/src/blockquote/cad-blockquote.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-blockquote",
+          "declaration": {
+            "name": "CadBlockquote",
+            "module": "packages/elements/src/blockquote/cad-blockquote.ts"
           }
         }
       ]
@@ -1313,18 +1435,30 @@
               "name": "base"
             },
             {
-              "description": "Optional leading or trailing icon.",
-              "name": "icon"
+              "description": "Trailing composition slot.",
+              "name": "end"
             },
             {
               "description": "Action label.",
               "name": "label"
+            },
+            {
+              "description": "Leading composition slot.",
+              "name": "start"
             }
           ],
           "slots": [
             {
               "description": "Action label.",
               "name": ""
+            },
+            {
+              "description": "Optional trailing visual or metadata.",
+              "name": "end"
+            },
+            {
+              "description": "Optional leading visual or metadata.",
+              "name": "start"
             }
           ],
           "members": [
@@ -1358,27 +1492,6 @@
               },
               "default": "''",
               "attribute": "href"
-            },
-            {
-              "kind": "field",
-              "name": "icon",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "icon"
-            },
-            {
-              "kind": "field",
-              "name": "iconPosition",
-              "privacy": "public",
-              "type": {
-                "text": "CadButtonIconPosition"
-              },
-              "default": "'start'",
-              "attribute": "icon-position",
-              "reflects": true
             },
             {
               "kind": "field",
@@ -1490,19 +1603,6 @@
                   }
                 }
               ]
-            },
-            {
-              "kind": "method",
-              "name": "renderIcon",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "position",
-                  "type": {
-                    "text": "CadButtonIconPosition"
-                  }
-                }
-              ]
             }
           ],
           "attributes": [
@@ -1529,22 +1629,6 @@
               },
               "default": "''",
               "fieldName": "href"
-            },
-            {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "icon"
-            },
-            {
-              "name": "icon-position",
-              "type": {
-                "text": "CadButtonIconPosition"
-              },
-              "default": "'start'",
-              "fieldName": "iconPosition"
             },
             {
               "name": "label",
@@ -1676,6 +1760,10 @@
               "name": ""
             },
             {
+              "description": "Optional visual that replaces the intrinsic variant mark.",
+              "name": "icon"
+            },
+            {
               "description": "Visible heading. Falls back to the `heading` attribute.",
               "name": "title"
             }
@@ -1690,16 +1778,6 @@
               },
               "default": "''",
               "attribute": "heading"
-            },
-            {
-              "kind": "field",
-              "name": "icon",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "icon"
             },
             {
               "kind": "field",
@@ -1721,14 +1799,6 @@
               },
               "default": "''",
               "fieldName": "heading"
-            },
-            {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "icon"
             },
             {
               "name": "variant",
@@ -1772,9 +1842,13 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A composable notebook card that can optionally act as a link.",
+          "description": "A notebook paper surface that delegates content hierarchy to composable children.",
           "name": "CadCard",
           "cssProperties": [
+            {
+              "description": "Per-instance accent color.",
+              "name": "--cad-card-accent"
+            },
             {
               "description": "Per-instance paper color.",
               "name": "--cad-card-bg"
@@ -1788,44 +1862,12 @@
             {
               "description": "Card article or anchor.",
               "name": "base"
-            },
-            {
-              "description": "Card body.",
-              "name": "body"
-            },
-            {
-              "description": "Card footer.",
-              "name": "footer"
-            },
-            {
-              "description": "Card header.",
-              "name": "header"
-            },
-            {
-              "description": "Optional heading icon.",
-              "name": "icon"
-            },
-            {
-              "description": "Optional eyebrow text.",
-              "name": "kicker"
-            },
-            {
-              "description": "Card heading.",
-              "name": "title"
             }
           ],
           "slots": [
             {
-              "description": "Card body.",
+              "description": "Card composition, usually header, content, and footer elements.",
               "name": ""
-            },
-            {
-              "description": "Card heading. Falls back to the `heading` attribute.",
-              "name": "title"
-            },
-            {
-              "description": "Supporting actions or metadata.",
-              "name": "footer"
             }
           ],
           "members": [
@@ -1842,16 +1884,6 @@
             },
             {
               "kind": "field",
-              "name": "heading",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "heading"
-            },
-            {
-              "kind": "field",
               "name": "href",
               "privacy": "public",
               "type": {
@@ -1859,26 +1891,6 @@
               },
               "default": "''",
               "attribute": "href"
-            },
-            {
-              "kind": "field",
-              "name": "icon",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "icon"
-            },
-            {
-              "kind": "field",
-              "name": "kicker",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "kicker"
             },
             {
               "kind": "field",
@@ -1901,11 +1913,6 @@
               "default": "'paper'",
               "attribute": "variant",
               "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "renderContent",
-              "privacy": "private"
             }
           ],
           "attributes": [
@@ -1918,14 +1925,6 @@
               "fieldName": "folded"
             },
             {
-              "name": "heading",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "heading"
-            },
-            {
               "name": "href",
               "type": {
                 "text": "string"
@@ -1934,20 +1933,12 @@
               "fieldName": "href"
             },
             {
-              "name": "icon",
+              "name": "variant",
               "type": {
-                "text": "string"
+                "text": "CadCardVariant"
               },
-              "default": "''",
-              "fieldName": "icon"
-            },
-            {
-              "name": "kicker",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "kicker"
+              "default": "'paper'",
+              "fieldName": "variant"
             },
             {
               "name": "tone",
@@ -1956,14 +1947,6 @@
               },
               "default": "'neutral'",
               "fieldName": "tone"
-            },
-            {
-              "name": "variant",
-              "type": {
-                "text": "CadCardVariant"
-              },
-              "default": "'paper'",
-              "fieldName": "variant"
             }
           ],
           "superclass": {
@@ -1971,6 +1954,201 @@
             "package": "lit"
           },
           "tagName": "cad-card",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "Groups the card's leading hierarchy without prescribing its content.",
+          "name": "CadCardHeader",
+          "cssParts": [
+            {
+              "description": "Native card header.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Kicker, title, description, actions, or custom content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "'div' | 'footer' | 'header'"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "default": "'header'",
+              "inheritedFrom": {
+                "name": "CadCardSection",
+                "module": "packages/elements/src/card/cad-card.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "CadCardSection",
+            "module": "packages/elements/src/card/cad-card.ts"
+          },
+          "tagName": "cad-card-header",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "Applies title typography while leaving heading level to native slotted markup.",
+          "name": "CadCardTitle",
+          "cssParts": [
+            {
+              "description": "Title wrapper.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "A native heading element.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "'div' | 'footer' | 'header'"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "default": "'div'",
+              "inheritedFrom": {
+                "name": "CadCardSection",
+                "module": "packages/elements/src/card/cad-card.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "CadCardSection",
+            "module": "packages/elements/src/card/cad-card.ts"
+          },
+          "tagName": "cad-card-title",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "Styles compact eyebrow content above a card title.",
+          "name": "CadCardKicker",
+          "cssParts": [
+            {
+              "description": "Kicker wrapper.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Kicker text.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "'div' | 'footer' | 'header'"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "default": "'div'",
+              "inheritedFrom": {
+                "name": "CadCardSection",
+                "module": "packages/elements/src/card/cad-card.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "CadCardSection",
+            "module": "packages/elements/src/card/cad-card.ts"
+          },
+          "tagName": "cad-card-kicker",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "Groups the primary card content.",
+          "name": "CadCardContent",
+          "cssParts": [
+            {
+              "description": "Content wrapper.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Card body.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "'div' | 'footer' | 'header'"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "default": "'div'",
+              "inheritedFrom": {
+                "name": "CadCardSection",
+                "module": "packages/elements/src/card/cad-card.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "CadCardSection",
+            "module": "packages/elements/src/card/cad-card.ts"
+          },
+          "tagName": "cad-card-content",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "Groups card actions or supporting metadata.",
+          "name": "CadCardFooter",
+          "cssParts": [
+            {
+              "description": "Native card footer.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Footer actions or metadata.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "'div' | 'footer' | 'header'"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "default": "'footer'",
+              "inheritedFrom": {
+                "name": "CadCardSection",
+                "module": "packages/elements/src/card/cad-card.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "CadCardSection",
+            "module": "packages/elements/src/card/cad-card.ts"
+          },
+          "tagName": "cad-card-footer",
           "customElement": true
         }
       ],
@@ -1984,10 +2162,90 @@
           }
         },
         {
+          "kind": "js",
+          "name": "CadCardHeader",
+          "declaration": {
+            "name": "CadCardHeader",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadCardTitle",
+          "declaration": {
+            "name": "CadCardTitle",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadCardKicker",
+          "declaration": {
+            "name": "CadCardKicker",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadCardContent",
+          "declaration": {
+            "name": "CadCardContent",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadCardFooter",
+          "declaration": {
+            "name": "CadCardFooter",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
           "kind": "custom-element-definition",
           "name": "cad-card",
           "declaration": {
             "name": "CadCard",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-card-content",
+          "declaration": {
+            "name": "CadCardContent",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-card-footer",
+          "declaration": {
+            "name": "CadCardFooter",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-card-header",
+          "declaration": {
+            "name": "CadCardHeader",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-card-kicker",
+          "declaration": {
+            "name": "CadCardKicker",
+            "module": "packages/elements/src/card/cad-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-card-title",
+          "declaration": {
+            "name": "CadCardTitle",
             "module": "packages/elements/src/card/cad-card.ts"
           }
         }
@@ -3148,6 +3406,370 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/checklist/cad-checklist.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One composable row inside `cad-checklist`.",
+          "name": "CadChecklistItem",
+          "cssParts": [
+            {
+              "description": "Accessible list item.",
+              "name": "item"
+            },
+            {
+              "description": "Intrinsic check or cross mark.",
+              "name": "mark"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Item content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "privacy": "public",
+              "type": {
+                "text": "CadChecklistItemKind | ''"
+              },
+              "default": "''",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "resolvedKind",
+              "privacy": "public",
+              "type": {
+                "text": "CadChecklistItemKind"
+              },
+              "default": "'check'"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "CadChecklistItemKind | ''"
+              },
+              "default": "''",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-checklist-item",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A semantic checklist or do/don't list composed from checklist items.",
+          "name": "CadChecklist",
+          "cssParts": [
+            {
+              "description": "Checklist surface.",
+              "name": "base"
+            },
+            {
+              "description": "Accessible list container.",
+              "name": "list"
+            },
+            {
+              "description": "Checklist title.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Direct `cad-checklist-item` children.",
+              "name": ""
+            },
+            {
+              "description": "Optional visible title. Falls back to `title`.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadChecklistTone"
+              },
+              "default": "'mint'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadChecklistVariant"
+              },
+              "default": "'mixed'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "syncItems",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "title"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadChecklistTone"
+              },
+              "default": "'mint'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadChecklistVariant"
+              },
+              "default": "'mixed'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-checklist",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadChecklistItem",
+          "declaration": {
+            "name": "CadChecklistItem",
+            "module": "packages/elements/src/checklist/cad-checklist.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadChecklist",
+          "declaration": {
+            "name": "CadChecklist",
+            "module": "packages/elements/src/checklist/cad-checklist.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-checklist-item",
+          "declaration": {
+            "name": "CadChecklistItem",
+            "module": "packages/elements/src/checklist/cad-checklist.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-checklist",
+          "declaration": {
+            "name": "CadChecklist",
+            "module": "packages/elements/src/checklist/cad-checklist.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/code-block/cad-code-block.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A readable notebook code sample with optional filename and line numbers.",
+          "name": "CadCodeBlock",
+          "cssProperties": [
+            {
+              "description": "Code surface color.",
+              "name": "--cad-code-bg"
+            },
+            {
+              "description": "Code foreground color.",
+              "name": "--cad-code-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native figure.",
+              "name": "base"
+            },
+            {
+              "description": "Native code element.",
+              "name": "code"
+            },
+            {
+              "description": "Filename and language metadata.",
+              "name": "header"
+            },
+            {
+              "description": "Native preformatted block.",
+              "name": "pre"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Progressive code content used when `code` is not set.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "code",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "code"
+            },
+            {
+              "kind": "field",
+              "name": "filename",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "filename"
+            },
+            {
+              "kind": "field",
+              "name": "language",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "language"
+            },
+            {
+              "kind": "field",
+              "name": "showLineNumbers",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "show-line-numbers",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadCodeBlockTone"
+              },
+              "default": "'accent'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "code",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "code"
+            },
+            {
+              "name": "filename",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "filename"
+            },
+            {
+              "name": "language",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "language"
+            },
+            {
+              "name": "show-line-numbers",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "showLineNumbers"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadCodeBlockTone"
+              },
+              "default": "'accent'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-code-block",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadCodeBlock",
+          "declaration": {
+            "name": "CadCodeBlock",
+            "module": "packages/elements/src/code-block/cad-code-block.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-code-block",
+          "declaration": {
+            "name": "CadCodeBlock",
+            "module": "packages/elements/src/code-block/cad-code-block.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/divider/cad-divider.ts",
       "declarations": [
         {
@@ -3288,6 +3910,140 @@
           "declaration": {
             "name": "CadDivider",
             "module": "packages/elements/src/divider/cad-divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/empty-state/cad-empty-state.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A static empty collection or permission state with composable content.",
+          "name": "CadEmptyState",
+          "cssParts": [
+            {
+              "description": "Action area.",
+              "name": "actions"
+            },
+            {
+              "description": "Empty state surface.",
+              "name": "base"
+            },
+            {
+              "description": "Supporting copy.",
+              "name": "description"
+            },
+            {
+              "description": "Illustration area.",
+              "name": "icon"
+            },
+            {
+              "description": "Title area.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Recovery actions.",
+              "name": "actions"
+            },
+            {
+              "description": "Supporting copy. Falls back to `description`.",
+              "name": "description"
+            },
+            {
+              "description": "Optional product-facing illustration.",
+              "name": "icon"
+            },
+            {
+              "description": "Visible title. Falls back to `title`.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadEmptyStateVariant"
+              },
+              "default": "'no-data'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "description"
+            },
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "title"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadEmptyStateVariant"
+              },
+              "default": "'no-data'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-empty-state",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadEmptyState",
+          "declaration": {
+            "name": "CadEmptyState",
+            "module": "packages/elements/src/empty-state/cad-empty-state.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-empty-state",
+          "declaration": {
+            "name": "CadEmptyState",
+            "module": "packages/elements/src/empty-state/cad-empty-state.ts"
           }
         }
       ]
@@ -3593,6 +4349,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "module": "packages/elements/src/table/cad-table.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "module": "packages/elements/src/input/cad-input.js"
           }
         },
@@ -3707,6 +4471,54 @@
             "name": "*",
             "module": "packages/elements/src/sticker/cad-sticker.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/blockquote/cad-blockquote.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/checklist/cad-checklist.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/code-block/cad-code-block.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/empty-state/cad-empty-state.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/kanban/cad-kanban.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/steps/cad-steps.js"
+          }
         }
       ]
     },
@@ -3746,18 +4558,22 @@
               "name": "hint"
             },
             {
-              "description": "Optional leading icon.",
-              "name": "icon"
-            },
-            {
               "description": "Visible label.",
               "name": "label"
+            },
+            {
+              "description": "Leading composition slot.",
+              "name": "prefix"
             }
           ],
           "slots": [
             {
               "description": "Visible control label. Falls back to the `label` attribute.",
               "name": "label"
+            },
+            {
+              "description": "Optional leading content inside the field.",
+              "name": "prefix"
             }
           ],
           "members": [
@@ -3819,16 +4635,6 @@
               },
               "default": "''",
               "attribute": "hint"
-            },
-            {
-              "kind": "field",
-              "name": "icon",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "icon"
             },
             {
               "kind": "field",
@@ -4274,14 +5080,6 @@
               "fieldName": "hint"
             },
             {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "icon"
-            },
-            {
               "name": "inputmode",
               "type": {
                 "text": "string"
@@ -4417,6 +5215,270 @@
           "declaration": {
             "name": "CadInput",
             "module": "packages/elements/src/input/cad-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/internal/system-icon.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "renderSystemIcon",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "CadSystemIconName"
+              }
+            }
+          ],
+          "description": "Small intrinsic UI marks. Product-facing artwork belongs in `cad-icon`."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "renderSystemIcon",
+          "declaration": {
+            "name": "renderSystemIcon",
+            "module": "packages/elements/src/internal/system-icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/kanban/cad-kanban.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A compact note composed inside a Kanban column.",
+          "name": "CadKanbanCard",
+          "cssParts": [
+            {
+              "description": "Note surface and accessible list item.",
+              "name": "card"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Card content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadKanbanCardTone"
+              },
+              "default": "'lemon'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadKanbanCardTone"
+              },
+              "default": "'lemon'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-kanban-card",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One titled column inside `cad-kanban`.",
+          "name": "CadKanbanColumn",
+          "cssParts": [
+            {
+              "description": "Column surface and accessible list item.",
+              "name": "column"
+            },
+            {
+              "description": "Column header.",
+              "name": "header"
+            },
+            {
+              "description": "Title wrapper.",
+              "name": "title"
+            },
+            {
+              "description": "Derived card count.",
+              "name": "count"
+            },
+            {
+              "description": "Accessible card list.",
+              "name": "cards"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Direct `cad-kanban-card` children.",
+              "name": ""
+            },
+            {
+              "description": "Optional native heading. Falls back to `title`.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "count",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "syncCount",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "count"
+            },
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "title"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-kanban-column",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A horizontally scrollable Kanban board composed from columns and cards.",
+          "name": "CadKanban",
+          "cssParts": [
+            {
+              "description": "Scrollable accessible column list.",
+              "name": "board"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Direct `cad-kanban-column` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Kanban board'",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Kanban board'",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-kanban",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadKanbanCard",
+          "declaration": {
+            "name": "CadKanbanCard",
+            "module": "packages/elements/src/kanban/cad-kanban.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadKanbanColumn",
+          "declaration": {
+            "name": "CadKanbanColumn",
+            "module": "packages/elements/src/kanban/cad-kanban.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadKanban",
+          "declaration": {
+            "name": "CadKanban",
+            "module": "packages/elements/src/kanban/cad-kanban.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-kanban-card",
+          "declaration": {
+            "name": "CadKanbanCard",
+            "module": "packages/elements/src/kanban/cad-kanban.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-kanban-column",
+          "declaration": {
+            "name": "CadKanbanColumn",
+            "module": "packages/elements/src/kanban/cad-kanban.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-kanban",
+          "declaration": {
+            "name": "CadKanban",
+            "module": "packages/elements/src/kanban/cad-kanban.ts"
           }
         }
       ]
@@ -5284,7 +6346,7 @@
                 {
                   "name": "icon",
                   "type": {
-                    "text": "string"
+                    "text": "CadSystemIconName"
                   }
                 },
                 {
@@ -6364,6 +7426,230 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/steps/cad-steps.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One numbered stage inside `cad-steps`.",
+          "name": "CadStep",
+          "cssParts": [
+            {
+              "description": "Step content.",
+              "name": "content"
+            },
+            {
+              "description": "Accessible list item.",
+              "name": "item"
+            },
+            {
+              "description": "Step marker.",
+              "name": "marker"
+            },
+            {
+              "description": "Supporting metadata.",
+              "name": "meta"
+            },
+            {
+              "description": "Step title.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Step description or custom content.",
+              "name": ""
+            },
+            {
+              "description": "Supporting duration, owner, or status.",
+              "name": "meta"
+            },
+            {
+              "description": "Visible title. Falls back to `title`.",
+              "name": "title"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "index",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadStepTone"
+              },
+              "default": "'blue'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "title"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadStepTone"
+              },
+              "default": "'blue'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-step",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A responsive ordered method, timeline, or preparation sequence.",
+          "name": "CadSteps",
+          "cssParts": [
+            {
+              "description": "Accessible ordered-list container.",
+              "name": "list"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Direct `cad-step` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Steps'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "privacy": "public",
+              "type": {
+                "text": "CadStepsOrientation"
+              },
+              "default": "'vertical'",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "syncSteps",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Steps'",
+              "fieldName": "label"
+            },
+            {
+              "name": "orientation",
+              "type": {
+                "text": "CadStepsOrientation"
+              },
+              "default": "'vertical'",
+              "fieldName": "orientation"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-steps",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadStep",
+          "declaration": {
+            "name": "CadStep",
+            "module": "packages/elements/src/steps/cad-steps.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadSteps",
+          "declaration": {
+            "name": "CadSteps",
+            "module": "packages/elements/src/steps/cad-steps.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-step",
+          "declaration": {
+            "name": "CadStep",
+            "module": "packages/elements/src/steps/cad-steps.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-steps",
+          "declaration": {
+            "name": "CadSteps",
+            "module": "packages/elements/src/steps/cad-steps.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/sticker/cad-sticker.ts",
       "declarations": [
         {
@@ -6386,8 +7672,8 @@
               "name": "base"
             },
             {
-              "description": "Optional leading icon.",
-              "name": "icon"
+              "description": "Leading composition slot.",
+              "name": "start"
             },
             {
               "description": "Colored sticker surface.",
@@ -6402,19 +7688,13 @@
             {
               "description": "Sticker label. Falls back to the `label` attribute.",
               "name": ""
+            },
+            {
+              "description": "Optional leading visual.",
+              "name": "start"
             }
           ],
           "members": [
-            {
-              "kind": "field",
-              "name": "icon",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "icon"
-            },
             {
               "kind": "field",
               "name": "label",
@@ -6460,14 +7740,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "icon"
-            },
             {
               "name": "label",
               "type": {
@@ -6530,34 +7802,28 @@
     },
     {
       "kind": "javascript-module",
-      "path": "packages/elements/src/tabs/cad-tab.ts",
+      "path": "packages/elements/src/table/cad-table.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "A declarative panel consumed by `cad-tabs`.",
-          "name": "CadTab",
-          "cssParts": [
-            {
-              "description": "Panel content container.",
-              "name": "panel"
-            }
-          ],
+          "description": "A declarative column consumed by `cad-table`.",
+          "name": "CadTableColumn",
           "slots": [
             {
-              "description": "Panel content.",
+              "description": "Progressive fallback label.",
               "name": ""
             }
           ],
           "members": [
             {
               "kind": "field",
-              "name": "icon",
+              "name": "key",
               "privacy": "public",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "attribute": "icon",
+              "attribute": "key",
               "reflects": true
             },
             {
@@ -6570,17 +7836,473 @@
               "default": "''",
               "attribute": "label",
               "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "key"
             },
             {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-table-column",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A declarative cell consumed by `cad-table-row`.",
+          "name": "CadTableCell",
+          "slots": [
+            {
+              "description": "Progressive fallback cell content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
               "kind": "field",
-              "name": "name",
+              "name": "column",
               "privacy": "public",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "attribute": "name",
+              "attribute": "column",
               "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "column",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "column"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-table-cell",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A declarative row consumed by `cad-table`.",
+          "name": "CadTableRow",
+          "slots": [
+            {
+              "description": "`cad-table-cell` values with readable fallback text.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-table-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A responsive native data table built from declarative column and row children.",
+          "name": "CadTable",
+          "cssProperties": [
+            {
+              "description": "Table line color.",
+              "name": "--cad-table-grid"
+            },
+            {
+              "description": "Table foreground color.",
+              "name": "--cad-table-ink"
+            },
+            {
+              "description": "Table paper color.",
+              "name": "--cad-table-paper"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Responsive scroll container.",
+              "name": "base"
+            },
+            {
+              "description": "Native table caption.",
+              "name": "caption"
+            },
+            {
+              "description": "Native body cell.",
+              "name": "cell"
+            },
+            {
+              "description": "Empty-state cell.",
+              "name": "empty"
+            },
+            {
+              "description": "Native column header.",
+              "name": "header"
+            },
+            {
+              "description": "Native table element.",
+              "name": "table"
+            }
+          ],
+          "slots": [
+            {
+              "description": "`cad-table-column` and `cad-table-row` data.",
+              "name": ""
+            },
+            {
+              "description": "Visible table caption. Falls back to the `caption` attribute.",
+              "name": "caption"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "caption",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "caption"
+            },
+            {
+              "kind": "field",
+              "name": "density",
+              "privacy": "public",
+              "type": {
+                "text": "CadTableDensity"
+              },
+              "default": "'regular'",
+              "attribute": "density",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "emptyText",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No data'",
+              "attribute": "empty-text"
+            },
+            {
+              "kind": "field",
+              "name": "minWidth",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'32rem'",
+              "attribute": "min-width"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadTableVariant"
+              },
+              "default": "'grid'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "zebra",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "zebra",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dataObserver",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "TableColumn[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "TableRow[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "caption",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "caption"
+            },
+            {
+              "name": "density",
+              "type": {
+                "text": "CadTableDensity"
+              },
+              "default": "'regular'",
+              "fieldName": "density"
+            },
+            {
+              "name": "empty-text",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No data'",
+              "fieldName": "emptyText"
+            },
+            {
+              "name": "min-width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'32rem'",
+              "fieldName": "minWidth"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadTableVariant"
+              },
+              "default": "'grid'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "zebra",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "zebra"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadTableColumn",
+          "declaration": {
+            "name": "CadTableColumn",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadTableCell",
+          "declaration": {
+            "name": "CadTableCell",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadTableRow",
+          "declaration": {
+            "name": "CadTableRow",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadTable",
+          "declaration": {
+            "name": "CadTable",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-table-column",
+          "declaration": {
+            "name": "CadTableColumn",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-table-cell",
+          "declaration": {
+            "name": "CadTableCell",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-table-row",
+          "declaration": {
+            "name": "CadTableRow",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-table",
+          "declaration": {
+            "name": "CadTable",
+            "module": "packages/elements/src/table/cad-table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/tabs/cad-tab.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A semantic tab list composed inside `cad-tabs`.",
+          "name": "CadTabsList",
+          "cssParts": [
+            {
+              "description": "Native tab-list container.",
+              "name": "list"
+            }
+          ],
+          "slots": [
+            {
+              "description": "`cad-tab-trigger` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Tabs'",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Tabs'",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-tabs-list",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A native tab button controlled by its nearest `cad-tabs`.",
+          "name": "CadTabTrigger",
+          "cssParts": [
+            {
+              "description": "Native tab button.",
+              "name": "tab"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Visible tab label. Falls back to the `label` attribute.",
+              "name": ""
+            },
+            {
+              "description": "Optional trailing content.",
+              "name": "end"
+            },
+            {
+              "description": "Optional leading content.",
+              "name": "start"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "controls",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
             },
             {
               "kind": "field",
@@ -6592,180 +8314,56 @@
               "default": "'accent'",
               "attribute": "tone",
               "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "icon"
             },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "label"
-            },
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "name"
-            },
-            {
-              "name": "tone",
-              "type": {
-                "text": "CadTabTone"
-              },
-              "default": "'accent'",
-              "fieldName": "tone"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "cad-tab",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "CadTab",
-          "declaration": {
-            "name": "CadTab",
-            "module": "packages/elements/src/tabs/cad-tab.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "cad-tab",
-          "declaration": {
-            "name": "CadTab",
-            "module": "packages/elements/src/tabs/cad-tab.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "packages/elements/src/tabs/cad-tabs.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "An accessible tabs controller for declarative `cad-tab` children.",
-          "name": "CadTabs",
-          "cssProperties": [
-            {
-              "description": "Panel surface.",
-              "name": "--cad-tabs-panel-bg"
-            }
-          ],
-          "cssParts": [
-            {
-              "description": "Tab list.",
-              "name": "list"
-            },
-            {
-              "description": "Panel container.",
-              "name": "panels"
-            },
-            {
-              "description": "Every native tab button.",
-              "name": "tab"
-            }
-          ],
-          "slots": [
-            {
-              "description": "Direct `cad-tab` children.",
-              "name": ""
-            }
-          ],
-          "members": [
             {
               "kind": "field",
-              "name": "activeTab",
+              "name": "value",
               "privacy": "public",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "attribute": "active-tab",
+              "attribute": "value",
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "defaultTab",
-              "privacy": "public",
-              "type": {
-                "text": "string"
+              "kind": "method",
+              "name": "focusControl",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
               },
-              "default": "''",
-              "attribute": "default-tab"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "privacy": "public",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Tabs'",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "items",
-              "type": {
-                "text": "CadTab[]"
-              },
-              "privacy": "private",
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "instanceId",
-              "privacy": "private",
-              "readonly": true,
-              "default": "`cad-tabs-${++tabsInstance}`"
-            },
-            {
-              "kind": "field",
-              "name": "observer",
-              "type": {
-                "text": "MutationObserver | undefined"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "directItems",
-              "type": {
-                "text": "CadTab[]"
-              },
-              "privacy": "private",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "definitions",
-              "type": {
-                "text": "Map<string, HTMLElement>"
-              },
-              "privacy": "private",
-              "readonly": true
+              "parameters": [
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "FocusOptions"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
-              "name": "syncItems",
+              "name": "setControlledPanel",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "panel",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "requestActivation",
               "privacy": "private",
               "return": {
                 "type": {
@@ -6775,87 +8373,7 @@
             },
             {
               "kind": "method",
-              "name": "applyPanelState",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "applyAriaRelationships",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "panelId",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "name",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "tabId",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "string"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "name",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "activate",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "focus",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleKeydown",
+              "name": "requestNavigation",
               "privacy": "private",
               "return": {
                 "type": {
@@ -6868,11 +8386,363 @@
                   "type": {
                     "text": "KeyboardEvent"
                   }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchRequest",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "key",
+                  "optional": true,
+                  "type": {
+                    "text": "CadTabRequestDetail['key']"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "cad-tab-request",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Requests activation or keyboard navigation from `cad-tabs`."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadTabTone"
+              },
+              "default": "'accent'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-tab-trigger",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A tab panel controlled by the matching `cad-tab-trigger` value.",
+          "name": "CadTabContent",
+          "cssProperties": [
+            {
+              "description": "Panel surface.",
+              "name": "--cad-tabs-panel-bg"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native tab panel.",
+              "name": "panel"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Panel content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-tab-content",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadTabsList",
+          "declaration": {
+            "name": "CadTabsList",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadTabTrigger",
+          "declaration": {
+            "name": "CadTabTrigger",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadTabContent",
+          "declaration": {
+            "name": "CadTabContent",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-tabs-list",
+          "declaration": {
+            "name": "CadTabsList",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-tab-trigger",
+          "declaration": {
+            "name": "CadTabTrigger",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-tab-content",
+          "declaration": {
+            "name": "CadTabContent",
+            "module": "packages/elements/src/tabs/cad-tab.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/tabs/cad-tabs.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Coordinates compound tab-list, trigger, and content primitives.",
+          "name": "CadTabs",
+          "slots": [
+            {
+              "description": "One `cad-tabs-list` and matching `cad-tab-content` children.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "default-value"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "syncing",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "instanceId",
+              "privacy": "private",
+              "readonly": true,
+              "default": "`cad-tabs-${++tabsInstance}`"
+            },
+            {
+              "kind": "field",
+              "name": "list",
+              "type": {
+                "text": "CadTabsList | null"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "triggers",
+              "type": {
+                "text": "CadTabTrigger[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "contents",
+              "type": {
+                "text": "CadTabContent[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "sync",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "panelId",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "handleRequest",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "activate",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
                 },
                 {
-                  "name": "index",
+                  "name": "focusTarget",
                   "type": {
-                    "text": "number"
+                    "text": "CadTabTrigger"
                   }
                 }
               ]
@@ -6884,33 +8754,25 @@
               "type": {
                 "text": "CustomEvent"
               },
-              "description": "Fired after the active panel changes."
+              "description": "Fired after an interactive value change."
             }
           ],
           "attributes": [
             {
-              "name": "active-tab",
+              "name": "default-value",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "fieldName": "activeTab"
+              "fieldName": "defaultValue"
             },
             {
-              "name": "default-tab",
+              "name": "value",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "fieldName": "defaultTab"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Tabs'",
-              "fieldName": "label"
+              "fieldName": "value"
             }
           ],
           "superclass": {

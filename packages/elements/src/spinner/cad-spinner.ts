@@ -1,7 +1,5 @@
 import { css, html, LitElement } from 'lit'
 
-import '../icon/cad-icon.js'
-
 export type CadSpinnerSize = 'lg' | 'md' | 'sm'
 export type CadSpinnerTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet'
 
@@ -67,7 +65,22 @@ export class CadSpinner extends LitElement {
     }
 
     .icon {
+      box-sizing: border-box;
+      width: var(--_spinner-size, 1.75rem);
+      height: var(--_spinner-size, 1.75rem);
+      border: 2px dashed currentColor;
+      border-inline-end-color: transparent;
+      border-radius: 50% 47% 52% 48%;
       animation: spin 900ms steps(12, end) infinite;
+    }
+
+    :host([size='sm']) .icon {
+      --_spinner-size: 1.125rem;
+    }
+
+    :host([size='lg']) .icon {
+      --_spinner-size: 2.625rem;
+      border-width: 3px;
     }
 
     .label {
@@ -113,13 +126,9 @@ export class CadSpinner extends LitElement {
   }
 
   override render() {
-    const iconSize =
-      this.size === 'sm' ? '18' : this.size === 'lg' ? '42' : '28'
     return html`
       <span aria-live="polite" class="base" part="base" role="status">
-        <span aria-hidden="true" class="icon" part="icon">
-          <cad-icon name="reset" size=${iconSize}></cad-icon>
-        </span>
+        <span aria-hidden="true" class="icon" part="icon"></span>
         <span class="label" part="label"><slot>${this.label}</slot></span>
       </span>
     `

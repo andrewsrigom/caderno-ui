@@ -24,7 +24,7 @@ describe('cad-callout', () => {
     expect(element.shadowRoot?.querySelector('[part="content"]')).not.toBeNull()
   })
 
-  it('selects an icon and heading from the variant', async () => {
+  it('selects an intrinsic mark and heading from the variant', async () => {
     const element = document.createElement('cad-callout')
     element.variant = 'tip'
     document.body.append(element)
@@ -34,7 +34,8 @@ describe('cad-callout', () => {
       element.shadowRoot?.querySelector('[part="title"]')?.textContent,
     ).toContain('Tip')
     expect(
-      element.shadowRoot?.querySelector('cad-icon')?.getAttribute('name'),
-    ).toBe('lightbulb')
+      element.shadowRoot?.querySelector('[part="icon"] svg'),
+    ).not.toBeNull()
+    expect(customElements.get('cad-icon')).toBeUndefined()
   })
 })

@@ -1,0 +1,63 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-steps label="Package release" orientation="horizontal">
+  <cad-step title="Verify contracts" tone="blue">
+    Run type, element, accessibility, and bundle checks.
+    <span slot="meta">Automated · 8 min</span>
+  </cad-step>
+  <cad-step title="Publish packages" tone="violet">
+    Publish the synchronized package versions.
+    <span slot="meta">Owner · maintainer</span>
+  </cad-step>
+</cad-steps>
+
+<script type="module">
+  import '@caderno-ui/elements/steps'
+</script>`
+---
+
+<DocsLayout
+  description="Responsive numbered sequences for methods, timelines, and rollout plans."
+  title="Steps"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-steps&gt; family</p>
+    <h1>A sequence assembled from independent stages.</h1>
+    <p>
+      Steps assigns order and responsive layout. Each step owns its title,
+      content, metadata, and optional marker override.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Package release path"
+    description="The same sequence communicates automation, ownership, and the public handoff."
+  >
+    <cad-steps label="Package release" orientation="horizontal">
+      <cad-step title="Verify contracts" tone="blue">
+        Run type, element, accessibility, and bundle checks.
+        <span slot="meta">Automated · 8 min</span>
+      </cad-step>
+      <cad-step title="Publish packages" tone="violet">
+        Publish the synchronized package versions after verification passes.
+        <span slot="meta">Owner · maintainer</span>
+      </cad-step>
+      <cad-step title="Validate consumers" tone="mint">
+        Install the public release in SeniorPath and rerun its critical flows.
+        <span slot="meta">Required before announcement</span>
+      </cad-step>
+    </cad-steps>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-steps" />
+  <ApiReference tagName="cad-step" />
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/steps'
+</script>

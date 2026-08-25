@@ -1,0 +1,70 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-empty-state
+  title="No matching decisions"
+  description="Try a broader owner or status filter."
+  variant="no-results"
+>
+  <cad-icon name="search" size="56" slot="icon"></cad-icon>
+  <cad-button slot="actions">Clear filters</cad-button>
+</cad-empty-state>
+
+<script type="module">
+  import '@caderno-ui/elements/empty-state'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/button'
+</script>`
+---
+
+<DocsLayout
+  description="Composable empty collection, search, and access states with explicit recovery actions."
+  title="Empty state"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-empty-state&gt;</p>
+    <h1>Explain what is absent and give the next useful action.</h1>
+    <p>
+      Empty state owns layout, not product illustration or recovery behavior.
+      Those concerns enter through explicit slots and selective imports.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Filtered decision log"
+    description="The collection exists, but the current owner and status filters produce no results."
+  >
+    <cad-empty-state
+      title="No matching decisions"
+      description="Try a broader owner or status filter."
+      variant="no-results"
+    >
+      <cad-icon name="search" size="56" slot="icon"></cad-icon>
+      <cad-button slot="actions" variant="secondary">
+        <cad-icon name="reset" size="18" slot="start"></cad-icon>
+        Clear filters
+      </cad-button>
+    </cad-empty-state>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-empty-state" />
+
+  <section class="content-section" aria-labelledby="empty-accessibility">
+    <h2 id="empty-accessibility">Accessibility</h2>
+    <p>
+      Empty state is static content, not an alert. Move focus only when a user
+      action replaces a focused collection, and keep action labels specific to
+      the recovery they perform.
+    </p>
+  </section>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/empty-state'
+  import '@caderno-ui/elements/icon'
+</script>

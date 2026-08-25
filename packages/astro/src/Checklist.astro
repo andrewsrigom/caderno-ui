@@ -1,0 +1,30 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type {
+  CadChecklistTone,
+  CadChecklistVariant,
+} from '@caderno-ui/elements/checklist'
+
+type Props = {
+  class?: string
+  title?: string
+  tone?: CadChecklistTone
+  variant?: CadChecklistVariant
+}
+
+const {
+  class: className,
+  title,
+  tone = 'mint',
+  variant = 'mixed',
+} = Astro.props
+---
+
+<cad-checklist class={className} title={title} tone={tone} variant={variant}>
+  <slot name="title" slot="title" />
+  <slot />
+</cad-checklist>
+
+<script>
+  import '@caderno-ui/elements/checklist'
+</script>

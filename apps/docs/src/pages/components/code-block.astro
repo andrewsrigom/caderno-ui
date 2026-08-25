@@ -1,0 +1,65 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const sample = `import '@caderno-ui/elements/card'
+import '@caderno-ui/elements/badge'
+
+const card = document.querySelector('cad-card')
+card?.addEventListener('click', () => openReview())`
+
+const usage = `<cad-code-block
+  code="import '@caderno-ui/elements/card'"
+  filename="review-queue.ts"
+  language="ts"
+  show-line-numbers
+></cad-code-block>
+
+<script type="module">
+  import '@caderno-ui/elements/code-block'
+</script>`
+---
+
+<DocsLayout
+  description="Readable preformatted code with optional filename, language, and line numbers."
+  title="Code block"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-code-block&gt;</p>
+    <h1>Code examples that remain native preformatted text.</h1>
+    <p>
+      Code block owns presentation and metadata, while syntax highlighting and
+      copy behavior remain opt-in application concerns.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="Selective component imports"
+    description="A real application entrypoint imports only the card and badge used by its review queue."
+  >
+    <cad-code-block
+      code={sample}
+      filename="review-queue.ts"
+      language="ts"
+      show-line-numbers
+      tone="accent"></cad-code-block>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+
+  <ApiReference tagName="cad-code-block" />
+
+  <section class="content-section" aria-labelledby="code-boundary">
+    <h2 id="code-boundary">Deliberate boundary</h2>
+    <p>
+      This primitive does not bundle a highlighter or clipboard controller. An
+      application can add either when required without making every code sample
+      pay that runtime cost.
+    </p>
+  </section>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/code-block'
+</script>

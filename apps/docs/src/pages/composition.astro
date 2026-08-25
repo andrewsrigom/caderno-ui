@@ -1,0 +1,125 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import DemoFrame from '../components/DemoFrame.astro'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const selectiveImport = `import '@caderno-ui/elements/card'
+
+// Only add artwork when this screen actually uses it.
+import '@caderno-ui/elements/icon'`
+---
+
+<DocsLayout
+  description="The composition, dependency, and bundle boundaries used across Caderno UI."
+  title="Composition"
+>
+  <header class="page-header">
+    <p class="eyebrow">Architecture</p>
+    <h1>Small behavior, explicit composition.</h1>
+    <p>
+      Caderno UI separates semantic behavior from product content and optional
+      artwork. The result is a source-owned API in the spirit of compositional
+      systems, while the canonical Lit implementation remains framework
+      agnostic.
+    </p>
+  </header>
+
+  <section class="content-section" aria-labelledby="rules-title">
+    <h2 id="rules-title">The review criteria</h2>
+    <div class="rules-grid">
+      <article>
+        <h3>Compound when hierarchy varies</h3>
+        <p>
+          Card and Tabs expose named structural primitives because applications
+          need to reorder, omit, or enrich those regions.
+        </p>
+      </article>
+      <article>
+        <h3>Slots when content varies</h3>
+        <p>
+          Button adornments, Input prefixes, and Callout illustrations are
+          slots. A string prop must not pull another visual package into a
+          bundle.
+        </p>
+      </article>
+      <article>
+        <h3>Own behavior when semantics depend on it</h3>
+        <p>
+          Modal owns its dialog and focus lifecycle; Alert owns live-region and
+          dismissal behavior; form controls own native validation.
+        </p>
+      </article>
+      <article>
+        <h3>Keep intrinsic marks internal</h3>
+        <p>
+          Close, check, direction, and status marks are tiny internal SVGs.
+          Product-facing doodles remain an explicit <code>cad-icon</code> import.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <DemoFrame
+    title="Composition without hidden dependencies"
+    description="The Card entrypoint works alone; the application opts into Badge and Icon for this particular presentation."
+  >
+    <cad-card tone="blue">
+      <cad-card-header>
+        <cad-card-kicker>Bundle boundary</cad-card-kicker>
+        <cad-card-title><h2>Review search delivery</h2></cad-card-title>
+      </cad-card-header>
+      <cad-card-content>
+        <p>
+          The surface, hierarchy, status label, and doodle come from separate
+          public entrypoints and can be shipped independently.
+        </p>
+      </cad-card-content>
+      <cad-card-footer>
+        <cad-badge tone="mint">Verified</cad-badge>
+      </cad-card-footer>
+    </cad-card>
+  </DemoFrame>
+
+  <CodeBlock code={selectiveImport} language="ts" />
+
+  <section class="content-section" aria-labelledby="delivery-title">
+    <h2 id="delivery-title">Enforced in CI</h2>
+    <p>
+      Every public Elements and React entrypoint has its own gzip budget. Static
+      checks reject primitive components that import the public icon registry,
+      and bundle inspection rejects Rough.js anywhere outside Chart.
+    </p>
+  </section>
+
+  <style>
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+      gap: 1rem;
+    }
+
+    .rules-grid article {
+      padding: 1rem 1.1rem;
+      background: var(--cad-surface-raised);
+      border: 1px dashed var(--cad-line-strong);
+      border-radius: 0.75rem;
+    }
+
+    .rules-grid :is(h3, p) {
+      margin-block: 0;
+    }
+
+    .rules-grid p {
+      margin-top: 0.5rem;
+    }
+
+    cad-card {
+      max-width: 36rem;
+    }
+  </style>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/badge'
+  import '@caderno-ui/elements/card'
+</script>

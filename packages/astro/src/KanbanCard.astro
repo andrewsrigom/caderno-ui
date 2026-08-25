@@ -1,0 +1,13 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadKanbanCardTone } from '@caderno-ui/elements/kanban'
+
+type Props = { class?: string; tone?: CadKanbanCardTone }
+const { class: className, tone = 'lemon' } = Astro.props
+---
+
+<cad-kanban-card class={className} tone={tone}><slot /></cad-kanban-card>
+
+<script>
+  import '@caderno-ui/elements/kanban'
+</script>

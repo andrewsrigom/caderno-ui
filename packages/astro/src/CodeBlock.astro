@@ -1,0 +1,35 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadCodeBlockTone } from '@caderno-ui/elements/code-block'
+
+type Props = {
+  class?: string
+  code?: string
+  filename?: string
+  language?: string
+  showLineNumbers?: boolean
+  tone?: CadCodeBlockTone
+}
+
+const {
+  class: className,
+  code,
+  filename,
+  language,
+  showLineNumbers = false,
+  tone = 'accent',
+} = Astro.props
+---
+
+<cad-code-block
+  class={className}
+  code={code}
+  filename={filename}
+  language={language}
+  show-line-numbers={showLineNumbers || undefined}
+  tone={tone}><slot /></cad-code-block
+>
+
+<script>
+  import '@caderno-ui/elements/code-block'
+</script>

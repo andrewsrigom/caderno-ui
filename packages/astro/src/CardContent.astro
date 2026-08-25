@@ -1,0 +1,12 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = { class?: string }
+const { class: className } = Astro.props
+---
+
+<cad-card-content class={className}><slot /></cad-card-content>
+
+<script>
+  import '@caderno-ui/elements/card'
+</script>

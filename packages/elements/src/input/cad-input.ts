@@ -1,7 +1,5 @@
 import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
 
-import '../icon/cad-icon.js'
-
 export type CadInputSize = 'lg' | 'md' | 'sm'
 export type CadInputTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
@@ -12,12 +10,13 @@ export type CadInputType =
  * A form-associated notebook input with native validation and reset behavior.
  *
  * @slot label - Visible control label. Falls back to the `label` attribute.
+ * @slot prefix - Optional leading content inside the field.
  * @csspart base - Field container.
  * @csspart control - Native input.
  * @csspart field - Ruled input frame.
  * @csspart hint - Hint or error message.
- * @csspart icon - Optional leading icon.
  * @csspart label - Visible label.
+ * @csspart prefix - Leading composition slot.
  * @fires input - Fired while the user edits the value.
  * @fires change - Fired when the user commits a value change.
  * @cssprop --cad-input-focus - Per-instance focus and label color.
@@ -36,7 +35,6 @@ export class CadInput extends LitElement {
     disabled: { reflect: true, type: Boolean },
     error: { type: String },
     hint: { type: String },
-    icon: { type: String },
     inputMode: { attribute: 'inputmode', type: String },
     invalid: { reflect: true, type: Boolean },
     label: { type: String },
@@ -147,14 +145,6 @@ export class CadInput extends LitElement {
       );
     }
 
-    .icon {
-      display: inline-grid;
-      flex: 0 0 auto;
-      place-items: center;
-      color: var(--_input-focus);
-      transform: translateY(2px) rotate(-4deg);
-    }
-
     .control {
       flex: 1 1 auto;
       min-width: 0;
@@ -225,7 +215,6 @@ export class CadInput extends LitElement {
   declare disabled: boolean
   declare error: string
   declare hint: string
-  declare icon: string
   declare inputMode: string
   declare invalid: boolean
   declare label: string
@@ -253,7 +242,6 @@ export class CadInput extends LitElement {
     this.disabled = false
     this.error = ''
     this.hint = ''
-    this.icon = ''
     this.inputMode = ''
     this.invalid = false
     this.label = ''
@@ -360,16 +348,7 @@ export class CadInput extends LitElement {
           }
         </label>
         <div class="field" part="field">
-          ${
-            this.icon
-              ? html`<span aria-hidden="true" class="icon" part="icon">
-                  <cad-icon
-                    name=${this.icon}
-                    size=${this.size === 'sm' ? '16' : '18'}
-                  ></cad-icon>
-                </span>`
-              : nothing
-          }
+          <slot name="prefix" part="prefix"></slot>
           <input
             aria-describedby=${message ? 'message' : nothing}
             aria-invalid=${this.invalid ? 'true' : nothing}

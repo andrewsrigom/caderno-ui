@@ -8,7 +8,6 @@ import type {
 
 type Props = {
   class?: string
-  icon?: string
   label?: string
   shape?: CadStickerShape
   size?: CadStickerSize
@@ -16,7 +15,6 @@ type Props = {
 }
 const {
   class: className,
-  icon,
   label,
   shape = 'label',
   size = 'md',
@@ -26,11 +24,11 @@ const {
 
 <cad-sticker
   class={className}
-  icon={icon}
   label={label}
   shape={shape}
   size={size}
-  tone={tone}><slot>{label}</slot></cad-sticker
+  tone={tone}
+  ><slot name="start" slot="start" /><slot>{label}</slot></cad-sticker
 >
 
 <script>

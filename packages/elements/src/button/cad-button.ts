@@ -1,8 +1,5 @@
 import { css, html, LitElement, nothing } from 'lit'
 
-import '../icon/cad-icon.js'
-
-export type CadButtonIconPosition = 'end' | 'start'
 export type CadButtonSize = 'lg' | 'md' | 'sm'
 export type CadButtonTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
@@ -13,9 +10,12 @@ export type CadButtonVariant = 'ghost' | 'link' | 'primary' | 'secondary'
  * A notebook-styled action that renders a native button or link.
  *
  * @slot - Action label.
+ * @slot end - Optional trailing visual or metadata.
+ * @slot start - Optional leading visual or metadata.
  * @csspart base - Native button or anchor.
- * @csspart icon - Optional leading or trailing icon.
+ * @csspart end - Trailing composition slot.
  * @csspart label - Action label.
+ * @csspart start - Leading composition slot.
  * @cssprop --cad-button-bg - Per-instance action color.
  * @cssprop --cad-button-ink - Per-instance foreground color.
  */
@@ -24,8 +24,6 @@ export class CadButton extends LitElement {
     disabled: { reflect: true, type: Boolean },
     form: { type: String },
     href: { type: String },
-    icon: { type: String },
-    iconPosition: { attribute: 'icon-position', reflect: true, type: String },
     label: { type: String },
     rel: { type: String },
     size: { reflect: true, type: String },
@@ -114,8 +112,6 @@ export class CadButton extends LitElement {
         transform var(--cad-duration-fast, 140ms)
           var(--cad-transition-smooth, ease),
         box-shadow var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease),
-        background var(--cad-duration-fast, 140ms)
           var(--cad-transition-smooth, ease);
       transform: rotate(-0.3deg);
       -webkit-tap-highlight-color: transparent;
@@ -200,12 +196,6 @@ export class CadButton extends LitElement {
       transform: none;
     }
 
-    .icon {
-      display: inline-grid;
-      flex: 0 0 auto;
-      place-items: center;
-    }
-
     .label {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -229,8 +219,6 @@ export class CadButton extends LitElement {
   declare disabled: boolean
   declare form: string
   declare href: string
-  declare icon: string
-  declare iconPosition: CadButtonIconPosition
   declare label: string
   declare rel: string
   declare size: CadButtonSize
@@ -244,8 +232,6 @@ export class CadButton extends LitElement {
     this.disabled = false
     this.form = ''
     this.href = ''
-    this.icon = ''
-    this.iconPosition = 'start'
     this.label = ''
     this.rel = ''
     this.size = 'md'
@@ -276,21 +262,11 @@ export class CadButton extends LitElement {
     event.stopImmediatePropagation()
   }
 
-  private renderIcon(position: CadButtonIconPosition) {
-    if (!this.icon || this.iconPosition !== position) return nothing
-    const size = this.size === 'sm' ? 16 : this.size === 'lg' ? 22 : 18
-    return html`
-      <span aria-hidden="true" class="icon" part="icon">
-        <cad-icon name=${this.icon} size=${size}></cad-icon>
-      </span>
-    `
-  }
-
   override render() {
     const content = html`
-      ${this.renderIcon('start')}
+      <slot name="start" part="start"></slot>
       <span class="label" part="label"><slot></slot></span>
-      ${this.renderIcon('end')}
+      <slot name="end" part="end"></slot>
     `
 
     if (this.href) {

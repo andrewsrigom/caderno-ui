@@ -5,20 +5,15 @@ import type { CadBadgeTone, CadBadgeVariant } from '@caderno-ui/elements/badge'
 
 type Props = {
   class?: string
-  icon?: string
   tone?: CadBadgeTone
   variant?: CadBadgeVariant
 }
 
-const {
-  class: className,
-  icon,
-  tone = 'neutral',
-  variant = 'solid',
-} = Astro.props
+const { class: className, tone = 'neutral', variant = 'solid' } = Astro.props
 ---
 
-<cad-badge class={className} icon={icon} tone={tone} variant={variant}>
+<cad-badge class={className} tone={tone} variant={variant}>
+  <slot name="start" slot="start" />
   <slot />
 </cad-badge>
 

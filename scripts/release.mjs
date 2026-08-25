@@ -6,7 +6,14 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const dryRun = process.argv.includes('--dry-run')
-const packageDirectories = ['astro', 'elements', 'icons', 'react', 'tokens']
+const packageDirectories = [
+  'astro',
+  'elements',
+  'icons',
+  'motion',
+  'react',
+  'tokens',
+]
 
 function run(command, arguments_) {
   execFileSync(command, arguments_, { cwd: root, stdio: 'inherit' })

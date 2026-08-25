@@ -1,7 +1,7 @@
 :root {
-  --cad-font-ui:
-    'Helvetica Neue', 'SF Pro Display', Arial, Roboto, system-ui, sans-serif;
-  --cad-font-book: Georgia, 'Times New Roman', 'DejaVu Serif', serif;
+  --cad-font-text: Georgia, 'Times New Roman', 'DejaVu Serif', serif;
+  --cad-font-ui: var(--cad-font-text);
+  --cad-font-book: var(--cad-font-text);
   --cad-font-hand:
     'Caveat', 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
   --cad-font-mono:

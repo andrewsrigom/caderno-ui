@@ -1,5 +1,11 @@
 # @caderno-ui/tokens
 
+## 0.2.1
+
+### Patch Changes
+
+- Consolidate interface and reading typography into one shared text role while preserving the existing UI and book token aliases.
+
 ## 0.2.0
 
 ### Minor Changes

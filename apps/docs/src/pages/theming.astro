@@ -5,7 +5,7 @@ import DocsLayout from '../layouts/DocsLayout.astro'
 
 const themeImport = `import '@caderno-ui/tokens/notebook.css'`
 const override = `.product-surface {
-  --cad-font-book: Charter, Georgia, serif;
+  --cad-font-text: Charter, Georgia, serif;
   --cad-link: #6d35c5;
   --cad-post-it-blue-bg: #d9c8ff;
   --cad-post-it-blue-ink: #321b59;
@@ -81,6 +81,13 @@ const colorTokens = [
       component. Shadow DOM inherits custom properties without leaking internal
       selectors. When changing a color, test the resulting pair in every theme
       where that scope can appear.
+    </p>
+    <p>
+      Typography has three roles: <code>--cad-font-text</code> for both UI and reading,
+      <code>--cad-font-hand</code> for annotations and emphasis, and
+      <code>--cad-font-mono</code> for code. The legacy
+      <code>--cad-font-ui</code> and <code>--cad-font-book</code> names remain as
+      aliases to the shared text family.
     </p>
     <CodeBlock code={override} language="css" />
     <DemoFrame title="A locally themed alert">

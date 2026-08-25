@@ -22,7 +22,7 @@ afterEach(() => {
 })
 
 describe('createMotionScope', () => {
-  it('limits selectors to its root and restores animation styles', () => {
+  it('limits selectors to its root and restores animation styles', async () => {
     matchMedia(false)
     const root = document.createElement('section')
     const inside = document.createElement('article')
@@ -35,7 +35,7 @@ describe('createMotionScope', () => {
     const motion = createMotionScope(root)
     motion.enter('[data-motion-item]', { duration: 1 })
 
-    expect(inside.style.transform).not.toBe('')
+    await vi.waitFor(() => expect(inside.style.transform).not.toBe(''))
     expect(outside.style.transform).toBe('')
 
     motion.revert()

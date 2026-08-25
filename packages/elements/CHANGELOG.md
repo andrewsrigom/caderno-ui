@@ -1,5 +1,12 @@
 # @caderno-ui/elements
 
+## 0.3.1
+
+### Patch Changes
+
+- 4ead231: Replace the rotating prose accordion arrow glyph with a stable CSS chevron.
+- @caderno-ui/icons@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes

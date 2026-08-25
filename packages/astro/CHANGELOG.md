@@ -1,5 +1,13 @@
 # @caderno-ui/astro
 
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies [4ead231]
+  - @caderno-ui/elements@0.3.1
+  - @caderno-ui/icons@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes

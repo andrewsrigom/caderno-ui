@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config'
 
+const isDevelopmentServer = process.argv.includes('dev')
+
 export default defineConfig({
-  base: '/caderno-ui',
+  base: isDevelopmentServer ? '/' : '/caderno-ui',
   site: 'https://andrewsrigom.github.io',
   trailingSlash: 'always',
 })

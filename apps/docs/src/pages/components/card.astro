@@ -4,6 +4,7 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const usage = `<cad-card folded tone="blue">
   <cad-card-header>
     <cad-card-kicker>Architecture review</cad-card-kicker>
@@ -68,7 +69,7 @@ const usage = `<cad-card folded tone="blue">
       </cad-card>
 
       <cad-card
-        href="/caderno-ui/components/chart/"
+        href={`${base}/components/chart/`}
         tone="mint"
         variant="outlined"
       >

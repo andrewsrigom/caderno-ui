@@ -4,6 +4,7 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const usage = `<cad-button tone="mint">
   <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
   Save review
@@ -46,7 +47,7 @@ const usage = `<cad-button tone="mint">
         ></cad-icon>
         Save draft
       </cad-button>
-      <cad-button href="/caderno-ui/components/" variant="ghost">
+      <cad-button href={`${base}/components/`} variant="ghost">
         Browse components
         <cad-icon aria-hidden="true" name="arrow-right" size="18" slot="end"
         ></cad-icon>

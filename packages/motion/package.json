@@ -1,6 +1,6 @@
 {
   "name": "@caderno-ui/motion",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Accessible motion presets and opt-in GSAP choreography for Caderno UI.",
   "keywords": [
     "animation",

@@ -1,5 +1,24 @@
 # @caderno-ui/astro
 
+## 0.3.0
+
+### Minor Changes
+
+- 4916af4: Add a shared motion vocabulary, animated accordion disclosure, viewport-aware
+  chart drawing and replay, dynamic tab and modal entrances, and an opt-in GSAP
+  package with scoped enter, exit, stagger, and scroll-reveal choreography.
+- 4916af4: Add canonical compact breadcrumbs, editorial prose enhancement and styling, a table-of-contents facade, stable first-frame fallbacks, and the complete handwriting type scale.
+- 4916af4: Add the composable `cad-skeleton` loading placeholder with text, rectangle, and
+  circle shapes, bounded text lines, motion preferences, and framework adapters.
+
+### Patch Changes
+
+- Updated dependencies [4916af4]
+- Updated dependencies [4916af4]
+- Updated dependencies [4916af4]
+  - @caderno-ui/elements@0.3.0
+  - @caderno-ui/icons@0.3.0
+
 ## 0.2.1
 
 ### Patch Changes

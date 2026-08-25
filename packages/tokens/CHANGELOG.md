@@ -1,5 +1,14 @@
 # @caderno-ui/tokens
 
+## 0.3.0
+
+### Minor Changes
+
+- 4916af4: Add a shared motion vocabulary, animated accordion disclosure, viewport-aware
+  chart drawing and replay, dynamic tab and modal entrances, and an opt-in GSAP
+  package with scoped enter, exit, stagger, and scroll-reveal choreography.
+- 4916af4: Add canonical compact breadcrumbs, editorial prose enhancement and styling, a table-of-contents facade, stable first-frame fallbacks, and the complete handwriting type scale.
+
 ## 0.2.1
 
 ### Patch Changes

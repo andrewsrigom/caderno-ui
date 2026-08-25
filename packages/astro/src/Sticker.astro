@@ -1,0 +1,38 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type {
+  CadStickerShape,
+  CadStickerSize,
+  CadStickerTone,
+} from '@caderno-ui/elements/sticker'
+
+type Props = {
+  class?: string
+  icon?: string
+  label?: string
+  shape?: CadStickerShape
+  size?: CadStickerSize
+  tone?: CadStickerTone
+}
+const {
+  class: className,
+  icon,
+  label,
+  shape = 'label',
+  size = 'md',
+  tone = 'blue',
+} = Astro.props
+---
+
+<cad-sticker
+  class={className}
+  icon={icon}
+  label={label}
+  shape={shape}
+  size={size}
+  tone={tone}><slot>{label}</slot></cad-sticker
+>
+
+<script>
+  import '@caderno-ui/elements/sticker'
+</script>

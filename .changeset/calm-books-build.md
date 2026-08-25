@@ -20,3 +20,7 @@ coordination and a composed toggle event.
 Add Spinner, Tooltip, Modal, Toast, and ToastHost feedback primitives with
 accessible native semantics, typed public events, focus management, safe
 imperative notifications, framework adapters, and cross-browser examples.
+Add Breadcrumb, Pagination, Avatar, Highlight, Tape, and Sticker primitives so
+navigation, identity, and notebook annotations can move out of application
+code while preserving native links, list semantics, visible fallbacks, and
+theme-safe decoration.

@@ -17,6 +17,7 @@ for (const component of [
   'form-controls',
   'feedback',
   'icons',
+  'navigation-and-annotations',
   'progress',
   'tabs',
 ]) {
@@ -154,6 +155,15 @@ test('all interactive component controls are reachable by keyboard', async ({
   await expect(
     page.getByRole('button', { name: 'Send hosted toast' }),
   ).toBeFocused()
+
+  const navigationLinks = page.locator(
+    '[data-component="navigation-and-annotations"] a',
+  )
+  await expect(navigationLinks).toHaveCount(9)
+  for (let index = 0; index < 9; index += 1) {
+    await page.keyboard.press('Tab')
+    await expect(navigationLinks.nth(index)).toBeFocused()
+  }
 
   await page.keyboard.press('Tab')
   await expect(page.getByRole('tab', { name: 'Contract' })).toBeFocused()

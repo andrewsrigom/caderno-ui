@@ -49,7 +49,14 @@
     "./Tooltip.astro": "./src/Tooltip.astro",
     "./Modal.astro": "./src/Modal.astro",
     "./Toast.astro": "./src/Toast.astro",
-    "./ToastHost.astro": "./src/ToastHost.astro"
+    "./ToastHost.astro": "./src/ToastHost.astro",
+    "./Breadcrumb.astro": "./src/Breadcrumb.astro",
+    "./BreadcrumbItem.astro": "./src/BreadcrumbItem.astro",
+    "./Pagination.astro": "./src/Pagination.astro",
+    "./Avatar.astro": "./src/Avatar.astro",
+    "./Highlight.astro": "./src/Highlight.astro",
+    "./Tape.astro": "./src/Tape.astro",
+    "./Sticker.astro": "./src/Sticker.astro"
   },
   "scripts": {
     "typecheck": "astro check"

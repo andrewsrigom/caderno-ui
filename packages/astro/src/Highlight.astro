@@ -1,0 +1,22 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type {
+  CadHighlightTone,
+  CadHighlightVariant,
+} from '@caderno-ui/elements/highlight'
+
+type Props = {
+  class?: string
+  tone?: CadHighlightTone
+  variant?: CadHighlightVariant
+}
+const { class: className, tone = 'lemon', variant = 'marker' } = Astro.props
+---
+
+<cad-highlight class={className} tone={tone} variant={variant}
+  ><slot /></cad-highlight
+>
+
+<script>
+  import '@caderno-ui/elements/highlight'
+</script>

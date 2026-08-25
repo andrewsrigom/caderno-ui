@@ -1,0 +1,44 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = {
+  baseHref: string
+  class?: string
+  label?: string
+  nextLabel?: string
+  page: number
+  pageLabel?: string
+  pageParam?: string
+  previousLabel?: string
+  total: number
+}
+const {
+  baseHref,
+  class: className,
+  label = 'Pagination',
+  nextLabel = 'Next page',
+  page,
+  pageLabel = 'Page',
+  pageParam = 'page',
+  previousLabel = 'Previous page',
+  total,
+} = Astro.props
+const safeTotal = Math.max(1, Math.floor(total))
+const safePage = Math.min(safeTotal, Math.max(1, Math.floor(page)))
+---
+
+<cad-pagination
+  base-href={baseHref}
+  class={className}
+  label={label}
+  next-label={nextLabel}
+  page={safePage}
+  page-label={pageLabel}
+  page-param={pageParam}
+  previous-label={previousLabel}
+  total={safeTotal}>{pageLabel} {safePage} / {safeTotal}</cad-pagination
+>
+
+<script>
+  import '@caderno-ui/elements/pagination'
+</script>

@@ -1,0 +1,49 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-breadcrumb label="Documentation path">
+  <cad-breadcrumb-item href="/components">Components</cad-breadcrumb-item>
+  <cad-breadcrumb-item current>Breadcrumb</cad-breadcrumb-item>
+</cad-breadcrumb>
+
+<script type="module">
+  import '@caderno-ui/elements/breadcrumb'
+</script>`
+---
+
+<DocsLayout
+  description="Composable semantic location trails."
+  title="Breadcrumb"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-breadcrumb&gt;</p>
+    <h1>Keep the reader oriented in a hierarchy.</h1>
+    <p>
+      Compose items explicitly so links remain native and the current page is
+      announced without inventing an interaction model.
+    </p>
+  </header>
+  <DemoFrame title="Documentation path">
+    <cad-breadcrumb label="Documentation path">
+      <cad-breadcrumb-item href="/components">Components</cad-breadcrumb-item>
+      <cad-breadcrumb-item href="/components/card">Surfaces</cad-breadcrumb-item
+      >
+      <cad-breadcrumb-item current>Breadcrumb</cad-breadcrumb-item>
+    </cad-breadcrumb>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-breadcrumb" />
+  <ApiReference tagName="cad-breadcrumb-item" />
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      The container renders a labeled nav and explicit list semantics. Items use
+      native anchors, while the active item receives <code
+        >aria-current="page"</code
+      >.
+    </p>
+  </section>
+</DocsLayout>

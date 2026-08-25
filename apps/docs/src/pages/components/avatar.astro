@@ -1,0 +1,55 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-avatar name="Ada Lovelace" description="Author" status="online" status-label="Available"></cad-avatar>
+
+<script type="module">
+  import '@caderno-ui/elements/avatar'
+</script>`
+---
+
+<DocsLayout description="Compact identity and presence." title="Avatar">
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-avatar&gt;</p>
+    <h1>Attach a person to the note.</h1>
+    <p>
+      Avatar derives two initials when no image is available and keeps the
+      visible identity separate from its optional presence status.
+    </p>
+  </header>
+  <DemoFrame title="Identity sizes">
+    <div class="demo-row">
+      <cad-avatar
+        description="Author"
+        name="Ada Lovelace"
+        size="lg"
+        status="online"
+        status-label="Available"></cad-avatar>
+      <cad-avatar
+        description="Editorial review"
+        name="Caderno UI"
+        status="away"
+        status-label="Away"></cad-avatar>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-avatar" />
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2><p>
+      Generated portraits are decorative because the adjacent name already
+      identifies the person. Localize <code>status-label</code> whenever a presence
+      dot is shown.
+    </p>
+  </section>
+  <style>
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+  </style>
+</DocsLayout>

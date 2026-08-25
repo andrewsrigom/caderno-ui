@@ -375,6 +375,89 @@
         "CadToastPlacement",
         "CadToastVariant"
       ]
+    },
+    {
+      "astroFacades": ["Breadcrumb.astro", "BreadcrumbItem.astro"],
+      "docsPage": "breadcrumb.astro",
+      "elements": [
+        {
+          "className": "CadBreadcrumb",
+          "events": [],
+          "tagName": "cad-breadcrumb"
+        },
+        {
+          "className": "CadBreadcrumbItem",
+          "events": [],
+          "tagName": "cad-breadcrumb-item"
+        }
+      ],
+      "name": "breadcrumb",
+      "typeExports": []
+    },
+    {
+      "astroFacades": ["Pagination.astro"],
+      "docsPage": "pagination.astro",
+      "elements": [
+        {
+          "className": "CadPagination",
+          "events": [],
+          "tagName": "cad-pagination"
+        }
+      ],
+      "name": "pagination",
+      "typeExports": []
+    },
+    {
+      "astroFacades": ["Avatar.astro"],
+      "docsPage": "avatar.astro",
+      "elements": [
+        {
+          "className": "CadAvatar",
+          "events": [],
+          "tagName": "cad-avatar"
+        }
+      ],
+      "name": "avatar",
+      "typeExports": ["CadAvatarSize", "CadAvatarStatus"]
+    },
+    {
+      "astroFacades": ["Highlight.astro"],
+      "docsPage": "highlight.astro",
+      "elements": [
+        {
+          "className": "CadHighlight",
+          "events": [],
+          "tagName": "cad-highlight"
+        }
+      ],
+      "name": "highlight",
+      "typeExports": ["CadHighlightTone", "CadHighlightVariant"]
+    },
+    {
+      "astroFacades": ["Tape.astro"],
+      "docsPage": "tape.astro",
+      "elements": [
+        {
+          "className": "CadTape",
+          "events": [],
+          "tagName": "cad-tape"
+        }
+      ],
+      "name": "tape",
+      "typeExports": ["CadTapeSize", "CadTapeTone"]
+    },
+    {
+      "astroFacades": ["Sticker.astro"],
+      "docsPage": "sticker.astro",
+      "elements": [
+        {
+          "className": "CadSticker",
+          "events": [],
+          "tagName": "cad-sticker"
+        }
+      ],
+      "name": "sticker",
+      "typeExports": ["CadStickerShape", "CadStickerSize", "CadStickerTone"]
     }
   ]
 }

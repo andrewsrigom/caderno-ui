@@ -22,7 +22,7 @@
       "maxGzip": 8475
     },
     "elements-root": {
-      "maxGzip": 32392
+      "maxGzip": 36674
     },
     "elements-tabs": {
       "maxGzip": 14536
@@ -52,7 +52,7 @@
       "maxGzip": 9115
     },
     "react-root": {
-      "maxGzip": 33841
+      "maxGzip": 38312
     },
     "react-tabs": {
       "maxGzip": 15216

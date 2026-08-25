@@ -1,0 +1,40 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-pagination base-href="/notes?filter=ready" page="5" total="12">
+  Page 5 of 12
+</cad-pagination>
+
+<script type="module">
+  import '@caderno-ui/elements/pagination'
+</script>`
+---
+
+<DocsLayout description="URL-based collection pagination." title="Pagination">
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-pagination&gt;</p>
+    <h1>Move through long collections with real URLs.</h1>
+    <p>
+      Pagination preserves existing query parameters, removes the page parameter
+      on page one, and keeps direction controls out of the tab order when
+      unavailable.
+    </p>
+  </header>
+  <DemoFrame title="Long collection"
+    ><cad-pagination base-href="/notes?filter=ready" page="5" total="12"
+      >Page 5 of 12</cad-pagination
+    ></DemoFrame
+  >
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-pagination" />
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      A labeled navigation landmark wraps an ordered list. Every link has a page
+      label and the current page uses <code>aria-current</code>.
+    </p>
+  </section>
+</DocsLayout>

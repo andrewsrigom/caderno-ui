@@ -119,6 +119,30 @@
     "./toast": {
       "types": "./dist/toast.d.ts",
       "import": "./dist/toast.js"
+    },
+    "./breadcrumb": {
+      "types": "./dist/breadcrumb.d.ts",
+      "import": "./dist/breadcrumb.js"
+    },
+    "./pagination": {
+      "types": "./dist/pagination.d.ts",
+      "import": "./dist/pagination.js"
+    },
+    "./avatar": {
+      "types": "./dist/avatar.d.ts",
+      "import": "./dist/avatar.js"
+    },
+    "./highlight": {
+      "types": "./dist/highlight.d.ts",
+      "import": "./dist/highlight.js"
+    },
+    "./tape": {
+      "types": "./dist/tape.d.ts",
+      "import": "./dist/tape.js"
+    },
+    "./sticker": {
+      "types": "./dist/sticker.d.ts",
+      "import": "./dist/sticker.js"
     }
   },
   "sideEffects": [

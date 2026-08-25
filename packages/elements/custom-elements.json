@@ -507,6 +507,195 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/avatar/cad-avatar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A compact identity with initials or a decorative portrait and optional status.",
+          "name": "CadAvatar",
+          "cssParts": [
+            {
+              "description": "Identity container.",
+              "name": "base"
+            },
+            {
+              "description": "Name and description stack.",
+              "name": "copy"
+            },
+            {
+              "description": "Supporting text.",
+              "name": "description"
+            },
+            {
+              "description": "Portrait surface.",
+              "name": "image"
+            },
+            {
+              "description": "Visible name.",
+              "name": "name"
+            },
+            {
+              "description": "Presence indicator.",
+              "name": "status"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Custom portrait content.",
+              "name": "image"
+            },
+            {
+              "description": "Visible name. Falls back to the `name` attribute.",
+              "name": "name"
+            },
+            {
+              "description": "Supporting text. Falls back to the `description` attribute.",
+              "name": "description"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "privacy": "public",
+              "type": {
+                "text": "CadAvatarSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "src",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "src"
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "privacy": "public",
+              "type": {
+                "text": "CadAvatarStatus | ''"
+              },
+              "default": "''",
+              "attribute": "status",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "statusLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "status-label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "description"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "CadAvatarSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "src"
+            },
+            {
+              "name": "status",
+              "type": {
+                "text": "CadAvatarStatus | ''"
+              },
+              "default": "''",
+              "fieldName": "status"
+            },
+            {
+              "name": "status-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "statusLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-avatar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadAvatar",
+          "declaration": {
+            "name": "CadAvatar",
+            "module": "packages/elements/src/avatar/cad-avatar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-avatar",
+          "declaration": {
+            "name": "CadAvatar",
+            "module": "packages/elements/src/avatar/cad-avatar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/badge/cad-badge.ts",
       "declarations": [
         {
@@ -843,6 +1032,259 @@
           "declaration": {
             "name": "CadBookmark",
             "module": "packages/elements/src/bookmark/cad-bookmark.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/breadcrumb/cad-breadcrumb-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One link or current-page label inside a `cad-breadcrumb`.",
+          "name": "CadBreadcrumbItem",
+          "cssParts": [
+            {
+              "description": "List item.",
+              "name": "base"
+            },
+            {
+              "description": "Navigable item.",
+              "name": "link"
+            },
+            {
+              "description": "Current-page label.",
+              "name": "current"
+            },
+            {
+              "description": "Decorative separator.",
+              "name": "separator"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Item label.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "current",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "current",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "first",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "first"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "rel"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "target"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "current"
+            },
+            {
+              "name": "first",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "first"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "href"
+            },
+            {
+              "name": "rel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "rel"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "target"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-breadcrumb-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadBreadcrumbItem",
+          "declaration": {
+            "name": "CadBreadcrumbItem",
+            "module": "packages/elements/src/breadcrumb/cad-breadcrumb-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-breadcrumb-item",
+          "declaration": {
+            "name": "CadBreadcrumbItem",
+            "module": "packages/elements/src/breadcrumb/cad-breadcrumb-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/breadcrumb/cad-breadcrumb.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A semantic breadcrumb trail composed from `cad-breadcrumb-item` children.",
+          "name": "CadBreadcrumb",
+          "cssParts": [
+            {
+              "description": "Native navigation landmark.",
+              "name": "base"
+            },
+            {
+              "description": "Breadcrumb list.",
+              "name": "list"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Breadcrumb items.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Breadcrumb'",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "handleSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Breadcrumb'",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-breadcrumb",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadBreadcrumbItem",
+          "declaration": {
+            "name": "CadBreadcrumbItem",
+            "module": "./cad-breadcrumb-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadBreadcrumb",
+          "declaration": {
+            "name": "CadBreadcrumb",
+            "module": "packages/elements/src/breadcrumb/cad-breadcrumb.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-breadcrumb",
+          "declaration": {
+            "name": "CadBreadcrumb",
+            "module": "packages/elements/src/breadcrumb/cad-breadcrumb.ts"
           }
         }
       ]
@@ -2852,6 +3294,101 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/highlight/cad-highlight.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An inline semantic mark with hand-drawn highlight treatments.",
+          "name": "CadHighlight",
+          "cssProperties": [
+            {
+              "description": "Per-instance marker color.",
+              "name": "--cad-highlight-color"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native mark element.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Highlighted text.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadHighlightTone"
+              },
+              "default": "'lemon'",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadHighlightVariant"
+              },
+              "default": "'marker'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadHighlightTone"
+              },
+              "default": "'lemon'",
+              "fieldName": "tone"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadHighlightVariant"
+              },
+              "default": "'marker'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-highlight",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadHighlight",
+          "declaration": {
+            "name": "CadHighlight",
+            "module": "packages/elements/src/highlight/cad-highlight.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-highlight",
+          "declaration": {
+            "name": "CadHighlight",
+            "module": "packages/elements/src/highlight/cad-highlight.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/icon/cad-icon.ts",
       "declarations": [
         {
@@ -3121,6 +3658,54 @@
           "declaration": {
             "name": "*",
             "module": "packages/elements/src/toast/cad-toast.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/breadcrumb/cad-breadcrumb.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/pagination/cad-pagination.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/avatar/cad-avatar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/highlight/cad-highlight.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/tape/cad-tape.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/sticker/cad-sticker.js"
           }
         }
       ]
@@ -4522,6 +5107,290 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/pagination/cad-pagination.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A compact, URL-based pagination landmark for long collections.",
+          "name": "CadPagination",
+          "cssParts": [
+            {
+              "description": "Native navigation landmark.",
+              "name": "base"
+            },
+            {
+              "description": "Current page link.",
+              "name": "current"
+            },
+            {
+              "description": "Previous and next controls.",
+              "name": "direction"
+            },
+            {
+              "description": "Omitted page range.",
+              "name": "ellipsis"
+            },
+            {
+              "description": "Ordered page list.",
+              "name": "list"
+            },
+            {
+              "description": "Page link.",
+              "name": "page"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "baseHref",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'/'",
+              "attribute": "base-href"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pagination'",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "nextLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next page'",
+              "attribute": "next-label"
+            },
+            {
+              "kind": "field",
+              "name": "page",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "page",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "pageLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Page'",
+              "attribute": "page-label"
+            },
+            {
+              "kind": "field",
+              "name": "pageParam",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'page'",
+              "attribute": "page-param"
+            },
+            {
+              "kind": "field",
+              "name": "previousLabel",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous page'",
+              "attribute": "previous-label"
+            },
+            {
+              "kind": "field",
+              "name": "total",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "total",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "items",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "CadPaginationItem[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "page",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "total",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "pageHref",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "target",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderDirection",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "target",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                },
+                {
+                  "name": "icon",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "label",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "base-href",
+              "type": {
+                "text": "string"
+              },
+              "default": "'/'",
+              "fieldName": "baseHref"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pagination'",
+              "fieldName": "label"
+            },
+            {
+              "name": "next-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next page'",
+              "fieldName": "nextLabel"
+            },
+            {
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "page"
+            },
+            {
+              "name": "page-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Page'",
+              "fieldName": "pageLabel"
+            },
+            {
+              "name": "page-param",
+              "type": {
+                "text": "string"
+              },
+              "default": "'page'",
+              "fieldName": "pageParam"
+            },
+            {
+              "name": "previous-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous page'",
+              "fieldName": "previousLabel"
+            },
+            {
+              "name": "total",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "total"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-pagination",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadPagination",
+          "declaration": {
+            "name": "CadPagination",
+            "module": "packages/elements/src/pagination/cad-pagination.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-pagination",
+          "declaration": {
+            "name": "CadPagination",
+            "module": "packages/elements/src/pagination/cad-pagination.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/progress/cad-progress.ts",
       "declarations": [
         {
@@ -5421,6 +6290,172 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/sticker/cad-sticker.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A compact decorative label for categories, milestones, and annotations.",
+          "name": "CadSticker",
+          "cssProperties": [
+            {
+              "description": "Per-instance sticker background.",
+              "name": "--cad-sticker-bg"
+            },
+            {
+              "description": "Per-instance sticker foreground.",
+              "name": "--cad-sticker-ink"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Sticker container.",
+              "name": "base"
+            },
+            {
+              "description": "Optional leading icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Colored sticker surface.",
+              "name": "surface"
+            },
+            {
+              "description": "Sticker text.",
+              "name": "text"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Sticker label. Falls back to the `label` attribute.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "icon",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "shape",
+              "privacy": "public",
+              "type": {
+                "text": "CadStickerShape"
+              },
+              "default": "'label'",
+              "attribute": "shape",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "privacy": "public",
+              "type": {
+                "text": "CadStickerSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadStickerTone"
+              },
+              "default": "'blue'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "icon"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "label"
+            },
+            {
+              "name": "shape",
+              "type": {
+                "text": "CadStickerShape"
+              },
+              "default": "'label'",
+              "fieldName": "shape"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "CadStickerSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadStickerTone"
+              },
+              "default": "'blue'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-sticker",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadSticker",
+          "declaration": {
+            "name": "CadSticker",
+            "module": "packages/elements/src/sticker/cad-sticker.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-sticker",
+          "declaration": {
+            "name": "CadSticker",
+            "module": "packages/elements/src/sticker/cad-sticker.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/tabs/cad-tab.ts",
       "declarations": [
         {
@@ -5850,6 +6885,113 @@
           "declaration": {
             "name": "*",
             "module": "packages/elements/src/tabs/cad-tabs.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/tape/cad-tape.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A decorative strip of translucent notebook tape.",
+          "name": "CadTape",
+          "cssProperties": [
+            {
+              "description": "Per-instance rotation.",
+              "name": "--cad-tape-tilt"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Decorative tape surface.",
+              "name": "base"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "privacy": "public",
+              "type": {
+                "text": "CadTapeSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tilt",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "-1.4",
+              "attribute": "tilt"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadTapeTone"
+              },
+              "default": "'lemon'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "CadTapeSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "tilt",
+              "type": {
+                "text": "number"
+              },
+              "default": "-1.4",
+              "fieldName": "tilt"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadTapeTone"
+              },
+              "default": "'lemon'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-tape",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadTape",
+          "declaration": {
+            "name": "CadTape",
+            "module": "packages/elements/src/tape/cad-tape.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-tape",
+          "declaration": {
+            "name": "CadTape",
+            "module": "packages/elements/src/tape/cad-tape.ts"
           }
         }
       ]

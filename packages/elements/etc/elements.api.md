@@ -121,6 +121,57 @@ export class CadAlert extends LitElement {
 export type CadAlertVariant = 'danger' | 'info' | 'success' | 'warning';
 
 // @public
+export class CadAvatar extends LitElement {
+    constructor();
+    // (undocumented)
+    description: string;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    static properties: {
+        description: {
+            type: StringConstructor;
+        };
+        name: {
+            type: StringConstructor;
+        };
+        size: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        src: {
+            type: StringConstructor;
+        };
+        status: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        statusLabel: {
+            attribute: string;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    size: CadAvatarSize;
+    // (undocumented)
+    src: string;
+    // (undocumented)
+    status: CadAvatarStatus | '';
+    // (undocumented)
+    statusLabel: string;
+    // (undocumented)
+    static styles: CSSResult;
+}
+
+// @public (undocumented)
+export type CadAvatarSize = 'lg' | 'md' | 'sm';
+
+// @public (undocumented)
+export type CadAvatarStatus = 'away' | 'offline' | 'online';
+
+// @public
 export class CadBadge extends LitElement {
     constructor();
     // (undocumented)
@@ -212,6 +263,61 @@ export type CadBookmarkChangeDetail = {
 
 // @public (undocumented)
 export type CadBookmarkChangeEvent = CustomEvent<CadBookmarkChangeDetail>;
+
+// @public
+export class CadBreadcrumb extends LitElement {
+    constructor();
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    static properties: {
+        label: {
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+}
+
+// @public
+export class CadBreadcrumbItem extends LitElement {
+    constructor();
+    // (undocumented)
+    current: boolean;
+    // (undocumented)
+    first: boolean;
+    // (undocumented)
+    href: string;
+    // (undocumented)
+    static properties: {
+        current: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        first: {
+            state: boolean;
+        };
+        href: {
+            type: StringConstructor;
+        };
+        rel: {
+            type: StringConstructor;
+        };
+        target: {
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    rel: string;
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    target: string;
+}
 
 // @public
 export class CadButton extends LitElement {
@@ -563,6 +669,36 @@ export type CadDividerTone = 'accent' | 'ink' | 'muted' | 'strong';
 export type CadDividerVariant = 'dashed' | 'dotted' | 'wavy';
 
 // @public
+export class CadHighlight extends LitElement {
+    constructor();
+    // (undocumented)
+    static properties: {
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        variant: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadHighlightTone;
+    // (undocumented)
+    variant: CadHighlightVariant;
+}
+
+// @public (undocumented)
+export type CadHighlightTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet';
+
+// @public (undocumented)
+export type CadHighlightVariant = 'double' | 'marker' | 'underline';
+
+// @public
 export class CadIcon extends LitElement {
     constructor();
     // (undocumented)
@@ -912,6 +1048,65 @@ export class CadNote extends LitElement {
 export type CadNoteTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper';
 
 // @public
+export class CadPagination extends LitElement {
+    constructor();
+    // (undocumented)
+    baseHref: string;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    nextLabel: string;
+    // (undocumented)
+    page: number;
+    // (undocumented)
+    pageLabel: string;
+    // (undocumented)
+    pageParam: string;
+    // (undocumented)
+    previousLabel: string;
+    // (undocumented)
+    static properties: {
+        baseHref: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        label: {
+            type: StringConstructor;
+        };
+        nextLabel: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        page: {
+            reflect: boolean;
+            type: NumberConstructor;
+        };
+        pageLabel: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        pageParam: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        previousLabel: {
+            attribute: string;
+            type: StringConstructor;
+        };
+        total: {
+            reflect: boolean;
+            type: NumberConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    total: number;
+}
+
+// @public
 export class CadProgress extends LitElement {
     constructor();
     // (undocumented)
@@ -1099,6 +1294,55 @@ export type CadSpinnerSize = 'lg' | 'md' | 'sm';
 export type CadSpinnerTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet';
 
 // @public
+export class CadSticker extends LitElement {
+    constructor();
+    // (undocumented)
+    icon: string;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    static properties: {
+        icon: {
+            type: StringConstructor;
+        };
+        label: {
+            type: StringConstructor;
+        };
+        shape: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        size: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    shape: CadStickerShape;
+    // (undocumented)
+    size: CadStickerSize;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadStickerTone;
+}
+
+// @public (undocumented)
+export type CadStickerShape = 'banner' | 'bubble' | 'burst' | 'label' | 'round';
+
+// @public (undocumented)
+export type CadStickerSize = 'md' | 'sm';
+
+// @public (undocumented)
+export type CadStickerTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet';
+
+// @public
 export class CadTab extends LitElement {
     constructor();
     // (undocumented)
@@ -1181,6 +1425,41 @@ export class CadTabs extends LitElement {
 
 // @public (undocumented)
 export type CadTabTone = 'accent' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public
+export class CadTape extends LitElement {
+    constructor();
+    // (undocumented)
+    static properties: {
+        size: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        tilt: {
+            type: NumberConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    size: CadTapeSize;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tilt: number;
+    // (undocumented)
+    tone: CadTapeTone;
+}
+
+// @public (undocumented)
+export type CadTapeSize = 'lg' | 'md' | 'sm';
+
+// @public (undocumented)
+export type CadTapeTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'violet';
 
 // @public
 export class CadTextarea extends LitElement {

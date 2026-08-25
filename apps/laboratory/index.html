@@ -338,6 +338,57 @@
         </div>
       </section>
 
+      <section data-component="navigation-and-annotations">
+        <h2>Navigation and annotations</h2>
+        <cad-breadcrumb label="Laboratory path">
+          <cad-breadcrumb-item href="/">Caderno UI</cad-breadcrumb-item>
+          <cad-breadcrumb-item href="#navigation-and-annotations"
+            >Components</cad-breadcrumb-item
+          >
+          <cad-breadcrumb-item current>Navigation</cad-breadcrumb-item>
+        </cad-breadcrumb>
+        <div class="annotation-grid">
+          <div class="annotation-sample">
+            <h3>Identity</h3>
+            <cad-avatar
+              description="Contract reviewer"
+              name="Ada Lovelace"
+              size="lg"
+              status="online"
+              status-label="Available"
+            ></cad-avatar>
+          </div>
+          <div class="annotation-sample">
+            <h3>Inline emphasis</h3>
+            <p class="annotation-copy">
+              Keep the
+              <cad-highlight tone="mint">contract explicit</cad-highlight> and
+              test
+              <cad-highlight tone="violet" variant="double"
+                >every boundary</cad-highlight
+              >.
+            </p>
+          </div>
+          <div class="annotation-sample">
+            <h3>Decorative language</h3>
+            <div class="cluster">
+              <cad-tape aria-hidden="true" tone="paper"></cad-tape>
+              <cad-sticker icon="check" tone="mint">Reviewed</cad-sticker>
+              <cad-sticker icon="spark" shape="burst" size="sm" tone="lemon"
+                >New</cad-sticker
+              >
+            </div>
+          </div>
+        </div>
+        <cad-pagination
+          base-href="/?filter=reviewed"
+          label="Laboratory pages"
+          page="5"
+          total="12"
+          >Page 5 of 12</cad-pagination
+        >
+      </section>
+
       <section data-component="progress">
         <h2>Progress</h2>
         <div class="progress-stack">

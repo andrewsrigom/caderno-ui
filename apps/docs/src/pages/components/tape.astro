@@ -1,0 +1,43 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-tape aria-hidden="true" tone="paper"></cad-tape>
+<script type="module">import '@caderno-ui/elements/tape'</script>`
+---
+
+<DocsLayout description="Decorative translucent notebook tape." title="Tape">
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-tape&gt;</p><h1>
+      Pin a surface without adding meaning.
+    </h1><p>
+      Tape is intentionally decorative. Use its size, tone, and tilt to support
+      composition, never to communicate state.
+    </p>
+  </header>
+  <DemoFrame title="Tape palette"
+    ><div class="demo-row">
+      <cad-tape tone="paper"></cad-tape><cad-tape size="sm" tone="mint"
+      ></cad-tape><cad-tape size="lg" tilt="1.5" tone="violet"></cad-tape>
+    </div></DemoFrame
+  >
+  <CodeBlock code={usage} language="html" />
+  <ApiReference tagName="cad-tape" />
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2><p>
+      The internal surface is hidden from assistive technology. Add <code
+        >aria-hidden="true"</code
+      > to the host when authoring it directly.
+    </p>
+  </section>
+  <style>
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+  </style>
+</DocsLayout>

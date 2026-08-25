@@ -121,6 +121,38 @@ section {
   gap: 1rem;
 }
 
+.annotation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+.annotation-sample {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  padding: 1rem;
+  background: var(--cad-surface);
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: var(--cad-radius-md);
+}
+
+.annotation-sample h3,
+.annotation-copy {
+  margin: 0;
+}
+
+.annotation-sample h3 {
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-lg);
+}
+
+.annotation-copy {
+  font-family: var(--cad-font-book);
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
 .feedback-sample {
   display: grid;
   gap: 1rem;

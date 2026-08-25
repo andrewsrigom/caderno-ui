@@ -122,6 +122,30 @@
     "./toast": {
       "types": "./dist/toast/cad-toast.d.ts",
       "import": "./dist/toast/cad-toast.js"
+    },
+    "./breadcrumb": {
+      "types": "./dist/breadcrumb/cad-breadcrumb.d.ts",
+      "import": "./dist/breadcrumb/cad-breadcrumb.js"
+    },
+    "./pagination": {
+      "types": "./dist/pagination/cad-pagination.d.ts",
+      "import": "./dist/pagination/cad-pagination.js"
+    },
+    "./avatar": {
+      "types": "./dist/avatar/cad-avatar.d.ts",
+      "import": "./dist/avatar/cad-avatar.js"
+    },
+    "./highlight": {
+      "types": "./dist/highlight/cad-highlight.d.ts",
+      "import": "./dist/highlight/cad-highlight.js"
+    },
+    "./tape": {
+      "types": "./dist/tape/cad-tape.d.ts",
+      "import": "./dist/tape/cad-tape.js"
+    },
+    "./sticker": {
+      "types": "./dist/sticker/cad-sticker.d.ts",
+      "import": "./dist/sticker/cad-sticker.js"
     }
   },
   "sideEffects": [

@@ -12,12 +12,17 @@ import { CadAccordionToggleEvent } from '@caderno-ui/elements/accordion';
 import { CadAccordionTone } from '@caderno-ui/elements/accordion';
 import { CadAlert as CadAlert_2 } from '@caderno-ui/elements/alert';
 import { CadAlertVariant } from '@caderno-ui/elements/alert';
+import { CadAvatar as CadAvatar_2 } from '@caderno-ui/elements/avatar';
+import { CadAvatarSize } from '@caderno-ui/elements/avatar';
+import { CadAvatarStatus } from '@caderno-ui/elements/avatar';
 import { CadBadge as CadBadge_2 } from '@caderno-ui/elements/badge';
 import { CadBadgeTone } from '@caderno-ui/elements/badge';
 import { CadBadgeVariant } from '@caderno-ui/elements/badge';
 import { CadBookmark as CadBookmark_2 } from '@caderno-ui/elements/bookmark';
 import { CadBookmarkChangeDetail } from '@caderno-ui/elements/bookmark';
 import { CadBookmarkChangeEvent } from '@caderno-ui/elements/bookmark';
+import { CadBreadcrumb as CadBreadcrumb_2 } from '@caderno-ui/elements/breadcrumb';
+import { CadBreadcrumbItem as CadBreadcrumbItem_2 } from '@caderno-ui/elements/breadcrumb';
 import { CadButton as CadButton_2 } from '@caderno-ui/elements/button';
 import { CadButtonIconPosition } from '@caderno-ui/elements/button';
 import { CadButtonSize } from '@caderno-ui/elements/button';
@@ -38,6 +43,9 @@ import { CadDividerDensity } from '@caderno-ui/elements/divider';
 import { CadDividerOrientation } from '@caderno-ui/elements/divider';
 import { CadDividerTone } from '@caderno-ui/elements/divider';
 import { CadDividerVariant } from '@caderno-ui/elements/divider';
+import { CadHighlight as CadHighlight_2 } from '@caderno-ui/elements/highlight';
+import { CadHighlightTone } from '@caderno-ui/elements/highlight';
+import { CadHighlightVariant } from '@caderno-ui/elements/highlight';
 import { CadIcon as CadIcon_2 } from '@caderno-ui/elements/icon';
 import { CadInput as CadInput_2 } from '@caderno-ui/elements/input';
 import { CadInputSize } from '@caderno-ui/elements/input';
@@ -53,6 +61,7 @@ import { CadModalOpenEvent } from '@caderno-ui/elements/modal';
 import { CadModalSize } from '@caderno-ui/elements/modal';
 import { CadNote as CadNote_2 } from '@caderno-ui/elements/note';
 import { CadNoteTone } from '@caderno-ui/elements/note';
+import { CadPagination as CadPagination_2 } from '@caderno-ui/elements/pagination';
 import { CadProgress as CadProgress_2 } from '@caderno-ui/elements/progress';
 import { CadProgressTone } from '@caderno-ui/elements/progress';
 import { CadRadio as CadRadio_2 } from '@caderno-ui/elements/radio';
@@ -60,11 +69,18 @@ import { CadRadioTone } from '@caderno-ui/elements/radio';
 import { CadSpinner as CadSpinner_2 } from '@caderno-ui/elements/spinner';
 import { CadSpinnerSize } from '@caderno-ui/elements/spinner';
 import { CadSpinnerTone } from '@caderno-ui/elements/spinner';
+import { CadSticker as CadSticker_2 } from '@caderno-ui/elements/sticker';
+import { CadStickerShape } from '@caderno-ui/elements/sticker';
+import { CadStickerSize } from '@caderno-ui/elements/sticker';
+import { CadStickerTone } from '@caderno-ui/elements/sticker';
 import { CadTab as CadTab_2 } from '@caderno-ui/elements/tabs';
 import { CadTabChangeDetail } from '@caderno-ui/elements/tabs';
 import { CadTabChangeEvent } from '@caderno-ui/elements/tabs';
 import { CadTabs as CadTabs_2 } from '@caderno-ui/elements/tabs';
 import { CadTabTone } from '@caderno-ui/elements/tabs';
+import { CadTape as CadTape_2 } from '@caderno-ui/elements/tape';
+import { CadTapeSize } from '@caderno-ui/elements/tape';
+import { CadTapeTone } from '@caderno-ui/elements/tape';
 import { CadTextarea as CadTextarea_2 } from '@caderno-ui/elements/textarea';
 import { CadTextareaResize } from '@caderno-ui/elements/textarea';
 import { CadTextareaTone } from '@caderno-ui/elements/textarea';
@@ -105,6 +121,13 @@ onDismiss: EventName<CadDismissEvent>;
 export { CadAlertVariant }
 
 // @public (undocumented)
+export const CadAvatar: ReactWebComponent<CadAvatar_2, {}>;
+
+export { CadAvatarSize }
+
+export { CadAvatarStatus }
+
+// @public (undocumented)
 export const CadBadge: ReactWebComponent<CadBadge_2, {}>;
 
 export { CadBadgeTone }
@@ -119,6 +142,12 @@ onBookmarkChange: EventName<CadBookmarkChangeEvent>;
 export { CadBookmarkChangeDetail }
 
 export { CadBookmarkChangeEvent }
+
+// @public (undocumented)
+export const CadBreadcrumb: ReactWebComponent<CadBreadcrumb_2, {}>;
+
+// @public (undocumented)
+export const CadBreadcrumbItem: ReactWebComponent<CadBreadcrumbItem_2, {}>;
 
 // @public (undocumented)
 export const CadButton: ReactWebComponent<CadButton_2, {}>;
@@ -166,6 +195,13 @@ export { CadDividerTone }
 export { CadDividerVariant }
 
 // @public (undocumented)
+export const CadHighlight: ReactWebComponent<CadHighlight_2, {}>;
+
+export { CadHighlightTone }
+
+export { CadHighlightVariant }
+
+// @public (undocumented)
 export const CadIcon: ReactWebComponent<CadIcon_2, {}>;
 
 // @public (undocumented)
@@ -204,6 +240,9 @@ export const CadNote: ReactWebComponent<CadNote_2, {}>;
 export { CadNoteTone }
 
 // @public (undocumented)
+export const CadPagination: ReactWebComponent<CadPagination_2, {}>;
+
+// @public (undocumented)
 export const CadProgress: ReactWebComponent<CadProgress_2, {}>;
 
 export { CadProgressTone }
@@ -221,6 +260,15 @@ export { CadSpinnerSize }
 export { CadSpinnerTone }
 
 // @public (undocumented)
+export const CadSticker: ReactWebComponent<CadSticker_2, {}>;
+
+export { CadStickerShape }
+
+export { CadStickerSize }
+
+export { CadStickerTone }
+
+// @public (undocumented)
 export const CadTab: ReactWebComponent<CadTab_2, {}>;
 
 export { CadTabChangeDetail }
@@ -233,6 +281,13 @@ onTabChange: EventName<CadTabChangeEvent>;
 }>;
 
 export { CadTabTone }
+
+// @public (undocumented)
+export const CadTape: ReactWebComponent<CadTape_2, {}>;
+
+export { CadTapeSize }
+
+export { CadTapeTone }
 
 // @public (undocumented)
 export const CadTextarea: ReactWebComponent<CadTextarea_2, {}>;

@@ -1,27 +1,101 @@
 cad-alert:not(:defined),
 cad-accordion:not(:defined),
 cad-accordion-item:not(:defined),
+cad-avatar:not(:defined),
 cad-badge:not(:defined),
+cad-breadcrumb:not(:defined),
+cad-breadcrumb-item:not(:defined),
 cad-button:not(:defined),
 cad-callout:not(:defined),
 cad-card:not(:defined),
 cad-chart:not(:defined),
 cad-checkbox:not(:defined),
 cad-divider:not(:defined),
+cad-highlight:not(:defined),
 cad-input:not(:defined),
 cad-link:not(:defined),
 cad-modal:not(:defined),
 cad-note:not(:defined),
+cad-pagination:not(:defined),
 cad-progress:not(:defined),
 cad-radio:not(:defined),
 cad-spinner:not(:defined),
+cad-sticker:not(:defined),
 cad-tab:not(:defined),
 cad-tabs:not(:defined),
+cad-tape:not(:defined),
 cad-textarea:not(:defined),
 cad-toast:not(:defined),
 cad-toast-host:not(:defined),
 cad-tooltip:not(:defined) {
   box-sizing: border-box;
+}
+
+cad-breadcrumb:not(:defined) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+cad-breadcrumb-item:not(:defined) {
+  display: inline-flex;
+  color: var(--cad-ink-muted, currentColor);
+  font-family: var(--cad-font-hand, inherit);
+}
+
+cad-breadcrumb-item:not(:defined) + cad-breadcrumb-item:not(:defined)::before {
+  margin-inline: 0.35rem;
+  content: '→';
+}
+
+cad-pagination:not(:defined) {
+  display: block;
+  font-family: var(--cad-font-hand, inherit);
+  text-align: center;
+}
+
+cad-avatar:not(:defined) {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-family: var(--cad-font-hand, inherit);
+}
+
+cad-avatar:not(:defined)::before {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--cad-post-it-blue-bg, transparent);
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  content: attr(name);
+  font-size: 0;
+}
+
+cad-highlight:not(:defined) {
+  background: linear-gradient(
+    transparent 55%,
+    var(--cad-post-it-lemon-bg, transparent) 56%
+  );
+}
+
+cad-sticker:not(:defined) {
+  display: inline-flex;
+  padding: 0.35rem 0.65rem;
+  background: var(--cad-post-it-blue-bg, transparent);
+  border-radius: 0.75rem;
+  font-family: var(--cad-font-hand, inherit);
+  font-weight: 700;
+}
+
+cad-tape:not(:defined) {
+  display: inline-block;
+  width: 5.4rem;
+  height: 1.55rem;
+  background: var(--cad-tape-paper-bg, currentColor);
+  opacity: 0.72;
 }
 
 cad-input:not(:defined),

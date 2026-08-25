@@ -1,0 +1,44 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type {
+  CadAvatarSize,
+  CadAvatarStatus,
+} from '@caderno-ui/elements/avatar'
+
+type Props = {
+  class?: string
+  description?: string
+  name: string
+  size?: CadAvatarSize
+  src?: string
+  status?: CadAvatarStatus
+  statusLabel?: string
+}
+const {
+  class: className,
+  description,
+  name,
+  size = 'md',
+  src,
+  status,
+  statusLabel,
+} = Astro.props
+---
+
+<cad-avatar
+  class={className}
+  description={description}
+  name={name}
+  size={size}
+  src={src}
+  status={status}
+  status-label={statusLabel}
+>
+  <span slot="name">{name}</span>
+  {description ? <span slot="description">{description}</span> : null}
+  <slot name="image" slot="image" />
+</cad-avatar>
+
+<script>
+  import '@caderno-ui/elements/avatar'
+</script>

@@ -23,8 +23,11 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-accordion',
       'cad-accordion-item',
       'cad-alert',
+      'cad-avatar',
       'cad-badge',
       'cad-bookmark',
+      'cad-breadcrumb',
+      'cad-breadcrumb-item',
       'cad-button',
       'cad-callout',
       'cad-card',
@@ -32,16 +35,20 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-chart-item',
       'cad-checkbox',
       'cad-divider',
+      'cad-highlight',
       'cad-icon',
       'cad-input',
       'cad-link',
       'cad-modal',
       'cad-note',
+      'cad-pagination',
       'cad-progress',
       'cad-radio',
       'cad-spinner',
+      'cad-sticker',
       'cad-tab',
       'cad-tabs',
+      'cad-tape',
       'cad-textarea',
       'cad-toast',
       'cad-toast-host',
@@ -168,6 +175,34 @@ test('coordinates tooltip, modal, and hosted toast behavior', async ({
   )
 })
 
+test('renders native navigation and semantic annotation primitives', async ({
+  page,
+}) => {
+  const section = page.locator('[data-component="navigation-and-annotations"]')
+  await expect(
+    section.getByRole('navigation', { name: 'Laboratory path' }),
+  ).toBeVisible()
+  const currentBreadcrumb = section.locator('cad-breadcrumb-item[current]')
+  await expect(currentBreadcrumb).toHaveText('Navigation')
+  await expect(
+    currentBreadcrumb.locator('[aria-current="page"]'),
+  ).toBeAttached()
+  await expect(
+    section.getByRole('navigation', { name: 'Laboratory pages' }),
+  ).toBeVisible()
+  await expect(section.getByRole('link', { name: 'Page 5' })).toHaveAttribute(
+    'aria-current',
+    'page',
+  )
+  await expect(
+    section.locator('cad-highlight').first().locator('mark'),
+  ).toBeVisible()
+  await expect(section.locator('cad-avatar [part="status"]')).toHaveAttribute(
+    'aria-label',
+    'Available',
+  )
+})
+
 test('persists bookmarks and restores them after navigation', async ({
   page,
 }) => {
@@ -229,6 +264,13 @@ test.describe('without JavaScript', () => {
     ).toBeVisible()
     await expect(
       page.getByText('The public review is available locally.'),
+    ).toBeVisible()
+    await expect(page.getByText('contract explicit')).toBeVisible()
+    await expect(page.getByText('Page 5 of 12')).toBeVisible()
+    await expect(
+      page
+        .locator('[data-component="navigation-and-annotations"]')
+        .getByText('Reviewed'),
     ).toBeVisible()
   })
 })

@@ -1,0 +1,24 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = {
+  class?: string
+  current?: boolean
+  href?: string
+  rel?: string
+  target?: string
+}
+const { class: className, current = false, href, rel, target } = Astro.props
+---
+
+<cad-breadcrumb-item
+  class={className}
+  current={current}
+  href={href}
+  rel={rel}
+  target={target}><slot /></cad-breadcrumb-item
+>
+
+<script>
+  import '@caderno-ui/elements/breadcrumb'
+</script>

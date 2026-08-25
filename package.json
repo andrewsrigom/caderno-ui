@@ -24,7 +24,7 @@
     "api:check": "node scripts/run-api-extractor.mjs",
     "api:report": "pnpm build && node scripts/run-api-extractor.mjs --update",
     "build": "pnpm --filter './packages/*' --workspace-concurrency=1 -r --if-present build && pnpm --filter './apps/*' -r --if-present build",
-    "build:core": "pnpm --filter @caderno-ui/icons build && pnpm --filter @caderno-ui/elements build",
+    "build:core": "pnpm --filter @caderno-ui/icons build && pnpm --filter @caderno-ui/elements build && pnpm --filter @caderno-ui/motion build",
     "bundle:baseline": "pnpm build && node scripts/check-bundles.mjs --update",
     "bundle:check": "pnpm build && node scripts/check-bundles.mjs",
     "changeset:check": "node scripts/check-changeset.mjs",

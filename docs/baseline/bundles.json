@@ -21,16 +21,16 @@
       "gzip": 10194
     },
     "elements-note": {
-      "bytes": 19373,
-      "gzip": 7227
+      "bytes": 19753,
+      "gzip": 7293
     },
     "elements-progress": {
-      "bytes": 20163,
-      "gzip": 7282
+      "bytes": 23618,
+      "gzip": 8081
     },
     "elements-root": {
-      "bytes": 156310,
-      "gzip": 31803
+      "bytes": 160497,
+      "gzip": 32539
     },
     "elements-tabs": {
       "bytes": 33684,
@@ -61,16 +61,16 @@
       "gzip": 10740
     },
     "react-note": {
-      "bytes": 20812,
-      "gzip": 7783
+      "bytes": 21192,
+      "gzip": 7845
     },
     "react-progress": {
-      "bytes": 21510,
-      "gzip": 7839
+      "bytes": 24965,
+      "gzip": 8640
     },
     "react-root": {
-      "bytes": 161010,
-      "gzip": 33227
+      "bytes": 165197,
+      "gzip": 33947
     },
     "react-tabs": {
       "bytes": 35235,

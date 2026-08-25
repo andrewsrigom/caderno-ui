@@ -2,11 +2,23 @@
   box-sizing: border-box;
 }
 
+:root {
+  --_grid: color-mix(in srgb, var(--cad-line-strong) 42%, transparent);
+}
+
 body {
   min-width: 20rem;
   margin: 0;
   color: var(--cad-ink);
-  background: var(--cad-bg);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 4.5rem,
+      rgb(226 81 96 / 12%) 4.5rem 4.6rem,
+      transparent 4.6rem
+    ),
+    repeating-linear-gradient(0deg, transparent 0 31px, var(--_grid) 31px 32px),
+    var(--cad-bg);
   font-family: var(--cad-font-ui);
 }
 
@@ -93,20 +105,68 @@ section {
   padding-block: 0.75rem;
 }
 
-.icon-grid {
+.section-intro {
+  max-width: 48rem;
+  margin-bottom: 0;
+  color: var(--cad-ink-soft);
+  font-family: var(--cad-font-book);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.icon-palette,
+.icon-category {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 0.75rem;
-  max-width: 38rem;
-  padding: 1rem;
-  color: var(--cad-ink);
-  background: var(--cad-surface);
+  gap: 1rem;
+}
+
+.icon-palette {
+  gap: 1.5rem;
+}
+
+.icon-category {
+  padding: 1.15rem;
+  background: color-mix(in srgb, var(--cad-surface) 92%, transparent);
   border: 1px dashed var(--cad-line-strong);
   border-radius: var(--cad-radius-md);
 }
 
-.icon-grid cad-icon {
+.icon-category h3 {
+  margin: 0;
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-lg);
+}
+
+.icon-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 0.75rem;
+}
+
+.icon-sample {
+  display: grid;
+  min-width: 0;
+  min-height: 6rem;
+  place-content: center;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0.85rem 0.6rem;
+  color: var(--cad-ink);
+  background: var(--cad-surface);
+  border: 1px solid var(--cad-line);
+  border-radius: var(--cad-radius-sm);
+  text-align: center;
+}
+
+.icon-sample cad-icon {
   justify-self: center;
+}
+
+.icon-sample figcaption {
+  overflow-wrap: anywhere;
+  color: var(--cad-ink-muted);
+  font-family: var(--cad-font-mono);
+  font-size: 0.72rem;
 }
 
 .progress-stack {

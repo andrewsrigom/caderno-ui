@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
+import { cadIconCategories } from '../packages/icons/src/index'
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/')
 })
@@ -78,6 +80,19 @@ test('renders the extracted SeniorPath primitives with native semantics', async 
   await expect(
     page.locator('cad-divider').first().locator('[part="base"]'),
   ).toHaveAttribute('role', 'none')
+})
+
+test('exposes the complete typed icon palette', async ({ page }) => {
+  const expectedNames = Object.values(cadIconCategories).flat()
+  const palette = page.locator('[data-icon-palette]')
+  const samples = palette.locator('.icon-sample')
+
+  await expect(samples).toHaveCount(expectedNames.length)
+  expect(
+    await samples
+      .locator('cad-icon')
+      .evaluateAll((icons) => icons.map((icon) => icon.getAttribute('name'))),
+  ).toEqual(expectedNames)
 })
 
 test('supports accessible tab keyboard navigation and composed events', async ({

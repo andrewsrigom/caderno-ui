@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@caderno-ui/elements": "workspace:^",
+    "@caderno-ui/icons": "workspace:^",
     "@caderno-ui/tokens": "workspace:^"
   },
   "devDependencies": {

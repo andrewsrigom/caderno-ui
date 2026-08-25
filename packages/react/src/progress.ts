@@ -9,4 +9,7 @@ export const CadProgress = createComponent({
   tagName: 'cad-progress',
 })
 
-export type { CadProgressTone } from '@caderno-ui/elements/progress'
+export type {
+  CadProgressTone,
+  CadProgressVariant,
+} from '@caderno-ui/elements/progress'

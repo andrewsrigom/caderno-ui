@@ -24,3 +24,5 @@ Add Breadcrumb, Pagination, Avatar, Highlight, Tape, and Sticker primitives so
 navigation, identity, and notebook annotations can move out of application
 code while preserving native links, list semantics, visible fallbacks, and
 theme-safe decoration.
+Expand Progress with accessible bar, segmented, and ring variants, and align
+the pink and violet tone contracts used by notebook notes and annotations.

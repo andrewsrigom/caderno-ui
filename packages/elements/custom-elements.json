@@ -5425,6 +5425,14 @@
               "name": "label"
             },
             {
+              "description": "Circular progress visualization.",
+              "name": "ring"
+            },
+            {
+              "description": "Segmented progress visualization.",
+              "name": "steps"
+            },
+            {
               "description": "Visible progress value.",
               "name": "value"
             }
@@ -5436,6 +5444,17 @@
             }
           ],
           "members": [
+            {
+              "kind": "field",
+              "name": "current",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "current",
+              "reflects": true
+            },
             {
               "kind": "field",
               "name": "label",
@@ -5466,6 +5485,17 @@
               },
               "default": "true",
               "attribute": "show-value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "steps",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "steps",
               "reflects": true
             },
             {
@@ -5502,6 +5532,17 @@
             },
             {
               "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "CadProgressVariant"
+              },
+              "default": "'bar'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "normalizedMax",
               "type": {
                 "text": "number"
@@ -5526,9 +5567,26 @@
               },
               "privacy": "private",
               "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "percentage",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "readonly": true
             }
           ],
           "attributes": [
+            {
+              "name": "current",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "current"
+            },
             {
               "name": "label",
               "type": {
@@ -5554,6 +5612,14 @@
               "fieldName": "showValue"
             },
             {
+              "name": "steps",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "steps"
+            },
+            {
               "name": "tone",
               "type": {
                 "text": "CadProgressTone"
@@ -5576,6 +5642,14 @@
               },
               "default": "''",
               "fieldName": "valueLabel"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "CadProgressVariant"
+              },
+              "default": "'bar'",
+              "fieldName": "variant"
             }
           ],
           "superclass": {

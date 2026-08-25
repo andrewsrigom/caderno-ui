@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit'
 
 export type CadTapeSize = 'lg' | 'md' | 'sm'
 export type CadTapeTone =
-  'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'violet'
+  'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'pink' | 'violet'
 
 /**
  * A decorative strip of translucent notebook tape.
@@ -33,6 +33,9 @@ export class CadTape extends LitElement {
     }
     :host([tone='paper']) {
       --_tape-bg: var(--cad-tape-paper-bg, #d5cfb9);
+    }
+    :host([tone='pink']) {
+      --_tape-bg: var(--cad-post-it-pink-bg, #ffb7d5);
     }
     :host([tone='violet']) {
       --_tape-bg: var(--cad-sticker-violet-bg, #bba0ff);

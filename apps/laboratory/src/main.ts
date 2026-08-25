@@ -2,6 +2,11 @@ import '@caderno-ui/tokens/notebook.css'
 import '@caderno-ui/elements/fallback.css'
 import '@caderno-ui/elements'
 import '@caderno-ui/elements/chart'
+import {
+  cadIconCategories,
+  type CadIconCategory,
+  type CadIconName,
+} from '@caderno-ui/icons'
 
 import './style.css'
 
@@ -13,6 +18,48 @@ const formResult =
   document.querySelector<HTMLOutputElement>('[data-form-result]')
 const toastHost = document.querySelector('cad-toast-host')
 const toastTrigger = document.querySelector<HTMLElement>('[data-toast-trigger]')
+const iconPalette = document.querySelector<HTMLElement>('[data-icon-palette]')
+
+const iconCategoryLabels: Record<CadIconCategory, string> = {
+  annotation: 'Annotation',
+  engineering: 'Engineering',
+  study: 'Study',
+}
+
+function createIconSample(name: CadIconName) {
+  const sample = document.createElement('figure')
+  const icon = document.createElement('cad-icon')
+  const caption = document.createElement('figcaption')
+
+  sample.className = 'icon-sample'
+  icon.label = name.replaceAll('-', ' ')
+  icon.name = name
+  icon.size = '32'
+  caption.textContent = name
+  sample.append(icon, caption)
+
+  return sample
+}
+
+function createIconCategory(category: CadIconCategory) {
+  const group = document.createElement('section')
+  const heading = document.createElement('h3')
+  const grid = document.createElement('div')
+
+  group.className = 'icon-category'
+  heading.textContent = iconCategoryLabels[category]
+  grid.className = 'icon-palette-grid'
+  grid.append(...cadIconCategories[category].map(createIconSample))
+  group.append(heading, grid)
+
+  return group
+}
+
+iconPalette?.replaceChildren(
+  ...(Object.keys(cadIconCategories) as CadIconCategory[]).map(
+    createIconCategory,
+  ),
+)
 
 toggle?.addEventListener('click', () => {
   root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light'

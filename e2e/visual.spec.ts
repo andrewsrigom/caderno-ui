@@ -21,12 +21,13 @@ for (const theme of ['light', 'dark'] as const) {
         (element, value) => element.setAttribute('data-theme', value),
         theme,
       )
-    await expect(page.locator('main')).toHaveScreenshot(
-      `laboratory-${theme}.png`,
-      {
-        animations: 'disabled',
-        scale: 'css',
-      },
-    )
+    const laboratory = page.locator('main')
+    await laboratory.evaluate((element) => {
+      element.style.height = `${Math.ceil(element.getBoundingClientRect().height)}px`
+    })
+    await expect(laboratory).toHaveScreenshot(`laboratory-${theme}.png`, {
+      animations: 'disabled',
+      scale: 'css',
+    })
   })
 }

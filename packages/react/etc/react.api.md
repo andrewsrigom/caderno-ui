@@ -64,6 +64,7 @@ import { CadNoteTone } from '@caderno-ui/elements/note';
 import { CadPagination as CadPagination_2 } from '@caderno-ui/elements/pagination';
 import { CadProgress as CadProgress_2 } from '@caderno-ui/elements/progress';
 import { CadProgressTone } from '@caderno-ui/elements/progress';
+import { CadProgressVariant } from '@caderno-ui/elements/progress';
 import { CadRadio as CadRadio_2 } from '@caderno-ui/elements/radio';
 import { CadRadioTone } from '@caderno-ui/elements/radio';
 import { CadSpinner as CadSpinner_2 } from '@caderno-ui/elements/spinner';
@@ -246,6 +247,8 @@ export const CadPagination: ReactWebComponent<CadPagination_2, {}>;
 export const CadProgress: ReactWebComponent<CadProgress_2, {}>;
 
 export { CadProgressTone }
+
+export { CadProgressVariant }
 
 // @public (undocumented)
 export const CadRadio: ReactWebComponent<CadRadio_2, {}>;

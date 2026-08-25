@@ -693,7 +693,7 @@ export class CadHighlight extends LitElement {
 }
 
 // @public (undocumented)
-export type CadHighlightTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet';
+export type CadHighlightTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
 
 // @public (undocumented)
 export type CadHighlightVariant = 'double' | 'marker' | 'underline';
@@ -1045,7 +1045,7 @@ export class CadNote extends LitElement {
 }
 
 // @public (undocumented)
-export type CadNoteTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper';
+export type CadNoteTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'pink' | 'violet';
 
 // @public
 export class CadPagination extends LitElement {
@@ -1110,11 +1110,17 @@ export class CadPagination extends LitElement {
 export class CadProgress extends LitElement {
     constructor();
     // (undocumented)
+    current: number;
+    // (undocumented)
     label: string;
     // (undocumented)
     max: number;
     // (undocumented)
     static properties: {
+        current: {
+            reflect: boolean;
+            type: NumberConstructor;
+        };
         label: {
             type: StringConstructor;
         };
@@ -1126,6 +1132,10 @@ export class CadProgress extends LitElement {
             attribute: string;
             reflect: boolean;
             type: BooleanConstructor;
+        };
+        steps: {
+            reflect: boolean;
+            type: NumberConstructor;
         };
         tone: {
             reflect: boolean;
@@ -1139,11 +1149,17 @@ export class CadProgress extends LitElement {
             attribute: string;
             type: StringConstructor;
         };
+        variant: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
     };
     // (undocumented)
     render(): TemplateResult<1>;
     // (undocumented)
     showValue: boolean;
+    // (undocumented)
+    steps: number;
     // (undocumented)
     static styles: CSSResult;
     // (undocumented)
@@ -1152,10 +1168,15 @@ export class CadProgress extends LitElement {
     value: number | undefined;
     // (undocumented)
     valueLabel: string;
+    // (undocumented)
+    variant: CadProgressVariant;
 }
 
 // @public (undocumented)
-export type CadProgressTone = 'blue' | 'coral' | 'lemon' | 'mint';
+export type CadProgressTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public (undocumented)
+export type CadProgressVariant = 'bar' | 'ring' | 'steps';
 
 // @public
 export class CadRadio extends LitElement {
@@ -1459,7 +1480,7 @@ export class CadTape extends LitElement {
 export type CadTapeSize = 'lg' | 'md' | 'sm';
 
 // @public (undocumented)
-export type CadTapeTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'violet';
+export type CadTapeTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'pink' | 'violet';
 
 // @public
 export class CadTextarea extends LitElement {

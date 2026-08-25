@@ -104,15 +104,16 @@
       </section>
 
       <section data-component="icons">
-        <h2>Icons</h2>
-        <div class="icon-grid" aria-label="Representative icon set">
-          <cad-icon label="Idea" name="lightbulb" size="30"></cad-icon>
-          <cad-icon label="Architecture" name="layers" size="30"></cad-icon>
-          <cad-icon label="Code" name="code" size="30"></cad-icon>
-          <cad-icon label="Review" name="checklist" size="30"></cad-icon>
-          <cad-icon label="Chart" name="gauge" size="30"></cad-icon>
-          <cad-icon label="Release" name="rocket" size="30"></cad-icon>
-        </div>
+        <h2>Complete icon palette</h2>
+        <p class="section-intro">
+          All typed doodles exported by <code>@caderno-ui/icons</code>, grouped
+          by their intended visual role.
+        </p>
+        <div
+          class="icon-palette"
+          data-icon-palette
+          aria-label="Complete Caderno UI icon set"
+        ></div>
       </section>
 
       <section data-component="badges-and-notes">
@@ -404,6 +405,26 @@
           <cad-progress label="Indexing notes" show-value tone="blue">
             <span slot="fallback">Indexing notes: in progress</span>
           </cad-progress>
+          <div class="cluster">
+            <cad-progress
+              current="3"
+              label="Interview stages"
+              steps="5"
+              tone="violet"
+              variant="steps"
+            >
+              <span slot="fallback">Interview stages: 60%</span>
+            </cad-progress>
+            <cad-progress
+              label="Review confidence"
+              max="10"
+              tone="pink"
+              value="8"
+              variant="ring"
+            >
+              <span slot="fallback">Review confidence: 80%</span>
+            </cad-progress>
+          </div>
         </div>
       </section>
 

@@ -105,6 +105,9 @@ importers:
       '@caderno-ui/elements':
         specifier: workspace:^
         version: link:../../packages/elements
+      '@caderno-ui/icons':
+        specifier: workspace:^
+        version: link:../../packages/icons
       '@caderno-ui/tokens':
         specifier: workspace:^
         version: link:../../packages/tokens

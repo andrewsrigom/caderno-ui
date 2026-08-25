@@ -181,7 +181,7 @@
           "events": []
         }
       ],
-      "typeExports": ["CadProgressTone"],
+      "typeExports": ["CadProgressTone", "CadProgressVariant"],
       "astroFacades": ["Progress.astro"],
       "docsPage": "progress.astro"
     },

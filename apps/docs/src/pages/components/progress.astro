@@ -14,21 +14,28 @@ const usage = `<cad-progress
   <span slot="fallback">Reading plan: 63%</span>
 </cad-progress>
 
+<cad-progress
+  current="3"
+  label="Interview stages"
+  steps="5"
+  variant="steps"
+></cad-progress>
+
 <script type="module">
   import '@caderno-ui/elements/progress'
 </script>`
 ---
 
 <DocsLayout
-  description="CadProgress preserves native progress semantics with notebook styling."
+  description="CadProgress preserves native progress semantics across bar, steps, and ring visualizations."
   title="Progress"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-progress&gt;</p>
     <h1>Show how far the page has turned.</h1>
     <p>
-      Progress wraps the native element, supports determinate and indeterminate
-      work, and keeps its visible and accessible labels aligned.
+      Progress uses a native element for every variant, supports determinate and
+      indeterminate work, and keeps visible and accessible values aligned.
     </p>
   </header>
 
@@ -56,6 +63,24 @@ const usage = `<cad-progress
       >
         <span slot="fallback">Review confidence: ready</span>
       </cad-progress>
+      <cad-progress
+        current="3"
+        label="Interview stages"
+        steps="5"
+        tone="violet"
+        variant="steps"
+      >
+        <span slot="fallback">Interview stages: 60%</span>
+      </cad-progress>
+      <cad-progress
+        label="Review confidence"
+        max="10"
+        tone="pink"
+        value="8"
+        variant="ring"
+      >
+        <span slot="fallback">Review confidence: 80%</span>
+      </cad-progress>
     </div>
   </DemoFrame>
   <CodeBlock code={usage} language="html" />
@@ -65,9 +90,9 @@ const usage = `<cad-progress
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      A native <code>progress</code> element exposes value, maximum, and its visible
-      label. Omit <code>value</code> while duration is unknown and use
-      <code>value-label</code> only when words communicate the state better.
+      A native <code>progress</code> element remains in the accessibility tree for
+      bar, steps, and ring variants. Omit <code>value</code> while duration is unknown
+      and use <code>value-label</code> when words communicate the state better.
     </p>
   </section>
 

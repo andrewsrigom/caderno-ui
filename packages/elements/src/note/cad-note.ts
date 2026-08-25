@@ -1,6 +1,7 @@
 import { css, html, LitElement } from 'lit'
 
-export type CadNoteTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper'
+export type CadNoteTone =
+  'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'pink' | 'violet'
 
 /**
  * A notebook-styled note for grouping supporting content.
@@ -48,6 +49,16 @@ export class CadNote extends LitElement {
     :host([tone='mint']) {
       --_note-bg: var(--cad-note-bg, var(--cad-post-it-mint-bg, #d8ffec));
       --_note-ink: var(--cad-note-ink, var(--cad-post-it-mint-ink, #274f41));
+    }
+
+    :host([tone='pink']) {
+      --_note-bg: var(--cad-note-bg, var(--cad-post-it-pink-bg, #ffb7d5));
+      --_note-ink: var(--cad-note-ink, var(--cad-post-it-pink-ink, #52233a));
+    }
+
+    :host([tone='violet']) {
+      --_note-bg: var(--cad-note-bg, var(--cad-sticker-violet-bg, #bba0ff));
+      --_note-ink: var(--cad-note-ink, var(--cad-sticker-violet-ink, #30205e));
     }
 
     .base {

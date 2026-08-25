@@ -1,6 +1,7 @@
 import { css, html, LitElement } from 'lit'
 
-export type CadHighlightTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'violet'
+export type CadHighlightTone =
+  'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
 export type CadHighlightVariant = 'double' | 'marker' | 'underline'
 
 /**
@@ -39,6 +40,12 @@ export class CadHighlight extends LitElement {
       --_highlight: var(
         --cad-highlight-color,
         var(--cad-post-it-mint-bg, #a9eacb)
+      );
+    }
+    :host([tone='pink']) {
+      --_highlight: var(
+        --cad-highlight-color,
+        var(--cad-post-it-pink-bg, #ffb7d5)
       );
     }
     :host([tone='violet']) {

@@ -16,13 +16,13 @@
       "maxGzip": 11824
     },
     "elements-note": {
-      "maxGzip": 8412
+      "maxGzip": 8487
     },
     "elements-progress": {
-      "maxGzip": 8475
+      "maxGzip": 9394
     },
     "elements-root": {
-      "maxGzip": 36674
+      "maxGzip": 37520
     },
     "elements-tabs": {
       "maxGzip": 14536
@@ -46,13 +46,13 @@
       "maxGzip": 12451
     },
     "react-note": {
-      "maxGzip": 9051
+      "maxGzip": 9122
     },
     "react-progress": {
-      "maxGzip": 9115
+      "maxGzip": 10036
     },
     "react-root": {
-      "maxGzip": 38312
+      "maxGzip": 39140
     },
     "react-tabs": {
       "maxGzip": 15216

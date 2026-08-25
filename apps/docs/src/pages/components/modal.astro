@@ -4,8 +4,9 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-modal heading="Review contract" size="md">
+const usage = `<cad-modal size="md">
   <button slot="trigger" type="button">Open review</button>
+  <h2 slot="title">Review contract</h2>
   <p>Confirm the public API before publishing.</p>
   <button slot="footer" type="button">Continue</button>
 </cad-modal>
@@ -29,23 +30,26 @@ const usage = `<cad-modal heading="Review contract" size="md">
   </header>
 
   <DemoFrame title="Native modal">
-    <cad-modal heading="Review contract">
+    <cad-modal>
       <cad-button slot="trigger" variant="primary">Open review</cad-button>
+      <h2 slot="title">Review contract</h2>
       <p>
         Confirm the public attributes, slots, parts, and events before release.
       </p>
       <cad-button slot="footer" variant="secondary">Continue</cad-button>
     </cad-modal>
   </DemoFrame>
-  <CodeBlock code={usage} language="html" />
+  <CodeBlock code={usage} collapsible language="html" />
   <ApiReference tagName="cad-modal" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Always provide <code>heading</code> or a title slot. The close button is named,
-      Escape remains native, and <code>cad-modal-close</code> crosses the shadow boundary
-      with the dialog return value.
+      Always provide <code>heading</code> or a title slot. Prefer the slot when the
+      title should participate in the document’s heading hierarchy. The close button
+      is named, Escape remains native, and
+      <code>cad-modal-close</code> crosses the shadow boundary with the dialog return
+      value.
     </p>
   </section>
 </DocsLayout>

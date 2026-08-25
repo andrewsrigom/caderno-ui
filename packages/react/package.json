@@ -171,6 +171,10 @@
     "./steps": {
       "types": "./dist/steps.d.ts",
       "import": "./dist/steps.js"
+    },
+    "./paper": {
+      "types": "./dist/paper.d.ts",
+      "import": "./dist/paper.js"
     }
   },
   "sideEffects": [

@@ -19,11 +19,28 @@ describe('cad-steps', () => {
 
     expect(first.index).toBe(1)
     expect(second.index).toBe(2)
+    expect(first.dataset.orientation).toBe('vertical')
+    expect(first.hasAttribute('data-last-step')).toBe(false)
+    expect(second.hasAttribute('data-last-step')).toBe(true)
+    expect(first.shadowRoot?.querySelector('[part="connector"]')).not.toBeNull()
     expect(
       steps.shadowRoot
         ?.querySelector('[role="list"]')
         ?.getAttribute('aria-label'),
     ).toBe('Release sequence')
+  })
+
+  it('keeps connector layout synchronized with orientation', async () => {
+    const steps = document.createElement('cad-steps')
+    const step = document.createElement('cad-step')
+    steps.append(step)
+    document.body.append(steps)
+    await nextFrame()
+
+    steps.orientation = 'horizontal'
+    await steps.updateComplete
+
+    expect(step.dataset.orientation).toBe('horizontal')
   })
 
   it('preserves an explicit marker value', async () => {

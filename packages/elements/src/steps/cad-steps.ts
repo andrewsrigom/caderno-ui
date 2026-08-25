@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit'
+import { css, html, LitElement, type PropertyValues } from 'lit'
 
 export type CadStepsOrientation = 'horizontal' | 'vertical'
 export type CadStepTone =
@@ -11,6 +11,7 @@ export type CadStepTone =
  * @slot meta - Supporting duration, owner, or status.
  * @slot title - Visible title. Falls back to `title`.
  * @csspart content - Step content.
+ * @csspart connector - Decorative line to the next step.
  * @csspart item - Accessible list item.
  * @csspart marker - Step marker.
  * @csspart meta - Supporting metadata.
@@ -58,6 +59,7 @@ export class CadStep extends LitElement {
     }
 
     .item {
+      position: relative;
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
       gap: 0.8rem;
@@ -66,8 +68,11 @@ export class CadStep extends LitElement {
     }
 
     .marker {
+      position: relative;
+      z-index: 1;
       display: inline-grid;
       place-items: center;
+      justify-self: start;
       min-width: 2.2rem;
       height: 2.2rem;
       padding-inline: 0.25rem;
@@ -78,6 +83,31 @@ export class CadStep extends LitElement {
       font-family: var(--cad-font-hand, cursive);
       font-weight: 700;
       transform: rotate(-2deg);
+    }
+
+    .connector {
+      position: absolute;
+      z-index: 0;
+      inset-block: 2.2rem -0.75rem;
+      inset-inline-start: 1.08rem;
+      border-inline-start: 2px dashed
+        color-mix(in srgb, var(--_step-ink) 38%, transparent);
+      transform: rotate(-0.6deg);
+    }
+
+    :host([data-last-step]) .connector {
+      display: none;
+    }
+
+    :host([data-orientation='horizontal']) .item {
+      grid-template-columns: 1fr;
+    }
+
+    :host([data-orientation='horizontal']) .connector {
+      inset: 1.08rem -0.75rem auto 2.2rem;
+      border-block-start: 2px dashed
+        color-mix(in srgb, var(--_step-ink) 38%, transparent);
+      border-inline-start: 0;
     }
 
     .content {
@@ -111,6 +141,26 @@ export class CadStep extends LitElement {
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-sm, 1.05rem);
     }
+
+    @media (width <= 38rem) {
+      :host([data-orientation='horizontal']) .item {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      :host([data-orientation='horizontal']) .connector {
+        inset: 2.2rem auto -0.75rem 1.08rem;
+        border-block-start: 0;
+        border-inline-start: 2px dashed
+          color-mix(in srgb, var(--_step-ink) 38%, transparent);
+      }
+    }
+
+    @media (forced-colors: active) {
+      .connector,
+      :host([data-orientation='horizontal']) .connector {
+        border-color: CanvasText;
+      }
+    }
   `
 
   declare index: number
@@ -129,6 +179,7 @@ export class CadStep extends LitElement {
   override render() {
     return html`
       <div class="item" part="item" role="listitem">
+        <span aria-hidden="true" class="connector" part="connector"></span>
         <span aria-hidden="true" class="marker" part="marker">
           ${this.value || this.index}
         </span>
@@ -195,11 +246,18 @@ export class CadSteps extends LitElement {
   }
 
   private syncSteps = (): void => {
-    Array.from(this.querySelectorAll<CadStep>(':scope > cad-step')).forEach(
-      (step, index) => {
-        step.index = index + 1
-      },
+    const steps = Array.from(
+      this.querySelectorAll<CadStep>(':scope > cad-step'),
     )
+    steps.forEach((step, index) => {
+      step.index = index + 1
+      step.dataset.orientation = this.orientation
+      step.toggleAttribute('data-last-step', index === steps.length - 1)
+    })
+  }
+
+  protected override updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('orientation')) this.syncSteps()
   }
 }
 

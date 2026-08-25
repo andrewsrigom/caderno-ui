@@ -53,8 +53,8 @@
       "gzip": 8641
     },
     "elements-table": {
-      "bytes": 21485,
-      "gzip": 7678
+      "bytes": 21487,
+      "gzip": 7685
     },
     "elements-input": {
       "bytes": 23104,
@@ -85,8 +85,8 @@
       "gzip": 7430
     },
     "elements-modal": {
-      "bytes": 22875,
-      "gzip": 8509
+      "bytes": 22965,
+      "gzip": 8527
     },
     "elements-toast": {
       "bytes": 23731,
@@ -125,8 +125,8 @@
       "gzip": 7709
     },
     "elements-code-block": {
-      "bytes": 19490,
-      "gzip": 7293
+      "bytes": 23259,
+      "gzip": 8604
     },
     "elements-empty-state": {
       "bytes": 18753,
@@ -137,8 +137,12 @@
       "gzip": 7166
     },
     "elements-steps": {
-      "bytes": 19400,
-      "gzip": 7164
+      "bytes": 20953,
+      "gzip": 7469
+    },
+    "elements-paper": {
+      "bytes": 21524,
+      "gzip": 7345
     },
     "react-alert": {
       "bytes": 22816,
@@ -193,8 +197,8 @@
       "gzip": 9251
     },
     "react-table": {
-      "bytes": 23185,
-      "gzip": 8280
+      "bytes": 23187,
+      "gzip": 8287
     },
     "react-input": {
       "bytes": 24545,
@@ -225,8 +229,8 @@
       "gzip": 7983
     },
     "react-modal": {
-      "bytes": 24385,
-      "gzip": 9084
+      "bytes": 24475,
+      "gzip": 9101
     },
     "react-toast": {
       "bytes": 25303,
@@ -265,8 +269,8 @@
       "gzip": 8285
     },
     "react-code-block": {
-      "bytes": 20940,
-      "gzip": 7843
+      "bytes": 24709,
+      "gzip": 9162
     },
     "react-empty-state": {
       "bytes": 20205,
@@ -277,20 +281,24 @@
       "gzip": 7752
     },
     "react-steps": {
-      "bytes": 20916,
-      "gzip": 7730
+      "bytes": 22469,
+      "gzip": 8034
+    },
+    "react-paper": {
+      "bytes": 22965,
+      "gzip": 7901
     },
     "elements-root": {
-      "bytes": 190510,
-      "gzip": 37674
+      "bytes": 202015,
+      "gzip": 40044
     },
     "icons-root": {
       "bytes": 9224,
       "gzip": 3599
     },
     "react-root": {
-      "bytes": 197184,
-      "gzip": 39518
+      "bytes": 208791,
+      "gzip": 41910
     }
   },
   "icons": {

@@ -124,6 +124,11 @@ export class CadModal extends LitElement {
       line-height: 1;
     }
 
+    .title ::slotted(*) {
+      margin: 0;
+      font: inherit;
+    }
+
     .close {
       display: inline-grid;
       flex: 0 0 auto;
@@ -275,9 +280,9 @@ export class CadModal extends LitElement {
         <div class="paper" part="paper">
           <span aria-hidden="true" class="tape" part="tape"></span>
           <header class="header" part="header">
-            <h2 class="title" id="modal-title" part="title">
-              <slot name="title">${this.heading}</slot>
-            </h2>
+            <div class="title" id="modal-title" part="title">
+              <slot name="title"><strong>${this.heading}</strong></slot>
+            </div>
             <button
               aria-label=${this.closeLabel}
               class="close"

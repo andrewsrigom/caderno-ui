@@ -43,4 +43,18 @@ describe('cad-modal', () => {
     })
     expect(document.activeElement).toBe(trigger)
   })
+
+  it('preserves application-owned title heading semantics', async () => {
+    const modal = document.createElement('cad-modal')
+    const title = document.createElement('h3')
+    title.slot = 'title'
+    title.textContent = 'Review contract'
+    modal.append(title)
+    document.body.append(modal)
+    await modal.updateComplete
+
+    expect(modal.querySelector('h3[slot="title"]')).toBe(title)
+    expect(modal.shadowRoot?.querySelector('.title')?.localName).toBe('div')
+    expect(modal.dialog?.getAttribute('aria-labelledby')).toBe('modal-title')
+  })
 })

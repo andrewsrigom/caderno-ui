@@ -36,6 +36,7 @@ export const navigation = [
       { href: '/components/link/', label: 'Link' },
       { href: '/components/modal/', label: 'Modal' },
       { href: '/components/note/', label: 'Note' },
+      { href: '/components/paper/', label: 'Paper' },
       { href: '/components/pagination/', label: 'Pagination' },
       { href: '/components/progress/', label: 'Progress' },
       { href: '/components/radio/', label: 'Radio' },

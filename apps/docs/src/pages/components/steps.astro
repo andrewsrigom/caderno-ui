@@ -5,11 +5,13 @@ import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-steps label="Package release" orientation="horizontal">
-  <cad-step title="Verify contracts" tone="blue">
+  <cad-step tone="blue">
+    <h3 slot="title">Verify contracts</h3>
     Run type, element, accessibility, and bundle checks.
     <span slot="meta">Automated · 8 min</span>
   </cad-step>
-  <cad-step title="Publish packages" tone="violet">
+  <cad-step tone="violet">
+    <h3 slot="title">Publish packages</h3>
     Publish the synchronized package versions.
     <span slot="meta">Owner · maintainer</span>
   </cad-step>
@@ -29,7 +31,8 @@ const usage = `<cad-steps label="Package release" orientation="horizontal">
     <h1>A sequence assembled from independent stages.</h1>
     <p>
       Steps assigns order and responsive layout. Each step owns its title,
-      content, metadata, and optional marker override.
+      content, metadata, and optional marker override. A title attribute is a
+      convenience fallback; use the title slot when heading semantics matter.
     </p>
   </header>
 
@@ -38,21 +41,24 @@ const usage = `<cad-steps label="Package release" orientation="horizontal">
     description="The same sequence communicates automation, ownership, and the public handoff."
   >
     <cad-steps label="Package release" orientation="horizontal">
-      <cad-step title="Verify contracts" tone="blue">
+      <cad-step tone="blue">
+        <h3 slot="title">Verify contracts</h3>
         Run type, element, accessibility, and bundle checks.
         <span slot="meta">Automated · 8 min</span>
       </cad-step>
-      <cad-step title="Publish packages" tone="violet">
+      <cad-step tone="violet">
+        <h3 slot="title">Publish packages</h3>
         Publish the synchronized package versions after verification passes.
         <span slot="meta">Owner · maintainer</span>
       </cad-step>
-      <cad-step title="Validate consumers" tone="mint">
+      <cad-step tone="mint">
+        <h3 slot="title">Validate consumers</h3>
         Install the public release in SeniorPath and rerun its critical flows.
         <span slot="meta">Required before announcement</span>
       </cad-step>
     </cad-steps>
   </DemoFrame>
-  <CodeBlock code={usage} language="html" />
+  <CodeBlock code={usage} collapsible language="html" />
 
   <ApiReference tagName="cad-steps" />
   <ApiReference tagName="cad-step" />

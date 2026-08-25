@@ -15,10 +15,17 @@ const usage = `<cad-code-block
   filename="review-queue.ts"
   language="ts"
   show-line-numbers
-></cad-code-block>
+>
+  <button slot="actions" type="button">Copy</button>
+</cad-code-block>
 
 <script type="module">
   import '@caderno-ui/elements/code-block'
+
+  const block = document.querySelector('cad-code-block')
+  block?.querySelector('button')?.addEventListener('click', () => {
+    navigator.clipboard.writeText(block.code)
+  })
 </script>`
 ---
 
@@ -30,8 +37,9 @@ const usage = `<cad-code-block
     <p class="eyebrow">&lt;cad-code-block&gt;</p>
     <h1>Code examples that remain native preformatted text.</h1>
     <p>
-      Code block owns presentation and metadata, while syntax highlighting and
-      copy behavior remain opt-in application concerns.
+      Code block owns presentation, metadata, line numbers, and lightweight
+      syntax formatting. Actions remain explicit composition so an application
+      can add copy, open, or playground behavior without a forced controller.
     </p>
   </header>
 
@@ -44,18 +52,23 @@ const usage = `<cad-code-block
       filename="review-queue.ts"
       language="ts"
       show-line-numbers
-      tone="accent"></cad-code-block>
+      tone="accent"
+    >
+      <button data-copy-code slot="actions" type="button">Copy</button>
+    </cad-code-block>
   </DemoFrame>
-  <CodeBlock code={usage} language="html" />
+  <CodeBlock code={usage} collapsible language="html" />
 
   <ApiReference tagName="cad-code-block" />
 
   <section class="content-section" aria-labelledby="code-boundary">
-    <h2 id="code-boundary">Deliberate boundary</h2>
+    <h2 id="code-boundary">Useful formatting, deliberate weight</h2>
     <p>
-      This primitive does not bundle a highlighter or clipboard controller. An
-      application can add either when required without making every code sample
-      pay that runtime cost.
+      HTML and Astro, JavaScript and TypeScript, CSS, JSON, and shell examples
+      receive dependency-free token colors. Unknown languages remain readable
+      plain text. Teams that need grammar-perfect highlighting can place
+      pre-highlighted markup in the default slot instead of shipping a parser to
+      every consumer.
     </p>
   </section>
 </DocsLayout>

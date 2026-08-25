@@ -34,4 +34,23 @@ describe('cad-code-block', () => {
     expect(numbers).toHaveLength(2)
     expect(numbers?.[0]?.getAttribute('aria-hidden')).toBe('true')
   })
+
+  it('formats recognized syntax without changing the copied source text', async () => {
+    const block = document.createElement('cad-code-block')
+    block.code = "import { html } from 'lit' // browser template"
+    block.language = 'ts'
+    document.body.append(block)
+    await block.updateComplete
+
+    expect(block.shadowRoot?.querySelectorAll('.token.keyword')).toHaveLength(2)
+    expect(block.shadowRoot?.querySelector('.token.string')?.textContent).toBe(
+      "'lit'",
+    )
+    expect(block.shadowRoot?.querySelector('.token.comment')?.textContent).toBe(
+      '// browser template',
+    )
+    expect(block.shadowRoot?.querySelector('code')?.textContent).toBe(
+      block.code,
+    )
+  })
 })

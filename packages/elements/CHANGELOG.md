@@ -30,6 +30,10 @@
   CodeBlock, EmptyState, Steps, and Kanban families from proven application
   patterns, with framework adapters, progressive fallbacks, realistic docs, and
   cross-browser accessibility coverage.
+  Add a neutral Paper primitive with ruled, grid, dotted, and blank patterns.
+  Upgrade CodeBlock with dependency-free syntax formatting and an actions slot,
+  connect responsive Steps visually, and keep Modal title heading semantics
+  owned by the consuming application.
 
 ### Patch Changes
 

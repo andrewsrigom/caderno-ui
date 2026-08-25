@@ -81,6 +81,11 @@ import { CadModalSize } from '@caderno-ui/elements/modal';
 import { CadNote as CadNote_2 } from '@caderno-ui/elements/note';
 import { CadNoteTone } from '@caderno-ui/elements/note';
 import { CadPagination as CadPagination_2 } from '@caderno-ui/elements/pagination';
+import { CadPaper as CadPaper_2 } from '@caderno-ui/elements/paper';
+import { CadPaperElevation } from '@caderno-ui/elements/paper';
+import { CadPaperPattern } from '@caderno-ui/elements/paper';
+import { CadPaperSpacing } from '@caderno-ui/elements/paper';
+import { CadPaperTone } from '@caderno-ui/elements/paper';
 import { CadProgress as CadProgress_2 } from '@caderno-ui/elements/progress';
 import { CadProgressTone } from '@caderno-ui/elements/progress';
 import { CadProgressVariant } from '@caderno-ui/elements/progress';
@@ -324,6 +329,17 @@ export { CadNoteTone }
 
 // @public (undocumented)
 export const CadPagination: ReactWebComponent<CadPagination_2, {}>;
+
+// @public (undocumented)
+export const CadPaper: ReactWebComponent<CadPaper_2, {}>;
+
+export { CadPaperElevation }
+
+export { CadPaperPattern }
+
+export { CadPaperSpacing }
+
+export { CadPaperTone }
 
 // @public (undocumented)
 export const CadProgress: ReactWebComponent<CadProgress_2, {}>;

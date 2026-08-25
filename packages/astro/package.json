@@ -74,7 +74,8 @@
     "./KanbanCard.astro": "./src/KanbanCard.astro",
     "./KanbanColumn.astro": "./src/KanbanColumn.astro",
     "./Step.astro": "./src/Step.astro",
-    "./Steps.astro": "./src/Steps.astro"
+    "./Steps.astro": "./src/Steps.astro",
+    "./Paper.astro": "./src/Paper.astro"
   },
   "scripts": {
     "typecheck": "astro check"

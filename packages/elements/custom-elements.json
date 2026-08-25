@@ -3619,6 +3619,38 @@
             {
               "description": "Code foreground color.",
               "name": "--cad-code-ink"
+            },
+            {
+              "description": "Syntax comment color.",
+              "name": "--cad-code-comment"
+            },
+            {
+              "description": "Syntax keyword color.",
+              "name": "--cad-code-keyword"
+            },
+            {
+              "description": "Syntax string color.",
+              "name": "--cad-code-string"
+            },
+            {
+              "description": "Syntax number color.",
+              "name": "--cad-code-number"
+            },
+            {
+              "description": "Syntax tag color.",
+              "name": "--cad-code-tag"
+            },
+            {
+              "description": "Syntax attribute color.",
+              "name": "--cad-code-attribute"
+            },
+            {
+              "description": "Syntax property color.",
+              "name": "--cad-code-property"
+            },
+            {
+              "description": "Syntax punctuation color.",
+              "name": "--cad-code-punctuation"
             }
           ],
           "cssParts": [
@@ -3643,6 +3675,10 @@
             {
               "description": "Progressive code content used when `code` is not set.",
               "name": ""
+            },
+            {
+              "description": "Optional actions such as an application-owned copy button.",
+              "name": "actions"
             }
           ],
           "members": [
@@ -3697,6 +3733,19 @@
               "default": "'accent'",
               "attribute": "tone",
               "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "renderLine",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "line",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [
@@ -4518,6 +4567,14 @@
           "declaration": {
             "name": "*",
             "module": "packages/elements/src/steps/cad-steps.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "packages/elements/src/paper/cad-paper.js"
           }
         }
       ]
@@ -6453,6 +6510,182 @@
     },
     {
       "kind": "javascript-module",
+      "path": "packages/elements/src/paper/cad-paper.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A neutral notebook surface for composing application-owned content.",
+          "name": "CadPaper",
+          "cssProperties": [
+            {
+              "description": "Per-instance paper color.",
+              "name": "--cad-paper-bg"
+            },
+            {
+              "description": "Per-instance foreground color.",
+              "name": "--cad-paper-ink"
+            },
+            {
+              "description": "Pattern line or dot color.",
+              "name": "--cad-paper-line"
+            },
+            {
+              "description": "Margin rule color.",
+              "name": "--cad-paper-margin"
+            },
+            {
+              "description": "Distance between pattern lines or dots.",
+              "name": "--cad-paper-step"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Paper surface.",
+              "name": "base"
+            },
+            {
+              "description": "Content wrapper.",
+              "name": "content"
+            },
+            {
+              "description": "Decorative notebook margin.",
+              "name": "margin-line"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Paper content. Use native landmarks and headings when they are meaningful.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "elevation",
+              "privacy": "public",
+              "type": {
+                "text": "CadPaperElevation"
+              },
+              "default": "'flat'",
+              "attribute": "elevation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "margin",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "margin",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "pattern",
+              "privacy": "public",
+              "type": {
+                "text": "CadPaperPattern"
+              },
+              "default": "'ruled'",
+              "attribute": "pattern",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "spacing",
+              "privacy": "public",
+              "type": {
+                "text": "CadPaperSpacing"
+              },
+              "default": "'regular'",
+              "attribute": "spacing",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "privacy": "public",
+              "type": {
+                "text": "CadPaperTone"
+              },
+              "default": "'paper'",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "elevation",
+              "type": {
+                "text": "CadPaperElevation"
+              },
+              "default": "'flat'",
+              "fieldName": "elevation"
+            },
+            {
+              "name": "margin",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "margin"
+            },
+            {
+              "name": "pattern",
+              "type": {
+                "text": "CadPaperPattern"
+              },
+              "default": "'ruled'",
+              "fieldName": "pattern"
+            },
+            {
+              "name": "spacing",
+              "type": {
+                "text": "CadPaperSpacing"
+              },
+              "default": "'regular'",
+              "fieldName": "spacing"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "CadPaperTone"
+              },
+              "default": "'paper'",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-paper",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadPaper",
+          "declaration": {
+            "name": "CadPaper",
+            "module": "packages/elements/src/paper/cad-paper.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-paper",
+          "declaration": {
+            "name": "CadPaper",
+            "module": "packages/elements/src/paper/cad-paper.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "packages/elements/src/progress/cad-progress.ts",
       "declarations": [
         {
@@ -7436,6 +7669,10 @@
             {
               "description": "Step content.",
               "name": "content"
+            },
+            {
+              "description": "Decorative line to the next step.",
+              "name": "connector"
             },
             {
               "description": "Accessible list item.",

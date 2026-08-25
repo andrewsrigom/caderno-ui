@@ -7,34 +7,49 @@ import { CadBookmark } from '@caderno-ui/react/bookmark'
 import { CadChart, CadChartItem } from '@caderno-ui/react/chart'
 import { CadIcon } from '@caderno-ui/react/icon'
 import { CadNote } from '@caderno-ui/react/note'
+import { CadPaper } from '@caderno-ui/react/paper'
 import { CadProgress } from '@caderno-ui/react/progress'
-import { CadTab, CadTabs } from '@caderno-ui/react/tabs'
+import {
+  CadTabContent,
+  CadTabs,
+  CadTabsList,
+  CadTabTrigger,
+} from '@caderno-ui/react/tabs'
 
 const markup = renderToString(
   createElement(
     CadTabs,
-    { defaultTab: 'note', label: 'Fixture tabs' },
+    { defaultValue: 'note' },
     createElement(
-      CadTab,
-      { label: 'Note', name: 'note' },
+      CadTabsList,
+      { label: 'Fixture tabs' },
+      createElement(CadTabTrigger, { label: 'Note', value: 'note' }, 'Note'),
+    ),
+    createElement(
+      CadTabContent,
+      { value: 'note' },
       createElement(
-        CadAlert,
-        { heading: 'Packed SSR' },
-        'Content survives SSR.',
-      ),
-      createElement(CadBookmark, { label: 'Save' }),
-      createElement(CadIcon, { name: 'spark' }),
-      createElement(CadBadge, { tone: 'mint' }, 'Ready'),
-      createElement(
-        CadNote,
-        { heading: 'Fixture note' },
-        'Static note content.',
-      ),
-      createElement(CadProgress, { label: 'Packed progress', value: 75 }),
-      createElement(
-        CadChart,
-        { heading: 'Packed chart' },
-        createElement(CadChartItem, { label: 'Notes', value: 4 }, 'Notes: 4'),
+        CadPaper,
+        { margin: true, pattern: 'ruled' },
+        createElement(
+          CadAlert,
+          { heading: 'Packed SSR' },
+          'Content survives SSR.',
+        ),
+        createElement(CadBookmark, { label: 'Save' }),
+        createElement(CadIcon, { name: 'spark' }),
+        createElement(CadBadge, { tone: 'mint' }, 'Ready'),
+        createElement(
+          CadNote,
+          { heading: 'Fixture note' },
+          'Static note content.',
+        ),
+        createElement(CadProgress, { label: 'Packed progress', value: 75 }),
+        createElement(
+          CadChart,
+          { heading: 'Packed chart' },
+          createElement(CadChartItem, { label: 'Notes', value: 4 }, 'Notes: 4'),
+        ),
       ),
     ),
   ),
@@ -42,7 +57,9 @@ const markup = renderToString(
 
 for (const tag of [
   'cad-tabs',
-  'cad-tab',
+  'cad-tabs-list',
+  'cad-tab-trigger',
+  'cad-tab-content',
   'cad-alert',
   'cad-badge',
   'cad-bookmark',
@@ -50,6 +67,7 @@ for (const tag of [
   'cad-chart-item',
   'cad-icon',
   'cad-note',
+  'cad-paper',
   'cad-progress',
 ]) {
   if (!markup.includes(`<${tag}`)) throw new Error(`React SSR omitted ${tag}.`)

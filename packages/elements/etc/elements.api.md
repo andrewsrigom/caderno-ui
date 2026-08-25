@@ -1341,6 +1341,60 @@ export class CadPagination extends LitElement {
 }
 
 // @public
+export class CadPaper extends LitElement {
+    constructor();
+    // (undocumented)
+    elevation: CadPaperElevation;
+    // (undocumented)
+    margin: boolean;
+    // (undocumented)
+    pattern: CadPaperPattern;
+    // (undocumented)
+    static properties: {
+        elevation: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        margin: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
+        pattern: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        spacing: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        tone: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    spacing: CadPaperSpacing;
+    // (undocumented)
+    static styles: CSSResult;
+    // (undocumented)
+    tone: CadPaperTone;
+}
+
+// @public (undocumented)
+export type CadPaperElevation = 'flat' | 'raised';
+
+// @public (undocumented)
+export type CadPaperPattern = 'blank' | 'dotted' | 'grid' | 'ruled';
+
+// @public (undocumented)
+export type CadPaperSpacing = 'compact' | 'regular' | 'spacious';
+
+// @public (undocumented)
+export type CadPaperTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'pink' | 'violet';
+
+// @public
 export class CadProgress extends LitElement {
     constructor();
     // (undocumented)
@@ -1603,6 +1657,8 @@ export class CadSteps extends LitElement {
     render(): TemplateResult<1>;
     // (undocumented)
     static styles: CSSResult;
+    // (undocumented)
+    protected updated(changedProperties: PropertyValues<this>): void;
 }
 
 // @public (undocumented)

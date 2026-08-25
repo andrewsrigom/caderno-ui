@@ -3,16 +3,169 @@ import { css, html, LitElement, nothing } from 'lit'
 export type CadCodeBlockTone =
   'accent' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
 
+type SyntaxTokenKind =
+  | 'attribute'
+  | 'comment'
+  | 'keyword'
+  | 'literal'
+  | 'number'
+  | 'property'
+  | 'punctuation'
+  | 'string'
+  | 'tag'
+
+type SyntaxToken = {
+  kind?: SyntaxTokenKind
+  value: string
+}
+
+const scriptKeywords = new Set([
+  'as',
+  'async',
+  'await',
+  'break',
+  'case',
+  'catch',
+  'class',
+  'const',
+  'continue',
+  'declare',
+  'default',
+  'delete',
+  'do',
+  'else',
+  'export',
+  'extends',
+  'finally',
+  'for',
+  'from',
+  'function',
+  'if',
+  'implements',
+  'import',
+  'in',
+  'instanceof',
+  'interface',
+  'let',
+  'new',
+  'of',
+  'private',
+  'protected',
+  'public',
+  'readonly',
+  'return',
+  'static',
+  'super',
+  'switch',
+  'this',
+  'throw',
+  'try',
+  'type',
+  'typeof',
+  'var',
+  'void',
+  'while',
+  'with',
+  'yield',
+])
+
+const scriptPattern =
+  /(\/\/.*$|\/\*.*?\*\/|`(?:\\.|[^`\\])*`|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b[A-Za-z_$][\w$]*\b|\b\d+(?:\.\d+)?\b|[{}()[\].,;:+*/%=<>!?&|~-])/g
+const markupPattern =
+  /(<!--.*?-->|<\/?[A-Za-z][\w:-]*|\/?>|[\w:@-]+(?=\s*=)|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[={}])/g
+const stylePattern =
+  /(\/\*.*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|--[\w-]+|-?[A-Za-z][\w-]*(?=\s*:)|(?:[.#]|::?)?-?[A-Za-z][\w-]*(?=\s*[{,])|\b\d+(?:\.\d+)?(?:%|[a-z]+)?\b|[{}():;,])/gi
+const shellPattern =
+  /(#.*$|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|--?[\w-]+|\b(?:cd|curl|echo|export|git|npm|npx|pnpm|yarn)\b|\b\d+\b|[|&;])/g
+
+function tokenKind(
+  value: string,
+  language: string,
+): SyntaxTokenKind | undefined {
+  const isShell = ['bash', 'shell', 'sh'].includes(language)
+  if (
+    value.startsWith('<!--') ||
+    value.startsWith('//') ||
+    value.startsWith('/*')
+  ) {
+    return 'comment'
+  }
+  if (isShell && value.startsWith('#')) return 'comment'
+  if (/^["'`]/.test(value)) return 'string'
+  if (/^\d/.test(value)) return 'number'
+
+  if (language === 'html' || language === 'astro' || language === 'markup') {
+    if (/^<\/?[A-Za-z]/.test(value)) return 'tag'
+    if (/^[\w:@-]+$/.test(value)) return 'attribute'
+    return 'punctuation'
+  }
+
+  if (language === 'css' || language === 'scss') {
+    if (value.startsWith('--') || /[A-Za-z]/.test(value)) return 'property'
+    return 'punctuation'
+  }
+
+  if (scriptKeywords.has(value)) return 'keyword'
+  if (['false', 'null', 'true', 'undefined'].includes(value)) return 'literal'
+  if (/^[{}()[\].,;:+*/%=<>!?&|~-]$/.test(value)) return 'punctuation'
+  if (isShell && (/^-/.test(value) || /^[a-z]+$/.test(value))) {
+    return 'keyword'
+  }
+  return undefined
+}
+
+function syntaxPattern(language: string): RegExp | undefined {
+  if (['astro', 'html', 'markup'].includes(language)) return markupPattern
+  if (['css', 'scss'].includes(language)) return stylePattern
+  if (['bash', 'shell', 'sh'].includes(language)) return shellPattern
+  if (
+    ['js', 'javascript', 'json', 'jsx', 'ts', 'tsx', 'typescript'].includes(
+      language,
+    )
+  ) {
+    return scriptPattern
+  }
+  return undefined
+}
+
+function tokenize(line: string, language: string): SyntaxToken[] {
+  const normalizedLanguage = language.toLowerCase()
+  const pattern = syntaxPattern(normalizedLanguage)
+  if (!pattern) return [{ value: line }]
+
+  pattern.lastIndex = 0
+  const tokens: SyntaxToken[] = []
+  let cursor = 0
+  for (const match of line.matchAll(pattern)) {
+    const index = match.index
+    if (index > cursor) tokens.push({ value: line.slice(cursor, index) })
+    const kind = tokenKind(match[0], normalizedLanguage)
+    tokens.push(kind ? { kind, value: match[0] } : { value: match[0] })
+    cursor = index + match[0].length
+  }
+  if (cursor < line.length) tokens.push({ value: line.slice(cursor) })
+  return tokens
+}
+
 /**
  * A readable notebook code sample with optional filename and line numbers.
  *
  * @slot - Progressive code content used when `code` is not set.
+ * @slot actions - Optional actions such as an application-owned copy button.
  * @csspart base - Native figure.
  * @csspart code - Native code element.
  * @csspart header - Filename and language metadata.
  * @csspart pre - Native preformatted block.
  * @cssprop --cad-code-bg - Code surface color.
  * @cssprop --cad-code-ink - Code foreground color.
+ * @cssprop --cad-code-comment - Syntax comment color.
+ * @cssprop --cad-code-keyword - Syntax keyword color.
+ * @cssprop --cad-code-string - Syntax string color.
+ * @cssprop --cad-code-number - Syntax number color.
+ * @cssprop --cad-code-tag - Syntax tag color.
+ * @cssprop --cad-code-attribute - Syntax attribute color.
+ * @cssprop --cad-code-property - Syntax property color.
+ * @cssprop --cad-code-punctuation - Syntax punctuation color.
  */
 export class CadCodeBlock extends LitElement {
   static override properties = {
@@ -62,6 +215,9 @@ export class CadCodeBlock extends LitElement {
     figure {
       position: relative;
       margin: 0;
+    }
+
+    figure.has-header {
       padding-top: 1.2rem;
     }
 
@@ -96,6 +252,23 @@ export class CadCodeBlock extends LitElement {
       text-transform: uppercase;
     }
 
+    .actions {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      margin-inline-start: auto;
+    }
+
+    ::slotted([slot='actions']) {
+      padding: 0.2rem 0.45rem;
+      color: inherit;
+      background: color-mix(in srgb, currentColor 8%, transparent);
+      border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+      border-radius: 0.3rem;
+      cursor: pointer;
+      font: inherit;
+    }
+
     pre {
       max-width: 100%;
       padding: 1.5rem 1.15rem 1.2rem;
@@ -128,11 +301,50 @@ export class CadCodeBlock extends LitElement {
       user-select: none;
     }
 
+    .token.comment {
+      color: var(--cad-code-comment, #b7c1d8);
+      font-style: italic;
+    }
+
+    .token.keyword,
+    .token.literal {
+      color: var(--cad-code-keyword, #ffacd0);
+    }
+
+    .token.string {
+      color: var(--cad-code-string, #bfe68f);
+    }
+
+    .token.number {
+      color: var(--cad-code-number, #ffd479);
+    }
+
+    .token.tag {
+      color: var(--cad-code-tag, #91dcff);
+    }
+
+    .token.attribute {
+      color: var(--cad-code-attribute, #d0bdff);
+    }
+
+    .token.property {
+      color: var(--cad-code-property, #9fdcff);
+    }
+
+    .token.punctuation {
+      color: var(--cad-code-punctuation, #d7dded);
+    }
+
     @media (forced-colors: active) {
       pre {
         color: CanvasText;
         background: Canvas;
         border-color: CanvasText;
+        forced-color-adjust: none;
+      }
+
+      .token.token {
+        color: CanvasText;
       }
     }
   `
@@ -154,25 +366,28 @@ export class CadCodeBlock extends LitElement {
 
   override render() {
     const lines = this.code.replace(/\n$/, '').split('\n')
-    const hasHeader = this.filename || this.language
+    const hasHeader =
+      this.filename || this.language || this.querySelector('[slot="actions"]')
     return html`
-      <figure part="base">
-        ${
-          hasHeader
-            ? html`<figcaption class="header" part="header">
-                ${
-                  this.filename
-                    ? html`<span class="filename">${this.filename}</span>`
-                    : nothing
-                }
-                ${
-                  this.language
-                    ? html`<span class="language">${this.language}</span>`
-                    : nothing
-                }
-              </figcaption>`
-            : nothing
-        }
+      <figure class=${hasHeader ? 'has-header' : ''} part="base">
+        <figcaption ?hidden=${!hasHeader} class="header" part="header">
+          ${
+            this.filename
+              ? html`<span class="filename">${this.filename}</span>`
+              : nothing
+          }
+          ${
+            this.language
+              ? html`<span class="language">${this.language}</span>`
+              : nothing
+          }
+          <span class="actions">
+            <slot
+              name="actions"
+              @slotchange=${() => this.requestUpdate()}
+            ></slot>
+          </span>
+        </figcaption>
         <pre part="pre"><code part="code">${
           this.code
             ? this.showLineNumbers
@@ -181,14 +396,27 @@ export class CadCodeBlock extends LitElement {
                     html`<span class="line"
                       ><span aria-hidden="true" class="number"
                         >${index + 1}</span
-                      ><span>${line || '\u00a0'}</span></span
+                      ><span>${this.renderLine(line) || '\u00a0'}</span></span
                     >`,
                 )
-              : this.code
+              : lines.map(
+                  (line, index) =>
+                    html`${this.renderLine(line)}${
+                      index < lines.length - 1 ? '\n' : nothing
+                    }`,
+                )
             : html`<slot></slot>`
         }</code></pre>
       </figure>
     `
+  }
+
+  private renderLine(line: string) {
+    return tokenize(line, this.language).map((token) =>
+      token.kind
+        ? html`<span class="token ${token.kind}">${token.value}</span>`
+        : token.value,
+    )
   }
 }
 

@@ -1,16 +1,56 @@
 ---
 type Props = {
   code: string
+  collapsible?: boolean
+  filename?: string
   language?: string
+  open?: boolean
+  showLineNumbers?: boolean
 }
 
-const { code, language = 'html' } = Astro.props
+const {
+  code,
+  collapsible = false,
+  filename,
+  language = 'html',
+  open = false,
+  showLineNumbers = false,
+} = Astro.props
 ---
 
-<div class="code-block">
-  <div class="code-toolbar">
-    <span>{language}</span>
-    <button data-copy-code type="button">Copy</button>
-  </div>
-  <pre><code>{code}</code></pre>
-</div>
+{
+  collapsible ? (
+    <details class="code-disclosure" open={open}>
+      <summary>
+        <span class="when-closed">Show code</span>
+        <span class="when-open">Hide code</span>
+        <small>{language}</small>
+      </summary>
+      <div class="code-block">
+        <cad-code-block
+          code={code}
+          filename={filename}
+          language={language}
+          show-line-numbers={showLineNumbers || undefined}
+        >
+          <button data-copy-code slot="actions" type="button">
+            Copy
+          </button>
+        </cad-code-block>
+      </div>
+    </details>
+  ) : (
+    <div class="code-block">
+      <cad-code-block
+        code={code}
+        filename={filename}
+        language={language}
+        show-line-numbers={showLineNumbers || undefined}
+      >
+        <button data-copy-code slot="actions" type="button">
+          Copy
+        </button>
+      </cad-code-block>
+    </div>
+  )
+}

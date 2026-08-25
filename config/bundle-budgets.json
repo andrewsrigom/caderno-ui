@@ -40,7 +40,7 @@
       "maxGzip": 10038
     },
     "elements-table": {
-      "maxGzip": 8930
+      "maxGzip": 8938
     },
     "elements-input": {
       "maxGzip": 9426
@@ -64,7 +64,7 @@
       "maxGzip": 8645
     },
     "elements-modal": {
-      "maxGzip": 9886
+      "maxGzip": 9907
     },
     "elements-toast": {
       "maxGzip": 10040
@@ -94,7 +94,7 @@
       "maxGzip": 8966
     },
     "elements-code-block": {
-      "maxGzip": 8487
+      "maxGzip": 9995
     },
     "elements-empty-state": {
       "maxGzip": 8177
@@ -103,7 +103,10 @@
       "maxGzip": 8341
     },
     "elements-steps": {
-      "maxGzip": 8339
+      "maxGzip": 8690
+    },
+    "elements-paper": {
+      "maxGzip": 8547
     },
     "react-alert": {
       "maxGzip": 9909
@@ -145,7 +148,7 @@
       "maxGzip": 10739
     },
     "react-table": {
-      "maxGzip": 9622
+      "maxGzip": 9631
     },
     "react-input": {
       "maxGzip": 10068
@@ -169,7 +172,7 @@
       "maxGzip": 9281
     },
     "react-modal": {
-      "maxGzip": 10547
+      "maxGzip": 10567
     },
     "react-toast": {
       "maxGzip": 10722
@@ -199,7 +202,7 @@
       "maxGzip": 9628
     },
     "react-code-block": {
-      "maxGzip": 9120
+      "maxGzip": 10637
     },
     "react-empty-state": {
       "maxGzip": 8813
@@ -208,16 +211,19 @@
       "maxGzip": 9015
     },
     "react-steps": {
-      "maxGzip": 8990
+      "maxGzip": 9340
+    },
+    "react-paper": {
+      "maxGzip": 9187
     },
     "elements-root": {
-      "maxGzip": 43426
+      "maxGzip": 46151
     },
     "icons-root": {
       "maxGzip": 4239
     },
     "react-root": {
-      "maxGzip": 45546
+      "maxGzip": 48297
     }
   },
   "icons": {

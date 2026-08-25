@@ -1,8 +1,17 @@
 ---
+import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const compositionUsage = `<cad-paper margin pattern="ruled" spacing="spacious">
+  <cad-alert heading="Study plan" variant="info">
+    Save the note, then move between the implementation and review panels.
+  </cad-alert>
+  <cad-tabs default-value="build">
+    <!-- Compose the tab family around application-owned content. -->
+  </cad-tabs>
+</cad-paper>`
 const components = [
   {
     description:
@@ -176,6 +185,14 @@ const components = [
     tag: '<cad-note>',
   },
   {
+    description:
+      'Neutral ruled, grid, dotted, or blank surfaces for native content.',
+    href: '/components/paper/',
+    icon: 'note',
+    label: 'Paper',
+    tag: '<cad-paper>',
+  },
+  {
     description: 'URL-based collection navigation with compact truncation.',
     href: '/components/pagination/',
     icon: 'arrow-right',
@@ -298,26 +315,29 @@ const components = [
     title="The components together"
     description="All behavior below comes from the same Lit-based element package."
   >
-    <cad-alert heading="Study plan" variant="info">
-      Save the note, then move between the implementation and review panels.
-    </cad-alert>
-    <cad-bookmark bookmark-id="component-index-demo" label="Save this plan"
-    ></cad-bookmark>
-    <cad-tabs default-value="build">
-      <cad-tabs-list label="Study plan stages">
-        <cad-tab-trigger label="Build" tone="mint" value="build">
-          Build
-        </cad-tab-trigger>
-        <cad-tab-trigger label="Review" tone="lemon" value="review">
-          Review
-        </cad-tab-trigger>
-      </cad-tabs-list>
-      <cad-tab-content value="build">
-        Implement the smallest complete behavior and keep its contract typed.
-      </cad-tab-content>
-      <cad-tab-content value="review">
-        Verify semantics, keyboard behavior, events, and package boundaries.
-      </cad-tab-content>
-    </cad-tabs>
+    <cad-paper margin pattern="ruled" spacing="spacious">
+      <cad-alert heading="Study plan" variant="info">
+        Save the note, then move between the implementation and review panels.
+      </cad-alert>
+      <cad-bookmark bookmark-id="component-index-demo" label="Save this plan"
+      ></cad-bookmark>
+      <cad-tabs default-value="build">
+        <cad-tabs-list label="Study plan stages">
+          <cad-tab-trigger label="Build" tone="mint" value="build">
+            Build
+          </cad-tab-trigger>
+          <cad-tab-trigger label="Review" tone="lemon" value="review">
+            Review
+          </cad-tab-trigger>
+        </cad-tabs-list>
+        <cad-tab-content value="build">
+          Implement the smallest complete behavior and keep its contract typed.
+        </cad-tab-content>
+        <cad-tab-content value="review">
+          Verify semantics, keyboard behavior, events, and package boundaries.
+        </cad-tab-content>
+      </cad-tabs>
+    </cad-paper>
   </DemoFrame>
+  <CodeBlock code={compositionUsage} language="html" collapsible />
 </DocsLayout>

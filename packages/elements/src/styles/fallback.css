@@ -29,6 +29,7 @@ cad-kanban-column:not(:defined),
 cad-link:not(:defined),
 cad-modal:not(:defined),
 cad-note:not(:defined),
+cad-paper:not(:defined),
 cad-pagination:not(:defined),
 cad-progress:not(:defined),
 cad-radio:not(:defined),
@@ -222,6 +223,53 @@ cad-card:not(:defined) {
   border-radius: 0.8rem;
 }
 
+cad-paper:not(:defined) {
+  display: block;
+  padding: 1.25rem 1.35rem;
+  color: var(--cad-paper-ink, var(--cad-ink, currentColor));
+  background-color: var(--cad-paper-bg, var(--cad-surface-raised, transparent));
+  border: 1px solid var(--cad-line, currentColor);
+  border-radius: 0.45rem;
+  font-family: var(--cad-font-book, inherit);
+}
+
+cad-paper[pattern='ruled']:not(:defined),
+cad-paper:not(:defined, [pattern]) {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 calc(var(--cad-paper-step, 1.75rem) - 1px),
+    var(--cad-paper-line, var(--cad-line, currentColor))
+      calc(var(--cad-paper-step, 1.75rem) - 1px) var(--cad-paper-step, 1.75rem)
+  );
+}
+
+cad-paper[pattern='grid']:not(:defined) {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 calc(var(--cad-paper-step, 1.75rem) - 1px),
+      var(--cad-paper-line, var(--cad-line, currentColor))
+        calc(var(--cad-paper-step, 1.75rem) - 1px)
+        var(--cad-paper-step, 1.75rem)
+    ),
+    repeating-linear-gradient(
+      to right,
+      transparent 0 calc(var(--cad-paper-step, 1.75rem) - 1px),
+      var(--cad-paper-line, var(--cad-line, currentColor))
+        calc(var(--cad-paper-step, 1.75rem) - 1px)
+        var(--cad-paper-step, 1.75rem)
+    );
+}
+
+cad-paper[pattern='dotted']:not(:defined) {
+  background-image: radial-gradient(
+    circle,
+    var(--cad-paper-line, var(--cad-line, currentColor)) 1px,
+    transparent 1.25px
+  );
+  background-size: var(--cad-paper-step, 1.75rem) var(--cad-paper-step, 1.75rem);
+}
+
 cad-card-header:not(:defined) {
   display: grid;
   gap: 0.35rem;
@@ -337,6 +385,14 @@ cad-code-block:not(:defined) {
   border-radius: 0.75rem;
   font-family: var(--cad-font-mono, monospace);
   white-space: pre;
+}
+
+cad-code-block[code]:not(:defined)::before {
+  content: attr(code);
+}
+
+cad-code-block:not(:defined) > [slot='actions'] {
+  display: none;
 }
 
 cad-empty-state:not(:defined) {

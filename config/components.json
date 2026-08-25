@@ -638,6 +638,24 @@
       ],
       "name": "steps",
       "typeExports": ["CadStepTone", "CadStepsOrientation"]
+    },
+    {
+      "astroFacades": ["Paper.astro"],
+      "docsPage": "paper.astro",
+      "elements": [
+        {
+          "className": "CadPaper",
+          "events": [],
+          "tagName": "cad-paper"
+        }
+      ],
+      "name": "paper",
+      "typeExports": [
+        "CadPaperElevation",
+        "CadPaperPattern",
+        "CadPaperSpacing",
+        "CadPaperTone"
+      ]
     }
   ]
 }

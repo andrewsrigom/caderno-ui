@@ -105,7 +105,7 @@ const socialImage = new URL(`${base}/og.png`, Astro.site)
             ))
           }
         </nav>
-        <p class="version-note">Current release <strong>v0.1.0</strong></p>
+        <p class="version-note">Current release <strong>v0.2.0</strong></p>
       </aside>
 
       <main id="content" tabindex="-1">
@@ -139,9 +139,12 @@ const socialImage = new URL(`${base}/og.png`, Astro.site)
         '[data-copy-code]',
       )) {
         button.addEventListener('click', async () => {
-          const code = button.closest('.code-block')?.querySelector('code')
-          if (!code?.textContent) return
-          await navigator.clipboard.writeText(code.textContent)
+          const codeBlock = button.closest('cad-code-block') as HTMLElement & {
+            code?: string
+          }
+          const code = codeBlock?.code ?? codeBlock?.getAttribute('code')
+          if (!code) return
+          await navigator.clipboard.writeText(code)
           button.textContent = 'Copied'
           window.setTimeout(() => {
             button.textContent = 'Copy'

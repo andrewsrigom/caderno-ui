@@ -7,8 +7,11 @@ import Bookmark from '@caderno-ui/astro/Bookmark.astro'
 import Chart from '@caderno-ui/astro/Chart.astro'
 import ChartItem from '@caderno-ui/astro/ChartItem.astro'
 import Note from '@caderno-ui/astro/Note.astro'
+import Paper from '@caderno-ui/astro/Paper.astro'
 import Progress from '@caderno-ui/astro/Progress.astro'
-import Tab from '@caderno-ui/astro/Tab.astro'
+import TabContent from '@caderno-ui/astro/TabContent.astro'
+import TabsList from '@caderno-ui/astro/TabsList.astro'
+import TabTrigger from '@caderno-ui/astro/TabTrigger.astro'
 import Tabs from '@caderno-ui/astro/Tabs.astro'
 ---
 
@@ -24,8 +27,13 @@ import Tabs from '@caderno-ui/astro/Tabs.astro'
     <Chart heading="Packed chart">
       <ChartItem label="Notes" value={4}>Notes: 4</ChartItem>
     </Chart>
-    <Tabs label="Packed tabs">
-      <Tab label="Notes" name="notes">Static tab content.</Tab>
+    <Tabs defaultValue="notes">
+      <TabsList label="Packed tabs">
+        <TabTrigger label="Notes" value="notes">Notes</TabTrigger>
+      </TabsList>
+      <TabContent value="notes">
+        <Paper margin pattern="ruled">Static tab content.</Paper>
+      </TabContent>
     </Tabs>
   </body>
 </html>

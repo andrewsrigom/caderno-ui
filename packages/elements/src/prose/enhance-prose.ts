@@ -26,7 +26,6 @@ function enhanceAccordions(root: ProseRoot): void {
         const indicator = document.createElement('span')
         indicator.className = 'cad-prose-accordion-indicator'
         indicator.setAttribute('aria-hidden', 'true')
-        indicator.textContent = '→'
 
         summary.append(tape, title, indicator)
       }

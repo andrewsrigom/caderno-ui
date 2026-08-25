@@ -23,6 +23,9 @@ describe('Caderno prose enhancement', () => {
     enhanceCadernoProse(document)
 
     expect(prose.querySelector('.cad-prose-accordion')).not.toBeNull()
+    expect(
+      prose.querySelector('.cad-prose-accordion-indicator')?.textContent,
+    ).toBe('')
     expect(prose.querySelector('.cad-prose-blockquote')).not.toBeNull()
     expect(prose.querySelector('.cad-prose-code')).not.toBeNull()
     expect(prose.querySelector('.cad-prose-highlight')).not.toBeNull()

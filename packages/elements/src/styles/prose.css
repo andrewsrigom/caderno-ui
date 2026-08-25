@@ -121,15 +121,19 @@
 }
 
 .cad-prose-accordion-indicator {
-  display: inline-grid;
-  font-family: var(--cad-font-hand);
-  font-size: var(--cad-hand-sm);
-  line-height: 1;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 0.72rem;
+  height: 0.72rem;
+  margin-inline: 0.18rem 0.12rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-0.08rem, 0.08rem);
   transition: transform 150ms var(--cad-transition-smooth);
 }
 
 .cad-prose-accordion[open] .cad-prose-accordion-indicator {
-  transform: rotate(90deg);
+  transform: rotate(225deg) translate(-0.08rem, 0.08rem);
 }
 
 .cad-prose-accordion::details-content {

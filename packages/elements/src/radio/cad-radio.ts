@@ -112,8 +112,9 @@ export class CadRadio extends LitElement {
       background: transparent;
       border: 2px solid color-mix(in srgb, var(--_radio-ink) 55%, transparent);
       border-radius: 54% 46% 52% 48%;
-      transition: transform var(--cad-duration-fast, 140ms)
-        var(--cad-transition-smooth, ease);
+      transition: transform
+        var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+        var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
       transform: rotate(-3deg);
     }
 
@@ -125,8 +126,12 @@ export class CadRadio extends LitElement {
       border-radius: 52% 48% 54% 46%;
       opacity: 0;
       transition:
-        opacity var(--cad-duration-fast, 140ms) ease,
-        transform var(--cad-duration-fast, 140ms) ease;
+        opacity
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, ease),
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, ease);
       transform: scale(0.5);
     }
 

@@ -8,6 +8,7 @@
       "@caderno-ui/astro",
       "@caderno-ui/elements",
       "@caderno-ui/icons",
+      "@caderno-ui/motion",
       "@caderno-ui/react",
       "@caderno-ui/tokens"
     ]

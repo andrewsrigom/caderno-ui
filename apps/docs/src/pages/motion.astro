@@ -1,0 +1,317 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import DemoFrame from '../components/DemoFrame.astro'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const coreExample = `import { createMotionScope } from '@caderno-ui/motion'
+
+const page = document.querySelector('[data-page]')
+const motion = createMotionScope(page ?? undefined)
+
+motion.enter('[data-motion-item]', {
+  from: 'below',
+  stagger: 0.06,
+})
+
+// Revert when the page or feature unmounts.
+motion.revert()`
+
+const scrollExample = `import { createScrollReveal } from '@caderno-ui/motion/scroll'
+
+const reveal = createScrollReveal('[data-motion-section]', {
+  root: document.querySelector('main') ?? undefined,
+  start: 'top 82%',
+  once: true,
+})
+
+reveal.revert()`
+
+const feedbackExample = `.interactive-paper {
+  transition:
+    transform var(--cad-motion-duration-feedback)
+      var(--cad-motion-ease-feedback),
+    box-shadow var(--cad-motion-duration-feedback)
+      var(--cad-motion-ease-feedback);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-paper {
+    transition-duration: 0.01ms;
+  }
+}`
+---
+
+<DocsLayout
+  description="Build tactile component feedback and accessible GSAP choreography with Caderno UI."
+  title="Motion"
+>
+  <header class="page-header">
+    <p class="eyebrow">Interaction language</p>
+    <h1>Motion that feels like paper, not a presentation.</h1>
+    <p>
+      Caderno UI owns the timings, component feedback, and reusable GSAP
+      presets. Applications decide where a sequence belongs without creating a
+      second animation system.
+    </p>
+  </header>
+
+  <DemoFrame
+    description="The same scoped entrance API can be replayed or cleaned up without leaving inline styles behind."
+    title="A short paper-settling sequence"
+  >
+    <div class="motion-demo">
+      <div class="motion-stage" data-motion-stage>
+        <article class="motion-note lemon" data-motion-note>
+          <small>01 · feedback</small>
+          <strong>Buttons and cards respond immediately.</strong>
+        </article>
+        <article class="motion-note blue" data-motion-note>
+          <small>02 · entrance</small>
+          <strong>Related notes settle as one group.</strong>
+        </article>
+        <article class="motion-note mint" data-motion-note>
+          <small>03 · cleanup</small>
+          <strong>Route changes restore the original page.</strong>
+        </article>
+      </div>
+      <cad-button data-motion-replay variant="secondary">
+        Replay sequence
+      </cad-button>
+    </div>
+  </DemoFrame>
+
+  <section class="content-section" aria-labelledby="layers-title">
+    <h2 id="layers-title">One system, three layers</h2>
+    <p>
+      The dependency boundary follows the size and responsibility of the
+      interaction. Import GSAP-backed motion only when page choreography needs
+      it.
+    </p>
+    <div class="motion-layer-grid">
+      <article class="motion-layer" data-motion-layer>
+        <span>CSS</span>
+        <h3>Component feedback</h3>
+        <p>
+          Hover, press, selection, disclosure, and brief loading transitions.
+        </p>
+      </article>
+      <article class="motion-layer" data-motion-layer>
+        <span>Core</span>
+        <h3>Scoped choreography</h3>
+        <p>Enter, exit, stagger, replay, and lifecycle cleanup.</p>
+      </article>
+      <article class="motion-layer" data-motion-layer>
+        <span>Scroll</span>
+        <h3>Optional ScrollTrigger</h3>
+        <p>One-time section reveals without adding weight to other pages.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="content-section" aria-labelledby="feedback-title">
+    <h2 id="feedback-title">Keep direct feedback in CSS</h2>
+    <p>
+      State changes inside a component should remain fast, interruptible, and
+      available without JavaScript choreography. Semantic tokens preserve one
+      rhythm across every custom element.
+    </p>
+    <CodeBlock code={feedbackExample} language="css" />
+  </section>
+
+  <section class="content-section" aria-labelledby="core-title">
+    <h2 id="core-title">Compose entrances from Caderno UI</h2>
+    <p>
+      The application selects meaningful targets. The package supplies the
+      gesture, stagger, reduced-motion behavior, and cleanup contract.
+    </p>
+    <CodeBlock code={coreExample} language="typescript" />
+  </section>
+
+  <section class="content-section" aria-labelledby="scroll-title">
+    <h2 id="scroll-title">Pay for scroll choreography only when needed</h2>
+    <p>
+      ScrollTrigger lives in a separate export. Prefer one-time reveals and
+      avoid scroll hijacking or long pinned reading passages.
+    </p>
+    <CodeBlock code={scrollExample} language="typescript" />
+  </section>
+
+  <cad-callout
+    heading="Reduced motion is a state, not an edge case"
+    variant="info"
+  >
+    Content starts visible in the document. When reduced motion is requested,
+    the package applies state changes without spatial animation, and component
+    transitions collapse to an effectively instant duration.
+  </cad-callout>
+
+  <style>
+    .motion-demo {
+      display: grid;
+      justify-items: start;
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    .motion-stage {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(0.7rem, 2vw, 1.1rem);
+      width: 100%;
+      padding: clamp(1rem, 4vw, 2.5rem);
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0 27px,
+          color-mix(in srgb, var(--cad-line) 55%, transparent) 27px 28px
+        ),
+        var(--cad-surface-sunken);
+      border: 1px dashed var(--cad-line-strong);
+      border-radius: 0.75rem 1.2rem 0.85rem 1rem;
+      overflow: hidden;
+    }
+
+    .motion-note {
+      position: relative;
+      display: grid;
+      min-height: 9rem;
+      align-content: space-between;
+      gap: 1rem;
+      padding: 1.15rem;
+      color: #21324d;
+      border: 1px solid rgb(33 50 77 / 18%);
+      border-radius: 0.35rem 0.7rem 0.4rem 0.65rem;
+      box-shadow: 0.45rem 0.55rem 0 rgb(var(--cad-shadow-rgb) / 12%);
+    }
+
+    .motion-note::before {
+      position: absolute;
+      top: -0.4rem;
+      left: 34%;
+      width: 3.5rem;
+      height: 0.85rem;
+      background: color-mix(in srgb, var(--cad-tape-paper-bg) 72%, transparent);
+      content: '';
+      transform: rotate(-2deg);
+    }
+
+    .motion-note:nth-child(2) {
+      transform: rotate(0.65deg);
+    }
+
+    .motion-note:nth-child(3) {
+      transform: rotate(-0.45deg);
+    }
+
+    .motion-note.lemon {
+      background: var(--cad-post-it-lemon-bg);
+    }
+
+    .motion-note.blue {
+      background: var(--cad-post-it-blue-bg);
+    }
+
+    .motion-note.mint {
+      background: var(--cad-post-it-mint-bg);
+    }
+
+    .motion-note small {
+      font-family: var(--cad-font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .motion-note strong {
+      font-family: var(--cad-font-hand);
+      font-size: var(--cad-hand-md);
+      line-height: 1.2;
+    }
+
+    .motion-layer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .motion-layer {
+      padding: 1.25rem;
+      background: color-mix(
+        in srgb,
+        var(--cad-surface-raised) 94%,
+        transparent
+      );
+      border: 1px solid var(--cad-line);
+      border-radius: 0.55rem 0.85rem 0.65rem 0.95rem;
+      box-shadow: 0.25rem 0.3rem 0 rgb(var(--cad-shadow-rgb) / 8%);
+    }
+
+    .motion-layer span {
+      color: var(--cad-link);
+      font-family: var(--cad-font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .motion-layer h3 {
+      margin: 0.65rem 0 0.4rem;
+      font-family: var(--cad-font-book);
+      font-size: 1.1rem;
+    }
+
+    .motion-layer p {
+      margin: 0;
+      color: var(--cad-ink-soft);
+      font-size: 0.92rem;
+    }
+
+    @media (width <= 48rem) {
+      .motion-stage,
+      .motion-layer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .motion-note {
+        min-height: 7rem;
+      }
+    }
+  </style>
+
+  <script>
+    import { createMotionScope } from '@caderno-ui/motion'
+    import { createScrollReveal } from '@caderno-ui/motion/scroll'
+
+    const stage = document.querySelector<HTMLElement>('[data-motion-stage]')
+    const replay = document.querySelector<HTMLElement>('[data-motion-replay]')
+    let entrance = createMotionScope(stage ?? undefined)
+
+    const playEntrance = () => {
+      entrance.revert()
+      entrance = createMotionScope(stage ?? undefined)
+      entrance.enter('[data-motion-note]', {
+        from: 'below',
+        rotate: -0.8,
+        stagger: 0.08,
+      })
+    }
+
+    playEntrance()
+    replay?.addEventListener('click', playEntrance)
+
+    const layerReveal = createScrollReveal('[data-motion-layer]', {
+      root: document,
+      start: 'top 88%',
+    })
+
+    window.addEventListener(
+      'pagehide',
+      () => {
+        entrance.revert()
+        layerReveal.revert()
+      },
+      { once: true },
+    )
+  </script>
+</DocsLayout>

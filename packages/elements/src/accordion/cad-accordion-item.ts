@@ -1,4 +1,12 @@
-import { css, html, LitElement, nothing } from 'lit'
+import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
+
+import {
+  prefersReducedMotion,
+  readMotionEasing,
+  readMotionTime,
+} from '../internal/motion.js'
+
+export type CadAccordionAnimation = 'collapse' | 'none'
 
 export type CadAccordionTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'paper' | 'violet'
@@ -23,6 +31,7 @@ export type CadAccordionToggleEvent = CustomEvent<CadAccordionToggleDetail>
  */
 export class CadAccordionItem extends LitElement {
   static override properties = {
+    animation: { reflect: true, type: String },
     disabled: { reflect: true, type: Boolean },
     heading: { type: String },
     open: { reflect: true, type: Boolean },
@@ -112,8 +121,9 @@ export class CadAccordionItem extends LitElement {
       height: 0.72rem;
       border-right: 2px solid currentColor;
       border-bottom: 2px solid currentColor;
-      transition: transform var(--cad-duration-fast, 140ms)
-        var(--cad-transition-smooth, ease);
+      transition: transform
+        var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+        var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
       transform: rotate(45deg) translate(-0.1rem, 0.1rem);
     }
 
@@ -122,11 +132,14 @@ export class CadAccordionItem extends LitElement {
     }
 
     .content {
+      box-sizing: border-box;
       padding: 0.95rem;
+      overflow: clip;
       border-top: 1px dashed
         color-mix(in srgb, var(--_accordion-ink) 26%, transparent);
       font-family: var(--cad-font-book, serif);
       line-height: 1.6;
+      transform-origin: top center;
     }
 
     ::slotted(:first-child) {
@@ -138,7 +151,9 @@ export class CadAccordionItem extends LitElement {
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .content,
       .marker {
+        animation: none;
         transition: none;
       }
     }
@@ -150,33 +165,56 @@ export class CadAccordionItem extends LitElement {
     }
   `
 
+  declare animation: CadAccordionAnimation
   declare disabled: boolean
   declare heading: string
   declare open: boolean
   declare tone: CadAccordionTone
 
+  private contentAnimation: Animation | undefined
+  private isClosing = false
+
   constructor() {
     super()
+    this.animation = 'collapse'
     this.disabled = false
     this.heading = ''
     this.open = false
     this.tone = 'paper'
   }
 
+  override disconnectedCallback(): void {
+    this.contentAnimation?.cancel()
+    super.disconnectedCallback()
+  }
+
+  protected override willUpdate(changed: PropertyValues<this>): void {
+    if (!this.hasUpdated || !changed.has('open')) return
+    this.isClosing = !this.open && changed.get('open') === true
+  }
+
+  protected override updated(changed: PropertyValues<this>): void {
+    if (!changed.has('open') || changed.get('open') === undefined) return
+
+    this.dispatchEvent(
+      new CustomEvent<CadAccordionToggleDetail>('cad-accordion-toggle', {
+        bubbles: true,
+        composed: true,
+        detail: { open: this.open },
+      }),
+    )
+    this.animateContent(this.open)
+  }
+
   override render() {
     return html`
-      <details
-        class="base"
-        .open=${this.open}
-        part="base"
-        @toggle=${this.handleNativeToggle}
-      >
+      <details class="base" .open=${this.open || this.isClosing} part="base">
         <summary
           aria-disabled=${this.disabled ? 'true' : nothing}
           class="summary"
           part="summary"
           tabindex=${this.disabled ? '-1' : nothing}
-          @click=${this.preventWhenDisabled}
+          @click=${this.handleSummaryClick}
           @keydown=${this.preventWhenDisabled}
         >
           <span part="title"><slot name="title">${this.heading}</slot></span>
@@ -191,22 +229,92 @@ export class CadAccordionItem extends LitElement {
     if (this.disabled) event.preventDefault()
   }
 
-  private handleNativeToggle(event: Event): void {
-    const details = event.currentTarget
-    if (
-      !(details instanceof HTMLDetailsElement) ||
-      details.open === this.open
-    ) {
+  private handleSummaryClick(event: MouseEvent): void {
+    event.preventDefault()
+    if (this.disabled) return
+    this.open = !this.open
+  }
+
+  private animateContent(opening: boolean): void {
+    const content = this.renderRoot.querySelector<HTMLElement>('.content')
+    if (!content) return
+
+    const wasAnimating = Boolean(this.contentAnimation)
+    const animatedHeight = content.getBoundingClientRect().height
+    this.contentAnimation?.cancel()
+    this.contentAnimation = undefined
+
+    if (this.animation === 'none' || prefersReducedMotion()) {
+      this.finishClosing(opening)
       return
     }
-    this.open = details.open
-    this.dispatchEvent(
-      new CustomEvent<CadAccordionToggleDetail>('cad-accordion-toggle', {
-        bubbles: true,
-        composed: true,
-        detail: { open: this.open },
-      }),
+    if (typeof content.animate !== 'function') {
+      this.finishClosing(opening)
+      return
+    }
+
+    const styles = getComputedStyle(content)
+    const borderHeight =
+      Number.parseFloat(styles.borderTopWidth) +
+      Number.parseFloat(styles.borderBottomWidth)
+    const fullHeight = content.scrollHeight + borderHeight
+    const currentHeight = wasAnimating
+      ? animatedHeight
+      : content.getBoundingClientRect().height
+    const duration = readMotionTime(
+      this,
+      opening ? '--cad-motion-duration-enter' : '--cad-motion-duration-exit',
+      opening ? 420 : 220,
     )
+    const easing = readMotionEasing(
+      this,
+      opening ? '--cad-motion-ease-enter' : '--cad-motion-ease-exit',
+      opening ? 'cubic-bezier(0.16, 1, 0.3, 1)' : 'cubic-bezier(0.4, 0, 1, 1)',
+    )
+    const startHeight = opening && !wasAnimating ? 0 : currentHeight
+    const animation = content.animate(
+      opening
+        ? [
+            {
+              height: `${startHeight}px`,
+              opacity: startHeight === 0 ? 0 : 1,
+              transform: 'translateY(-0.35rem)',
+            },
+            {
+              height: `${fullHeight}px`,
+              opacity: 1,
+              transform: 'translateY(0)',
+            },
+          ]
+        : [
+            {
+              height: `${currentHeight}px`,
+              opacity: 1,
+              transform: 'translateY(0)',
+            },
+            {
+              height: '0px',
+              opacity: 0,
+              transform: 'translateY(-0.35rem)',
+            },
+          ],
+      { duration, easing },
+    )
+    this.contentAnimation = animation
+    void animation.finished
+      .then(() => {
+        if (this.contentAnimation !== animation) return
+        this.contentAnimation = undefined
+        animation.cancel()
+        this.finishClosing(opening)
+      })
+      .catch(() => undefined)
+  }
+
+  private finishClosing(opening: boolean): void {
+    if (opening || this.open || !this.isClosing) return
+    this.isClosing = false
+    this.requestUpdate()
   }
 }
 

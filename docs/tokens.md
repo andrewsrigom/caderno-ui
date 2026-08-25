@@ -23,6 +23,27 @@ Use `--cad-surface-raised` for cards and paper placed above the page, and
 `--cad-surface-sunken` for tracks or inset regions. These roles keep elevation
 meaning stable even when their concrete colors change between themes.
 
+## Motion roles
+
+Semantic motion tokens keep CSS feedback and page choreography on the same
+rhythm. Component styles consume these roles directly; `@caderno-ui/motion`
+publishes matching JavaScript defaults for coordinated sequences.
+
+| Token                            | Default   | Role                               |
+| -------------------------------- | --------- | ---------------------------------- |
+| `--cad-motion-duration-feedback` | `140ms`   | direct press, hover, and selection |
+| `--cad-motion-duration-enter`    | `420ms`   | content settling into the page     |
+| `--cad-motion-duration-exit`     | `220ms`   | content leaving the page           |
+| `--cad-motion-ease-feedback`     | spring    | tactile component response         |
+| `--cad-motion-ease-enter`        | out       | decelerating arrival               |
+| `--cad-motion-ease-exit`         | in        | accelerating departure             |
+| `--cad-motion-distance-sm`       | `0.35rem` | compact state change               |
+| `--cad-motion-distance-md`       | `0.85rem` | page or group entrance             |
+| `--cad-motion-stagger`           | `60ms`    | delay between related items        |
+
+Theme scopes may override these roles, but decorative movement must still be
+disabled when `prefers-reduced-motion: reduce` matches.
+
 ## Contrast-safe pairs
 
 The following pairs are checked in both themes at a minimum contrast ratio of

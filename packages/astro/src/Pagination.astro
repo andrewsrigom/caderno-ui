@@ -4,6 +4,7 @@ import '@caderno-ui/elements/fallback.css'
 type Props = {
   baseHref: string
   class?: string
+  getHref?: (page: number) => string
   label?: string
   nextLabel?: string
   page: number
@@ -15,6 +16,7 @@ type Props = {
 const {
   baseHref,
   class: className,
+  getHref,
   label = 'Pagination',
   nextLabel = 'Next page',
   page,
@@ -25,11 +27,15 @@ const {
 } = Astro.props
 const safeTotal = Math.max(1, Math.floor(total))
 const safePage = Math.min(safeTotal, Math.max(1, Math.floor(page)))
+const hrefs = getHref
+  ? Array.from({ length: safeTotal }, (_, index) => getHref(index + 1))
+  : undefined
 ---
 
 <cad-pagination
   base-href={baseHref}
   class={className}
+  hrefs={hrefs ? JSON.stringify(hrefs) : undefined}
   label={label}
   next-label={nextLabel}
   page={safePage}

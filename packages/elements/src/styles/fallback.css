@@ -33,6 +33,7 @@ cad-paper:not(:defined),
 cad-pagination:not(:defined),
 cad-progress:not(:defined),
 cad-radio:not(:defined),
+cad-skeleton:not(:defined),
 cad-spinner:not(:defined),
 cad-step:not(:defined),
 cad-steps:not(:defined),
@@ -71,6 +72,39 @@ cad-breadcrumb-item:not(:defined) + cad-breadcrumb-item:not(:defined)::before {
   content: '→';
 }
 
+cad-breadcrumb[variant='compact']:not(:defined) {
+  flex-wrap: nowrap;
+  gap: 0.45rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+cad-breadcrumb[variant='compact']:not(:defined)
+  cad-breadcrumb-item:not(:defined) {
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--cad-font-text, var(--cad-font-book, serif));
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+cad-breadcrumb[variant='compact']:not(:defined)
+  cad-breadcrumb-item[current]:not(:defined) {
+  flex: 1 1 auto;
+  color: var(--cad-ink, currentColor);
+  font-weight: 600;
+}
+
+@media (width <= 639px) {
+  cad-breadcrumb[variant='compact']:not(:defined)
+    cad-breadcrumb-item[current]:not(:defined) {
+    display: none;
+  }
+}
+
 cad-pagination:not(:defined) {
   display: block;
   font-family: var(--cad-font-hand, inherit);
@@ -105,11 +139,54 @@ cad-highlight:not(:defined) {
 
 cad-sticker:not(:defined) {
   display: inline-flex;
-  padding: 0.35rem 0.65rem;
-  background: var(--cad-post-it-blue-bg, transparent);
-  border-radius: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.1rem;
+  padding: 0.42rem 0.72rem 0.45rem;
+  color: var(--cad-sticker-ink, var(--cad-post-it-blue-ink, #18345d));
+  white-space: nowrap;
+  background: var(--cad-sticker-bg, var(--cad-post-it-blue-bg, #b8d5ff));
+  border-radius: 0.85rem 1.05rem 0.8rem 0.95rem;
+  box-shadow:
+    inset 0 -0.16rem 0.28rem color-mix(in srgb, currentColor 22%, transparent),
+    inset 0 0.12rem 0 color-mix(in srgb, white 32%, transparent);
   font-family: var(--cad-font-hand, inherit);
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: var(--cad-hand-weight-strong, 700);
+  line-height: 1.1;
+  filter: drop-shadow(
+    0 0.22rem 0.24rem rgb(var(--cad-shadow-rgb, 0 0 0) / 16%)
+  );
+  transform: rotate(-0.4deg);
+}
+
+cad-sticker[tone='coral']:not(:defined) {
+  color: var(--cad-sticker-ink, var(--cad-post-it-coral-ink, #55251b));
+  background: var(--cad-sticker-bg, var(--cad-post-it-coral-bg, #ffb19f));
+  transform: rotate(0.4deg);
+}
+
+cad-sticker[tone='lemon']:not(:defined) {
+  color: var(--cad-sticker-ink, var(--cad-post-it-lemon-ink, #49370d));
+  background: var(--cad-sticker-bg, var(--cad-post-it-lemon-bg, #fff1a8));
+}
+
+cad-sticker[tone='mint']:not(:defined) {
+  color: var(--cad-sticker-ink, var(--cad-post-it-mint-ink, #173d2c));
+  background: var(--cad-sticker-bg, var(--cad-post-it-mint-bg, #a9eacb));
+  transform: rotate(0.3deg);
+}
+
+cad-sticker[tone='violet']:not(:defined) {
+  color: var(--cad-sticker-ink, var(--cad-sticker-violet-ink, #30205e));
+  background: var(--cad-sticker-bg, var(--cad-sticker-violet-bg, #bba0ff));
+  transform: rotate(-0.5deg);
+}
+
+cad-sticker[size='sm']:not(:defined) {
+  min-height: 1.65rem;
+  padding: 0.27rem 0.52rem 0.3rem;
+  font-size: 0.67rem;
 }
 
 cad-tape:not(:defined) {
@@ -632,6 +709,28 @@ cad-tab-content:not(:defined) {
 cad-spinner:not(:defined) {
   display: inline-flex;
   font-family: var(--cad-font-hand, inherit);
+}
+
+cad-skeleton:not(:defined) {
+  display: block;
+  width: var(--cad-skeleton-width, 100%);
+  height: var(--cad-skeleton-height, 0.85em);
+  background: var(
+    --cad-skeleton-bg,
+    color-mix(in srgb, var(--cad-ink, #162033) 13%, transparent)
+  );
+  border-radius: var(--cad-skeleton-radius, 0.35rem 0.5rem 0.4rem 0.45rem);
+}
+
+cad-skeleton:not(:defined)[shape='rectangle'] {
+  height: var(--cad-skeleton-height, 6rem);
+  border-radius: var(--cad-skeleton-radius, 0.65rem 0.8rem 0.7rem 0.75rem);
+}
+
+cad-skeleton:not(:defined)[shape='circle'] {
+  width: var(--cad-skeleton-width, 3rem);
+  height: var(--cad-skeleton-height, var(--cad-skeleton-width, 3rem));
+  border-radius: var(--cad-skeleton-radius, 50%);
 }
 
 cad-tooltip:not(:defined) {

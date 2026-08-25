@@ -142,7 +142,7 @@
           "events": []
         }
       ],
-      "typeExports": ["CadChartFillStyle", "CadChartType"],
+      "typeExports": ["CadChartAnimation", "CadChartFillStyle", "CadChartType"],
       "astroFacades": ["Chart.astro", "ChartItem.astro"],
       "docsPage": "chart.astro"
     },
@@ -358,11 +358,25 @@
       ],
       "name": "accordion",
       "typeExports": [
+        "CadAccordionAnimation",
         "CadAccordionMode",
         "CadAccordionToggleDetail",
         "CadAccordionToggleEvent",
         "CadAccordionTone"
       ]
+    },
+    {
+      "astroFacades": ["Skeleton.astro"],
+      "docsPage": "skeleton.astro",
+      "elements": [
+        {
+          "className": "CadSkeleton",
+          "events": [],
+          "tagName": "cad-skeleton"
+        }
+      ],
+      "name": "skeleton",
+      "typeExports": ["CadSkeletonAnimation", "CadSkeletonShape"]
     },
     {
       "astroFacades": ["Spinner.astro"],

@@ -5,6 +5,7 @@
 ```ts
 
 import { CadAccordion as CadAccordion_2 } from '@caderno-ui/elements/accordion';
+import { CadAccordionAnimation } from '@caderno-ui/elements/accordion';
 import { CadAccordionItem as CadAccordionItem_2 } from '@caderno-ui/elements/accordion';
 import { CadAccordionMode } from '@caderno-ui/elements/accordion';
 import { CadAccordionToggleDetail } from '@caderno-ui/elements/accordion';
@@ -91,6 +92,9 @@ import { CadProgressTone } from '@caderno-ui/elements/progress';
 import { CadProgressVariant } from '@caderno-ui/elements/progress';
 import { CadRadio as CadRadio_2 } from '@caderno-ui/elements/radio';
 import { CadRadioTone } from '@caderno-ui/elements/radio';
+import { CadSkeleton as CadSkeleton_2 } from '@caderno-ui/elements/skeleton';
+import { CadSkeletonAnimation } from '@caderno-ui/elements/skeleton';
+import { CadSkeletonShape } from '@caderno-ui/elements/skeleton';
 import { CadSpinner as CadSpinner_2 } from '@caderno-ui/elements/spinner';
 import { CadSpinnerSize } from '@caderno-ui/elements/spinner';
 import { CadSpinnerTone } from '@caderno-ui/elements/spinner';
@@ -136,6 +140,8 @@ import { ReactWebComponent } from '@lit/react';
 
 // @public (undocumented)
 export const CadAccordion: ReactWebComponent<CadAccordion_2, {}>;
+
+export { CadAccordionAnimation }
 
 // @public (undocumented)
 export const CadAccordionItem: ReactWebComponent<CadAccordionItem_2, {
@@ -352,6 +358,13 @@ export { CadProgressVariant }
 export const CadRadio: ReactWebComponent<CadRadio_2, {}>;
 
 export { CadRadioTone }
+
+// @public (undocumented)
+export const CadSkeleton: ReactWebComponent<CadSkeleton_2, {}>;
+
+export { CadSkeletonAnimation }
+
+export { CadSkeletonShape }
 
 // @public (undocumented)
 export const CadSpinner: ReactWebComponent<CadSpinner_2, {}>;

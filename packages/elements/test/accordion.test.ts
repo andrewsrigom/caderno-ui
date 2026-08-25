@@ -51,4 +51,36 @@ describe('cad-accordion', () => {
     item.shadowRoot?.querySelector('summary')?.click()
     expect(item.open).toBe(false)
   })
+
+  it('animates disclosure content and keeps it rendered while closing', async () => {
+    const item = document.createElement('cad-accordion-item')
+    item.heading = 'Animated explanation'
+    item.style.setProperty('--cad-motion-duration-enter', '40ms')
+    item.style.setProperty('--cad-motion-duration-exit', '40ms')
+    item.textContent = 'The content follows the notebook motion language.'
+    document.body.append(item)
+    await item.updateComplete
+
+    const details = item.shadowRoot?.querySelector('details')
+    const content = item.shadowRoot?.querySelector('.content')
+    item.shadowRoot?.querySelector('summary')?.click()
+    await item.updateComplete
+
+    expect(item.open).toBe(true)
+    expect(details?.open).toBe(true)
+    expect(content?.getAnimations()).toHaveLength(1)
+    expect(
+      (content?.getAnimations()[0]?.effect as KeyframeEffect).getKeyframes()[0]
+        ?.height,
+    ).toBe('0px')
+
+    await vi.waitFor(() => expect(content?.getAnimations()).toHaveLength(0))
+    item.shadowRoot?.querySelector('summary')?.click()
+    await item.updateComplete
+
+    expect(item.open).toBe(false)
+    expect(details?.open).toBe(true)
+    expect(content?.getAnimations()).toHaveLength(1)
+    await vi.waitFor(() => expect(details?.open).toBe(false))
+  })
 })

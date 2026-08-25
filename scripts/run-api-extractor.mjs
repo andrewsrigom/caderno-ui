@@ -10,6 +10,11 @@ const reports = [
     label: 'elements chart',
   },
   { config: 'packages/icons/api-extractor.json', label: 'icons' },
+  { config: 'packages/motion/api-extractor.json', label: 'motion' },
+  {
+    config: 'packages/motion/api-extractor.scroll.json',
+    label: 'motion scroll',
+  },
   { config: 'packages/react/api-extractor.json', label: 'react' },
   {
     config: 'packages/react/api-extractor.chart.json',

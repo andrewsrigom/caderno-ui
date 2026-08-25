@@ -98,10 +98,12 @@ export class CadCard extends LitElement {
       box-shadow: 0 0.4rem 0.9rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.08);
       text-decoration: none;
       transition:
-        transform var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease),
-        box-shadow var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease);
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
+        box-shadow
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
     }
 
     :host([variant='outlined']) .base {
@@ -114,6 +116,11 @@ export class CadCard extends LitElement {
     a.base:hover {
       box-shadow: 0 0.7rem 1.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
       transform: translateY(-2px);
+    }
+
+    a.base:active {
+      box-shadow: 0 0.2rem 0.5rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.1);
+      transform: translateY(1px) scale(0.99);
     }
 
     a.base:focus-visible {

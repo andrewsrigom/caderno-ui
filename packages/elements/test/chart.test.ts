@@ -99,4 +99,22 @@ describe('cad-chart', () => {
       chart.shadowRoot?.querySelector('table')?.getAttribute('aria-labelledby'),
     ).toBe('chart-title')
   })
+
+  it('provides draw motion with an explicit static opt-out', async () => {
+    const chart = document.createElement('cad-chart')
+    chart.animation = 'none'
+    chart.append(createItem('Draft', 3), createItem('Ready', 9))
+    document.body.append(chart)
+    await chart.updateComplete
+
+    const marks = chart.shadowRoot?.querySelectorAll('[data-rough] > *')
+    expect(marks).toHaveLength(2)
+    expect(
+      [...(marks ?? [])].flatMap((mark) => mark.getAnimations()),
+    ).toHaveLength(0)
+
+    chart.animation = 'draw'
+    await chart.updateComplete
+    expect(chart.animation).toBe('draw')
+  })
 })

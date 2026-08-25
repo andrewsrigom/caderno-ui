@@ -9,6 +9,12 @@ const usage = `<cad-breadcrumb label="Documentation path">
   <cad-breadcrumb-item current>Breadcrumb</cad-breadcrumb-item>
 </cad-breadcrumb>
 
+<cad-breadcrumb label="Compact reading path" variant="compact">
+  <cad-breadcrumb-item href="/guide">Guide</cad-breadcrumb-item>
+  <cad-breadcrumb-item href="/guide/foundations">Foundations</cad-breadcrumb-item>
+  <cad-breadcrumb-item current>A long chapter title that truncates safely</cad-breadcrumb-item>
+</cad-breadcrumb>
+
 <script type="module">
   import '@caderno-ui/elements/breadcrumb'
 </script>`
@@ -32,6 +38,17 @@ const usage = `<cad-breadcrumb label="Documentation path">
       <cad-breadcrumb-item href="/components/card">Surfaces</cad-breadcrumb-item
       >
       <cad-breadcrumb-item current>Breadcrumb</cad-breadcrumb-item>
+    </cad-breadcrumb>
+  </DemoFrame>
+  <DemoFrame title="Compact reading path">
+    <cad-breadcrumb label="Compact reading path" variant="compact">
+      <cad-breadcrumb-item href="/guide">Guide</cad-breadcrumb-item>
+      <cad-breadcrumb-item href="/guide/foundations"
+        >Foundations</cad-breadcrumb-item
+      >
+      <cad-breadcrumb-item current>
+        A long chapter title that truncates safely
+      </cad-breadcrumb-item>
     </cad-breadcrumb>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />

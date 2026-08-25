@@ -10,8 +10,15 @@ const artifacts = join(root, '.artifacts')
 const packsDirectory = join(artifacts, 'packs')
 const baselinePath = join(root, 'docs/baseline/tarballs.json')
 const update = process.argv.includes('--update')
-const packageDirectories = ['astro', 'elements', 'icons', 'react', 'tokens']
-const typedPackages = new Set(['elements', 'icons', 'react'])
+const packageDirectories = [
+  'astro',
+  'elements',
+  'icons',
+  'motion',
+  'react',
+  'tokens',
+]
+const typedPackages = new Set(['elements', 'icons', 'motion', 'react'])
 const errors = []
 const baseline = {}
 
@@ -122,7 +129,7 @@ for (const packageDirectory of packageDirectories) {
         '--no-emoji',
         '--no-color',
         ...(packageDirectory === 'elements'
-          ? ['--exclude-entrypoints', './fallback.css']
+          ? ['--exclude-entrypoints', './fallback.css', './prose.css']
           : []),
       ])
     } catch {

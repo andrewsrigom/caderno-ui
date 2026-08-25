@@ -8,12 +8,22 @@ type BreadcrumbItem = {
   rel?: string
   target?: string
 }
-type Props = { class?: string; items?: BreadcrumbItem[]; label?: string }
+type Props = {
+  class?: string
+  items?: BreadcrumbItem[]
+  label?: string
+  variant?: 'compact' | 'default'
+}
 
-const { class: className, items = [], label = 'Breadcrumb' } = Astro.props
+const {
+  class: className,
+  items = [],
+  label = 'Breadcrumb',
+  variant = 'default',
+} = Astro.props
 ---
 
-<cad-breadcrumb class={className} label={label}>
+<cad-breadcrumb class={className} label={label} variant={variant}>
   {
     items.map((item, index) => (
       <cad-breadcrumb-item

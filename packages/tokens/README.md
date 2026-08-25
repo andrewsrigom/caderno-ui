@@ -15,5 +15,9 @@ the light theme, or override the documented `--cad-*` custom properties in your
 own stylesheet. Override matching background/foreground pairs together so the
 contrast guarantee remains intact.
 
+Semantic motion roles are included for component feedback, content entrance and
+exit, movement distance, and stagger. Use them for CSS transitions; coordinated
+JavaScript choreography is available from `@caderno-ui/motion`.
+
 The token taxonomy, checked color pairs, and extension rules are documented in
 the repository's token contract.

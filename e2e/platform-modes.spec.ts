@@ -43,6 +43,28 @@ test('removes optional motion when reduced motion is requested', async ({
   await expect(
     page.getByRole('progressbar', { name: 'Indexing notes' }),
   ).toHaveCSS('animation-name', 'none')
+
+  const accordion = page.locator('cad-accordion-item').nth(1)
+  await accordion.getByText('When is the simple loop better?').click()
+  expect(
+    await accordion
+      .locator('[part="content"]')
+      .evaluate((element) => element.getAnimations().length),
+  ).toBe(0)
+
+  const chart = page.locator('cad-chart[heading="Notes reviewed"]')
+  await chart.scrollIntoViewIfNeeded()
+  await page.waitForTimeout(100)
+  expect(
+    await chart
+      .locator('[data-rough]')
+      .evaluate((drawing) =>
+        [...drawing.children].reduce(
+          (total, mark) => total + mark.getAnimations().length,
+          0,
+        ),
+      ),
+  ).toBe(0)
 })
 
 test('remains operable in forced colors', async ({ page }) => {

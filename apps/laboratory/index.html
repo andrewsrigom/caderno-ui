@@ -366,6 +366,62 @@
         </div>
       </section>
 
+      <section data-component="skeleton">
+        <h2>Loading placeholders</h2>
+        <p class="section-intro">
+          One decorative primitive composes around the geometry of a profile,
+          list, card, or media surface.
+        </p>
+        <div class="skeleton-grid">
+          <article
+            aria-busy="true"
+            aria-label="Loading profile preview"
+            class="skeleton-sample"
+          >
+            <span class="visually-hidden" role="status">
+              Loading profile preview
+            </span>
+            <div class="skeleton-identity">
+              <cad-skeleton
+                class="skeleton-avatar"
+                shape="circle"
+              ></cad-skeleton>
+              <cad-skeleton
+                animation="wave"
+                class="skeleton-copy"
+                lines="2"
+              ></cad-skeleton>
+            </div>
+            <cad-skeleton animation="wave" lines="4"></cad-skeleton>
+          </article>
+          <article
+            aria-busy="true"
+            aria-label="Loading card preview"
+            class="skeleton-sample"
+          >
+            <span class="visually-hidden" role="status">
+              Loading card preview
+            </span>
+            <cad-skeleton
+              class="skeleton-media"
+              shape="rectangle"
+            ></cad-skeleton>
+            <cad-skeleton lines="2"></cad-skeleton>
+            <div class="skeleton-actions">
+              <cad-skeleton
+                class="skeleton-action"
+                shape="rectangle"
+              ></cad-skeleton>
+              <cad-skeleton
+                animation="none"
+                class="skeleton-action skeleton-action-short"
+                shape="rectangle"
+              ></cad-skeleton>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section data-component="navigation-and-annotations">
         <h2>Navigation and annotations</h2>
         <cad-breadcrumb label="Laboratory path">

@@ -15,6 +15,7 @@ Caderno UI is a notebook-inspired, framework-agnostic interface system. Its cano
 | `@caderno-ui/tokens`   | Theme tokens and standalone light/dark defaults     |
 | `@caderno-ui/icons`    | Typed hand-drawn SVG path data                      |
 | `@caderno-ui/elements` | `cad-*` custom elements implemented with Lit        |
+| `@caderno-ui/motion`   | Accessible, opt-in GSAP choreography and presets    |
 | `@caderno-ui/react`    | Typed React wrappers around the custom elements     |
 | `@caderno-ui/astro`    | Astro facades with declarative, pre-upgrade content |
 
@@ -47,6 +48,11 @@ React, Astro, TypeScript, and compatibility matrix.
 ```
 
 Import individual element entry points in application code. The `@caderno-ui/elements` root entry point registers the lightweight core set. Charts stay behind `@caderno-ui/elements/chart`, so Rough.js is only loaded by applications that opt into data visualization.
+
+Coordinated page motion follows the same boundary. Component feedback remains
+CSS-driven, while applications opt into scoped GSAP presets from
+`@caderno-ui/motion` and load ScrollTrigger only through
+`@caderno-ui/motion/scroll`.
 
 ## Framework adapters
 

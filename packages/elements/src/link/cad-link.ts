@@ -65,8 +65,9 @@ export class CadLink extends LitElement {
       background-size: 100% 100%;
       border-radius: 0.15rem;
       box-decoration-break: clone;
-      transition: background-size var(--cad-duration-fast, 140ms)
-        var(--cad-transition-smooth, ease);
+      transition: background-size
+        var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+        var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
       -webkit-box-decoration-break: clone;
     }
 

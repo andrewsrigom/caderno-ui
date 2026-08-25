@@ -135,10 +135,12 @@ export class CadCheckbox extends LitElement {
       border: 2px solid color-mix(in srgb, var(--_check-ink) 55%, transparent);
       border-radius: 0.35rem 0.55rem 0.3rem 0.5rem;
       transition:
-        background-color var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease),
-        transform var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease);
+        background-color
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
       transform: rotate(-2deg);
     }
 
@@ -147,8 +149,12 @@ export class CadCheckbox extends LitElement {
       place-items: center;
       opacity: 0;
       transition:
-        opacity var(--cad-duration-fast, 140ms) ease,
-        transform var(--cad-duration-fast, 140ms) ease;
+        opacity
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, ease),
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, ease);
       transform: scale(0.6) rotate(-6deg);
     }
 

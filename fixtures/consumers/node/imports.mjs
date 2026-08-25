@@ -9,6 +9,8 @@ const imports = [
   '@caderno-ui/elements/progress',
   '@caderno-ui/elements/tabs',
   '@caderno-ui/icons',
+  '@caderno-ui/motion',
+  '@caderno-ui/motion/scroll',
   '@caderno-ui/react',
   '@caderno-ui/react/alert',
   '@caderno-ui/react/badge',

@@ -21,6 +21,7 @@ for (const component of [
   'navigation-and-annotations',
   'planning-patterns',
   'progress',
+  'skeleton',
   'tabs',
   'tables',
 ]) {

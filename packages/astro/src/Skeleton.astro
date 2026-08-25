@@ -1,0 +1,32 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadSkeletonAnimation,
+  CadSkeletonShape,
+} from '@caderno-ui/elements/skeleton'
+
+type Props = {
+  animation?: CadSkeletonAnimation
+  class?: string
+  lines?: number
+  shape?: CadSkeletonShape
+}
+
+const {
+  animation = 'pulse',
+  class: className,
+  lines = 1,
+  shape = 'text',
+}: Props = Astro.props
+---
+
+<cad-skeleton
+  animation={animation}
+  class={className}
+  lines={lines}
+  shape={shape}></cad-skeleton>
+
+<script>
+  import '@caderno-ui/elements/skeleton'
+</script>

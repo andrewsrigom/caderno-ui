@@ -5,6 +5,7 @@
 ```ts
 
 import { CadChart as CadChart_2 } from '@caderno-ui/elements/chart';
+import { CadChartAnimation } from '@caderno-ui/elements/chart';
 import { CadChartFillStyle } from '@caderno-ui/elements/chart';
 import { CadChartItem as CadChartItem_2 } from '@caderno-ui/elements/chart';
 import { CadChartType } from '@caderno-ui/elements/chart';
@@ -12,6 +13,8 @@ import { ReactWebComponent } from '@lit/react';
 
 // @public (undocumented)
 export const CadChart: ReactWebComponent<CadChart_2, {}>;
+
+export { CadChartAnimation }
 
 export { CadChartFillStyle }
 

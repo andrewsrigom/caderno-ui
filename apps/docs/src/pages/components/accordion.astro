@@ -21,7 +21,7 @@ const usage = `<cad-accordion label="Review questions" mode="single">
 ---
 
 <DocsLayout
-  description="CadAccordion coordinates native details disclosures in single or multiple mode."
+  description="CadAccordion coordinates animated native details disclosures in single or multiple mode."
   title="Accordion"
 >
   <header class="page-header">
@@ -29,8 +29,8 @@ const usage = `<cad-accordion label="Review questions" mode="single">
     <h1>Disclose supporting material with native foundations.</h1>
     <p>
       Each item renders <code>details</code> and <code>summary</code>. The
-      parent adds optional single-open coordination without replacing native
-      keyboard behavior.
+      parent adds optional single-open coordination, animated height and
+      opacity, and keeps native keyboard behavior.
     </p>
   </header>
 
@@ -67,8 +67,10 @@ const usage = `<cad-accordion label="Review questions" mode="single">
     <h2 id="events-title">Event</h2>
     <p>
       Items emit the composed <code>cad-accordion-toggle</code> event with
-      <code>{'{ open }'}</code> after native state changes. Disabled items leave the
-      reading content in place but remove the summary from the tab order.
+      <code>{'{ open }'}</code> after disclosure state changes. Use
+      <code>animation="none"</code> for a deliberately static instance. Disabled items
+      leave the reading content in place but remove the summary from the tab order.
+      The animation is removed automatically when reduced motion is requested.
     </p>
   </section>
 </DocsLayout>

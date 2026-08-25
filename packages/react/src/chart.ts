@@ -20,6 +20,7 @@ export const CadChartItem = createComponent({
 })
 
 export type {
+  CadChartAnimation,
   CadChartFillStyle,
   CadChartType,
 } from '@caderno-ui/elements/chart'

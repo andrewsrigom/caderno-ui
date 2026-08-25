@@ -45,6 +45,17 @@
           "members": [
             {
               "kind": "field",
+              "name": "animation",
+              "privacy": "public",
+              "type": {
+                "text": "CadAccordionAnimation"
+              },
+              "default": "'collapse'",
+              "attribute": "animation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "disabled",
               "privacy": "public",
               "type": {
@@ -87,6 +98,23 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "contentAnimation",
+              "type": {
+                "text": "Animation | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "isClosing",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
               "kind": "method",
               "name": "preventWhenDisabled",
               "privacy": "private",
@@ -106,7 +134,7 @@
             },
             {
               "kind": "method",
-              "name": "handleNativeToggle",
+              "name": "handleSummaryClick",
               "privacy": "private",
               "return": {
                 "type": {
@@ -117,7 +145,43 @@
                 {
                   "name": "event",
                   "type": {
-                    "text": "Event"
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "animateContent",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "opening",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "finishClosing",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "opening",
+                  "type": {
+                    "text": "boolean"
                   }
                 }
               ]
@@ -133,6 +197,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "animation",
+              "type": {
+                "text": "CadAccordionAnimation"
+              },
+              "default": "'collapse'",
+              "fieldName": "animation"
+            },
             {
               "name": "disabled",
               "type": {
@@ -286,6 +358,14 @@
           "name": "CadAccordionItem",
           "declaration": {
             "name": "CadAccordionItem",
+            "module": "./cad-accordion-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CadAccordionAnimation",
+          "declaration": {
+            "name": "CadAccordionAnimation",
             "module": "./cad-accordion-item.js"
           }
         },
@@ -1241,6 +1321,17 @@
               },
               "default": "''",
               "attribute": "target"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "'compact' | 'default'"
+              },
+              "default": "'default'",
+              "attribute": "variant",
+              "reflects": true
             }
           ],
           "attributes": [
@@ -1283,6 +1374,14 @@
               },
               "default": "''",
               "fieldName": "target"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "'compact' | 'default'"
+              },
+              "default": "'default'",
+              "fieldName": "variant"
             }
           ],
           "superclass": {
@@ -1348,6 +1447,17 @@
               "attribute": "label"
             },
             {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "'compact' | 'default'"
+              },
+              "default": "'default'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
               "kind": "method",
               "name": "handleSlotChange",
               "privacy": "private",
@@ -1364,6 +1474,24 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "syncItems",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "slot",
+                  "type": {
+                    "text": "HTMLSlotElement | null"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [
@@ -1374,6 +1502,14 @@
               },
               "default": "'Breadcrumb'",
               "fieldName": "label"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "'compact' | 'default'"
+              },
+              "default": "'default'",
+              "fieldName": "variant"
             }
           ],
           "superclass": {
@@ -2438,6 +2574,17 @@
           "members": [
             {
               "kind": "field",
+              "name": "animation",
+              "privacy": "public",
+              "type": {
+                "text": "CadChartAnimation"
+              },
+              "default": "'draw'",
+              "attribute": "animation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "fillStyle",
               "privacy": "public",
               "type": {
@@ -2527,6 +2674,33 @@
               "name": "dataObserver",
               "privacy": "private",
               "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "drawAnimations",
+              "type": {
+                "text": "Animation[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "drawObserver",
+              "type": {
+                "text": "IntersectionObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "replay",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Replays the configured draw animation without rebuilding the chart data."
             },
             {
               "kind": "field",
@@ -2636,6 +2810,88 @@
             {
               "kind": "method",
               "name": "draw",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "queueDrawingAnimation",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "drawing",
+                  "type": {
+                    "text": "SVGGElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "animateDrawing",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "drawing",
+                  "type": {
+                    "text": "SVGGElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "markKeyframes",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Keyframe[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "trackDrawAnimation",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "animation",
+                  "type": {
+                    "text": "Animation"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "cancelDrawAnimations",
               "privacy": "private",
               "return": {
                 "type": {
@@ -2790,6 +3046,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "animation",
+              "type": {
+                "text": "CadChartAnimation"
+              },
+              "default": "'draw'",
+              "fieldName": "animation"
+            },
             {
               "name": "fill-style",
               "type": {
@@ -4446,6 +4710,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "module": "packages/elements/src/skeleton/cad-skeleton.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "module": "packages/elements/src/spinner/cad-spinner.js"
           }
         },
@@ -5272,6 +5544,105 @@
           "declaration": {
             "name": "CadInput",
             "module": "packages/elements/src/input/cad-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/internal/motion.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "prefersReducedMotion",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "readMotionTime",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "parameters": [
+            {
+              "name": "element",
+              "type": {
+                "text": "Element"
+              }
+            },
+            {
+              "name": "property",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "fallback",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "readMotionEasing",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "element",
+              "type": {
+                "text": "Element"
+              }
+            },
+            {
+              "name": "property",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "fallback",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "prefersReducedMotion",
+          "declaration": {
+            "name": "prefersReducedMotion",
+            "module": "packages/elements/src/internal/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "readMotionTime",
+          "declaration": {
+            "name": "readMotionTime",
+            "module": "packages/elements/src/internal/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "readMotionEasing",
+          "declaration": {
+            "name": "readMotionEasing",
+            "module": "packages/elements/src/internal/motion.ts"
           }
         }
       ]
@@ -6271,6 +6642,16 @@
             },
             {
               "kind": "field",
+              "name": "hrefs",
+              "privacy": "public",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "attribute": "hrefs"
+            },
+            {
+              "kind": "field",
               "name": "label",
               "privacy": "public",
               "type": {
@@ -6423,6 +6804,14 @@
               },
               "default": "'/'",
               "fieldName": "baseHref"
+            },
+            {
+              "name": "hrefs",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "fieldName": "hrefs"
             },
             {
               "name": "label",
@@ -6970,6 +7359,57 @@
           "declaration": {
             "name": "CadProgress",
             "module": "packages/elements/src/progress/cad-progress.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/prose/enhance-prose.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "enhanceCadernoProse",
+          "return": {
+            "type": {
+              "text": "void"
+            }
+          },
+          "parameters": [
+            {
+              "name": "root",
+              "default": "document",
+              "type": {
+                "text": "ProseRoot"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "installCadernoProse",
+          "return": {
+            "type": {
+              "text": "void"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "enhanceCadernoProse",
+          "declaration": {
+            "name": "enhanceCadernoProse",
+            "module": "packages/elements/src/prose/enhance-prose.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "installCadernoProse",
+          "declaration": {
+            "name": "installCadernoProse",
+            "module": "packages/elements/src/prose/enhance-prose.ts"
           }
         }
       ]
@@ -7532,6 +7972,148 @@
           "declaration": {
             "name": "CadRadio",
             "module": "packages/elements/src/radio/cad-radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "packages/elements/src/skeleton/cad-skeleton.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A decorative layout placeholder for content that is still loading.",
+          "name": "CadSkeleton",
+          "cssProperties": [
+            {
+              "description": "Placeholder base color.",
+              "name": "--cad-skeleton-bg"
+            },
+            {
+              "description": "Traveling highlight color for `wave`.",
+              "name": "--cad-skeleton-highlight"
+            },
+            {
+              "description": "Item width. A circle also uses it as its default height.",
+              "name": "--cad-skeleton-width"
+            },
+            {
+              "description": "Item height.",
+              "name": "--cad-skeleton-height"
+            },
+            {
+              "description": "Item corner radius.",
+              "name": "--cad-skeleton-radius"
+            },
+            {
+              "description": "Gap between repeated text lines.",
+              "name": "--cad-skeleton-gap"
+            },
+            {
+              "description": "Final line width when `lines` is greater than one.",
+              "name": "--cad-skeleton-last-line-width"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Placeholder group.",
+              "name": "base"
+            },
+            {
+              "description": "Each rendered placeholder shape or text line.",
+              "name": "item"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "animation",
+              "privacy": "public",
+              "type": {
+                "text": "CadSkeletonAnimation"
+              },
+              "default": "'pulse'",
+              "attribute": "animation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "lines",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "lines",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "shape",
+              "privacy": "public",
+              "type": {
+                "text": "CadSkeletonShape"
+              },
+              "default": "'text'",
+              "attribute": "shape",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "renderedLineCount",
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "animation",
+              "type": {
+                "text": "CadSkeletonAnimation"
+              },
+              "default": "'pulse'",
+              "fieldName": "animation"
+            },
+            {
+              "name": "lines",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "lines"
+            },
+            {
+              "name": "shape",
+              "type": {
+                "text": "CadSkeletonShape"
+              },
+              "default": "'text'",
+              "fieldName": "shape"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "cad-skeleton",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CadSkeleton",
+          "declaration": {
+            "name": "CadSkeleton",
+            "module": "packages/elements/src/skeleton/cad-skeleton.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cad-skeleton",
+          "declaration": {
+            "name": "CadSkeleton",
+            "module": "packages/elements/src/skeleton/cad-skeleton.ts"
           }
         }
       ]

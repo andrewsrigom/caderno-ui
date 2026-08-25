@@ -27,7 +27,16 @@
     "--cad-sticker-violet-ink",
     "--cad-tape-paper-bg",
     "--cad-shadow-rgb",
-    "--cad-transition-smooth"
+    "--cad-transition-smooth",
+    "--cad-motion-duration-feedback",
+    "--cad-motion-duration-enter",
+    "--cad-motion-duration-exit",
+    "--cad-motion-ease-feedback",
+    "--cad-motion-ease-enter",
+    "--cad-motion-ease-exit",
+    "--cad-motion-distance-sm",
+    "--cad-motion-distance-md",
+    "--cad-motion-stagger"
   ],
   "contrastPairs": [
     { "background": "--cad-bg", "foreground": "--cad-ink", "minimum": 4.5 },

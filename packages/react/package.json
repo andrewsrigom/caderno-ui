@@ -108,6 +108,10 @@
       "types": "./dist/accordion.d.ts",
       "import": "./dist/accordion.js"
     },
+    "./skeleton": {
+      "types": "./dist/skeleton.d.ts",
+      "import": "./dist/skeleton.js"
+    },
     "./spinner": {
       "types": "./dist/spinner.d.ts",
       "import": "./dist/spinner.js"

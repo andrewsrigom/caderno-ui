@@ -2,11 +2,13 @@
 import '@caderno-ui/elements/fallback.css'
 
 import type {
+  CadChartAnimation,
   CadChartFillStyle,
   CadChartType,
 } from '@caderno-ui/elements/chart'
 
 type Props = {
+  animation?: CadChartAnimation
   class?: string
   fillStyle?: CadChartFillStyle
   heading: string
@@ -19,6 +21,7 @@ type Props = {
 }
 
 const {
+  animation = 'draw',
   class: className,
   fillStyle = 'hachure',
   heading,
@@ -32,6 +35,7 @@ const {
 ---
 
 <cad-chart
+  animation={animation}
   class={className}
   fill-style={fillStyle}
   heading={heading}

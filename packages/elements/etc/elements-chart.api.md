@@ -12,6 +12,8 @@ import { TemplateResult } from 'lit';
 export class CadChart extends LitElement {
     constructor();
     // (undocumented)
+    animation: CadChartAnimation;
+    // (undocumented)
     connectedCallback(): void;
     // (undocumented)
     disconnectedCallback(): void;
@@ -21,6 +23,10 @@ export class CadChart extends LitElement {
     heading: string;
     // (undocumented)
     static properties: {
+        animation: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
         fillStyle: {
             attribute: string;
             reflect: boolean;
@@ -58,6 +64,7 @@ export class CadChart extends LitElement {
     };
     // (undocumented)
     render(): TemplateResult<1>;
+    replay(): void;
     // (undocumented)
     roughness: number;
     // (undocumented)
@@ -75,6 +82,9 @@ export class CadChart extends LitElement {
     // (undocumented)
     valueLabel: string;
 }
+
+// @public (undocumented)
+export type CadChartAnimation = 'draw' | 'none';
 
 // @public (undocumented)
 export type CadChartFillStyle = 'cross-hatch' | 'dashed' | 'dots' | 'hachure' | 'solid' | 'zigzag' | 'zigzag-line';

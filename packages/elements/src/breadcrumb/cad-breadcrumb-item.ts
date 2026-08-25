@@ -18,6 +18,7 @@ export class CadBreadcrumbItem extends LitElement {
     href: { type: String },
     rel: { type: String },
     target: { type: String },
+    variant: { reflect: true, type: String },
   }
 
   static override styles = css`
@@ -86,6 +87,45 @@ export class CadBreadcrumbItem extends LitElement {
       width: 0.95rem;
       height: 0.95rem;
     }
+
+    :host([variant='compact']) {
+      min-width: 0;
+    }
+
+    :host([variant='compact'][current]) {
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    :host([variant='compact']) .item {
+      font-family: var(--cad-font-text, var(--cad-font-book, serif));
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    :host([variant='compact']) a {
+      text-decoration: none;
+    }
+
+    :host([variant='compact']) .current {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background: none;
+      font-weight: 600;
+    }
+
+    :host([variant='compact']) .separator {
+      color: var(--cad-line-strong, currentColor);
+      transform: none;
+    }
+
+    @media (max-width: 639px) {
+      :host([variant='compact'][current]) {
+        display: none;
+      }
+    }
     @media (forced-colors: active) {
       a,
       .current {
@@ -99,6 +139,7 @@ export class CadBreadcrumbItem extends LitElement {
   declare href: string
   declare rel: string
   declare target: string
+  declare variant: 'compact' | 'default'
 
   constructor() {
     super()
@@ -107,6 +148,7 @@ export class CadBreadcrumbItem extends LitElement {
     this.href = ''
     this.rel = ''
     this.target = ''
+    this.variant = 'default'
   }
 
   override render() {

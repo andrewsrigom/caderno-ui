@@ -1,0 +1,51 @@
+---
+import TableOfContents from '@caderno-ui/astro/TableOfContents.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `---
+import TableOfContents from '@caderno-ui/astro/TableOfContents.astro'
+---
+<TableOfContents
+  ariaLabel="Neste capítulo"
+  selector="article h2, article h3"
+  sticky
+  title="Neste capítulo"
+/>`
+---
+
+<DocsLayout
+  description="A compact, heading-aware navigation for articles and notebooks."
+  title="Table of contents"
+>
+  <header class="page-header">
+    <p class="eyebrow">TableOfContents.astro</p>
+    <h1>Keep long notes easy to scan.</h1>
+    <p>
+      The component can receive explicit items or discover second- and
+      third-level headings, generate stable anchors, and track the visible
+      section.
+    </p>
+  </header>
+  <DemoFrame title="Explicit chapter outline">
+    <TableOfContents
+      ariaLabel="Neste capítulo"
+      items={[
+        { id: 'diagnostico', title: 'Diagnóstico antes da solução' },
+        { id: 'hipoteses', level: 3, title: 'Organizando hipóteses' },
+        { id: 'validacao', title: 'Validação e próximos passos' },
+      ]}
+      title="Neste capítulo"
+    />
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="astro" />
+  <section class="content-section" aria-labelledby="behavior-title">
+    <h2 id="behavior-title">Behavior</h2>
+    <p>
+      Use explicit items for a stable server-rendered first frame. Heading
+      discovery is available for content generated from Markdown, and
+      enhancement is idempotent across Astro navigations.
+    </p>
+  </section>
+</DocsLayout>

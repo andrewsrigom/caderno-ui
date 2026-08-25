@@ -33,17 +33,28 @@ export class CadAccordion extends LitElement {
     static styles: CSSResult;
 }
 
+// @public (undocumented)
+export type CadAccordionAnimation = 'collapse' | 'none';
+
 // @public
 export class CadAccordionItem extends LitElement {
     constructor();
     // (undocumented)
+    animation: CadAccordionAnimation;
+    // (undocumented)
     disabled: boolean;
+    // (undocumented)
+    disconnectedCallback(): void;
     // (undocumented)
     heading: string;
     // (undocumented)
     open: boolean;
     // (undocumented)
     static properties: {
+        animation: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
         disabled: {
             reflect: boolean;
             type: BooleanConstructor;
@@ -66,6 +77,10 @@ export class CadAccordionItem extends LitElement {
     static styles: CSSResult;
     // (undocumented)
     tone: CadAccordionTone;
+    // (undocumented)
+    protected updated(changed: PropertyValues<this>): void;
+    // (undocumented)
+    protected willUpdate(changed: PropertyValues<this>): void;
 }
 
 // @public (undocumented)
@@ -305,11 +320,19 @@ export class CadBreadcrumb extends LitElement {
         label: {
             type: StringConstructor;
         };
+        variant: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
     };
     // (undocumented)
     render(): TemplateResult<1>;
     // (undocumented)
     static styles: CSSResult;
+    // (undocumented)
+    protected updated(changedProperties: PropertyValues<this>): void;
+    // (undocumented)
+    variant: 'compact' | 'default';
 }
 
 // @public
@@ -339,6 +362,10 @@ export class CadBreadcrumbItem extends LitElement {
         target: {
             type: StringConstructor;
         };
+        variant: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
     };
     // (undocumented)
     rel: string;
@@ -348,6 +375,8 @@ export class CadBreadcrumbItem extends LitElement {
     static styles: CSSResult;
     // (undocumented)
     target: string;
+    // (undocumented)
+    variant: 'compact' | 'default';
 }
 
 // @public
@@ -1287,6 +1316,8 @@ export class CadPagination extends LitElement {
     // (undocumented)
     baseHref: string;
     // (undocumented)
+    hrefs: string[];
+    // (undocumented)
     label: string;
     // (undocumented)
     nextLabel: string;
@@ -1303,6 +1334,9 @@ export class CadPagination extends LitElement {
         baseHref: {
             attribute: string;
             type: StringConstructor;
+        };
+        hrefs: {
+            type: ArrayConstructor;
         };
         label: {
             type: StringConstructor;
@@ -1566,6 +1600,42 @@ export class CadRadio extends LitElement {
 
 // @public (undocumented)
 export type CadRadioTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet';
+
+// @public
+export class CadSkeleton extends LitElement {
+    constructor();
+    // (undocumented)
+    animation: CadSkeletonAnimation;
+    // (undocumented)
+    lines: number;
+    // (undocumented)
+    static properties: {
+        animation: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+        lines: {
+            reflect: boolean;
+            type: NumberConstructor;
+        };
+        shape: {
+            reflect: boolean;
+            type: StringConstructor;
+        };
+    };
+    // (undocumented)
+    render(): TemplateResult<1>;
+    // (undocumented)
+    shape: CadSkeletonShape;
+    // (undocumented)
+    static styles: CSSResult;
+}
+
+// @public (undocumented)
+export type CadSkeletonAnimation = 'none' | 'pulse' | 'wave';
+
+// @public (undocumented)
+export type CadSkeletonShape = 'circle' | 'rectangle' | 'text';
 
 // @public
 export class CadSpinner extends LitElement {

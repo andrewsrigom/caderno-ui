@@ -84,8 +84,9 @@ export class CadBookmark extends LitElement {
     .icon {
       width: 1.35rem;
       height: 1.35rem;
-      transition: transform var(--cad-duration-fast, 140ms)
-        var(--cad-transition-smooth, ease);
+      transition: transform
+        var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+        var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
     }
 
     button[aria-pressed='true'] .icon {

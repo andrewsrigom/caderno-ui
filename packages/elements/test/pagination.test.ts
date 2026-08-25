@@ -20,4 +20,19 @@ describe('cad-pagination', () => {
     expect(current?.getAttribute('href')).toBe('/notes?filter=ready&page=5')
     expect(element.shadowRoot?.querySelectorAll('a').length).toBeGreaterThan(3)
   })
+
+  it('uses explicit hrefs for path-based routers', async () => {
+    const pagination = document.createElement('cad-pagination')
+    pagination.hrefs = ['/notes', '/notes/page/2', '/notes/page/3']
+    pagination.page = 2
+    pagination.total = 3
+    document.body.append(pagination)
+    await pagination.updateComplete
+
+    const links =
+      pagination.shadowRoot?.querySelectorAll<HTMLAnchorElement>('a')
+    expect(
+      Array.from(links ?? [], (link) => link.getAttribute('href')),
+    ).toContain('/notes/page/3')
+  })
 })

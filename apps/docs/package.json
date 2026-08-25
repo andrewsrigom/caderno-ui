@@ -12,6 +12,7 @@
     "@caderno-ui/astro": "workspace:^",
     "@caderno-ui/elements": "workspace:^",
     "@caderno-ui/icons": "workspace:^",
+    "@caderno-ui/motion": "workspace:^",
     "@caderno-ui/tokens": "workspace:^"
   },
   "devDependencies": {

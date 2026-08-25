@@ -2,11 +2,17 @@
 import CodeBlock from '../components/CodeBlock.astro'
 import DemoFrame from '../components/DemoFrame.astro'
 import DocsLayout from '../layouts/DocsLayout.astro'
+import '@caderno-ui/elements/prose.css'
 
 const selectiveImport = `import '@caderno-ui/elements/card'
 
 // Only add artwork when this screen actually uses it.
 import '@caderno-ui/elements/icon'`
+
+const proseImport = `import '@caderno-ui/elements/prose.css'
+import { installCadernoProse } from '@caderno-ui/elements/prose'
+
+installCadernoProse()`
 ---
 
 <DocsLayout
@@ -82,6 +88,38 @@ import '@caderno-ui/elements/icon'`
 
   <CodeBlock code={selectiveImport} language="ts" collapsible />
 
+  <section class="content-section" aria-labelledby="prose-title">
+    <h2 id="prose-title">Progressive editorial content</h2>
+    <p>
+      The prose entrypoint owns the first-frame styles and enhancement contract
+      for semantic Markdown output. Consumers provide content, not parallel
+      Accordion, Blockquote, Code block, Highlight, Note, or Table skins.
+    </p>
+    <DemoFrame title="Semantic Markdown output">
+      <article class="cad-prose">
+        <h2>Investigate before changing code</h2>
+        <p>
+          Start with an observable hypothesis and <mark
+            >preserve the evidence</mark
+          >
+          before attempting a fix.
+        </p>
+        <blockquote>
+          <p>A small reproducible case is more useful than a large guess.</p>
+        </blockquote>
+        <pre><code><span class="line">const evidence = reproduce(issue)</span></code></pre>
+        <table>
+          <thead><tr><th>Signal</th><th>Meaning</th></tr></thead>
+          <tbody
+            ><tr><td>Repeatable</td><td>The hypothesis can be tested</td></tr
+            ></tbody
+          >
+        </table>
+      </article>
+    </DemoFrame>
+    <CodeBlock code={proseImport} language="ts" collapsible />
+  </section>
+
   <section class="content-section" aria-labelledby="delivery-title">
     <h2 id="delivery-title">Enforced in CI</h2>
     <p>
@@ -122,4 +160,7 @@ import '@caderno-ui/elements/icon'`
 <script>
   import '@caderno-ui/elements/badge'
   import '@caderno-ui/elements/card'
+  import { installCadernoProse } from '@caderno-ui/elements/prose'
+
+  installCadernoProse()
 </script>

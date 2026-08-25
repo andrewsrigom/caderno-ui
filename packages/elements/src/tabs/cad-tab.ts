@@ -129,10 +129,12 @@ export class CadTabTrigger extends LitElement {
       line-height: 1;
       cursor: pointer;
       transition:
-        transform var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease),
-        padding var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease);
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
+        padding
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
     }
 
     .tab:hover:not(:disabled) {
@@ -142,6 +144,10 @@ export class CadTabTrigger extends LitElement {
         var(--cad-surface, #1f2335)
       );
       transform: translateY(-1px);
+    }
+
+    .tab:active:not(:disabled) {
+      transform: translateY(1px) scale(0.98);
     }
 
     .tab[aria-selected='true'] {
@@ -292,12 +298,38 @@ export class CadTabContent extends LitElement {
       line-height: 1.65;
     }
 
+    :host([active]) .panel {
+      animation: cad-tab-panel-enter
+        var(--cad-motion-duration-enter, var(--cad-duration-slow, 420ms))
+        var(--cad-motion-ease-enter, var(--cad-transition-smooth, ease-out));
+      transform-origin: top left;
+    }
+
     ::slotted(:first-child) {
       margin-top: 0;
     }
 
     ::slotted(:last-child) {
       margin-bottom: 0;
+    }
+
+    @keyframes cad-tab-panel-enter {
+      from {
+        opacity: 0;
+        transform: translateY(var(--cad-motion-distance-sm, 0.35rem))
+          rotate(-0.2deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :host([active]) .panel {
+        animation: none;
+      }
     }
 
     @media (forced-colors: active) {

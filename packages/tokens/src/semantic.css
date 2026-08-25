@@ -33,6 +33,15 @@
   --cad-tape-paper-bg: var(--cad-color-night-tape);
   --cad-shadow-rgb: 0 0 0;
   --cad-transition-smooth: var(--cad-ease-out);
+  --cad-motion-duration-feedback: var(--cad-duration-fast);
+  --cad-motion-duration-enter: var(--cad-duration-slow);
+  --cad-motion-duration-exit: var(--cad-duration-normal);
+  --cad-motion-ease-feedback: var(--cad-ease-spring);
+  --cad-motion-ease-enter: var(--cad-ease-out);
+  --cad-motion-ease-exit: var(--cad-ease-in);
+  --cad-motion-distance-sm: 0.35rem;
+  --cad-motion-distance-md: 0.85rem;
+  --cad-motion-stagger: 60ms;
 }
 
 :root[data-theme='light'] {
@@ -69,4 +78,13 @@
   --cad-tape-paper-bg: var(--cad-color-day-tape);
   --cad-shadow-rgb: 15 23 42;
   --cad-transition-smooth: var(--cad-ease-out);
+  --cad-motion-duration-feedback: var(--cad-duration-fast);
+  --cad-motion-duration-enter: var(--cad-duration-slow);
+  --cad-motion-duration-exit: var(--cad-duration-normal);
+  --cad-motion-ease-feedback: var(--cad-ease-spring);
+  --cad-motion-ease-enter: var(--cad-ease-out);
+  --cad-motion-ease-exit: var(--cad-ease-in);
+  --cad-motion-distance-sm: 0.35rem;
+  --cad-motion-distance-md: 0.85rem;
+  --cad-motion-stagger: 60ms;
 }

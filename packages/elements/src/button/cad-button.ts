@@ -109,10 +109,12 @@ export class CadButton extends LitElement {
       text-decoration: none;
       cursor: pointer;
       transition:
-        transform var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease),
-        box-shadow var(--cad-duration-fast, 140ms)
-          var(--cad-transition-smooth, ease);
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
+        box-shadow
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
       transform: rotate(-0.3deg);
       -webkit-tap-highlight-color: transparent;
     }
@@ -163,6 +165,11 @@ export class CadButton extends LitElement {
     .base:not([aria-disabled='true']):hover {
       transform: rotate(-0.4deg) translateY(-1px);
       box-shadow: 0 0.55rem 1.1rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.18);
+    }
+
+    :host(:not([variant='link'])) .base:not([aria-disabled='true']):active {
+      transform: rotate(-0.15deg) translateY(1px) scale(0.98);
+      box-shadow: 0 0.18rem 0.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
     }
 
     :host([variant='ghost']) .base:not([aria-disabled='true']):hover,

@@ -1,6 +1,11 @@
 import { css, html, LitElement, nothing, svg } from 'lit'
 import rough from 'roughjs'
 
+import {
+  prefersReducedMotion,
+  readMotionEasing,
+  readMotionTime,
+} from '../internal/motion.js'
 import './cad-chart-item.js'
 export { CadChartItem } from './cad-chart-item.js'
 
@@ -14,6 +19,7 @@ export type CadChartFillStyle =
   | 'zigzag-line'
 
 export type CadChartType = 'bar' | 'donut' | 'line'
+export type CadChartAnimation = 'draw' | 'none'
 
 type ChartDatum = {
   color: string
@@ -72,6 +78,7 @@ const fillStyles: CadChartFillStyle[] = [
  */
 export class CadChart extends LitElement {
   static override properties = {
+    animation: { reflect: true, type: String },
     fillStyle: { attribute: 'fill-style', reflect: true, type: String },
     heading: { type: String },
     roughness: { reflect: true, type: Number },
@@ -176,6 +183,11 @@ export class CadChart extends LitElement {
       stroke-width: 1;
     }
 
+    [data-rough] > * {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
     .legend {
       display: flex;
       flex-wrap: wrap;
@@ -240,6 +252,7 @@ export class CadChart extends LitElement {
     }
   `
 
+  declare animation: CadChartAnimation
   declare fillStyle: CadChartFillStyle
   declare heading: string
   declare roughness: number
@@ -253,9 +266,12 @@ export class CadChart extends LitElement {
     typeof MutationObserver === 'undefined'
       ? undefined
       : new MutationObserver(() => this.requestUpdate())
+  private drawAnimations: Animation[] = []
+  private drawObserver: IntersectionObserver | undefined
 
   constructor() {
     super()
+    this.animation = 'draw'
     this.fillStyle = 'hachure'
     this.heading = 'Chart'
     this.roughness = 1.2
@@ -277,8 +293,18 @@ export class CadChart extends LitElement {
   }
 
   override disconnectedCallback(): void {
+    this.cancelDrawAnimations()
+    this.drawObserver?.disconnect()
     this.dataObserver?.disconnect()
     super.disconnectedCallback()
+  }
+
+  /** Replays the configured draw animation without rebuilding the chart data. */
+  replay(): void {
+    const drawing = this.renderRoot.querySelector<SVGGElement>('[data-rough]')
+    if (drawing && drawing.children.length > 0) {
+      this.queueDrawingAnimation(drawing)
+    }
   }
 
   protected override updated(): void {
@@ -337,6 +363,141 @@ export class CadChart extends LitElement {
     if (this.chartType === 'donut') this.drawDonut(roughSvg, drawing, data)
     else if (this.chartType === 'line') this.drawLine(roughSvg, drawing, data)
     else this.drawBars(roughSvg, drawing, data)
+    this.queueDrawingAnimation(drawing)
+  }
+
+  private queueDrawingAnimation(drawing: SVGGElement): void {
+    this.cancelDrawAnimations()
+    this.drawObserver?.disconnect()
+    this.drawObserver = undefined
+    if (this.animation === 'none' || prefersReducedMotion()) return
+
+    if (typeof IntersectionObserver === 'undefined') {
+      this.animateDrawing(drawing)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return
+        observer.disconnect()
+        if (this.drawObserver === observer) this.drawObserver = undefined
+        this.animateDrawing(drawing)
+      },
+      { threshold: 0.16 },
+    )
+    this.drawObserver = observer
+    observer.observe(this)
+  }
+
+  private animateDrawing(drawing: SVGGElement): void {
+    if (this.animation === 'none' || prefersReducedMotion()) return
+    if (typeof drawing.animate !== 'function') return
+
+    const marks = [...drawing.children].filter(
+      (element): element is SVGGraphicsElement =>
+        element instanceof SVGGraphicsElement,
+    )
+    const duration = readMotionTime(this, '--cad-motion-duration-enter', 420)
+    const stagger = readMotionTime(this, '--cad-motion-stagger', 60)
+    const easing = readMotionEasing(
+      this,
+      '--cad-motion-ease-enter',
+      'cubic-bezier(0.16, 1, 0.3, 1)',
+    )
+
+    marks.forEach((mark, index) => {
+      if (typeof mark.animate !== 'function') return
+      const animation = mark.animate(this.markKeyframes(index), {
+        delay: index * stagger,
+        duration,
+        easing,
+        fill: 'both',
+      })
+      this.trackDrawAnimation(animation)
+    })
+
+    const supportingElements = [
+      ...this.renderRoot.querySelectorAll<SVGGraphicsElement>(
+        '.axis-label, .value-label',
+      ),
+      ...this.renderRoot.querySelectorAll<HTMLElement>('.legend li'),
+    ]
+    supportingElements.forEach((element, index) => {
+      if (typeof element.animate !== 'function') return
+      const animation = element.animate(
+        [
+          { opacity: 0, transform: 'translateY(0.25rem)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        {
+          delay: Math.min(marks.length, 3) * stagger + index * stagger * 0.35,
+          duration: Math.max(160, duration * 0.7),
+          easing,
+          fill: 'both',
+        },
+      )
+      this.trackDrawAnimation(animation)
+    })
+  }
+
+  private markKeyframes(index: number): Keyframe[] {
+    if (this.chartType === 'bar') {
+      return [
+        {
+          opacity: 0,
+          transform: 'translateY(0.4rem) scaleY(0.04)',
+          transformOrigin: 'center bottom',
+        },
+        {
+          opacity: 1,
+          transform: 'translateY(0) scaleY(1)',
+          transformOrigin: 'center bottom',
+        },
+      ]
+    }
+
+    if (this.chartType === 'line') {
+      return index === 0
+        ? [
+            {
+              opacity: 0,
+              transform: 'scaleX(0.02)',
+              transformOrigin: 'left center',
+            },
+            {
+              opacity: 1,
+              transform: 'scaleX(1)',
+              transformOrigin: 'left center',
+            },
+          ]
+        : [
+            { opacity: 0, transform: 'scale(0.35) rotate(-8deg)' },
+            { opacity: 1, transform: 'scale(1) rotate(0)' },
+          ]
+    }
+
+    return [
+      { opacity: 0, transform: 'scale(0.82) rotate(-7deg)' },
+      { opacity: 1, transform: 'scale(1) rotate(0)' },
+    ]
+  }
+
+  private trackDrawAnimation(animation: Animation): void {
+    this.drawAnimations.push(animation)
+    void animation.finished
+      .then(() => {
+        animation.cancel()
+        this.drawAnimations = this.drawAnimations.filter(
+          (candidate) => candidate !== animation,
+        )
+      })
+      .catch(() => undefined)
+  }
+
+  private cancelDrawAnimations(): void {
+    for (const animation of this.drawAnimations) animation.cancel()
+    this.drawAnimations = []
   }
 
   private options(item: ChartDatum, index: number) {

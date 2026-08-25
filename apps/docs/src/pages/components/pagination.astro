@@ -11,6 +11,16 @@ const usage = `<cad-pagination base-href="/notes?filter=ready" page="5" total="1
 <script type="module">
   import '@caderno-ui/elements/pagination'
 </script>`
+
+const astroUsage = `---
+import Pagination from '@caderno-ui/astro/Pagination.astro'
+---
+<Pagination
+  baseHref="/notes"
+  getHref={(page) => page === 1 ? '/notes' : \`/notes/page/\${page}\`}
+  page={5}
+  total={12}
+/>`
 ---
 
 <DocsLayout description="URL-based collection pagination." title="Pagination">
@@ -29,6 +39,15 @@ const usage = `<cad-pagination base-href="/notes?filter=ready" page="5" total="1
     ></DemoFrame
   >
   <CodeBlock code={usage} collapsible language="html" />
+  <section class="content-section" aria-labelledby="path-router-title">
+    <h2 id="path-router-title">Path-based routers</h2>
+    <p>
+      The Astro facade accepts a <code>getHref</code> function and serializes only
+      the resulting URLs. Consumers keep their routing rules without rebuilding pagination
+      markup or styles.
+    </p>
+    <CodeBlock code={astroUsage} collapsible language="astro" />
+  </section>
   <ApiReference tagName="cad-pagination" />
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>

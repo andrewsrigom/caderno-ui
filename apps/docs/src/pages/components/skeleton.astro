@@ -1,0 +1,161 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<p class="loading-status" role="status">Loading profile…</p>
+<section aria-busy="true" aria-label="Profile">
+  <cad-skeleton shape="circle"></cad-skeleton>
+  <cad-skeleton animation="wave" lines="3"></cad-skeleton>
+</section>
+
+<script type="module">
+  import '@caderno-ui/elements/skeleton'
+</script>
+
+<style>
+  cad-skeleton[shape='circle'] {
+    --cad-skeleton-width: 3.5rem;
+  }
+</style>`
+---
+
+<DocsLayout
+  description="CadSkeleton reserves loading geometry with composable text, rectangle, and circle placeholders."
+  title="Skeleton"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-skeleton&gt;</p>
+    <h1>Reserve the shape of content while it loads.</h1>
+    <p>
+      Skeleton is one decorative primitive with three shapes. Compose it around
+      the layout users are about to receive instead of publishing a separate
+      skeleton component for every card, list, or profile.
+    </p>
+  </header>
+
+  <DemoFrame
+    title="A composed note preview"
+    description="Circle, text lines, and rectangles share the same primitive."
+  >
+    <span class="loading-status" role="status">Loading note preview…</span>
+    <article aria-busy="true" aria-label="Note preview" class="loading-card">
+      <div class="identity-placeholder">
+        <cad-skeleton class="avatar-placeholder" shape="circle"></cad-skeleton>
+        <cad-skeleton animation="wave" class="identity-copy" lines="2"
+        ></cad-skeleton>
+      </div>
+      <cad-skeleton animation="wave" lines="4"></cad-skeleton>
+      <cad-skeleton class="media-placeholder" shape="rectangle"></cad-skeleton>
+      <div class="action-placeholders">
+        <cad-skeleton class="action-placeholder" shape="rectangle"
+        ></cad-skeleton>
+        <cad-skeleton class="action-placeholder short" shape="rectangle"
+        ></cad-skeleton>
+      </div>
+    </article>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ApiReference tagName="cad-skeleton" />
+
+  <section class="content-section" aria-labelledby="choosing-title">
+    <h2 id="choosing-title">Choose the honest loading signal</h2>
+    <ul>
+      <li>
+        Use <strong>Skeleton</strong> for an initial load whose final geometry is
+        predictable.
+      </li>
+      <li>
+        Use <strong>Spinner</strong> for compact indeterminate work such as a button
+        action.
+      </li>
+      <li>
+        Use <strong>Progress</strong> when the amount completed can be measured.
+      </li>
+      <li>
+        During background refresh, keep useful content visible and mark its
+        region busy instead of replacing it with a skeleton.
+      </li>
+    </ul>
+  </section>
+
+  <section class="content-section" aria-labelledby="sizing-title">
+    <h2 id="sizing-title">Match the final geometry</h2>
+    <p>
+      Set <code>--cad-skeleton-width</code> and
+      <code>--cad-skeleton-height</code> in application CSS. Text can render up to
+      20 lines, and <code>--cad-skeleton-last-line-width</code> adjusts the final
+      line. Recipes stay local because their dimensions belong to the content layout,
+      not to the primitive.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Skeleton items are decorative and hidden from the accessibility tree. Set
+      <code>aria-busy="true"</code> on the region being updated and provide one concise
+      status message for the operation. Both animations become static when reduced
+      motion is requested.
+    </p>
+  </section>
+
+  <style>
+    .loading-card {
+      display: grid;
+      width: min(100%, 34rem);
+      gap: 1.25rem;
+      padding: 1.25rem;
+      background: var(--cad-surface);
+      border: 1px dashed var(--cad-line-strong);
+      border-radius: var(--cad-radius-md);
+    }
+
+    .identity-placeholder,
+    .action-placeholders {
+      display: flex;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .avatar-placeholder {
+      --cad-skeleton-width: 3.5rem;
+
+      flex: 0 0 auto;
+    }
+
+    .identity-copy {
+      --cad-skeleton-width: min(100%, 14rem);
+      --cad-skeleton-height: 0.75rem;
+
+      flex: 1;
+    }
+
+    .media-placeholder {
+      --cad-skeleton-height: 9rem;
+    }
+
+    .action-placeholder {
+      --cad-skeleton-width: 7rem;
+      --cad-skeleton-height: 2.5rem;
+    }
+
+    .action-placeholder.short {
+      --cad-skeleton-width: 5rem;
+    }
+
+    .loading-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</DocsLayout>

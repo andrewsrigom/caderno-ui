@@ -25,6 +25,7 @@ export const CadAccordionItem = createComponent({
 })
 
 export type {
+  CadAccordionAnimation,
   CadAccordionMode,
   CadAccordionToggleDetail,
   CadAccordionToggleEvent,

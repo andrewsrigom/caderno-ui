@@ -31,4 +31,26 @@ describe('cad-breadcrumb', () => {
       current.shadowRoot?.querySelector('[aria-current="page"]'),
     ).not.toBeNull()
   })
+
+  it('propagates the compact presentation to every item', async () => {
+    const breadcrumb = document.createElement('cad-breadcrumb')
+    breadcrumb.variant = 'compact'
+    const parent = document.createElement('cad-breadcrumb-item')
+    const current = document.createElement('cad-breadcrumb-item')
+    breadcrumb.append(parent, current)
+    document.body.append(breadcrumb)
+
+    await breadcrumb.updateComplete
+    await parent.updateComplete
+    await current.updateComplete
+
+    expect(parent.variant).toBe('compact')
+    expect(current.variant).toBe('compact')
+    expect(current.current).toBe(true)
+
+    breadcrumb.variant = 'default'
+    await breadcrumb.updateComplete
+    expect(parent.variant).toBe('default')
+    expect(current.variant).toBe('default')
+  })
 })

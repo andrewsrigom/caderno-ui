@@ -1,4 +1,5 @@
 import { cadIcons, type CadIconName } from '@caderno-ui/icons'
+import { motionDefaults } from '@caderno-ui/motion'
 import type { CadPaperPattern } from '@caderno-ui/elements/paper'
 import type { CadProgressTone } from '@caderno-ui/elements/progress'
 import type { CadTabChangeDetail } from '@caderno-ui/elements/tabs'
@@ -11,3 +12,4 @@ export const detail: CadTabChangeDetail = {
   previousValue: '',
   value: 'notes',
 }
+export const motionStagger = motionDefaults.stagger

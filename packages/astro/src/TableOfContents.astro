@@ -1,0 +1,184 @@
+---
+export type TableOfContentsItem = { id: string; level?: 2 | 3; title: string }
+type Props = {
+  ariaLabel?: string
+  class?: string
+  items?: TableOfContentsItem[]
+  selector?: string
+  sticky?: boolean
+  title?: string
+}
+const {
+  ariaLabel = 'On this page',
+  class: className,
+  items = [],
+  selector = 'article h2, article h3',
+  sticky = false,
+  title = 'On this page',
+}: Props = Astro.props
+---
+
+<nav
+  aria-label={ariaLabel}
+  class:list={['cad-toc', className]}
+  data-cad-toc
+  data-selector={selector}
+  data-sticky={sticky ? 'true' : 'false'}
+>
+  <p class="cad-toc__title">{title}</p>
+  <ol class="cad-toc__list">
+    {
+      items.map((item, index) => (
+        <li data-level={item.level ?? 2}>
+          <a
+            aria-current={index === 0 ? 'location' : undefined}
+            href={`#${item.id}`}
+          >
+            {item.title}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+<script>
+  const slug = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+  function installCadernoTocs() {
+    for (const toc of document.querySelectorAll<HTMLElement>(
+      '[data-cad-toc]',
+    )) {
+      if (toc.dataset.ready === 'true') continue
+      const selector = toc.dataset.selector
+      const list = toc.querySelector<HTMLOListElement>('.cad-toc__list')
+      if (!selector || !list) continue
+      const headings = Array.from(
+        document.querySelectorAll<HTMLElement>(selector),
+      )
+      if (list.children.length === 0)
+        headings.forEach((heading, index) => {
+          if (!heading.id)
+            heading.id =
+              slug(heading.textContent ?? '') || `section-${index + 1}`
+          const item = document.createElement('li')
+          const link = document.createElement('a')
+          item.dataset.level = heading.tagName === 'H3' ? '3' : '2'
+          link.href = `#${heading.id}`
+          link.textContent = heading.textContent?.trim() ?? heading.id
+          item.append(link)
+          list.append(item)
+        })
+      const links = Array.from(
+        list.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'),
+      )
+      const targets = links
+        .map((link) =>
+          document.getElementById(decodeURIComponent(link.hash.slice(1))),
+        )
+        .filter(
+          (heading): heading is HTMLElement => heading instanceof HTMLElement,
+        )
+      const setActive = (id: string) =>
+        links.forEach((link) =>
+          link.hash === `#${id}`
+            ? link.setAttribute('aria-current', 'location')
+            : link.removeAttribute('aria-current'),
+        )
+      if (targets.length > 0 && 'IntersectionObserver' in window) {
+        const visible = new Map<string, number>()
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) =>
+              entry.isIntersecting
+                ? visible.set(entry.target.id, entry.boundingClientRect.top)
+                : visible.delete(entry.target.id),
+            )
+            const active = [...visible.entries()].sort(
+              (left, right) => Math.abs(left[1]) - Math.abs(right[1]),
+            )[0]
+            if (active) setActive(active[0])
+          },
+          { rootMargin: '-18% 0px -68% 0px', threshold: [0, 1] },
+        )
+        targets.forEach((target) => observer.observe(target))
+      }
+      toc.dataset.ready = 'true'
+    }
+  }
+  installCadernoTocs()
+  document.addEventListener('astro:page-load', installCadernoTocs)
+</script>
+<style>
+  .cad-toc {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem 1.05rem 1.1rem;
+    color: var(--cad-ink, currentColor);
+    background: color-mix(in srgb, var(--cad-surface, Canvas) 92%, transparent);
+    border: 1px solid var(--cad-line, currentColor);
+    border-radius: 0.7rem 0.9rem 0.65rem 0.85rem;
+  }
+  .cad-toc[data-sticky='true'] {
+    position: sticky;
+    top: 1rem;
+  }
+  .cad-toc__title {
+    width: fit-content;
+    padding-bottom: 0.25rem;
+    margin: 0;
+    border-bottom: 1.5px solid var(--cad-line-strong, currentColor);
+    font-family: var(--cad-font-hand, cursive);
+    font-size: var(--cad-hand-sm, 1.1rem);
+    font-weight: var(--cad-hand-weight-strong, 700);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cad-toc__list {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .cad-toc__list li[data-level='3'] {
+    padding-left: 0.85rem;
+  }
+  .cad-toc__list a {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.2rem 0.25rem;
+    overflow-wrap: anywhere;
+    color: var(--cad-ink-muted, currentColor);
+    font-family: var(--cad-font-book, serif);
+    font-size: 0.9rem;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+  .cad-toc__list a:hover {
+    color: var(--cad-link, currentColor);
+  }
+  .cad-toc__list a[aria-current='location'] {
+    color: var(--cad-ink, currentColor);
+    background: linear-gradient(
+      transparent 58%,
+      color-mix(in srgb, var(--cad-post-it-blue-bg, #cfe2ff) 64%, transparent)
+        59%,
+      color-mix(in srgb, var(--cad-post-it-blue-bg, #cfe2ff) 64%, transparent)
+        94%,
+      transparent 95%
+    );
+    font-family: var(--cad-font-hand, cursive);
+    font-size: var(--cad-hand-sm, 1.1rem);
+    font-weight: var(--cad-hand-weight-strong, 700);
+  }
+  .cad-toc__list a:focus-visible {
+    outline: 2px dashed var(--cad-focus-ring, currentColor);
+    outline-offset: 3px;
+  }
+</style>

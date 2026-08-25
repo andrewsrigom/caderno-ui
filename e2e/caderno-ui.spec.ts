@@ -59,6 +59,7 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-pagination',
       'cad-progress',
       'cad-radio',
+      'cad-skeleton',
       'cad-spinner',
       'cad-step',
       'cad-steps',
@@ -107,6 +108,9 @@ test('renders the extracted SeniorPath primitives with native semantics', async 
   await expect(
     page.locator('cad-kanban').getByRole('list', { name: 'Release readiness' }),
   ).toBeVisible()
+  await expect(
+    page.locator('cad-skeleton').first().locator('[part="base"]'),
+  ).toHaveAttribute('aria-hidden', 'true')
 })
 
 test('exposes the complete typed icon palette', async ({ page }) => {
@@ -170,14 +174,49 @@ test('coordinates native accordion disclosures and composed events', async ({
   const first = page.locator('cad-accordion-item').first()
   const second = page.locator('cad-accordion-item').nth(1)
   await expect(first.locator('details')).toHaveAttribute('open', '')
+  await second.evaluate((element) => {
+    element.style.setProperty('--cad-motion-duration-enter', '1200ms')
+  })
 
   await second.getByText('When is the simple loop better?').click()
 
   await expect(second.locator('details')).toHaveAttribute('open', '')
+  await expect
+    .poll(() =>
+      second
+        .locator('[part="content"]')
+        .evaluate((element) => element.getAnimations().length),
+    )
+    .toBeGreaterThan(0)
   await expect(first.locator('details')).not.toHaveAttribute('open', '')
   await expect(page.locator('[data-event-log]')).toContainText(
     'cad-accordion-toggle',
   )
+})
+
+test('draws charts when they enter the viewport and supports replay', async ({
+  page,
+}) => {
+  const chart = page.locator('cad-chart[heading="Notes reviewed"]')
+  const animationCount = () =>
+    chart
+      .locator('[data-rough]')
+      .evaluate((drawing) =>
+        [...drawing.children].reduce(
+          (total, mark) => total + mark.getAnimations().length,
+          0,
+        ),
+      )
+
+  expect(await animationCount()).toBe(0)
+  await chart.scrollIntoViewIfNeeded()
+  await expect.poll(animationCount).toBeGreaterThan(0)
+  await expect.poll(animationCount).toBe(0)
+
+  await chart.evaluate((element) =>
+    (element as HTMLElementTagNameMap['cad-chart']).replay(),
+  )
+  await expect.poll(animationCount).toBeGreaterThan(0)
 })
 
 test('coordinates tooltip, modal, and hosted toast behavior', async ({

@@ -54,12 +54,13 @@ export class CadIcon extends LitElement {
 
   override render() {
     const paths = cadIcons[this.name] ?? cadIcons.spark
-    const isDecorative = this.label.length === 0
+    const label = this.label?.trim() ?? ''
+    const isDecorative = label.length === 0
 
     return html`
       <svg
         aria-hidden=${isDecorative ? 'true' : 'false'}
-        aria-label=${isDecorative ? nothing : this.label}
+        aria-label=${isDecorative ? nothing : label}
         fill="none"
         height=${this.size}
         part="svg"

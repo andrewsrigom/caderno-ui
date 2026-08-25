@@ -1,0 +1,688 @@
+/* Progressive editorial styles for semantic HTML enhanced by Caderno UI. */
+
+/* Stable first frame before the optional enhancement module runs. */
+.cad-prose .interview-question:not(.cad-prose-accordion),
+.cad-prose > blockquote:not(.cad-prose-blockquote blockquote),
+.cad-prose > pre:not([data-mermaid-source], .cad-prose-code-pre),
+.cad-prose > table:not(.cad-prose-table) {
+  color: var(--cad-ink);
+  background: var(--cad-surface);
+  border: 1px dashed var(--cad-line-strong);
+  border-radius: 0.7rem 0.9rem 0.65rem 0.85rem;
+}
+
+.cad-prose .interview-question:not(.cad-prose-accordion) {
+  padding: 0.85rem 1rem;
+  margin-block: 0.75rem;
+}
+
+.cad-prose .interview-question:not(.cad-prose-accordion) > summary {
+  color: var(--cad-post-it-blue-ink);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-md);
+  font-weight: var(--cad-hand-weight-strong);
+}
+
+.cad-prose > blockquote:not(.cad-prose-blockquote blockquote) {
+  padding: 1rem 1.2rem;
+  margin-block: 1.75rem 2rem;
+  font-family: var(--cad-font-book);
+}
+
+.cad-prose > pre:not([data-mermaid-source], .cad-prose-code-pre) {
+  padding: 1.1rem 1.25rem;
+  margin-block: 1.75rem 2rem;
+  overflow-x: auto;
+  font-family: var(--cad-font-mono);
+}
+
+.cad-prose > table:not(.cad-prose-table) {
+  width: 100%;
+  margin-block: 1.75rem 2rem;
+  border-collapse: collapse;
+  font-family: var(--cad-font-book);
+}
+
+.cad-prose > table:not(.cad-prose-table) :is(th, td) {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px dashed var(--cad-line);
+  text-align: left;
+}
+
+/* accordion */
+.cad-prose-accordion {
+  --_accordion-bg: var(--cad-post-it-blue-bg);
+  --_accordion-ink: var(--cad-post-it-blue-ink);
+
+  overflow: hidden;
+  background: color-mix(in srgb, var(--_accordion-bg) 18%, var(--cad-surface));
+  border: 1px solid color-mix(in srgb, var(--_accordion-ink) 30%, transparent);
+  border-radius: 0.65rem 0.85rem 0.6rem 0.8rem;
+  interpolate-size: allow-keywords;
+}
+
+.cad-prose-accordion[data-tone='coral'] {
+  --_accordion-bg: var(--cad-post-it-coral-bg);
+  --_accordion-ink: var(--cad-post-it-coral-ink);
+}
+
+.cad-prose-accordion[data-tone='lemon'] {
+  --_accordion-bg: var(--cad-post-it-lemon-bg);
+  --_accordion-ink: var(--cad-post-it-lemon-ink);
+}
+
+.cad-prose-accordion[data-tone='mint'] {
+  --_accordion-bg: var(--cad-post-it-mint-bg);
+  --_accordion-ink: var(--cad-post-it-mint-ink);
+}
+
+.cad-prose-accordion[data-tone='pink'] {
+  --_accordion-bg: var(--cad-post-it-pink-bg);
+  --_accordion-ink: var(--cad-post-it-pink-ink);
+}
+
+.cad-prose-accordion[data-tone='violet'] {
+  --_accordion-bg: var(--cad-sticker-violet-bg);
+  --_accordion-ink: var(--cad-sticker-violet-ink);
+}
+
+.cad-prose-accordion summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.95rem 1rem 0.9rem;
+  color: var(--_accordion-ink);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-md);
+  font-weight: var(--cad-hand-weight-strong);
+  line-height: 1.15;
+  list-style: none;
+}
+
+.cad-prose-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.cad-prose-accordion summary:focus-visible {
+  outline: 2px dashed var(--_accordion-ink);
+  outline-offset: -4px;
+}
+
+.cad-prose-accordion-tape {
+  position: absolute;
+  top: -0.1rem;
+  left: 1.1rem;
+  width: 3.2rem;
+  height: 0.45rem;
+  background: color-mix(in srgb, var(--_accordion-bg) 72%, transparent);
+  transform: rotate(-0.25deg);
+}
+
+.cad-prose-accordion-indicator {
+  display: inline-grid;
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-sm);
+  line-height: 1;
+  transition: transform 150ms var(--cad-transition-smooth);
+}
+
+.cad-prose-accordion[open] .cad-prose-accordion-indicator {
+  transform: rotate(90deg);
+}
+
+.cad-prose-accordion::details-content {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    height 180ms var(--cad-transition-smooth),
+    opacity 160ms ease,
+    content-visibility 180ms allow-discrete;
+}
+
+.cad-prose-accordion[open]::details-content {
+  height: auto;
+  opacity: 1;
+}
+
+.cad-prose-accordion-content {
+  padding: 0.15rem 1rem 1rem;
+  color: var(--cad-ink);
+  border-top: 1px dashed
+    color-mix(in srgb, var(--_accordion-ink) 24%, transparent);
+  font-family: var(--cad-font-book);
+  line-height: 1.65;
+}
+
+.cad-prose-accordion-content > :first-child {
+  margin-top: 0.9rem;
+}
+
+.cad-prose-accordion-content > :last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cad-prose-accordion::details-content,
+  .cad-prose-accordion-indicator {
+    transition: none;
+  }
+}
+
+/* blockquote */
+.cad-prose-blockquote {
+  --_quote-mark: var(--cad-post-it-blue-bg);
+  --_quote-ink: var(--cad-post-it-blue-ink);
+
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 1.35rem 1.45rem 1.15rem;
+  color: var(--cad-ink);
+  background: color-mix(in srgb, var(--_quote-mark) 12%, var(--cad-surface));
+  border-left: 0.35rem solid
+    color-mix(in srgb, var(--_quote-ink) 55%, transparent);
+  border-radius: 0.35rem 0.85rem 0.7rem 0.35rem;
+}
+
+.cad-prose-blockquote[data-tone='coral'] {
+  --_quote-mark: var(--cad-post-it-coral-bg);
+  --_quote-ink: var(--cad-post-it-coral-ink);
+}
+
+.cad-prose-blockquote[data-tone='lemon'] {
+  --_quote-mark: var(--cad-post-it-lemon-bg);
+  --_quote-ink: var(--cad-post-it-lemon-ink);
+}
+
+.cad-prose-blockquote[data-tone='mint'] {
+  --_quote-mark: var(--cad-post-it-mint-bg);
+  --_quote-ink: var(--cad-post-it-mint-ink);
+}
+
+.cad-prose-blockquote[data-tone='violet'] {
+  --_quote-mark: var(--cad-sticker-violet-bg);
+  --_quote-ink: var(--cad-sticker-violet-ink);
+}
+
+figure.cad-prose-blockquote > blockquote {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+figure.cad-prose-blockquote > blockquote::before {
+  content: none;
+}
+
+.cad-prose-blockquote-mark {
+  color: var(--_quote-ink);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-2xl);
+  font-weight: var(--cad-hand-weight-strong);
+  line-height: 0.72;
+  transform: rotate(-2deg);
+}
+
+figure.cad-prose-blockquote > blockquote > div {
+  font-family: var(--cad-font-book);
+  font-size: 1.06rem;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+figure.cad-prose-blockquote > blockquote > div > :first-child {
+  margin-top: 0;
+}
+
+figure.cad-prose-blockquote > blockquote > div > :last-child {
+  margin-bottom: 0;
+}
+
+.cad-prose-blockquote figcaption {
+  padding-left: 3rem;
+  color: var(--cad-ink-muted);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-sm);
+}
+
+.cad-prose-blockquote figcaption a {
+  color: var(--cad-link);
+  text-decoration: underline;
+  text-underline-offset: 0.18rem;
+}
+
+.cad-prose-blockquote figcaption a:focus-visible {
+  outline: 2px dashed var(--cad-link);
+  outline-offset: 3px;
+}
+
+/* code-block */
+.cad-prose-code {
+  --_code-ink: var(--cad-post-it-blue-ink);
+  --_code-bg: color-mix(in srgb, var(--cad-surface-strong) 82%, var(--cad-bg));
+
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--_code-bg);
+  border: 1.5px dashed color-mix(in srgb, var(--_code-ink) 32%, transparent);
+  border-radius: 0.7rem 0.9rem 0.7rem 0.85rem;
+  box-shadow: 0 0.55rem 1.1rem rgb(var(--cad-shadow-rgb) / 14%);
+}
+
+.cad-prose-code[data-tone='coral'] {
+  --_code-ink: var(--cad-post-it-coral-ink);
+}
+
+.cad-prose-code[data-tone='mint'] {
+  --_code-ink: var(--cad-post-it-mint-ink);
+}
+
+.cad-prose-code[data-tone='lemon'] {
+  --_code-ink: var(--cad-post-it-lemon-ink);
+}
+
+.cad-prose-code[data-tone='pink'] {
+  --_code-ink: var(--cad-post-it-pink-ink);
+}
+
+.cad-prose-code[data-tone='violet'] {
+  --_code-ink: var(--cad-sticker-violet-ink);
+}
+
+.cad-prose-code-ribbon {
+  position: absolute;
+  top: -0.55rem;
+  right: 1.2rem;
+  z-index: 2;
+  display: inline-grid;
+  place-items: center;
+  line-height: 0;
+}
+
+.cad-prose-code-ribbon-text {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--_code-ink);
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-sm);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  transform: rotate(-1.2deg);
+}
+
+.cad-prose-code-filename {
+  font-family: var(--cad-font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+figure.cad-prose-code > .cad-prose-code-pre {
+  margin: 0;
+  padding: 1.1rem 1.25rem 1.15rem;
+  overflow-x: auto;
+  color: color-mix(in srgb, var(--cad-ink) 92%, transparent);
+  background: transparent !important;
+  font-family: var(--cad-font-mono);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+figure.cad-prose-code > .cad-prose-code-pre > .cad-prose-code-code {
+  display: grid;
+  gap: 0;
+  color: inherit;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+figure.cad-prose-code > .astro-code,
+figure.cad-prose-code > .astro-code span {
+  /* stylelint-disable-next-line custom-property-pattern -- Shiki owns this runtime variable. */
+  color: var(--shiki-light);
+}
+
+html[data-theme='dark'] figure.cad-prose-code > .astro-code,
+html[data-theme='dark'] figure.cad-prose-code > .astro-code span {
+  /* stylelint-disable-next-line custom-property-pattern -- Shiki owns this runtime variable. */
+  color: var(--shiki-dark);
+}
+
+.cad-prose-code-line {
+  display: block;
+  white-space: pre;
+}
+
+.cad-prose-code-pre[data-line-numbers='on'] .cad-prose-code-line {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.cad-prose-code-ln {
+  color: color-mix(in srgb, var(--cad-ink-muted) 78%, transparent);
+  font-size: 0.78rem;
+  text-align: right;
+  user-select: none;
+}
+
+.cad-prose-code-line-text {
+  display: inline;
+  white-space: pre;
+}
+
+/* highlight */
+.cad-prose-highlight {
+  --_highlight: var(--cad-post-it-lemon-bg);
+
+  box-decoration-break: clone;
+  padding-inline: 0.08em;
+  color: inherit;
+  background-color: transparent;
+}
+
+.cad-prose-highlight[data-tone='pink'] {
+  --_highlight: var(--cad-post-it-pink-bg);
+}
+
+.cad-prose-highlight[data-tone='green'] {
+  --_highlight: var(--cad-post-it-mint-bg);
+}
+
+.cad-prose-highlight[data-tone='blue'] {
+  --_highlight: var(--cad-post-it-blue-bg);
+}
+
+.cad-prose-highlight[data-tone='orange'] {
+  --_highlight: var(--cad-post-it-coral-bg);
+}
+
+.cad-prose-highlight[data-tone='violet'] {
+  --_highlight: var(--cad-sticker-violet-bg);
+}
+
+.cad-prose-highlight[data-variant] {
+  padding-inline: 0.08em;
+}
+
+.cad-prose-highlight[data-variant='marker'] {
+  background-image: linear-gradient(
+    177deg,
+    transparent 15%,
+    var(--_highlight) 16%,
+    var(--_highlight) 88%,
+    transparent 89%
+  );
+}
+
+.cad-prose-highlight[data-variant='underline'] {
+  background-image: linear-gradient(
+    180deg,
+    transparent 67%,
+    var(--_highlight) 68%,
+    var(--_highlight) 93%,
+    transparent 94%
+  );
+}
+
+.cad-prose-highlight[data-variant='double'] {
+  background-image:
+    linear-gradient(
+      178deg,
+      transparent 46%,
+      var(--_highlight) 47%,
+      var(--_highlight) 64%,
+      transparent 65%
+    ),
+    linear-gradient(
+      181deg,
+      transparent 73%,
+      var(--_highlight) 74%,
+      var(--_highlight) 91%,
+      transparent 92%
+    );
+}
+
+/* post-it */
+.cad-prose-note {
+  --_note-bg: var(--cad-post-it-lemon-bg);
+  --_note-ink: var(--cad-post-it-lemon-ink);
+
+  position: relative;
+  box-sizing: border-box;
+  width: min(100%, 18rem);
+  min-height: 9rem;
+  padding: 1.4rem 1.25rem 1.2rem;
+  color: var(--_note-ink);
+  background: var(--_note-bg);
+  font-family: var(--cad-font-ui);
+  box-shadow:
+    0 0.7rem 1.4rem rgb(var(--cad-shadow-rgb) / 14%),
+    inset 0 -0.35rem 0.7rem color-mix(in srgb, var(--_note-ink) 8%, transparent);
+}
+
+.cad-prose-note[data-tone='pink'] {
+  --_note-bg: var(--cad-post-it-pink-bg);
+  --_note-ink: var(--cad-post-it-pink-ink);
+}
+
+.cad-prose-note[data-tone='mint'] {
+  --_note-bg: var(--cad-post-it-mint-bg);
+  --_note-ink: var(--cad-post-it-mint-ink);
+}
+
+.cad-prose-note[data-tone='blue'] {
+  --_note-bg: var(--cad-post-it-blue-bg);
+  --_note-ink: var(--cad-post-it-blue-ink);
+}
+
+.cad-prose-note[data-tone='coral'] {
+  --_note-bg: var(--cad-post-it-coral-bg);
+  --_note-ink: var(--cad-post-it-coral-ink);
+}
+
+.cad-prose-note[data-tilt='left'],
+.cad-prose-note:not([data-tilt]) {
+  transform: rotate(-0.35deg);
+}
+
+.cad-prose-note[data-tilt='right'] {
+  transform: rotate(0.4deg);
+}
+
+.cad-prose-note-tape,
+.cad-prose-note:not(:has(> .cad-prose-note-tape))::before {
+  position: absolute;
+  top: -0.55rem;
+  left: 50%;
+  width: 4.6rem;
+  height: 1.05rem;
+  background: var(--cad-tape-paper-bg);
+  content: '';
+  transform: translateX(-50%);
+}
+
+.cad-prose-note-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.55rem;
+  color: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.cad-prose-note-content,
+.cad-prose-note > p:not(.cad-prose-note-label) {
+  color: inherit;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.cad-prose-note-content > :first-child,
+.cad-prose-note > p:first-of-type:not(.cad-prose-note-label) {
+  margin-top: 0;
+}
+
+.cad-prose-note-content > :last-child,
+.cad-prose-note > p:last-child {
+  margin-bottom: 0;
+}
+
+/* table */
+.cad-prose-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--cad-line);
+  border-radius: 0.7rem 0.9rem 0.65rem 0.85rem;
+}
+
+.cad-prose-table-wrap > .cad-prose-table {
+  display: table;
+  width: 100%;
+  min-width: 34rem;
+  margin: 0;
+  overflow: visible;
+  overscroll-behavior-inline: auto;
+  border: 0;
+  border-radius: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: transparent;
+  color: var(--cad-ink);
+  font-family: var(--cad-font-book);
+}
+
+.cad-prose-table-wrap > .cad-prose-table caption {
+  padding: 0.9rem 1rem 0.6rem;
+  color: var(--cad-ink-muted);
+  text-align: left;
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-sm);
+  font-weight: var(--cad-hand-weight-strong);
+}
+
+.cad-prose-table-wrap > .cad-prose-table th,
+.cad-prose-table-wrap > .cad-prose-table td {
+  padding: 0.8rem 0.95rem;
+  text-align: left;
+  border-bottom: 1px dashed var(--cad-line-strong);
+  vertical-align: top;
+}
+
+.cad-prose-table-wrap > .cad-prose-table th {
+  color: var(--cad-ink);
+  background: color-mix(
+    in srgb,
+    var(--cad-post-it-blue-bg) 24%,
+    var(--cad-surface)
+  );
+  font-family: var(--cad-font-hand);
+  font-size: var(--cad-hand-sm);
+  font-weight: var(--cad-hand-weight-strong);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cad-prose-table-wrap[data-zebra='true']
+  > .cad-prose-table
+  tbody
+  tr:nth-child(even) {
+  background: color-mix(in srgb, var(--cad-post-it-mint-bg) 12%, transparent);
+}
+
+.cad-prose-table-wrap > .cad-prose-table tbody tr:first-child td,
+.cad-prose-table-wrap > .cad-prose-table tbody tr + tr td {
+  border-top: 0;
+}
+
+.cad-prose-table-wrap > .cad-prose-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Prose composition */
+.cad-prose {
+  margin-inline: 0;
+  max-width: none;
+}
+
+.cad-prose > :first-child {
+  margin-top: 0;
+}
+
+.cad-prose > h2 {
+  position: relative;
+  margin-top: 3.8rem;
+  margin-bottom: 0.85rem;
+  color: var(--cad-ink);
+  font-family: var(--cad-font-book);
+  font-size: clamp(1.75rem, 2.6vw, 2.15rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.cad-prose > h2::before {
+  position: absolute;
+  top: -0.75rem;
+  left: 0.05rem;
+  width: 3.6rem;
+  height: 0.42rem;
+  background: color-mix(in srgb, var(--cad-post-it-blue-bg) 72%, transparent);
+  border-radius: 0.12rem;
+  content: '';
+  transform: rotate(-0.25deg);
+}
+
+.cad-prose > h3 {
+  color: var(--cad-ink);
+  font-family: var(--cad-font-book);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cad-prose .cad-prose-accordion {
+  margin-block: 0.75rem;
+}
+
+.cad-prose .cad-prose-blockquote,
+.cad-prose .cad-prose-code,
+.cad-prose .cad-prose-table-wrap {
+  margin-block: 1.75rem 2rem;
+}
+
+.cad-prose .cad-prose-note {
+  margin: 2.25rem 0 2.75rem auto;
+}
+
+@media (width <= 40rem) {
+  .cad-prose .cad-prose-note {
+    width: calc(100% - 0.75rem);
+    margin-right: auto;
+  }
+}

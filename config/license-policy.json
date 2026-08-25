@@ -1,5 +1,9 @@
 {
-  "productionAllowed": ["BSD-3-Clause", "MIT"],
+  "productionAllowed": [
+    "BSD-3-Clause",
+    "MIT",
+    "Standard 'no charge' license: https://gsap.com/standard-license."
+  ],
   "developmentAllowed": [
     "Apache-2.0",
     "BSD-2-Clause",
@@ -11,6 +15,7 @@
     "MIT",
     "MIT-0",
     "MPL-2.0",
-    "Python-2.0"
+    "Python-2.0",
+    "Standard 'no charge' license: https://gsap.com/standard-license."
   ]
 }

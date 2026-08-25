@@ -76,6 +76,12 @@ export class CadModal extends LitElement {
       backdrop-filter: blur(3px);
     }
 
+    .base[open]::backdrop {
+      animation: cad-modal-backdrop-enter
+        var(--cad-motion-duration-enter, var(--cad-duration-slow, 420ms))
+        var(--cad-motion-ease-enter, var(--cad-transition-smooth, ease-out));
+    }
+
     .paper {
       position: relative;
       display: grid;
@@ -87,6 +93,13 @@ export class CadModal extends LitElement {
       border-radius: 0.9rem 1.15rem 0.85rem 1rem;
       box-shadow: 0 1.2rem 3rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.28);
       transform: rotate(-0.25deg);
+    }
+
+    .base[open] .paper {
+      animation: cad-modal-paper-enter
+        var(--cad-motion-duration-enter, var(--cad-duration-slow, 420ms))
+        var(--cad-motion-ease-enter, var(--cad-transition-smooth, ease-out));
+      transform-origin: center 42%;
     }
 
     .tape {
@@ -141,10 +154,22 @@ export class CadModal extends LitElement {
       background: transparent;
       border: 0;
       border-radius: 50%;
+      transition:
+        background-color
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
     }
 
     .close:hover {
       background: color-mix(in srgb, currentColor 10%, transparent);
+      transform: rotate(5deg) scale(1.05);
+    }
+
+    .close:active {
+      transform: rotate(-3deg) scale(0.94);
     }
 
     .close:focus-visible {
@@ -186,11 +211,47 @@ export class CadModal extends LitElement {
       display: none;
     }
 
+    @keyframes cad-modal-paper-enter {
+      from {
+        opacity: 0;
+        transform: translateY(var(--cad-motion-distance-md, 0.85rem))
+          rotate(-1.1deg) scale(0.965);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) rotate(-0.25deg) scale(1);
+      }
+    }
+
+    @keyframes cad-modal-backdrop-enter {
+      from {
+        background: transparent;
+        backdrop-filter: blur(0);
+      }
+
+      to {
+        background: rgb(var(--cad-shadow-rgb, 0 0 0) / 0.48);
+        backdrop-filter: blur(3px);
+      }
+    }
+
     @media (width <= 36rem) {
       .header,
       .body,
       .footer {
         padding-inline: 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .base[open] .paper,
+      .base[open]::backdrop {
+        animation: none;
+      }
+
+      .close {
+        transition: none;
       }
     }
 

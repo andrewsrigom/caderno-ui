@@ -12,3 +12,4 @@ new record instead of silently rewritten after a decision changes.
 | [0004](./0004-framework-adapters.md)           | Framework adapters stay thin and justified        |
 | [0005](./0005-ssr-and-hydration.md)            | Prefer resilient light DOM before Lit hydration   |
 | [0006](./0006-optional-heavy-entrypoints.md)   | Keep dependency-heavy features in opt-in subpaths |
+| [0007](./0007-motion-system-boundary.md)       | Make motion an opt-in system capability           |

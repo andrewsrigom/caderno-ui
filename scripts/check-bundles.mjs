@@ -18,6 +18,9 @@ const elementsPackage = JSON.parse(
 const reactPackage = JSON.parse(
   await readFile(join(root, 'packages/react/package.json'), 'utf8'),
 )
+const motionPackage = JSON.parse(
+  await readFile(join(root, 'packages/motion/package.json'), 'utf8'),
+)
 
 function publicEntrypoints(packageJson, packageDirectory, prefix) {
   return Object.fromEntries(
@@ -36,9 +39,11 @@ function publicEntrypoints(packageJson, packageDirectory, prefix) {
 
 const entrypoints = {
   ...publicEntrypoints(elementsPackage, 'elements', 'elements'),
+  ...publicEntrypoints(motionPackage, 'motion', 'motion'),
   ...publicEntrypoints(reactPackage, 'react', 'react'),
   'elements-root': './packages/elements/dist/index.js',
   'icons-root': './packages/icons/dist/index.js',
+  'motion-root': './packages/motion/dist/index.js',
   'react-root': './packages/react/dist/index.js',
 }
 
@@ -54,6 +59,7 @@ const isolationRules = {
     '/tabs/cad-tabs.',
   ],
   'elements-root': ['/chart/cad-chart.', '/roughjs/'],
+  'motion-root': ['/ScrollTrigger.'],
   'react-alert': ['/react/dist/bookmark.', '/react/dist/tabs.'],
   'react-bookmark': ['/react/dist/alert.', '/react/dist/tabs.'],
   'react-icon': [

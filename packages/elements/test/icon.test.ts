@@ -37,4 +37,15 @@ describe('cad-icon', () => {
       'http://www.w3.org/2000/svg',
     )
   })
+
+  it('stays decorative when a framework assigns an undefined label', async () => {
+    const icon = document.createElement('cad-icon')
+    icon.label = undefined as unknown as string
+    document.body.append(icon)
+    await icon.updateComplete
+
+    expect(
+      icon.shadowRoot?.querySelector('svg')?.getAttribute('aria-hidden'),
+    ).toBe('true')
+  })
 })

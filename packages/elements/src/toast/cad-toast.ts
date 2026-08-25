@@ -90,8 +90,9 @@ export class CadToast extends LitElement {
       border: 1px solid color-mix(in srgb, var(--_toast-ink) 34%, transparent);
       border-radius: 0.45rem 0.65rem 0.45rem 0.6rem;
       box-shadow: 0 0.8rem 1.8rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.18);
-      animation: enter var(--cad-duration-normal, 220ms)
-        var(--cad-transition-smooth, ease) both;
+      animation: enter
+        var(--cad-motion-duration-enter, var(--cad-duration-normal, 220ms))
+        var(--cad-motion-ease-enter, var(--cad-transition-smooth, ease)) both;
     }
 
     .tape {

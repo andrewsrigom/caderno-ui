@@ -62,11 +62,14 @@ export class CadTooltip extends LitElement {
       opacity: 0;
       pointer-events: none;
       transition:
-        opacity var(--cad-duration-fast, 120ms)
-          var(--cad-transition-smooth, ease),
-        transform var(--cad-duration-fast, 120ms)
-          var(--cad-transition-smooth, ease),
-        visibility 0s linear var(--cad-duration-fast, 120ms);
+        opacity
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 120ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
+        transform
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 120ms))
+          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
+        visibility 0s linear
+          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 120ms));
     }
 
     :host([open]) .bubble {

@@ -12,14 +12,15 @@ Framework adapters must stay thin:
 
 ## Package boundaries
 
-| Package      | Owns                                                | Does not own               |
-| ------------ | --------------------------------------------------- | -------------------------- |
-| `tokens`     | Standalone `--cad-*` theme defaults                 | Component rendering        |
-| `icons`      | Typed doodle data and names                         | Framework components       |
-| `elements`   | Semantics, keyboard behavior, state, events, styles | Application business rules |
-| `react`      | React event/property ergonomics                     | Component behavior         |
-| `astro`      | Astro props and progressive markup                  | Component behavior         |
-| `laboratory` | Development examples and contract inspection        | Published API              |
+| Package      | Owns                                                | Does not own                |
+| ------------ | --------------------------------------------------- | --------------------------- |
+| `tokens`     | Standalone `--cad-*` theme and motion defaults      | Component rendering         |
+| `icons`      | Typed doodle data and names                         | Framework components        |
+| `elements`   | Semantics, keyboard behavior, state, events, styles | Application business rules  |
+| `motion`     | Accessible GSAP presets and scoped cleanup          | Product-specific page flows |
+| `react`      | React event/property ergonomics                     | Component behavior          |
+| `astro`      | Astro props and progressive markup                  | Component behavior          |
+| `laboratory` | Development examples and contract inspection        | Published API               |
 
 ## Public contract
 
@@ -30,6 +31,7 @@ Framework adapters must stay thin:
 - Visual customization uses `--cad-*` properties and documented CSS parts.
 - Individual entry points register only the elements a consumer imports.
 - Features with material dependency cost, such as charts, remain optional subpaths and are excluded from package root entry points.
+- GSAP choreography is opt-in through `@caderno-ui/motion`; ScrollTrigger stays isolated in its `/scroll` subpath.
 - Meaningful content remains readable before upgrade and without JavaScript.
 
 ## Extensibility

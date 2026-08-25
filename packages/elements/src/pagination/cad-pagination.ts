@@ -20,6 +20,7 @@ type CadPaginationItem = number | 'ellipsis'
 export class CadPagination extends LitElement {
   static override properties = {
     baseHref: { attribute: 'base-href', type: String },
+    hrefs: { type: Array },
     label: { type: String },
     nextLabel: { attribute: 'next-label', type: String },
     page: { reflect: true, type: Number },
@@ -97,6 +98,7 @@ export class CadPagination extends LitElement {
   `
 
   declare baseHref: string
+  declare hrefs: string[]
   declare label: string
   declare nextLabel: string
   declare page: number
@@ -108,6 +110,7 @@ export class CadPagination extends LitElement {
   constructor() {
     super()
     this.baseHref = '/'
+    this.hrefs = []
     this.label = 'Pagination'
     this.nextLabel = 'Next page'
     this.page = 1
@@ -170,6 +173,8 @@ export class CadPagination extends LitElement {
   }
 
   private pageHref(target: number): string {
+    const explicitHref = this.hrefs[target - 1]
+    if (explicitHref) return explicitHref
     const url = new URL(this.baseHref, 'https://caderno-ui.local')
     if (target <= 1) url.searchParams.delete(this.pageParam)
     else url.searchParams.set(this.pageParam, String(target))

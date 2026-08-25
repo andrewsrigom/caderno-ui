@@ -1,6 +1,7 @@
 import '@caderno-ui/elements/alert'
 import '@caderno-ui/tokens/notebook.css'
 
+import { createMotionScope } from '@caderno-ui/motion'
 import { CadAlert } from '@caderno-ui/react/alert'
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -22,6 +23,10 @@ if (!customElements.get('cad-chart') || !customElements.get('cad-chart-item')) {
 
 const container = document.querySelector('#react-root')
 if (!container) throw new Error('React fixture root is missing.')
+
+const motion = createMotionScope(container)
+motion.enter(container, { duration: 0 })
+motion.revert()
 
 createRoot(container).render(
   createElement('main', null, [

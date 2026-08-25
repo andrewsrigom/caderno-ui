@@ -7,6 +7,7 @@ import {
 
 export {
   CadAccordionItem,
+  type CadAccordionAnimation,
   type CadAccordionToggleDetail,
   type CadAccordionToggleEvent,
   type CadAccordionTone,

@@ -31,9 +31,22 @@ const usage = `<cad-chart heading="Notes reviewed" type="bar" value-label="Notes
 
   <DemoFrame
     title="Bar chart"
-    description="Best for comparing discrete values."
+    description="Draws when it enters the viewport and redraws after data changes."
   >
-    <cad-chart heading="Notes reviewed" type="bar" value-label="Notes">
+    <div class="chart-controls">
+      <cad-button data-chart-replay size="sm" variant="secondary">
+        Replay drawing
+      </cad-button>
+      <cad-button data-chart-update size="sm" tone="lemon">
+        Update values
+      </cad-button>
+    </div>
+    <cad-chart
+      data-live-chart
+      heading="Notes reviewed"
+      type="bar"
+      value-label="Notes"
+    >
       <cad-chart-item label="Mon" value="4">Mon: 4</cad-chart-item>
       <cad-chart-item label="Tue" value="7">Tue: 7</cad-chart-item>
       <cad-chart-item label="Wed" value="5">Wed: 5</cad-chart-item>
@@ -84,6 +97,16 @@ const usage = `<cad-chart heading="Notes reviewed" type="bar" value-label="Notes
     </p>
   </section>
 
+  <section class="content-section" aria-labelledby="motion-title">
+    <h2 id="motion-title">Motion behavior</h2>
+    <p>
+      Marks draw with a short stagger when the chart enters the viewport and
+      when its declarative data changes. Call <code>replay()</code> for a user-requested
+      replay, or set <code>animation="none"</code> when motion would distract from
+      the task. Reduced-motion preferences always win.
+    </p>
+  </section>
+
   <ApiReference tagName="cad-chart" />
   <ApiReference tagName="cad-chart-item" />
 
@@ -112,9 +135,35 @@ const usage = `<cad-chart heading="Notes reviewed" type="bar" value-label="Notes
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
       gap: 1rem;
     }
+
+    .chart-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
   </style>
 
   <script>
+    import '@caderno-ui/elements/button'
     import '@caderno-ui/elements/chart'
+
+    const liveChart =
+      document.querySelector<HTMLElementTagNameMap['cad-chart']>(
+        '[data-live-chart]',
+      )
+    document
+      .querySelector('[data-chart-replay]')
+      ?.addEventListener('click', () => {
+        liveChart?.replay()
+      })
+    document
+      .querySelector('[data-chart-update]')
+      ?.addEventListener('click', () => {
+        const values = [6, 9, 4, 8, 7]
+        liveChart?.querySelectorAll('cad-chart-item').forEach((item, index) => {
+          item.value = values[index] ?? item.value
+        })
+      })
   </script>
 </DocsLayout>

@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit'
+import { css, html, LitElement, type PropertyValues } from 'lit'
 
 import { CadBreadcrumbItem } from './cad-breadcrumb-item.js'
 
@@ -12,7 +12,10 @@ export { CadBreadcrumbItem } from './cad-breadcrumb-item.js'
  * @csspart list - Breadcrumb list.
  */
 export class CadBreadcrumb extends LitElement {
-  static override properties = { label: { type: String } }
+  static override properties = {
+    label: { type: String },
+    variant: { reflect: true, type: String },
+  }
 
   static override styles = css`
     :host {
@@ -29,13 +32,21 @@ export class CadBreadcrumb extends LitElement {
       margin: 0;
       list-style: none;
     }
+
+    :host([variant='compact']) .list {
+      flex-wrap: nowrap;
+      gap: 0.45rem;
+      overflow: hidden;
+    }
   `
 
   declare label: string
+  declare variant: 'compact' | 'default'
 
   constructor() {
     super()
     this.label = 'Breadcrumb'
+    this.variant = 'default'
   }
 
   override render() {
@@ -46,9 +57,19 @@ export class CadBreadcrumb extends LitElement {
     </nav>`
   }
 
+  protected override updated(changedProperties: PropertyValues<this>): void {
+    if (changedProperties.has('variant')) {
+      this.syncItems(this.renderRoot.querySelector('slot'))
+    }
+  }
+
   private handleSlotChange(event: Event): void {
     const slot = event.currentTarget
-    if (!(slot instanceof HTMLSlotElement)) return
+    this.syncItems(slot instanceof HTMLSlotElement ? slot : null)
+  }
+
+  private syncItems(slot: HTMLSlotElement | null): void {
+    if (!slot) return
     const items = slot
       .assignedElements({ flatten: true })
       .filter(
@@ -57,6 +78,7 @@ export class CadBreadcrumb extends LitElement {
     const hasCurrent = items.some((item) => item.current)
     items.forEach((item, index) => {
       item.first = index === 0
+      item.variant = this.variant
       if (!hasCurrent) item.current = index === items.length - 1
     })
   }

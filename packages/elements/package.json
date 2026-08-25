@@ -82,6 +82,10 @@
       "types": "./dist/progress/cad-progress.d.ts",
       "import": "./dist/progress/cad-progress.js"
     },
+    "./prose": {
+      "types": "./dist/prose/enhance-prose.d.ts",
+      "import": "./dist/prose/enhance-prose.js"
+    },
     "./tabs": {
       "types": "./dist/tabs/index.d.ts",
       "import": "./dist/tabs/index.js"
@@ -91,6 +95,7 @@
       "import": "./dist/table/cad-table.js"
     },
     "./fallback.css": "./src/styles/fallback.css",
+    "./prose.css": "./src/styles/prose.css",
     "./input": {
       "types": "./dist/input/cad-input.d.ts",
       "import": "./dist/input/cad-input.js"
@@ -110,6 +115,10 @@
     "./accordion": {
       "types": "./dist/accordion/cad-accordion.d.ts",
       "import": "./dist/accordion/cad-accordion.js"
+    },
+    "./skeleton": {
+      "types": "./dist/skeleton/cad-skeleton.d.ts",
+      "import": "./dist/skeleton/cad-skeleton.js"
     },
     "./spinner": {
       "types": "./dist/spinner/cad-spinner.d.ts",

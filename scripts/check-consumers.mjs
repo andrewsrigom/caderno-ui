@@ -30,7 +30,7 @@ const packageTarball = (name) => {
 }
 
 const packedDependencies = Object.fromEntries(
-  ['astro', 'elements', 'icons', 'react', 'tokens'].map((name) => [
+  ['astro', 'elements', 'icons', 'motion', 'react', 'tokens'].map((name) => [
     `@caderno-ui/${name}`,
     packageTarball(name),
   ]),

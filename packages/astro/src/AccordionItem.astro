@@ -1,9 +1,13 @@
 ---
 import '@caderno-ui/elements/fallback.css'
 
-import type { CadAccordionTone } from '@caderno-ui/elements/accordion'
+import type {
+  CadAccordionAnimation,
+  CadAccordionTone,
+} from '@caderno-ui/elements/accordion'
 
 type Props = {
+  animation?: CadAccordionAnimation
   class?: string
   disabled?: boolean
   open?: boolean
@@ -12,6 +16,7 @@ type Props = {
 }
 
 const {
+  animation = 'collapse',
   class: className,
   disabled = false,
   open = false,
@@ -21,6 +26,7 @@ const {
 ---
 
 <cad-accordion-item
+  animation={animation}
   class={className}
   disabled={disabled}
   heading={title}

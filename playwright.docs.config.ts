@@ -21,7 +21,7 @@ export default defineConfig({
   ],
   webServer: {
     command:
-      'pnpm --filter @caderno-ui/docs exec astro preview --host 127.0.0.1 --port 5187',
+      'pnpm --filter @caderno-ui/docs exec node scripts/preview-test.mjs',
     url: 'http://127.0.0.1:5187/caderno-ui/',
     reuseExistingServer: false,
   },

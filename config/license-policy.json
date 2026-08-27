@@ -1,4 +1,20 @@
 {
+  "reviewedPackages": {
+    "tslib": "0BSD",
+    "caniuse-lite": "CC-BY-4.0",
+    "@fontsource/caveat": "OFL-1.1",
+    "@img/sharp-libvips-linux-x64": "LGPL-3.0-or-later",
+    "@img/sharp-linux-x64": "Apache-2.0",
+    "@playwright/test": "Apache-2.0",
+    "@swc/helpers": "Apache-2.0",
+    "baseline-browser-mapping": "Apache-2.0",
+    "detect-libc": "Apache-2.0",
+    "playwright": "Apache-2.0",
+    "playwright-core": "Apache-2.0",
+    "sharp": "Apache-2.0",
+    "picocolors": "ISC",
+    "semver": "ISC"
+  },
   "productionAllowed": [
     "BSD-3-Clause",
     "MIT",

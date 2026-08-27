@@ -346,6 +346,7 @@
     "src/styles/navigation.css",
     "src/styles/prose.css",
     "src/styles/scrollbar.css",
+    "src/styles/typography.css",
     "src/switch/cad-switch.ts",
     "src/table/cad-table.ts",
     "src/tabs/cad-tab.ts",

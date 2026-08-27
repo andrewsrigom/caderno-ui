@@ -19,7 +19,13 @@ function inventory(production) {
 
 function validate(scope, licenses, allowed) {
   const encountered = Object.keys(licenses).sort()
-  const unexpected = encountered.filter((license) => !allowed.includes(license))
+  const unexpected = encountered.filter(
+    (license) =>
+      !allowed.includes(license) &&
+      !licenses[license].every(
+        ({ name }) => policy.reviewedPackages?.[name] === license,
+      ),
+  )
   if (unexpected.length > 0) {
     throw new Error(
       `${scope} dependencies introduced unreviewed licenses: ${unexpected.join(', ')}`,

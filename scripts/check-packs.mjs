@@ -90,6 +90,19 @@ for (const packageDirectory of packageDirectories) {
       if (!files.has(archivePath)) {
         errors.push(`${packed.name}: export target does not exist: ${target}`)
       }
+      if (
+        packageDirectory === 'react' &&
+        target.endsWith('.js') &&
+        !target.endsWith('/index.js') &&
+        files.has(archivePath)
+      ) {
+        const source = await readFile(
+          join(extractionDirectory, archivePath),
+          'utf8',
+        )
+        if (!/^['"]use client['"];?/.test(source.trimStart()))
+          errors.push(`${packed.name}: ${target} lost its client boundary`)
+      }
     }
 
     for (const mapPath of [...files].filter((path) => path.endsWith('.map'))) {
@@ -135,6 +148,7 @@ for (const packageDirectory of packageDirectories) {
               './navigation.css',
               './prose.css',
               './scrollbar.css',
+              './typography.css',
             ]
           : []),
       ])

@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process'
-import { cp, mkdir, readdir, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdtemp, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
@@ -10,11 +11,13 @@ const reactVersion = process.env.REACT_VERSION ?? '19.2.8'
 const astroVersion = process.env.ASTRO_VERSION ?? '7.2.4'
 const nodeMajor = process.versions.node.split('.')[0]
 const reactMajor = reactVersion.split('.')[0]
-const artifact = join(
-  root,
-  '.artifacts',
-  `consumer-node${nodeMajor}-react${reactMajor}-astro${astroVersion.split('.')[0]}`,
+const artifact = await mkdtemp(
+  join(
+    tmpdir(),
+    `caderno-consumer-node${nodeMajor}-react${reactMajor}-astro${astroVersion.split('.')[0]}-`,
+  ),
 )
+console.log(`Isolated consumer: ${artifact}`)
 
 const run = (command, args) =>
   execFileSync(command, args, { cwd: artifact, stdio: 'inherit' })
@@ -36,8 +39,6 @@ const packedDependencies = Object.fromEntries(
   ]),
 )
 
-await rm(artifact, { force: true, recursive: true })
-await mkdir(artifact, { recursive: true })
 for (const directory of ['astro', 'node', 'react', 'typescript', 'vite']) {
   await cp(join(fixtures, directory), join(artifact, directory), {
     recursive: true,

@@ -43,6 +43,8 @@ run('pnpm', ['test:consumers'], {
   ASTRO_VERSION: '5.18.2',
   REACT_VERSION: '18.3.1',
 })
+run('pnpm', ['test:frameworks'])
+run('pnpm', ['test:frameworks'], { REACT_VERSION: '18.3.1' })
 
 const packsDirectory = path.join(root, '.artifacts/packs')
 const packedFiles = (await readdir(packsDirectory))

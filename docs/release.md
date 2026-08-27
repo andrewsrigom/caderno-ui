@@ -16,6 +16,29 @@ tests and packed consumer checks for React 18 / Astro 5 / TypeScript 5 and
 React 19 / Astro 7 / TypeScript 6. Compatibility failures stop the release;
 they must not rely only on the separate CI workflow.
 
+The gate also runs React 18/19 browser consumers and Next.js 16 static/SSR
+consumers, plus Vue 3 and Svelte 5 property/event/slot checks in Chromium,
+Firefox and WebKit. All consumers install exact tarballs in fresh OS temporary
+directories. Laboratory tests use port 5198, docs use 5187, framework consumers
+use 5192–5194, and the isolated SeniorPath candidate uses 5196.
+
+Before publication, run `node scripts/check-senior-consumer.mjs <checkout>`.
+It copies tracked/non-ignored SeniorPath source, installs the candidate tarballs,
+and exercises the library integration with disposable content. It does not run
+the separate editorial-catalog unit suite against private production data.
+Documentation tests also serve a disposable copy of the build, without taking
+over the developer's Astro preview.
+After publication, update the product's dependencies and remove development
+overrides. Never run fixture generation against the user's active content.
+
+The automated gate does not replace the [manual accessibility checks](accessibility.md).
+Record their results before authorizing publication. A successful dry run is a
+package verification result, not evidence of NVDA or VoiceOver testing.
+
+`pnpm docs:check` includes the Next.js static export under
+`/caderno-ui/examples/react/`. The hosted example must not be described as an
+SSR deployment. The independent `next start` consumer is the SSR evidence.
+
 ## Failure and recovery
 
 npm versions are immutable, so there is no transactional rollback across the

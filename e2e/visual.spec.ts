@@ -11,6 +11,13 @@ test.beforeEach(async ({ browserName, page }) => {
       '*, *::before, *::after { animation: none !important; caret-color: transparent !important; transition: none !important; }',
   })
   await page.evaluate(() => document.fonts.ready)
+  expect(
+    await page.evaluate(() =>
+      [...document.fonts].some(
+        (font) => font.family === 'Caveat' && font.status === 'loaded',
+      ),
+    ),
+  ).toBe(true)
   await page.locator('*').evaluateAll((elements) => {
     for (const element of elements) {
       if (!element.shadowRoot) continue
@@ -33,17 +40,17 @@ for (const theme of ['light', 'dark'] as const) {
     await page.locator('cad-progress:not([value])').evaluateAll((elements) => {
       for (const element of elements) element.setAttribute('value', '0')
     })
-    await expect(
-      page.locator('cad-header[data-component="header"]'),
-    ).toHaveScreenshot(`laboratory-header-${theme}.png`, {
-      animations: 'disabled',
-      scale: 'css',
-    })
+    await expect
+      .soft(page.locator('cad-header[data-component="header"]'))
+      .toHaveScreenshot(`laboratory-header-${theme}.png`, {
+        animations: 'disabled',
+        scale: 'css',
+      })
     const laboratory = page.locator('main')
     await laboratory.evaluate((element) => {
       element.style.height = `${Math.ceil(element.getBoundingClientRect().height)}px`
     })
-    await expect(laboratory).toHaveScreenshot(`laboratory-${theme}.png`, {
+    await expect.soft(laboratory).toHaveScreenshot(`laboratory-${theme}.png`, {
       animations: 'disabled',
       scale: 'css',
     })

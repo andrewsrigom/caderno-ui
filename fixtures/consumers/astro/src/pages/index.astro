@@ -4,6 +4,11 @@ import '@caderno-ui/tokens/notebook.css'
 import Alert from '@caderno-ui/astro/Alert.astro'
 import Badge from '@caderno-ui/astro/Badge.astro'
 import Bookmark from '@caderno-ui/astro/Bookmark.astro'
+import Breadcrumb from '@caderno-ui/astro/Breadcrumb.astro'
+import BreadcrumbItem from '@caderno-ui/astro/BreadcrumbItem.astro'
+import Input from '@caderno-ui/astro/Input.astro'
+import List from '@caderno-ui/astro/List.astro'
+import ListItem from '@caderno-ui/astro/ListItem.astro'
 import Card from '@caderno-ui/astro/Card.astro'
 import Chart from '@caderno-ui/astro/Chart.astro'
 import ChartItem from '@caderno-ui/astro/ChartItem.astro'
@@ -34,6 +39,27 @@ import Tabs from '@caderno-ui/astro/Tabs.astro'
     </Header>
     <Alert title="Packed Astro facade">Static fallback remains readable.</Alert>
     <Badge tone="mint">Ready</Badge>
+    <Breadcrumb items={[{ href: '/', label: 'Home' }, { label: 'Fixture' }]} />
+    <Breadcrumb label="Composed path">
+      <BreadcrumbItem href="/" current={false}>Home</BreadcrumbItem>
+      <BreadcrumbItem current>Fixture</BreadcrumbItem>
+    </Breadcrumb>
+    <List
+      ><ListItem href="/fixture">Not current</ListItem><ListItem current
+        >Current</ListItem
+      ></List
+    >
+    <List label="Compact composition" compact>
+      <ListItem>Static content</ListItem>
+      <ListItem
+        ><a {...{ slot: 'action' }} href="/notes">Open notes</a></ListItem
+      >
+      <ListItem
+        ><button {...{ slot: 'action' }} type="button">Save note</button
+        ></ListItem
+      >
+    </List>
+    <Input label="Valid input" invalid={false} />
     <Bookmark id="packed" label="Save packed fixture" />
     <Note heading="Packed note">Static note content.</Note>
     <button id="packed-popover-trigger" type="button">Open context</button>

@@ -18,7 +18,7 @@ const allowlist = JSON.parse(
 if (!/^pnpm@\d+\.\d+\.\d+$/.test(rootPackage.packageManager ?? '')) {
   errors.push('packageManager must pin an exact pnpm version')
 }
-if (rootPackage.engines?.node !== '>=20') {
+if (rootPackage.engines?.node !== '>=22.12') {
   errors.push('The root Node.js support floor must remain explicit')
 }
 

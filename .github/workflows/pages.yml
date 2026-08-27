@@ -6,11 +6,13 @@ on:
     paths:
       - '.github/workflows/pages.yml'
       - 'apps/docs/**'
+      - 'apps/notes/**'
       - 'package.json'
       - 'packages/**'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - 'scripts/check-docs.mjs'
+      - 'scripts/build-notes-example.mjs'
       - 'tsconfig.base.json'
   workflow_dispatch:
 

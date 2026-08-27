@@ -1,0 +1,152 @@
+---
+import '@fontsource/caveat/latin-500.css'
+import '@fontsource/caveat/latin-700.css'
+import '@caderno-ui/tokens/notebook.css'
+import '@caderno-ui/elements/fallback.css'
+import '@caderno-ui/elements/typography.css'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="A note form, note, and list built with Caderno UI."
+    />
+    <title>Notes and tasks · Caderno UI</title>
+  </head>
+  <body>
+    <main>
+      <header class="page-heading">
+        <h1 class="cad-type-title">Notes and tasks</h1>
+        <cad-link href={`${base}/components/`}>Browse components</cad-link>
+      </header>
+
+      <div class="preview" id="preview">
+        <cad-card tone="blue">
+          <cad-card-header>
+            <cad-card-title><h2>Write a note</h2></cad-card-title>
+          </cad-card-header>
+          <cad-card-content>
+            <form id="note-form">
+              <cad-input
+                label="Title"
+                name="title"
+                value="For tomorrow"
+                required></cad-input>
+              <cad-textarea
+                label="Note"
+                name="body"
+                rows="3"
+                value="Review the search results. Bring questions to the meeting."
+                required></cad-textarea>
+              <cad-button type="submit">Update preview</cad-button>
+            </form>
+          </cad-card-content>
+        </cad-card>
+
+        <div class="notes">
+          <cad-note id="note-preview" heading="For tomorrow">
+            <span id="note-body">
+              Review the search results. Bring questions to the meeting.
+            </span>
+          </cad-note>
+
+          <section class="tasks" aria-labelledby="tasks-title">
+            <h2 class="cad-type-title" id="tasks-title">Before the meeting</h2>
+            <cad-list label="Before the meeting" variant="numbered" compact>
+              <cad-list-item>Read the notes.</cad-list-item>
+              <cad-list-item>Compare the options.</cad-list-item>
+              <cad-list-item>Write down questions.</cad-list-item>
+            </cad-list>
+          </section>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <p class="cad-type-meta">Changes stay on this page. Reload to reset.</p>
+        <p class="cad-type-meta" role="status" id="preview-status"></p>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/card'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/link'
+  import '@caderno-ui/elements/list'
+  import '@caderno-ui/elements/note'
+  import '@caderno-ui/elements/textarea'
+
+  const form = document.querySelector<HTMLFormElement>('#note-form')
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const data = new FormData(form)
+    document
+      .querySelector('#note-preview')
+      ?.setAttribute('heading', String(data.get('title') ?? ''))
+    const body = document.querySelector('#note-body')
+    if (body) body.textContent = String(data.get('body') ?? '')
+    const status = document.querySelector('#preview-status')
+    if (status) status.textContent = 'Preview updated.'
+  })
+</script>
+
+<style>
+  main {
+    width: min(100%, 56rem);
+    margin-inline: auto;
+  }
+
+  .page-heading,
+  .page-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+  }
+
+  .preview {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 2.5rem;
+    padding: 2rem;
+  }
+
+  form,
+  .notes,
+  .tasks {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  form cad-button {
+    justify-self: start;
+  }
+
+  .notes {
+    gap: 2.5rem;
+  }
+
+  @media (width < 42rem) {
+    .preview {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .preview,
+    .page-heading,
+    .page-footer {
+      padding: 1.25rem;
+    }
+  }
+</style>

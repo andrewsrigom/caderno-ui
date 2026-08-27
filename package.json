@@ -99,5 +99,5 @@
       "rs-module-lexer"
     ]
   },
-  "customElements": ".artifacts/manifest/custom-elements.json"
+  "customElements": "packages/elements/custom-elements.json"
 }

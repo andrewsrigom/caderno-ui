@@ -3656,18 +3656,18 @@
           ],
           "events": [
             {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "Fired after the checked state changes."
-            },
-            {
               "name": "input",
               "type": {
                 "text": "Event"
               },
               "description": "Fired when the user toggles the checked state."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "Fired after the checked state changes."
             }
           ],
           "attributes": [
@@ -13579,18 +13579,18 @@
           ],
           "events": [
             {
-              "name": "change",
-              "type": {
-                "text": "Event"
-              },
-              "description": "Fired after the checked state changes."
-            },
-            {
               "name": "input",
               "type": {
                 "text": "Event"
               },
               "description": "Fired immediately when the checked state changes."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "description": "Fired after the checked state changes."
             }
           ],
           "attributes": [

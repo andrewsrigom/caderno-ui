@@ -7,22 +7,22 @@ import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-blockquote
-  author="Austin Freeman"
-  source="The Engineer's Notebook (1923)"
+  author="Review team"
+  source="Search review (example)"
 >
-  Simplicity is the soul of efficiency.
+  Search should stay available while the index rebuilds.
 </cad-blockquote>
 
 <script type="module">
   import '@caderno-ui/elements/blockquote'
 </script>`
 
-const variantsUsage = `<cad-blockquote author="Unknown">
-  Good engineering is also about communicating clearly.
+const variantsUsage = `<cad-blockquote>
+  Leave time to check the results before the next release.
 </cad-blockquote>
 
-<cad-blockquote author="Alan Kay" tone="lemon" variant="highlight">
-  The best way to predict the future is to invent it.
+<cad-blockquote author="Review team" tone="lemon" variant="highlight">
+  Start with the slowest query.
 </cad-blockquote>`
 ---
 
@@ -36,30 +36,30 @@ const variantsUsage = `<cad-blockquote author="Unknown">
     <p>Display a quotation with optional author and source.</p>
   </header>
 
-  <DemoFrame title="With source">
-    <cad-blockquote
-      author="Austin Freeman"
-      source="The Engineer's Notebook (1923)"
-    >
-      Simplicity is the soul of efficiency.
+  <DemoFrame
+    title="With source"
+    description="Sample quotations from a fictional project review."
+  >
+    <cad-blockquote author="Review team" source="Search review (example)">
+      Search should stay available while the index rebuilds.
     </cad-blockquote>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
   <ExampleGallery id="quote-variants-title" title="Attribution and emphasis">
-    <ExampleCard title="Simple attribution">
-      <cad-blockquote class="gallery-quote" author="Unknown">
-        Good engineering is also about communicating clearly.
+    <ExampleCard title="Without attribution">
+      <cad-blockquote class="gallery-quote">
+        Leave time to check the results before the next release.
       </cad-blockquote>
     </ExampleCard>
     <ExampleCard title="Highlighted takeaway">
       <cad-blockquote
         class="gallery-quote"
-        author="Alan Kay"
+        author="Review team"
         tone="lemon"
         variant="highlight"
       >
-        The best way to predict the future is to invent it.
+        Start with the slowest query.
       </cad-blockquote>
     </ExampleCard>
   </ExampleGallery>

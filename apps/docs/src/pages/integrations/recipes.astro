@@ -71,12 +71,15 @@ export function Save({ save }: { save: () => Promise<void> }) {
   </header>
   <section class="content-section">
     <h2>Controlled form</h2><p>
-      Use onInput for editing. Keep the form’s reset state in sync.
+      Update React state in <code>onInput</code> and restore it in <code
+        >onReset</code
+      >.
     </p><CodeBlock code={form} language="tsx" />
   </section>
   <section class="content-section">
-    <h2>Consumer-owned navigation</h2><p>
-      The action slot adds row layout, not navigation logic.
+    <h2>Navigation</h2><p>
+      Put a router link or button in the <code>action</code> slot. Your router handles
+      navigation.
     </p><CodeBlock code={navigation} language="tsx" />
   </section>
   <section class="content-section">

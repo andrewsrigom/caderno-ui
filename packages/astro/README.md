@@ -1,9 +1,11 @@
 # `@caderno-ui/astro`
 
-Astro facades for Caderno UI with useful server-rendered content before custom elements upgrade.
+Astro components for Caderno UI. Slotted content renders on the server before the custom elements initialize.
+
+In an existing Astro project:
 
 ```bash
-pnpm add @caderno-ui/astro astro
+pnpm add @caderno-ui/astro @caderno-ui/elements @caderno-ui/tokens @fontsource/caveat
 ```
 
 ```astro
@@ -11,21 +13,24 @@ pnpm add @caderno-ui/astro astro
 import Alert from '@caderno-ui/astro/Alert.astro'
 import List from '@caderno-ui/astro/List.astro'
 import ListItem from '@caderno-ui/astro/ListItem.astro'
+import '@fontsource/caveat/latin-500.css'
+import '@fontsource/caveat/latin-700.css'
 import '@caderno-ui/tokens/notebook.css'
+import '@caderno-ui/elements/fallback.css'
 ---
 
-<Alert heading="Review needed" variant="warning">
-  The implementation and contract have diverged.
+<Alert heading="Unsaved changes" variant="warning">
+  Save your notes before leaving this page.
 </Alert>
 
 <List label="Review">
-  <ListItem>Read the contract.</ListItem>
+  <ListItem>Read the review notes.</ListItem>
   <ListItem><a {...{ slot: 'action' }} href="/notes/">Open notes</a></ListItem>
 </List>
 ```
 
-Import facades by their individual exported paths. The package supports Astro
-5, 6 and 7. Do not apply `client:*` hydration directives: each facade registers
+Load styles and fonts once in your application layout. Import components by their individual exported paths. The package supports Astro
+5, 6 and 7. Do not apply `client:*` hydration directives: each component registers
 its own custom element. Native content in slots remains readable before upgrade.
 
 Use the spread form above when a native child's `slot` must reach the custom

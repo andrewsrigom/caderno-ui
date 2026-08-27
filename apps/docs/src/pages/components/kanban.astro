@@ -4,17 +4,17 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-kanban label="Release readiness">
+const usage = `<cad-kanban label="Weekly reading">
   <cad-kanban-column title="Planned">
-    <cad-kanban-card tone="coral">Replace temporary package links</cad-kanban-card>
+    <cad-kanban-card tone="coral">Read the chapter on caching</cad-kanban-card>
   </cad-kanban-column>
   <cad-kanban-column title="In review">
-    <cad-kanban-card tone="blue">Validate selective bundles</cad-kanban-card>
-    <cad-kanban-card tone="lemon">Review keyboard navigation</cad-kanban-card>
+    <cad-kanban-card tone="blue">Summarize search indexing</cad-kanban-card>
+    <cad-kanban-card tone="lemon">Compare queue examples</cad-kanban-card>
   </cad-kanban-column>
   <cad-kanban-column title="Ready">
-    <cad-kanban-card tone="blue">Compound card contract</cad-kanban-card>
-    <cad-kanban-card tone="blue">Responsive semantic table</cad-kanban-card>
+    <cad-kanban-card tone="blue">Database notes</cad-kanban-card>
+    <cad-kanban-card tone="blue">Interview questions</cad-kanban-card>
   </cad-kanban-column>
 </cad-kanban>
 
@@ -37,28 +37,24 @@ const usage = `<cad-kanban label="Release readiness">
   </header>
 
   <DemoFrame
-    title="Release readiness"
+    title="Weekly reading"
     description="Column counts follow the cards."
   >
-    <cad-kanban label="Release readiness">
+    <cad-kanban label="Weekly reading">
       <cad-kanban-column title="Planned">
         <cad-kanban-card tone="coral">
-          Replace temporary package links
+          Read the chapter on caching
         </cad-kanban-card>
       </cad-kanban-column>
       <cad-kanban-column title="In review">
         <cad-kanban-card tone="blue">
-          Validate selective bundles
+          Summarize search indexing
         </cad-kanban-card>
-        <cad-kanban-card tone="lemon">
-          Review keyboard navigation
-        </cad-kanban-card>
+        <cad-kanban-card tone="lemon"> Compare queue examples </cad-kanban-card>
       </cad-kanban-column>
       <cad-kanban-column title="Ready">
-        <cad-kanban-card tone="blue">Compound card contract</cad-kanban-card>
-        <cad-kanban-card tone="blue">
-          Responsive semantic table
-        </cad-kanban-card>
+        <cad-kanban-card tone="blue">Database notes</cad-kanban-card>
+        <cad-kanban-card tone="blue"> Interview questions </cad-kanban-card>
       </cad-kanban-column>
     </cad-kanban>
   </DemoFrame>

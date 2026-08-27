@@ -6,9 +6,11 @@ import ExampleCard from '../../components/ExampleCard.astro'
 import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-callout heading="Keep the contract small" variant="tip">
-  Add a property only when composition and native semantics cannot express the requirement.
-  <a href="/composition/" slot="action">Read the guide</a>
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+const usage = `<cad-callout heading="Add a source link" variant="tip">
+  Link to the original article so you can find it again later.
+  <a href="${base}/composition/" slot="action">Read the guide</a>
 </cad-callout>
 
 <script type="module">
@@ -16,16 +18,16 @@ const usage = `<cad-callout heading="Keep the contract small" variant="tip">
 </script>`
 
 const variantsUsage = `<cad-callout heading="Context" variant="info">
-  This decision applies to new integrations only.
+  These notes cover the first chapter.
 </cad-callout>
-<cad-callout heading="Good default" variant="success">
-  Prefer composition before adding another property.
+<cad-callout heading="Review complete" variant="success">
+  All source links have been checked.
 </cad-callout>
-<cad-callout heading="Check the trade-off" variant="warning">
-  This shortcut increases the migration cost later.
+<cad-callout heading="Check the date" variant="warning">
+  The next review has moved to Friday.
 </cad-callout>
 <cad-callout heading="Do not publish" variant="danger">
-  The example still contains a private token.
+  Remove the private contact details before sharing these notes.
 </cad-callout>`
 ---
 
@@ -42,10 +44,9 @@ const variantsUsage = `<cad-callout heading="Context" variant="info">
   </header>
 
   <DemoFrame title="A page note">
-    <cad-callout heading="Keep the contract small" variant="tip">
-      Add a property only when composition and native semantics cannot express
-      the requirement.
-      <a href="/composition/" slot="action">Read the guide</a>
+    <cad-callout heading="Add a source link" variant="tip">
+      Link to the original article so you can find it again later.
+      <a href={`${base}/composition/`} slot="action">Read the guide</a>
     </cad-callout>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
@@ -53,25 +54,25 @@ const variantsUsage = `<cad-callout heading="Context" variant="info">
   <ExampleGallery id="callout-variants-title" title="Message variants">
     <ExampleCard title="Info">
       <cad-callout class="gallery-callout" heading="Context" variant="info">
-        This decision applies to new integrations only.
+        These notes cover the first chapter.
       </cad-callout>
     </ExampleCard>
     <ExampleCard title="Success">
       <cad-callout
         class="gallery-callout"
-        heading="Good default"
+        heading="Review complete"
         variant="success"
       >
-        Prefer composition before adding another property.
+        All source links have been checked.
       </cad-callout>
     </ExampleCard>
     <ExampleCard title="Warning">
       <cad-callout
         class="gallery-callout"
-        heading="Check the trade-off"
+        heading="Check the date"
         variant="warning"
       >
-        This shortcut increases the migration cost later.
+        The next review has moved to Friday.
       </cad-callout>
     </ExampleCard>
     <ExampleCard title="Danger">
@@ -80,7 +81,7 @@ const variantsUsage = `<cad-callout heading="Context" variant="info">
         heading="Do not publish"
         variant="danger"
       >
-        The example still contains a private token.
+        Remove the private contact details before sharing these notes.
       </cad-callout>
     </ExampleCard>
   </ExampleGallery>

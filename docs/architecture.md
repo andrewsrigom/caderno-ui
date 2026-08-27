@@ -2,13 +2,14 @@
 
 ## One implementation, small adapters
 
-`@caderno-ui/elements` is the canonical runtime. Lit provides rendering and reactive properties, while the browser-native custom-element contract makes every component consumable from HTML, Astro, React, Vue, Svelte, or another framework.
+`@caderno-ui/elements` implements the components with Lit. HTML, React, Astro,
+Vue, and Svelte all use these same custom elements.
 
 Framework adapters must stay thin:
 
 - `@caderno-ui/react` maps properties and typed custom events with `@lit/react`.
-- `@caderno-ui/astro` provides declarative facades and useful pre-upgrade markup.
-- A future Vue package should map properties and events only; it should not copy rendering or styles.
+- `@caderno-ui/astro` provides Astro components and server-rendered slotted content.
+- Vue and Svelte use the custom elements directly.
 
 ## Package boundaries
 
@@ -17,8 +18,8 @@ Framework adapters must stay thin:
 | `tokens`     | Standalone `--cad-*` theme and motion defaults      | Component rendering         |
 | `icons`      | Typed doodle data and names                         | Framework components        |
 | `elements`   | Semantics, keyboard behavior, state, events, styles | Application business rules  |
-| `motion`     | Accessible GSAP presets and scoped cleanup          | Product-specific page flows |
-| `react`      | React event/property ergonomics                     | Component behavior          |
+| `motion`     | GSAP presets, reduced motion, and cleanup           | Product-specific page flows |
+| `react`      | React properties, events, and refs                  | Component behavior          |
 | `astro`      | Astro props and progressive markup                  | Component behavior          |
 | `laboratory` | Development examples and contract inspection        | Published API               |
 
@@ -31,9 +32,11 @@ Framework adapters must stay thin:
 - Visual customization uses `--cad-*` properties and documented CSS parts.
 - Individual entry points register only the elements a consumer imports.
 - Features with material dependency cost, such as charts, remain optional subpaths and are excluded from package root entry points.
-- GSAP choreography is opt-in through `@caderno-ui/motion`; ScrollTrigger stays isolated in its `/scroll` subpath.
+- Page animations use `@caderno-ui/motion`; ScrollTrigger is loaded only by its `/scroll` subpath.
 - Meaningful content remains readable before upgrade and without JavaScript.
 
 ## Extensibility
 
-Caderno UI is a versioned component library first. A shadcn-style registry can be added later for recipes that are intentionally application-owned, such as a composed editor, article shell, or study dashboard. Canonical primitives should remain packaged so fixes to accessibility and behavior reach every consumer through normal dependency updates.
+Applications compose components into editors, article layouts, and dashboards.
+Shared styles and behavior stay in the packages, so applications receive fixes
+through dependency updates. See the documentation recipes for composition examples.

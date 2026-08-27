@@ -1,7 +1,6 @@
 export const demoProjects = [
   {
-    description:
-      'Compare index boundaries, recovery paths, and observable lag.',
+    description: 'Compare query speed, indexing delay, and recovery time.',
     href: '/demo/projects/search-indexing/',
     id: 'search-indexing',
     status: 'In review',
@@ -9,7 +8,7 @@ export const demoProjects = [
     tone: 'blue',
   },
   {
-    description: 'Turn interview stories into concise, reusable evidence.',
+    description: 'Prepare examples of decisions and results for interviews.',
     href: '/demo/projects/',
     id: 'story-bank',
     status: 'Ready',
@@ -17,7 +16,7 @@ export const demoProjects = [
     tone: 'mint',
   },
   {
-    description: 'Document ordering, retries, and failure-mode trade-offs.',
+    description: 'Check message ordering, retries, and recovery after failure.',
     href: '/demo/projects/',
     id: 'queue-semantics',
     status: 'Planned',
@@ -25,7 +24,7 @@ export const demoProjects = [
     tone: 'lemon',
   },
   {
-    description: 'Audit the public contract and the smallest useful bundles.',
+    description: 'Review component properties, events, and bundle sizes.',
     href: '/demo/projects/',
     id: 'component-contracts',
     status: 'In review',
@@ -36,37 +35,37 @@ export const demoProjects = [
 
 export const demoNotes = [
   {
-    body: 'Prefer a reversible rollout. Keep the database authoritative until lag and recovery are both observable.',
+    body: 'Try the index in one workspace first. Measure indexing delay and test a rollback before expanding.',
     heading: 'Index rollout boundary',
     id: 'index-rollout',
     tag: 'Architecture',
   },
   {
-    body: 'The strongest story is the one where the trade-off, decision, and measurable outcome fit on one page.',
+    body: 'For each interview example, note the problem, what you did, and the result. Keep it to one page.',
     heading: 'Story bank rule',
     id: 'story-bank-rule',
     tag: 'Interview',
   },
   {
-    body: 'A component example is part of the contract. It must render the same API shown in its code sample.',
-    heading: 'Examples are contracts',
+    body: 'Check that the example runs after copying the code into a new project.',
+    heading: 'Check the examples',
     id: 'examples-contract',
     tag: 'Caderno UI',
   },
   {
-    body: 'Use a queue only when delayed work, retry semantics, and backpressure are product requirements—not fashion.',
+    body: 'Can this task wait? If so, check how retries and duplicate messages will be handled before adding a queue.',
     heading: 'Queue decision',
     id: 'queue-decision',
     tag: 'Systems',
   },
   {
-    body: 'Ask for the expected read path before choosing an index. The query shape should lead the data structure.',
+    body: 'List the queries people use most often, then compare indexes against those queries.',
     heading: 'Start with the read path',
     id: 'read-path',
     tag: 'Architecture',
   },
   {
-    body: 'The demo should feel like a real product: navigation, feedback, empty states, saved state, and responsive behavior.',
+    body: 'Try creating, finding, and editing a note on a phone. Check whether the next action is easy to find.',
     heading: 'Test in context',
     id: 'test-in-context',
     tag: 'Design system',

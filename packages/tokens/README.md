@@ -17,9 +17,8 @@ attribute or set it to `light` to return to white.
 Override `--cad-*` variables in your stylesheet. When changing colors, update
 background and text pairs together and check their contrast.
 
-Semantic motion roles are included for component feedback, content entrance and
-exit, movement distance, and stagger. Use them for CSS transitions; coordinated
-JavaScript choreography is available from `@caderno-ui/motion`.
+Motion tokens define duration, easing, distance, and stagger for CSS animations.
+For JavaScript animations, use `@caderno-ui/motion`.
 
 The token taxonomy, checked color pairs, and extension rules are documented in
 the repository's token contract.

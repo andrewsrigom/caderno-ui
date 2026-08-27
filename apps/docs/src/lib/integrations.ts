@@ -36,7 +36,7 @@ export const integrations = {
   },
   astro: {
     title: 'Astro',
-    description: 'Thin facades with native content before JavaScript.',
+    description: 'Astro components with server-rendered content.',
     install:
       'pnpm add @caderno-ui/astro @caderno-ui/elements @caderno-ui/tokens @fontsource/caveat',
     language: 'astro',
@@ -47,23 +47,22 @@ import List from '@caderno-ui/astro/List.astro'
 import ListItem from '@caderno-ui/astro/ListItem.astro'
 ---
 <Card>
-  <CardTitle><h2>A useful decision</h2></CardTitle>
-  <p>Keep behavior in the library.</p>
+  <CardTitle><h2>Search review</h2></CardTitle>
+  <p>Compare query speed and indexing delay.</p>
 </Card>
 <List label="Notes">
-  <ListItem>Read the contract.</ListItem>
+  <ListItem>Read the review notes.</ListItem>
   <ListItem><a {...{ slot: 'action' }} href="/notes/">Open notes</a></ListItem>
 </List>`,
     notes: [
-      'Import styles once in the application layout. Facades register only their own elements; no client:* directive is needed.',
+      'Import styles once in the application layout. Each Astro component registers its own elements; no client:* directive is needed.',
       'Spread a native child’s slot attribute when it must reach the custom element, as in the list above. Use normal Astro slots for the facade’s named slots.',
       'Set complex properties and attach native event listeners in a browser script. Server-rendered slotted content is available before upgrade; internal controls still need JavaScript.',
     ],
   },
   react: {
     title: 'React',
-    description:
-      'Typed adapters for React 18 and 19. One implementation underneath.',
+    description: 'Typed properties, events, and refs for React 18 and 19.',
     install:
       'pnpm add @caderno-ui/react @caderno-ui/elements @caderno-ui/tokens @fontsource/caveat',
     language: 'tsx',
@@ -71,8 +70,8 @@ import ListItem from '@caderno-ui/astro/ListItem.astro'
     notes: [
       'onInput fires while editing. onChange follows native commitment: blur for text, toggle for checkboxes, commit for sliders. This differs from React’s native text onChange.',
       'These callbacks receive DOM events. Read event.currentTarget.value or .checked synchronously; reset controlled state in the form’s onReset handler.',
-      'refs point to custom elements and support their public focus and validation methods. The action slot accepts a router Link or button without owning navigation.',
-      'The example below is the React Router consumer exercised from installed tarballs in Strict Mode. It checks external state, FormData, reset, slots and focus.',
+      'refs point to custom elements and support their focus and validation methods. Put a router Link or button in the action slot to handle navigation.',
+      'This React Router example is also tested in Strict Mode against installed packages. It covers external state, FormData, reset, slots, and focus.',
     ],
   },
   next: {
@@ -87,8 +86,8 @@ import { SaveNote } from './save-note'
 
 export default function Page() {
   return <CadCard>
-    <CadCardTitle><h1>A useful decision</h1></CadCardTitle>
-    <CadCardContent><p>Readable before JavaScript.</p></CadCardContent>
+    <CadCardTitle><h1>Search review</h1></CadCardTitle>
+    <CadCardContent><p>Compare query speed and indexing delay.</p></CadCardContent>
     <SaveNote />
   </CadCard>
 }
@@ -109,8 +108,8 @@ export function SaveNote() {
     notes: [
       'React component entrypoints retain use client in the published ESM. A Server Component can compose them; event handlers belong inside a Client Component.',
       'Import global styles and fonts in app/layout.tsx. Pass serializable data across the boundary and use native headings, paragraphs and links in slots.',
-      'This is not Lit shadow-root SSR. Slotted HTML is rendered on the server; internal controls initialize in the browser. No ssr: false or hydration-warning suppression is used.',
-      'The notes miniapp is a static export. A separate next build / next start consumer verifies request-time SSR and hydration using the same tarballs. Static hosting alone is not evidence of SSR.',
+      'Slotted HTML renders on the server; Lit shadow roots and internal controls initialize in the browser. This is not Lit shadow-root SSR.',
+      'The hosted notes app is a static export. Request-time SSR and hydration are tested separately with next build / next start using the same packages.',
     ],
   },
   vue: {
@@ -123,7 +122,7 @@ export function SaveNote() {
     notes: [
       'Configure @vitejs/plugin-vue with template.compilerOptions.isCustomElement: (tag) => tag.startsWith("cad-").',
       'Use :value.prop and :checked.prop for DOM properties, @input / @change for native events, and slot attributes for content.',
-      'This executable Vite example checks properties, events and action slots. Nuxt SSR and a dedicated Vue adapter are outside this release.',
+      'The Vite example is tested for properties, events, and action slots. Nuxt SSR is not tested; there is no dedicated Vue adapter.',
     ],
   },
   svelte: {
@@ -135,7 +134,7 @@ export function SaveNote() {
     example: svelteConsumer,
     notes: [
       'Register the elements before rendering. Use reactive properties with oninput / onchange and ordinary slot attributes.',
-      'This executable Vite example checks external state, events and slotted links. SvelteKit SSR and a dedicated Svelte adapter are outside this release.',
+      'The Vite example is tested for external state, events, and slotted links. SvelteKit SSR is not tested; there is no dedicated Svelte adapter.',
     ],
   },
 } as const

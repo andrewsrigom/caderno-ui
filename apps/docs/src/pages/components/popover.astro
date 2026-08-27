@@ -6,6 +6,8 @@ import ExampleCard from '../../components/ExampleCard.astro'
 import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 const usage = `<cad-button
   id="release-context"
   tone="blue"
@@ -17,15 +19,14 @@ const usage = `<cad-button
 
 <cad-popover
   anchor="release-context"
-  heading="Release review"
+  heading="Review notes"
   placement="bottom-start"
   size="md"
 >
   <p>
-    The public contract now covers focus restoration, light dismissal,
-    and viewport-aware placement.
+    The review now includes query timings and an indexing delay estimate.
   </p>
-  <cad-button href="/components/" size="sm" slot="actions" variant="link">
+  <cad-button href="${base}/components/" size="sm" slot="actions" variant="link">
     Browse components
   </cad-button>
 </cad-popover>
@@ -45,7 +46,7 @@ const placementsUsage = `<cad-button id="popover-top" variant="secondary">Top</c
 <cad-popover anchor="popover-bottom-start" heading="Aligned" placement="bottom-start" size="sm">Short context.</cad-popover>
 
 <cad-button id="popover-auto" variant="secondary">Auto</cad-button>
-<cad-popover anchor="popover-auto" heading="Smart placement" placement="auto" size="sm">The viewport chooses the safe side.</cad-popover>`
+<cad-popover anchor="popover-auto" heading="Automatic placement" placement="auto" size="sm">Opens on the side with enough room.</cad-popover>`
 ---
 
 <DocsLayout
@@ -73,15 +74,19 @@ const placementsUsage = `<cad-button id="popover-top" variant="secondary">Top</c
       </cad-button>
       <cad-popover
         anchor="release-context"
-        heading="Release review"
+        heading="Review notes"
         placement="bottom-start"
         size="md"
       >
         <p>
-          The public contract now covers focus restoration, light dismissal, and
-          viewport-aware placement.
+          The review now includes query timings and an indexing delay estimate.
         </p>
-        <cad-button href="/components/" size="sm" slot="actions" variant="link">
+        <cad-button
+          href={`${base}/components/`}
+          size="sm"
+          slot="actions"
+          variant="link"
+        >
           Browse components
         </cad-button>
       </cad-popover>
@@ -133,11 +138,11 @@ const placementsUsage = `<cad-button id="popover-top" variant="secondary">Top</c
       <cad-button id="popover-auto" variant="secondary">Auto</cad-button>
       <cad-popover
         anchor="popover-auto"
-        heading="Smart placement"
+        heading="Automatic placement"
         placement="auto"
         size="sm"
       >
-        The viewport chooses the safe side.
+        Opens on the side with enough room.
       </cad-popover>
     </ExampleCard>
   </ExampleGallery>

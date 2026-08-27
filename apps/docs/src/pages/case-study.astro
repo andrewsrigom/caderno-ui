@@ -16,40 +16,40 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
   <section class="content-section">
     <h2>The problem</h2><p>
       SeniorPath needed a consistent reading and annotation interface. Keeping a
-      separate catalog and local component styles in the app made changes
-      diverge.
+      separate component catalog and styles in the app meant the same fix had to
+      be made twice, with different results.
     </p>
   </section>
   <section class="content-section">
     <h2>The decisions</h2><ul>
       <li>
-        Keep behavior and styling in Lit custom elements. React and Astro
-        translate framework contracts; they do not duplicate components.
+        Implement behavior and styles once, in Lit custom elements. React
+        adapters map properties and events; Astro components add server-rendered
+        content.
       </li>
       <li>
-        Use slots for product content and consumer-owned navigation. A list item
-        should not decide which router an app uses.
+        Use slots for text, icons, and actions. Applications supply their own
+        links and router components.
       </li>
       <li>
-        Share white surfaces, blue ink, handwriting and border tokens. Preserve
-        readable native content before JavaScript.
+        Define the white background, blue ink, fonts, and borders in shared
+        tokens. Keep slotted text readable before JavaScript loads.
       </li>
       <li>
-        Offer selective imports. Charts and motion are optional dependencies of
-        the experience, not every button.
+        Provide imports per component. Charts and page animations load only when
+        the application imports them.
       </li>
     </ul>
   </section>
   <section class="content-section">
-    <h2>Use and evidence</h2><p>
-      SeniorPath is the real Astro consumer. This documentation also uses the
+    <h2>Where it is used</h2><p>
+      SeniorPath uses the Astro components. This documentation also uses the
       library. A <a href={`${base}/examples/react/`}
         >small React / Next.js notes app</a
-      > exercises forms, navigation, confirmation and feedback.
+      > demonstrates forms, navigation, delete confirmation, and notifications.
     </p><p>
-      <a href={`${base}/quality/`}
-        >See the validation scope and remaining limits</a
-      >. Package, browser and integration checks run before publication.
+      <a href={`${base}/quality/`}>See tests and known limitations</a>. Package,
+      browser and integration checks run before publication.
     </p>
   </section>
 </DocsLayout>

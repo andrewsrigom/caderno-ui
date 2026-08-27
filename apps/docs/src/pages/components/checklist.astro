@@ -7,9 +7,9 @@ import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-checklist title="Before publishing" variant="mixed">
-  <cad-checklist-item>Public contract reviewed</cad-checklist-item>
-  <cad-checklist-item>Keyboard flow verified</cad-checklist-item>
-  <cad-checklist-item kind="cross">Temporary package link remains</cad-checklist-item>
+  <cad-checklist-item>Notes reviewed</cad-checklist-item>
+  <cad-checklist-item>Source links checked</cad-checklist-item>
+  <cad-checklist-item kind="cross">Summary still missing</cad-checklist-item>
 </cad-checklist>
 
 <script type="module">
@@ -17,13 +17,13 @@ const usage = `<cad-checklist title="Before publishing" variant="mixed">
 </script>`
 
 const variantsUsage = `<cad-checklist title="Do" tone="blue" variant="do">
-  <cad-checklist-item>Keep the public contract small</cad-checklist-item>
-  <cad-checklist-item>Verify the keyboard path</cad-checklist-item>
+  <cad-checklist-item>Include source links</cad-checklist-item>
+  <cad-checklist-item>Use short headings</cad-checklist-item>
 </cad-checklist>
 
 <cad-checklist title="Don't" tone="blue" variant="dont">
-  <cad-checklist-item>Hide state behind color alone</cad-checklist-item>
-  <cad-checklist-item>Ship an example that uses another API</cad-checklist-item>
+  <cad-checklist-item>Copy notes without attribution</cad-checklist-item>
+  <cad-checklist-item>Leave broken links</cad-checklist-item>
 </cad-checklist>`
 ---
 
@@ -40,12 +40,12 @@ const variantsUsage = `<cad-checklist title="Do" tone="blue" variant="do">
     </p>
   </header>
 
-  <DemoFrame title="Component API review">
+  <DemoFrame title="Review notes">
     <cad-checklist title="Before publishing" variant="mixed">
-      <cad-checklist-item>Public contract reviewed</cad-checklist-item>
-      <cad-checklist-item>Keyboard flow verified</cad-checklist-item>
+      <cad-checklist-item>Notes reviewed</cad-checklist-item>
+      <cad-checklist-item>Source links checked</cad-checklist-item>
       <cad-checklist-item kind="cross">
-        Temporary package link remains
+        Summary still missing
       </cad-checklist-item>
     </cad-checklist>
   </DemoFrame>
@@ -63,8 +63,8 @@ const variantsUsage = `<cad-checklist title="Do" tone="blue" variant="do">
         tone="blue"
         variant="do"
       >
-        <cad-checklist-item>Keep the public contract small</cad-checklist-item>
-        <cad-checklist-item>Verify the keyboard path</cad-checklist-item>
+        <cad-checklist-item>Include source links</cad-checklist-item>
+        <cad-checklist-item>Use short headings</cad-checklist-item>
       </cad-checklist>
     </ExampleCard>
     <ExampleCard title="Don't">
@@ -74,10 +74,8 @@ const variantsUsage = `<cad-checklist title="Do" tone="blue" variant="do">
         tone="blue"
         variant="dont"
       >
-        <cad-checklist-item>Hide state behind color alone</cad-checklist-item>
-        <cad-checklist-item>
-          Ship an example that uses another API
-        </cad-checklist-item>
+        <cad-checklist-item>Copy notes without attribution</cad-checklist-item>
+        <cad-checklist-item> Leave broken links </cad-checklist-item>
       </cad-checklist>
     </ExampleCard>
   </ExampleGallery>

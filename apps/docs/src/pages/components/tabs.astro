@@ -26,11 +26,11 @@ const usage = `<cad-tabs default-value="overview">
 
   <cad-tab-content value="overview">
     <h2>Use an asynchronous search index</h2>
-    <p>Keep the transactional database authoritative and expose index lag as an observable product state.</p>
+    <p>Store writes in the database and update the search index in the background. Show when results were last indexed.</p>
   </cad-tab-content>
-  <cad-tab-content value="evidence">Evidence collected during the architecture review.</cad-tab-content>
-  <cad-tab-content value="notes">Notes, assumptions, and unresolved questions.</cad-tab-content>
-  <cad-tab-content value="rollout">A reversible rollout plan with observable checkpoints.</cad-tab-content>
+  <cad-tab-content value="evidence">The index returns queries faster, but adds a delay before new notes appear.</cad-tab-content>
+  <cad-tab-content value="notes">How long can users wait for a new note to appear in search?</cad-tab-content>
+  <cad-tab-content value="rollout">Start with one workspace. Check query times and indexing errors before expanding.</cad-tab-content>
 </cad-tabs>
 
 <script type="module">
@@ -77,18 +77,20 @@ const usage = `<cad-tabs default-value="overview">
       <cad-tab-content value="overview">
         <h2>Use an asynchronous search index</h2>
         <p>
-          Keep the transactional database authoritative and expose index lag as
-          an observable product state.
+          Store writes in the database and update the search index in the
+          background. Show when results were last indexed.
         </p>
       </cad-tab-content>
       <cad-tab-content value="evidence">
-        Evidence collected during the architecture review.
+        The index returns queries faster, but adds a delay before new notes
+        appear.
       </cad-tab-content>
       <cad-tab-content value="notes">
-        Notes, assumptions, and unresolved questions.
+        How long can users wait for a new note to appear in search?
       </cad-tab-content>
       <cad-tab-content value="rollout">
-        A reversible rollout plan with observable checkpoints.
+        Start with one workspace. Check query times and indexing errors before
+        expanding.
       </cad-tab-content>
     </cad-tabs>
   </DemoFrame>

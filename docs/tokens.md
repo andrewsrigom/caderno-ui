@@ -29,9 +29,8 @@ meaning stable even when their concrete colors change between themes.
 
 ## Motion roles
 
-Semantic motion tokens keep CSS feedback and page choreography on the same
-rhythm. Component styles consume these roles directly; `@caderno-ui/motion`
-publishes matching JavaScript defaults for coordinated sequences.
+Component styles use the motion tokens below. `@caderno-ui/motion` provides
+matching JavaScript defaults for page animations.
 
 | Token                            | Default   | Role                               |
 | -------------------------------- | --------- | ---------------------------------- |
@@ -58,8 +57,8 @@ The following pairs are checked in both themes at a minimum contrast ratio of
 - every matching `--cad-post-it-*-ink` on `--cad-post-it-*-bg`
 - `--cad-sticker-violet-ink` on `--cad-sticker-violet-bg`
 
-Treat each pair as indivisible when overriding a palette. A custom background
-without its corresponding foreground is not assumed to remain accessible.
+When overriding a palette, check each background and text pair together.
+Changing either color can reduce contrast.
 
 ## Automated audit
 

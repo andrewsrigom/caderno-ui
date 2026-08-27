@@ -1,8 +1,7 @@
 # `@caderno-ui/motion`
 
-Accessible, notebook-native motion presets for Caderno UI. The package keeps
-GSAP behind an explicit dependency boundary so applications can opt into richer
-choreography without adding it to the base custom-element bundle.
+Optional animation presets for Caderno UI, with reduced-motion support.
+This package uses GSAP; importing the base custom elements does not load it.
 
 ```bash
 pnpm add @caderno-ui/motion
@@ -22,7 +21,7 @@ motion.enter('[data-motion-item]', { stagger: 0.06 })
 motion.revert()
 ```
 
-Scroll-triggered choreography is isolated in its own entry point:
+Scroll animations use a separate entry point:
 
 ```ts
 import { createScrollReveal } from '@caderno-ui/motion/scroll'

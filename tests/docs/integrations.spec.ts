@@ -24,7 +24,9 @@ test('framework guides expose installed-package examples and honest limits', asy
   }
   await page.goto('quality/')
   await expect(
-    page.getByText('not advertised as verified', { exact: false }),
+    page.getByText('Screen-reader support is not yet verified.', {
+      exact: false,
+    }),
   ).toBeVisible()
 })
 

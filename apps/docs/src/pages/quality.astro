@@ -4,16 +4,18 @@ import DocsLayout from '../layouts/DocsLayout.astro'
 
 <DocsLayout
   title="Validation"
-  description="Tested contracts and the limits of this release."
+  description="Package, framework, and browser checks, with known limitations."
 >
   <header class="page-header">
-    <h1>Validation</h1><p>Compatibility is tested, not assumed.</p>
+    <h1>Validation</h1><p>
+      What the tests cover and what still needs manual verification.
+    </p>
   </header>
   <section class="content-section">
     <h2>Release checks</h2><ul>
       <li>
-        Packaged exports, types and selective imports. Consumers install
-        tarballs outside the workspace.
+        Package exports, types, and selective imports, tested in applications
+        that install tarballs outside the workspace.
       </li>
       <li>
         React 18/19: controlled forms, native events, reset, FormData, refs,
@@ -24,8 +26,7 @@ import DocsLayout from '../layouts/DocsLayout.astro'
         complete notes flow.
       </li>
       <li>
-        Vue 3 / Svelte 5: properties, events and slots in executable Vite
-        consumers.
+        Vue 3 / Svelte 5: properties, events, and slots in Vite applications.
       </li>
       <li>
         Chromium, Firefox and WebKit: keyboard, focus and component behavior.
@@ -42,21 +43,21 @@ import DocsLayout from '../layouts/DocsLayout.astro'
   <section class="content-section">
     <h2>Limits</h2><ul>
       <li>
-        Client boundaries preserve server-rendered slotted HTML, not Lit
-        shadow-root SSR. Internal form controls need JavaScript.
+        Server rendering preserves slotted HTML. Lit shadow roots render in the
+        browser; internal form controls need JavaScript.
       </li>
       <li>
         The public notes app is a static export, not a running Next.js server.
         Its local data never leaves the browser.
       </li>
       <li>
-        Nuxt, SvelteKit, new framework adapters and 1.0 API stability are not
-        part of this release.
+        Nuxt and SvelteKit are not tested. The API may change between minor
+        versions while the library is below 1.0.
       </li>
       <li>
-        Automated accessibility checks do not establish screen-reader
-        compatibility. NVDA, VoiceOver and JAWS combinations are not advertised
-        as verified without a recorded manual session.
+        Screen-reader support is not yet verified. NVDA and VoiceOver manual
+        checks are pending; JAWS has not been tested. Automated accessibility
+        checks do not replace these sessions.
       </li>
     </ul>
   </section>

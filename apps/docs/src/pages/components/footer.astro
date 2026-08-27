@@ -6,15 +6,17 @@ import ExampleCard from '../../components/ExampleCard.astro'
 import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 const usage = `<cad-footer label="Caderno UI footer" variant="light">
   <div class="footer-brand" slot="brand">
-    <a class="footer-logo" href="/" aria-label="Caderno UI home">
+    <a class="footer-logo" href="${base}/" aria-label="Caderno UI home">
       <cad-icon name="book" size="32"></cad-icon>
       <strong>CADERNO UI</strong>
     </a>
-    <p>Notebook-native components for products with a human voice.</p>
+    <p>UI components inspired by handwritten notes.</p>
     <form class="footer-newsletter" data-footer-newsletter>
-      <label for="footer-email">Get updates, not spam.</label>
+      <label for="footer-email">Release updates</label>
       <div class="footer-newsletter-row">
         <cad-input
           id="footer-email"
@@ -28,16 +30,16 @@ const usage = `<cad-footer label="Caderno UI footer" variant="light">
   </div>
 
   <cad-footer-group heading="Product">
-    <cad-link href="/components/">Components</cad-link>
-    <cad-link href="/theming/">Theming</cad-link>
-    <cad-link href="/motion/">Motion</cad-link>
-    <cad-link href="/integrations/">Integrations</cad-link>
+    <cad-link href="${base}/components/">Components</cad-link>
+    <cad-link href="${base}/theming/">Theming</cad-link>
+    <cad-link href="${base}/motion/">Motion</cad-link>
+    <cad-link href="${base}/integrations/">Integrations</cad-link>
   </cad-footer-group>
   <cad-footer-group heading="Resources">
-    <cad-link href="/getting-started/">Getting started</cad-link>
-    <cad-link href="/composition/">Composition</cad-link>
-    <cad-link href="/components/code-block/">Code examples</cad-link>
-    <cad-link href="/components/icon/">Icon catalog</cad-link>
+    <cad-link href="${base}/getting-started/">Getting started</cad-link>
+    <cad-link href="${base}/composition/">Composition</cad-link>
+    <cad-link href="${base}/components/code-block/">Code examples</cad-link>
+    <cad-link href="${base}/components/icon/">Icon catalog</cad-link>
   </cad-footer-group>
   <cad-footer-group heading="Company">
     <cad-link href="#about">About</cad-link>
@@ -57,12 +59,12 @@ const usage = `<cad-footer label="Caderno UI footer" variant="light">
     <cad-link href="#linkedin" label="LinkedIn" variant="plain">in</cad-link>
     <cad-link href="#youtube" label="YouTube" variant="plain">YT</cad-link>
   </div>
-  <p class="footer-aside" slot="aside">Built in public.<br />You can too.</p>
+  <p class="footer-aside" slot="aside">Read the source.<br />Contributions welcome.</p>
 
   <div class="footer-meta" slot="bottom">
     <span>© 2026 Caderno UI. MIT licensed.</span>
     <cad-link href="#language" variant="plain">English (US)</cad-link>
-    <span><i class="footer-status-dot"></i> All systems operational</span>
+    <span><i class="footer-status-dot"></i> Example status: operational</span>
   </div>
   <cad-link href="#top" slot="back-to-top" variant="plain">
     Back to top
@@ -101,11 +103,11 @@ const usage = `<cad-footer label="Caderno UI footer" variant="light">
 const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
   <div class="footer-brand" slot="brand">
     <strong>CADERNO UI</strong>
-    <p>Notebook-native components.</p>
+    <p>Handwritten UI components.</p>
   </div>
   <cad-footer-group heading="Product">
-    <cad-link href="/components/">Components</cad-link>
-    <cad-link href="/theming/">Theming</cad-link>
+    <cad-link href="${base}/components/">Components</cad-link>
+    <cad-link href="${base}/theming/">Theming</cad-link>
   </cad-footer-group>
   <span slot="bottom">MIT licensed.</span>
 </cad-footer>
@@ -113,11 +115,11 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
 <cad-footer label="Elevated footer" variant="elevated">
   <div class="footer-brand" slot="brand">
     <strong>CADERNO UI</strong>
-    <p>Notebook-native components.</p>
+    <p>Handwritten UI components.</p>
   </div>
   <cad-footer-group heading="Product">
-    <cad-link href="/components/">Components</cad-link>
-    <cad-link href="/theming/">Theming</cad-link>
+    <cad-link href="${base}/components/">Components</cad-link>
+    <cad-link href="${base}/theming/">Theming</cad-link>
   </cad-footer-group>
   <span slot="bottom">MIT licensed.</span>
 </cad-footer>
@@ -125,11 +127,11 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
 <cad-footer label="Minimal footer" variant="minimal">
   <div class="footer-brand" slot="brand">
     <strong>CADERNO UI</strong>
-    <p>Notebook-native components.</p>
+    <p>Handwritten UI components.</p>
   </div>
   <cad-footer-group heading="Product">
-    <cad-link href="/components/">Components</cad-link>
-    <cad-link href="/theming/">Theming</cad-link>
+    <cad-link href="${base}/components/">Components</cad-link>
+    <cad-link href="${base}/theming/">Theming</cad-link>
   </cad-footer-group>
   <span slot="bottom">MIT licensed.</span>
 </cad-footer>`
@@ -148,16 +150,19 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
     </p>
   </header>
 
-  <DemoFrame title="Product footer">
+  <DemoFrame
+    title="Product footer"
+    description="Example layout. The form does not subscribe or send data."
+  >
     <cad-footer label="Caderno UI footer" variant="light">
       <div class="footer-brand" slot="brand">
-        <a class="footer-logo" href="/" aria-label="Caderno UI home">
+        <a class="footer-logo" href={`${base}/`} aria-label="Caderno UI home">
           <cad-icon name="book" size="32"></cad-icon>
           <strong>CADERNO UI</strong>
         </a>
-        <p>Notebook-native components for products with a human voice.</p>
+        <p>UI components inspired by handwritten notes.</p>
         <form class="footer-newsletter" data-footer-newsletter>
-          <label for="footer-email">Get updates, not spam.</label>
+          <label for="footer-email">Release updates</label>
           <div class="footer-newsletter-row">
             <cad-input
               id="footer-email"
@@ -170,16 +175,18 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
       </div>
 
       <cad-footer-group heading="Product">
-        <cad-link href="/components/">Components</cad-link>
-        <cad-link href="/theming/">Theming</cad-link>
-        <cad-link href="/motion/">Motion</cad-link>
-        <cad-link href="/integrations/">Integrations</cad-link>
+        <cad-link href={`${base}/components/`}>Components</cad-link>
+        <cad-link href={`${base}/theming/`}>Theming</cad-link>
+        <cad-link href={`${base}/motion/`}>Motion</cad-link>
+        <cad-link href={`${base}/integrations/`}>Integrations</cad-link>
       </cad-footer-group>
       <cad-footer-group heading="Resources">
-        <cad-link href="/getting-started/">Getting started</cad-link>
-        <cad-link href="/composition/">Composition</cad-link>
-        <cad-link href="/components/code-block/">Code examples</cad-link>
-        <cad-link href="/components/icon/">Icon catalog</cad-link>
+        <cad-link href={`${base}/getting-started/`}>Getting started</cad-link>
+        <cad-link href={`${base}/composition/`}>Composition</cad-link>
+        <cad-link href={`${base}/components/code-block/`}
+          >Code examples</cad-link
+        >
+        <cad-link href={`${base}/components/icon/`}>Icon catalog</cad-link>
       </cad-footer-group>
       <cad-footer-group heading="Company">
         <cad-link href="#about">About</cad-link>
@@ -206,13 +213,15 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
         <cad-link href="#youtube" label="YouTube" variant="plain">YT</cad-link>
       </div>
       <p class="footer-aside" slot="aside">
-        Built in public.<br />You can too.
+        Read the source.<br />Contributions welcome.
       </p>
 
       <div class="footer-meta" slot="bottom">
         <span>© 2026 Caderno UI. MIT licensed.</span>
         <cad-link href="#language" variant="plain">English (US)</cad-link>
-        <span><i class="footer-status-dot"></i> All systems operational</span>
+        <span
+          ><i class="footer-status-dot"></i> Example status: operational</span
+        >
       </div>
       <cad-link href="#top" slot="back-to-top" variant="plain">
         Back to top
@@ -235,11 +244,11 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
       <cad-footer class="gallery-footer" label="Dark footer" variant="dark">
         <div class="footer-brand" slot="brand">
           <strong>CADERNO UI</strong>
-          <p>Notebook-native components.</p>
+          <p>Handwritten UI components.</p>
         </div>
         <cad-footer-group heading="Product">
-          <cad-link href="/components/">Components</cad-link>
-          <cad-link href="/theming/">Theming</cad-link>
+          <cad-link href={`${base}/components/`}>Components</cad-link>
+          <cad-link href={`${base}/theming/`}>Theming</cad-link>
         </cad-footer-group>
         <span slot="bottom">MIT licensed.</span>
       </cad-footer>
@@ -252,11 +261,11 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
       >
         <div class="footer-brand" slot="brand">
           <strong>CADERNO UI</strong>
-          <p>Notebook-native components.</p>
+          <p>Handwritten UI components.</p>
         </div>
         <cad-footer-group heading="Product">
-          <cad-link href="/components/">Components</cad-link>
-          <cad-link href="/theming/">Theming</cad-link>
+          <cad-link href={`${base}/components/`}>Components</cad-link>
+          <cad-link href={`${base}/theming/`}>Theming</cad-link>
         </cad-footer-group>
         <span slot="bottom">MIT licensed.</span>
       </cad-footer>
@@ -269,11 +278,11 @@ const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
       >
         <div class="footer-brand" slot="brand">
           <strong>CADERNO UI</strong>
-          <p>Notebook-native components.</p>
+          <p>Handwritten UI components.</p>
         </div>
         <cad-footer-group heading="Product">
-          <cad-link href="/components/">Components</cad-link>
-          <cad-link href="/theming/">Theming</cad-link>
+          <cad-link href={`${base}/components/`}>Components</cad-link>
+          <cad-link href={`${base}/theming/`}>Theming</cad-link>
         </cad-footer-group>
         <span slot="bottom">MIT licensed.</span>
       </cad-footer>

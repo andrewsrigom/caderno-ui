@@ -6,8 +6,8 @@ import ExampleCard from '../../components/ExampleCard.astro'
 import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-tooltip position="top" text="Review the public contract">
-  <cad-button size="sm" variant="secondary">Inspect contract</cad-button>
+const usage = `<cad-tooltip position="top" text="Copy a link to this note">
+  <cad-button size="sm" variant="secondary">Share note</cad-button>
 </cad-tooltip>
 
 <script type="module">
@@ -43,8 +43,8 @@ const placementsUsage = `<cad-tooltip open position="top" text="Appears above">
   </header>
 
   <DemoFrame title="Focus or hover">
-    <cad-tooltip position="top" text="Review the public contract">
-      <cad-button size="sm" variant="secondary">Inspect contract</cad-button>
+    <cad-tooltip position="top" text="Copy a link to this note">
+      <cad-button size="sm" variant="secondary">Share note</cad-button>
     </cad-tooltip>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />

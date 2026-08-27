@@ -1,22 +1,37 @@
 # `@caderno-ui/react`
 
-Typed React wrappers for the canonical Caderno UI custom elements.
+React components with typed properties, events, and refs for Caderno UI.
+
+In an existing React project:
 
 ```bash
-pnpm add @caderno-ui/react react
+pnpm add @caderno-ui/react @caderno-ui/elements @caderno-ui/tokens @fontsource/caveat
+```
+
+Load styles and fonts once in your application entry file or layout:
+
+```ts
+import '@fontsource/caveat/latin-500.css'
+import '@fontsource/caveat/latin-700.css'
+import '@caderno-ui/tokens/notebook.css'
+import '@caderno-ui/elements/fallback.css'
 ```
 
 ```tsx
 import { CadAlert } from '@caderno-ui/react/alert'
 
 export function Notice() {
-  return <CadAlert variant="warning">Review needed</CadAlert>
+  return (
+    <CadAlert variant="warning">
+      Save your notes before leaving this page.
+    </CadAlert>
+  )
 }
 ```
 
-Prefer component subpaths so an application only pays for the wrappers and
-element registrations it uses. The root `@caderno-ui/react` export remains
-available for convenience, but imports every current component.
+Import by component to load only the adapters and elements you use.
+The root `@caderno-ui/react` export registers the core set. Charts require a
+separate `@caderno-ui/react/chart` import.
 
 The wrappers map DOM properties and typed custom events through `@lit/react`; component behavior and styles remain in `@caderno-ui/elements`. The package is ESM-only and supports React 18 and 19.
 
@@ -28,8 +43,20 @@ are DOM events, not synthetic per-keystroke events. Read the typed
 `event.currentTarget.value` or `.checked` synchronously.
 
 ```tsx
-const [title, setTitle] = useState('')
-<CadInput value={title} onInput={(event) => setTitle(event.currentTarget.value)} />
+import { useState } from 'react'
+import { CadInput } from '@caderno-ui/react/input'
+
+export function NoteTitle() {
+  const [title, setTitle] = useState('')
+  return (
+    <CadInput
+      label="Title"
+      name="title"
+      value={title}
+      onInput={(event) => setTitle(event.currentTarget.value)}
+    />
+  )
+}
 ```
 
 Reset controlled state in the form's `onReset` handler. `ref` receives the
@@ -37,7 +64,7 @@ custom element: use its public `focus()`, `checkValidity()` or `reportValidity()
 The control participates in native `FormData` through its `name`.
 
 Provide a real anchor, router link or button in `CadListItem`'s `action` slot.
-The consumer owns navigation; don't nest a link inside another link.
+Your router or event handler controls navigation. Don't nest links.
 
 ## Server rendering
 
@@ -51,4 +78,4 @@ links and paragraphs in slots for useful initial content. Do not mask hydration
 problems with `ssr: false` or `suppressHydrationWarning`.
 
 The [integration guide](https://andrewsrigom.github.io/caderno-ui/integrations/react/)
-includes executable consumers and the Next.js notes example.
+includes working examples and the Next.js notes app.

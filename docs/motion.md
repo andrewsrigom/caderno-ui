@@ -1,20 +1,18 @@
-# Motion contract
+# Motion
 
-Caderno UI treats motion as interaction language, not decoration. Components
-should feel like paper being lifted, placed, marked, or dismissed while keeping
-content legible before JavaScript runs.
+Component animations show state changes. Page animations are optional.
+Content must remain readable before JavaScript runs and when motion is disabled.
 
-## Ownership
+## Packages
 
-| Layer        | Owner                  | Examples                                       |
-| ------------ | ---------------------- | ---------------------------------------------- |
-| Feedback     | `@caderno-ui/elements` | press, hover, selection, disclosure, data draw |
-| Vocabulary   | `@caderno-ui/tokens`   | duration, easing, distance, stagger            |
-| Choreography | `@caderno-ui/motion`   | enter, exit, grouped reveal, scroll reveal     |
-| Composition  | consumer application   | targets, trigger points, page-level sequencing |
+| Layer       | Owner                  | Examples                                       |
+| ----------- | ---------------------- | ---------------------------------------------- |
+| Feedback    | `@caderno-ui/elements` | press, hover, selection, disclosure, data draw |
+| Settings    | `@caderno-ui/tokens`   | duration, easing, distance, stagger            |
+| Sequences   | `@caderno-ui/motion`   | enter, exit, grouped reveal, scroll reveal     |
+| Composition | consumer application   | targets, trigger points, page-level sequencing |
 
-Applications may choose where motion occurs, but should consume the Caderno UI
-vocabulary instead of importing GSAP or inventing unrelated timings.
+Use the shared tokens and presets for consistent timing across the application.
 
 ## Component motion
 
@@ -22,8 +20,8 @@ Stateful components move by default when the movement explains what changed:
 
 - accordion content expands and collapses with height, opacity, and direction;
 - chart marks draw with stagger when they enter the viewport or data changes;
-- active tab panels settle into place when selection changes;
-- modal paper and backdrop enter as one focused layer;
+- active tab panels animate when selection changes;
+- modal and backdrop appear together;
 - buttons, cards, tabs, tooltips, toasts, progress, and loading states provide
   local feedback appropriate to their interaction.
 
@@ -33,9 +31,9 @@ These behaviors use CSS or the Web Animations API and semantic motion tokens, so
 `replay()` for an explicit user-requested replay. All automatic component motion
 is removed when reduced motion is requested.
 
-## Core choreography
+## Enter and exit animations
 
-The core package scopes selectors, tracks animation state, and restores inline
+The motion package scopes selectors, tracks animation state, and restores inline
 styles during cleanup:
 
 ```ts
@@ -54,10 +52,9 @@ motion.revert()
 ```
 
 `enter()` and `exit()` accept explicit duration, ease, distance, stagger,
-rotation, and scale overrides. Defaults match the public token vocabulary and
-provide a small paper-settling gesture rather than a generic large slide.
+rotation, and scale overrides. Defaults match the shared motion tokens.
 
-## Scroll choreography
+## Scroll animations
 
 ScrollTrigger has a separate entry point so it cannot leak into the core motion
 or element bundles:

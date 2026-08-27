@@ -13,7 +13,7 @@ const usage = `<cad-toast-host
 <script type="module">
   import { toast } from '@caderno-ui/elements/toast'
 
-  toast.success('Changes saved successfully.', {
+  toast.success('Changes saved.', {
     description: 'The review is ready for the team.',
     hostId: 'app-toaster'
   })
@@ -22,7 +22,7 @@ const usage = `<cad-toast-host
     hostId: 'app-toaster',
     loading: 'Publishing review...',
     success: ({ version }) => \`\${version} published.\`,
-    successDescription: 'The public contract is now available.',
+    successDescription: 'The team can now read the review.',
     error: 'Could not publish the review.'
   })
 
@@ -127,7 +127,7 @@ const usage = `<cad-toast-host
   const select = (selector: string) => document.querySelector(selector)
 
   select('[data-toast-success]')?.addEventListener('click', () => {
-    toast.success('Changes saved successfully.', {
+    toast.success('Changes saved.', {
       description: 'The review is ready for the team.',
       hostId,
     })
@@ -143,7 +143,7 @@ const usage = `<cad-toast-host
         hostId,
         loading: 'Publishing review...',
         success: ({ version }) => `${version} published.`,
-        successDescription: 'The public contract is now available.',
+        successDescription: 'The team can now read the review.',
       },
     )
   })

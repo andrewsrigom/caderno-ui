@@ -27,7 +27,7 @@ const usage = `<cad-steps label="Project setup">
   </cad-step>
   <cad-step status="pending">
     <h3 slot="title">Review and launch</h3>
-    Verify everything looks good and launch.
+    Check names and permissions, then publish.
     <span slot="meta">2 min</span>
     <span slot="status">Pending</span>
   </cad-step>
@@ -39,8 +39,8 @@ const usage = `<cad-steps label="Project setup">
 
 const horizontalUsage = `<cad-steps label="Release sequence" orientation="horizontal">
   <cad-step status="complete" title="Draft">Outline the change.</cad-step>
-  <cad-step status="current" title="Review">Verify the contract.</cad-step>
-  <cad-step status="warning" title="Validate">Check visual regressions.</cad-step>
+  <cad-step status="current" title="Review">Check the examples.</cad-step>
+  <cad-step status="warning" title="Validate">Fix the failing tests.</cad-step>
   <cad-step status="pending" title="Publish">Release the package.</cad-step>
 </cad-steps>`
 ---
@@ -79,7 +79,7 @@ const horizontalUsage = `<cad-steps label="Release sequence" orientation="horizo
       </cad-step>
       <cad-step status="pending">
         <h3 slot="title">Review and launch</h3>
-        Verify everything looks good and launch.
+        Check names and permissions, then publish.
         <span slot="meta">2 min</span>
         <span slot="status">Pending</span>
       </cad-step>
@@ -99,10 +99,9 @@ const horizontalUsage = `<cad-steps label="Release sequence" orientation="horizo
         orientation="horizontal"
       >
         <cad-step status="complete" title="Draft">Outline the change.</cad-step>
-        <cad-step status="current" title="Review">Verify the contract.</cad-step
-        >
+        <cad-step status="current" title="Review">Check the examples.</cad-step>
         <cad-step status="warning" title="Validate"
-          >Check visual regressions.</cad-step
+          >Fix the failing tests.</cad-step
         >
         <cad-step status="pending" title="Publish"
           >Release the package.</cad-step

@@ -24,10 +24,10 @@ const alertExample = `<cad-alert dismissible heading="Unsaved changes" variant="
 >
   <section class="hero">
     <div>
-      <h1>Handwritten UI.</h1>
+      <h1>Caderno UI</h1>
       <p class="hero-copy">
-        Simple, intuitive interfaces with the feel of pen on white paper. Works
-        in HTML, React, Astro, Vue, Svelte, and whatever comes next.
+        UI components with the feel of pen on white paper. For HTML, React,
+        Astro, Vue, and Svelte.
       </p>
       <div class="hero-actions">
         <Button href={`${base}/getting-started/`}>Get started</Button>
@@ -40,21 +40,21 @@ const alertExample = `<cad-alert dismissible heading="Unsaved changes" variant="
       </div>
       <CodeBlock code={install} language="shell" />
     </div>
-    <cad-note class="hero-note" heading="Keep it simple.">
-      Write what matters.<br />
-      Leave room to think.
+    <cad-note class="hero-note" heading="For tomorrow">
+      Review the search results.<br />
+      Bring questions to the meeting.
     </cad-note>
   </section>
 
   <section aria-labelledby="principles-title">
     <div class="section-heading">
-      <h2 id="principles-title">Use it your way</h2>
+      <h2 id="principles-title">How it works</h2>
     </div>
     <div class="feature-grid">
       <Card variant="outlined"
         ><CardContent>
           <cad-icon name="layers" size="26"></cad-icon>
-          <CardTitle>HTML at the core</CardTitle>
+          <CardTitle>Web components</CardTitle>
           <p>
             Use standard web components, with optional React and Astro adapters.
           </p>
@@ -63,7 +63,7 @@ const alertExample = `<cad-alert dismissible heading="Unsaved changes" variant="
       <Card variant="outlined"
         ><CardContent>
           <cad-icon name="brackets" size="26"></cad-icon>
-          <CardTitle>Your content</CardTitle>
+          <CardTitle>Slots</CardTitle>
           <p>
             Compose text, icons, and actions through slots. Keep your
             application logic separate.
@@ -73,7 +73,7 @@ const alertExample = `<cad-alert dismissible heading="Unsaved changes" variant="
       <Card variant="outlined"
         ><CardContent>
           <cad-icon name="spark" size="26"></cad-icon>
-          <CardTitle>Your styles</CardTitle>
+          <CardTitle>CSS variables</CardTitle>
           <p>Change colors, fonts, and spacing with CSS variables.</p>
         </CardContent></Card
       >

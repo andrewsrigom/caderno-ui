@@ -48,8 +48,8 @@ const feedbackExample = `.interactive-paper {
   <header class="page-header">
     <h1>Motion</h1>
     <p>
-      Components use CSS transitions. For page animations and scroll reveals,
-      import the optional motion package.
+      Components use CSS and the Web Animations API. For page animations and
+      scroll reveals, import the optional motion package.
     </p>
   </header>
 
@@ -65,11 +65,11 @@ const feedbackExample = `.interactive-paper {
         </article>
         <article class="motion-note blue" data-motion-note>
           <small>02 · entrance</small>
-          <strong>Related notes settle as one group.</strong>
+          <strong>Animate several notes in sequence.</strong>
         </article>
         <article class="motion-note mint" data-motion-note>
           <small>03 · cleanup</small>
-          <strong>Route changes restore the original page.</strong>
+          <strong>Restore styles when leaving the page.</strong>
         </article>
       </div>
       <cad-button data-motion-replay variant="secondary">
@@ -100,7 +100,7 @@ const feedbackExample = `.interactive-paper {
       <article class="motion-layer" data-motion-layer>
         <span>Scroll</span>
         <h3>Scroll reveals</h3>
-        <p>One-time section reveals without adding weight to other pages.</p>
+        <p>Animate sections when they enter the viewport.</p>
       </article>
     </div>
   </section>

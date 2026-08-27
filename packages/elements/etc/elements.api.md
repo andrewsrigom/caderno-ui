@@ -2477,6 +2477,10 @@ export class CadStep extends LitElement {
 export class CadSteps extends LitElement {
     constructor();
     // (undocumented)
+    connectedCallback(): void;
+    // (undocumented)
+    disconnectedCallback(): void;
+    // (undocumented)
     label: string;
     // (undocumented)
     orientation: CadStepsOrientation;

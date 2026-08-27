@@ -255,43 +255,6 @@ export class CadStep extends LitElement {
       border-bottom: 0;
     }
 
-    @media (width <= 48rem) {
-      :host([data-orientation='horizontal']) .item {
-        grid-template-columns: 2.25rem minmax(0, 1fr);
-        gap: 0.85rem;
-      }
-
-      :host([data-orientation='horizontal']) .connector {
-        top: 2.12rem;
-        right: auto;
-        bottom: -0.2rem;
-        left: 1.04rem;
-        width: 2px;
-        height: auto;
-        background: repeating-linear-gradient(
-          to bottom,
-          var(--_step-track) 0 0.35rem,
-          transparent 0.35rem 0.58rem
-        );
-        transform: rotate(-0.35deg);
-      }
-
-      :host([data-orientation='horizontal'][status='complete']) .connector,
-      :host([data-orientation='horizontal'][status='current']) .connector {
-        background: var(--_step-track);
-      }
-
-      :host([data-orientation='horizontal']) .content {
-        padding-bottom: 1.25rem;
-        border-bottom: 1px solid var(--cad-line, #d7deea);
-      }
-
-      :host([data-orientation='horizontal'][data-last-step]) .content {
-        padding-bottom: 0.15rem;
-        border-bottom: 0;
-      }
-    }
-
     @media (forced-colors: active) {
       :host {
         --_step-accent: CanvasText;
@@ -374,6 +337,7 @@ export class CadSteps extends LitElement {
   static override styles = css`
     :host {
       display: block;
+      min-width: 0;
     }
 
     .list {
@@ -381,28 +345,35 @@ export class CadSteps extends LitElement {
       gap: 0;
     }
 
-    :host([orientation='horizontal']) .list {
-      grid-auto-columns: minmax(10rem, 1fr);
+    :host([data-layout='horizontal']) .list {
+      grid-auto-columns: minmax(0, 1fr);
       grid-auto-flow: column;
       gap: 1.4rem;
-    }
-
-    @media (width <= 48rem) {
-      :host([orientation='horizontal']) .list {
-        grid-auto-columns: auto;
-        grid-auto-flow: row;
-        gap: 0;
-      }
     }
   `
 
   declare label: string
   declare orientation: CadStepsOrientation
 
+  private resizeObserver?: ResizeObserver
+
   constructor() {
     super()
     this.label = 'Steps'
     this.orientation = 'vertical'
+  }
+
+  override connectedCallback() {
+    super.connectedCallback()
+    if (typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => this.syncSteps())
+      this.resizeObserver.observe(this)
+    }
+  }
+
+  override disconnectedCallback() {
+    this.resizeObserver?.disconnect()
+    super.disconnectedCallback()
   }
 
   override render() {
@@ -417,10 +388,24 @@ export class CadSteps extends LitElement {
     const steps = Array.from(
       this.querySelectorAll<CadStep>(':scope > cad-step'),
     )
+    // One measured layout keeps the list and its separate shadow roots aligned,
+    // including browsers that cannot resolve a container query across them.
+    const rem =
+      Number.parseFloat(getComputedStyle(document.documentElement).fontSize) ||
+      16
+    const minimumWidth =
+      Math.max(48, steps.length * 10 + Math.max(0, steps.length - 1) * 1.4) *
+      rem
+    const layout =
+      this.orientation === 'horizontal' &&
+      this.getBoundingClientRect().width > minimumWidth
+        ? 'horizontal'
+        : 'vertical'
+    this.dataset.layout = layout
     steps.forEach((step, index) => {
       step.index = index + 1
       step.setSize = steps.length
-      step.dataset.orientation = this.orientation
+      step.dataset.orientation = layout
       step.toggleAttribute('data-last-step', index === steps.length - 1)
     })
   }

@@ -76,6 +76,7 @@ run('pnpm', [
 run('pnpm', ['exec', 'vite', 'build', '--config', 'vite/vite.config.mjs'])
 run('node', ['react/ssr.mjs'])
 run('pnpm', ['exec', 'astro', 'build', '--root', 'astro'])
+run('node', ['astro/assert-output.mjs'])
 run('pnpm', ['exec', 'tsc', '-p', 'typescript/tsconfig.bundler.json'])
 run('pnpm', ['exec', 'tsc', '-p', 'typescript/tsconfig.nodenext.json'])
 run('node', ['node/imports.mjs'])

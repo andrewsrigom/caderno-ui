@@ -1,5 +1,14 @@
 # @caderno-ui/astro
 
+## 0.4.1
+
+### Patch Changes
+
+- Keep step titles, markers, and metadata in their named slots in Astro. Adapt horizontal steps to the available container width so they do not overlap adjacent content.
+- Updated dependencies
+  - @caderno-ui/elements@0.4.1
+  - @caderno-ui/icons@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

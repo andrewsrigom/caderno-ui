@@ -15,6 +15,8 @@ import Note from '@caderno-ui/astro/Note.astro'
 import Popover from '@caderno-ui/astro/Popover.astro'
 import Progress from '@caderno-ui/astro/Progress.astro'
 import Slider from '@caderno-ui/astro/Slider.astro'
+import Step from '@caderno-ui/astro/Step.astro'
+import Steps from '@caderno-ui/astro/Steps.astro'
 import Switch from '@caderno-ui/astro/Switch.astro'
 import TabContent from '@caderno-ui/astro/TabContent.astro'
 import TabsList from '@caderno-ui/astro/TabsList.astro'
@@ -44,6 +46,16 @@ import Tabs from '@caderno-ui/astro/Tabs.astro'
     <Progress label="Packed progress" value={75} />
     <Slider label="Packed slider" name="packed-slider" value={64} />
     <Switch checked label="Packed switch" name="packed-switch" />
+    <Steps label="Packed method">
+      <Step>
+        <Fragment slot="title"><h3>Contract</h3></Fragment>
+        <span slot="marker">A</span>
+        <p>Define the behavior.</p>
+        <span slot="meta">2 minutes</span>
+        <span slot="status">Ready</span>
+      </Step>
+      <Step title="Verify">Check the evidence.</Step>
+    </Steps>
     <Chart heading="Packed chart">
       <ChartItem label="Notes" value={4}>Notes: 4</ChartItem>
     </Chart>

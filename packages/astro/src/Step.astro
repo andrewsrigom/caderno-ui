@@ -16,6 +16,7 @@ const {
   title,
   value,
 } = Astro.props
+// Spread DOM slot attributes so Astro 5 preserves them inside conditionals.
 ---
 
 <cad-step
@@ -25,11 +26,35 @@ const {
   title={title}
   value={value}
 >
-  <slot name="marker" slot="marker" />
-  <slot name="title" slot="title" />
+  {
+    Astro.slots.has('marker') && (
+      <span {...{ slot: 'marker' }}>
+        <slot name="marker" />
+      </span>
+    )
+  }
+  {
+    Astro.slots.has('title') && (
+      <div {...{ slot: 'title' }}>
+        <slot name="title" />
+      </div>
+    )
+  }
   <slot />
-  <slot name="meta" slot="meta" />
-  <slot name="status" slot="status" />
+  {
+    Astro.slots.has('meta') && (
+      <div {...{ slot: 'meta' }}>
+        <slot name="meta" />
+      </div>
+    )
+  }
+  {
+    Astro.slots.has('status') && (
+      <span {...{ slot: 'status' }}>
+        <slot name="status" />
+      </span>
+    )
+  }
 </cad-step>
 
 <script>

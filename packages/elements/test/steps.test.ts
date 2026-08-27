@@ -43,6 +43,7 @@ describe('cad-steps', () => {
 
   it('keeps connector layout synchronized with orientation', async () => {
     const steps = document.createElement('cad-steps')
+    steps.getBoundingClientRect = () => ({ width: 1000 }) as DOMRect
     const step = document.createElement('cad-step')
     steps.append(step)
     document.body.append(steps)
@@ -52,6 +53,7 @@ describe('cad-steps', () => {
     await steps.updateComplete
 
     expect(step.dataset.orientation).toBe('horizontal')
+    expect(steps.dataset.layout).toBe('horizontal')
   })
 
   it('preserves an explicit marker value', async () => {

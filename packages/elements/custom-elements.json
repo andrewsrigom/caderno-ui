@@ -12880,6 +12880,14 @@
             },
             {
               "kind": "field",
+              "name": "resizeObserver",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
               "name": "syncSteps",
               "privacy": "private"
             }

@@ -35,6 +35,9 @@ The automated gate does not replace the [manual accessibility checks](accessibil
 Record their results before authorizing publication. A successful dry run is a
 package verification result, not evidence of NVDA or VoiceOver testing.
 
+See the [0.5.0 candidate validation record](validation/0.5.0.md) for the local
+results and outstanding manual verification.
+
 `pnpm docs:check` includes the Next.js static export under
 `/caderno-ui/examples/react/`. The hosted example must not be described as an
 SSR deployment. The independent `next start` consumer is the SSR evidence.

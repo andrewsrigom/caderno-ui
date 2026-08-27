@@ -4,11 +4,18 @@ import '@caderno-ui/tokens/notebook.css'
 import Alert from '@caderno-ui/astro/Alert.astro'
 import Badge from '@caderno-ui/astro/Badge.astro'
 import Bookmark from '@caderno-ui/astro/Bookmark.astro'
+import Card from '@caderno-ui/astro/Card.astro'
 import Chart from '@caderno-ui/astro/Chart.astro'
 import ChartItem from '@caderno-ui/astro/ChartItem.astro'
+import Drawer from '@caderno-ui/astro/Drawer.astro'
+import Footer from '@caderno-ui/astro/Footer.astro'
+import FooterGroup from '@caderno-ui/astro/FooterGroup.astro'
+import Header from '@caderno-ui/astro/Header.astro'
 import Note from '@caderno-ui/astro/Note.astro'
-import Paper from '@caderno-ui/astro/Paper.astro'
+import Popover from '@caderno-ui/astro/Popover.astro'
 import Progress from '@caderno-ui/astro/Progress.astro'
+import Slider from '@caderno-ui/astro/Slider.astro'
+import Switch from '@caderno-ui/astro/Switch.astro'
 import TabContent from '@caderno-ui/astro/TabContent.astro'
 import TabsList from '@caderno-ui/astro/TabsList.astro'
 import TabTrigger from '@caderno-ui/astro/TabTrigger.astro'
@@ -19,11 +26,24 @@ import Tabs from '@caderno-ui/astro/Tabs.astro'
 <html lang="en">
   <head><title>Caderno UI packed Astro consumer</title></head>
   <body>
+    <Header label="Packed Astro header">
+      <strong slot="brand">Caderno UI</strong>
+      <a href="/components">Components</a>
+    </Header>
     <Alert title="Packed Astro facade">Static fallback remains readable.</Alert>
     <Badge tone="mint">Ready</Badge>
     <Bookmark id="packed" label="Save packed fixture" />
     <Note heading="Packed note">Static note content.</Note>
+    <button id="packed-popover-trigger" type="button">Open context</button>
+    <Popover anchor="packed-popover-trigger" heading="Packed popover">
+      Static popover content.
+    </Popover>
+    <Drawer heading="Packed drawer" placement="right">
+      Static drawer content.
+    </Drawer>
     <Progress label="Packed progress" value={75} />
+    <Slider label="Packed slider" name="packed-slider" value={64} />
+    <Switch checked label="Packed switch" name="packed-switch" />
     <Chart heading="Packed chart">
       <ChartItem label="Notes" value={4}>Notes: 4</ChartItem>
     </Chart>
@@ -32,8 +52,15 @@ import Tabs from '@caderno-ui/astro/Tabs.astro'
         <TabTrigger label="Notes" value="notes">Notes</TabTrigger>
       </TabsList>
       <TabContent value="notes">
-        <Paper margin pattern="ruled">Static tab content.</Paper>
+        <Card folded={false}>Static tab content.</Card>
       </TabContent>
     </Tabs>
+    <Footer label="Packed Astro footer">
+      <strong slot="brand">Caderno UI</strong>
+      <FooterGroup heading="Product">
+        <a href="/components">Components</a>
+      </FooterGroup>
+      <small slot="bottom">Packed Astro consumer</small>
+    </Footer>
   </body>
 </html>

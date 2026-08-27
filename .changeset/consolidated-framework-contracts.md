@@ -13,7 +13,7 @@ Consolidate framework integration without changing the visual direction.
 - Publish React component entrypoints with `use client` for App Router consumers.
 - Map native form `input` and `change` events explicitly. React `onInput` reports editing; `onChange` reports native commitment, unlike React's native text inputs.
 - Reset form controls to initial properties as well as initial HTML attributes.
-- Synchronize checkbox state and FormData before dispatching `input`.
+- Synchronize checkbox state and FormData before dispatching `input`; keep checkbox and switch edit/commit events consistent even when React rerenders between native events.
 - Do not recreate dismissed toasts or unmounted hosts when asynchronous tasks settle.
 - Add an isolated Next.js notes example and packed React, Next, Vue and Svelte consumers.
 - Keep feedback and link inks readable across themes, without out-of-sync palette transitions.

@@ -2,6 +2,7 @@
 import { act, createElement as h, createRef, StrictMode, useState } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { userEvent } from 'vitest/browser'
 import type { CadInput as InputElement } from '@caderno-ui/elements/input'
 import { CadInput } from '../src/input.js'
 import { CadTextarea } from '../src/textarea.js'
@@ -37,6 +38,59 @@ afterEach(() => {
 })
 
 describe('React form contracts in a browser', () => {
+  it.each([
+    ['checkbox', CadCheckbox],
+    ['switch', CadSwitch],
+    ['radio', CadRadio],
+  ] as const)(
+    'keeps %s edit and commit consistent when onInput rerenders React',
+    async (tag, Component) => {
+      const commits = vi.fn()
+      function Editor() {
+        const [checked, setChecked] = useState(false)
+        const [inputs, setInputs] = useState<boolean[]>([])
+        return h(
+          'form',
+          null,
+          h(Component, {
+            label: 'Reviewed',
+            name: 'reviewed',
+            checked,
+            onInput: (event) => {
+              const next = event.currentTarget.checked
+              setInputs((values) => [...values, next])
+            },
+            onChange: (event) => {
+              commits(event.currentTarget.checked)
+              setChecked(event.currentTarget.checked)
+            },
+          }),
+          h('output', null, JSON.stringify(inputs)),
+        )
+      }
+      await act(async () => root.render(h(StrictMode, null, h(Editor))))
+      await updated()
+      const host = container.querySelector(`cad-${tag}`)!
+      // The browser's native event loop differs from HTMLElement.click() inside act.
+      // Use normal React scheduling here: act would mask the input/change race.
+      Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: false })
+      try {
+        await userEvent.click(host.shadowRoot!.querySelector('label')!)
+        await expect
+          .poll(() => container.querySelector('output')?.textContent)
+          .toBe('[true]')
+        expect(commits.mock.calls).toEqual([[true]])
+        await updated()
+        expect(host.shadowRoot!.querySelector('input')!.checked).toBe(true)
+        expect(
+          new FormData(container.querySelector('form')!).get('reviewed'),
+        ).toBe('on')
+      } finally {
+        Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true })
+      }
+    },
+  )
+
   it('exposes updated checkbox state and FormData during onInput', async () => {
     const inputs: Array<[boolean, FormDataEntryValue | null]> = []
     const changes = vi.fn()

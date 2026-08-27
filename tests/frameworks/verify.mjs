@@ -96,6 +96,12 @@ export async function verifyFrameworks({ evidence, next }) {
             .getByRole('textbox', { name: 'Body', exact: true })
             .fill('Edited body')
           await page.getByRole('switch', { name: 'Auto-save' }).press('Space')
+          await expect(
+            page.getByRole('switch', { name: 'Auto-save' }),
+          ).toBeChecked()
+          await expect(page.getByLabel('Switch input states')).toHaveText(
+            '[true]',
+          )
           await page
             .getByRole('radio', { name: 'Personal note' })
             .press('Space')

@@ -430,6 +430,13 @@ export class CadSwitch extends LitElement {
     if (!(control instanceof HTMLInputElement)) return
     this.checked = control.checked
     this.syncFormState()
+    // Discrete edit and commit share one state, as with checkbox and radio.
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
     this.dispatchEvent(
       new Event('change', {
         bubbles: true,
@@ -440,16 +447,6 @@ export class CadSwitch extends LitElement {
 
   private handleInput(event: Event): void {
     event.stopPropagation()
-    const control = event.currentTarget
-    if (!(control instanceof HTMLInputElement)) return
-    this.checked = control.checked
-    this.syncFormState()
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
   }
 
   private syncFormState(): void {

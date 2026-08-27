@@ -379,6 +379,14 @@ export class CadCheckbox extends LitElement {
     this.checked = control.checked
     this.indeterminate = control.indeterminate
     this.syncFormState()
+    // A checkbox edit is also its commit. Deliver both notifications together,
+    // before a controlled consumer can render between the native events.
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
     this.dispatchEvent(
       new Event('change', {
         bubbles: true,
@@ -389,17 +397,6 @@ export class CadCheckbox extends LitElement {
 
   private handleInput(event: Event): void {
     event.stopPropagation()
-    const control = event.currentTarget
-    if (!(control instanceof HTMLInputElement)) return
-    this.checked = control.checked
-    this.indeterminate = control.indeterminate
-    this.syncFormState()
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
   }
 
   private syncFormState(): void {

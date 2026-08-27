@@ -20,6 +20,7 @@ function App() {
   const [checkboxInputs, setCheckboxInputs] = useState<boolean[]>([])
   const [body, setBody] = useState('Original body')
   const [autoSave, setAutoSave] = useState(false)
+  const [switchInputs, setSwitchInputs] = useState<boolean[]>([])
   const [kind, setKind] = useState(false)
   const [depth, setDepth] = useState(60)
   const [disabled, setDisabled] = useState(false)
@@ -77,6 +78,10 @@ function App() {
             label="Auto-save"
             name="autoSave"
             checked={autoSave}
+            onInput={(event) => {
+              const next = event.currentTarget.checked
+              setSwitchInputs((values) => [...values, next])
+            }}
             onChange={(event) => setAutoSave(event.currentTarget.checked)}
           />
           <CadRadio
@@ -116,6 +121,9 @@ function App() {
       <output aria-label="Changes">{changes}</output>
       <output aria-label="Checkbox input states">
         {JSON.stringify(checkboxInputs)}
+      </output>
+      <output aria-label="Switch input states">
+        {JSON.stringify(switchInputs)}
       </output>
       <output aria-label="Form data">{data}</output>
       <output aria-label="Route">{location.pathname}</output>

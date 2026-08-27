@@ -8,6 +8,9 @@
 - React forms explicitly map native `input` and `change`. Use `onInput` for
   controlled text editing, not the per-keystroke `onChange` convention of React
   native inputs. Read `.value` / `.checked` from `event.currentTarget`.
+- Checkbox, switch and radio emit `input` followed by `change` for the same
+  discrete action, with the updated state available to both handlers. A React
+  render triggered by the input handler cannot revert the pending commit.
 - Reset controlled React state in `form.onReset`. Native form reset now restores
   the initial property value, including values provided by adapters.
 - Component React subpaths retain `use client`. In Next.js keep event callbacks

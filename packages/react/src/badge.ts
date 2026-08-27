@@ -1,3 +1,5 @@
+'use client'
+
 import { CadBadge as CadBadgeElement } from '@caderno-ui/elements/badge'
 import { createComponent } from '@lit/react'
 import React from 'react'

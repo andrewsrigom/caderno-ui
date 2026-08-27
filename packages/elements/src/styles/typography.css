@@ -1,0 +1,49 @@
+/* Public text roles for native HTML. Share these with components and prose. */
+.cad-type-display,
+.cad-type-heading,
+.cad-type-title,
+.cad-type-label,
+.cad-type-body,
+.cad-type-meta,
+.cad-type-code {
+  margin: 0;
+  color: var(--cad-ink);
+  overflow-wrap: anywhere;
+}
+
+.cad-type-display {
+  font: 700 var(--cad-type-display-size) / var(--cad-type-display-line-height)
+    var(--cad-type-display-font);
+}
+
+.cad-type-heading {
+  font: 700 var(--cad-type-heading-size) / var(--cad-type-heading-line-height)
+    var(--cad-type-heading-font);
+}
+
+.cad-type-title {
+  color: var(--cad-link);
+  font: var(--cad-hand-weight-strong) var(--cad-type-title-size) /
+    var(--cad-type-title-line-height) var(--cad-type-title-font);
+}
+
+.cad-type-label {
+  color: var(--cad-link);
+  font: var(--cad-hand-weight-strong) var(--cad-type-label-size) / 1.4
+    var(--cad-type-label-font);
+}
+
+.cad-type-body {
+  font: var(--cad-type-body-size) / var(--cad-type-body-line-height)
+    var(--cad-type-body-font);
+}
+
+.cad-type-meta {
+  color: var(--cad-ink-muted);
+  font: var(--cad-type-meta-size) / var(--cad-type-meta-line-height)
+    var(--cad-type-meta-font);
+}
+
+.cad-type-code {
+  font: var(--cad-type-code-size) / 1.6 var(--cad-type-code-font);
+}

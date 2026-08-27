@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadSlider as CadSliderElement,
   type CadSliderInputEvent,
@@ -10,6 +12,12 @@ export const CadSlider = createComponent({
   displayName: 'CadSlider',
   elementClass: CadSliderElement,
   events: {
+    onInput: 'input' as EventName<
+      Event & { currentTarget: CadSliderElement; target: CadSliderElement }
+    >,
+    onChange: 'change' as EventName<
+      Event & { currentTarget: CadSliderElement; target: CadSliderElement }
+    >,
     onSliderInput: 'cad-slider-input' as EventName<CadSliderInputEvent>,
     onSliderChange: 'cad-slider-change' as EventName<CadSliderChangeEvent>,
   },

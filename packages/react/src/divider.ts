@@ -1,3 +1,5 @@
+'use client'
+
 import { CadDivider as CadDividerElement } from '@caderno-ui/elements/divider'
 import { createComponent } from '@lit/react'
 import React from 'react'

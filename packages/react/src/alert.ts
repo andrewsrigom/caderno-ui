@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadAlert as CadAlertElement,
   type CadDismissEvent,

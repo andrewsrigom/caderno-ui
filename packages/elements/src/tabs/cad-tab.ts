@@ -114,9 +114,8 @@ export class CadTabTrigger extends LitElement {
       line-height: 1;
       cursor: pointer;
       transform: rotate(-0.15deg);
-      transition: background-color
-        var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
-        var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
+      /* Change foreground and background together when the theme changes. */
+      transition: none;
     }
 
     .tab:hover:not(:disabled, [aria-selected='true']) {

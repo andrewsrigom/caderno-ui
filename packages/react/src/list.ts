@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadList as CadListElement,
   CadListItem as CadListItemElement,

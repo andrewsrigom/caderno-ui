@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadTable as CadTableElement,
   CadTableColumn as CadTableColumnElement,

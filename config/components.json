@@ -317,7 +317,18 @@
       "elements": [
         {
           "className": "CadInput",
-          "events": [],
+          "events": [
+            {
+              "eventName": "input",
+              "propName": "onInput",
+              "typeName": "Event"
+            },
+            {
+              "eventName": "change",
+              "propName": "onChange",
+              "typeName": "Event"
+            }
+          ],
           "tagName": "cad-input"
         }
       ],
@@ -330,7 +341,18 @@
       "elements": [
         {
           "className": "CadTextarea",
-          "events": [],
+          "events": [
+            {
+              "eventName": "input",
+              "propName": "onInput",
+              "typeName": "Event"
+            },
+            {
+              "eventName": "change",
+              "propName": "onChange",
+              "typeName": "Event"
+            }
+          ],
           "tagName": "cad-textarea"
         }
       ],
@@ -343,7 +365,18 @@
       "elements": [
         {
           "className": "CadCheckbox",
-          "events": [],
+          "events": [
+            {
+              "eventName": "input",
+              "propName": "onInput",
+              "typeName": "Event"
+            },
+            {
+              "eventName": "change",
+              "propName": "onChange",
+              "typeName": "Event"
+            }
+          ],
           "tagName": "cad-checkbox"
         }
       ],
@@ -356,7 +389,18 @@
       "elements": [
         {
           "className": "CadSwitch",
-          "events": [],
+          "events": [
+            {
+              "eventName": "input",
+              "propName": "onInput",
+              "typeName": "Event"
+            },
+            {
+              "eventName": "change",
+              "propName": "onChange",
+              "typeName": "Event"
+            }
+          ],
           "tagName": "cad-switch"
         }
       ],
@@ -370,6 +414,16 @@
         {
           "className": "CadSlider",
           "events": [
+            {
+              "eventName": "input",
+              "propName": "onInput",
+              "typeName": "Event"
+            },
+            {
+              "eventName": "change",
+              "propName": "onChange",
+              "typeName": "Event"
+            },
             {
               "eventName": "cad-slider-input",
               "propName": "onSliderInput",
@@ -399,7 +453,18 @@
       "elements": [
         {
           "className": "CadRadio",
-          "events": [],
+          "events": [
+            {
+              "eventName": "input",
+              "propName": "onInput",
+              "typeName": "Event"
+            },
+            {
+              "eventName": "change",
+              "propName": "onChange",
+              "typeName": "Event"
+            }
+          ],
           "tagName": "cad-radio"
         }
       ],

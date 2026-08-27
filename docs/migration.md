@@ -1,5 +1,25 @@
 # SeniorPath migration
 
+## Upgrading from 0.4 to 0.5
+
+- Update all installed `@caderno-ui/*` packages together; remove development
+  `link:` / `file:` overrides from the delivery lockfile.
+- Tooling now requires Node 22.12 or newer (CI: 22/24).
+- React forms explicitly map native `input` and `change`. Use `onInput` for
+  controlled text editing, not the per-keystroke `onChange` convention of React
+  native inputs. Read `.value` / `.checked` from `event.currentTarget`.
+- Reset controlled React state in `form.onReset`. Native form reset now restores
+  the initial property value, including values provided by adapters.
+- Component React subpaths retain `use client`. In Next.js keep event callbacks
+  in client files; native slotted content remains server-renderable. This does
+  not provide Lit shadow-root SSR.
+- Async toast completion no longer revives dismissed notifications or removed
+  hosts. Mount a host for the lifetime of the flow that owns the feedback.
+- List item `action` slots accept consumer-owned anchors, router links or buttons.
+  Use `compact` for the borderless list without changing markers or numbering.
+- Shared `typography.css` and `prose.css` own editorial text. Remove duplicated
+  product-level styling rather than overriding library parts to recreate it.
+
 ## Upgrading from 0.3 to 0.4
 
 Update all installed `@caderno-ui/*` packages to `0.4.0` together. Keep imports
@@ -31,28 +51,12 @@ Run integration tests in an isolated copy with temporary content and fresh
 browser contexts. Never point fixture generation at the developer's content
 directory or reuse the developer's browser storage.
 
-## Current slice
+## Consumer boundary
 
-The first migration proves the shared architecture with components that cover different contracts:
-
-- `cad-alert`: slots, variants, dismiss action, and a composed event.
-- `cad-bookmark`: pressed state, storage persistence, and a composed event.
-- `cad-tabs` with `cad-tab`: declarative children, keyboard navigation, named tab panels, and no-JavaScript content.
-- `cad-icon`: the shared renderer for the existing 40 SeniorPath doodles.
-
-SeniorPath keeps its existing Astro component imports as compatibility facades. The facades now delegate to `@caderno-ui/astro`, so product pages can migrate incrementally without a broad call-site rewrite.
-
-SeniorPath consumes published package versions. Local links may be used while
-developing a shared fix, but must not remain in a release lockfile.
-
-## Recommended sequence
-
-1. Publish the initial package set and consume exact compatible versions in SeniorPath.
-2. Migrate low-state primitives next: button, link, badge, divider, sticker, and callout.
-3. Migrate form controls with browser-level accessibility tests.
-4. Migrate composed feedback components: toast, modal, tooltip, and empty state.
-5. Migrate navigation and content recipes after their application-specific behavior has been separated from the visual primitive.
-6. Add a Vue adapter only when a real Vue consumer exists; validate it against the same custom-element fixtures.
+SeniorPath keeps product content, routes and application layout. Components,
+typography, tokens and interactions come from Caderno UI. New shared fixes must
+land in the library and be demonstrated there before updating the consumer.
+Vue and Svelte currently use native custom elements, without new adapters.
 
 ## Acceptance checks for every component
 

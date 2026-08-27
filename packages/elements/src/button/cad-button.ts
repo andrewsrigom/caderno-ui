@@ -20,6 +20,11 @@ export type CadButtonVariant = 'ghost' | 'link' | 'primary' | 'secondary'
  * @cssprop --cad-button-ink - Per-instance foreground color.
  */
 export class CadButton extends LitElement {
+  static override shadowRootOptions: ShadowRootInit = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  }
+
   static override properties = {
     disabled: { reflect: true, type: Boolean },
     form: { type: String },

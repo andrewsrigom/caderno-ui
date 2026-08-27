@@ -266,11 +266,6 @@ export class CadRadio extends LitElement {
     )
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    if (!this.hasUpdated) this.defaultChecked = this.hasAttribute('checked')
-  }
-
   override click(): void {
     this.control?.click()
   }
@@ -306,6 +301,7 @@ export class CadRadio extends LitElement {
   }
 
   protected override firstUpdated(): void {
+    this.defaultChecked = this.checked
     if (this.checked) this.uncheckPeers()
     this.refreshGroup()
   }

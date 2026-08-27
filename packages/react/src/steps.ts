@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadSteps as CadStepsElement,
   CadStep as CadStepElement,

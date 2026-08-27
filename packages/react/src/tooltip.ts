@@ -1,3 +1,5 @@
+'use client'
+
 import { CadTooltip as CadTooltipElement } from '@caderno-ui/elements/tooltip'
 import { createComponent } from '@lit/react'
 import React from 'react'

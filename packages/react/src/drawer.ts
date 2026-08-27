@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadDrawer as CadDrawerElement,
   type CadDrawerCloseEvent,

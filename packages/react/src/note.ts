@@ -1,3 +1,5 @@
+'use client'
+
 import { CadNote as CadNoteElement } from '@caderno-ui/elements/note'
 import { createComponent } from '@lit/react'
 import React from 'react'

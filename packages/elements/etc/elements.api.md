@@ -451,6 +451,8 @@ export class CadButton extends LitElement {
     // (undocumented)
     render(): TemplateResult<1>;
     // (undocumented)
+    static shadowRootOptions: ShadowRootInit;
+    // (undocumented)
     size: CadButtonSize;
     // (undocumented)
     static styles: CSSResult;
@@ -594,8 +596,6 @@ export class CadCheckbox extends LitElement {
     checkValidity(): boolean;
     // (undocumented)
     click(): void;
-    // (undocumented)
-    connectedCallback(): void;
     // (undocumented)
     disabled: boolean;
     // (undocumented)
@@ -1327,8 +1327,6 @@ export class CadInput extends LitElement {
     // (undocumented)
     checkValidity(): boolean;
     // (undocumented)
-    connectedCallback(): void;
-    // (undocumented)
     disabled: boolean;
     // (undocumented)
     error: string;
@@ -1627,9 +1625,15 @@ export type CadLinkVariant = 'highlight' | 'plain' | 'underline';
 export class CadList extends LitElement {
     constructor();
     // (undocumented)
+    compact: boolean;
+    // (undocumented)
     label: string;
     // (undocumented)
     static properties: {
+        compact: {
+            reflect: boolean;
+            type: BooleanConstructor;
+        };
         label: {
             type: StringConstructor;
         };
@@ -1652,6 +1656,8 @@ export class CadList extends LitElement {
 export class CadListItem extends LitElement {
     constructor();
     // (undocumented)
+    compact: boolean;
+    // (undocumented)
     current: boolean;
     // (undocumented)
     disabled: boolean;
@@ -1661,6 +1667,10 @@ export class CadListItem extends LitElement {
     index: number;
     // (undocumented)
     static properties: {
+        compact: {
+            attribute: boolean;
+            state: boolean;
+        };
         current: {
             reflect: boolean;
             type: BooleanConstructor;
@@ -1694,6 +1704,8 @@ export class CadListItem extends LitElement {
     rel: string;
     // (undocumented)
     render(): TemplateResult<1>;
+    // (undocumented)
+    static shadowRootOptions: ShadowRootInit;
     // (undocumented)
     static styles: CSSResult;
     // (undocumented)
@@ -2098,8 +2110,6 @@ export class CadRadio extends LitElement {
     checkValidity(): boolean;
     // (undocumented)
     click(): void;
-    // (undocumented)
-    connectedCallback(): void;
     // (undocumented)
     disabled: boolean;
     // (undocumented)
@@ -2562,8 +2572,6 @@ export class CadSwitch extends LitElement {
     // (undocumented)
     click(): void;
     // (undocumented)
-    connectedCallback(): void;
-    // (undocumented)
     disabled: boolean;
     // (undocumented)
     protected firstUpdated(): void;
@@ -2927,8 +2935,6 @@ export class CadTextarea extends LitElement {
     checkValidity(): boolean;
     // (undocumented)
     cols: number;
-    // (undocumented)
-    connectedCallback(): void;
     // (undocumented)
     disabled: boolean;
     // (undocumented)

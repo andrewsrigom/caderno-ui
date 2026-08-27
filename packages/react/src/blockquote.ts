@@ -1,3 +1,5 @@
+'use client'
+
 import { CadBlockquote as CadBlockquoteElement } from '@caderno-ui/elements/blockquote'
 import { createComponent } from '@lit/react'
 import React from 'react'

@@ -14,7 +14,9 @@ function renderReactEntry(entry) {
   const importedTypes = [
     ...new Set(
       entry.elements.flatMap((element) =>
-        element.events.map((event) => event.typeName),
+        element.events
+          .map((event) => event.typeName)
+          .filter((name) => name !== 'Event'),
       ),
     ),
   ]
@@ -25,7 +27,7 @@ function renderReactEntry(entry) {
     ...elementImports,
     ...importedTypes.map((name) => `type ${name}`),
   ]
-  const hasEvents = importedTypes.length > 0
+  const hasEvents = entry.elements.some((element) => element.events.length > 0)
   const litReactImport = hasEvents
     ? "import { createComponent, type EventName } from '@lit/react'"
     : "import { createComponent } from '@lit/react'"
@@ -33,7 +35,7 @@ function renderReactEntry(entry) {
     .map((element) => {
       const eventLines = element.events.map(
         (event) =>
-          `    ${event.propName}: '${event.eventName}' as EventName<${event.typeName}>,`,
+          `    ${event.propName}: '${event.eventName}' as EventName<${event.typeName === 'Event' ? `Event & { currentTarget: ${element.className}Element; target: ${element.className}Element }` : event.typeName}>,`,
       )
       const events =
         eventLines.length > 0
@@ -51,7 +53,7 @@ function renderReactEntry(entry) {
       ? `\n\nexport {\n${quoteList(entry.valueExports)}\n} from '@caderno-ui/elements/${entry.name}'`
       : ''
 
-  return `import {\n${quoteList(imports)}\n} from '@caderno-ui/elements/${entry.name}'\n${litReactImport}\nimport React from 'react'\n\n${components}${typeExports}${valueExports}\n`
+  return `'use client'\n\nimport {\n${quoteList(imports)}\n} from '@caderno-ui/elements/${entry.name}'\n${litReactImport}\nimport React from 'react'\n\n${components}${typeExports}${valueExports}\n`
 }
 
 function renderIndex(entries) {

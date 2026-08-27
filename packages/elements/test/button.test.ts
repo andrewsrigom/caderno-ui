@@ -8,6 +8,17 @@ afterEach(() => {
 })
 
 describe('cad-button', () => {
+  it('delegates host focus to the native control', async () => {
+    const element = document.createElement('cad-button')
+    element.textContent = 'Open menu'
+    document.body.append(element)
+    await element.updateComplete
+    element.focus()
+    expect(element.shadowRoot?.activeElement).toBe(
+      element.shadowRoot?.querySelector('button'),
+    )
+  })
+
   it('renders a native button with composable start and end slots', async () => {
     expectRegistered('cad-button')
     const element = document.createElement('cad-button')

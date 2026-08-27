@@ -1,3 +1,5 @@
+'use client'
+
 import { CadLink as CadLinkElement } from '@caderno-ui/elements/link'
 import { createComponent } from '@lit/react'
 import React from 'react'

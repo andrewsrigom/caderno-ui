@@ -5,17 +5,25 @@ import { renderSystemIcon } from '../internal/system-icon.js'
 export type CadListVariant = 'bullet' | 'numbered'
 
 /**
- * One navigable or static row inside `cad-list`.
+ * A content item inside `cad-list`. Compose links or buttons in the default
+ * slot. The optional href is a convenience for a single native link.
  *
- * @slot - Item label.
- * @csspart arrow - Trailing direction mark.
+ * @slot - Item content, including consumer-owned links or buttons.
+ * @slot action - One native link or button owning the entire interactive row.
+ * @csspart arrow - Decorative trailing arrow on interactive rows.
  * @csspart item - Accessible list item.
  * @csspart label - Visible item label.
  * @csspart marker - Bullet or number marker.
  * @csspart row - Native link or static row.
  */
 export class CadListItem extends LitElement {
+  static override shadowRootOptions: ShadowRootInit = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  }
+
   static override properties = {
+    compact: { attribute: false, state: true },
     current: { reflect: true, type: Boolean },
     disabled: { reflect: true, type: Boolean },
     href: { type: String },
@@ -34,8 +42,9 @@ export class CadListItem extends LitElement {
     }
 
     .row {
+      position: relative;
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-columns: auto minmax(0, 1fr);
       gap: 1rem;
       align-items: center;
       box-sizing: border-box;
@@ -54,11 +63,33 @@ export class CadListItem extends LitElement {
       transform: rotate(-0.06deg);
     }
 
+    .row.compact {
+      min-height: 0;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      transform: none;
+    }
+
+    ::slotted(a:not([slot='action'])) {
+      color: var(--cad-link, #005bac);
+      text-decoration: underline;
+      text-decoration-color: var(--cad-link-mark, #ef4d4f);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.2em;
+      cursor: pointer;
+    }
+
+    ::slotted(a:not([slot='action']):hover) {
+      text-decoration-thickness: 3px;
+    }
+
     a.row {
       cursor: pointer;
     }
 
-    a.row:hover {
+    a.row:hover,
+    .row.has-action:hover {
       background: color-mix(
         in srgb,
         var(--cad-post-it-blue-bg, #cfe2ff) 24%,
@@ -66,7 +97,9 @@ export class CadListItem extends LitElement {
       );
     }
 
-    a.row:focus-visible {
+    a.row:focus-visible,
+    ::slotted(a:focus-visible),
+    ::slotted(button[slot='action']:focus-visible) {
       outline: var(
         --cad-focus-outline,
         2px dashed var(--cad-focus-ring, var(--cad-link, #005bac))
@@ -91,6 +124,12 @@ export class CadListItem extends LitElement {
       transform: rotate(0.08deg);
     }
 
+    :host([current]) .row.compact {
+      background: transparent;
+      font-weight: 700;
+      transform: none;
+    }
+
     :host([disabled]) .row {
       cursor: not-allowed;
       opacity: 0.42;
@@ -105,6 +144,7 @@ export class CadListItem extends LitElement {
       background: currentColor;
       border-radius: 50%;
       transform: rotate(-2deg);
+      user-select: none;
     }
 
     :host([data-variant='numbered']) .marker {
@@ -123,8 +163,32 @@ export class CadListItem extends LitElement {
       overflow-wrap: anywhere;
     }
 
+    .row.interactive {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .row.has-action {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+      padding: 0;
+    }
+
+    .row.has-action .marker {
+      position: absolute;
+      inset-inline-start: 1rem;
+      top: 50%;
+      z-index: 1;
+      pointer-events: none;
+      transform: translateY(-50%) rotate(-2deg);
+    }
+
+    .row.has-action.compact .marker {
+      inset-inline-start: 0;
+    }
+
     .arrow {
       display: inline-grid;
+      pointer-events: none;
       transform: rotate(-1deg);
     }
 
@@ -133,9 +197,62 @@ export class CadListItem extends LitElement {
       height: 1.35rem;
     }
 
+    .row.has-action .arrow {
+      position: absolute;
+      inset-inline-end: 1rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-1deg);
+    }
+
+    ::slotted([slot='action']) {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      width: 100%;
+      min-height: calc(3.25rem - 2 * var(--cad-border-width, 1.5px));
+      padding: 0.7rem 3.35rem 0.7rem 3.25rem;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      font: inherit;
+      text-align: start;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    :host([data-variant='numbered']) ::slotted([slot='action']) {
+      min-height: calc(2.15rem + 1.4rem);
+      padding-inline-start: 4.15rem;
+    }
+
+    .compact ::slotted([slot='action']) {
+      min-height: 1.25em;
+      padding-block: 0;
+      padding-inline-start: 2.25rem;
+    }
+
+    :host([data-variant='numbered']) .compact ::slotted([slot='action']) {
+      min-height: 2.15rem;
+      padding-inline-start: 3.15rem;
+    }
+
+    :host(:has(> [slot='action']:disabled)) .row {
+      opacity: 0.42;
+    }
+
+    ::slotted([slot='action']:disabled) {
+      cursor: not-allowed;
+    }
+
     @media (forced-colors: active) {
       .row {
         border-color: CanvasText;
+      }
+
+      a.row,
+      ::slotted(a) {
+        color: LinkText;
       }
 
       :host([current]) .row {
@@ -145,6 +262,7 @@ export class CadListItem extends LitElement {
     }
   `
 
+  declare compact: boolean
   declare current: boolean
   declare disabled: boolean
   declare href: string
@@ -156,6 +274,7 @@ export class CadListItem extends LitElement {
 
   constructor() {
     super()
+    this.compact = false
     this.current = false
     this.disabled = false
     this.href = ''
@@ -171,23 +290,29 @@ export class CadListItem extends LitElement {
   }
 
   override render() {
+    const hasAction = Boolean(this.querySelector(':scope > [slot="action"]'))
+    const linked = Boolean(this.href && !this.disabled && !hasAction)
+    const interactive = hasAction || Boolean(this.href)
+    const rowClass = `row${this.compact ? ' compact' : ''}${interactive ? ' interactive' : ''}${hasAction ? ' has-action' : ''}`
     const content = html`
       <span aria-hidden="true" class="marker" part="marker">
         ${this.variant === 'numbered' ? this.value || this.index : nothing}
       </span>
-      <span class="label" part="label"><slot></slot></span>
-      <span aria-hidden="true" class="arrow" part="arrow">
-        ${renderSystemIcon('arrow-right')}
+      <span class="label" part="label">
+        <slot name="action" @slotchange=${this.onActionSlotChange}
+          ><slot></slot
+        ></slot>
       </span>
+      ${interactive ? html`<span aria-hidden="true" class="arrow" part="arrow">${renderSystemIcon('arrow-right')}</span>` : nothing}
     `
 
     return html`
       <div class="item" part="item" role="listitem">
         ${
-          this.href && !this.disabled
+          linked
             ? html`<a
                 aria-current=${this.current ? 'page' : nothing}
-                class="row"
+                class=${rowClass}
                 href=${this.href}
                 part="row"
                 rel=${this.rel || nothing}
@@ -197,7 +322,7 @@ export class CadListItem extends LitElement {
             : html`<span
                 aria-current=${this.current ? 'page' : nothing}
                 aria-disabled=${this.disabled ? 'true' : nothing}
-                class="row"
+                class=${rowClass}
                 part="row"
                 >${content}</span
               >`
@@ -205,16 +330,23 @@ export class CadListItem extends LitElement {
       </div>
     `
   }
+
+  private onActionSlotChange = (): void => {
+    this.requestUpdate()
+  }
 }
 
 /**
- * A hand-drawn bullet or numbered list for navigable collections.
+ * A handwritten list with individual frames and blue markers. The optional
+ * compact option removes frames and padding, preserving markers and readable gaps. A link
+ * or button in the action slot owns navigation and interaction.
  *
  * @slot - Direct `cad-list-item` children.
  * @csspart list - Accessible list container.
  */
 export class CadList extends LitElement {
   static override properties = {
+    compact: { reflect: true, type: Boolean },
     label: { type: String },
     variant: { reflect: true, type: String },
   }
@@ -228,19 +360,25 @@ export class CadList extends LitElement {
       display: grid;
       gap: 0.65rem;
     }
+
+    :host([compact]:not([variant='numbered'])) .list {
+      gap: 0;
+    }
   `
 
+  declare compact: boolean
   declare label: string
   declare variant: CadListVariant
 
   constructor() {
     super()
+    this.compact = false
     this.label = 'List'
     this.variant = 'bullet'
   }
 
   protected override updated(changed: PropertyValues<this>): void {
-    if (changed.has('variant')) this.syncItems()
+    if (changed.has('variant') || changed.has('compact')) this.syncItems()
   }
 
   override render() {
@@ -258,6 +396,7 @@ export class CadList extends LitElement {
     items.forEach((item, index) => {
       item.index = index + 1
       item.variant = this.variant
+      item.compact = this.compact
     })
   }
 }

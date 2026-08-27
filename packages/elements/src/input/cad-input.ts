@@ -379,11 +379,6 @@ export class CadInput extends LitElement {
     return this.renderRoot.querySelector('input')
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    if (!this.hasUpdated) this.defaultValue = this.getAttribute('value') ?? ''
-  }
-
   override focus(options?: FocusOptions): void {
     this.control?.focus(options)
   }
@@ -419,6 +414,7 @@ export class CadInput extends LitElement {
   }
 
   protected override firstUpdated(): void {
+    this.defaultValue = this.value
     this.syncFormState()
   }
 

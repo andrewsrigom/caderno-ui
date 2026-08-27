@@ -282,11 +282,6 @@ export class CadCheckbox extends LitElement {
     return this.renderRoot.querySelector('input')
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    if (!this.hasUpdated) this.defaultChecked = this.hasAttribute('checked')
-  }
-
   override click(): void {
     this.control?.click()
   }
@@ -323,6 +318,7 @@ export class CadCheckbox extends LitElement {
   }
 
   protected override firstUpdated(): void {
+    this.defaultChecked = this.checked
     this.syncFormState()
   }
 
@@ -393,6 +389,11 @@ export class CadCheckbox extends LitElement {
 
   private handleInput(event: Event): void {
     event.stopPropagation()
+    const control = event.currentTarget
+    if (!(control instanceof HTMLInputElement)) return
+    this.checked = control.checked
+    this.indeterminate = control.indeterminate
+    this.syncFormState()
     this.dispatchEvent(
       new Event('input', {
         bubbles: true,

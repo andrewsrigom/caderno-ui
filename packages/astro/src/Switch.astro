@@ -30,14 +30,14 @@ const {
 ---
 
 <cad-switch
-  checked={checked}
+  checked={checked || undefined}
   class={className}
-  disabled={disabled}
+  disabled={disabled || undefined}
   hint={hint}
   id={id}
   label={label}
   name={name}
-  required={required}
+  required={required || undefined}
   size={size}
   value={value}
 >

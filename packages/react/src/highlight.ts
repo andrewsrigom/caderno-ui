@@ -1,3 +1,5 @@
+'use client'
+
 import { CadHighlight as CadHighlightElement } from '@caderno-ui/elements/highlight'
 import { createComponent } from '@lit/react'
 import React from 'react'

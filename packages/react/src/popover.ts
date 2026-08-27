@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadPopover as CadPopoverElement,
   type CadPopoverCloseEvent,

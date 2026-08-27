@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadBookmark as CadBookmarkElement,
   type CadBookmarkChangeEvent,

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadAccordion as CadAccordionElement,
   CadAccordionItem as CadAccordionItemElement,

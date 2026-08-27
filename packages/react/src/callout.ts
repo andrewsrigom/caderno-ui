@@ -1,3 +1,5 @@
+'use client'
+
 import { CadCallout as CadCalloutElement } from '@caderno-ui/elements/callout'
 import { createComponent } from '@lit/react'
 import React from 'react'

@@ -6,6 +6,32 @@ import { expectRegistered } from './contract.js'
 afterEach(() => document.body.replaceChildren())
 
 describe('cad-code-block', () => {
+  it('highlights semantic server-rendered code and copies its exact source', async () => {
+    const write = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue()
+    const block = document.createElement('cad-code-block')
+    const source = '  const count = 2\n\n  count += 1\n'
+    const pre = document.createElement('pre')
+    const code = document.createElement('code')
+    code.textContent = source
+    pre.append(code)
+    block.append(pre)
+    block.language = 'js'
+    block.copyable = true
+    document.body.append(block)
+    await block.updateComplete
+
+    expect(block.querySelector('pre > code')?.textContent).toBe(source)
+    expect(block.shadowRoot?.querySelector('.token.keyword')?.textContent).toBe(
+      'const',
+    )
+    expect(block.shadowRoot?.querySelector('code')?.textContent).toBe(
+      source.trimEnd(),
+    )
+    expect(block.shadowRoot?.querySelector('code slot')).toBeNull()
+    await block.copy()
+    expect(write).toHaveBeenCalledWith(source)
+  })
+
   it('copies exact source, announces success, and emits a composed result', async () => {
     const write = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue()
     const block = document.createElement('cad-code-block')

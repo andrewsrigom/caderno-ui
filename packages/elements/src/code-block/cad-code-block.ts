@@ -462,7 +462,11 @@ export class CadCodeBlock extends LitElement {
   }
 
   override render() {
-    const lines = this.code.replace(/\n$/, '').split('\n')
+    // Native source remains readable without JavaScript and is highlighted
+    // by the same renderer as the code property after registration.
+    const source =
+      this.code || this.querySelector('pre > code')?.textContent || ''
+    const lines = source.replace(/\n$/, '').split('\n')
     const hasHeader =
       this.copyable ||
       this.filename ||
@@ -503,7 +507,7 @@ export class CadCodeBlock extends LitElement {
         </figcaption>
         <span class="copy-status" role="status">${this.copyMessage}</span>
         <pre part="pre"><code part="code">${
-          this.code
+          source
             ? this.showLineNumbers
               ? lines.map(
                   (line, index) =>
@@ -519,7 +523,7 @@ export class CadCodeBlock extends LitElement {
                       index < lines.length - 1 ? '\n' : nothing
                     }`,
                 )
-            : html`<slot></slot>`
+            : html`<slot @slotchange=${() => this.requestUpdate()}></slot>`
         }</code></pre>
       </figure>
     `

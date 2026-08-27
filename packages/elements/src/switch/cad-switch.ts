@@ -320,11 +320,6 @@ export class CadSwitch extends LitElement {
     return this.renderRoot.querySelector('input')
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    if (!this.hasUpdated) this.defaultChecked = this.hasAttribute('checked')
-  }
-
   override click(): void {
     this.control?.click()
   }
@@ -360,6 +355,7 @@ export class CadSwitch extends LitElement {
   }
 
   protected override firstUpdated(): void {
+    this.defaultChecked = this.checked
     this.syncFormState()
   }
 

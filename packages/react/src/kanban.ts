@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadKanban as CadKanbanElement,
   CadKanbanColumn as CadKanbanColumnElement,

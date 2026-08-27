@@ -42,27 +42,27 @@ export class CadLink extends LitElement {
 
     :host([tone='coral']) {
       --_link-mark: var(--cad-link-mark, #ff3347);
-      --_link-ink: var(--cad-link-ink, #e62436);
+      --_link-ink: var(--cad-link-ink, var(--cad-danger-ink, #e62436));
     }
 
     :host([tone='lemon']) {
       --_link-mark: var(--cad-link-mark, #f0a11a);
-      --_link-ink: var(--cad-link-ink, #80530d);
+      --_link-ink: var(--cad-link-ink, var(--cad-warning-ink, #80530d));
     }
 
     :host([tone='mint']) {
       --_link-mark: var(--cad-link-mark, #1aa36e);
-      --_link-ink: var(--cad-link-ink, #087a4f);
+      --_link-ink: var(--cad-link-ink, var(--cad-success-ink, #087a4f));
     }
 
     :host([tone='pink']) {
       --_link-mark: var(--cad-link-mark, #ef669c);
-      --_link-ink: var(--cad-link-ink, #a92b60);
+      --_link-ink: var(--cad-link-ink, var(--cad-pink-ink, #a92b60));
     }
 
     :host([tone='violet']) {
       --_link-mark: var(--cad-link-mark, #ff5c5c);
-      --_link-ink: var(--cad-link-ink, #7131b5);
+      --_link-ink: var(--cad-link-ink, var(--cad-violet-ink, #7131b5));
     }
 
     .base {
@@ -83,9 +83,8 @@ export class CadLink extends LitElement {
       border-radius: 0;
       box-decoration-break: clone;
       cursor: pointer;
-      transition:
-        background-size var(--cad-duration-fast, 140ms) ease,
-        color var(--cad-duration-fast, 140ms) ease;
+      /* Palette changes must keep text and surface in sync. */
+      transition: background-size var(--cad-duration-fast, 140ms) ease;
       -webkit-box-decoration-break: clone;
     }
 
@@ -117,7 +116,7 @@ export class CadLink extends LitElement {
     }
 
     .base:visited {
-      color: #7131b5;
+      color: var(--cad-violet-ink, #7131b5);
     }
 
     :host([tone='coral']) .base:visited {

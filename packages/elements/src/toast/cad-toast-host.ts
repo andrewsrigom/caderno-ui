@@ -380,6 +380,31 @@ baseToast.promise = <T, E = unknown>(
     ...callOptions
   } = options
   const id = baseToast.loading(loading, callOptions)
+  const host = resolveHost({ ...callOptions, create: false })
+  const loadingToast = host?.activeToasts.find(
+    (item) => String(item.toastId) === String(id),
+  )
+  // A pending task must not recreate a dismissed notification or an unmounted host.
+  const settle = (
+    title: string,
+    variant: CadToastVariant,
+    description?: string,
+  ) => {
+    if (
+      !host?.isConnected ||
+      !loadingToast?.open ||
+      loadingToast.variant !== 'loading' ||
+      !host.contains(loadingToast)
+    )
+      return
+    host.show({
+      ...callOptions,
+      ...(description === undefined ? {} : { description }),
+      id,
+      title,
+      variant,
+    })
+  }
   let pending: Promise<T>
 
   try {
@@ -389,7 +414,7 @@ baseToast.promise = <T, E = unknown>(
       typeof errorMessage === 'function'
         ? errorMessage(error as E)
         : errorMessage
-    baseToast.error(message, { ...callOptions, id })
+    settle(message, 'error')
     void onFinally?.()
     return id
   }
@@ -405,18 +430,14 @@ baseToast.promise = <T, E = unknown>(
           typeof successDescription === 'function'
             ? successDescription(value)
             : successDescription
-        baseToast.success(message, {
-          ...callOptions,
-          ...(description === undefined ? {} : { description }),
-          id,
-        })
+        settle(message, 'success', description)
       },
       (error: E) => {
         const message =
           typeof errorMessage === 'function'
             ? errorMessage(error)
             : errorMessage
-        baseToast.error(message, { ...callOptions, id })
+        settle(message, 'error')
       },
     )
     .finally(onFinally)

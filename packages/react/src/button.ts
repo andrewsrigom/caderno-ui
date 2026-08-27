@@ -1,3 +1,5 @@
+'use client'
+
 import { CadButton as CadButtonElement } from '@caderno-ui/elements/button'
 import { createComponent } from '@lit/react'
 import React from 'react'

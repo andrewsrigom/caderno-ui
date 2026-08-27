@@ -210,7 +210,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "test": "pnpm build && vitest run && node test/ssr-smoke.mjs",
+    "test": "pnpm build && vitest run && vitest run --config vitest.browser.config.ts && node test/ssr-smoke.mjs",
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
@@ -221,18 +221,20 @@
     "react": ">=18 <20"
   },
   "devDependencies": {
+    "@vitest/browser-playwright": "^4.1.11",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.3",
     "jsdom": "^30.0.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "vitest": "^4.1.11",
-    "typescript": "^6.0.3"
+    "react-router": "^7.18.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
   },
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12"
   }
 }

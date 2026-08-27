@@ -1,3 +1,5 @@
+'use client'
+
 import { CadAvatar as CadAvatarElement } from '@caderno-ui/elements/avatar'
 import { createComponent } from '@lit/react'
 import React from 'react'

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadChart as CadChartElement,
   CadChartItem as CadChartItemElement,

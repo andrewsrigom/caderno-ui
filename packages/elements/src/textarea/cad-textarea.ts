@@ -376,11 +376,6 @@ export class CadTextarea extends LitElement {
     return this.renderRoot.querySelector('textarea')
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback()
-    if (!this.hasUpdated) this.defaultValue = this.getAttribute('value') ?? ''
-  }
-
   override focus(options?: FocusOptions): void {
     this.control?.focus(options)
   }
@@ -416,6 +411,7 @@ export class CadTextarea extends LitElement {
   }
 
   protected override firstUpdated(): void {
+    this.defaultValue = this.value
     this.syncFormState()
   }
 

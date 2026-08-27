@@ -1678,6 +1678,15 @@
           "members": [
             {
               "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "ShadowRootInit"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
+            },
+            {
+              "kind": "field",
               "name": "disabled",
               "privacy": "public",
               "type": {
@@ -7696,7 +7705,7 @@
         {
           "kind": "variable",
           "name": "feedbackToneStyles",
-          "default": "css` :host { --_feedback-accent: var(--cad-link, #005bac); --_feedback-tint: var(--cad-post-it-blue-bg, #dbeafe); } :host([variant='success']) { --_feedback-accent: #07875f; --_feedback-tint: var(--cad-post-it-mint-bg, #d6f5e7); } :host([variant='tip']), :host([variant='warning']) { --_feedback-accent: #e98212; --_feedback-tint: var(--cad-post-it-lemon-bg, #fff1bd); } :host([variant='danger']), :host([variant='error']) { --_feedback-accent: #f03c4f; --_feedback-tint: var(--cad-post-it-coral-bg, #ffe0d8); } :host([variant='neutral']) { --_feedback-accent: #6d7d9f; --_feedback-tint: color-mix( in srgb, var(--cad-surface-raised, #fff) 78%, #d9dfeb ); } :host([variant='accent']) { --_feedback-accent: #7131b5; --_feedback-tint: var(--cad-sticker-violet-bg, #eadcff); } `",
+          "default": "css` :host { --_feedback-accent: var(--cad-link, #005bac); --_feedback-tint: var(--cad-post-it-blue-bg, #dbeafe); } :host([variant='success']) { --_feedback-accent: var(--cad-success-ink, #07875f); --_feedback-tint: var(--cad-post-it-mint-bg, #d6f5e7); } :host([variant='tip']), :host([variant='warning']) { --_feedback-accent: var(--cad-warning-ink, #b45f00); --_feedback-tint: var(--cad-post-it-lemon-bg, #fff1bd); } :host([variant='danger']), :host([variant='error']) { --_feedback-accent: var(--cad-danger-ink, #d52f3f); --_feedback-tint: var(--cad-post-it-coral-bg, #ffe0d8); } :host([variant='neutral']) { --_feedback-accent: var(--cad-ink-soft, #59657e); --_feedback-tint: color-mix( in srgb, var(--cad-surface-raised, #fff) 78%, #d9dfeb ); } :host([variant='accent']) { --_feedback-accent: var(--cad-violet-ink, #7131b5); --_feedback-tint: var(--cad-sticker-violet-bg, #eadcff); } `",
           "description": "Shared ink and paper tones for feedback components."
         }
       ],
@@ -8364,11 +8373,11 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "One navigable or static row inside `cad-list`.",
+          "description": "A content item inside `cad-list`. Compose links or buttons in the default\nslot. The optional href is a convenience for a single native link.",
           "name": "CadListItem",
           "cssParts": [
             {
-              "description": "Trailing direction mark.",
+              "description": "Decorative trailing arrow on interactive rows.",
               "name": "arrow"
             },
             {
@@ -8390,11 +8399,33 @@
           ],
           "slots": [
             {
-              "description": "Item label.",
+              "description": "Item content, including consumer-owned links or buttons.",
               "name": ""
+            },
+            {
+              "description": "One native link or button owning the entire interactive row.",
+              "name": "action"
             }
           ],
           "members": [
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "ShadowRootInit"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
+            },
+            {
+              "kind": "field",
+              "name": "compact",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
             {
               "kind": "field",
               "name": "current",
@@ -8474,6 +8505,11 @@
                 "text": "CadListVariant"
               },
               "default": "'bullet'"
+            },
+            {
+              "kind": "field",
+              "name": "onActionSlotChange",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -8535,7 +8571,7 @@
         },
         {
           "kind": "class",
-          "description": "A hand-drawn bullet or numbered list for navigable collections.",
+          "description": "A handwritten list with individual frames and blue markers. The optional\ncompact option removes frames and padding, preserving markers and readable gaps. A link\nor button in the action slot owns navigation and interaction.",
           "name": "CadList",
           "cssParts": [
             {
@@ -8550,6 +8586,17 @@
             }
           ],
           "members": [
+            {
+              "kind": "field",
+              "name": "compact",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "compact",
+              "reflects": true
+            },
             {
               "kind": "field",
               "name": "label",
@@ -8578,6 +8625,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "compact",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "compact"
+            },
             {
               "name": "label",
               "type": {

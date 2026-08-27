@@ -290,7 +290,16 @@ export { CadCardTone }
 export { CadCardVariant }
 
 // @public (undocumented)
-export const CadCheckbox: ReactWebComponent<CadCheckbox_2, {}>;
+export const CadCheckbox: ReactWebComponent<CadCheckbox_2, {
+onInput: EventName<Event & {
+currentTarget: CadCheckbox_2;
+target: CadCheckbox_2;
+}>;
+onChange: EventName<Event & {
+currentTarget: CadCheckbox_2;
+target: CadCheckbox_2;
+}>;
+}>;
 
 export { CadCheckboxTone }
 
@@ -404,7 +413,16 @@ export { CadHighlightVariant }
 export const CadIcon: ReactWebComponent<CadIcon_2, {}>;
 
 // @public (undocumented)
-export const CadInput: ReactWebComponent<CadInput_2, {}>;
+export const CadInput: ReactWebComponent<CadInput_2, {
+onInput: EventName<Event & {
+currentTarget: CadInput_2;
+target: CadInput_2;
+}>;
+onChange: EventName<Event & {
+currentTarget: CadInput_2;
+target: CadInput_2;
+}>;
+}>;
 
 export { CadInputSize }
 
@@ -494,7 +512,16 @@ export { CadProgressSize }
 export { CadProgressTone }
 
 // @public (undocumented)
-export const CadRadio: ReactWebComponent<CadRadio_2, {}>;
+export const CadRadio: ReactWebComponent<CadRadio_2, {
+onInput: EventName<Event & {
+currentTarget: CadRadio_2;
+target: CadRadio_2;
+}>;
+onChange: EventName<Event & {
+currentTarget: CadRadio_2;
+target: CadRadio_2;
+}>;
+}>;
 
 export { CadRadioTone }
 
@@ -507,6 +534,14 @@ export { CadSkeletonShape }
 
 // @public (undocumented)
 export const CadSlider: ReactWebComponent<CadSlider_2, {
+onInput: EventName<Event & {
+currentTarget: CadSlider_2;
+target: CadSlider_2;
+}>;
+onChange: EventName<Event & {
+currentTarget: CadSlider_2;
+target: CadSlider_2;
+}>;
 onSliderInput: EventName<CadSliderInputEvent>;
 onSliderChange: EventName<CadSliderChangeEvent>;
 }>;
@@ -550,7 +585,16 @@ export { CadStickerSize }
 export { CadStickerTone }
 
 // @public (undocumented)
-export const CadSwitch: ReactWebComponent<CadSwitch_2, {}>;
+export const CadSwitch: ReactWebComponent<CadSwitch_2, {
+onInput: EventName<Event & {
+currentTarget: CadSwitch_2;
+target: CadSwitch_2;
+}>;
+onChange: EventName<Event & {
+currentTarget: CadSwitch_2;
+target: CadSwitch_2;
+}>;
+}>;
 
 export { CadSwitchSize }
 
@@ -595,7 +639,16 @@ export { CadTabTone }
 export const CadTabTrigger: ReactWebComponent<CadTabTrigger_2, {}>;
 
 // @public (undocumented)
-export const CadTextarea: ReactWebComponent<CadTextarea_2, {}>;
+export const CadTextarea: ReactWebComponent<CadTextarea_2, {
+onInput: EventName<Event & {
+currentTarget: CadTextarea_2;
+target: CadTextarea_2;
+}>;
+onChange: EventName<Event & {
+currentTarget: CadTextarea_2;
+target: CadTextarea_2;
+}>;
+}>;
 
 export { CadTextareaResize }
 

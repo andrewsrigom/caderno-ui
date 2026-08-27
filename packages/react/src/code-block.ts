@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadCodeBlock as CadCodeBlockElement,
   type CadCodeCopyEvent,

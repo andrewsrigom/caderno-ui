@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadFooter as CadFooterElement,
   CadFooterGroup as CadFooterGroupElement,

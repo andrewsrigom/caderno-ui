@@ -1,3 +1,5 @@
+'use client'
+
 import { CadEmptyState as CadEmptyStateElement } from '@caderno-ui/elements/empty-state'
 import { createComponent } from '@lit/react'
 import React from 'react'

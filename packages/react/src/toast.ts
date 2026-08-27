@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadToast as CadToastElement,
   CadToastHost as CadToastHostElement,

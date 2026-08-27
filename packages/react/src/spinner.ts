@@ -1,3 +1,5 @@
+'use client'
+
 import { CadSpinner as CadSpinnerElement } from '@caderno-ui/elements/spinner'
 import { createComponent } from '@lit/react'
 import React from 'react'

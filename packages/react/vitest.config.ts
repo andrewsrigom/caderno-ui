@@ -5,6 +5,7 @@ export default defineConfig({
     conditions: ['browser'],
   },
   test: {
+    include: ['test/react.test.ts'],
     environment: 'jsdom',
     restoreMocks: true,
   },

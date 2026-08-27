@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadCard as CadCardElement,
   CadCardHeader as CadCardHeaderElement,

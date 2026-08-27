@@ -109,6 +109,7 @@
     "./fallback.css": "./src/styles/fallback.css",
     "./navigation.css": "./src/styles/navigation.css",
     "./scrollbar.css": "./src/styles/scrollbar.css",
+    "./typography.css": "./src/styles/typography.css",
     "./custom-elements.json": "./custom-elements.json",
     "./prose.css": "./src/styles/prose.css",
     "./input": {
@@ -240,7 +241,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12"
   },
   "customElements": "./custom-elements.json"
 }

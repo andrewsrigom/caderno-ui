@@ -57,20 +57,20 @@ const {
 <cad-input
   autocomplete={autocomplete}
   class={className}
-  disabled={disabled}
+  disabled={disabled || undefined}
   error={error}
   hint={hint}
   id={id}
   inputmode={inputmode}
-  invalid={invalid}
+  invalid={invalid || undefined}
   label={label}
   maxlength={maxlength}
   minlength={minlength}
   name={name}
   pattern={pattern}
   placeholder={placeholder}
-  readonly={readonly}
-  required={required}
+  readonly={readonly || undefined}
+  required={required || undefined}
   size={size}
   tone={tone}
   type={type}

@@ -1,3 +1,5 @@
+'use client'
+
 import { CadPagination as CadPaginationElement } from '@caderno-ui/elements/pagination'
 import { createComponent } from '@lit/react'
 import React from 'react'

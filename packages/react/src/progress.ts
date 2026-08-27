@@ -1,3 +1,5 @@
+'use client'
+
 import { CadProgress as CadProgressElement } from '@caderno-ui/elements/progress'
 import { createComponent } from '@lit/react'
 import React from 'react'

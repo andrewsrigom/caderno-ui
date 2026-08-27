@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadTabs as CadTabsElement,
   CadTabsList as CadTabsListElement,

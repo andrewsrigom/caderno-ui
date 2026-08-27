@@ -138,17 +138,26 @@ cad-list:not(:defined) {
   counter-reset: cad-list-item;
 }
 
+cad-list[compact]:not([variant='numbered'], :defined) {
+  gap: 0;
+}
+
 cad-list-item:not(:defined) {
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 1rem;
   align-items: center;
   min-height: 3.25rem;
   padding: 0.7rem 1rem;
+  overflow-wrap: anywhere;
   color: var(--cad-link, #005bac);
   background: var(--cad-surface, #fff);
-  border: var(--cad-frame-border, 1.5px dashed currentColor);
-  font-family: var(--cad-type-control-font, var(--cad-font-hand, inherit));
+  border: var(--cad-border-width, 1.5px) var(--cad-border-style, dashed)
+    color-mix(in srgb, var(--cad-link, #005bac) 82%, transparent);
+  font: var(--cad-type-control-size, var(--cad-hand-md, 1.2rem)) / 1.25
+    var(--cad-type-control-font, var(--cad-font-hand, cursive));
+  transform: rotate(-0.06deg);
   counter-increment: cad-list-item;
 }
 
@@ -159,9 +168,11 @@ cad-list-item:not(:defined)::before {
   background: currentColor;
   border-radius: 50%;
   content: '';
+  transform: rotate(-2deg);
 }
 
-cad-list[variant='numbered']:not(:defined) cad-list-item:not(:defined)::before {
+cad-list[variant='numbered']:not(:defined)
+  > cad-list-item:not(:defined)::before {
   display: inline-grid;
   place-items: center;
   box-sizing: border-box;
@@ -169,17 +180,130 @@ cad-list[variant='numbered']:not(:defined) cad-list-item:not(:defined)::before {
   height: 2.15rem;
   margin: 0;
   background: transparent;
-  border: var(--cad-border-width, 1.5px) solid currentColor;
+  border: 1.5px solid currentColor;
   border-radius: 50%;
   content: counter(cad-list-item);
+  font-size: var(--cad-hand-md, 1.2rem);
+}
+
+cad-list[variant='numbered']:not(:defined)
+  > cad-list-item[value]:not(:defined)::before {
+  content: attr(value);
+}
+
+cad-list[compact]:not(:defined) > cad-list-item:not(:defined) {
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  transform: none;
 }
 
 cad-list-item[current]:not(:defined) {
-  background: color-mix(
-    in srgb,
-    var(--cad-post-it-blue-bg, #cfe2ff) 28%,
-    var(--cad-surface, #fff)
-  );
+  background:
+    repeating-linear-gradient(
+      -24deg,
+      color-mix(in srgb, var(--cad-post-it-blue-bg, #cfe2ff) 38%, transparent) 0
+        2px,
+      transparent 2px 7px
+    ),
+    var(--cad-surface, #fff);
+  border-color: var(--cad-link, #005bac);
+  transform: rotate(0.08deg);
+}
+
+cad-list[compact]:not(:defined) > cad-list-item[current]:not(:defined) {
+  font-weight: 700;
+}
+
+cad-list-item:not(:defined) > a:not([slot='action']) {
+  color: var(--cad-link, #005bac);
+  text-decoration: underline;
+  text-decoration-color: var(--cad-link-mark, #ef4d4f);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+cad-list-item:not(:defined) > :is(a, button):focus-visible {
+  outline: var(--cad-focus-outline, 2px dashed var(--cad-link, #005bac));
+  outline-offset: 3px;
+}
+
+cad-list-item:not(:defined):has(> [slot='action']) {
+  display: block;
+  min-height: 0;
+  padding: 0;
+}
+
+cad-list-item:not(:defined):has(> [slot='action'])::before {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: 50%;
+  z-index: 1;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-2deg);
+}
+
+cad-list-item:not(:defined):has(> [slot='action'])::after {
+  position: absolute;
+  inset-inline-end: 1rem;
+  top: 50%;
+  display: block;
+  width: 1.35rem;
+  height: 1.35rem;
+  background: currentColor;
+  content: '';
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-1deg);
+}
+
+cad-list-item:not(:defined) > [slot='action'] {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: calc(3.25rem - 2 * var(--cad-border-width, 1.5px));
+  padding: 0.7rem 3.35rem 0.7rem 3.25rem;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+cad-list[variant='numbered'] > cad-list-item:not(:defined) > [slot='action'] {
+  min-height: calc(2.15rem + 1.4rem);
+  padding-inline-start: 4.15rem;
+}
+
+cad-list[compact] > cad-list-item:not(:defined):has(> [slot='action'])::before {
+  inset-inline-start: 0;
+}
+
+cad-list[compact] > cad-list-item:not(:defined) > [slot='action'] {
+  min-height: 1.25em;
+  padding-block: 0;
+  padding-inline-start: 2.25rem;
+}
+
+cad-list[compact][variant='numbered']
+  > cad-list-item:not(:defined)
+  > [slot='action'] {
+  min-height: 2.15rem;
+  padding-inline-start: 3.15rem;
+}
+
+cad-list-item:not(:defined):has(> [slot='action']:disabled) {
+  opacity: 0.42;
+}
+
+cad-list-item:not(:defined) > [slot='action']:disabled {
+  cursor: not-allowed;
 }
 
 cad-breadcrumb[variant='compact']:not(:defined)
@@ -799,8 +923,22 @@ cad-code-block:not(:defined) {
   white-space: pre;
 }
 
-cad-code-block[code]:not(:defined)::before {
+cad-code-block[code]:not(:defined, :has(> pre))::before {
   content: attr(code);
+}
+
+cad-code-block:not(:defined) > pre {
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  white-space: pre;
+}
+
+cad-code-block:not(:defined) > pre > code {
+  font: inherit;
 }
 
 cad-code-block:not(:defined) > [slot='actions'] {

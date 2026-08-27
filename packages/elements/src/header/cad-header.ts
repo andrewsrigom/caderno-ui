@@ -573,7 +573,11 @@ export class CadHeader extends LitElement {
 
   private handleResize = (entries: ResizeObserverEntry[]): void => {
     const entry = entries[0]
-    if (entry) this.syncResponsiveState(entry.contentRect.width)
+    if (!entry) return
+    window.cancelAnimationFrame(this.resizeFrame)
+    this.resizeFrame = window.requestAnimationFrame(() => {
+      if (this.isConnected) this.syncResponsiveState(entry.contentRect.width)
+    })
   }
 
   private handleSlotChange(event: Event): void {

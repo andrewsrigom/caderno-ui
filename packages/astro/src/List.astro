@@ -4,14 +4,25 @@ import type { CadListVariant } from '@caderno-ui/elements/list'
 
 type Props = {
   class?: string
+  compact?: boolean
   label?: string
   variant?: CadListVariant
 }
 
-const { class: className, label = 'List', variant = 'bullet' } = Astro.props
+const {
+  class: className,
+  compact = false,
+  label = 'List',
+  variant = 'bullet',
+} = Astro.props
 ---
 
-<cad-list class={className} label={label} variant={variant}>
+<cad-list
+  class={className}
+  compact={compact || undefined}
+  label={label}
+  variant={variant}
+>
   <slot />
 </cad-list>
 

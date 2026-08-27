@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadBreadcrumb as CadBreadcrumbElement,
   CadBreadcrumbItem as CadBreadcrumbItemElement,

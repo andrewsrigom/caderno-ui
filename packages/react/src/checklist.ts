@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CadChecklist as CadChecklistElement,
   CadChecklistItem as CadChecklistItemElement,

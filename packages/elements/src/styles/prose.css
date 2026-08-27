@@ -1,4 +1,77 @@
+@import url('./typography.css');
+
 /* Progressive editorial styles for semantic HTML enhanced by Caderno UI. */
+
+.cad-prose {
+  margin-inline: 0;
+  max-width: none;
+  color: var(--cad-ink);
+  font: var(--cad-type-body-size) / var(--cad-type-body-line-height)
+    var(--cad-type-body-font);
+  overflow-wrap: anywhere;
+}
+
+.cad-prose :where(p, ul, ol, dl) {
+  margin-block: 0 1.5rem;
+}
+
+.cad-prose :where(ul) {
+  list-style-type: disc;
+}
+
+.cad-prose :where(ol) {
+  list-style-type: decimal;
+}
+
+.cad-prose :where(ul, ol) {
+  padding-inline-start: 1.5rem;
+}
+
+.cad-prose :where(li > :last-child) {
+  margin-bottom: 0;
+}
+
+.cad-prose :where(a) {
+  color: var(--cad-link);
+  text-decoration: underline;
+  text-decoration-color: var(--cad-link-mark);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.cad-prose :where(a:hover) {
+  text-decoration-thickness: 3px;
+}
+
+.cad-prose :where(a:focus-visible) {
+  outline: var(--cad-focus-outline);
+  outline-offset: var(--cad-focus-offset);
+}
+
+.cad-prose :where(code) {
+  font-family: var(--cad-type-code-font);
+  font-size: var(--cad-type-code-size);
+}
+
+.cad-prose :where(:not(pre) > code) {
+  padding: 0.1em 0.3em;
+  color: inherit;
+  background: var(--cad-surface-strong);
+  border-radius: 0;
+}
+
+.cad-prose
+  > :where(cad-code-block, cad-blockquote, cad-note, cad-callout, cad-table) {
+  margin-block: 1.75rem;
+}
+
+.cad-prose > :where(cad-accordion, cad-accordion-item) {
+  margin-block: 0.75rem;
+}
+
+.cad-prose > :where(h2, h3, h4) {
+  scroll-margin-top: 2rem;
+}
 
 /* Stable first frame before the optional enhancement module runs. */
 .cad-prose .interview-question:not(.cad-prose-accordion),
@@ -654,45 +727,24 @@ html[data-theme='dark'] figure.cad-prose-code > .astro-code span {
   border-bottom: 0;
 }
 
-/* Prose composition */
-.cad-prose {
-  margin-inline: 0;
-  max-width: none;
-}
-
+/* Prose composition uses the same text roles as component headings. */
 .cad-prose > :first-child {
   margin-top: 0;
 }
 
 .cad-prose > h2 {
-  position: relative;
-  margin-top: 3.8rem;
+  margin-top: 2.5rem;
   margin-bottom: 0.85rem;
-  color: var(--cad-ink);
-  font-family: var(--cad-type-heading-font, var(--cad-font-book));
-  font-size: var(--cad-type-heading-size, clamp(1.75rem, 2.6vw, 2.15rem));
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  color: var(--cad-link);
+  font: var(--cad-hand-weight-strong) var(--cad-type-title-size) /
+    var(--cad-type-title-line-height) var(--cad-type-title-font);
 }
 
-.cad-prose > h2::before {
-  position: absolute;
-  top: -0.75rem;
-  left: 0.05rem;
-  width: 3.6rem;
-  height: 0.42rem;
-  background: color-mix(in srgb, var(--cad-post-it-blue-bg) 72%, transparent);
-  border-radius: 0;
-  content: '';
-  transform: rotate(-0.25deg);
-}
-
-.cad-prose > h3 {
-  color: var(--cad-ink);
-  font-family: var(--cad-type-heading-font, var(--cad-font-book));
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.cad-prose > :where(h3, h4) {
+  margin-block: 1.75rem 0.75rem;
+  color: var(--cad-link);
+  font: var(--cad-hand-weight-strong) var(--cad-type-label-size) / 1.4
+    var(--cad-type-label-font);
 }
 
 .cad-prose .cad-prose-accordion {

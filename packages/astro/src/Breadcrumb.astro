@@ -30,7 +30,8 @@ const {
         current={
           item.current ||
           (!items.some((candidate) => candidate.current) &&
-            index === items.length - 1)
+            index === items.length - 1) ||
+          undefined
         }
         href={item.href}
         rel={item.rel}

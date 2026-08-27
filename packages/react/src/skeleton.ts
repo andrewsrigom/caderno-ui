@@ -1,3 +1,5 @@
+'use client'
+
 import { CadSkeleton as CadSkeletonElement } from '@caderno-ui/elements/skeleton'
 import { createComponent } from '@lit/react'
 import React from 'react'

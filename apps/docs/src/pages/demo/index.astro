@@ -1,0 +1,304 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const toUrl = (href: string) => `${base}${href}`
+---
+
+<DemoLayout
+  description="A complete navigable workspace composed with Caderno UI."
+  title="Overview"
+>
+  <header class="demo-page-heading">
+    <p class="demo-eyebrow">Wednesday · review week</p>
+    <h1>Good morning, Andrews.</h1>
+    <p>
+      Field Notes keeps projects, decisions, and loose ideas close enough to
+      review without turning the notebook into a dashboard wall.
+    </p>
+    <div class="demo-actions">
+      <cad-drawer
+        heading="Quick note"
+        id="quick-note-drawer"
+        placement="right"
+        size="sm"
+      >
+        <cad-button slot="trigger" type="button">
+          <cad-icon aria-hidden="true" name="pencil" size="20" slot="start"
+          ></cad-icon>
+          Quick note
+        </cad-button>
+        <form class="demo-form" data-quick-note-form>
+          <cad-input
+            label="Title"
+            name="title"
+            placeholder="What should be remembered?"
+            required></cad-input>
+          <cad-textarea
+            label="Note"
+            name="note"
+            placeholder="Write the decision, question, or next step..."
+            required
+            rows="7"></cad-textarea>
+        </form>
+        <cad-button
+          data-close-quick-note
+          slot="footer"
+          type="button"
+          variant="link"
+        >
+          Cancel
+        </cad-button>
+        <cad-button data-save-quick-note slot="footer" type="button">
+          Save note
+        </cad-button>
+      </cad-drawer>
+
+      <cad-modal heading="Create a project" id="new-project-modal" size="sm">
+        <cad-button slot="trigger" type="button" variant="secondary">
+          <cad-icon aria-hidden="true" name="folder" size="20" slot="start"
+          ></cad-icon>
+          New project
+        </cad-button>
+        <form class="demo-form" data-project-form>
+          <cad-input
+            label="Project name"
+            name="project"
+            placeholder="e.g. Cache invalidation review"
+            required></cad-input>
+          <cad-textarea
+            label="First outcome"
+            name="outcome"
+            placeholder="What should be true when this project is done?"
+            rows="5"></cad-textarea>
+        </form>
+        <cad-button
+          data-close-project-modal
+          slot="footer"
+          type="button"
+          variant="link"
+        >
+          Cancel
+        </cad-button>
+        <cad-button data-create-project slot="footer" type="button">
+          Create project
+        </cad-button>
+      </cad-modal>
+    </div>
+  </header>
+
+  <cad-alert dismissible heading="Design review on Friday" variant="info">
+    The search indexing project is ready for its next decision. Review the
+    evidence before the meeting.
+    <cad-link href={toUrl('/demo/projects/search-indexing/')} slot="action">
+      Open project
+    </cad-link>
+  </cad-alert>
+
+  <section class="demo-section" aria-labelledby="today-title">
+    <div class="demo-section-heading">
+      <div>
+        <p class="demo-section-label">Today at a glance</p>
+        <h2 id="today-title">Enough signal to choose the next page.</h2>
+      </div>
+    </div>
+
+    <div class="demo-grid demo-grid-metrics">
+      <cad-card tone="blue">
+        <cad-card-header>
+          <cad-card-kicker>Active projects</cad-card-kicker>
+          <cad-card-title
+            ><span class="demo-metric-value">4</span></cad-card-title
+          >
+        </cad-card-header>
+        <cad-card-content>
+          <span class="demo-metric-detail">Two need a decision this week.</span>
+        </cad-card-content>
+      </cad-card>
+      <cad-card tone="lemon">
+        <cad-card-header>
+          <cad-card-kicker>Notes this week</cad-card-kicker>
+          <cad-card-title
+            ><span class="demo-metric-value">18</span></cad-card-title
+          >
+        </cad-card-header>
+        <cad-card-content>
+          <span class="demo-metric-detail">Six were turned into actions.</span>
+        </cad-card-content>
+      </cad-card>
+      <cad-card tone="mint">
+        <cad-card-header>
+          <cad-card-kicker>Review readiness</cad-card-kicker>
+          <cad-card-title
+            ><span class="demo-metric-value">72%</span></cad-card-title
+          >
+        </cad-card-header>
+        <cad-card-content>
+          <cad-progress
+            aria-label="Review readiness: 72 percent"
+            size="sm"
+            value="72"></cad-progress>
+        </cad-card-content>
+      </cad-card>
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="pulse-title">
+    <div class="demo-section-heading">
+      <div>
+        <p class="demo-section-label">Project pulse</p>
+        <h2 id="pulse-title">Search indexing strategy</h2>
+      </div>
+      <cad-link href={toUrl('/demo/projects/search-indexing/')}>
+        Open full project
+      </cad-link>
+    </div>
+
+    <div class="demo-grid demo-grid-split">
+      <div class="demo-panel">
+        <cad-chart
+          animation="none"
+          heading="Review confidence"
+          type="line"
+          value-label="Confidence"
+        >
+          <cad-chart-item label="Scope" value="35">Scope: 35</cad-chart-item>
+          <cad-chart-item label="Options" value="48">Options: 48</cad-chart-item
+          >
+          <cad-chart-item label="Evidence" value="64"
+            >Evidence: 64</cad-chart-item
+          >
+          <cad-chart-item label="Decision" value="72"
+            >Decision: 72</cad-chart-item
+          >
+          <cad-chart-item label="Rollout" value="86">Rollout: 86</cad-chart-item
+          >
+        </cad-chart>
+      </div>
+
+      <div class="demo-panel">
+        <div class="demo-panel-heading">
+          <div>
+            <p class="demo-kicker">Next checkpoints</p>
+            <h3>Before Friday</h3>
+          </div>
+        </div>
+        <cad-steps label="Search indexing checkpoints">
+          <cad-step status="complete" title="Frame the read path">
+            Agree on the queries that matter.
+            <span slot="status">Done</span>
+          </cad-step>
+          <cad-step status="current" title="Compare failure modes">
+            Make recovery costs explicit.
+            <span slot="status">Current</span>
+          </cad-step>
+          <cad-step status="pending" title="Choose rollout boundary">
+            Define the reversible first release.
+            <span slot="status">Next</span>
+          </cad-step>
+        </cad-steps>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="desk-title">
+    <div class="demo-section-heading">
+      <div>
+        <p class="demo-section-label">On the desk</p>
+        <h2 id="desk-title">Review queue and recent notes.</h2>
+      </div>
+    </div>
+
+    <div class="demo-grid demo-grid-halves">
+      <div class="demo-panel">
+        <cad-checklist title="Before the review" variant="mixed">
+          <cad-checklist-item>Read path documented</cad-checklist-item>
+          <cad-checklist-item>Index lag measured</cad-checklist-item>
+          <cad-checklist-item kind="cross">
+            Recovery drill still missing
+          </cad-checklist-item>
+        </cad-checklist>
+      </div>
+      <div class="demo-panel">
+        <div class="demo-panel-heading">
+          <h3>Latest notes</h3>
+          <cad-link href={toUrl('/demo/notes/')}>View all</cad-link>
+        </div>
+        <cad-list label="Latest notes">
+          <cad-list-item href={toUrl('/demo/notes/#index-rollout')}>
+            Index rollout boundary
+          </cad-list-item>
+          <cad-list-item href={toUrl('/demo/notes/#story-bank-rule')}>
+            Story bank rule
+          </cad-list-item>
+          <cad-list-item href={toUrl('/demo/notes/#examples-contract')}>
+            Examples are contracts
+          </cad-list-item>
+        </cad-list>
+      </div>
+    </div>
+  </section>
+</DemoLayout>
+
+<script>
+  import '@caderno-ui/elements/drawer'
+  import '@caderno-ui/elements/modal'
+  import '@caderno-ui/elements/chart'
+  import { toast } from '@caderno-ui/elements/toast'
+  import type { CadDrawer } from '@caderno-ui/elements/drawer'
+  import type { CadModal } from '@caderno-ui/elements/modal'
+
+  const hostId = 'demo-toasts'
+  const drawer = document.querySelector<CadDrawer>('#quick-note-drawer')
+  const modal = document.querySelector<CadModal>('#new-project-modal')
+
+  document
+    .querySelector('[data-close-quick-note]')
+    ?.addEventListener('click', () => drawer?.close('api'))
+
+  document
+    .querySelector('[data-save-quick-note]')
+    ?.addEventListener('click', () => {
+      drawer?.close('api')
+      toast.success('Note saved.', {
+        description: 'It is ready in your notes workspace.',
+        hostId,
+      })
+    })
+
+  document
+    .querySelector('[data-close-project-modal]')
+    ?.addEventListener('click', () => modal?.close('cancel'))
+
+  document
+    .querySelector('[data-create-project]')
+    ?.addEventListener('click', () => {
+      modal?.close('created')
+      toast.promise(
+        new Promise<{ name: string }>((resolve) => {
+          window.setTimeout(() => resolve({ name: 'New project' }), 650)
+        }),
+        {
+          hostId,
+          loading: 'Creating project...',
+          success: ({ name }) => `${name} created.`,
+          successDescription: 'A blank project is ready for its first note.',
+          error: 'Could not create the project.',
+        },
+      )
+    })
+</script>
+
+<script>
+  import '@caderno-ui/elements/alert'
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/card'
+  import '@caderno-ui/elements/checklist'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/link'
+  import '@caderno-ui/elements/list'
+  import '@caderno-ui/elements/progress'
+  import '@caderno-ui/elements/steps'
+  import '@caderno-ui/elements/textarea'
+</script>

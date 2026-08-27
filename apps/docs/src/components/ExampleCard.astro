@@ -1,0 +1,73 @@
+---
+type Props = {
+  description?: string
+  title: string
+  wide?: boolean
+}
+
+const { description, title, wide = false } = Astro.props
+---
+
+<article class:list={['example-card', { 'example-card--wide': wide }]}>
+  <header>
+    <h3>{title}</h3>
+    {description && <p>{description}</p>}
+  </header>
+  <div class="example-card__canvas">
+    <slot />
+  </div>
+</article>
+
+<style>
+  .example-card {
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--cad-surface);
+    border: var(--cad-frame-border-subtle);
+    border-radius: 0;
+  }
+
+  .example-card--wide {
+    grid-column: 1 / -1;
+  }
+
+  header {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px dashed var(--cad-line);
+  }
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h3 {
+    color: var(--cad-link);
+    font-family: var(--cad-type-title-font);
+    font-size: var(--cad-type-label-size);
+    font-weight: var(--cad-hand-weight-strong);
+  }
+
+  p {
+    margin-top: 0.2rem;
+    color: var(--cad-ink-muted);
+    font-size: 0.78rem;
+  }
+
+  .example-card__canvas {
+    display: grid;
+    min-height: 10rem;
+    min-width: 0;
+    place-items: center;
+    gap: 1rem;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    background:
+      radial-gradient(
+        circle at 18% 12%,
+        color-mix(in srgb, var(--cad-link) 6%, transparent),
+        transparent 35%
+      ),
+      var(--cad-bg);
+  }
+</style>

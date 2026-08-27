@@ -4,33 +4,56 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-divider variant="wavy"></cad-divider>
-<cad-divider decorative="false" density="loose" tone="strong"></cad-divider>
+const usage = `<cad-divider label="Notes"></cad-divider>
+
+<cad-divider label="Decision point">
+  <cad-icon aria-hidden="true" name="star" slot="start"></cad-icon>
+</cad-divider>
+
+<cad-divider variant="dashed"></cad-divider>
+<cad-divider tone="muted"></cad-divider>
+<cad-divider variant="double"></cad-divider>
 
 <script type="module">
   import '@caderno-ui/elements/divider'
+  import '@caderno-ui/elements/icon'
 </script>`
 ---
 
 <DocsLayout
-  description="CadDivider separates content visually or semantically with dashed, dotted, and wavy lines."
+  description="Separate sections with a line, an optional label, or an icon."
   title="Divider"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-divider&gt;</p>
-    <h1>Separate sections with one quiet pencil line.</h1>
-    <p>
-      Divider is decorative by default. Opt into separator semantics only when
-      the line communicates structure that headings and spacing do not already
-      express.
-    </p>
+    <h1>Divider</h1>
+    <p>Separate sections with a line, an optional label, or an icon.</p>
   </header>
 
-  <DemoFrame title="Line treatments">
+  <DemoFrame title="Divider treatments">
     <div class="divider-stack">
-      <cad-divider density="dense"></cad-divider>
-      <cad-divider tone="accent" variant="dotted"></cad-divider>
-      <cad-divider density="loose" tone="strong" variant="wavy"></cad-divider>
+      <div>
+        <p>Center label</p>
+        <cad-divider label="Notes"></cad-divider>
+      </div>
+      <div>
+        <p>Icon + label</p>
+        <cad-divider label="Decision point">
+          <cad-icon aria-hidden="true" name="star" slot="start"></cad-icon>
+        </cad-divider>
+      </div>
+      <div>
+        <p>Dashed divider</p>
+        <cad-divider variant="dashed"></cad-divider>
+      </div>
+      <div>
+        <p>Light section divider</p>
+        <cad-divider tone="muted"></cad-divider>
+      </div>
+      <div>
+        <p>Double divider</p>
+        <cad-divider variant="double"></cad-divider>
+      </div>
     </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
@@ -40,16 +63,33 @@ const usage = `<cad-divider variant="wavy"></cad-divider>
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Keep <code>decorative</code> for visual rhythm. Set it to false only when assistive
-      technology also needs the separator; orientation is then exposed through ARIA.
+      Unlabeled lines are decorative. Add <code>semantic</code> when the separator
+      needs to be announced as page structure.
     </p>
   </section>
 
   <style>
     .divider-stack {
       display: grid;
-      gap: 2rem;
-      padding-block: 1rem;
+      gap: 1.75rem;
+      padding-block: 0.5rem;
+    }
+
+    .divider-stack > div {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .divider-stack p {
+      margin: 0;
+      color: var(--cad-link);
+      font-family: var(--cad-font-hand);
+      font-size: var(--cad-hand-sm);
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/divider'
+  import '@caderno-ui/elements/icon'
+</script>

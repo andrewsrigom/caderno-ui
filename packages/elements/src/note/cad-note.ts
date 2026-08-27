@@ -29,6 +29,7 @@ export class CadNote extends LitElement {
       --_note-bg: var(--cad-note-bg, var(--cad-surface-raised, #f7f0dc));
       --_note-ink: var(--cad-note-ink, var(--cad-ink, #25202a));
       display: block;
+      width: min(100%, 20rem);
     }
 
     :host([tone='blue']) {
@@ -64,19 +65,18 @@ export class CadNote extends LitElement {
     .base {
       position: relative;
       display: grid;
-      gap: 0.85rem;
-      min-height: 100%;
-      padding: 1.4rem 1.35rem 1.25rem;
-      overflow: hidden;
+      gap: 0.45rem;
+      padding: 1.5rem;
+      overflow: visible;
       color: var(--_note-ink);
       background: color-mix(
         in srgb,
         var(--_note-bg) 90%,
         var(--cad-surface, white)
       );
-      border: 1.5px solid color-mix(in srgb, var(--_note-ink) 28%, transparent);
-      border-radius: 0.55rem 0.8rem 0.65rem 0.7rem;
-      box-shadow: 0 0.65rem 1.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
+      border: 0;
+      border-radius: 0;
+      box-shadow: 0.65rem 0.75rem 0 rgb(var(--cad-shadow-rgb, 0 0 0) / 0.13);
     }
 
     :host([folded]) .base::after {
@@ -90,7 +90,7 @@ export class CadNote extends LitElement {
         color-mix(in srgb, var(--_note-bg) 58%, transparent) 49%,
         color-mix(in srgb, var(--_note-ink) 18%, var(--_note-bg)) 51%
       );
-      border-start-start-radius: 0.45rem;
+      border-start-start-radius: 0;
       content: '';
     }
 
@@ -111,7 +111,7 @@ export class CadNote extends LitElement {
     .title {
       margin: 0;
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-lg, 1.55rem);
+      font-size: var(--cad-hand-md, 1.2rem);
       font-weight: var(--cad-hand-weight-strong, 700);
       line-height: 1.05;
     }
@@ -123,8 +123,9 @@ export class CadNote extends LitElement {
 
     .content {
       min-width: 0;
-      font-family: var(--cad-font-book, serif);
-      line-height: 1.6;
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-lg, 1.55rem);
+      line-height: 1.25;
     }
 
     .footer {
@@ -163,7 +164,7 @@ export class CadNote extends LitElement {
     super()
     this.folded = false
     this.heading = 'Note'
-    this.tone = 'paper'
+    this.tone = 'lemon'
   }
 
   override render() {

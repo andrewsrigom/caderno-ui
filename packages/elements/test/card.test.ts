@@ -42,13 +42,30 @@ describe('cad-card', () => {
       footer.updateComplete,
     ])
 
-    expect(
-      card.shadowRoot?.querySelector('article[part="base"]'),
-    ).not.toBeNull()
+    const base = card.shadowRoot?.querySelector<HTMLElement>(
+      'article[part="base"]',
+    )
+    expect(base).not.toBeNull()
+    expect(card.folded).toBe(false)
+    expect(getComputedStyle(base!).clipPath).toBe('none')
+    expect(getComputedStyle(base!).paddingTop).toBe('0px')
+    expect(getComputedStyle(base!).borderTopStyle).toBe('solid')
+    const band = card.shadowRoot?.querySelector<HTMLElement>('[part="band"]')
+    const fold = card.shadowRoot?.querySelector<HTMLElement>('[part="fold"]')
+    expect(getComputedStyle(band!).display).toBe('none')
+    expect(getComputedStyle(fold!).display).toBe('none')
     expect(header.shadowRoot?.querySelector('header')).not.toBeNull()
+    expect(
+      getComputedStyle(header.shadowRoot!.querySelector('header')!)
+        .borderBottomStyle,
+    ).toBe('solid')
     expect(title.textContent).toContain('Architecture')
     expect(content.textContent).toContain('Typed contracts')
     expect(footer.shadowRoot?.querySelector('footer')).not.toBeNull()
+    expect(
+      getComputedStyle(footer.shadowRoot!.querySelector('footer')!)
+        .borderTopStyle,
+    ).toBe('solid')
   })
 
   it('renders a native anchor when href is provided', async () => {
@@ -60,6 +77,60 @@ describe('cad-card', () => {
 
     expect(element.shadowRoot?.querySelector('a')?.getAttribute('href')).toBe(
       '/components',
+    )
+  })
+
+  it('keeps section dividers without an outer border in the plain variant', async () => {
+    const card = document.createElement('cad-card')
+    const header = document.createElement('cad-card-header')
+    const content = document.createElement('cad-card-content')
+    const footer = document.createElement('cad-card-footer')
+    card.variant = 'plain'
+    header.textContent = 'Review confidence'
+    content.textContent = 'Evidence is ready.'
+    footer.textContent = 'Updated today'
+    card.append(header, content, footer)
+    document.body.append(card)
+    await Promise.all([
+      card.updateComplete,
+      header.updateComplete,
+      content.updateComplete,
+      footer.updateComplete,
+    ])
+
+    const base = card.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!
+    expect(getComputedStyle(base).borderTopWidth).toBe('0px')
+    expect(getComputedStyle(base).boxShadow).toBe('none')
+    expect(getComputedStyle(base).clipPath).toBe('none')
+    expect(
+      getComputedStyle(header.shadowRoot!.querySelector('header')!)
+        .borderBottomStyle,
+    ).toBe('solid')
+    expect(
+      getComputedStyle(footer.shadowRoot!.querySelector('footer')!)
+        .borderTopStyle,
+    ).toBe('solid')
+  })
+
+  it('retains the folded treatment as an explicit option', async () => {
+    const card = document.createElement('cad-card')
+    card.folded = true
+    card.textContent = 'Optional paper fold'
+    document.body.append(card)
+    await card.updateComplete
+
+    const base = card.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!
+    const band = card.shadowRoot!.querySelector<HTMLElement>('[part="band"]')!
+    const fold = card.shadowRoot!.querySelector<HTMLElement>('[part="fold"]')!
+    expect(getComputedStyle(base).clipPath).toContain('polygon')
+    expect(getComputedStyle(band).display).not.toBe('none')
+    expect(getComputedStyle(fold).display).not.toBe('none')
+    const foldSeam = getComputedStyle(fold, '::after')
+    expect(foldSeam.left).toBe('0px')
+    expect(foldSeam.top).toBe('0px')
+    expect(foldSeam.transform).toBe('none')
+    expect(parseFloat(foldSeam.width)).toBeGreaterThan(
+      parseFloat(getComputedStyle(fold).width) / 2,
     )
   })
 })

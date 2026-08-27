@@ -5,13 +5,26 @@ import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-accordion label="Review questions" mode="single">
-  <cad-accordion-item open tone="blue">
+  <cad-accordion-item open>
     <span slot="title">Why use a Map?</span>
-    It turns repeated lookup into an explicit index.
+    <p>
+      It turns repeated lookup into an explicit index and makes the
+      complexity visible.
+    </p>
   </cad-accordion-item>
-  <cad-accordion-item tone="mint">
+  <cad-accordion-item>
     <span slot="title">When is the simple loop better?</span>
-    When the input is small and clarity dominates.
+    <p>
+      When the input is small, the operation is one-off, and clarity
+      dominates.
+    </p>
+  </cad-accordion-item>
+  <cad-accordion-item>
+    <span slot="title">What belongs in the explanation?</span>
+    <p>
+      State the invariant, trade-off, and verification strategy before
+      optimizing.
+    </p>
   </cad-accordion-item>
 </cad-accordion>
 
@@ -21,36 +34,35 @@ const usage = `<cad-accordion label="Review questions" mode="single">
 ---
 
 <DocsLayout
-  description="CadAccordion coordinates animated native details disclosures in single or multiple mode."
+  description="Expand or collapse sections of content. Allow several sections open, or keep only one open at a time."
   title="Accordion"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-accordion&gt; + &lt;cad-accordion-item&gt;</p>
-    <h1>Disclose supporting material with native foundations.</h1>
+    <h1>Accordion</h1>
     <p>
-      Each item renders <code>details</code> and <code>summary</code>. The
-      parent adds optional single-open coordination, animated height and
-      opacity, and keeps native keyboard behavior.
+      Expand or collapse sections of content. Allow several sections open, or
+      keep only one open at a time.
     </p>
   </header>
 
   <DemoFrame title="Single-open review questions">
     <cad-accordion label="Review questions" mode="single">
-      <cad-accordion-item open tone="blue">
+      <cad-accordion-item open>
         <span slot="title">Why use a Map?</span>
         <p>
           It turns repeated lookup into an explicit index and makes the
           complexity visible.
         </p>
       </cad-accordion-item>
-      <cad-accordion-item tone="mint">
+      <cad-accordion-item>
         <span slot="title">When is the simple loop better?</span>
         <p>
           When the input is small, the operation is one-off, and clarity
           dominates.
         </p>
       </cad-accordion-item>
-      <cad-accordion-item tone="lemon">
+      <cad-accordion-item>
         <span slot="title">What belongs in the explanation?</span>
         <p>
           State the invariant, trade-off, and verification strategy before
@@ -64,13 +76,16 @@ const usage = `<cad-accordion label="Review questions" mode="single">
   <ApiReference tagName="cad-accordion-item" />
 
   <section class="content-section" aria-labelledby="events-title">
-    <h2 id="events-title">Event</h2>
+    <h2 id="events-title">Behavior</h2>
     <p>
-      Items emit the composed <code>cad-accordion-toggle</code> event with
-      <code>{'{ open }'}</code> after disclosure state changes. Use
-      <code>animation="none"</code> for a deliberately static instance. Disabled items
-      leave the reading content in place but remove the summary from the tab order.
-      The animation is removed automatically when reduced motion is requested.
+      <code>cad-accordion-toggle</code> reports <code>{'{ open }'}</code> when an
+      item opens or closes. Set <code>animation="none"</code> to disable animation;
+      reduced-motion preferences also disable it. Disabled items keep their content
+      but remove the summary from the tab order.
     </p>
   </section>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/accordion'
+</script>

@@ -5,12 +5,16 @@ import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-kanban label="Release readiness">
+  <cad-kanban-column title="Planned">
+    <cad-kanban-card tone="coral">Replace temporary package links</cad-kanban-card>
+  </cad-kanban-column>
   <cad-kanban-column title="In review">
     <cad-kanban-card tone="blue">Validate selective bundles</cad-kanban-card>
     <cad-kanban-card tone="lemon">Review keyboard navigation</cad-kanban-card>
   </cad-kanban-column>
   <cad-kanban-column title="Ready">
-    <cad-kanban-card tone="mint">Compound card contract</cad-kanban-card>
+    <cad-kanban-card tone="blue">Compound card contract</cad-kanban-card>
+    <cad-kanban-card tone="blue">Responsive semantic table</cad-kanban-card>
   </cad-kanban-column>
 </cad-kanban>
 
@@ -20,26 +24,26 @@ const usage = `<cad-kanban label="Release readiness">
 ---
 
 <DocsLayout
-  description="Composable Kanban boards with independent columns, cards, counts, and accessible list structure."
+  description="Organize cards into columns. Drag-and-drop, filtering, and saving are handled by your application."
   title="Kanban"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-kanban&gt; family</p>
-    <h1>A planning surface, not a hidden task model.</h1>
+    <h1>Kanban</h1>
     <p>
-      Kanban provides the visual and semantic board structure. Applications own
-      drag-and-drop, persistence, filtering, and domain-specific card content.
+      Organize cards into columns. Drag-and-drop, filtering, and saving are
+      handled by your application.
     </p>
   </header>
 
   <DemoFrame
     title="Release readiness"
-    description="A static release view whose counts follow the composed cards."
+    description="Column counts follow the cards."
   >
     <cad-kanban label="Release readiness">
       <cad-kanban-column title="Planned">
         <cad-kanban-card tone="coral">
-          Replace temporary package links with public versions
+          Replace temporary package links
         </cad-kanban-card>
       </cad-kanban-column>
       <cad-kanban-column title="In review">
@@ -51,8 +55,8 @@ const usage = `<cad-kanban label="Release readiness">
         </cad-kanban-card>
       </cad-kanban-column>
       <cad-kanban-column title="Ready">
-        <cad-kanban-card tone="mint"> Compound card contract </cad-kanban-card>
-        <cad-kanban-card tone="mint">
+        <cad-kanban-card tone="blue">Compound card contract</cad-kanban-card>
+        <cad-kanban-card tone="blue">
           Responsive semantic table
         </cad-kanban-card>
       </cad-kanban-column>
@@ -65,11 +69,10 @@ const usage = `<cad-kanban label="Release readiness">
   <ApiReference tagName="cad-kanban-card" />
 
   <section class="content-section" aria-labelledby="kanban-boundary">
-    <h2 id="kanban-boundary">Deliberate boundary</h2>
+    <h2 id="kanban-boundary">Moving cards</h2>
     <p>
-      This primitive intentionally has no drag-and-drop runtime. If an
-      application adds movement, it must also provide keyboard movement,
-      announcements, persistence, and undo as one product behavior.
+      Drag-and-drop is not built in. If you add it, include keyboard movement,
+      status announcements, saving, and undo.
     </p>
   </section>
 </DocsLayout>

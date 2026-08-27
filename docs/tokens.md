@@ -5,6 +5,10 @@ It loads primitives first and semantic defaults second. Consumers should normall
 override semantic tokens; primitives exist to keep the system internally
 consistent and are not theme roles by themselves.
 
+The default theme is light, with a white background. Set `data-theme="dark"`
+on `<html>` to choose dark mode. Remove the attribute or set it to `light` to
+return to white. System preferences do not change the theme.
+
 ## Taxonomy
 
 | Layer     | Pattern                                                                                | Purpose                                             |

@@ -1,299 +1,264 @@
 import { css, html, LitElement } from 'lit'
 import { ifDefined } from 'lit/directives/if-defined.js'
 
-export type CadProgressTone =
-  'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
-export type CadProgressVariant = 'bar' | 'ring' | 'steps'
+export type CadProgressSize = 'md' | 'sm' | 'xs'
+export type CadProgressTone = 'amber' | 'blue' | 'mint' | 'neutral' | 'red'
 
 /**
- * A labeled progress indicator with determinate and indeterminate states.
+ * A native horizontal progress indicator for determinate and indeterminate work.
  *
  * @slot fallback - Readable progress shown before the component upgrades.
  * @csspart bar - Native progress element.
- * @csspart base - Progress container.
+ * @csspart base - Progress layout.
  * @csspart label - Visible progress label.
- * @csspart ring - Circular progress visualization.
- * @csspart steps - Segmented progress visualization.
- * @csspart value - Visible progress value.
+ * @csspart value - Visible percentage or count.
  * @cssprop --cad-progress-bg - Per-instance track color.
  * @cssprop --cad-progress-fill - Per-instance fill color.
  * @cssprop --cad-progress-ink - Per-instance foreground color.
  */
 export class CadProgress extends LitElement {
   static override properties = {
-    current: { reflect: true, type: Number },
     label: { type: String },
     max: { reflect: true, type: Number },
     showValue: { attribute: 'show-value', reflect: true, type: Boolean },
-    steps: { reflect: true, type: Number },
+    size: { reflect: true, type: String },
     tone: { reflect: true, type: String },
     value: { reflect: true, type: Number },
     valueLabel: { attribute: 'value-label', type: String },
-    variant: { reflect: true, type: String },
   }
 
   static override styles = css`
     :host {
+      --_progress-accent: var(--cad-progress-fill, var(--cad-link, #005bac));
       --_progress-bg: var(
         --cad-progress-bg,
-        var(--cad-surface-sunken, #e7dfca)
+        color-mix(in srgb, var(--_progress-accent) 6%, #fff)
       );
-      --_progress-fill: var(
-        --cad-progress-fill,
-        var(--cad-post-it-blue-bg, #88b7ff)
-      );
-      --_progress-ink: var(--cad-progress-ink, var(--cad-ink, #25202a));
+      --_progress-ink: var(--cad-progress-ink, var(--cad-ink, #162033));
+      --_progress-height: 0.65rem;
       display: block;
-    }
-
-    :host([tone='coral']) {
-      --_progress-fill: var(
-        --cad-progress-fill,
-        var(--cad-post-it-coral-bg, #ff9d87)
-      );
-    }
-
-    :host([tone='lemon']) {
-      --_progress-fill: var(
-        --cad-progress-fill,
-        var(--cad-post-it-lemon-bg, #f2d85f)
-      );
+      min-width: 0;
     }
 
     :host([tone='mint']) {
-      --_progress-fill: var(
+      --_progress-accent: var(
         --cad-progress-fill,
-        var(--cad-post-it-mint-bg, #80d9ad)
+        var(--cad-success-ink, #07875f)
       );
     }
 
-    :host([tone='pink']) {
-      --_progress-fill: var(
+    :host([tone='amber']) {
+      --_progress-accent: var(
         --cad-progress-fill,
-        var(--cad-post-it-pink-bg, #ffb7d5)
+        var(--cad-warning-ink, #d97706)
       );
     }
 
-    :host([tone='violet']) {
-      --_progress-fill: var(
+    :host([tone='red']) {
+      --_progress-accent: var(
         --cad-progress-fill,
-        var(--cad-sticker-violet-bg, #bba0ff)
+        var(--cad-danger-ink, #e13d45)
       );
+    }
+
+    :host([tone='neutral']) {
+      --_progress-accent: var(
+        --cad-progress-fill,
+        var(--cad-ink-muted, #68738c)
+      );
+    }
+
+    :host([size='sm']) {
+      --_progress-height: 0.5rem;
+    }
+
+    :host([size='xs']) {
+      --_progress-height: 0.36rem;
+      display: inline-block;
+      max-width: 100%;
     }
 
     .base {
       display: grid;
-      gap: 0.45rem;
+      grid-template-areas:
+        'label label'
+        'bar value';
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.35rem 1rem;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
       color: var(--_progress-ink);
     }
 
-    .header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
+    .base:not(.has-value) {
+      grid-template-areas:
+        'label'
+        'bar';
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .label {
+      grid-area: label;
+      min-width: 0;
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
+      font-size: var(--cad-hand-sm, 1rem);
       font-weight: var(--cad-hand-weight-strong, 700);
+      line-height: 1.15;
     }
 
     .value {
-      font-family: var(--cad-font-mono, monospace);
-      font-size: 0.82em;
+      grid-area: value;
+      min-width: 3.5rem;
+      color: var(--_progress-ink);
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-xs, 0.88rem);
+      font-weight: var(--cad-hand-weight-strong, 700);
+      line-height: 1;
+      text-align: end;
+      white-space: nowrap;
     }
 
     progress.bar {
+      grid-area: bar;
       width: 100%;
-      height: 1rem;
+      height: var(--_progress-height);
+      min-width: 4rem;
       overflow: hidden;
       appearance: none;
+      color: var(--_progress-accent);
       background: var(--_progress-bg);
-      border: 1.5px solid
-        color-mix(in srgb, var(--_progress-ink) 38%, transparent);
-      border-radius: 999px 920px 980px 940px;
+      border: 1px solid
+        color-mix(in srgb, var(--_progress-accent) 68%, transparent);
+      border-radius: 999px;
+      box-shadow: 0 1px 0
+        color-mix(in srgb, var(--_progress-accent) 18%, transparent);
     }
 
     progress.bar::-webkit-progress-bar {
       background: var(--_progress-bg);
+      border-radius: inherit;
     }
 
     progress.bar::-webkit-progress-value {
-      background: repeating-linear-gradient(
-        -18deg,
-        var(--_progress-fill),
-        var(--_progress-fill) 0.4rem,
-        color-mix(in srgb, var(--_progress-fill) 72%, var(--_progress-ink))
-          0.44rem,
-        color-mix(in srgb, var(--_progress-fill) 72%, var(--_progress-ink))
-          0.5rem
-      );
+      background:
+        repeating-linear-gradient(
+          -18deg,
+          transparent 0 0.24rem,
+          rgb(255 255 255 / 34%) 0.24rem 0.3rem
+        ),
+        var(--_progress-accent);
       border-radius: inherit;
+      box-shadow: inset -1px 0
+        color-mix(in srgb, var(--_progress-accent) 72%, #000);
     }
 
     progress.bar::-moz-progress-bar {
-      background: repeating-linear-gradient(
-        -18deg,
-        var(--_progress-fill),
-        var(--_progress-fill) 0.4rem,
-        color-mix(in srgb, var(--_progress-fill) 72%, var(--_progress-ink))
-          0.44rem,
-        color-mix(in srgb, var(--_progress-fill) 72%, var(--_progress-ink))
-          0.5rem
-      );
+      background:
+        repeating-linear-gradient(
+          -18deg,
+          transparent 0 0.24rem,
+          rgb(255 255 255 / 34%) 0.24rem 0.3rem
+        ),
+        var(--_progress-accent);
       border-radius: inherit;
+    }
+
+    progress.bar:not([value]) {
+      background:
+        repeating-linear-gradient(
+          118deg,
+          transparent 0 0.65rem,
+          var(--_progress-accent) 0.68rem 0.86rem,
+          transparent 0.9rem 1.5rem
+        ),
+        var(--_progress-bg);
+      background-size: 2.2rem 100%;
+    }
+
+    progress.bar:not([value])::-webkit-progress-bar {
+      background:
+        repeating-linear-gradient(
+          118deg,
+          transparent 0 0.65rem,
+          var(--_progress-accent) 0.68rem 0.86rem,
+          transparent 0.9rem 1.5rem
+        ),
+        var(--_progress-bg);
+      background-size: 2.2rem 100%;
+    }
+
+    :host([size='xs']) .base {
+      grid-template-areas: 'label bar value';
+      grid-template-columns: auto minmax(4rem, 8rem) auto;
+      gap: 0.55rem;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    :host([size='xs']) .base:not(.has-value) {
+      grid-template-areas: 'label bar';
+      grid-template-columns: auto minmax(4rem, 8rem);
+    }
+
+    :host([size='xs']) .label,
+    :host([size='xs']) .value {
+      font-size: var(--cad-hand-xs, 0.82rem);
     }
 
     slot[name='fallback'] {
       display: none;
     }
 
-    .semantic {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(var(--_step-count), minmax(0, 1fr));
-      gap: 0.45rem;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .steps li {
-      min-width: 0;
-      height: 0.6rem;
-      background: var(--_progress-bg);
-      border: 1px solid
-        color-mix(in srgb, var(--_progress-ink) 28%, transparent);
-      border-radius: 999px;
-    }
-
-    .steps li[data-state='complete'],
-    .steps li[data-state='current'] {
-      background: var(--_progress-fill);
-    }
-
-    .steps li[data-state='current'] {
-      outline: 2px solid
-        color-mix(in srgb, var(--_progress-ink) 42%, transparent);
-      outline-offset: 2px;
-    }
-
-    :host([variant='ring']) .base {
-      justify-items: center;
-      width: fit-content;
-      text-align: center;
-    }
-
-    :host([variant='ring']) .header {
-      display: grid;
-      justify-items: center;
-    }
-
-    .ring {
-      display: grid;
-      place-items: center;
-      width: 5.5rem;
-      aspect-ratio: 1;
-      padding: 0.55rem;
-      background: conic-gradient(
-        var(--_progress-fill) var(--_progress-angle),
-        var(--_progress-bg) 0
-      );
-      border: 1px solid
-        color-mix(in srgb, var(--_progress-ink) 32%, transparent);
-      border-radius: 50% 48% 52% 47%;
-    }
-
-    .ring::before {
-      width: 100%;
-      height: 100%;
-      grid-area: 1 / 1;
-      background: var(--cad-surface, #fffdf7);
-      border-radius: 48% 52% 47% 53%;
-      content: '';
-    }
-
-    .ring strong {
-      position: relative;
-      grid-area: 1 / 1;
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-lg, 1.55rem);
-    }
-
     @media (prefers-reduced-motion: no-preference) {
-      progress.bar:not([value]) {
-        background: repeating-linear-gradient(
-          -18deg,
-          var(--_progress-bg),
-          var(--_progress-bg) 0.55rem,
-          var(--_progress-fill) 0.58rem,
-          var(--_progress-fill) 0.8rem
-        );
-        background-size: 2rem 100%;
-        animation: cad-progress-drift 1.4s linear infinite;
+      progress.bar:not([value]),
+      progress.bar:not([value])::-webkit-progress-bar {
+        animation: cad-progress-drift 1.15s linear infinite;
       }
     }
 
     @keyframes cad-progress-drift {
       to {
-        background-position: 2rem 0;
+        background-position: 2.2rem 0;
       }
     }
 
     @media (forced-colors: active) {
-      progress.bar,
-      .ring,
-      .steps li {
+      progress.bar {
         border-color: CanvasText;
+      }
+
+      progress.bar::-webkit-progress-value,
+      progress.bar::-moz-progress-bar {
+        background: Highlight;
       }
     }
   `
 
-  declare current: number
   declare label: string
   declare max: number
   declare showValue: boolean
-  declare steps: number
+  declare size: CadProgressSize
   declare tone: CadProgressTone
   declare value: number | undefined
   declare valueLabel: string
-  declare variant: CadProgressVariant
 
   constructor() {
     super()
-    this.current = 0
     this.label = 'Progress'
     this.max = 100
-    this.showValue = true
-    this.steps = 0
+    this.showValue = false
+    this.size = 'md'
     this.tone = 'blue'
     this.value = undefined
     this.valueLabel = ''
-    this.variant = 'bar'
   }
 
   private get normalizedMax(): number {
-    if (this.variant === 'steps')
-      return Number.isFinite(this.steps) && this.steps > 0
-        ? Math.floor(this.steps)
-        : 1
     return Number.isFinite(this.max) && this.max > 0 ? this.max : 100
   }
 
   private get normalizedValue(): number | undefined {
-    if (this.variant === 'steps') {
-      const current = Number.isFinite(this.current) ? this.current : 0
-      return Math.min(this.normalizedMax, Math.max(0, Math.floor(current)))
-    }
     if (this.value === undefined || !Number.isFinite(this.value))
       return undefined
     return Math.min(this.normalizedMax, Math.max(0, this.value))
@@ -302,80 +267,30 @@ export class CadProgress extends LitElement {
   private get visibleValue(): string {
     if (this.valueLabel) return this.valueLabel
     const value = this.normalizedValue
-    if (value === undefined) return 'In progress'
-    return `${Math.round((value / this.normalizedMax) * 100)}%`
-  }
-
-  private get percentage(): number {
-    const value = this.normalizedValue
     return value === undefined
-      ? 0
-      : Math.round((value / this.normalizedMax) * 100)
+      ? ''
+      : `${Math.round((value / this.normalizedMax) * 100)}%`
   }
 
   override render() {
     const value = this.normalizedValue
-    const progress =
-      this.variant === 'bar'
-        ? html`<progress
-            aria-label=${this.label}
-            aria-valuetext=${ifDefined(this.valueLabel || undefined)}
-            class="bar"
-            max=${this.normalizedMax}
-            part="bar"
-            value=${ifDefined(value)}
-          ></progress>`
-        : html`<progress
-            aria-label=${this.label}
-            aria-valuetext=${ifDefined(this.valueLabel || undefined)}
-            class="semantic"
-            max=${this.normalizedMax}
-            value=${ifDefined(value)}
-          ></progress>`
+    const visibleValue = this.visibleValue
+    const hasVisibleValue = this.showValue && visibleValue.length > 0
 
     return html`
-      <div class="base" part="base">
-        <div class="header">
-          <span part="label">${this.label}</span>
-          ${
-            this.showValue && this.variant !== 'ring'
-              ? html`<span class="value" part="value"
-                  >${this.visibleValue}</span
-                >`
-              : null
-          }
-        </div>
-        ${progress}
+      <div class="base ${hasVisibleValue ? 'has-value' : ''}" part="base">
+        <span class="label" part="label">${this.label}</span>
+        <progress
+          aria-label=${this.label}
+          aria-valuetext=${ifDefined(this.valueLabel || undefined)}
+          class="bar"
+          max=${this.normalizedMax}
+          part="bar"
+          value=${ifDefined(value)}
+        ></progress>
         ${
-          this.variant === 'steps'
-            ? html`<ol
-                aria-hidden="true"
-                class="steps"
-                part="steps"
-                style="--_step-count: ${this.normalizedMax}"
-              >
-                ${Array.from({ length: this.normalizedMax }, (_, index) => {
-                  const current = value ?? 0
-                  const state =
-                    index < current
-                      ? 'complete'
-                      : index === current
-                        ? 'current'
-                        : 'pending'
-                  return html`<li data-state=${state}></li>`
-                })}
-              </ol>`
-            : null
-        }
-        ${
-          this.variant === 'ring'
-            ? html`<span
-                aria-hidden="true"
-                class="ring"
-                part="ring"
-                style="--_progress-angle: ${this.percentage * 3.6}deg"
-                ><strong>${this.percentage}%</strong></span
-              >`
+          hasVisibleValue
+            ? html`<span class="value" part="value">${visibleValue}</span>`
             : null
         }
         <slot name="fallback"></slot>

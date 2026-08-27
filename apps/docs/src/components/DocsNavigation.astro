@@ -1,0 +1,31 @@
+---
+import '@caderno-ui/elements/navigation.css'
+import { navigation } from '../lib/navigation'
+
+type Props = { label?: string }
+const { label = 'Documentation' } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const pagePath = Astro.url.pathname.slice(base.length).replace(/\/$/, '') || '/'
+---
+
+<nav aria-label={label} class="cad-navigation">
+  {
+    navigation.map((section) => (
+      <section class="cad-navigation-group">
+        <h2 class="cad-navigation-title">{section.label}</h2>
+        {section.items.map((item) => (
+          <a
+            aria-current={
+              pagePath === (item.href.replace(/\/$/, '') || '/')
+                ? 'page'
+                : undefined
+            }
+            href={`${base}${item.href}`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </section>
+    ))
+  }
+</nav>

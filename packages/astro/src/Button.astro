@@ -50,9 +50,21 @@ const {
   type={type}
   variant={variant}
 >
-  <slot name="start" slot="start" />
+  {
+    Astro.slots.has('start') && (
+      <span slot="start">
+        <slot name="start" />
+      </span>
+    )
+  }
   <slot />
-  <slot name="end" slot="end" />
+  {
+    Astro.slots.has('end') && (
+      <span slot="end">
+        <slot name="end" />
+      </span>
+    )
+  }
 </cad-button>
 
 <script>

@@ -1,0 +1,75 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadFooterVariant } from '@caderno-ui/elements/footer'
+
+type Props = {
+  class?: string
+  label?: string
+  linksLabel?: string
+  socialLabel?: string
+  variant?: CadFooterVariant
+}
+
+const {
+  class: className,
+  label = 'Site footer',
+  linksLabel = 'Footer links',
+  socialLabel = 'Social links',
+  variant = 'light',
+} = Astro.props
+
+const hasAside = Astro.slots.has('aside')
+const hasBackToTop = Astro.slots.has('back-to-top')
+const hasBottom = Astro.slots.has('bottom')
+const hasBrand = Astro.slots.has('brand')
+const hasSocial = Astro.slots.has('social')
+---
+
+<cad-footer
+  class={className}
+  label={label}
+  links-label={linksLabel}
+  social-label={socialLabel}
+  variant={variant}
+>
+  {
+    hasBrand && (
+      <div slot="brand">
+        <slot name="brand" />
+      </div>
+    )
+  }
+  <slot />
+  {
+    hasSocial && (
+      <div slot="social">
+        <slot name="social" />
+      </div>
+    )
+  }
+  {
+    hasAside && (
+      <div slot="aside">
+        <slot name="aside" />
+      </div>
+    )
+  }
+  {
+    hasBottom && (
+      <div slot="bottom">
+        <slot name="bottom" />
+      </div>
+    )
+  }
+  {
+    hasBackToTop && (
+      <div slot="back-to-top">
+        <slot name="back-to-top" />
+      </div>
+    )
+  }
+</cad-footer>
+
+<script>
+  import '@caderno-ui/elements/footer'
+</script>

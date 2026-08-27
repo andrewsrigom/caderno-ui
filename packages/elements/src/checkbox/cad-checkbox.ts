@@ -1,7 +1,5 @@
 import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
 
-import { renderSystemIcon } from '../internal/system-icon.js'
-
 export type CadCheckboxTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
 
@@ -44,13 +42,10 @@ export class CadCheckbox extends LitElement {
   static override styles = css`
     :host {
       --_check-bg: var(--cad-checkbox-bg, var(--cad-post-it-blue-bg, #cfe2ff));
-      --_check-ink: var(
-        --cad-checkbox-ink,
-        var(--cad-post-it-blue-ink, #20375d)
-      );
+      --_check-ink: var(--cad-checkbox-ink, var(--cad-link, #005bac));
       display: inline-block;
       max-width: 100%;
-      color: var(--cad-ink, #25202a);
+      color: var(--_check-ink);
     }
 
     :host([tone='coral']) {
@@ -99,7 +94,7 @@ export class CadCheckbox extends LitElement {
     .base {
       display: inline-grid;
       grid-template-columns: auto minmax(0, 1fr);
-      gap: 0.6rem;
+      gap: 1rem;
       align-items: start;
       max-width: 100%;
       cursor: pointer;
@@ -124,16 +119,17 @@ export class CadCheckbox extends LitElement {
     }
 
     .box {
+      position: relative;
       display: inline-grid;
       place-items: center;
       box-sizing: border-box;
-      width: 1.6rem;
-      height: 1.6rem;
+      width: 1.5rem;
+      height: 1.5rem;
       margin-top: 0.1rem;
       color: var(--_check-ink);
       background: transparent;
-      border: 2px solid color-mix(in srgb, var(--_check-ink) 55%, transparent);
-      border-radius: 0.35rem 0.55rem 0.3rem 0.5rem;
+      border: 1.5px solid color-mix(in srgb, var(--_check-ink) 88%, transparent);
+      border-radius: 0;
       transition:
         background-color
           var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
@@ -145,7 +141,9 @@ export class CadCheckbox extends LitElement {
     }
 
     .mark {
-      display: inline-grid;
+      position: absolute;
+      inset: 0;
+      display: grid;
       place-items: center;
       opacity: 0;
       transition:
@@ -158,21 +156,19 @@ export class CadCheckbox extends LitElement {
       transform: scale(0.6) rotate(-6deg);
     }
 
-    .mark::after {
-      display: none;
-      width: 0.85rem;
-      border-top: 2px solid currentColor;
+    .mark::before {
+      display: block;
+      width: 0.52rem;
+      height: 1.15rem;
+      border-block-end: 2px solid currentColor;
+      border-inline-end: 2px solid currentColor;
       content: '';
-    }
-
-    .mark svg {
-      width: 1rem;
-      height: 1rem;
+      transform: translate(0.28rem, -0.48rem) rotate(40deg);
     }
 
     .control:checked + .box,
     .control:indeterminate + .box {
-      background: color-mix(in srgb, var(--_check-bg) 68%, transparent);
+      background: color-mix(in srgb, var(--_check-bg) 32%, transparent);
       border-color: var(--_check-ink);
     }
 
@@ -182,12 +178,12 @@ export class CadCheckbox extends LitElement {
       transform: scale(1) rotate(-6deg);
     }
 
-    .control:indeterminate + .box .mark svg {
-      display: none;
-    }
-
-    .control:indeterminate + .box .mark::after {
-      display: block;
+    .control:indeterminate + .box .mark::before {
+      width: 0.85rem;
+      height: 0;
+      border-block-end: 2px solid currentColor;
+      border-inline-end: 0;
+      transform: rotate(-2deg) translateY(0);
     }
 
     .control:focus-visible + .box {
@@ -212,12 +208,12 @@ export class CadCheckbox extends LitElement {
 
     .label {
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-md, 1.2rem);
+      font-size: var(--cad-hand-md, 1.25rem);
       line-height: 1.25;
     }
 
     .hint {
-      color: var(--cad-ink-muted, currentColor);
+      color: var(--cad-ink-muted, #6f6a64);
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-sm, 1.05rem);
       line-height: 1.3;
@@ -359,7 +355,7 @@ export class CadCheckbox extends LitElement {
           @input=${this.handleInput}
         />
         <span aria-hidden="true" class="box" part="box">
-          <span class="mark" part="mark"> ${renderSystemIcon('check')} </span>
+          <span class="mark" part="mark"></span>
         </span>
         <span class="body">
           <span class="label" part="label">

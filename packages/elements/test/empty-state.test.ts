@@ -15,6 +15,8 @@ describe('cad-empty-state', () => {
     empty.description = 'Try a broader owner or status filter.'
     document.body.append(empty)
     await empty.updateComplete
+    expect(empty.size).toBe('comfortable')
+    expect(empty.tone).toBe('neutral')
     expect(
       empty.shadowRoot?.querySelector('.icon')?.hasAttribute('hidden'),
     ).toBe(true)
@@ -27,6 +29,35 @@ describe('cad-empty-state', () => {
     await empty.updateComplete
     expect(
       empty.shadowRoot?.querySelector('.actions')?.hasAttribute('hidden'),
+    ).toBe(false)
+  })
+
+  it('composes context and independent recovery actions', async () => {
+    const empty = document.createElement('cad-empty-state')
+    empty.eyebrow = 'No projects yet'
+    empty.size = 'compact'
+    empty.tone = 'blue'
+
+    const primary = document.createElement('button')
+    primary.slot = 'primary'
+    primary.textContent = 'Create project'
+    const secondary = document.createElement('a')
+    secondary.slot = 'secondary'
+    secondary.textContent = 'Browse templates'
+    empty.append(primary, secondary)
+    document.body.append(empty)
+    await nextFrame()
+    await empty.updateComplete
+
+    expect(empty.getAttribute('size')).toBe('compact')
+    expect(empty.getAttribute('tone')).toBe('blue')
+    expect(
+      empty.shadowRoot?.querySelector('[part="eyebrow"]')?.textContent,
+    ).toContain('No projects yet')
+    expect(
+      empty.shadowRoot
+        ?.querySelector('[part="actions"]')
+        ?.hasAttribute('hidden'),
     ).toBe(false)
   })
 })

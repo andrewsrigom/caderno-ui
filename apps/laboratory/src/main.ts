@@ -69,8 +69,16 @@ for (const eventName of [
   'cad-bookmark-change',
   'cad-accordion-toggle',
   'cad-dismiss',
+  'cad-drawer-close',
+  'cad-drawer-open',
+  'cad-footer-group-toggle',
+  'cad-header-menu-toggle',
   'cad-modal-close',
   'cad-modal-open',
+  'cad-popover-close',
+  'cad-popover-open',
+  'cad-slider-change',
+  'cad-slider-input',
   'cad-tab-change',
   'cad-toast-dismiss',
 ]) {
@@ -101,3 +109,13 @@ document
     if (!(trigger instanceof HTMLElement)) return
     trigger.closest('cad-modal')?.close('confirmed')
   })
+
+for (const selector of ['[data-drawer-cancel]', '[data-drawer-save]']) {
+  document
+    .querySelector<HTMLElement>(selector)
+    ?.addEventListener('click', (event) => {
+      const trigger = event.currentTarget
+      if (!(trigger instanceof HTMLElement)) return
+      trigger.closest('cad-drawer')?.close('api')
+    })
+}

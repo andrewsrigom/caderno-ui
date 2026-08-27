@@ -6,8 +6,20 @@ import '@caderno-ui/elements/prose.css'
 
 const selectiveImport = `import '@caderno-ui/elements/card'
 
-// Only add artwork when this screen actually uses it.
-import '@caderno-ui/elements/icon'`
+import '@caderno-ui/elements/badge'`
+
+const cardMarkup = `<cad-card tone="blue">
+  <cad-card-header>
+    <cad-card-kicker>Architecture review</cad-card-kicker>
+    <cad-card-title><h2>Review search delivery</h2></cad-card-title>
+  </cad-card-header>
+  <cad-card-content>
+    <p>Compare query speed and recovery time before choosing an index.</p>
+  </cad-card-content>
+  <cad-card-footer>
+    <cad-badge tone="mint">Verified</cad-badge>
+  </cad-card-footer>
+</cad-card>`
 
 const proseImport = `import '@caderno-ui/elements/prose.css'
 import { installCadernoProse } from '@caderno-ui/elements/prose'
@@ -16,69 +28,58 @@ installCadernoProse()`
 ---
 
 <DocsLayout
-  description="The composition, dependency, and bundle boundaries used across Caderno UI."
+  description="Combine components, add your own content, and import only what you use."
   title="Composition"
 >
   <header class="page-header">
-    <p class="eyebrow">Architecture</p>
-    <h1>Small behavior, explicit composition.</h1>
+    <h1>Composition</h1>
     <p>
-      Caderno UI separates semantic behavior from product content and optional
-      artwork. The result is a source-owned API in the spirit of compositional
-      systems, while the canonical Lit implementation remains framework
-      agnostic.
+      Combine components and slots to build the interface you need. Your
+      application supplies the content and actions.
     </p>
   </header>
 
   <section class="content-section" aria-labelledby="rules-title">
-    <h2 id="rules-title">The review criteria</h2>
+    <h2 id="rules-title">How to compose</h2>
     <div class="rules-grid">
       <article>
-        <h3>Compound when hierarchy varies</h3>
+        <h3>Arrange the parts</h3>
+        <p>Add, omit, or reorder Card sections and Tabs panels.</p>
+      </article>
+      <article>
+        <h3>Add content with slots</h3>
         <p>
-          Card and Tabs expose named structural primitives because applications
-          need to reorder, omit, or enrich those regions.
+          Place icons, labels, and actions in the slots each component provides.
         </p>
       </article>
       <article>
-        <h3>Slots when content varies</h3>
+        <h3>Keep built-in behavior</h3>
         <p>
-          Button adornments, Input prefixes, and Callout illustrations are
-          slots. A string prop must not pull another visual package into a
-          bundle.
+          Components handle focus, keyboard input, and form validation. Your app
+          handles what happens next.
         </p>
       </article>
       <article>
-        <h3>Own behavior when semantics depend on it</h3>
+        <h3>Import icons separately</h3>
         <p>
-          Modal owns its dialog and focus lifecycle; Alert owns live-region and
-          dismissal behavior; form controls own native validation.
-        </p>
-      </article>
-      <article>
-        <h3>Keep intrinsic marks internal</h3>
-        <p>
-          Close, check, direction, and status marks are tiny internal SVGs.
-          Product-facing doodles remain an explicit <code>cad-icon</code> import.
+          Built-in controls include their own marks. Import <code>cad-icon</code
+          > only when you add an icon.
         </p>
       </article>
     </div>
   </section>
 
   <DemoFrame
-    title="Composition without hidden dependencies"
-    description="The Card entrypoint works alone; the application opts into Badge and Icon for this particular presentation."
+    title="Card with a badge"
+    description="Import Card and Badge for this example."
   >
     <cad-card tone="blue">
       <cad-card-header>
-        <cad-card-kicker>Bundle boundary</cad-card-kicker>
+        <cad-card-kicker>Architecture review</cad-card-kicker>
         <cad-card-title><h2>Review search delivery</h2></cad-card-title>
       </cad-card-header>
       <cad-card-content>
-        <p>
-          The surface, hierarchy, status label, and doodle come from separate
-          public entrypoints and can be shipped independently.
-        </p>
+        <p>Compare query speed and recovery time before choosing an index.</p>
       </cad-card-content>
       <cad-card-footer>
         <cad-badge tone="mint">Verified</cad-badge>
@@ -86,14 +87,14 @@ installCadernoProse()`
     </cad-card>
   </DemoFrame>
 
+  <CodeBlock code={cardMarkup} language="html" collapsible />
   <CodeBlock code={selectiveImport} language="ts" collapsible />
 
   <section class="content-section" aria-labelledby="prose-title">
-    <h2 id="prose-title">Progressive editorial content</h2>
+    <h2 id="prose-title">Style HTML and Markdown</h2>
     <p>
-      The prose entrypoint owns the first-frame styles and enhancement contract
-      for semantic Markdown output. Consumers provide content, not parallel
-      Accordion, Blockquote, Code block, Highlight, Note, or Table skins.
+      Wrap HTML or rendered Markdown in <code>class="cad-prose"</code>. The
+      stylesheet covers headings, lists, quotes, code, and tables.
     </p>
     <DemoFrame title="Semantic Markdown output">
       <article class="cad-prose">
@@ -120,12 +121,34 @@ installCadernoProse()`
     <CodeBlock code={proseImport} language="ts" collapsible />
   </section>
 
-  <section class="content-section" aria-labelledby="delivery-title">
-    <h2 id="delivery-title">Enforced in CI</h2>
+  <section class="content-section" aria-labelledby="native-navigation-title">
+    <h2 id="native-navigation-title">Navigation without JavaScript</h2>
     <p>
-      Every public Elements and React entrypoint has its own gzip budget. Static
-      checks reject primitive components that import the public icon registry,
-      and bundle inspection rejects Rough.js anywhere outside Chart.
+      Use <code>navigation.css</code> with HTML links. Mark the current page with
+      <code>aria-current="page"</code>.
+    </p>
+    <CodeBlock
+      language="html"
+      code={`<nav class="cad-navigation" aria-label="Documentation">
+  <section class="cad-navigation-group">
+    <h2 class="cad-navigation-title">Overview</h2>
+    <a href="/" aria-current="page">Introduction</a>
+    <a href="/getting-started/">Getting started</a>
+  </section>
+</nav>`}
+    />
+    <CodeBlock
+      language="css"
+      code={`@import '@caderno-ui/tokens/notebook.css';
+@import '@caderno-ui/elements/navigation.css';`}
+    />
+  </section>
+
+  <section class="content-section" aria-labelledby="delivery-title">
+    <h2 id="delivery-title">Keep imports small</h2>
+    <p>
+      Import components by subpath. Charts load Rough.js only when you import
+      <code>@caderno-ui/elements/chart</code>. Bundle sizes are checked in CI.
     </p>
   </section>
 
@@ -140,7 +163,7 @@ installCadernoProse()`
       padding: 1rem 1.1rem;
       background: var(--cad-surface-raised);
       border: 1px dashed var(--cad-line-strong);
-      border-radius: 0.75rem;
+      border-radius: 0;
     }
 
     .rules-grid :is(h3, p) {

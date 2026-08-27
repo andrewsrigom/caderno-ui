@@ -1,4 +1,3 @@
-:root,
 :root[data-theme='dark'] {
   color-scheme: dark;
   --cad-bg: var(--cad-color-night-bg);
@@ -12,7 +11,29 @@
   --cad-line: rgb(124 124 255 / 14%);
   --cad-line-strong: rgb(124 124 255 / 28%);
   --cad-link: var(--cad-color-night-link);
+  --cad-link-mark: var(--cad-color-night-link-mark);
   --cad-focus-ring: var(--cad-color-night-link);
+  --cad-scrollbar-thumb: color-mix(
+    in srgb,
+    var(--cad-link) 78%,
+    var(--cad-surface)
+  );
+  --cad-scrollbar-thumb-hover: var(--cad-link);
+  --cad-scrollbar-track: var(--cad-surface);
+  --cad-border-ink: color-mix(in srgb, var(--cad-link) 72%, transparent);
+  --cad-border-ink-subtle: color-mix(in srgb, var(--cad-link) 32%, transparent);
+  --cad-frame-border: var(--cad-border-width) var(--cad-border-style)
+    var(--cad-border-ink);
+  --cad-frame-border-subtle: var(--cad-border-width-subtle)
+    var(--cad-border-style) var(--cad-border-ink-subtle);
+  --cad-focus-outline: var(--cad-focus-width) var(--cad-border-style)
+    var(--cad-focus-ring);
+  --cad-success-ink: var(--cad-color-night-success-ink);
+  --cad-warning-ink: var(--cad-color-night-warning-ink);
+  --cad-danger-ink: var(--cad-color-night-danger-ink);
+  --cad-danger: var(--cad-danger-ink);
+  --cad-pink-ink: var(--cad-color-night-pink-accent);
+  --cad-violet-ink: var(--cad-color-night-violet-accent);
   --cad-control-hover: color-mix(
     in srgb,
     var(--cad-surface-strong) 90%,
@@ -44,6 +65,7 @@
   --cad-motion-stagger: 60ms;
 }
 
+:root,
 :root[data-theme='light'] {
   color-scheme: light;
   --cad-bg: var(--cad-color-day-bg);
@@ -57,7 +79,29 @@
   --cad-line: rgb(55 76 119 / 14%);
   --cad-line-strong: rgb(55 76 119 / 24%);
   --cad-link: var(--cad-color-day-link);
+  --cad-link-mark: var(--cad-color-day-link-mark);
   --cad-focus-ring: var(--cad-color-day-link);
+  --cad-scrollbar-thumb: color-mix(
+    in srgb,
+    var(--cad-link) 78%,
+    var(--cad-surface)
+  );
+  --cad-scrollbar-thumb-hover: var(--cad-link);
+  --cad-scrollbar-track: var(--cad-surface);
+  --cad-border-ink: color-mix(in srgb, var(--cad-link) 72%, transparent);
+  --cad-border-ink-subtle: color-mix(in srgb, var(--cad-link) 32%, transparent);
+  --cad-frame-border: var(--cad-border-width) var(--cad-border-style)
+    var(--cad-border-ink);
+  --cad-frame-border-subtle: var(--cad-border-width-subtle)
+    var(--cad-border-style) var(--cad-border-ink-subtle);
+  --cad-focus-outline: var(--cad-focus-width) var(--cad-border-style)
+    var(--cad-focus-ring);
+  --cad-success-ink: var(--cad-color-day-success-ink);
+  --cad-warning-ink: var(--cad-color-day-warning-ink);
+  --cad-danger-ink: var(--cad-color-day-danger-ink);
+  --cad-danger: var(--cad-danger-ink);
+  --cad-pink-ink: var(--cad-color-day-pink-accent);
+  --cad-violet-ink: var(--cad-color-day-violet-accent);
   --cad-control-hover: color-mix(
     in srgb,
     var(--cad-surface-strong) 82%,

@@ -1,29 +1,46 @@
 ---
 import '@caderno-ui/elements/fallback.css'
+import type { CadPaginationVariant } from '@caderno-ui/elements/pagination'
 
 type Props = {
   baseHref: string
+  boundaryCount?: number
   class?: string
+  firstLabel?: string
   getHref?: (page: number) => string
   label?: string
+  lastLabel?: string
   nextLabel?: string
+  nextText?: string
   page: number
   pageLabel?: string
   pageParam?: string
   previousLabel?: string
+  previousText?: string
+  showFirstLast?: boolean
+  siblingCount?: number
   total: number
+  variant?: CadPaginationVariant
 }
 const {
   baseHref,
+  boundaryCount = 1,
   class: className,
+  firstLabel = 'First page',
   getHref,
   label = 'Pagination',
+  lastLabel = 'Last page',
   nextLabel = 'Next page',
+  nextText = 'Next',
   page,
   pageLabel = 'Page',
   pageParam = 'page',
   previousLabel = 'Previous page',
+  previousText = 'Previous',
+  showFirstLast = false,
+  siblingCount = 1,
   total,
+  variant = 'boxed',
 } = Astro.props
 const safeTotal = Math.max(1, Math.floor(total))
 const safePage = Math.min(safeTotal, Math.max(1, Math.floor(page)))
@@ -34,15 +51,28 @@ const hrefs = getHref
 
 <cad-pagination
   base-href={baseHref}
+  boundary-count={boundaryCount}
   class={className}
+  first-label={firstLabel}
   hrefs={hrefs ? JSON.stringify(hrefs) : undefined}
   label={label}
+  last-label={lastLabel}
   next-label={nextLabel}
+  next-text={nextText}
   page={safePage}
   page-label={pageLabel}
   page-param={pageParam}
   previous-label={previousLabel}
-  total={safeTotal}>{pageLabel} {safePage} / {safeTotal}</cad-pagination
+  previous-text={previousText}
+  show-first-last={showFirstLast}
+  sibling-count={siblingCount}
+  total={safeTotal}
+  variant={variant}
+  >{pageLabel}
+  {safePage} / {safeTotal}<slot
+    name="previous-label"
+    slot="previous-label"
+  /><slot name="next-label" slot="next-label" /></cad-pagination
 >
 
 <script>

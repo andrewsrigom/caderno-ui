@@ -1,8 +1,16 @@
 ---
 import '@caderno-ui/tokens/notebook.css'
+import '@caderno-ui/elements/scrollbar.css'
 import '../styles/global.css'
 
-import { navigation } from '../lib/navigation'
+import Button from '@caderno-ui/astro/Button.astro'
+import Drawer from '@caderno-ui/astro/Drawer.astro'
+import Footer from '@caderno-ui/astro/Footer.astro'
+import Header from '@caderno-ui/astro/Header.astro'
+import Icon from '@caderno-ui/astro/Icon.astro'
+import Link from '@caderno-ui/astro/Link.astro'
+import DocsNavigation from '../components/DocsNavigation.astro'
+import DocsSidebar from '../components/DocsSidebar.astro'
 
 type Props = {
   description: string
@@ -12,9 +20,6 @@ type Props = {
 const { description, title } = Astro.props
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const toUrl = (href: string) => `${base}${href}`
-const pagePath = Astro.url.pathname.slice(base.length) || '/'
-const isActive = (href: string) =>
-  href === '/' ? pagePath === '/' : pagePath.startsWith(href)
 const fullTitle = title === 'Caderno UI' ? title : `${title} · Caderno UI`
 const socialImage = new URL(`${base}/og.png`, Astro.site)
 ---
@@ -25,7 +30,7 @@ const socialImage = new URL(`${base}/og.png`, Astro.site)
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f6f7fb" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="canonical" href={Astro.url} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
@@ -38,119 +43,97 @@ const socialImage = new URL(`${base}/og.png`, Astro.site)
     <meta name="twitter:image" content={socialImage} />
     <title>{fullTitle}</title>
     <script is:inline>
-      const savedTheme = localStorage.getItem('caderno-ui:docs-theme')
-      const preferredTheme = matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light'
-      document.documentElement.dataset.theme = savedTheme ?? preferredTheme
+      let savedTheme
+      try {
+        savedTheme = localStorage.getItem('caderno-ui:docs-theme')
+      } catch {}
+      document.documentElement.dataset.theme =
+        savedTheme === 'dark' ? 'dark' : 'light'
     </script>
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
-    <header class="topbar">
-      <a class="brand" href={toUrl('/')} aria-label="Caderno UI home">
-        <span aria-hidden="true" class="brand-mark">C</span>
-        <span>
-          <strong>Caderno UI</strong>
-          <small>Notebook-native components</small>
+    <Header class="docs-header" label="Caderno UI" variant="glass" sticky>
+      <div slot="brand" class="docs-brand-row">
+        <Drawer
+          class="docs-mobile-menu"
+          heading="Documentation"
+          closeLabel="Close documentation menu"
+          placement="left"
+          size="sm"
+        >
+          <Button
+            slot="trigger"
+            label="Open documentation menu"
+            size="sm"
+            variant="ghost"
+          >
+            Menu
+          </Button>
+          <DocsNavigation label="Mobile documentation" />
+        </Drawer>
+        <a class="docs-brand" href={toUrl('/')} aria-label="Caderno UI home"
+          >Caderno UI</a
+        >
+      </div>
+      <div slot="actions" class="docs-actions">
+        <div class="docs-utility-links">
+          <Link href="https://www.npmjs.com/org/caderno-ui">npm</Link>
+          <Link href="https://github.com/andrewsrigom/caderno-ui">GitHub</Link>
+        </div>
+        <span data-theme-toggle>
+          <Button label="Toggle color theme" size="sm" variant="ghost">
+            <Icon slot="start" name="spark" size={18} />Theme
+          </Button>
         </span>
-      </a>
-      <nav aria-label="Utility navigation">
-        <a href="https://www.npmjs.com/org/caderno-ui">npm</a>
-        <a href="https://github.com/andrewsrigom/caderno-ui">GitHub</a>
-        <button aria-label="Toggle color theme" data-theme-toggle type="button">
-          <cad-icon name="spark" size="18"></cad-icon>
-          <span>Theme</span>
-        </button>
-      </nav>
-    </header>
-
-    <details class="mobile-navigation">
-      <summary>Documentation menu</summary>
-      <nav aria-label="Mobile documentation">
-        {
-          navigation.map((section) => (
-            <div>
-              <strong>{section.label}</strong>
-              {section.items.map((item) => (
-                <a
-                  aria-current={isActive(item.href) ? 'page' : undefined}
-                  href={toUrl(item.href)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          ))
+      </div>
+    </Header>
+    <noscript>
+      <div class="docs-mobile-menu docs-nojs-navigation">
+        <DocsNavigation label="Mobile documentation" />
+      </div>
+      <style>
+        [data-theme-toggle],
+        cad-drawer.docs-mobile-menu {
+          display: none !important;
         }
-      </nav>
-    </details>
+      </style>
+    </noscript>
 
     <div class="docs-shell">
-      <aside class="sidebar">
-        <nav aria-label="Documentation">
-          {
-            navigation.map((section) => (
-              <section>
-                <h2>{section.label}</h2>
-                {section.items.map((item) => (
-                  <a
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    href={toUrl(item.href)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </section>
-            ))
-          }
-        </nav>
-        <p class="version-note">Current release <strong>v0.2.0</strong></p>
-      </aside>
+      <DocsSidebar />
 
       <main id="content" tabindex="-1">
         <slot />
-        <footer class="page-footer">
-          <p>MIT licensed. Built with Lit, TypeScript, and Astro.</p>
-          <a href="https://github.com/andrewsrigom/caderno-ui/issues"
-            >Report an issue</a
-          >
-        </footer>
       </main>
     </div>
+    <Footer class="docs-footer" label="Caderno UI footer" variant="minimal">
+      <div slot="bottom" class="docs-footer-content">
+        <span>MIT licensed. Built with Caderno UI.</span>
+        <Link href="https://github.com/andrewsrigom/caderno-ui/issues"
+          >Report an issue</Link
+        >
+      </div>
+      <Link slot="back-to-top" href="#content">Back to top</Link>
+    </Footer>
 
     <script>
-      import '@caderno-ui/elements'
-
       const root = document.documentElement
-      const themeButton = document.querySelector<HTMLButtonElement>(
+      const themeButton = document.querySelector<HTMLElement>(
         '[data-theme-toggle]',
       )
 
       themeButton?.addEventListener('click', () => {
         root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light'
-        localStorage.setItem(
-          'caderno-ui:docs-theme',
-          root.dataset.theme ?? 'light',
-        )
+        try {
+          localStorage.setItem(
+            'caderno-ui:docs-theme',
+            root.dataset.theme ?? 'light',
+          )
+        } catch {
+          /* A blocked preference store must not prevent toggling. */
+        }
       })
-
-      for (const button of document.querySelectorAll<HTMLButtonElement>(
-        '[data-copy-code]',
-      )) {
-        button.addEventListener('click', async () => {
-          const codeBlock = button.closest('cad-code-block') as HTMLElement & {
-            code?: string
-          }
-          const code = codeBlock?.code ?? codeBlock?.getAttribute('code')
-          if (!code) return
-          await navigator.clipboard.writeText(code)
-          button.textContent = 'Copied'
-          window.setTimeout(() => {
-            button.textContent = 'Copy'
-          }, 1400)
-        })
-      }
     </script>
   </body>
 </html>

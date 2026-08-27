@@ -22,7 +22,7 @@ describe('cad-note', () => {
     await note.updateComplete
 
     expect(note.heading).toBe('Note')
-    expect(note.tone).toBe('paper')
+    expect(note.tone).toBe('lemon')
     expect(note.shadowRoot?.querySelector('[role="note"]')).not.toBeNull()
     expect(
       note.shadowRoot

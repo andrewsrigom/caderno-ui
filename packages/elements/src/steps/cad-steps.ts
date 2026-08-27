@@ -1,68 +1,84 @@
-import { css, html, LitElement, type PropertyValues } from 'lit'
+import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
 
 export type CadStepsOrientation = 'horizontal' | 'vertical'
-export type CadStepTone =
-  'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
+export type CadStepStatus =
+  'complete' | 'current' | 'disabled' | 'error' | 'pending' | 'warning'
+
+const defaultStatusLabels: Record<CadStepStatus, string> = {
+  complete: 'Complete',
+  current: 'Current',
+  disabled: 'Disabled',
+  error: 'Error',
+  pending: 'Pending',
+  warning: 'Needs attention',
+}
 
 /**
- * One numbered stage inside `cad-steps`.
+ * One stateful stage inside `cad-steps`.
  *
  * @slot - Step description or custom content.
- * @slot meta - Supporting duration, owner, or status.
+ * @slot marker - Optional marker override.
+ * @slot meta - Supporting duration, owner, or timing.
+ * @slot status - Optional visible status label.
  * @slot title - Visible title. Falls back to `title`.
  * @csspart content - Step content.
  * @csspart connector - Decorative line to the next step.
  * @csspart item - Accessible list item.
- * @csspart marker - Step marker.
+ * @csspart marker - Status and order marker.
  * @csspart meta - Supporting metadata.
+ * @csspart status - Visible status label container.
  * @csspart title - Step title.
+ * @cssprop --cad-step-accent - Per-instance state color.
+ * @cssprop --cad-step-track - Per-instance connector color.
  */
 export class CadStep extends LitElement {
   static override properties = {
     index: { attribute: false, state: true },
+    setSize: { attribute: false, state: true },
+    status: { reflect: true, type: String },
+    statusLabel: { attribute: 'status-label', type: String },
     title: { type: String },
-    tone: { reflect: true, type: String },
     value: { type: String },
   }
 
   static override styles = css`
     :host {
-      --_step-bg: var(--cad-post-it-blue-bg, #cfe2ff);
-      --_step-ink: var(--cad-post-it-blue-ink, #20375d);
+      --_step-accent: var(--cad-step-accent, var(--cad-ink-muted, #7d879a));
+      --_step-track: var(
+        --cad-step-track,
+        color-mix(in srgb, var(--_step-accent) 55%, transparent)
+      );
       display: block;
       min-width: 0;
+      color: var(--_step-accent);
     }
 
-    :host([tone='coral']) {
-      --_step-bg: var(--cad-post-it-coral-bg, #ffd8ce);
-      --_step-ink: var(--cad-post-it-coral-ink, #633b32);
+    :host([status='complete']) {
+      --_step-accent: var(--cad-step-accent, var(--cad-success-ink, #07875f));
     }
 
-    :host([tone='lemon']) {
-      --_step-bg: var(--cad-post-it-lemon-bg, #fff1ac);
-      --_step-ink: var(--cad-post-it-lemon-ink, #51491f);
+    :host([status='current']) {
+      --_step-accent: var(--cad-step-accent, var(--cad-link, #005bac));
     }
 
-    :host([tone='mint']) {
-      --_step-bg: var(--cad-post-it-mint-bg, #d8ffec);
-      --_step-ink: var(--cad-post-it-mint-ink, #274f41);
+    :host([status='warning']) {
+      --_step-accent: var(--cad-step-accent, var(--cad-warning-ink, #e98212));
     }
 
-    :host([tone='pink']) {
-      --_step-bg: var(--cad-post-it-pink-bg, #ffb7d5);
-      --_step-ink: var(--cad-post-it-pink-ink, #52233a);
+    :host([status='error']) {
+      --_step-accent: var(--cad-step-accent, var(--cad-danger-ink, #f03c4f));
     }
 
-    :host([tone='violet']) {
-      --_step-bg: var(--cad-sticker-violet-bg, #bba0ff);
-      --_step-ink: var(--cad-sticker-violet-ink, #30205e);
+    :host([status='disabled']) {
+      --_step-accent: var(--cad-step-accent, #9aa3b1);
+      opacity: 0.58;
     }
 
     .item {
       position: relative;
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 0.8rem;
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+      gap: 0.85rem;
       align-items: start;
       min-width: 0;
     }
@@ -70,59 +86,93 @@ export class CadStep extends LitElement {
     .marker {
       position: relative;
       z-index: 1;
+      box-sizing: border-box;
       display: inline-grid;
       place-items: center;
       justify-self: start;
-      min-width: 2.2rem;
-      height: 2.2rem;
-      padding-inline: 0.25rem;
-      color: var(--_step-ink);
-      background: var(--_step-bg);
-      border: 1px solid color-mix(in srgb, var(--_step-ink) 42%, transparent);
-      border-radius: 50% 47% 52% 46%;
+      width: 2.15rem;
+      height: 2.15rem;
+      color: var(--_step-accent);
+      background: color-mix(
+        in srgb,
+        var(--_step-accent) 7%,
+        var(--cad-surface-raised, #fff)
+      );
+      border: 1.5px solid currentColor;
+      border-radius: 51% 48% 52% 47%;
       font-family: var(--cad-font-hand, cursive);
-      font-weight: 700;
-      transform: rotate(-2deg);
+      font-size: 1rem;
+      font-weight: var(--cad-hand-weight-strong, 700);
+      line-height: 1;
+      transform: rotate(-1.3deg);
+    }
+
+    :host([status='complete']) .marker,
+    :host([status='current']) .marker {
+      box-shadow: inset 0 0 0 1px
+        color-mix(in srgb, currentColor 18%, transparent);
+    }
+
+    :host([status='disabled']) .marker {
+      border-style: dashed;
+    }
+
+    .marker ::slotted(*) {
+      width: 1.15rem;
+      height: 1.15rem;
+      color: inherit;
     }
 
     .connector {
       position: absolute;
       z-index: 0;
-      inset-block: 2.2rem -0.75rem;
-      inset-inline-start: 1.08rem;
-      border-inline-start: 2px dashed
-        color-mix(in srgb, var(--_step-ink) 38%, transparent);
-      transform: rotate(-0.6deg);
+      top: 2.12rem;
+      bottom: -0.2rem;
+      left: 1.04rem;
+      width: 2px;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--_step-track) 0 0.35rem,
+        transparent 0.35rem 0.58rem
+      );
+      transform: rotate(-0.35deg);
+    }
+
+    :host([status='complete']) .connector,
+    :host([status='current']) .connector {
+      background: var(--_step-track);
     }
 
     :host([data-last-step]) .connector {
       display: none;
     }
 
-    :host([data-orientation='horizontal']) .item {
-      grid-template-columns: 1fr;
-    }
-
-    :host([data-orientation='horizontal']) .connector {
-      inset: 1.08rem -0.75rem auto 2.2rem;
-      border-block-start: 2px dashed
-        color-mix(in srgb, var(--_step-ink) 38%, transparent);
-      border-inline-start: 0;
-    }
-
     .content {
       display: grid;
       gap: 0.35rem;
       min-width: 0;
-      padding-block: 0.18rem 0.8rem;
+      padding: 0.15rem 0 1.25rem;
+      border-bottom: 1px solid var(--cad-line, #d7deea);
+    }
+
+    :host([data-last-step]) .content {
+      padding-bottom: 0.15rem;
+      border-bottom: 0;
+    }
+
+    .heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: start;
     }
 
     .title {
-      color: var(--cad-ink, currentColor);
+      color: var(--cad-link, #005bac);
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-lg, 1.55rem);
-      font-weight: 700;
-      line-height: 1.1;
+      font-size: 1.05rem;
+      font-weight: var(--cad-hand-weight-strong, 700);
+      line-height: 1.2;
     }
 
     .title ::slotted(*) {
@@ -130,62 +180,176 @@ export class CadStep extends LitElement {
       font: inherit;
     }
 
+    .status {
+      color: var(--_step-accent);
+      font-family: var(--cad-font-hand, cursive);
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+
+    .status ::slotted(*) {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.4rem;
+      padding: 0.12rem 0.5rem 0.16rem;
+      color: inherit;
+      border: 1px solid currentColor;
+      border-radius: 0;
+      font: inherit;
+      white-space: nowrap;
+    }
+
     .body {
-      color: var(--cad-ink-muted, currentColor);
+      color: var(--cad-ink, #162033);
       font-family: var(--cad-font-book, serif);
-      line-height: 1.55;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
 
     .meta {
-      color: var(--_step-ink);
+      color: var(--cad-ink-muted, #68738c);
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
+      font-size: 0.78rem;
+      line-height: 1.3;
     }
 
-    @media (width <= 38rem) {
+    .state-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :host([data-orientation='horizontal']) .item {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    :host([data-orientation='horizontal']) .connector {
+      top: 1.04rem;
+      right: -1.5rem;
+      bottom: auto;
+      left: 2.12rem;
+      width: auto;
+      height: 2px;
+      background: repeating-linear-gradient(
+        to right,
+        var(--_step-track) 0 0.42rem,
+        transparent 0.42rem 0.68rem
+      );
+      transform: rotate(0.2deg);
+    }
+
+    :host([data-orientation='horizontal'][status='complete']) .connector,
+    :host([data-orientation='horizontal'][status='current']) .connector {
+      background: var(--_step-track);
+    }
+
+    :host([data-orientation='horizontal']) .content {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    @media (width <= 48rem) {
       :host([data-orientation='horizontal']) .item {
-        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+        gap: 0.85rem;
       }
 
       :host([data-orientation='horizontal']) .connector {
-        inset: 2.2rem auto -0.75rem 1.08rem;
-        border-block-start: 0;
-        border-inline-start: 2px dashed
-          color-mix(in srgb, var(--_step-ink) 38%, transparent);
+        top: 2.12rem;
+        right: auto;
+        bottom: -0.2rem;
+        left: 1.04rem;
+        width: 2px;
+        height: auto;
+        background: repeating-linear-gradient(
+          to bottom,
+          var(--_step-track) 0 0.35rem,
+          transparent 0.35rem 0.58rem
+        );
+        transform: rotate(-0.35deg);
+      }
+
+      :host([data-orientation='horizontal'][status='complete']) .connector,
+      :host([data-orientation='horizontal'][status='current']) .connector {
+        background: var(--_step-track);
+      }
+
+      :host([data-orientation='horizontal']) .content {
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid var(--cad-line, #d7deea);
+      }
+
+      :host([data-orientation='horizontal'][data-last-step]) .content {
+        padding-bottom: 0.15rem;
+        border-bottom: 0;
       }
     }
 
     @media (forced-colors: active) {
-      .connector,
-      :host([data-orientation='horizontal']) .connector {
-        border-color: CanvasText;
+      :host {
+        --_step-accent: CanvasText;
+        --_step-track: CanvasText;
+        forced-color-adjust: none;
       }
     }
   `
 
   declare index: number
+  declare setSize: number
+  declare status: CadStepStatus
+  declare statusLabel: string
   declare title: string
-  declare tone: CadStepTone
   declare value: string
 
   constructor() {
     super()
     this.index = 1
+    this.setSize = 1
+    this.status = 'pending'
+    this.statusLabel = ''
     this.title = ''
-    this.tone = 'blue'
     this.value = ''
   }
 
   override render() {
+    const marker =
+      this.value ||
+      (this.status === 'complete'
+        ? '✓'
+        : this.status === 'warning'
+          ? '!'
+          : this.status === 'error'
+            ? '×'
+            : this.index)
+    const statusText = this.statusLabel || defaultStatusLabels[this.status]
+
     return html`
-      <div class="item" part="item" role="listitem">
+      <div
+        aria-current=${this.status === 'current' ? 'step' : nothing}
+        aria-posinset=${this.index}
+        aria-setsize=${this.setSize}
+        class="item"
+        part="item"
+        role="listitem"
+      >
         <span aria-hidden="true" class="connector" part="connector"></span>
         <span aria-hidden="true" class="marker" part="marker">
-          ${this.value || this.index}
+          <slot name="marker">${marker}</slot>
         </span>
         <div class="content" part="content">
-          <div class="title" part="title">
-            <slot name="title"><strong>${this.title}</strong></slot>
+          <span class="state-label">${statusText}</span>
+          <div class="heading">
+            <div class="title" part="title">
+              <slot name="title"><strong>${this.title}</strong></slot>
+            </div>
+            <div class="status" part="status"><slot name="status"></slot></div>
           </div>
           <div class="body"><slot></slot></div>
           <div class="meta" part="meta"><slot name="meta"></slot></div>
@@ -199,7 +363,7 @@ export class CadStep extends LitElement {
  * A responsive ordered method, timeline, or preparation sequence.
  *
  * @slot - Direct `cad-step` children.
- * @csspart list - Accessible ordered-list container.
+ * @csspart list - Accessible list container.
  */
 export class CadSteps extends LitElement {
   static override properties = {
@@ -214,16 +378,20 @@ export class CadSteps extends LitElement {
 
     .list {
       display: grid;
-      gap: 0.75rem;
+      gap: 0;
     }
 
     :host([orientation='horizontal']) .list {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+      grid-auto-columns: minmax(10rem, 1fr);
+      grid-auto-flow: column;
+      gap: 1.4rem;
     }
 
-    @media (width <= 38rem) {
+    @media (width <= 48rem) {
       :host([orientation='horizontal']) .list {
-        grid-template-columns: 1fr;
+        grid-auto-columns: auto;
+        grid-auto-flow: row;
+        gap: 0;
       }
     }
   `
@@ -251,6 +419,7 @@ export class CadSteps extends LitElement {
     )
     steps.forEach((step, index) => {
       step.index = index + 1
+      step.setSize = steps.length
       step.dataset.orientation = this.orientation
       step.toggleAttribute('data-last-step', index === steps.length - 1)
     })
@@ -262,8 +431,9 @@ export class CadSteps extends LitElement {
 }
 
 if (typeof customElements !== 'undefined') {
-  if (!customElements.get('cad-step'))
+  if (!customElements.get('cad-step')) {
     customElements.define('cad-step', CadStep)
+  }
   if (!customElements.get('cad-steps')) {
     customElements.define('cad-steps', CadSteps)
   }

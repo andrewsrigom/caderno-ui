@@ -1,7 +1,7 @@
 ---
 import '@caderno-ui/elements/fallback.css'
 
-import type { CadModalSize } from '@caderno-ui/elements/modal'
+import type { CadModalSize, CadModalTone } from '@caderno-ui/elements/modal'
 
 type Props = {
   class?: string
@@ -10,6 +10,7 @@ type Props = {
   heading?: string
   open?: boolean
   size?: CadModalSize
+  tone?: CadModalTone
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   heading,
   open = false,
   size = 'md',
+  tone = 'default',
 }: Props = Astro.props
 const hasFooter = Astro.slots.has('footer')
 ---
@@ -30,6 +32,7 @@ const hasFooter = Astro.slots.has('footer')
   heading={heading}
   open={open || undefined}
   size={size}
+  tone={tone}
 >
   <span slot="trigger"><slot name="trigger" /></span>
   <slot name="title" slot="title" />

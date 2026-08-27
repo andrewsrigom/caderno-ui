@@ -2,66 +2,150 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-steps label="Package release" orientation="horizontal">
-  <cad-step tone="blue">
-    <h3 slot="title">Verify contracts</h3>
-    Run type, element, accessibility, and bundle checks.
-    <span slot="meta">Automated · 8 min</span>
+const usage = `<cad-steps label="Project setup">
+  <cad-step status="complete">
+    <h3 slot="title">Create project</h3>
+    Start a new project and define the scope.
+    <span slot="meta">2 min</span>
+    <span slot="status">Done</span>
   </cad-step>
-  <cad-step tone="violet">
-    <h3 slot="title">Publish packages</h3>
-    Publish the synchronized package versions.
-    <span slot="meta">Owner · maintainer</span>
+  <cad-step status="current">
+    <h3 slot="title">Invite collaborators</h3>
+    Add people who will work on this project.
+    <span slot="meta">1 min</span>
+    <span slot="status">Current</span>
+  </cad-step>
+  <cad-step status="pending">
+    <h3 slot="title">Configure settings</h3>
+    Set permissions, workflows, and integrations.
+    <span slot="meta">3–5 min</span>
+    <span slot="status">Pending</span>
+  </cad-step>
+  <cad-step status="pending">
+    <h3 slot="title">Review and launch</h3>
+    Verify everything looks good and launch.
+    <span slot="meta">2 min</span>
+    <span slot="status">Pending</span>
   </cad-step>
 </cad-steps>
 
 <script type="module">
   import '@caderno-ui/elements/steps'
 </script>`
+
+const horizontalUsage = `<cad-steps label="Release sequence" orientation="horizontal">
+  <cad-step status="complete" title="Draft">Outline the change.</cad-step>
+  <cad-step status="current" title="Review">Verify the contract.</cad-step>
+  <cad-step status="warning" title="Validate">Check visual regressions.</cad-step>
+  <cad-step status="pending" title="Publish">Release the package.</cad-step>
+</cad-steps>`
 ---
 
 <DocsLayout
-  description="Responsive numbered sequences for methods, timelines, and rollout plans."
+  description="Show the stages of a process and which are complete, current, or pending."
   title="Steps"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-steps&gt; family</p>
-    <h1>A sequence assembled from independent stages.</h1>
+    <h1>Steps</h1>
     <p>
-      Steps assigns order and responsive layout. Each step owns its title,
-      content, metadata, and optional marker override. A title attribute is a
-      convenience fallback; use the title slot when heading semantics matter.
+      Show the stages of a process and which are complete, current, or pending.
     </p>
   </header>
 
-  <DemoFrame
-    title="Package release path"
-    description="The same sequence communicates automation, ownership, and the public handoff."
-  >
-    <cad-steps label="Package release" orientation="horizontal">
-      <cad-step tone="blue">
-        <h3 slot="title">Verify contracts</h3>
-        Run type, element, accessibility, and bundle checks.
-        <span slot="meta">Automated · 8 min</span>
+  <DemoFrame title="Project setup">
+    <cad-steps label="Project setup">
+      <cad-step status="complete">
+        <h3 slot="title">Create project</h3>
+        Start a new project and define the scope.
+        <span slot="meta">2 min</span>
+        <span slot="status">Done</span>
       </cad-step>
-      <cad-step tone="violet">
-        <h3 slot="title">Publish packages</h3>
-        Publish the synchronized package versions after verification passes.
-        <span slot="meta">Owner · maintainer</span>
+      <cad-step status="current">
+        <h3 slot="title">Invite collaborators</h3>
+        Add people who will work on this project.
+        <span slot="meta">1 min</span>
+        <span slot="status">Current</span>
       </cad-step>
-      <cad-step tone="mint">
-        <h3 slot="title">Validate consumers</h3>
-        Install the public release in SeniorPath and rerun its critical flows.
-        <span slot="meta">Required before announcement</span>
+      <cad-step status="pending">
+        <h3 slot="title">Configure settings</h3>
+        Set permissions, workflows, and integrations.
+        <span slot="meta">3–5 min</span>
+        <span slot="status">Pending</span>
+      </cad-step>
+      <cad-step status="pending">
+        <h3 slot="title">Review and launch</h3>
+        Verify everything looks good and launch.
+        <span slot="meta">2 min</span>
+        <span slot="status">Pending</span>
       </cad-step>
     </cad-steps>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
+  <ExampleGallery
+    id="steps-orientation-title"
+    title="Horizontal layout"
+    description="Switches to vertical in narrow containers."
+  >
+    <ExampleCard title="Release sequence" wide>
+      <cad-steps
+        class="horizontal-steps"
+        label="Release sequence"
+        orientation="horizontal"
+      >
+        <cad-step status="complete" title="Draft">Outline the change.</cad-step>
+        <cad-step status="current" title="Review">Verify the contract.</cad-step
+        >
+        <cad-step status="warning" title="Validate"
+          >Check visual regressions.</cad-step
+        >
+        <cad-step status="pending" title="Publish"
+          >Release the package.</cad-step
+        >
+      </cad-steps>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={horizontalUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="states-title">
+    <h2 id="states-title">States and slots</h2><p>
+      States are <code>complete</code>, <code>current</code>, <code
+        >pending</code
+      >, <code>disabled</code>, <code>warning</code>, and <code>error</code>.
+      Use slots for the title, content, metadata, status, or a custom marker.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="orientation-guidance-title">
+    <h2 id="orientation-guidance-title">Orientation</h2><p>
+      Vertical is the default. Horizontal suits short sequences and switches to
+      vertical in narrow containers. Steps shows progress; it does not navigate
+      or expand content.
+    </p>
+  </section>
+
   <ApiReference tagName="cad-steps" />
   <ApiReference tagName="cad-step" />
+
+  <style>
+    .horizontal-steps {
+      width: 100%;
+    }
+  </style>
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2><p>
+      Steps exposes a list and marks the current item with <code
+        >aria-current="step"</code
+      >. Translate <code>status-label</code> for each state. For navigation use Tabs
+      or Breadcrumb; for disclosure use Accordion.
+    </p>
+  </section>
 </DocsLayout>
 
 <script>

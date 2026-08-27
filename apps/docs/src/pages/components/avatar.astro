@@ -2,54 +2,92 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-avatar name="Ada Lovelace" description="Author" status="online" status-label="Available"></cad-avatar>
+const usage = `<cad-avatar name="Ada Lovelace" description="Author" status="online" status-label="Available">
+  <cad-doodle-avatar slot="image" variant="happy"></cad-doodle-avatar>
+</cad-avatar>
 
 <script type="module">
   import '@caderno-ui/elements/avatar'
+  import '@caderno-ui/elements/doodle-avatar'
 </script>`
+
+const variantsUsage = `<cad-avatar description="Reviewer" name="Grace Hopper" size="sm"></cad-avatar>
+
+<cad-avatar description="Maintainer" name="Linus Torvalds" size="md" status="away" status-label="Away"></cad-avatar>
+
+<cad-avatar description="Author" name="Ada Lovelace" size="lg" status="online" status-label="Available">
+  <cad-doodle-avatar slot="image" variant="happy"></cad-doodle-avatar>
+</cad-avatar>`
 ---
 
-<DocsLayout description="Compact identity and presence." title="Avatar">
+<DocsLayout
+  description="Identify a person with initials, a portrait, or a doodle. Add a presence indicator when needed."
+  title="Avatar"
+>
   <header class="page-header">
     <p class="eyebrow">&lt;cad-avatar&gt;</p>
-    <h1>Attach a person to the note.</h1>
+    <h1>Avatar</h1>
     <p>
-      Avatar derives two initials when no image is available and keeps the
-      visible identity separate from its optional presence status.
+      Identify a person with initials, a portrait, or a doodle. Add a presence
+      indicator when needed.
     </p>
   </header>
-  <DemoFrame title="Identity sizes">
-    <div class="demo-row">
+  <DemoFrame title="Author identity">
+    <cad-avatar
+      description="Author"
+      name="Ada Lovelace"
+      status="online"
+      status-label="Available"
+    >
+      <cad-doodle-avatar slot="image" variant="happy"></cad-doodle-avatar>
+    </cad-avatar>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+  <ExampleGallery
+    columns={3}
+    id="avatar-compositions-title"
+    title="Sizes and presence"
+    description="Portraits and presence indicators are optional."
+  >
+    <ExampleCard title="Small · initials">
+      <cad-avatar description="Reviewer" name="Grace Hopper" size="sm"
+      ></cad-avatar>
+    </ExampleCard>
+    <ExampleCard title="Medium · away">
+      <cad-avatar
+        description="Maintainer"
+        name="Linus Torvalds"
+        size="md"
+        status="away"
+        status-label="Away"></cad-avatar>
+    </ExampleCard>
+    <ExampleCard title="Large · portrait">
       <cad-avatar
         description="Author"
         name="Ada Lovelace"
         size="lg"
         status="online"
-        status-label="Available"></cad-avatar>
-      <cad-avatar
-        description="Editorial review"
-        name="Caderno UI"
-        status="away"
-        status-label="Away"></cad-avatar>
-    </div>
-  </DemoFrame>
-  <CodeBlock code={usage} collapsible language="html" />
+        status-label="Available"
+      >
+        <cad-doodle-avatar slot="image" variant="happy"></cad-doodle-avatar>
+      </cad-avatar>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
   <ApiReference tagName="cad-avatar" />
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2><p>
-      Generated portraits are decorative because the adjacent name already
-      identifies the person. Localize <code>status-label</code> whenever a presence
-      dot is shown.
+      Keep portraits and nested doodles decorative when the name is already
+      visible. Translate <code>status-label</code> when showing a presence indicator.
     </p>
   </section>
-  <style>
-    .demo-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: center;
-    }
-  </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/avatar'
+  import '@caderno-ui/elements/doodle-avatar'
+</script>

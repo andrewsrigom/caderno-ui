@@ -9,27 +9,19 @@ const install = `pnpm add @caderno-ui/elements @caderno-ui/tokens
 pnpm add @caderno-ui/react     # React
 pnpm add @caderno-ui/astro     # Astro
 
-# Optional page choreography
+# Optional page animations
 pnpm add @caderno-ui/motion`
 
-const register = `// Register the lightweight core components
-import '@caderno-ui/elements'
+const register = `import '@caderno-ui/tokens/notebook.css'
+import '@caderno-ui/elements/alert'`
 
-// Or register only what this page uses
-import '@caderno-ui/elements/alert'
-import '@caderno-ui/elements/bookmark'
-
-// Opt into charts and Rough.js explicitly
-import '@caderno-ui/elements/chart'
-
-// Load the notebook theme once in your application
-import '@caderno-ui/tokens/notebook.css'`
-
-const markup = `<cad-alert heading="Your first note" variant="success">
-  Caderno UI works anywhere the Custom Elements standard works.
+const markup = `<cad-alert heading="Ready" variant="info">
+  Your notes are ready to edit.
 </cad-alert>`
 
-const eventExample = `const bookmark = document.querySelector('cad-bookmark')
+const eventExample = `import '@caderno-ui/elements/bookmark'
+
+const bookmark = document.querySelector('cad-bookmark')
 
 bookmark.addEventListener('cad-bookmark-change', (event) => {
   console.log(event.detail)
@@ -42,12 +34,9 @@ bookmark.addEventListener('cad-bookmark-change', (event) => {
   title="Getting started"
 >
   <header class="page-header">
-    <p class="eyebrow">Start here</p>
-    <h1>From package to page in minutes.</h1>
+    <h1>Getting started</h1>
     <p>
-      Caderno UI publishes standard custom elements. Add the canonical runtime,
-      load its design tokens, and write ordinary HTML—or choose a thin adapter
-      for stronger framework ergonomics.
+      Install the packages, load the theme, and import the components you use.
     </p>
   </header>
 
@@ -55,10 +44,10 @@ bookmark.addEventListener('cad-bookmark-change', (event) => {
     <li>
       <span>1</span>
       <div>
-        <h2>Install the runtime</h2>
+        <h2>Install</h2>
         <p>
-          The elements package contains behavior and styles. Tokens provide the
-          light and dark notebook themes.
+          Elements provides the components. Tokens provides their shared colors,
+          fonts, and spacing. React, Astro, and motion packages are optional.
         </p>
       </div>
     </li>
@@ -69,10 +58,10 @@ bookmark.addEventListener('cad-bookmark-change', (event) => {
     <li>
       <span>2</span>
       <div>
-        <h2>Register components and tokens</h2>
+        <h2>Import</h2>
         <p>
-          Scoped entry points keep registrations explicit and make the browser
-          download only the components used by that surface.
+          Import each component by name to keep unused components out of your
+          bundle. Load the theme once; it starts with a white background.
         </p>
       </div>
     </li>
@@ -83,34 +72,38 @@ bookmark.addEventListener('cad-bookmark-change', (event) => {
     <li>
       <span>3</span>
       <div>
-        <h2>Use semantic markup</h2>
+        <h2>Add markup</h2>
         <p>
-          Attributes carry serializable values. Slots carry content. Complex
-          values should be assigned as JavaScript properties.
+          Use attributes for simple values and slots for content. Set arrays and
+          objects as JavaScript properties.
         </p>
       </div>
     </li>
   </ol>
   <CodeBlock code={markup} language="html" />
 
-  <DemoFrame title="Your first Caderno component">
-    <cad-alert heading="Your first note" variant="success">
-      Caderno UI works anywhere the Custom Elements standard works.
+  <DemoFrame title="Your first component">
+    <cad-alert heading="Ready" variant="info">
+      Your notes are ready to edit.
     </cad-alert>
   </DemoFrame>
 
   <section class="content-section" aria-labelledby="events-title">
-    <h2 id="events-title">Listen to public events</h2>
+    <h2 id="events-title">Handle events</h2>
     <p>
-      Events bubble and cross the shadow boundary, so application code can
-      handle them from a component, a form, or a page-level controller.
+      Listen on the component or a parent element. Events bubble and cross
+      shadow boundaries.
     </p>
     <CodeBlock code={eventExample} language="typescript" />
   </section>
 
   <aside class="callout">
     <strong>ES modules only</strong>
-    Packages target modern build tools and browsers. Caderno UI does not ship a CommonJS
-    build or require a global runtime.
+    Use a build tool that resolves package imports, such as Vite. Packages are ESM-only;
+    bare package names do not work in an unconfigured HTML file.
   </aside>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/alert'
+</script>

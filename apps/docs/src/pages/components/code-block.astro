@@ -11,64 +11,61 @@ const card = document.querySelector('cad-card')
 card?.addEventListener('click', () => openReview())`
 
 const usage = `<cad-code-block
-  code="import '@caderno-ui/elements/card'"
+  code="${sample.replaceAll('&', '&amp;').replaceAll('"', '&quot;')}"
   filename="review-queue.ts"
   language="ts"
   show-line-numbers
+  copyable
 >
-  <button slot="actions" type="button">Copy</button>
 </cad-code-block>
 
 <script type="module">
   import '@caderno-ui/elements/code-block'
-
-  const block = document.querySelector('cad-code-block')
-  block?.querySelector('button')?.addEventListener('click', () => {
-    navigator.clipboard.writeText(block.code)
-  })
 </script>`
 ---
 
 <DocsLayout
-  description="Readable preformatted code with optional filename, language, and line numbers."
+  description="Display code with syntax colors, optional line numbers, and a copy button."
   title="Code block"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-code-block&gt;</p>
-    <h1>Code examples that remain native preformatted text.</h1>
+    <h1>Code block</h1>
     <p>
-      Code block owns presentation, metadata, line numbers, and lightweight
-      syntax formatting. Actions remain explicit composition so an application
-      can add copy, open, or playground behavior without a forced controller.
+      Display code with syntax colors, optional line numbers, and a copy button.
     </p>
   </header>
 
-  <DemoFrame
-    title="Selective component imports"
-    description="A real application entrypoint imports only the card and badge used by its review queue."
-  >
+  <DemoFrame title="Selective component imports">
     <cad-code-block
       code={sample}
       filename="review-queue.ts"
       language="ts"
       show-line-numbers
       tone="accent"
+      copyable
     >
-      <button data-copy-code slot="actions" type="button">Copy</button>
     </cad-code-block>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
   <ApiReference tagName="cad-code-block" />
 
-  <section class="content-section" aria-labelledby="code-boundary">
-    <h2 id="code-boundary">Useful formatting, deliberate weight</h2>
+  <section class="content-section" aria-labelledby="copy-title">
+    <h2 id="copy-title">Copying</h2>
     <p>
-      HTML and Astro, JavaScript and TypeScript, CSS, JSON, and shell examples
-      receive dependency-free token colors. Unknown languages remain readable
-      plain text. Teams that need grammar-perfect highlighting can place
-      pre-highlighted markup in the default slot instead of shipping a parser to
-      every consumer.
+      Add <code>copyable</code> for the built-in copy button. <code
+        >cad-code-copy</code
+      > reports success or failure. Use the <code>actions</code> slot for custom controls.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="code-boundary">
+    <h2 id="code-boundary">Syntax colors</h2>
+    <p>
+      HTML, Astro, JavaScript, TypeScript, CSS, JSON, and shell have built-in
+      syntax colors. Other languages display as plain text. For a different
+      highlighter, place pre-highlighted markup in the default slot.
     </p>
   </section>
 </DocsLayout>

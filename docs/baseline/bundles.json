@@ -1,327 +1,375 @@
 {
   "entrypoints": {
     "elements-alert": {
-      "bytes": 21342,
-      "gzip": 7950
+      "bytes": 24362,
+      "gzip": 8642
     },
     "elements-badge": {
-      "bytes": 17927,
-      "gzip": 6782
+      "bytes": 18725,
+      "gzip": 6976
     },
     "elements-bookmark": {
-      "bytes": 19996,
-      "gzip": 7614
+      "bytes": 20707,
+      "gzip": 7822
     },
     "elements-button": {
-      "bytes": 22639,
-      "gzip": 7837
+      "bytes": 23122,
+      "gzip": 7913
     },
     "elements-callout": {
-      "bytes": 20679,
-      "gzip": 7685
+      "bytes": 22544,
+      "gzip": 8274
     },
     "elements-card": {
-      "bytes": 22087,
-      "gzip": 7633
+      "bytes": 23570,
+      "gzip": 7948
     },
     "elements-chart": {
-      "bytes": 56785,
-      "gzip": 19156
+      "bytes": 56752,
+      "gzip": 19142
     },
     "elements-divider": {
-      "bytes": 19120,
-      "gzip": 6838
+      "bytes": 22784,
+      "gzip": 7487
+    },
+    "elements-drawer": {
+      "bytes": 31149,
+      "gzip": 10130
+    },
+    "elements-footer": {
+      "bytes": 28724,
+      "gzip": 9239
+    },
+    "elements-header": {
+      "bytes": 28914,
+      "gzip": 9281
     },
     "elements-icon": {
-      "bytes": 25490,
-      "gzip": 10204
+      "bytes": 25770,
+      "gzip": 10300
     },
     "elements-link": {
-      "bytes": 19662,
-      "gzip": 7124
+      "bytes": 20900,
+      "gzip": 7497
     },
     "elements-note": {
-      "bytes": 19843,
-      "gzip": 7306
+      "bytes": 19786,
+      "gzip": 7281
     },
     "elements-progress": {
-      "bytes": 23857,
-      "gzip": 8099
+      "bytes": 22163,
+      "gzip": 7634
     },
     "elements-prose": {
-      "bytes": 2483,
-      "gzip": 834
+      "bytes": 2460,
+      "gzip": 823
     },
     "elements-tabs": {
-      "bytes": 25294,
-      "gzip": 8830
+      "bytes": 25095,
+      "gzip": 8763
     },
     "elements-table": {
-      "bytes": 21487,
-      "gzip": 7685
+      "bytes": 22350,
+      "gzip": 7816
     },
     "elements-input": {
-      "bytes": 23104,
-      "gzip": 8109
+      "bytes": 25316,
+      "gzip": 8582
     },
     "elements-textarea": {
-      "bytes": 23037,
-      "gzip": 8080
+      "bytes": 25064,
+      "gzip": 8528
     },
     "elements-checkbox": {
-      "bytes": 24801,
-      "gzip": 8642
+      "bytes": 23797,
+      "gzip": 8152
+    },
+    "elements-switch": {
+      "bytes": 25841,
+      "gzip": 8710
+    },
+    "elements-slider": {
+      "bytes": 34733,
+      "gzip": 11151
     },
     "elements-radio": {
       "bytes": 23720,
       "gzip": 8351
     },
     "elements-accordion": {
-      "bytes": 22985,
-      "gzip": 8314
+      "bytes": 23231,
+      "gzip": 8332
     },
     "elements-skeleton": {
-      "bytes": 18457,
-      "gzip": 6922
+      "bytes": 18401,
+      "gzip": 6901
     },
     "elements-spinner": {
-      "bytes": 17877,
-      "gzip": 6782
+      "bytes": 22789,
+      "gzip": 7722
     },
     "elements-tooltip": {
-      "bytes": 20610,
-      "gzip": 7453
+      "bytes": 20582,
+      "gzip": 7446
+    },
+    "elements-popover": {
+      "bytes": 33680,
+      "gzip": 11146
     },
     "elements-modal": {
-      "bytes": 24688,
-      "gzip": 8854
+      "bytes": 28236,
+      "gzip": 9745
     },
     "elements-toast": {
-      "bytes": 23803,
-      "gzip": 8657
+      "bytes": 33185,
+      "gzip": 11048
     },
     "elements-breadcrumb": {
-      "bytes": 21181,
-      "gzip": 7867
+      "bytes": 22495,
+      "gzip": 8210
     },
     "elements-pagination": {
-      "bytes": 20743,
-      "gzip": 7875
+      "bytes": 25995,
+      "gzip": 9069
     },
     "elements-avatar": {
-      "bytes": 18964,
-      "gzip": 7101
+      "bytes": 19046,
+      "gzip": 7122
+    },
+    "elements-doodle-avatar": {
+      "bytes": 23034,
+      "gzip": 8375
     },
     "elements-highlight": {
-      "bytes": 17995,
-      "gzip": 6640
-    },
-    "elements-tape": {
-      "bytes": 17545,
-      "gzip": 6694
+      "bytes": 19892,
+      "gzip": 7159
     },
     "elements-sticker": {
-      "bytes": 20386,
-      "gzip": 7363
+      "bytes": 20319,
+      "gzip": 7338
     },
     "elements-blockquote": {
-      "bytes": 18189,
-      "gzip": 6884
+      "bytes": 20237,
+      "gzip": 7411
     },
     "elements-checklist": {
-      "bytes": 20526,
-      "gzip": 7709
+      "bytes": 21238,
+      "gzip": 7915
     },
     "elements-code-block": {
-      "bytes": 23259,
-      "gzip": 8604
+      "bytes": 23418,
+      "gzip": 8591
     },
     "elements-empty-state": {
-      "bytes": 18753,
-      "gzip": 7023
+      "bytes": 23092,
+      "gzip": 7823
     },
     "elements-kanban": {
-      "bytes": 19505,
-      "gzip": 7166
+      "bytes": 19477,
+      "gzip": 7157
+    },
+    "elements-list": {
+      "bytes": 22050,
+      "gzip": 8137
     },
     "elements-steps": {
-      "bytes": 20953,
-      "gzip": 7469
-    },
-    "elements-paper": {
-      "bytes": 21524,
-      "gzip": 7345
+      "bytes": 24546,
+      "gzip": 8158
     },
     "motion-scroll": {
       "bytes": 116764,
       "gzip": 46088
     },
     "react-alert": {
-      "bytes": 22816,
-      "gzip": 8529
+      "bytes": 25836,
+      "gzip": 9215
     },
     "react-badge": {
-      "bytes": 19368,
-      "gzip": 7333
+      "bytes": 20166,
+      "gzip": 7527
     },
     "react-bookmark": {
-      "bytes": 21491,
-      "gzip": 8181
+      "bytes": 22202,
+      "gzip": 8391
     },
     "react-button": {
-      "bytes": 24082,
-      "gzip": 8403
+      "bytes": 24565,
+      "gzip": 8478
     },
     "react-callout": {
-      "bytes": 22124,
-      "gzip": 8245
+      "bytes": 23990,
+      "gzip": 8840
     },
     "react-card": {
-      "bytes": 23960,
-      "gzip": 8280
+      "bytes": 25443,
+      "gzip": 8597
     },
     "react-chart": {
-      "bytes": 58313,
-      "gzip": 19786
+      "bytes": 58280,
+      "gzip": 19772
     },
     "react-divider": {
-      "bytes": 20565,
-      "gzip": 7393
+      "bytes": 24229,
+      "gzip": 8054
+    },
+    "react-drawer": {
+      "bytes": 32665,
+      "gzip": 10720
+    },
+    "react-footer": {
+      "bytes": 30312,
+      "gzip": 9839
+    },
+    "react-header": {
+      "bytes": 30410,
+      "gzip": 9861
     },
     "react-icon": {
-      "bytes": 26930,
-      "gzip": 10749
+      "bytes": 27210,
+      "gzip": 10857
     },
     "react-link": {
-      "bytes": 21101,
-      "gzip": 7685
+      "bytes": 22339,
+      "gzip": 8061
     },
     "react-note": {
-      "bytes": 21282,
-      "gzip": 7858
+      "bytes": 21225,
+      "gzip": 7836
     },
     "react-progress": {
-      "bytes": 25204,
-      "gzip": 8655
+      "bytes": 23510,
+      "gzip": 8197
     },
     "react-tabs": {
-      "bytes": 27030,
-      "gzip": 9438
+      "bytes": 26831,
+      "gzip": 9378
     },
     "react-table": {
-      "bytes": 23187,
-      "gzip": 8287
+      "bytes": 24050,
+      "gzip": 8418
     },
     "react-input": {
-      "bytes": 24545,
-      "gzip": 8667
+      "bytes": 26757,
+      "gzip": 9143
     },
     "react-textarea": {
-      "bytes": 24484,
-      "gzip": 8643
+      "bytes": 26511,
+      "gzip": 9089
     },
     "react-checkbox": {
-      "bytes": 26249,
-      "gzip": 9206
+      "bytes": 25244,
+      "gzip": 8716
+    },
+    "react-switch": {
+      "bytes": 27284,
+      "gzip": 9274
+    },
+    "react-slider": {
+      "bytes": 36152,
+      "gzip": 11729
     },
     "react-radio": {
       "bytes": 25161,
       "gzip": 8908
     },
     "react-accordion": {
-      "bytes": 24578,
-      "gzip": 8908
+      "bytes": 24824,
+      "gzip": 8922
     },
     "react-skeleton": {
-      "bytes": 19904,
-      "gzip": 7478
+      "bytes": 19848,
+      "gzip": 7457
     },
     "react-spinner": {
-      "bytes": 19322,
-      "gzip": 7333
+      "bytes": 24234,
+      "gzip": 8278
     },
     "react-tooltip": {
-      "bytes": 22055,
-      "gzip": 8005
+      "bytes": 22027,
+      "gzip": 7997
+    },
+    "react-popover": {
+      "bytes": 35203,
+      "gzip": 11719
     },
     "react-modal": {
-      "bytes": 26198,
-      "gzip": 9427
+      "bytes": 29746,
+      "gzip": 10334
     },
     "react-toast": {
-      "bytes": 25375,
-      "gzip": 9251
+      "bytes": 34758,
+      "gzip": 11644
     },
     "react-breadcrumb": {
-      "bytes": 22729,
-      "gzip": 8447
+      "bytes": 24043,
+      "gzip": 8789
     },
     "react-pagination": {
-      "bytes": 22194,
-      "gzip": 8435
+      "bytes": 27447,
+      "gzip": 9628
     },
     "react-avatar": {
-      "bytes": 20407,
-      "gzip": 7654
+      "bytes": 20489,
+      "gzip": 7674
+    },
+    "react-doodle-avatar": {
+      "bytes": 24358,
+      "gzip": 8896
     },
     "react-highlight": {
-      "bytes": 19444,
-      "gzip": 7192
-    },
-    "react-tape": {
-      "bytes": 18984,
-      "gzip": 7242
+      "bytes": 21341,
+      "gzip": 7713
     },
     "react-sticker": {
-      "bytes": 21831,
-      "gzip": 7924
+      "bytes": 21764,
+      "gzip": 7896
     },
     "react-blockquote": {
-      "bytes": 19640,
-      "gzip": 7443
+      "bytes": 21688,
+      "gzip": 7968
     },
     "react-checklist": {
-      "bytes": 22070,
-      "gzip": 8285
+      "bytes": 22782,
+      "gzip": 8493
     },
     "react-code-block": {
-      "bytes": 24709,
-      "gzip": 9162
+      "bytes": 24868,
+      "gzip": 9152
     },
     "react-empty-state": {
-      "bytes": 20205,
-      "gzip": 7576
+      "bytes": 24544,
+      "gzip": 8386
     },
     "react-kanban": {
-      "bytes": 21128,
-      "gzip": 7752
+      "bytes": 21100,
+      "gzip": 7745
+    },
+    "react-list": {
+      "bytes": 23574,
+      "gzip": 8717
     },
     "react-steps": {
-      "bytes": 22469,
-      "gzip": 8034
-    },
-    "react-paper": {
-      "bytes": 22965,
-      "gzip": 7901
+      "bytes": 26062,
+      "gzip": 8733
     },
     "elements-root": {
-      "bytes": 212911,
-      "gzip": 42164
+      "bytes": 350728,
+      "gzip": 68830
     },
     "icons-root": {
-      "bytes": 9224,
-      "gzip": 3599
+      "bytes": 9430,
+      "gzip": 3674
     },
     "motion-root": {
       "bytes": 72536,
       "gzip": 28457
     },
     "react-root": {
-      "bytes": 219795,
-      "gzip": 44067
+      "bytes": 358627,
+      "gzip": 70578
     }
   },
   "icons": {
-    "names": 40
+    "names": 41
   }
 }

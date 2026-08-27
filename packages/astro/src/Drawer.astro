@@ -1,0 +1,60 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadDrawerPlacement,
+  CadDrawerSize,
+} from '@caderno-ui/elements/drawer'
+
+type Props = {
+  class?: string
+  closeLabel?: string
+  closeOnBackdrop?: boolean
+  heading?: string
+  open?: boolean
+  placement?: CadDrawerPlacement
+  size?: CadDrawerSize
+}
+
+const {
+  class: className,
+  closeLabel = 'Close drawer',
+  closeOnBackdrop = true,
+  heading,
+  open = false,
+  placement = 'right',
+  size = 'md',
+}: Props = Astro.props
+const hasFooter = Astro.slots.has('footer')
+---
+
+<cad-drawer
+  class={className}
+  close-label={closeLabel}
+  close-on-backdrop={String(closeOnBackdrop)}
+  heading={heading}
+  open={open || undefined}
+  placement={placement}
+  size={size}
+>
+  <span slot="trigger"><slot name="trigger" /></span>
+  {
+    Astro.slots.has('title') && (
+      <span slot="title">
+        <slot name="title" />
+      </span>
+    )
+  }
+  <slot />
+  {
+    hasFooter ? (
+      <span slot="footer">
+        <slot name="footer" />
+      </span>
+    ) : null
+  }
+</cad-drawer>
+
+<script>
+  import '@caderno-ui/elements/drawer'
+</script>

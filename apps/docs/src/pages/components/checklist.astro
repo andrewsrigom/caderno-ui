@@ -2,75 +2,93 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-checklist title="Do" variant="do" tone="mint">
-  <cad-checklist-item>Import the component entrypoint you use.</cad-checklist-item>
-  <cad-checklist-item>Choose native heading levels in application markup.</cad-checklist-item>
-</cad-checklist>
-
-<cad-checklist title="Don't" variant="dont" tone="coral">
-  <cad-checklist-item>Import the root package for one button.</cad-checklist-item>
-  <cad-checklist-item>Encode a whole product card in component props.</cad-checklist-item>
+const usage = `<cad-checklist title="Before publishing" variant="mixed">
+  <cad-checklist-item>Public contract reviewed</cad-checklist-item>
+  <cad-checklist-item>Keyboard flow verified</cad-checklist-item>
+  <cad-checklist-item kind="cross">Temporary package link remains</cad-checklist-item>
 </cad-checklist>
 
 <script type="module">
   import '@caderno-ui/elements/checklist'
 </script>`
+
+const variantsUsage = `<cad-checklist title="Do" tone="blue" variant="do">
+  <cad-checklist-item>Keep the public contract small</cad-checklist-item>
+  <cad-checklist-item>Verify the keyboard path</cad-checklist-item>
+</cad-checklist>
+
+<cad-checklist title="Don't" tone="blue" variant="dont">
+  <cad-checklist-item>Hide state behind color alone</cad-checklist-item>
+  <cad-checklist-item>Ship an example that uses another API</cad-checklist-item>
+</cad-checklist>`
 ---
 
 <DocsLayout
-  description="Composable checklists and do/don't guidance with intrinsic status marks."
+  description="Show a list of recommendations or review results. Use Checkbox for items the user can toggle."
   title="Checklist"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-checklist&gt; family</p>
-    <h1>Review guidance that reads like a list.</h1>
+    <h1>Checklist</h1>
     <p>
-      The parent establishes tone and a default mark. Each item remains a small
-      compound child and can override its own meaning in a mixed checklist.
+      Show a list of recommendations or review results. Use Checkbox for items
+      the user can toggle.
     </p>
   </header>
 
-  <DemoFrame
-    title="Component API review"
-    description="A concrete do/don't review used before accepting a new public contract."
-  >
-    <div class="guidance-grid">
-      <cad-checklist title="Do" variant="do" tone="mint">
-        <cad-checklist-item>
-          Import the component entrypoint you actually use.
-        </cad-checklist-item>
-        <cad-checklist-item>
-          Choose native heading levels in application markup.
-        </cad-checklist-item>
-        <cad-checklist-item>
-          Keep optional icons in explicit slots.
-        </cad-checklist-item>
-      </cad-checklist>
-      <cad-checklist title="Don't" variant="dont" tone="coral">
-        <cad-checklist-item>
-          Import the root package for one button.
-        </cad-checklist-item>
-        <cad-checklist-item>
-          Encode a whole product card in component props.
-        </cad-checklist-item>
-        <cad-checklist-item>
-          Replace native semantics with decorative containers.
-        </cad-checklist-item>
-      </cad-checklist>
-    </div>
+  <DemoFrame title="Component API review">
+    <cad-checklist title="Before publishing" variant="mixed">
+      <cad-checklist-item>Public contract reviewed</cad-checklist-item>
+      <cad-checklist-item>Keyboard flow verified</cad-checklist-item>
+      <cad-checklist-item kind="cross">
+        Temporary package link remains
+      </cad-checklist-item>
+    </cad-checklist>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    id="checklist-variants-title"
+    title="Do and don’t"
+    description="Use mixed for results, do for recommendations, and don’t for things to avoid."
+  >
+    <ExampleCard title="Do">
+      <cad-checklist
+        class="gallery-checklist"
+        title="Do"
+        tone="blue"
+        variant="do"
+      >
+        <cad-checklist-item>Keep the public contract small</cad-checklist-item>
+        <cad-checklist-item>Verify the keyboard path</cad-checklist-item>
+      </cad-checklist>
+    </ExampleCard>
+    <ExampleCard title="Don't">
+      <cad-checklist
+        class="gallery-checklist"
+        title="Don't"
+        tone="blue"
+        variant="dont"
+      >
+        <cad-checklist-item>Hide state behind color alone</cad-checklist-item>
+        <cad-checklist-item>
+          Ship an example that uses another API
+        </cad-checklist-item>
+      </cad-checklist>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
 
   <ApiReference tagName="cad-checklist" />
   <ApiReference tagName="cad-checklist-item" />
 
   <style>
-    .guidance-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-      gap: 1rem;
+    .gallery-checklist {
+      width: 100%;
     }
   </style>
 </DocsLayout>

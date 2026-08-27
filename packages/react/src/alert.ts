@@ -16,6 +16,7 @@ export const CadAlert = createComponent({
 })
 
 export type {
+  CadAlertSize,
   CadAlertVariant,
   CadDismissDetail,
   CadDismissEvent,

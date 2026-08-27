@@ -1,0 +1,166 @@
+---
+import '@caderno-ui/tokens/notebook.css'
+import '@caderno-ui/elements/scrollbar.css'
+import '../styles/demo.css'
+
+type Props = {
+  description: string
+  title: string
+}
+
+const { description, title } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const toUrl = (href: string) => `${base}${href}`
+const pagePath = Astro.url.pathname.slice(base.length) || '/'
+const fullTitle = `${title} · Field Notes demo · Caderno UI`
+const socialImage = new URL(`${base}/og.png`, Astro.site)
+
+const demoNavigation = [
+  { href: '/demo/', label: 'Overview' },
+  { href: '/demo/projects/', label: 'Projects' },
+  { href: '/demo/notes/', label: 'Notes' },
+  { href: '/demo/settings/', label: 'Settings' },
+]
+
+const isActive = (href: string) =>
+  href === '/demo/' ? pagePath === href : pagePath.startsWith(href)
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href={Astro.url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={socialImage} />
+    <title>{fullTitle}</title>
+    <script is:inline>
+      let savedTheme
+      try {
+        savedTheme = localStorage.getItem('caderno-ui:demo-theme')
+      } catch {}
+      document.documentElement.dataset.theme =
+        savedTheme === 'dark' ? 'dark' : 'light'
+    </script>
+  </head>
+  <body>
+    <a class="demo-skip-link" href="#demo-content">Skip to content</a>
+    <div class="demo-app">
+      <cad-header
+        label="Field Notes application header"
+        navigation-label="Field Notes"
+        sticky
+        variant="surface"
+      >
+        <a
+          class="demo-brand"
+          href={toUrl('/demo/')}
+          slot="brand"
+          aria-label="Field Notes overview"
+        >
+          <cad-icon aria-hidden="true" name="book" size="28"></cad-icon>
+          <strong>FIELD NOTES</strong>
+        </a>
+
+        {
+          demoNavigation.map((item) => (
+            <cad-link
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              href={toUrl(item.href)}
+              variant={isActive(item.href) ? 'underline' : 'plain'}
+            >
+              {item.label}
+            </cad-link>
+          ))
+        }
+
+        <div class="demo-header-actions" slot="actions">
+          <cad-button
+            data-demo-theme
+            label="Toggle color theme"
+            size="sm"
+            variant="ghost"
+          >
+            <cad-icon aria-hidden="true" name="spark" size="20"></cad-icon>
+          </cad-button>
+          <cad-button
+            href={toUrl('/components/')}
+            label="Back to component docs"
+            size="sm"
+            variant="ghost"
+          >
+            <cad-icon aria-hidden="true" name="brackets" size="20"></cad-icon>
+          </cad-button>
+        </div>
+
+        <cad-button
+          label="Account: Andrews"
+          size="sm"
+          slot="user"
+          variant="ghost"
+        >
+          <cad-avatar name="Andrews Rigom" size="sm"></cad-avatar>
+        </cad-button>
+      </cad-header>
+
+      <main class="demo-main" id="demo-content" tabindex="-1">
+        <slot />
+      </main>
+
+      <cad-footer label="Field Notes footer" variant="minimal">
+        <div class="demo-footer-brand" slot="brand">
+          <a class="demo-brand" href={toUrl('/demo/')}>
+            <cad-icon aria-hidden="true" name="book" size="26"></cad-icon>
+            <strong>FIELD NOTES</strong>
+          </a>
+          <p>A project and notes demo built with Caderno UI.</p>
+        </div>
+        <cad-footer-group heading="Workspace">
+          <cad-link href={toUrl('/demo/projects/')}>Projects</cad-link>
+          <cad-link href={toUrl('/demo/notes/')}>Notes</cad-link>
+          <cad-link href={toUrl('/demo/settings/')}>Settings</cad-link>
+        </cad-footer-group>
+        <cad-footer-group heading="Caderno UI">
+          <cad-link href={toUrl('/components/')}>Components</cad-link>
+          <cad-link href={toUrl('/composition/')}>Composition</cad-link>
+          <cad-link href={toUrl('/getting-started/')}>Getting started</cad-link>
+        </cad-footer-group>
+        <div class="demo-footer-meta" slot="bottom">
+          <span>Demo data only · nothing is sent anywhere.</span>
+          <span>Built with 30+ public components.</span>
+        </div>
+      </cad-footer>
+
+      <cad-toast-host id="demo-toasts" placement="top-right"></cad-toast-host>
+    </div>
+
+    <script>
+      const root = document.documentElement
+      const themeButton = document.querySelector('[data-demo-theme]')
+
+      themeButton?.addEventListener('click', () => {
+        root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light'
+        localStorage.setItem(
+          'caderno-ui:demo-theme',
+          root.dataset.theme ?? 'light',
+        )
+      })
+    </script>
+  </body>
+</html>
+
+<script>
+  import '@caderno-ui/elements/avatar'
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/footer'
+  import '@caderno-ui/elements/header'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/link'
+  import '@caderno-ui/elements/toast'
+</script>

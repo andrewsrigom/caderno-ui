@@ -6,8 +6,7 @@ import DemoFrame from '../../components/DemoFrame.astro'
 import ApiReference from '../../components/ApiReference.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-icon name="rocket" size="28"></cad-icon>
-<cad-icon name="check" label="Completed" size="28"></cad-icon>
+const usage = `<cad-icon label="Launch" name="rocket" size="28"></cad-icon>
 
 <script type="module">
   import '@caderno-ui/elements/icon'
@@ -20,25 +19,20 @@ const names = Object.keys(cadIcons) as (keyof typeof cadIcons)[]
 ---
 
 <DocsLayout
-  description="CadIcon renders typed, hand-drawn SVG symbols that inherit the surrounding text color."
+  description="Hand-drawn symbols that inherit the text color. Add a label when an icon needs to be announced."
   title="Icon"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-icon&gt;</p>
-    <h1>Hand-drawn marks, typed by name.</h1>
+    <h1>Icon</h1>
     <p>
-      Icons are SVG paths with no framework runtime. The element renders them
-      accessibly, inherits <code class="inline-code">currentColor</code>, and
-      remains decorative unless given a label.
+      Hand-drawn symbols that inherit the text color. Add a label when an icon
+      needs to be announced.
     </p>
   </header>
 
-  <DemoFrame title="Icon sizing and semantics">
-    <div class="icon-scale">
-      <cad-icon name="spark" size="18"></cad-icon>
-      <cad-icon name="book" size="28"></cad-icon>
-      <cad-icon label="Launch" name="rocket" size="40"></cad-icon>
-    </div>
+  <DemoFrame title="A labelled icon">
+    <cad-icon label="Launch" name="rocket" size="28"></cad-icon>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
@@ -93,3 +87,7 @@ const names = Object.keys(cadIcons) as (keyof typeof cadIcons)[]
     }
   </script>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/icon'
+</script>

@@ -1,0 +1,254 @@
+---
+import DemoLayout from '../../../layouts/DemoLayout.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const toUrl = (href: string) => `${base}${href}`
+---
+
+<DemoLayout
+  description="A detailed architecture project that exercises tabs, charts, tables, steps, alerts, bookmarks, and checklists."
+  title="Search indexing strategy"
+>
+  <cad-breadcrumb label="Search indexing project path">
+    <cad-breadcrumb-item href={toUrl('/demo/')}>Demo</cad-breadcrumb-item>
+    <cad-breadcrumb-item href={toUrl('/demo/projects/')}
+      >Projects</cad-breadcrumb-item
+    >
+    <cad-breadcrumb-item current>Search indexing</cad-breadcrumb-item>
+  </cad-breadcrumb>
+
+  <header class="demo-page-heading">
+    <p class="demo-eyebrow">Architecture review · updated today</p>
+    <div class="demo-project-title">
+      <h1>Search indexing strategy</h1>
+      <cad-bookmark
+        active-label="Remove saved project"
+        bookmark-id="demo-search-indexing"
+        label="Save project"
+        persist></cad-bookmark>
+    </div>
+    <p>
+      Choose the index boundary without hiding write amplification, query lag,
+      or the recovery path from the team making the decision.
+    </p>
+    <div class="demo-actions">
+      <cad-badge tone="blue">In review</cad-badge>
+      <cad-badge tone="mint">3 decisions recorded</cad-badge>
+      <cad-button
+        data-share-project
+        size="sm"
+        type="button"
+        variant="secondary"
+      >
+        Copy review link
+      </cad-button>
+    </div>
+  </header>
+
+  <cad-alert heading="One blocker remains" variant="warning">
+    Recovery time has not been tested under peak write load.
+    <cad-link href="#decision-work" slot="action">Review evidence</cad-link>
+  </cad-alert>
+
+  <section class="demo-section" aria-labelledby="readiness-title">
+    <div class="demo-section-heading">
+      <div>
+        <p class="demo-section-label">Readiness</p>
+        <h2 id="readiness-title">The decision is 72% ready.</h2>
+      </div>
+    </div>
+    <cad-progress label="Architecture review readiness" show-value value="72"
+    ></cad-progress>
+  </section>
+
+  <section
+    class="demo-section"
+    id="decision-work"
+    aria-label="Project workspace"
+  >
+    <cad-tabs default-value="overview">
+      <cad-tabs-list label="Search indexing workspace">
+        <cad-tab-trigger active label="Overview" value="overview">
+          <cad-icon aria-hidden="true" name="book" size="20" slot="start"
+          ></cad-icon>
+          Overview
+        </cad-tab-trigger>
+        <cad-tab-trigger label="Decisions" value="decisions">
+          <cad-icon aria-hidden="true" name="checklist" size="20" slot="start"
+          ></cad-icon>
+          Decisions
+        </cad-tab-trigger>
+        <cad-tab-trigger label="Activity" value="activity">
+          <cad-icon aria-hidden="true" name="clock" size="20" slot="start"
+          ></cad-icon>
+          Activity
+        </cad-tab-trigger>
+      </cad-tabs-list>
+
+      <cad-tab-content value="overview">
+        <div class="demo-tab-stack">
+          <section class="demo-panel" aria-labelledby="sequence-title">
+            <div class="demo-panel-heading">
+              <div>
+                <p class="demo-kicker">Release sequence</p>
+                <h2 id="sequence-title">Keep every step reversible.</h2>
+              </div>
+            </div>
+            <cad-steps label="Index rollout" orientation="horizontal">
+              <cad-step status="complete" title="Observe">
+                Measure the current read path.
+              </cad-step>
+              <cad-step status="current" title="Shadow">
+                Build without serving traffic.
+              </cad-step>
+              <cad-step status="pending" title="Canary">
+                Route a small read cohort.
+              </cad-step>
+              <cad-step status="pending" title="Adopt">
+                Expand after recovery proves safe.
+              </cad-step>
+            </cad-steps>
+          </section>
+
+          <div class="demo-grid demo-grid-split">
+            <div class="demo-panel">
+              <cad-chart
+                animation="none"
+                heading="Query latency by option"
+                type="bar"
+                value-label="Milliseconds"
+              >
+                <cad-chart-item label="Database" value="180">
+                  Database: 180 ms
+                </cad-chart-item>
+                <cad-chart-item label="Read replica" value="96">
+                  Read replica: 96 ms
+                </cad-chart-item>
+                <cad-chart-item label="Search index" value="42">
+                  Search index: 42 ms
+                </cad-chart-item>
+              </cad-chart>
+            </div>
+            <div class="demo-panel">
+              <cad-checklist title="Decision evidence" variant="mixed">
+                <cad-checklist-item
+                  >Query distribution sampled</cad-checklist-item
+                >
+                <cad-checklist-item
+                  >Lag is visible to operators</cad-checklist-item
+                >
+                <cad-checklist-item kind="cross">
+                  Peak recovery drill missing
+                </cad-checklist-item>
+              </cad-checklist>
+            </div>
+          </div>
+        </div>
+      </cad-tab-content>
+
+      <cad-tab-content value="decisions">
+        <div class="demo-tab-stack">
+          <cad-blockquote
+            author="Architecture review"
+            source="August 26 decision log"
+          >
+            Keep the transactional database authoritative; the index is a
+            derived read model with visible lag.
+          </cad-blockquote>
+          <cad-table
+            caption="Architecture decisions"
+            min-width="42rem"
+            variant="grid"
+            zebra
+          >
+            <cad-table-column key="decision" label="Decision"
+            ></cad-table-column>
+            <cad-table-column key="status" label="Status"></cad-table-column>
+            <cad-table-column key="owner" label="Owner"></cad-table-column>
+            <cad-table-column key="evidence" label="Evidence"
+            ></cad-table-column>
+            <cad-table-row>
+              <cad-table-cell column="decision">Source of truth</cad-table-cell>
+              <cad-table-cell column="status">Accepted</cad-table-cell>
+              <cad-table-cell column="owner">Andrews</cad-table-cell>
+              <cad-table-cell column="evidence"
+                >Failure isolation</cad-table-cell
+              >
+            </cad-table-row>
+            <cad-table-row>
+              <cad-table-cell column="decision">Refresh model</cad-table-cell>
+              <cad-table-cell column="status">Accepted</cad-table-cell>
+              <cad-table-cell column="owner">Platform</cad-table-cell>
+              <cad-table-cell column="evidence"
+                >Async event stream</cad-table-cell
+              >
+            </cad-table-row>
+            <cad-table-row>
+              <cad-table-cell column="decision">Recovery target</cad-table-cell>
+              <cad-table-cell column="status">Open</cad-table-cell>
+              <cad-table-cell column="owner">Reliability</cad-table-cell>
+              <cad-table-cell column="evidence"
+                >Load drill required</cad-table-cell
+              >
+            </cad-table-row>
+          </cad-table>
+        </div>
+      </cad-tab-content>
+
+      <cad-tab-content value="activity">
+        <div class="demo-tab-stack">
+          <cad-list label="Project activity">
+            <cad-list-item current href="#activity"
+              >Today · Read path benchmark added</cad-list-item
+            >
+            <cad-list-item href="#activity"
+              >Yesterday · Index lag budget revised</cad-list-item
+            >
+            <cad-list-item href="#activity"
+              >Monday · Recovery owner assigned</cad-list-item
+            >
+            <cad-list-item href="#activity"
+              >Last week · Review opened</cad-list-item
+            >
+          </cad-list>
+          <cad-note heading="Question for the review" tone="lemon">
+            What should the product show when the index is healthy enough to
+            read, but still behind the source of truth?
+          </cad-note>
+        </div>
+      </cad-tab-content>
+    </cad-tabs>
+  </section>
+</DemoLayout>
+
+<script>
+  import '@caderno-ui/elements/chart'
+  import { toast } from '@caderno-ui/elements/toast'
+
+  document
+    .querySelector('[data-share-project]')
+    ?.addEventListener('click', () => {
+      toast.success('Review link copied.', {
+        description: 'The demo keeps this interaction local.',
+        hostId: 'demo-toasts',
+      })
+    })
+</script>
+
+<script>
+  import '@caderno-ui/elements/alert'
+  import '@caderno-ui/elements/badge'
+  import '@caderno-ui/elements/blockquote'
+  import '@caderno-ui/elements/bookmark'
+  import '@caderno-ui/elements/breadcrumb'
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/checklist'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/link'
+  import '@caderno-ui/elements/list'
+  import '@caderno-ui/elements/note'
+  import '@caderno-ui/elements/progress'
+  import '@caderno-ui/elements/steps'
+  import '@caderno-ui/elements/table'
+  import '@caderno-ui/elements/tabs'
+</script>

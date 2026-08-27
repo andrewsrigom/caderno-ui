@@ -1,74 +1,108 @@
 ---
+import Badge from '@caderno-ui/astro/Badge.astro'
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-badge tone="mint">
-  <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
-  Reviewed
-</cad-badge>
-<cad-badge tone="coral" variant="outline">Needs work</cad-badge>
+const withImport = (markup: string) => `${markup}
 
 <script type="module">
   import '@caderno-ui/elements/badge'
-  import '@caderno-ui/elements/icon'
 </script>`
+const rowStyle =
+  'display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;'
+const tones = [
+  ['blue', 'New'],
+  ['mint', 'Ready'],
+  ['lemon', 'In review'],
+  ['coral', 'Needs changes'],
+  ['violet', 'Blocked'],
+  ['neutral', 'Archived'],
+] as const
+const quiet = [
+  ['blue', 'Draft'],
+  ['lemon', 'Planned'],
+  ['neutral', 'Optional'],
+] as const
+const contextUsage = withImport(`<p style="${rowStyle}">
+  <span>Search indexing</span>
+  <cad-badge tone="mint">Ready for review</cad-badge>
+</p>`)
+const toneUsage = withImport(`<div style="${rowStyle}">
+${tones.map(([tone, label]) => `  <cad-badge tone="${tone}">${label}</cad-badge>`).join('\n')}
+</div>`)
+const quietUsage = withImport(`<div style="${rowStyle}">
+${quiet.map(([tone, label]) => `  <cad-badge tone="${tone}" variant="outline">${label}</cad-badge>`).join('\n')}
+</div>`)
+const markerUsage = withImport(`<div style="${rowStyle}">
+  <cad-badge tone="mint"><span aria-hidden="true" slot="start">✓</span>Reviewed</cad-badge>
+  <cad-badge tone="coral"><span aria-hidden="true" slot="start">×</span>Failed</cad-badge>
+</div>`)
 ---
 
-<DocsLayout
-  description="CadBadge is a compact, non-interactive label for status and metadata."
-  title="Badge"
->
+<DocsLayout description="Short status labels beside content." title="Badge">
   <header class="page-header">
-    <p class="eyebrow">&lt;cad-badge&gt;</p>
-    <h1>Label the margin without adding interaction.</h1>
-    <p>
-      Badge keeps short statuses, categories, and metadata visually distinct. It
-      deliberately adds no ARIA role and should never replace a button.
-    </p>
+    <h1>Badge</h1>
+    <p>Short status labels beside content.</p>
   </header>
 
-  <DemoFrame title="Review status vocabulary">
-    <div class="badge-row">
-      <cad-badge tone="mint">
-        <cad-icon aria-hidden="true" name="check" size="15" slot="start"
-        ></cad-icon>
-        Reviewed
-      </cad-badge>
-      <cad-badge tone="blue">
-        <cad-icon aria-hidden="true" name="spark" size="15" slot="start"
-        ></cad-icon>
-        New idea
-      </cad-badge>
-      <cad-badge tone="lemon">In progress</cad-badge>
-      <cad-badge tone="coral" variant="outline">Needs work</cad-badge>
-    </div>
+  <DemoFrame title="Beside content">
+    <p style={rowStyle}>
+      <span>Search indexing</span>
+      <Badge tone="mint">Ready for review</Badge>
+    </p>
   </DemoFrame>
-  <CodeBlock code={usage} collapsible language="html" />
+  <CodeBlock code={contextUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="tones-title">
+    <h2 id="tones-title">Status tones</h2>
+    <div style={rowStyle}>
+      {tones.map(([tone, label]) => <cad-badge tone={tone}>{label}</cad-badge>)}
+    </div>
+    <CodeBlock code={toneUsage} collapsible language="html" />
+  </section>
+
+  <section class="content-section" aria-labelledby="quiet-title">
+    <h2 id="quiet-title">Quiet labels</h2>
+    <p>Use <code>outline</code> for an open marker without the highlight.</p>
+    <div style={rowStyle}>
+      {
+        quiet.map(([tone, label]) => (
+          <cad-badge tone={tone} variant="outline">
+            {label}
+          </cad-badge>
+        ))
+      }
+    </div>
+    <CodeBlock code={quietUsage} collapsible language="html" />
+  </section>
+
+  <section class="content-section" aria-labelledby="marker-title">
+    <h2 id="marker-title">Custom marker</h2>
+    <p>The <code>start</code> slot replaces the dot with your own visual.</p>
+    <div style={rowStyle}>
+      <cad-badge tone="mint"
+        ><span aria-hidden="true" slot="start">✓</span>Reviewed</cad-badge
+      >
+      <cad-badge tone="coral"
+        ><span aria-hidden="true" slot="start">×</span>Failed</cad-badge
+      >
+    </div>
+    <CodeBlock code={markerUsage} collapsible language="html" />
+  </section>
 
   <ApiReference tagName="cad-badge" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Keep labels concise and include the same meaning in text; tone and icon
-      are supporting cues. Use Alert for status announcements and a native
-      control for actions.
+      Write the status in text; color and markers are supporting cues. Use Alert
+      for announcements and Button for actions.
     </p>
   </section>
-
-  <style>
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-    }
-  </style>
 </DocsLayout>
 
 <script>
   import '@caderno-ui/elements/badge'
-  import '@caderno-ui/elements/icon'
 </script>

@@ -2,42 +2,87 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<p>Keep the <cad-highlight tone="mint">contract explicit</cad-highlight>.</p>
-<script type="module">import '@caderno-ui/elements/highlight'</script>`
+const usage = `<p>We chose the <cad-highlight>event-driven architecture</cad-highlight> to decouple services.</p>
+
+<script type="module">
+  import '@caderno-ui/elements/highlight'
+</script>`
+
+const variantsUsage = `<p>Use <cad-highlight variant="marker">incremental rollout</cad-highlight> for high-risk changes.</p>
+<p>The migration starts <cad-highlight tone="blue" variant="underline">next week</cad-highlight>.</p>
+<p>Keep the system in <cad-highlight tone="blue" variant="double">read-only mode</cad-highlight>.</p>`
 ---
 
-<DocsLayout description="Semantic inline marker treatments." title="Highlight">
+<DocsLayout
+  description="Emphasize a short phrase with a marker, underline, or double stroke."
+  title="Highlight"
+>
   <header class="page-header">
-    <p class="eyebrow">&lt;cad-highlight&gt;</p><h1>
-      Mark the phrase that carries the decision.
-    </h1><p>
-      Highlight renders a native mark and offers marker, underline, and
-      double-stroke treatments without changing the text color contract.
-    </p>
+    <p class="eyebrow">&lt;cad-highlight&gt;</p>
+    <h1>Highlight</h1>
+    <p>Emphasize a short phrase with a marker, underline, or double stroke.</p>
   </header>
-  <DemoFrame title="Marker treatments"
+  <DemoFrame title="Event-driven architecture"
     ><p class="sample">
-      Review the <cad-highlight>public contract</cad-highlight>, preserve <cad-highlight
-        tone="mint"
-        variant="underline">native semantics</cad-highlight
-      >, and test <cad-highlight tone="violet" variant="double"
-        >every boundary</cad-highlight
-      >.
+      We chose the <cad-highlight>event-driven architecture</cad-highlight> to decouple
+      services.
     </p></DemoFrame
   >
   <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery columns={3} id="highlight-styles-title" title="Styles">
+    <ExampleCard title="Marker">
+      <p class="variant-sample">
+        Use <cad-highlight variant="marker">incremental rollout</cad-highlight> for
+        high-risk changes.
+      </p>
+    </ExampleCard>
+    <ExampleCard title="Underline">
+      <p class="variant-sample">
+        The migration starts <cad-highlight tone="blue" variant="underline">
+          next week
+        </cad-highlight>.
+      </p>
+    </ExampleCard>
+    <ExampleCard title="Double stroke">
+      <p class="variant-sample">
+        Keep the system in <cad-highlight tone="blue" variant="double">
+          read-only mode
+        </cad-highlight>.
+      </p>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+  <section class="content-section" aria-labelledby="treatments-title">
+    <h2 id="treatments-title">Styles and colors</h2><p>
+      Use <code>marker</code>, <code>underline</code>, or <code>double</code>.
+      Colors are yellow, blue, mint, amber, pink, lavender, and gray. The text
+      color stays unchanged.
+    </p>
+  </section>
   <ApiReference tagName="cad-highlight" />
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2><p>
-      Use highlight for relevance, not as the only status cue. Text remains
-      available before the element upgrades.
+      Uses a native <code>&lt;mark&gt;</code>. Keep phrases short. Use Alert or
+      Badge for status and errors.
     </p>
   </section>
   <style>
     .sample {
-      font: 1.2rem/1.8 var(--cad-font-book);
+      font: 1.2rem/1.8 var(--cad-font-hand);
+    }
+
+    .variant-sample {
+      margin: 0;
+      font: 1.05rem/1.7 var(--cad-font-hand);
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/highlight'
+</script>

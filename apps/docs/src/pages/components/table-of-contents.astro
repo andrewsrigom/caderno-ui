@@ -9,23 +9,25 @@ import TableOfContents from '@caderno-ui/astro/TableOfContents.astro'
 ---
 <TableOfContents
   ariaLabel="Neste capítulo"
-  selector="article h2, article h3"
-  sticky
+  items={[
+    { id: 'diagnostico', title: 'Diagnóstico antes da solução' },
+    { id: 'hipoteses', level: 3, title: 'Organizando hipóteses' },
+    { id: 'validacao', title: 'Validação e próximos passos' },
+  ]}
   title="Neste capítulo"
 />`
 ---
 
 <DocsLayout
-  description="A compact, heading-aware navigation for articles and notebooks."
+  description="Link to sections of a long page and highlight the section being read. Available as an Astro component."
   title="Table of contents"
 >
   <header class="page-header">
     <p class="eyebrow">TableOfContents.astro</p>
-    <h1>Keep long notes easy to scan.</h1>
+    <h1>Table of contents</h1>
     <p>
-      The component can receive explicit items or discover second- and
-      third-level headings, generate stable anchors, and track the visible
-      section.
+      Link to sections of a long page and highlight the section being read.
+      Available as an Astro component.
     </p>
   </header>
   <DemoFrame title="Explicit chapter outline">
@@ -43,9 +45,9 @@ import TableOfContents from '@caderno-ui/astro/TableOfContents.astro'
   <section class="content-section" aria-labelledby="behavior-title">
     <h2 id="behavior-title">Behavior</h2>
     <p>
-      Use explicit items for a stable server-rendered first frame. Heading
-      discovery is available for content generated from Markdown, and
-      enhancement is idempotent across Astro navigations.
+      Pass <code>items</code> to show links before JavaScript loads. Automatic discovery
+      finds <code>h2</code> and <code>h3</code> headings, creates anchors, and tracks
+      the visible section.
     </p>
   </section>
 </DocsLayout>

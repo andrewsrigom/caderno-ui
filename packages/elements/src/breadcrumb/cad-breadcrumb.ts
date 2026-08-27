@@ -26,7 +26,7 @@ export class CadBreadcrumb extends LitElement {
     .list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
+      gap: 0.5rem;
       align-items: center;
       padding: 0;
       margin: 0;
@@ -35,7 +35,7 @@ export class CadBreadcrumb extends LitElement {
 
     :host([variant='compact']) .list {
       flex-wrap: nowrap;
-      gap: 0.45rem;
+      gap: 0.35rem;
       overflow: hidden;
     }
   `

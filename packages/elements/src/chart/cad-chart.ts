@@ -38,12 +38,12 @@ const plot = {
   top: 22,
 }
 const fallbackColors = [
-  '#5f91e8',
-  '#eb8069',
-  '#d7b830',
-  '#4eb486',
-  '#9a7bd3',
-  '#cf72a4',
+  '#005bac',
+  '#ff665c',
+  '#0b3f86',
+  '#78aee8',
+  '#6b7280',
+  '#e2b82f',
 ]
 const fillStyles: CadChartFillStyle[] = [
   'cross-hatch',
@@ -91,48 +91,61 @@ export class CadChart extends LitElement {
 
   static override styles = css`
     :host {
-      --_chart-color-1: var(--cad-chart-color-1, #5f91e8);
-      --_chart-color-2: var(--cad-chart-color-2, #eb8069);
-      --_chart-color-3: var(--cad-chart-color-3, #d7b830);
-      --_chart-color-4: var(--cad-chart-color-4, #4eb486);
-      --_chart-color-5: var(--cad-chart-color-5, #9a7bd3);
-      --_chart-color-6: var(--cad-chart-color-6, #cf72a4);
+      --_chart-color-1: var(--cad-chart-color-1, #005bac);
+      --_chart-color-2: var(--cad-chart-color-2, #ff665c);
+      --_chart-color-3: var(--cad-chart-color-3, #0b3f86);
+      --_chart-color-4: var(--cad-chart-color-4, #78aee8);
+      --_chart-color-5: var(--cad-chart-color-5, #6b7280);
+      --_chart-color-6: var(--cad-chart-color-6, #e2b82f);
       --_chart-grid: var(
         --cad-chart-grid,
-        color-mix(
-          in srgb,
-          var(--cad-line-strong, currentColor) 62%,
-          transparent
-        )
+        color-mix(in srgb, var(--cad-link, #005bac) 28%, transparent)
       );
-      --_chart-ink: var(--cad-chart-ink, var(--cad-ink, #25202a));
-      --_chart-paper: var(--cad-chart-paper, var(--cad-surface, #fffdf7));
+      --_chart-ink: var(--cad-chart-ink, var(--cad-link, #005bac));
+      --_chart-paper: var(--cad-chart-paper, var(--cad-surface, #fff));
       display: block;
       min-width: 0;
       color: var(--_chart-ink);
     }
 
     .base {
+      position: relative;
       display: grid;
       gap: 1rem;
       margin: 0;
       min-width: 0;
       padding: 1.25rem;
-      background:
-        linear-gradient(var(--_chart-grid) 1px, transparent 1px) 0 1.8rem / 100%
-          1.8rem,
-        var(--_chart-paper);
-      border: 1.5px solid var(--_chart-grid);
-      border-radius: 0.65rem 0.85rem 0.7rem 0.8rem;
-      box-shadow: 0 0.7rem 1.6rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
+      background: var(--_chart-paper);
+      border: var(--cad-border-width, 1.5px) var(--cad-border-style, dashed)
+        color-mix(in srgb, var(--_chart-ink) 68%, transparent);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .base::after {
+      content: none;
     }
 
     .title {
+      position: relative;
+      width: fit-content;
       margin: 0;
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-lg, 1.55rem);
+      font-family: var(--cad-type-title-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-title-size, var(--cad-hand-lg, 1.55rem));
       font-weight: var(--cad-hand-weight-strong, 700);
-      line-height: 1.05;
+      line-height: var(--cad-type-title-line-height, 1.15);
+    }
+
+    .title::after {
+      position: absolute;
+      right: 9%;
+      bottom: -0.32rem;
+      left: 0;
+      height: 2px;
+      background: var(--cad-link-mark, #ef4d4f);
+      content: '';
+      opacity: 0.78;
+      transform: rotate(-0.7deg);
     }
 
     .title ::slotted(*) {
@@ -147,7 +160,7 @@ export class CadChart extends LitElement {
       min-height: 13rem;
       overflow: visible;
       color: var(--_chart-ink);
-      font-family: var(--cad-font-ui, sans-serif);
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
     }
 
     .grid-line {
@@ -159,20 +172,21 @@ export class CadChart extends LitElement {
     .axis-label,
     .value-label {
       fill: var(--_chart-ink);
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
       font-size: 13px;
       text-anchor: middle;
     }
 
     .tick-label {
       fill: var(--_chart-ink);
-      font-family: var(--cad-font-mono, monospace);
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
       font-size: 11px;
       opacity: 0.75;
       text-anchor: end;
     }
 
     .value-label {
-      font-family: var(--cad-font-mono, monospace);
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
       font-size: 11px;
     }
 
@@ -195,8 +209,8 @@ export class CadChart extends LitElement {
       margin: 0;
       padding: 0;
       list-style: none;
-      font-family: var(--cad-font-ui, sans-serif);
-      font-size: 0.9rem;
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-hand-sm, 1.05rem);
     }
 
     .legend li {
@@ -210,7 +224,7 @@ export class CadChart extends LitElement {
       height: 0.8rem;
       background: var(--_swatch);
       border: 1px solid var(--_chart-ink);
-      border-radius: 45% 55% 50% 42%;
+      border-radius: 0;
       transform: rotate(-4deg);
     }
 
@@ -219,8 +233,8 @@ export class CadChart extends LitElement {
       padding: 2rem;
       color: color-mix(in srgb, var(--_chart-ink) 72%, transparent);
       border: 1px dashed var(--_chart-grid);
-      border-radius: 0.5rem;
-      font-family: var(--cad-font-hand, cursive);
+      border-radius: 0;
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
       text-align: center;
     }
 
@@ -276,7 +290,7 @@ export class CadChart extends LitElement {
     this.heading = 'Chart'
     this.roughness = 1.2
     this.seed = 42
-    this.showLegend = true
+    this.showLegend = false
     this.showValues = true
     this.type = 'bar'
     this.valueLabel = 'Value'

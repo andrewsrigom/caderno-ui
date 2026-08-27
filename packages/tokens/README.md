@@ -1,6 +1,6 @@
 # `@caderno-ui/tokens`
 
-Standalone design tokens and light/dark defaults for Caderno UI.
+Shared colors, fonts, spacing, and motion values for Caderno UI.
 
 ```bash
 pnpm add @caderno-ui/tokens
@@ -10,10 +10,12 @@ pnpm add @caderno-ui/tokens
 import '@caderno-ui/tokens/notebook.css'
 ```
 
-The default theme is dark. Set `data-theme="light"` on the document root for
-the light theme, or override the documented `--cad-*` custom properties in your
-own stylesheet. Override matching background/foreground pairs together so the
-contrast guarantee remains intact.
+The default theme is light, with a white background. System preferences do not
+change it. Set `data-theme="dark"` on `<html>` to opt into dark mode. Remove the
+attribute or set it to `light` to return to white.
+
+Override `--cad-*` variables in your stylesheet. When changing colors, update
+background and text pairs together and check their contrast.
 
 Semantic motion roles are included for component feedback, content entrance and
 exit, movement distance, and stagger. Use them for CSS transitions; coordinated

@@ -61,6 +61,19 @@ describe('cad-chart', () => {
     expect(chart.shadowRoot?.querySelector('.donut-hole')).not.toBeNull()
   })
 
+  it('keeps legends opt-in for categorical charts', async () => {
+    const chart = document.createElement('cad-chart')
+    chart.append(createItem('Approved', 8), createItem('Blocked', 2))
+    document.body.append(chart)
+    await chart.updateComplete
+
+    expect(chart.shadowRoot?.querySelector('.legend')).toBeNull()
+
+    chart.showLegend = true
+    await chart.updateComplete
+    expect(chart.shadowRoot?.querySelectorAll('.legend li')).toHaveLength(2)
+  })
+
   it('reacts to declarative item changes and clamps negative values', async () => {
     const chart = document.createElement('cad-chart')
     const item = createItem('Open issues', -4)

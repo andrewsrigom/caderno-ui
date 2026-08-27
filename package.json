@@ -56,6 +56,7 @@
     "test:a11y": "pnpm build:core && playwright test e2e/accessibility.spec.ts",
     "test:authoring": "node scripts/test-create-component.mjs",
     "test:browser": "pnpm --filter @caderno-ui/elements test:browser",
+    "test:docs": "pnpm exec playwright test --config playwright.docs.config.ts",
     "test:consumers": "node scripts/check-consumers.mjs",
     "test:e2e": "pnpm build:core && playwright test",
     "test:platform": "pnpm build:core && playwright test e2e/platform-modes.spec.ts",

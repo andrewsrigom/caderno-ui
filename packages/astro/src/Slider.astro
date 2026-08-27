@@ -1,0 +1,77 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadSliderTone } from '@caderno-ui/elements/slider'
+
+type Props = {
+  class?: string
+  disabled?: boolean
+  endValue?: number
+  hint?: string
+  id?: string
+  label: string
+  max?: number
+  maxLabel?: string
+  min?: number
+  minLabel?: string
+  name?: string
+  range?: boolean
+  showValue?: boolean
+  step?: number
+  ticks?: string
+  tone?: CadSliderTone
+  value?: number
+  valuePrefix?: string
+  valueSuffix?: string
+}
+
+const {
+  class: className,
+  disabled = false,
+  endValue = 75,
+  hint,
+  id,
+  label,
+  max = 100,
+  maxLabel,
+  min = 0,
+  minLabel,
+  name,
+  range = false,
+  showValue = false,
+  step = 1,
+  ticks,
+  tone = 'blue',
+  value = 50,
+  valuePrefix,
+  valueSuffix,
+} = Astro.props
+---
+
+<cad-slider
+  class={className}
+  disabled={disabled}
+  end-value={endValue}
+  hint={hint}
+  id={id}
+  label={label}
+  max={max}
+  max-label={maxLabel}
+  min={min}
+  min-label={minLabel}
+  name={name}
+  range={range}
+  show-value={showValue}
+  step={step}
+  ticks={ticks}
+  tone={tone}
+  value={value}
+  value-prefix={valuePrefix}
+  value-suffix={valueSuffix}
+>
+  <span slot="label">{label}</span>
+  {hint ? <span slot="hint">{hint}</span> : null}
+</cad-slider>
+
+<script>
+  import '@caderno-ui/elements/slider'
+</script>

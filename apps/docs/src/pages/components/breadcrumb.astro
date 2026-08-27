@@ -4,15 +4,15 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-breadcrumb label="Documentation path">
-  <cad-breadcrumb-item href="/components">Components</cad-breadcrumb-item>
-  <cad-breadcrumb-item current>Breadcrumb</cad-breadcrumb-item>
-</cad-breadcrumb>
-
-<cad-breadcrumb label="Compact reading path" variant="compact">
-  <cad-breadcrumb-item href="/guide">Guide</cad-breadcrumb-item>
-  <cad-breadcrumb-item href="/guide/foundations">Foundations</cad-breadcrumb-item>
-  <cad-breadcrumb-item current>A long chapter title that truncates safely</cad-breadcrumb-item>
+const usage = `<cad-breadcrumb label="Architecture guide path">
+  <cad-breadcrumb-item href="/guides">Guides</cad-breadcrumb-item>
+  <cad-breadcrumb-item href="/guides/system-design">
+    System design
+  </cad-breadcrumb-item>
+  <cad-breadcrumb-item href="/guides/system-design/caching">
+    Caching
+  </cad-breadcrumb-item>
+  <cad-breadcrumb-item current>Trade-offs</cad-breadcrumb-item>
 </cad-breadcrumb>
 
 <script type="module">
@@ -21,46 +21,40 @@ const usage = `<cad-breadcrumb label="Documentation path">
 ---
 
 <DocsLayout
-  description="Composable semantic location trails."
+  description="Show the current page and links to its parent pages."
   title="Breadcrumb"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-breadcrumb&gt;</p>
-    <h1>Keep the reader oriented in a hierarchy.</h1>
-    <p>
-      Compose items explicitly so links remain native and the current page is
-      announced without inventing an interaction model.
-    </p>
+    <h1>Breadcrumb</h1>
+    <p>Show the current page and links to its parent pages.</p>
   </header>
-  <DemoFrame title="Documentation path">
-    <cad-breadcrumb label="Documentation path">
-      <cad-breadcrumb-item href="/components">Components</cad-breadcrumb-item>
-      <cad-breadcrumb-item href="/components/card">Surfaces</cad-breadcrumb-item
+
+  <DemoFrame title="Architecture guide path">
+    <cad-breadcrumb label="Architecture guide path">
+      <cad-breadcrumb-item href="/guides">Guides</cad-breadcrumb-item>
+      <cad-breadcrumb-item href="/guides/system-design"
+        >System design</cad-breadcrumb-item
       >
-      <cad-breadcrumb-item current>Breadcrumb</cad-breadcrumb-item>
-    </cad-breadcrumb>
-  </DemoFrame>
-  <DemoFrame title="Compact reading path">
-    <cad-breadcrumb label="Compact reading path" variant="compact">
-      <cad-breadcrumb-item href="/guide">Guide</cad-breadcrumb-item>
-      <cad-breadcrumb-item href="/guide/foundations"
-        >Foundations</cad-breadcrumb-item
+      <cad-breadcrumb-item href="/guides/system-design/caching"
+        >Caching</cad-breadcrumb-item
       >
-      <cad-breadcrumb-item current>
-        A long chapter title that truncates safely
-      </cad-breadcrumb-item>
+      <cad-breadcrumb-item current>Trade-offs</cad-breadcrumb-item>
     </cad-breadcrumb>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
   <ApiReference tagName="cad-breadcrumb" />
   <ApiReference tagName="cad-breadcrumb-item" />
+
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      The container renders a labeled nav and explicit list semantics. Items use
-      native anchors, while the active item receives <code
-        >aria-current="page"</code
-      >.
+      The trail is a labeled navigation list. Parent pages are links; the
+      current page uses <code>aria-current="page"</code>.
     </p>
   </section>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/breadcrumb'
+</script>

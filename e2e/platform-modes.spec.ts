@@ -40,9 +40,10 @@ test('removes optional motion when reduced motion is requested', async ({
     .getByRole('tab', { name: 'Contract' })
     .evaluate((element) => getComputedStyle(element).transitionDuration)
   expect(transitionDuration).toBe('0s')
-  await expect(
-    page.getByRole('progressbar', { name: 'Indexing notes' }),
-  ).toHaveCSS('animation-name', 'none')
+  await expect(page.getByRole('progressbar', { name: 'Syncing' })).toHaveCSS(
+    'animation-name',
+    'none',
+  )
 
   const accordion = page.locator('cad-accordion-item').nth(1)
   await accordion.getByText('When is the simple loop better?').click()

@@ -1,0 +1,101 @@
+---
+import DocsNavigation from './DocsNavigation.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+---
+
+<aside
+  id="docs-sidebar"
+  class="sidebar"
+  data-scroll-storage-key={`caderno-ui:docs-sidebar:${base}`}
+>
+  <DocsNavigation />
+</aside>
+
+<!-- Restore during parsing so the menu does not jump after module loading. -->
+<script is:inline>
+  ;(() => {
+    const sidebar = document.getElementById('docs-sidebar')
+    if (!sidebar) return
+
+    const key = sidebar.dataset.scrollStorageKey
+    const page = location.pathname + location.search
+    const navigation = performance.getEntriesByType('navigation')[0]
+    const revisiting = ['back_forward', 'reload'].includes(navigation?.type)
+    let restored = false
+    let frame = 0
+
+    const validTop = (value) =>
+      typeof value === 'number' && Number.isFinite(value) && value >= 0
+
+    const read = () => {
+      try {
+        const state = JSON.parse(sessionStorage.getItem(key) || '{}')
+        if (state && typeof state === 'object' && !Array.isArray(state)) {
+          return state
+        }
+      } catch {
+        // Navigation must still work when storage is unavailable or invalid.
+      }
+      return {}
+    }
+
+    const save = () => {
+      frame = 0
+      if (!restored || !sidebar.clientHeight) return
+      const state = read()
+      const pages =
+        state.pages && typeof state.pages === 'object' ? state.pages : {}
+      try {
+        sessionStorage.setItem(
+          key,
+          JSON.stringify({
+            latest: sidebar.scrollTop,
+            pages: { ...pages, [page]: sidebar.scrollTop },
+          }),
+        )
+      } catch {
+        // A full or blocked preference store must not break links.
+      }
+    }
+
+    const restore = () => {
+      if (!sidebar.clientHeight) {
+        restored = false
+        return
+      }
+      if (restored) return
+      const state = read()
+      const previous = revisiting ? state.pages?.[page] : state.latest
+      if (validTop(previous)) sidebar.scrollTop = previous
+
+      // Preserve history/reload positions exactly. For a new destination,
+      // reveal its active link only if it would otherwise be outside the menu.
+      const current = sidebar.querySelector('[aria-current="page"]')
+      if (current && (!revisiting || !validTop(previous))) {
+        const item = current.getBoundingClientRect()
+        const viewport = sidebar.getBoundingClientRect()
+        if (item.top < viewport.top) {
+          sidebar.scrollTop += item.top - viewport.top - 8
+        } else if (item.bottom > viewport.bottom) {
+          sidebar.scrollTop += item.bottom - viewport.bottom + 8
+        }
+      }
+      restored = true
+    }
+
+    restore()
+    sidebar.addEventListener(
+      'scroll',
+      () => {
+        if (!frame) frame = requestAnimationFrame(save)
+      },
+      { passive: true },
+    )
+    window.addEventListener('pagehide', () => {
+      cancelAnimationFrame(frame)
+      save()
+    })
+    window.addEventListener('resize', restore)
+  })()
+</script>

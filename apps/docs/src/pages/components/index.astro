@@ -1,288 +1,344 @@
 ---
+import Card from '@caderno-ui/astro/Card.astro'
+import CardContent from '@caderno-ui/astro/CardContent.astro'
+import CardTitle from '@caderno-ui/astro/CardTitle.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
-const compositionUsage = `<cad-paper margin pattern="ruled" spacing="spacious">
-  <cad-alert heading="Study plan" variant="info">
-    Save the note, then move between the implementation and review panels.
-  </cad-alert>
-  <cad-tabs default-value="build">
-    <!-- Compose the tab family around application-owned content. -->
-  </cad-tabs>
-</cad-paper>`
+const compositionUsage = `<cad-alert heading="Study plan" variant="info">
+  Save the plan and switch between Build and Review.
+</cad-alert>
+<cad-bookmark bookmark-id="component-index-demo" label="Save this plan"
+></cad-bookmark>
+<cad-tabs default-value="build">
+  <cad-tabs-list label="Study plan stages">
+    <cad-tab-trigger active label="Build" value="build">
+      Build
+    </cad-tab-trigger>
+    <cad-tab-trigger label="Review" value="review">
+      Review
+    </cad-tab-trigger>
+  </cad-tabs-list>
+  <cad-tab-content value="build">
+    Build the first working version.
+  </cad-tab-content>
+  <cad-tab-content value="review">
+    Check the result with a keyboard and screen reader.
+  </cad-tab-content>
+</cad-tabs>
+
+<script type="module">
+  import '@caderno-ui/elements/alert'
+  import '@caderno-ui/elements/bookmark'
+  import '@caderno-ui/elements/tabs'
+</script>`
+
 const components = [
   {
-    description:
-      'Native details disclosures with optional single-open coordination.',
+    description: 'Collapsible sections.',
     href: '/components/accordion/',
     icon: 'layers',
     label: 'Accordion',
     tag: '<cad-accordion>',
   },
   {
-    description: 'Semantic status messages with four variants and dismissal.',
+    description: 'Status messages and actions.',
     href: '/components/alert/',
     icon: 'exclamation',
     label: 'Alert',
     tag: '<cad-alert>',
   },
   {
-    description:
-      'Compact identity with initials, portrait, and presence status.',
+    description: 'Initials, portraits, and presence.',
     href: '/components/avatar/',
     icon: 'brain',
     label: 'Avatar',
     tag: '<cad-avatar>',
   },
   {
-    description:
-      'Compact status and metadata labels without false interaction.',
+    description: 'Hand-drawn faces.',
+    href: '/components/doodle-avatar/',
+    icon: 'scribble',
+    label: 'Doodle avatar',
+    tag: '<cad-doodle-avatar>',
+  },
+  {
+    description: 'Short status and category labels.',
     href: '/components/badge/',
     icon: 'box',
     label: 'Badge',
     tag: '<cad-badge>',
   },
   {
-    description:
-      'Semantic quotations and decision excerpts with optional attribution.',
+    description: 'Quotations with optional sources.',
     href: '/components/blockquote/',
     icon: 'note',
     label: 'Blockquote',
     tag: '<cad-blockquote>',
   },
   {
-    description:
-      'A pressed-state save control with optional local persistence.',
+    description: 'Save or unsave an item.',
     href: '/components/bookmark/',
     icon: 'bookmark',
     label: 'Bookmark',
     tag: '<cad-bookmark>',
   },
   {
-    description: 'Composable native links for hierarchical location trails.',
+    description: 'Links to parent pages.',
     href: '/components/breadcrumb/',
     icon: 'arrow-right',
     label: 'Breadcrumb',
     tag: '<cad-breadcrumb>',
   },
   {
-    description: 'Native actions and links with form-aware notebook styling.',
+    description: 'Actions, form submission, and navigation.',
     href: '/components/button/',
     icon: 'check',
     label: 'Button',
     tag: '<cad-button>',
   },
   {
-    description: 'Static editorial guidance without live-region announcements.',
+    description: 'Tips and warnings within a page.',
     href: '/components/callout/',
     icon: 'lightbulb',
     label: 'Callout',
     tag: '<cad-callout>',
   },
   {
-    description: 'Composable paper surfaces with optional link semantics.',
+    description: 'Related content in one container.',
     href: '/components/card/',
     icon: 'note',
     label: 'Card',
     tag: '<cad-card>',
   },
   {
-    description: 'Accessible hand-drawn bar, line, and donut visualizations.',
+    description: 'Bar, line, and donut charts.',
     href: '/components/chart/',
     icon: 'gauge',
     label: 'Chart',
     tag: '<cad-chart>',
   },
   {
-    description: 'Form-associated checklist state with native validation.',
+    description: 'Independent on/off choices.',
     href: '/components/checkbox/',
     icon: 'check',
     label: 'Checkbox',
     tag: '<cad-checkbox>',
   },
   {
-    description: 'Composable checklists and do/don’t review guidance.',
+    description: 'Recommendations and review results.',
     href: '/components/checklist/',
     icon: 'checklist',
     label: 'Checklist',
     tag: '<cad-checklist>',
   },
   {
-    description:
-      'Native preformatted code with optional filename and line numbers.',
+    description: 'Code with syntax colors and optional copying.',
     href: '/components/code-block/',
     icon: 'brackets',
     label: 'Code block',
     tag: '<cad-code-block>',
   },
   {
-    description: 'Decorative or semantic dashed, dotted, and wavy separators.',
+    description: 'Lines between sections.',
     href: '/components/divider/',
     icon: 'underline',
     label: 'Divider',
     tag: '<cad-divider>',
   },
   {
-    description:
-      'Empty collection, search, and access states with recovery slots.',
+    description: 'A task panel at the edge of the screen.',
+    href: '/components/drawer/',
+    icon: 'layers',
+    label: 'Drawer',
+    tag: '<cad-drawer>',
+  },
+  {
+    description: 'Missing content and the next step.',
     href: '/components/empty-state/',
     icon: 'search',
     label: 'Empty state',
     tag: '<cad-empty-state>',
   },
   {
-    description: 'Semantic inline marks with hand-drawn marker treatments.',
+    description: 'Links and information at the bottom of a page.',
+    href: '/components/footer/',
+    icon: 'book',
+    label: 'Footer',
+    tag: '<cad-footer>',
+  },
+  {
+    description: 'Brand, navigation, and actions.',
+    href: '/components/header/',
+    icon: 'layers',
+    label: 'Header',
+    tag: '<cad-header>',
+  },
+  {
+    description: 'Marker and underline emphasis.',
     href: '/components/highlight/',
     icon: 'underline',
     label: 'Highlight',
     tag: '<cad-highlight>',
   },
   {
-    description: 'Forty typed, hand-drawn symbols that inherit current color.',
+    description: 'Hand-drawn symbols.',
     href: '/components/icon/',
     icon: 'spark',
     label: 'Icon',
     tag: '<cad-icon>',
   },
   {
-    description:
-      'Form-associated text input with native validation and reset behavior.',
+    description: 'Single-line text fields.',
     href: '/components/input/',
     icon: 'pencil',
     label: 'Input',
     tag: '<cad-input>',
   },
   {
-    description:
-      'Composable planning boards with independent columns and cards.',
+    description: 'Cards organized into columns.',
     href: '/components/kanban/',
     icon: 'grid',
     label: 'Kanban',
     tag: '<cad-kanban>',
   },
   {
-    description: 'Native anchors with marker, underline, and plain treatments.',
+    description: 'Bullet and numbered lists.',
+    href: '/components/list/',
+    icon: 'checklist',
+    label: 'List',
+    tag: '<cad-list>',
+  },
+  {
+    description: 'Navigation with a coral underline.',
     href: '/components/link/',
     icon: 'arrow-right',
     label: 'Link',
     tag: '<cad-link>',
   },
   {
-    description:
-      'Native modal dialog with focus restoration and composed events.',
+    description: 'A dialog for a decision or short task.',
     href: '/components/modal/',
     icon: 'layers',
     label: 'Modal',
     tag: '<cad-modal>',
   },
   {
-    description: 'Semantic supporting content on notebook-styled paper.',
+    description: 'Handwritten annotations and reminders.',
     href: '/components/note/',
     icon: 'note',
     label: 'Note',
     tag: '<cad-note>',
   },
   {
-    description:
-      'Neutral ruled, grid, dotted, or blank surfaces for native content.',
-    href: '/components/paper/',
-    icon: 'note',
-    label: 'Paper',
-    tag: '<cad-paper>',
-  },
-  {
-    description: 'URL-based collection navigation with compact truncation.',
+    description: 'Navigation between pages.',
     href: '/components/pagination/',
     icon: 'arrow-right',
     label: 'Pagination',
     tag: '<cad-pagination>',
   },
   {
-    description: 'Determinate and indeterminate native progress semantics.',
+    description: 'Extra information beside a trigger.',
+    href: '/components/popover/',
+    icon: 'question',
+    label: 'Popover',
+    tag: '<cad-popover>',
+  },
+  {
+    description: 'Task completion and ongoing work.',
     href: '/components/progress/',
     icon: 'checklist',
     label: 'Progress',
     tag: '<cad-progress>',
   },
   {
-    description:
-      'Cross-shadow radio grouping with native forms and arrow keys.',
+    description: 'One choice from a group.',
     href: '/components/radio/',
     icon: 'target',
     label: 'Radio',
     tag: '<cad-radio>',
   },
   {
-    description: 'Composable text, rectangle, and circle loading placeholders.',
+    description: 'Placeholders while content loads.',
     href: '/components/skeleton/',
     icon: 'layers',
     label: 'Skeleton',
     tag: '<cad-skeleton>',
   },
   {
-    description: 'Named indeterminate work with reduced-motion support.',
+    description: 'Select a number or range.',
+    href: '/components/slider/',
+    icon: 'gauge',
+    label: 'Slider',
+    tag: '<cad-slider>',
+  },
+  {
+    description: 'An indicator for ongoing work.',
     href: '/components/spinner/',
     icon: 'reset',
     label: 'Spinner',
     tag: '<cad-spinner>',
   },
   {
-    description:
-      'Responsive numbered sequences for methods, timelines, and rollouts.',
+    description: 'Stages and progress in a process.',
     href: '/components/steps/',
     icon: 'checklist',
     label: 'Steps',
     tag: '<cad-steps>',
   },
   {
-    description:
-      'Decorative labels for categories, milestones, and annotations.',
+    description: 'Decorative text labels.',
     href: '/components/sticker/',
     icon: 'spark',
     label: 'Sticker',
     tag: '<cad-sticker>',
   },
   {
-    description: 'Keyboard-accessible tabs with declarative panel children.',
+    description: 'Settings that take effect immediately.',
+    href: '/components/switch/',
+    icon: 'reset',
+    label: 'Switch',
+    tag: '<cad-switch>',
+  },
+  {
+    description: 'Switch between related panels.',
     href: '/components/tabs/',
     icon: 'layers',
     label: 'Tabs',
     tag: '<cad-tabs>',
   },
   {
-    description:
-      'Responsive native tables with declarative rows and notebook treatments.',
+    description: 'Rows and columns in a handwritten style.',
     href: '/components/table/',
     icon: 'grid',
     label: 'Table',
     tag: '<cad-table>',
   },
   {
-    description: 'Decorative translucent tape for notebook compositions.',
-    href: '/components/tape/',
-    icon: 'tape',
-    label: 'Tape',
-    tag: '<cad-tape>',
+    description: 'Links to page sections, for Astro.',
+    href: '/components/table-of-contents/',
+    icon: 'checklist',
+    label: 'Table of contents',
+    tag: 'TableOfContents.astro',
   },
   {
-    description: 'Form-associated ruled writing surface for longer responses.',
+    description: 'Multi-line text fields.',
     href: '/components/textarea/',
     icon: 'note',
     label: 'Textarea',
     tag: '<cad-textarea>',
   },
   {
-    description:
-      'Declarative and hosted notifications with safe plain-text creation.',
+    description: 'Temporary notifications, with an optional action.',
     href: '/components/toast/',
     icon: 'spark',
     label: 'Toast',
     tag: '<cad-toast>',
   },
   {
-    description: 'Short hover and focus descriptions with Escape dismissal.',
+    description: 'Short hints on hover or focus.',
     href: '/components/tooltip/',
     icon: 'question',
     label: 'Tooltip',
@@ -296,55 +352,64 @@ const components = [
   title="Components"
 >
   <header class="page-header">
-    <p class="eyebrow">Component index</p>
-    <h1>Small set. Explicit contracts.</h1>
-    <p>
-      Caderno UI starts with the components that already proved useful in a real
-      product. Each page documents attributes, events, slots, parts, and design
-      tokens as public API.
-    </p>
+    <h1>Components</h1>
+    <p>Browse examples, variations, and the API for each component.</p>
   </header>
 
   <div class="component-grid">
     {
       components.map((component) => (
-        <a class="component-card" href={`${base}${component.href}`}>
-          <cad-icon name={component.icon} size="28" />
-          <h2>{component.label}</h2>
-          <code>{component.tag}</code>
-          <p>{component.description}</p>
-        </a>
+        <Card variant="outlined" href={`${base}${component.href}`}>
+          <CardContent>
+            <cad-icon name={component.icon} size="28" />
+            <CardTitle>{component.label}</CardTitle>
+            <code>{component.tag}</code>
+            <p>{component.description}</p>
+          </CardContent>
+        </Card>
       ))
     }
   </div>
 
-  <DemoFrame
-    title="The components together"
-    description="All behavior below comes from the same Lit-based element package."
-  >
-    <cad-paper margin pattern="ruled" spacing="spacious">
+  <DemoFrame title="Combined example">
+    <div class="component-stack">
       <cad-alert heading="Study plan" variant="info">
-        Save the note, then move between the implementation and review panels.
+        Save the plan and switch between Build and Review.
       </cad-alert>
       <cad-bookmark bookmark-id="component-index-demo" label="Save this plan"
       ></cad-bookmark>
       <cad-tabs default-value="build">
         <cad-tabs-list label="Study plan stages">
-          <cad-tab-trigger label="Build" tone="mint" value="build">
+          <cad-tab-trigger active label="Build" value="build">
             Build
           </cad-tab-trigger>
-          <cad-tab-trigger label="Review" tone="lemon" value="review">
+          <cad-tab-trigger label="Review" value="review">
             Review
           </cad-tab-trigger>
         </cad-tabs-list>
         <cad-tab-content value="build">
-          Implement the smallest complete behavior and keep its contract typed.
+          Build the first working version.
         </cad-tab-content>
         <cad-tab-content value="review">
-          Verify semantics, keyboard behavior, events, and package boundaries.
+          Check the result with a keyboard and screen reader.
         </cad-tab-content>
       </cad-tabs>
-    </cad-paper>
+    </div>
   </DemoFrame>
   <CodeBlock code={compositionUsage} language="html" collapsible />
 </DocsLayout>
+
+<style>
+  .component-stack {
+    display: grid;
+    gap: var(--cad-space-4, 1rem);
+    width: min(100%, 48rem);
+  }
+</style>
+
+<script>
+  import '@caderno-ui/elements/alert'
+  import '@caderno-ui/elements/bookmark'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/tabs'
+</script>

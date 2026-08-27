@@ -1,20 +1,35 @@
 ---
 import '@caderno-ui/elements/fallback.css'
-import type { CadStepTone } from '@caderno-ui/elements/steps'
+import type { CadStepStatus } from '@caderno-ui/elements/steps'
 
 type Props = {
   class?: string
+  status?: CadStepStatus
+  statusLabel?: string
   title?: string
-  tone?: CadStepTone
   value?: string
 }
-const { class: className, title, tone = 'blue', value } = Astro.props
+const {
+  class: className,
+  status = 'pending',
+  statusLabel,
+  title,
+  value,
+} = Astro.props
 ---
 
-<cad-step class={className} title={title} tone={tone} value={value}>
+<cad-step
+  class={className}
+  status={status}
+  status-label={statusLabel}
+  title={title}
+  value={value}
+>
+  <slot name="marker" slot="marker" />
   <slot name="title" slot="title" />
   <slot />
   <slot name="meta" slot="meta" />
+  <slot name="status" slot="status" />
 </cad-step>
 
 <script>

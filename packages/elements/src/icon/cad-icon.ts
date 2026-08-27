@@ -5,6 +5,8 @@ import { css, html, LitElement, nothing, svg } from 'lit'
  * A typed, hand-drawn Caderno UI SVG icon.
  *
  * @csspart svg - The rendered SVG element.
+ * @cssprop --cad-icon-size - CSS-controlled rendered size for composed icons.
+ * @cssprop --cad-icon-stroke-width - Main pen stroke width.
  */
 export class CadIcon extends LitElement {
   static override properties = {
@@ -24,7 +26,10 @@ export class CadIcon extends LitElement {
 
     svg {
       display: block;
+      width: var(--cad-icon-size, auto);
+      height: var(--cad-icon-size, auto);
       overflow: visible;
+      shape-rendering: geometricPrecision;
     }
 
     path {
@@ -32,12 +37,17 @@ export class CadIcon extends LitElement {
       stroke: currentColor;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-width: 1.55;
+      stroke-width: var(--cad-icon-stroke-width, 1.55);
     }
 
     .echo {
-      opacity: 0.22;
-      transform: translate(0.36px, -0.22px);
+      opacity: 0.18;
+      transform: translate(0.42px, -0.26px) rotate(0.18deg);
+      transform-origin: center;
+    }
+
+    g:not(.echo) path:nth-child(even) {
+      transform: translate(0.06px, 0.08px);
     }
   `
 

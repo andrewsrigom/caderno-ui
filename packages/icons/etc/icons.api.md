@@ -7,7 +7,7 @@
 // @public (undocumented)
 export const cadIconCategories: {
     readonly annotation: readonly ["spark", "arrow-right", "arrow-left", "question", "exclamation", "box", "star", "brackets", "reset", "underline", "check", "cross", "pin", "tape", "highlight", "scribble"];
-    readonly study: readonly ["brain", "lightbulb", "clock", "target", "note", "book", "bookmark", "pencil", "search", "checklist"];
+    readonly study: readonly ["brain", "lightbulb", "clock", "target", "note", "book", "folder", "bookmark", "pencil", "search", "checklist"];
     readonly engineering: readonly ["code", "terminal", "database", "server", "cloud", "network", "lock", "bug", "gear", "layers", "api", "branch", "rocket", "gauge"];
 };
 
@@ -41,6 +41,7 @@ export const cadIcons: {
     readonly target: readonly ["M11.8 3.3 C16.7 3.1 20.5 6.9 20.7 11.8 C20.9 16.7 17 20.5 12.1 20.7 C7.1 20.8 3.3 17 3.2 12.1 C3 7.2 6.9 3.5 11.8 3.3 Z", "M12 7 C14.8 7 17 9 17.1 11.9 C17.2 14.8 15 17 12.1 17 C9.2 17 7 14.9 7 12 C7 9.2 9.2 7.1 12 7 Z", "M12 10.1 C13.2 10 14 10.9 14 12 C14 13.1 13.2 14 12.1 14 C10.9 14 10 13.1 10.1 11.9 C10.1 10.8 10.9 10.2 12 10.1 Z", "M14.2 9.6 L21.2 2.8 M17.6 2.9 L21.3 2.7 L21.1 6.4"];
     readonly note: readonly ["M4.1 3.6 C8.8 3.3 14.9 3.5 19.7 3.2 C19.5 8.2 19.8 14.4 19.5 20 C14.7 19.8 9 20.1 4.2 19.8 C4.4 14.3 3.9 9 4.1 3.6 Z", "M7 8 C10.4 7.7 13.9 7.9 17 7.6 M7 11.8 C10.5 11.5 14 11.7 17.1 11.4 M7 15.6 C9.4 15.3 11.8 15.5 14 15.2"];
     readonly book: readonly ["M3.1 4.5 C6.2 3.7 9.2 4 11.8 5.8 L11.8 20 C9 18.4 6.3 18 3.1 18.7 Z", "M20.9 4.5 C17.8 3.7 14.8 4 12.2 5.8 L12.2 20 C15 18.4 17.7 18 20.9 18.7 Z", "M6 8 C7.4 7.8 8.8 8.1 10 8.7 M14 8.7 C15.3 8.1 16.8 7.8 18 8"];
+    readonly folder: readonly ["M3.4 7.6 C5.1 7.4 7.2 7.6 8.8 7.4 L10.2 4.8 C12.5 4.6 14.8 4.9 17 4.7 L18.2 7.4 C19.2 7.4 20.1 7.5 20.8 7.4", "M3.4 7.7 C8.9 7.4 15.1 7.8 20.8 7.5 L19.2 19.1 C14.5 18.9 9.1 19.2 4.4 19 Z"];
     readonly bookmark: readonly ["M7.3 3.2 C10.3 3 13.7 3.3 16.8 3.1 L16.6 20.6 L12 16.9 L7.4 20.5 Z"];
     readonly pencil: readonly ["M4 17.2 C8.2 13.1 13.1 8.1 17.2 4 L20 6.8 C15.9 10.9 11 15.7 6.7 19.8 L3.3 20.7 Z", "M15.4 5.9 L18.2 8.7 M5.8 17.4 L7.2 19"];
     readonly search: readonly ["M10.5 3.5 C14.7 3.3 18 6.5 18.1 10.6 C18.2 14.7 15 18 10.9 18 C6.7 18 3.5 14.9 3.5 10.8 C3.4 6.7 6.4 3.7 10.5 3.5 Z", "M16.5 16.2 C18.2 17.8 19.6 19.3 21 20.7"];

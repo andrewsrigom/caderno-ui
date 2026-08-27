@@ -4,16 +4,17 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '')
-const usage = `<cad-card folded tone="blue">
+const usage = `<cad-card tone="blue">
   <cad-card-header>
-    <cad-card-kicker>Architecture review</cad-card-kicker>
     <cad-card-title>
       <h2>Search indexing strategy</h2>
     </cad-card-title>
   </cad-card-header>
   <cad-card-content>
-    <p>Compare write amplification, query latency, and failure recovery.</p>
+    <p>
+      Compare write amplification, query latency, and failure recovery
+      before choosing the index boundary.
+    </p>
   </cad-card-content>
   <cad-card-footer>
     <cad-badge tone="mint">Ready for review</cad-badge>
@@ -25,35 +26,43 @@ const usage = `<cad-card folded tone="blue">
   import '@caderno-ui/elements/card'
   import '@caderno-ui/elements/badge'
 </script>`
+
+const plainUsage = `<cad-card tone="blue" variant="plain">
+  <cad-card-header>
+    <cad-card-title><h2>Review confidence</h2></cad-card-title>
+  </cad-card-header>
+  <cad-card-content>
+    <p>
+      Scope, options, and evidence are ready. The decision can move
+      forward without adding another boxed surface to the page.
+    </p>
+  </cad-card-content>
+  <cad-card-footer>
+    <span>3 checkpoints complete</span>
+    <time datetime="2026-08-24">Updated today</time>
+  </cad-card-footer>
+</cad-card>`
 ---
 
 <DocsLayout
-  description="Compose accessible paper surfaces from independent Caderno UI card primitives."
+  description="Group related content. Add only the header, title, body, and footer you need."
   title="Card"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-card&gt; family</p>
-    <h1>A surface, not a preassembled content model.</h1>
+    <h1>Card</h1>
     <p>
-      Card owns the paper surface. Header, kicker, title, content, and footer
-      are small compound primitives you can arrange—or omit—without paying for
-      an icon, heading level, or action the card did not choose.
+      Group related content. Add only the header, title, body, and footer you
+      need.
     </p>
   </header>
 
-  <DemoFrame
-    title="A real review queue"
-    description="The first card composes metadata and actions; the second turns the whole surface into one native link."
-  >
-    <div class="card-grid">
-      <cad-card folded tone="blue">
+  <DemoFrame title="With an outer border">
+    <div class="card-stage">
+      <cad-card tone="blue">
         <cad-card-header>
-          <cad-card-kicker>Architecture review</cad-card-kicker>
           <cad-card-title>
-            <h2>
-              <cad-icon name="brackets" size="22"></cad-icon>
-              Search indexing strategy
-            </h2>
+            <h2>Search indexing strategy</h2>
           </cad-card-title>
         </cad-card-header>
         <cad-card-content>
@@ -67,31 +76,44 @@ const usage = `<cad-card folded tone="blue">
           <time datetime="2026-08-24">Updated today</time>
         </cad-card-footer>
       </cad-card>
-
-      <cad-card
-        href={`${base}/components/chart/`}
-        tone="mint"
-        variant="outlined"
-      >
-        <cad-card-header>
-          <cad-card-kicker>Evidence</cad-card-kicker>
-          <cad-card-title><h2>Inspect delivery metrics</h2></cad-card-title>
-        </cad-card-header>
-        <cad-card-content>
-          <p>Open the accessible bar, line, and donut chart contracts.</p>
-        </cad-card-content>
-        <cad-card-footer>7 data points · 3 visualizations</cad-card-footer>
-      </cad-card>
     </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
+  <DemoFrame
+    title="Without an outer border"
+    description="The plain variant keeps the section dividers."
+  >
+    <div class="card-stage">
+      <cad-card tone="blue" variant="plain">
+        <cad-card-header>
+          <cad-card-title><h2>Review confidence</h2></cad-card-title>
+        </cad-card-header>
+        <cad-card-content>
+          <p>
+            Scope, options, and evidence are ready. The decision can move
+            forward without adding another boxed surface to the page.
+          </p>
+        </cad-card-content>
+        <cad-card-footer>
+          <span>3 checkpoints complete</span>
+          <time datetime="2026-08-24">Updated today</time>
+        </cad-card-footer>
+      </cad-card>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={plainUsage} collapsible language="html" />
+
   <section class="content-section" aria-labelledby="composition-title">
-    <h2 id="composition-title">Composition contract</h2>
+    <h2 id="composition-title">Composition</h2>
     <p>
-      Put a native heading inside <code>cad-card-title</code> so the page—not the
-      component—chooses the correct heading level. Icons and badges are separate entrypoints
-      and only enter the bundle when the application imports them.
+      Put a native heading inside <code>cad-card-title</code> to choose its heading
+      level. Import icons and badges separately when using them.
+    </p>
+    <p>
+      The default <code>paper</code> variant has an outer border. Use <code
+        >variant="plain"</code
+      > for section dividers only. Add <code>folded</code> for a folded corner.
     </p>
   </section>
 
@@ -100,23 +122,15 @@ const usage = `<cad-card folded tone="blue">
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Do not put nested interactive controls inside a linked card. For several
-      actions, omit <code>href</code> and compose explicit controls in
-      <code>cad-card-footer</code>.
+      Do not nest buttons or links inside a linked card. For multiple actions,
+      omit <code>href</code> and put controls in <code>cad-card-footer</code>.
     </p>
   </section>
 
   <style>
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-      gap: 1rem;
-    }
-
-    cad-card-title h2 {
-      display: flex;
-      gap: 0.55rem;
-      align-items: center;
+    .card-stage {
+      width: min(100%, 46rem);
+      margin-inline: auto;
     }
   </style>
 </DocsLayout>
@@ -124,5 +138,4 @@ const usage = `<cad-card folded tone="blue">
 <script>
   import '@caderno-ui/elements/badge'
   import '@caderno-ui/elements/card'
-  import '@caderno-ui/elements/icon'
 </script>

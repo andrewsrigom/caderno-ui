@@ -36,14 +36,25 @@ export class CadKanbanCard extends LitElement {
       --_kanban-ink: var(--cad-post-it-pink-ink, #52233a);
     }
     .card {
+      position: relative;
       padding: 0.75rem 0.8rem 0.8rem;
       color: var(--_kanban-ink);
-      background: var(--_kanban-bg);
-      box-shadow: 0 0.35rem 0.65rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.1);
+      background: color-mix(
+        in srgb,
+        var(--_kanban-bg) 76%,
+        var(--cad-surface, #fff)
+      );
+      border: 1px solid color-mix(in srgb, var(--_kanban-ink) 48%, transparent);
+      box-shadow: 0.2rem 0.22rem 0
+        color-mix(in srgb, var(--_kanban-ink) 10%, transparent);
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-sm, 1.05rem);
       line-height: 1.25;
-      transform: rotate(-0.25deg);
+      transform: rotate(-0.35deg);
+    }
+
+    :host(:nth-of-type(even)) .card {
+      transform: rotate(0.3deg);
     }
   `
 
@@ -82,24 +93,38 @@ export class CadKanbanColumn extends LitElement {
     :host {
       display: block;
       min-width: 13rem;
+      color: var(--cad-link, #005bac);
     }
     .column {
+      position: relative;
       min-height: 100%;
-      padding: 0.85rem;
-      background: color-mix(
-        in srgb,
-        var(--cad-surface, white) 88%,
-        var(--cad-surface-raised, white)
-      );
-      border: 1px dashed var(--cad-line-strong, currentColor);
-      border-radius: 0.75rem 0.95rem 0.7rem 0.9rem;
+      padding: 0.75rem 0.9rem 0.95rem 1rem;
+      background: transparent;
+      border: 0;
+      border-inline-start: 1.5px solid
+        color-mix(in srgb, currentColor 68%, transparent);
+      border-radius: 0;
+    }
+    .column::before {
+      position: absolute;
+      inset-block: 0.2rem 0;
+      inset-inline-start: 0.18rem;
+      border-inline-start: 1px dashed
+        color-mix(in srgb, currentColor 28%, transparent);
+      content: '';
+      pointer-events: none;
+      transform: rotate(0.15deg);
     }
     header {
+      position: relative;
       display: flex;
       gap: 0.7rem;
       align-items: center;
       justify-content: space-between;
-      padding: 0 0.2rem 0.65rem;
+      padding: 0 0.2rem 0.75rem;
+      margin-bottom: 0.75rem;
+      border-block-end: 1px solid
+        color-mix(in srgb, currentColor 42%, transparent);
       font-family: var(--cad-font-hand, cursive);
       font-weight: 700;
     }
@@ -116,9 +141,16 @@ export class CadKanbanColumn extends LitElement {
       place-items: center;
       min-width: 1.7rem;
       height: 1.7rem;
-      color: var(--cad-post-it-blue-ink, #20375d);
-      background: var(--cad-post-it-blue-bg, #cfe2ff);
-      border-radius: 50%;
+      color: var(--cad-link, #005bac);
+      background: color-mix(
+        in srgb,
+        var(--cad-post-it-blue-bg, #cfe2ff) 48%,
+        transparent
+      );
+      border: 1px solid currentColor;
+      border-radius: 51% 49% 47% 53%;
+      font-family: var(--cad-font-hand, cursive);
+      transform: rotate(3deg);
     }
     .cards {
       display: grid;
@@ -178,10 +210,13 @@ export class CadKanban extends LitElement {
       display: grid;
       grid-auto-columns: minmax(13rem, 1fr);
       grid-auto-flow: column;
-      gap: 1rem;
+      gap: 0.45rem;
       max-width: 100%;
-      padding-bottom: 0.35rem;
+      padding: 0.75rem 0 0.45rem;
       overflow-x: auto;
+      background: var(--cad-surface, #fff);
+      border-block: 1px solid
+        color-mix(in srgb, var(--cad-link, #005bac) 34%, transparent);
     }
   `
 

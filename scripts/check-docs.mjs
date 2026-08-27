@@ -8,6 +8,14 @@ const manifest = JSON.parse(
   await readFile(join(root, 'packages/elements/custom-elements.json'), 'utf8'),
 )
 const errors = []
+const inventory = JSON.parse(
+  await readFile(join(root, 'config/components.json'), 'utf8'),
+)
+const entryForTag = new Map(
+  inventory.entries.flatMap((entry) =>
+    entry.elements.map((element) => [element.tagName, entry.name]),
+  ),
+)
 
 async function collectFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true })
@@ -43,11 +51,54 @@ const publicTags = new Set(
 for (const file of (await collectFiles(docsRoot)).filter((path) =>
   ['.astro', '.ts'].includes(extname(path)),
 )) {
-  const source = await readFile(file, 'utf8')
+  const source = (await readFile(file, 'utf8')).replaceAll('\r\n', '\n')
   const displayPath = file.slice(root.length)
   const frontmatterEnd = source.indexOf('\n---\n', 4)
+  // Page frontmatter may itself contain an Astro example with --- delimiters.
+  const pageStart = source.search(/\n<(?:!doctype|DocsLayout|DemoLayout)\b/i)
   const templateSource =
-    frontmatterEnd === -1 ? source : source.slice(frontmatterEnd + 5)
+    pageStart >= 0
+      ? source.slice(pageStart)
+      : frontmatterEnd === -1
+        ? source
+        : source.slice(frontmatterEnd + 5)
+
+  if (
+    displayPath.includes('/layouts/') &&
+    /import\s+['"]@caderno-ui\/elements['"]/.test(templateSource)
+  ) {
+    errors.push(
+      `${displayPath}: runtime imports must use selective component entry points`,
+    )
+  }
+  if (/from\s+['"][^'"]*packages\/(elements|tokens|astro)\//.test(source)) {
+    errors.push(
+      `${displayPath}: consume published package exports, not workspace internals`,
+    )
+  }
+  if (extname(file) === '.astro') {
+    const runtimeImports = new Set(
+      Array.from(
+        templateSource
+          .replace(/import\s+type\s+[\s\S]*?from\s+['"][^'"]+['"]/g, '')
+          .matchAll(
+            /(?:from\s+|import\s*)['"]@caderno-ui\/elements\/([^'"]+)['"]/g,
+          ),
+        (match) => match[1],
+      ),
+    )
+    const requiredEntries = new Set(
+      Array.from(templateSource.matchAll(/<cad-[a-z0-9-]+/g), (match) =>
+        entryForTag.get(match[0].slice(1)),
+      ).filter(Boolean),
+    )
+    for (const entry of requiredEntries) {
+      if (!runtimeImports.has(entry))
+        errors.push(
+          `${displayPath}: add runtime import @caderno-ui/elements/${entry}`,
+        )
+    }
+  }
 
   for (const match of source.matchAll(
     /(?:from\s+|import\s*(?:\(|))['"](@caderno-ui\/[^'"]+)['"]/g,

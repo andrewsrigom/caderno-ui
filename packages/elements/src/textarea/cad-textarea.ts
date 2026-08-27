@@ -1,6 +1,7 @@
 import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
 
 export type CadTextareaResize = 'both' | 'horizontal' | 'none' | 'vertical'
+export type CadTextareaLayout = 'block' | 'inline'
 export type CadTextareaTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
 
@@ -10,6 +11,7 @@ export type CadTextareaTone =
  * @slot label - Visible control label. Falls back to the `label` attribute.
  * @csspart base - Field container.
  * @csspart control - Native textarea.
+ * @csspart field - Hand-drawn textarea frame.
  * @csspart hint - Hint or error message.
  * @csspart label - Visible label.
  * @fires input - Fired while the user edits the value.
@@ -33,6 +35,7 @@ export class CadTextarea extends LitElement {
     hint: { type: String },
     invalid: { reflect: true, type: Boolean },
     label: { type: String },
+    layout: { reflect: true, type: String },
     maxLength: { attribute: 'maxlength', type: Number },
     minLength: { attribute: 'minlength', type: Number },
     name: { reflect: true, type: String },
@@ -48,23 +51,28 @@ export class CadTextarea extends LitElement {
 
   static override styles = css`
     :host {
-      --_textarea-focus: var(
-        --cad-textarea-focus,
-        var(--cad-post-it-blue-ink, #18345d)
-      );
+      --_textarea-focus: var(--cad-textarea-focus, var(--cad-link, #005bac));
       --_textarea-line: var(
         --cad-textarea-line,
-        color-mix(in srgb, var(--_textarea-focus) 32%, transparent)
+        var(
+          --cad-border-ink,
+          color-mix(in srgb, var(--_textarea-focus) 72%, transparent)
+        )
       );
       display: block;
       color: var(--cad-ink, #25202a);
+      max-width: 100%;
     }
 
     :host([tone='coral']),
     :host([invalid]) {
       --_textarea-focus: var(
         --cad-textarea-focus,
-        var(--cad-post-it-coral-ink, #633b32)
+        var(--cad-danger-ink, #d52f3f)
+      );
+      --_textarea-line: var(
+        --cad-textarea-line,
+        var(--cad-danger-ink, #d52f3f)
       );
     }
 
@@ -99,15 +107,22 @@ export class CadTextarea extends LitElement {
     .base {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 0.35rem;
+      gap: 0.4rem;
+      align-items: start;
+    }
+
+    :host([layout='inline']) .base {
+      grid-template-columns: minmax(4.75rem, auto) minmax(0, 1fr);
+      column-gap: 1rem;
     }
 
     .label {
       color: var(--_textarea-focus);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
-      letter-spacing: 0.02em;
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-label-size, var(--cad-hand-sm, 1.05rem));
+      font-weight: var(--cad-hand-weight-regular, 500);
+      letter-spacing: 0;
+      padding-top: 0.35rem;
     }
 
     .required {
@@ -115,29 +130,66 @@ export class CadTextarea extends LitElement {
       color: var(--cad-post-it-coral-ink, #633b32);
     }
 
+    .field {
+      position: relative;
+      min-width: 0;
+    }
+
+    .field::after {
+      position: absolute;
+      top: 0.25rem;
+      right: -1.55rem;
+      width: 1rem;
+      height: 1.5rem;
+      background:
+        linear-gradient(
+            18deg,
+            transparent 45%,
+            var(--_textarea-focus) 47% 54%,
+            transparent 56%
+          )
+          0 0 / 0.72rem 0.42rem no-repeat,
+        linear-gradient(
+            90deg,
+            transparent 44%,
+            var(--_textarea-focus) 46% 54%,
+            transparent 56%
+          )
+          0 50% / 0.82rem 0.42rem no-repeat,
+        linear-gradient(
+            162deg,
+            transparent 45%,
+            var(--_textarea-focus) 47% 54%,
+            transparent 56%
+          )
+          0 100% / 0.72rem 0.42rem no-repeat;
+      content: '';
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .field:focus-within::after {
+      opacity: 1;
+    }
+
     .control {
       display: block;
       box-sizing: border-box;
       width: 100%;
-      padding: 0.4rem 0.75rem 0.55rem;
+      min-height: 5.25rem;
+      padding: 0.52rem 0.75rem 0.62rem;
       color: inherit;
-      background-color: transparent;
-      background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent calc(var(--cad-hand-lg, 1.55rem) - 1px),
-        var(--_textarea-line) calc(var(--cad-hand-lg, 1.55rem) - 1px),
-        var(--_textarea-line) var(--cad-hand-lg, 1.55rem)
-      );
-      background-attachment: local;
-      background-position: 0 0.15rem;
-      border: 1.5px dashed
-        color-mix(in srgb, var(--_textarea-focus) 30%, transparent);
-      border-radius: 0.5rem 0.65rem 0.5rem 0.6rem;
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-md, 1.2rem);
-      line-height: var(--cad-hand-lg, 1.55rem);
+      background: var(--cad-surface, #fff);
+      border: var(--cad-border-width, 1.5px) var(--cad-border-style, dashed)
+        var(--_textarea-line);
+      border-radius: 0;
+      box-shadow: 0.3px 0.5px 0
+        color-mix(in srgb, var(--_textarea-line) 26%, transparent);
+      font-family: var(--cad-type-control-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-label-size, var(--cad-hand-sm, 1.05rem));
+      line-height: 1.4;
       resize: vertical;
+      transform: rotate(-0.06deg);
     }
 
     :host([resize='both']) .control {
@@ -158,18 +210,18 @@ export class CadTextarea extends LitElement {
         var(--cad-ink-muted, currentColor) 78%,
         transparent
       );
-      font-style: italic;
+      font-style: normal;
     }
 
     .control:focus {
       border-color: var(--_textarea-focus);
-      border-style: solid;
+      box-shadow: 0.4px 0.6px 0
+        color-mix(in srgb, var(--_textarea-focus) 28%, transparent);
       outline: none;
     }
 
     .control:focus-visible {
-      outline: 2px dashed var(--cad-focus-ring, var(--_textarea-focus));
-      outline-offset: 3px;
+      outline: none;
     }
 
     .control:disabled {
@@ -180,13 +232,71 @@ export class CadTextarea extends LitElement {
     .hint {
       margin: 0;
       color: var(--cad-ink-muted, currentColor);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-      line-height: 1.3;
+      font-family: var(--cad-type-meta-font, var(--cad-font-book, serif));
+      font-size: var(--cad-type-meta-size, 0.82rem);
+      line-height: var(--cad-type-meta-line-height, 1.45);
     }
 
+    :host([layout='inline']) .hint {
+      grid-column: 2;
+    }
+
+    :host([tone='coral']) .hint,
     :host([invalid]) .hint {
-      color: var(--cad-post-it-coral-ink, #633b32);
+      color: var(--cad-danger-ink, #d52f3f);
+    }
+
+    :host([tone='coral']) .label,
+    :host([invalid]) .label {
+      color: var(--cad-danger-ink, #d52f3f);
+    }
+
+    .status {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      width: 1rem;
+      height: 1rem;
+      color: var(--cad-danger-ink, #d52f3f);
+      pointer-events: none;
+    }
+
+    .status::before,
+    .status::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 1rem;
+      height: 1.5px;
+      background: currentColor;
+      content: '';
+    }
+
+    .status::before {
+      transform: rotate(47deg);
+    }
+
+    .status::after {
+      transform: rotate(-44deg);
+    }
+
+    :host([invalid]) .control {
+      padding-inline-end: 2.35rem;
+    }
+
+    @media (max-width: 34rem) {
+      :host([layout='inline']) .base {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      :host([layout='inline']) .hint {
+        grid-column: 1;
+      }
+
+      .field::after {
+        right: -1.1rem;
+        transform: scale(0.75);
+      }
     }
 
     @media (forced-colors: active) {
@@ -204,6 +314,7 @@ export class CadTextarea extends LitElement {
   declare hint: string
   declare invalid: boolean
   declare label: string
+  declare layout: CadTextareaLayout
   declare maxLength: number
   declare minLength: number
   declare name: string
@@ -231,6 +342,7 @@ export class CadTextarea extends LitElement {
     this.hint = ''
     this.invalid = false
     this.label = ''
+    this.layout = 'block'
     this.maxLength = -1
     this.minLength = -1
     this.name = ''
@@ -333,26 +445,29 @@ export class CadTextarea extends LitElement {
               : nothing
           }
         </label>
-        <textarea
-          aria-describedby=${message ? 'message' : nothing}
-          aria-invalid=${this.invalid ? 'true' : nothing}
-          autocomplete=${this.autocomplete || nothing}
-          class="control"
-          cols=${this.cols}
-          ?disabled=${disabled}
-          id="control"
-          maxlength=${this.maxLength >= 0 ? this.maxLength : nothing}
-          minlength=${this.minLength >= 0 ? this.minLength : nothing}
-          part="control"
-          placeholder=${this.placeholder}
-          ?readonly=${this.readOnly}
-          ?required=${this.required}
-          rows=${this.rows}
-          wrap=${this.wrap}
-          .value=${this.value}
-          @change=${this.handleChange}
-          @input=${this.handleInput}
-        ></textarea>
+        <div class="field" part="field">
+          <textarea
+            aria-describedby=${message ? 'message' : nothing}
+            aria-invalid=${this.invalid ? 'true' : nothing}
+            autocomplete=${this.autocomplete || nothing}
+            class="control"
+            cols=${this.cols}
+            ?disabled=${disabled}
+            id="control"
+            maxlength=${this.maxLength >= 0 ? this.maxLength : nothing}
+            minlength=${this.minLength >= 0 ? this.minLength : nothing}
+            part="control"
+            placeholder=${this.placeholder}
+            ?readonly=${this.readOnly}
+            ?required=${this.required}
+            rows=${this.rows}
+            wrap=${this.wrap}
+            .value=${this.value}
+            @change=${this.handleChange}
+            @input=${this.handleInput}
+          ></textarea>
+          ${this.invalid ? html`<span aria-hidden="true" class="status"></span>` : nothing}
+        </div>
         ${
           message
             ? html`<p class="hint" id="message" part="hint">${message}</p>`

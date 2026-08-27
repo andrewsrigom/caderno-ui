@@ -1,10 +1,44 @@
 import { afterEach, describe, expect, it } from 'vitest'
 
 import { enhanceCadernoProse } from '../src/prose/enhance-prose.js'
+import '../src/styles/prose.css'
 
 afterEach(() => document.body.replaceChildren())
 
 describe('Caderno prose enhancement', () => {
+  it('keeps the blue header band unchanged when native tables are enhanced', () => {
+    const prose = document.createElement('article')
+    prose.className = 'cad-prose'
+    prose.innerHTML = `
+      <table>
+        <caption>Review queue</caption>
+        <thead><tr><th scope="col">Note</th><th scope="col">Status</th></tr></thead>
+        <tbody><tr><td>Caching</td><td>Ready</td></tr></tbody>
+      </table>
+    `
+    document.body.append(prose)
+    const header = prose.querySelector('th')!
+    const readAppearance = () => {
+      const style = getComputedStyle(header)
+      return {
+        color: style.color,
+        background: style.backgroundColor,
+        backgroundImage: style.backgroundImage,
+        border: style.borderWidth,
+      }
+    }
+    const initial = readAppearance()
+    expect(initial.color).toBe('rgb(0, 91, 172)')
+    expect(initial.background).not.toBe('rgba(0, 0, 0, 0)')
+    expect(initial.backgroundImage).toBe('none')
+    expect(initial.border).toBe('0px')
+
+    enhanceCadernoProse(document)
+
+    expect(readAppearance()).toEqual(initial)
+    expect(header.scope).toBe('col')
+  })
+
   it('enhances semantic editorial HTML with the canonical prose contract', () => {
     const prose = document.createElement('article')
     prose.className = 'cad-prose'

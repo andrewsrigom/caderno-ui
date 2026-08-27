@@ -20,6 +20,6 @@ export const CadStep = createComponent({
 })
 
 export type {
-  CadStepTone,
+  CadStepStatus,
   CadStepsOrientation,
 } from '@caderno-ui/elements/steps'

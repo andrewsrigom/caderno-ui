@@ -1,0 +1,20 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadListVariant } from '@caderno-ui/elements/list'
+
+type Props = {
+  class?: string
+  label?: string
+  variant?: CadListVariant
+}
+
+const { class: className, label = 'List', variant = 'bullet' } = Astro.props
+---
+
+<cad-list class={className} label={label} variant={variant}>
+  <slot />
+</cad-list>
+
+<script>
+  import '@caderno-ui/elements/list'
+</script>

@@ -1,4 +1,4 @@
-import { html, LitElement, type PropertyValues } from 'lit'
+import { css, html, LitElement, type PropertyValues } from 'lit'
 
 import type {
   CadTabContent,
@@ -27,6 +27,15 @@ export class CadTabs extends LitElement {
     defaultValue: { attribute: 'default-value', type: String },
     value: { reflect: true, type: String },
   }
+
+  static override styles = css`
+    :host {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+  `
 
   declare defaultValue: string
   declare value: string

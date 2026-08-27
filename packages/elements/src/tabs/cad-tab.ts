@@ -1,5 +1,6 @@
 import { css, html, LitElement, nothing } from 'lit'
 
+/** @deprecated Tabs use one neutral/blue palette. Tone values are ignored. */
 export type CadTabTone =
   'accent' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
 
@@ -26,14 +27,23 @@ export class CadTabsList extends LitElement {
       position: relative;
       z-index: 1;
       display: block;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .list {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
+      flex-wrap: nowrap;
+      gap: 0.4rem;
       align-items: flex-end;
-      padding: 0 0.15rem;
+      padding: 0 0.75rem;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scrollbar-width: none;
+    }
+
+    .list::-webkit-scrollbar {
+      display: none;
     }
   `
 
@@ -50,6 +60,7 @@ export class CadTabsList extends LitElement {
       class="list"
       part="list"
       role="tablist"
+      tabindex="-1"
     >
       <slot></slot>
     </div>`
@@ -77,34 +88,11 @@ export class CadTabTrigger extends LitElement {
 
   static override styles = css`
     :host {
-      --_tab-bg: var(--cad-post-it-blue-bg, #293f64);
-      --_tab-ink: var(--cad-post-it-blue-ink, #deebff);
+      --_tab-bg: var(--cad-surface, #fff);
+      --_tab-border: var(--cad-link, #005bac);
+      --_tab-ink: var(--cad-link, #005bac);
       display: inline-flex;
-    }
-
-    :host([tone='coral']) {
-      --_tab-bg: var(--cad-post-it-coral-bg, #633b32);
-      --_tab-ink: var(--cad-post-it-coral-ink, #ffe1da);
-    }
-
-    :host([tone='mint']) {
-      --_tab-bg: var(--cad-post-it-mint-bg, #274f41);
-      --_tab-ink: var(--cad-post-it-mint-ink, #d8ffec);
-    }
-
-    :host([tone='lemon']) {
-      --_tab-bg: var(--cad-post-it-lemon-bg, #51491f);
-      --_tab-ink: var(--cad-post-it-lemon-ink, #fff1ac);
-    }
-
-    :host([tone='pink']) {
-      --_tab-bg: var(--cad-post-it-pink-bg, #5a3449);
-      --_tab-ink: var(--cad-post-it-pink-ink, #ffdceb);
-    }
-
-    :host([tone='violet']) {
-      --_tab-bg: var(--cad-sticker-violet-bg, #58419b);
-      --_tab-ink: var(--cad-sticker-violet-ink, #f5efff);
+      flex: 0 0 auto;
     }
 
     .tab {
@@ -112,54 +100,39 @@ export class CadTabTrigger extends LitElement {
       gap: 0.4rem;
       align-items: center;
       min-height: 2.75rem;
-      padding: 0.55rem 1rem 0.85rem;
+      padding: 0.72rem 1rem 0.78rem;
       margin: 0;
       color: var(--_tab-ink);
-      background: color-mix(
-        in srgb,
-        var(--_tab-bg) 40%,
-        var(--cad-surface, #1f2335)
-      );
-      border: 1.5px solid color-mix(in srgb, var(--_tab-ink) 32%, transparent);
+      background: var(--_tab-bg);
+      border: 1.5px solid
+        color-mix(in srgb, var(--_tab-border) 72%, transparent);
       border-bottom-width: 0;
-      border-radius: 0.7rem 0.95rem 0 0;
+      border-radius: 0.4rem 0.55rem 0 0;
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-md, 1.2rem);
       font-weight: var(--cad-hand-weight-regular, 500);
       line-height: 1;
       cursor: pointer;
-      transition:
-        transform
-          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
-          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease)),
-        padding
-          var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
-          var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
+      transform: rotate(-0.15deg);
+      transition: background-color
+        var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
+        var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
     }
 
-    .tab:hover:not(:disabled) {
-      background: color-mix(
-        in srgb,
-        var(--_tab-bg) 55%,
-        var(--cad-surface, #1f2335)
-      );
-      transform: translateY(-1px);
-    }
-
-    .tab:active:not(:disabled) {
-      transform: translateY(1px) scale(0.98);
+    .tab:hover:not(:disabled, [aria-selected='true']) {
+      background: color-mix(in srgb, var(--_tab-ink) 6%, var(--_tab-bg));
     }
 
     .tab[aria-selected='true'] {
-      padding-bottom: 1.05rem;
-      background: var(--_tab-bg);
-      border-color: color-mix(in srgb, var(--_tab-ink) 55%, transparent);
-      box-shadow:
-        inset 0 -0.18rem 0.32rem
-          color-mix(in srgb, var(--_tab-ink) 22%, transparent),
-        inset 0 0.14rem 0 color-mix(in srgb, white 32%, transparent);
+      position: relative;
+      z-index: 2;
+      padding-bottom: 0.9rem;
+      color: var(--_tab-bg);
+      background: var(--_tab-ink);
+      border-color: var(--_tab-border);
+      box-shadow: 0 3px 0 var(--_tab-ink);
       font-weight: 700;
-      transform: translateY(2px);
+      transform: translateY(1.5px) rotate(0.12deg);
     }
 
     .tab:disabled {
@@ -168,8 +141,12 @@ export class CadTabTrigger extends LitElement {
     }
 
     .tab:focus-visible {
-      outline: 2px dashed var(--cad-focus-ring, currentColor);
-      outline-offset: 3px;
+      outline: var(--cad-focus-outline, 2px dashed var(--_tab-ink));
+      outline-offset: -4px;
+    }
+
+    .tab[aria-selected='true']:focus-visible {
+      outline-color: var(--_tab-bg);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -194,6 +171,7 @@ export class CadTabTrigger extends LitElement {
   declare controls: string
   declare disabled: boolean
   declare label: string
+  /** @deprecated Tabs use one neutral/blue palette. This value is ignored. */
   declare tone: CadTabTone
   declare value: string
 
@@ -277,6 +255,8 @@ export class CadTabContent extends LitElement {
   static override styles = css`
     :host {
       display: block;
+      min-width: 0;
+      max-width: 100%;
     }
 
     :host(:not([active])) {
@@ -284,25 +264,28 @@ export class CadTabContent extends LitElement {
     }
 
     .panel {
+      box-sizing: border-box;
+      width: 100%;
       min-width: 0;
-      padding: 1.35rem 1.5rem 1.4rem;
-      color: var(--cad-ink, currentColor);
-      background: var(
-        --cad-tabs-panel-bg,
-        color-mix(in srgb, var(--cad-surface, #1f2335) 92%, transparent)
-      );
+      padding: 1.5rem 1.65rem 1.6rem;
+      margin-top: -1.5px;
+      color: var(--cad-link, #005bac);
+      background: var(--cad-tabs-panel-bg, var(--cad-surface, #fff));
       border: 1.5px solid
-        color-mix(in srgb, var(--cad-ink-muted, currentColor) 32%, transparent);
-      border-radius: 0.35rem 0.85rem 0.85rem 0.85rem;
-      font-family: var(--cad-font-book, serif);
+        color-mix(in srgb, var(--cad-link, #005bac) 82%, transparent);
+      border-radius: 0;
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-md, 1.2rem);
       line-height: 1.65;
+      transform: rotate(-0.04deg);
     }
 
-    :host([active]) .panel {
-      animation: cad-tab-panel-enter
-        var(--cad-motion-duration-enter, var(--cad-duration-slow, 420ms))
-        var(--cad-motion-ease-enter, var(--cad-transition-smooth, ease-out));
-      transform-origin: top left;
+    ::slotted(h2),
+    ::slotted(h3) {
+      color: inherit;
+      font-family: inherit;
+      font-size: var(--cad-hand-lg, 1.55rem);
+      line-height: 1.2;
     }
 
     ::slotted(:first-child) {
@@ -311,25 +294,6 @@ export class CadTabContent extends LitElement {
 
     ::slotted(:last-child) {
       margin-bottom: 0;
-    }
-
-    @keyframes cad-tab-panel-enter {
-      from {
-        opacity: 0;
-        transform: translateY(var(--cad-motion-distance-sm, 0.35rem))
-          rotate(-0.2deg);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) rotate(0);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      :host([active]) .panel {
-        animation: none;
-      }
     }
 
     @media (forced-colors: active) {

@@ -2,54 +2,217 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-modal size="md">
-  <button slot="trigger" type="button">Open review</button>
-  <h2 slot="title">Review contract</h2>
-  <p>Confirm the public API before publishing.</p>
-  <button slot="footer" type="button">Continue</button>
+const usage = `<cad-modal heading="Save review?" size="md">
+  <cad-button slot="trigger" type="button">Open review</cad-button>
+
+  <p>
+    You've made changes to this review.<br />
+    Save your progress before leaving?
+  </p>
+
+  <cad-button
+    data-modal-cancel
+    slot="footer"
+    type="button"
+    variant="link"
+  >
+    Cancel
+  </cad-button>
+  <cad-button data-modal-save slot="footer" type="button">
+    Save review
+  </cad-button>
 </cad-modal>
 
 <script type="module">
+  import '@caderno-ui/elements/button'
   import '@caderno-ui/elements/modal'
+
+  const modal = document.querySelector('cad-modal')
+  modal.querySelector('[data-modal-cancel]').addEventListener('click', () => {
+    modal.close('cancel')
+  })
+  modal.querySelector('[data-modal-save]').addEventListener('click', () => {
+    modal.close('saved')
+  })
 </script>`
+
+const variantsUsage = `<cad-modal heading="Leave this page?" size="sm">
+  <cad-button slot="trigger">Confirmation</cad-button>
+  <p>Your changes won't be saved.</p>
+  <cad-button data-close-composed-modal slot="footer" variant="link">Keep editing</cad-button>
+  <cad-button data-close-composed-modal slot="footer">Leave page</cad-button>
+</cad-modal>
+
+<cad-modal heading="Delete this note?" size="sm" tone="danger">
+  <cad-button slot="trigger" tone="coral" variant="secondary">Destructive</cad-button>
+  <p>This action cannot be undone.</p>
+  <cad-button data-close-composed-modal slot="footer" variant="link">Cancel</cad-button>
+  <cad-button data-close-composed-modal slot="footer" tone="coral">Delete permanently</cad-button>
+</cad-modal>
+
+<cad-modal heading="Add a note" size="sm">
+  <cad-button slot="trigger" variant="secondary">Form</cad-button>
+  <cad-input label="Title" placeholder="Release notes"></cad-input>
+  <cad-textarea label="Details" placeholder="Write a short description..."></cad-textarea>
+  <cad-button data-close-composed-modal slot="footer" variant="link">Cancel</cad-button>
+  <cad-button data-close-composed-modal slot="footer">Save note</cad-button>
+</cad-modal>`
 ---
 
 <DocsLayout
-  description="CadModal wraps native dialog behavior with notebook styling and composed lifecycle events."
+  description="Focus on a decision or a short form. The rest of the page stays inactive until it closes."
   title="Modal"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-modal&gt;</p>
-    <h1>Use the platform dialog, then restore the reader’s place.</h1>
+    <h1>Modal</h1>
     <p>
-      Modal delegates focus trapping and Escape to <code>&lt;dialog&gt;</code>,
-      supports backdrop dismissal, and returns focus to the opener.
+      Focus on a decision or a short form. The rest of the page stays inactive
+      until it closes.
     </p>
   </header>
 
-  <DemoFrame title="Native modal">
-    <cad-modal>
-      <cad-button slot="trigger" variant="primary">Open review</cad-button>
-      <h2 slot="title">Review contract</h2>
+  <DemoFrame title="Save confirmation">
+    <cad-modal heading="Save review?" id="review-modal" size="md">
+      <cad-button slot="trigger" type="button">Open review</cad-button>
       <p>
-        Confirm the public attributes, slots, parts, and events before release.
+        You've made changes to this review.<br />
+        Save your progress before leaving?
       </p>
-      <cad-button slot="footer" variant="secondary">Continue</cad-button>
+      <cad-button data-modal-cancel slot="footer" type="button" variant="link">
+        Cancel
+      </cad-button>
+      <cad-button data-modal-save slot="footer" type="button">
+        Save review
+      </cad-button>
     </cad-modal>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    columns={3}
+    id="modal-compositions-title"
+    title="Use cases"
+    description="Open an example to try it."
+  >
+    <ExampleCard title="Confirmation">
+      <cad-modal heading="Leave this page?" size="sm">
+        <cad-button slot="trigger">Confirmation</cad-button>
+        <p>Your changes won't be saved.</p>
+        <cad-button
+          data-close-composed-modal
+          slot="footer"
+          type="button"
+          variant="link"
+        >
+          Keep editing
+        </cad-button>
+        <cad-button data-close-composed-modal slot="footer" type="button">
+          Leave page
+        </cad-button>
+      </cad-modal>
+    </ExampleCard>
+    <ExampleCard title="Destructive">
+      <cad-modal heading="Delete this note?" size="sm" tone="danger">
+        <cad-button slot="trigger" tone="coral" variant="secondary">
+          Destructive
+        </cad-button>
+        <p>This action cannot be undone.</p>
+        <cad-button
+          data-close-composed-modal
+          slot="footer"
+          type="button"
+          variant="link"
+        >
+          Cancel
+        </cad-button>
+        <cad-button
+          data-close-composed-modal
+          slot="footer"
+          tone="coral"
+          type="button"
+        >
+          Delete permanently
+        </cad-button>
+      </cad-modal>
+    </ExampleCard>
+    <ExampleCard title="Form">
+      <cad-modal heading="Add a note" size="sm">
+        <cad-button slot="trigger" variant="secondary">Form</cad-button>
+        <div class="modal-fields">
+          <cad-input label="Title" placeholder="Release notes"></cad-input>
+          <cad-textarea
+            label="Details"
+            placeholder="Write a short description..."></cad-textarea>
+        </div>
+        <cad-button
+          data-close-composed-modal
+          slot="footer"
+          type="button"
+          variant="link"
+        >
+          Cancel
+        </cad-button>
+        <cad-button data-close-composed-modal slot="footer" type="button">
+          Save note
+        </cad-button>
+      </cad-modal>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="composition-guidance-title">
+    <h2 id="composition-guidance-title">Content and actions</h2>
+    <p>
+      Add text, forms, and buttons through slots. Use <code>tone="danger"</code> for
+      destructive decisions; it changes the warning icon and title color.
+    </p>
+  </section>
+
   <ApiReference tagName="cad-modal" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Always provide <code>heading</code> or a title slot. Prefer the slot when the
-      title should participate in the document’s heading hierarchy. The close button
-      is named, Escape remains native, and
-      <code>cad-modal-close</code> crosses the shadow boundary with the dialog return
-      value.
+      Provide <code>heading</code> or a title slot. Focus stays inside the dialog
+      and returns to the opener on close. Escape closes it; <code
+        >cad-modal-close</code
+      > reports the return value.
     </p>
   </section>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/modal'
+  import '@caderno-ui/elements/textarea'
+  import type { CadModal } from '@caderno-ui/elements/modal'
+
+  const modal = document.querySelector<CadModal>('#review-modal')
+  modal?.querySelector('[data-modal-cancel]')?.addEventListener('click', () => {
+    modal.close('cancel')
+  })
+  modal?.querySelector('[data-modal-save]')?.addEventListener('click', () => {
+    modal.close('saved')
+  })
+
+  for (const button of document.querySelectorAll<HTMLElement>(
+    '[data-close-composed-modal]',
+  )) {
+    button.addEventListener('click', () => {
+      button.closest<CadModal>('cad-modal')?.close('action')
+    })
+  }
+</script>
+
+<style>
+  .modal-fields {
+    display: grid;
+    gap: 0.9rem;
+  }
+</style>

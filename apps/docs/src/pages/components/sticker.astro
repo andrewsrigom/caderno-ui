@@ -2,44 +2,61 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-sticker shape="burst" tone="lemon">
-  <cad-icon aria-hidden="true" name="spark" slot="start"></cad-icon>
-  New
+const usage = `<cad-sticker tone="blue">
+  <cad-icon aria-hidden="true" name="check" size="17" slot="start"></cad-icon>
+  Reviewed
 </cad-sticker>
 <script type="module">
   import '@caderno-ui/elements/sticker'
   import '@caderno-ui/elements/icon'
 </script>`
+
+const shapesUsage = `<cad-sticker shape="label" tone="blue">Reviewed</cad-sticker>
+<cad-sticker shape="banner" tone="blue">Chapter 4</cad-sticker>
+<cad-sticker shape="bubble" tone="blue">New note</cad-sticker>
+<cad-sticker shape="round" tone="blue">12</cad-sticker>
+<cad-sticker shape="burst" tone="blue">New</cad-sticker>`
 ---
 
 <DocsLayout
-  description="Decorative notebook labels and milestones."
+  description="Add a short decorative label, with an optional icon."
   title="Sticker"
 >
   <header class="page-header">
-    <p class="eyebrow">&lt;cad-sticker&gt;</p><h1>
-      Label the margin with personality.
-    </h1><p>
-      Sticker combines concise text with five reusable notebook shapes. A
-      leading illustration is composed through a slot instead of being coupled
-      to the icon registry.
-    </p>
+    <p class="eyebrow">&lt;cad-sticker&gt;</p>
+    <h1>Sticker</h1>
+    <p>Add a short decorative label, with an optional icon.</p>
   </header>
-  <DemoFrame title="Shapes and tones"
-    ><div class="demo-row">
-      <cad-sticker tone="mint">
-        <cad-icon aria-hidden="true" name="check" size="17" slot="start"
-        ></cad-icon>Reviewed</cad-sticker
-      ><cad-sticker shape="banner" tone="blue">Architecture</cad-sticker
-      ><cad-sticker shape="burst" tone="lemon">
-        <cad-icon aria-hidden="true" name="spark" size="17" slot="start"
-        ></cad-icon>New</cad-sticker
-      ><cad-sticker shape="bubble" tone="violet">Ask why</cad-sticker>
-    </div></DemoFrame
-  >
+  <DemoFrame title="Review label">
+    <cad-sticker tone="blue">
+      <cad-icon aria-hidden="true" name="check" size="17" slot="start"
+      ></cad-icon>
+      Reviewed
+    </cad-sticker>
+  </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+  <ExampleGallery columns={3} id="sticker-shapes-title" title="Shapes">
+    <ExampleCard title="Label">
+      <cad-sticker shape="label" tone="blue">Reviewed</cad-sticker>
+    </ExampleCard>
+    <ExampleCard title="Banner">
+      <cad-sticker shape="banner" tone="blue">Chapter 4</cad-sticker>
+    </ExampleCard>
+    <ExampleCard title="Bubble">
+      <cad-sticker shape="bubble" tone="blue">New note</cad-sticker>
+    </ExampleCard>
+    <ExampleCard title="Round">
+      <cad-sticker shape="round" tone="blue">12</cad-sticker>
+    </ExampleCard>
+    <ExampleCard title="Burst">
+      <cad-sticker shape="burst" tone="blue">New</cad-sticker>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={shapesUsage} collapsible language="html" />
   <ApiReference tagName="cad-sticker" />
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2><p>
@@ -47,14 +64,6 @@ const usage = `<cad-sticker shape="burst" tone="lemon">
       decorative supporting cues.
     </p>
   </section>
-  <style>
-    .demo-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: center;
-    }
-  </style>
 </DocsLayout>
 
 <script>

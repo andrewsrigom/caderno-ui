@@ -12,4 +12,5 @@ export const CadSpinner = createComponent({
 export type {
   CadSpinnerSize,
   CadSpinnerTone,
+  CadSpinnerVariant,
 } from '@caderno-ui/elements/spinner'

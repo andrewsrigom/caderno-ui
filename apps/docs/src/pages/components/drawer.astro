@@ -1,0 +1,188 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-drawer
+  heading="Task details"
+  id="task-drawer"
+  placement="right"
+  size="md"
+>
+  <cad-button slot="trigger" type="button">Open task details</cad-button>
+
+  <p>Review and update the Q3 roadmap.</p>
+  <div class="drawer-fields">
+    <cad-input label="Assignee" value="Alicia Gomes"></cad-input>
+    <cad-input label="Due date" value="May 31, 2026"></cad-input>
+    <cad-input label="Priority" value="High"></cad-input>
+  </div>
+
+  <cad-button data-drawer-cancel slot="footer" type="button" variant="link">
+    Cancel
+  </cad-button>
+  <cad-button data-drawer-save slot="footer" type="button">
+    Save changes
+  </cad-button>
+</cad-drawer>
+
+<script type="module">
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/drawer'
+  import '@caderno-ui/elements/input'
+
+  const drawer = document.querySelector('#task-drawer')
+  drawer.querySelector('[data-drawer-cancel]').addEventListener('click', () => {
+    drawer.close('api')
+  })
+  drawer.querySelector('[data-drawer-save]').addEventListener('click', () => {
+    drawer.close('api')
+  })
+</script>`
+
+const placementsUsage = `<cad-drawer heading="Left tools" placement="left" size="sm">
+  <cad-button slot="trigger">Open left</cad-button>
+  <p>Contextual tools for the current page.</p>
+</cad-drawer>
+<cad-drawer heading="Task details" placement="right" size="sm">
+  <cad-button slot="trigger">Open right</cad-button>
+  <p>Related details and editing.</p>
+</cad-drawer>
+<cad-drawer heading="Quick filters" placement="top" size="sm">
+  <cad-button slot="trigger">Open top</cad-button>
+  <p>Wide controls that stay close to the page.</p>
+</cad-drawer>
+<cad-drawer heading="Mobile action" placement="bottom" size="sm">
+  <cad-button slot="trigger">Open bottom</cad-button>
+  <p>A focused task that enters from the lower edge.</p>
+</cad-drawer>`
+---
+
+<DocsLayout
+  description="Open a panel from the edge of the screen for a related task. The page stays visible but cannot be used until the drawer closes."
+  title="Drawer"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-drawer&gt;</p>
+    <h1>Drawer</h1>
+    <p>
+      Open a panel from the edge of the screen for a related task. The page
+      stays visible but cannot be used until the drawer closes.
+    </p>
+  </header>
+
+  <DemoFrame
+    description="Open the panel, then close it to return focus to the trigger."
+    title="Edit task details"
+  >
+    <cad-drawer
+      heading="Task details"
+      id="task-drawer"
+      placement="right"
+      size="md"
+    >
+      <cad-button slot="trigger" type="button">Open task details</cad-button>
+      <p>Review and update the Q3 roadmap.</p>
+      <div class="drawer-fields">
+        <cad-input label="Assignee" value="Alicia Gomes"></cad-input>
+        <cad-input label="Due date" value="May 31, 2026"></cad-input>
+        <cad-input label="Priority" value="High"></cad-input>
+      </div>
+      <cad-button data-drawer-cancel slot="footer" type="button" variant="link">
+        Cancel
+      </cad-button>
+      <cad-button data-drawer-save slot="footer" type="button">
+        Save changes
+      </cad-button>
+    </cad-drawer>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    id="drawer-placements-title"
+    title="Placements"
+    description="Open an example to try each placement."
+  >
+    <ExampleCard title="Left">
+      <cad-drawer heading="Left tools" placement="left" size="sm">
+        <cad-button slot="trigger">Open left</cad-button>
+        <p>Contextual tools for the current page.</p>
+      </cad-drawer>
+    </ExampleCard>
+    <ExampleCard title="Right">
+      <cad-drawer heading="Task details" placement="right" size="sm">
+        <cad-button slot="trigger">Open right</cad-button>
+        <p>Related details and editing.</p>
+      </cad-drawer>
+    </ExampleCard>
+    <ExampleCard title="Top">
+      <cad-drawer heading="Quick filters" placement="top" size="sm">
+        <cad-button slot="trigger">Open top</cad-button>
+        <p>Wide controls that stay close to the page.</p>
+      </cad-drawer>
+    </ExampleCard>
+    <ExampleCard title="Bottom">
+      <cad-drawer heading="Mobile action" placement="bottom" size="sm">
+        <cad-button slot="trigger">Open bottom</cad-button>
+        <p>A focused task that enters from the lower edge.</p>
+      </cad-drawer>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={placementsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="placement-guidance-title">
+    <h2 id="placement-guidance-title">Placement and size</h2>
+    <p>
+      Choose <code>left</code>, <code>right</code> (default), <code>top</code>,
+      or <code>bottom</code>. Sizes <code>sm</code>, <code>md</code>, and <code
+        >lg</code
+      > control width for side drawers and height for top or bottom drawers.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="boundary-title">
+    <h2 id="boundary-title">Drawer or Modal?</h2>
+    <p>
+      Use Drawer for a task related to the page, Modal for a short decision, and
+      a full page for longer workflows.
+    </p>
+  </section>
+
+  <ApiReference tagName="cad-drawer" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Background content is inactive and focus stays in the drawer. Escape, the
+      close button, or an enabled backdrop click dismiss it and restore focus. <code
+        >cad-drawer-close</code
+      > reports the dismissal reason.
+    </p>
+  </section>
+</DocsLayout>
+
+<style>
+  .drawer-fields {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.15rem;
+  }
+</style>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/drawer'
+  import '@caderno-ui/elements/input'
+  import type { CadDrawer } from '@caderno-ui/elements/drawer'
+
+  const drawer = document.querySelector<CadDrawer>('#task-drawer')
+  drawer
+    ?.querySelector('[data-drawer-cancel]')
+    ?.addEventListener('click', () => drawer.close('api'))
+  drawer
+    ?.querySelector('[data-drawer-save]')
+    ?.addEventListener('click', () => drawer.close('api'))
+</script>

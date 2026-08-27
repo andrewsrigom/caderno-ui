@@ -14,6 +14,8 @@ describe('cad-accordion', () => {
     const accordion = document.createElement('cad-accordion')
     const first = document.createElement('cad-accordion-item')
     const second = document.createElement('cad-accordion-item')
+
+    expect(first.tone).toBe('blue')
     accordion.mode = 'single'
     first.heading = 'First'
     first.open = true

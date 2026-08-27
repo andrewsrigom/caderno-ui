@@ -24,6 +24,7 @@ describe('cad-alert', () => {
     expect(alert.dismissible).toBe(false)
     expect(alert.dismissLabel).toBe('Dismiss alert')
     expect(alert.heading).toBe('')
+    expect(alert.size).toBe('default')
     expect(alert.variant).toBe('info')
     expect(alert.getAttribute('variant')).toBe('info')
     expect(
@@ -31,6 +32,26 @@ describe('cad-alert', () => {
         ?.querySelector<HTMLSlotElement>('slot[name="title"]')
         ?.assignedElements(),
     ).toEqual([title])
+  })
+
+  it('renders an action slot and assertive error semantics', async () => {
+    const alert = document.createElement('cad-alert')
+    const action = document.createElement('button')
+    action.slot = 'action'
+    action.textContent = 'Try again'
+    alert.append('The operation failed.', action)
+    alert.variant = 'error'
+    document.body.append(alert)
+    await alert.updateComplete
+
+    expect(
+      alert.shadowRoot?.querySelector('[part="base"]')?.getAttribute('role'),
+    ).toBe('alert')
+    expect(
+      alert.shadowRoot
+        ?.querySelector<HTMLSlotElement>('slot[name="action"]')
+        ?.assignedElements(),
+    ).toEqual([action])
   })
 
   it('hides and emits a bubbling composed dismiss event', async () => {

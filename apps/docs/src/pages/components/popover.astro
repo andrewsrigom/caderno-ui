@@ -1,0 +1,187 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-button
+  id="release-context"
+  tone="blue"
+  type="button"
+  variant="secondary"
+>
+  What changed?
+</cad-button>
+
+<cad-popover
+  anchor="release-context"
+  heading="Release review"
+  placement="bottom-start"
+  size="md"
+>
+  <p>
+    The public contract now covers focus restoration, light dismissal,
+    and viewport-aware placement.
+  </p>
+  <cad-button href="/components/" size="sm" slot="actions" variant="link">
+    Browse components
+  </cad-button>
+</cad-popover>
+
+<script type="module">
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/popover'
+</script>`
+
+const placementsUsage = `<cad-button id="popover-top" variant="secondary">Top</cad-button>
+<cad-popover anchor="popover-top" heading="Above" placement="top" size="sm">Short context.</cad-popover>
+
+<cad-button id="popover-right" variant="secondary">Right</cad-button>
+<cad-popover anchor="popover-right" heading="Beside" placement="right" size="sm">Short context.</cad-popover>
+
+<cad-button id="popover-bottom-start" variant="secondary">Bottom start</cad-button>
+<cad-popover anchor="popover-bottom-start" heading="Aligned" placement="bottom-start" size="sm">Short context.</cad-popover>
+
+<cad-button id="popover-auto" variant="secondary">Auto</cad-button>
+<cad-popover anchor="popover-auto" heading="Smart placement" placement="auto" size="sm">The viewport chooses the safe side.</cad-popover>`
+---
+
+<DocsLayout
+  description="Show extra information or controls beside a trigger, without blocking the page."
+  title="Popover"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-popover&gt;</p>
+    <h1>Popover</h1>
+    <p>
+      Show extra information or controls beside a trigger, without blocking the
+      page.
+    </p>
+  </header>
+
+  <DemoFrame title="Release context">
+    <div class="popover-demo">
+      <cad-button
+        id="release-context"
+        tone="blue"
+        type="button"
+        variant="secondary"
+      >
+        What changed?
+      </cad-button>
+      <cad-popover
+        anchor="release-context"
+        heading="Release review"
+        placement="bottom-start"
+        size="md"
+      >
+        <p>
+          The public contract now covers focus restoration, light dismissal, and
+          viewport-aware placement.
+        </p>
+        <cad-button href="/components/" size="sm" slot="actions" variant="link">
+          Browse components
+        </cad-button>
+      </cad-popover>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    id="popover-placements-title"
+    title="Placements"
+    description="Open an example. The panel moves if it needs more room."
+  >
+    <ExampleCard title="Top">
+      <cad-button id="popover-top" variant="secondary">Top</cad-button>
+      <cad-popover
+        anchor="popover-top"
+        heading="Above"
+        placement="top"
+        size="sm"
+      >
+        Short context.
+      </cad-popover>
+    </ExampleCard>
+    <ExampleCard title="Right">
+      <cad-button id="popover-right" variant="secondary">Right</cad-button>
+      <cad-popover
+        anchor="popover-right"
+        heading="Beside"
+        placement="right"
+        size="sm"
+      >
+        Short context.
+      </cad-popover>
+    </ExampleCard>
+    <ExampleCard title="Bottom start">
+      <cad-button id="popover-bottom-start" variant="secondary"
+        >Bottom start</cad-button
+      >
+      <cad-popover
+        anchor="popover-bottom-start"
+        heading="Aligned"
+        placement="bottom-start"
+        size="sm"
+      >
+        Short context.
+      </cad-popover>
+    </ExampleCard>
+    <ExampleCard title="Auto">
+      <cad-button id="popover-auto" variant="secondary">Auto</cad-button>
+      <cad-popover
+        anchor="popover-auto"
+        heading="Smart placement"
+        placement="auto"
+        size="sm"
+      >
+        The viewport chooses the safe side.
+      </cad-popover>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={placementsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="placement-guidance-title">
+    <h2 id="placement-guidance-title">Placement</h2>
+    <p>
+      Choose <code>top</code>, <code>bottom</code>, <code>left</code>, or <code
+        >right</code
+      >. Top and bottom also accept <code>-start</code> and <code>-end</code>.
+      The panel flips or shifts to fit; <code>auto</code> chooses a side.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="boundary-title">
+    <h2 id="boundary-title">Popover, Tooltip, or Modal?</h2>
+    <p>
+      Use Tooltip for a short, non-interactive hint. Use Popover for nearby
+      content or controls, and Modal when the task must block the page.
+    </p>
+  </section>
+
+  <ApiReference tagName="cad-popover" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Focus enters the first action and returns to the opener on close. Escape
+      or an outside click dismisses the panel. The trigger exposes its expanded
+      state. Use <code>role="menu"</code> only for content with menu keyboard behavior.
+    </p>
+  </section>
+</DocsLayout>
+
+<style>
+  .popover-demo {
+    display: grid;
+    place-items: center;
+    min-height: 8rem;
+  }
+</style>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/popover'
+</script>

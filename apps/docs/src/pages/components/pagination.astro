@@ -2,6 +2,8 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-pagination base-href="/notes?filter=ready" page="5" total="12">
@@ -21,30 +23,63 @@ import Pagination from '@caderno-ui/astro/Pagination.astro'
   page={5}
   total={12}
 />`
+const variantsUsage = `<cad-pagination
+  base-href="/notes"
+  page="5"
+  show-first-last
+  total="12"
+></cad-pagination>
+
+<cad-pagination
+  base-href="/notes"
+  page="5"
+  total="12"
+  variant="text"
+></cad-pagination>`
 ---
 
-<DocsLayout description="URL-based collection pagination." title="Pagination">
+<DocsLayout
+  description="Split a collection into pages, with links to move between them."
+  title="Pagination"
+>
   <header class="page-header">
     <p class="eyebrow">&lt;cad-pagination&gt;</p>
-    <h1>Move through long collections with real URLs.</h1>
-    <p>
-      Pagination preserves existing query parameters, removes the page parameter
-      on page one, and keeps direction controls out of the tab order when
-      unavailable.
-    </p>
+    <h1>Pagination</h1>
+    <p>Split a collection into pages, with links to move between them.</p>
   </header>
-  <DemoFrame title="Long collection"
+  <DemoFrame
+    title="With ellipsis"
+    description="Long page ranges are shortened with ellipses."
     ><cad-pagination base-href="/notes?filter=ready" page="5" total="12"
       >Page 5 of 12</cad-pagination
     ></DemoFrame
   >
   <CodeBlock code={usage} collapsible language="html" />
-  <section class="content-section" aria-labelledby="path-router-title">
-    <h2 id="path-router-title">Path-based routers</h2>
+  <ExampleGallery id="pagination-variants-title" title="Controls and styles">
+    <ExampleCard title="First and last" wide>
+      <cad-pagination base-href="/notes" page="5" show-first-last total="12"
+      ></cad-pagination>
+    </ExampleCard>
+    <ExampleCard title="Text navigation" wide>
+      <cad-pagination base-href="/notes" page="5" total="12" variant="text"
+      ></cad-pagination>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+  <section class="content-section" aria-labelledby="pagination-guidance-title">
+    <h2 id="pagination-guidance-title">Controls</h2>
     <p>
-      The Astro facade accepts a <code>getHref</code> function and serializes only
-      the resulting URLs. Consumers keep their routing rules without rebuilding pagination
-      markup or styles.
+      Add <code>show-first-last</code> for boundary links or <code
+        >variant="text"</code
+      > for Previous and Next labels. <code>boundary-count</code> and <code
+        >sibling-count</code
+      > control how many page links are shown.
+    </p>
+  </section>
+  <section class="content-section" aria-labelledby="path-router-title">
+    <h2 id="path-router-title">Custom URLs</h2>
+    <p>
+      In Astro, use <code>getHref</code> to generate page URLs for your router.
     </p>
     <CodeBlock code={astroUsage} collapsible language="astro" />
   </section>
@@ -52,8 +87,12 @@ import Pagination from '@caderno-ui/astro/Pagination.astro'
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      A labeled navigation landmark wraps an ordered list. Every link has a page
-      label and the current page uses <code>aria-current</code>.
+      Navigation has a label, every link identifies its page, and the current
+      page uses <code>aria-current</code>.
     </p>
   </section>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/pagination'
+</script>

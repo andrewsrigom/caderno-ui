@@ -1,244 +1,280 @@
 {
   "entrypoints": {
     "elements-alert": {
-      "maxGzip": 9243
+      "maxGzip": 10039
     },
     "elements-badge": {
-      "maxGzip": 7900
+      "maxGzip": 8123
     },
     "elements-bookmark": {
-      "maxGzip": 8857
+      "maxGzip": 9096
     },
     "elements-button": {
-      "maxGzip": 9113
+      "maxGzip": 9200
     },
     "elements-callout": {
-      "maxGzip": 8938
+      "maxGzip": 9616
     },
     "elements-card": {
-      "maxGzip": 8878
+      "maxGzip": 9241
     },
     "elements-chart": {
-      "maxGzip": 22130
+      "maxGzip": 22114
     },
     "elements-divider": {
-      "maxGzip": 7964
+      "maxGzip": 8711
+    },
+    "elements-drawer": {
+      "maxGzip": 11750
+    },
+    "elements-footer": {
+      "maxGzip": 10725
+    },
+    "elements-header": {
+      "maxGzip": 10774
     },
     "elements-icon": {
-      "maxGzip": 11835
+      "maxGzip": 11945
     },
     "elements-link": {
-      "maxGzip": 8293
+      "maxGzip": 8722
     },
     "elements-note": {
-      "maxGzip": 8502
+      "maxGzip": 8474
     },
     "elements-progress": {
-      "maxGzip": 9414
+      "maxGzip": 8880
     },
     "elements-prose": {
-      "maxGzip": 1060
+      "maxGzip": 1047
     },
     "elements-tabs": {
-      "maxGzip": 10255
+      "maxGzip": 10178
     },
     "elements-table": {
-      "maxGzip": 8938
+      "maxGzip": 9089
     },
     "elements-input": {
-      "maxGzip": 9426
+      "maxGzip": 9970
     },
     "elements-textarea": {
-      "maxGzip": 9392
+      "maxGzip": 9908
     },
     "elements-checkbox": {
-      "maxGzip": 10039
+      "maxGzip": 9475
+    },
+    "elements-switch": {
+      "maxGzip": 10117
+    },
+    "elements-slider": {
+      "maxGzip": 12924
     },
     "elements-radio": {
       "maxGzip": 9704
     },
     "elements-accordion": {
-      "maxGzip": 9662
+      "maxGzip": 9682
     },
     "elements-skeleton": {
-      "maxGzip": 8061
+      "maxGzip": 8037
     },
     "elements-spinner": {
-      "maxGzip": 7900
+      "maxGzip": 8981
     },
     "elements-tooltip": {
-      "maxGzip": 8671
+      "maxGzip": 8663
+    },
+    "elements-popover": {
+      "maxGzip": 12918
     },
     "elements-modal": {
-      "maxGzip": 10283
+      "maxGzip": 11307
     },
     "elements-toast": {
-      "maxGzip": 10056
+      "maxGzip": 12806
     },
     "elements-breadcrumb": {
-      "maxGzip": 9148
+      "maxGzip": 9542
     },
     "elements-pagination": {
-      "maxGzip": 9157
+      "maxGzip": 10530
     },
     "elements-avatar": {
-      "maxGzip": 8267
+      "maxGzip": 8291
+    },
+    "elements-doodle-avatar": {
+      "maxGzip": 9732
     },
     "elements-highlight": {
-      "maxGzip": 7736
-    },
-    "elements-tape": {
-      "maxGzip": 7799
+      "maxGzip": 8333
     },
     "elements-sticker": {
-      "maxGzip": 8568
+      "maxGzip": 8539
     },
     "elements-blockquote": {
-      "maxGzip": 8017
+      "maxGzip": 8623
     },
     "elements-checklist": {
-      "maxGzip": 8966
+      "maxGzip": 9203
     },
     "elements-code-block": {
-      "maxGzip": 9995
+      "maxGzip": 9980
     },
     "elements-empty-state": {
-      "maxGzip": 8177
+      "maxGzip": 9097
     },
     "elements-kanban": {
-      "maxGzip": 8341
+      "maxGzip": 8331
+    },
+    "elements-list": {
+      "maxGzip": 9458
     },
     "elements-steps": {
-      "maxGzip": 8690
-    },
-    "elements-paper": {
-      "maxGzip": 8547
+      "maxGzip": 9482
     },
     "motion-scroll": {
       "maxGzip": 53102
     },
     "react-alert": {
-      "maxGzip": 9909
+      "maxGzip": 10698
     },
     "react-badge": {
-      "maxGzip": 8533
+      "maxGzip": 8757
     },
     "react-bookmark": {
-      "maxGzip": 9509
+      "maxGzip": 9750
     },
     "react-button": {
-      "maxGzip": 9764
+      "maxGzip": 9850
     },
     "react-callout": {
-      "maxGzip": 9582
+      "maxGzip": 10266
     },
     "react-card": {
-      "maxGzip": 9622
+      "maxGzip": 9987
     },
     "react-chart": {
-      "maxGzip": 22854
+      "maxGzip": 22838
     },
     "react-divider": {
-      "maxGzip": 8602
+      "maxGzip": 9363
+    },
+    "react-drawer": {
+      "maxGzip": 12428
+    },
+    "react-footer": {
+      "maxGzip": 11415
+    },
+    "react-header": {
+      "maxGzip": 11441
     },
     "react-icon": {
-      "maxGzip": 12462
+      "maxGzip": 12586
     },
     "react-link": {
-      "maxGzip": 8938
+      "maxGzip": 9371
     },
     "react-note": {
-      "maxGzip": 9137
+      "maxGzip": 9112
     },
     "react-progress": {
-      "maxGzip": 10054
+      "maxGzip": 9527
     },
     "react-tabs": {
-      "maxGzip": 10954
+      "maxGzip": 10885
     },
     "react-table": {
-      "maxGzip": 9631
+      "maxGzip": 9781
     },
     "react-input": {
-      "maxGzip": 10068
+      "maxGzip": 10615
     },
     "react-textarea": {
-      "maxGzip": 10040
+      "maxGzip": 10553
     },
     "react-checkbox": {
-      "maxGzip": 10687
+      "maxGzip": 10124
+    },
+    "react-switch": {
+      "maxGzip": 10766
+    },
+    "react-slider": {
+      "maxGzip": 13589
     },
     "react-radio": {
       "maxGzip": 10345
     },
     "react-accordion": {
-      "maxGzip": 10345
+      "maxGzip": 10361
     },
     "react-skeleton": {
-      "maxGzip": 8700
+      "maxGzip": 8676
     },
     "react-spinner": {
-      "maxGzip": 8533
+      "maxGzip": 9620
     },
     "react-tooltip": {
-      "maxGzip": 9306
+      "maxGzip": 9297
+    },
+    "react-popover": {
+      "maxGzip": 13577
     },
     "react-modal": {
-      "maxGzip": 10942
+      "maxGzip": 11985
     },
     "react-toast": {
-      "maxGzip": 10739
+      "maxGzip": 13491
     },
     "react-breadcrumb": {
-      "maxGzip": 9815
+      "maxGzip": 10208
     },
     "react-pagination": {
-      "maxGzip": 9801
+      "maxGzip": 11173
     },
     "react-avatar": {
-      "maxGzip": 8903
+      "maxGzip": 8926
+    },
+    "react-doodle-avatar": {
+      "maxGzip": 10331
     },
     "react-highlight": {
-      "maxGzip": 8371
-    },
-    "react-tape": {
-      "maxGzip": 8429
+      "maxGzip": 8970
     },
     "react-sticker": {
-      "maxGzip": 9213
+      "maxGzip": 9181
     },
     "react-blockquote": {
-      "maxGzip": 8660
+      "maxGzip": 9264
     },
     "react-checklist": {
-      "maxGzip": 9628
+      "maxGzip": 9867
     },
     "react-code-block": {
-      "maxGzip": 10637
+      "maxGzip": 10625
     },
     "react-empty-state": {
-      "maxGzip": 8813
+      "maxGzip": 9744
     },
     "react-kanban": {
-      "maxGzip": 9015
+      "maxGzip": 9007
+    },
+    "react-list": {
+      "maxGzip": 10125
     },
     "react-steps": {
-      "maxGzip": 9340
-    },
-    "react-paper": {
-      "maxGzip": 9187
+      "maxGzip": 10143
     },
     "elements-root": {
-      "maxGzip": 48589
+      "maxGzip": 79255
     },
     "icons-root": {
-      "maxGzip": 4239
+      "maxGzip": 4326
     },
     "motion-root": {
       "maxGzip": 32826
     },
     "react-root": {
-      "maxGzip": 50778
+      "maxGzip": 81265
     }
   },
   "icons": {

@@ -1,10 +1,17 @@
 ---
 import '@caderno-ui/elements/fallback.css'
 
-import type { CadLinkTone, CadLinkVariant } from '@caderno-ui/elements/link'
+import type {
+  CadLinkCurrent,
+  CadLinkTone,
+  CadLinkVariant,
+} from '@caderno-ui/elements/link'
 
 type Props = {
   class?: string
+  current?: CadLinkCurrent
+  disabled?: boolean
+  download?: string
   external?: boolean
   href: string
   label?: string
@@ -16,18 +23,24 @@ type Props = {
 
 const {
   class: className,
+  current,
+  disabled = false,
+  download,
   external = false,
   href,
   label,
   rel,
   target,
   tone = 'blue',
-  variant = 'highlight',
+  variant = 'underline',
 } = Astro.props
 ---
 
 <cad-link
+  aria-current={current}
   class={className}
+  disabled={disabled || undefined}
+  download={download}
   external={external || undefined}
   href={href}
   label={label}
@@ -36,7 +49,21 @@ const {
   tone={tone}
   variant={variant}
 >
+  {
+    Astro.slots.has('start') && (
+      <span slot="start">
+        <slot name="start" />
+      </span>
+    )
+  }
   <slot />
+  {
+    Astro.slots.has('end') && (
+      <span slot="end">
+        <slot name="end" />
+      </span>
+    )
+  }
 </cad-link>
 
 <script>

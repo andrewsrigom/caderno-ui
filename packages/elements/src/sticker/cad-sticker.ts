@@ -33,9 +33,7 @@ export class CadSticker extends LitElement {
       position: relative;
       display: inline-flex;
       color: var(--_sticker-ink);
-      filter: drop-shadow(
-        0 0.22rem 0.24rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.16)
-      );
+      filter: none;
       transform: rotate(-0.4deg);
     }
     :host([tone='coral']) {
@@ -80,9 +78,10 @@ export class CadSticker extends LitElement {
     }
     .base,
     .surface {
-      border-radius: 0.85rem 1.05rem 0.8rem 0.95rem;
+      border-radius: 0;
     }
     .surface {
+      position: relative;
       display: inline-flex;
       gap: 0.38rem;
       align-items: center;
@@ -91,20 +90,30 @@ export class CadSticker extends LitElement {
       padding: 0.42rem 0.72rem 0.45rem;
       color: var(--_sticker-ink);
       white-space: nowrap;
-      background: var(--_sticker-bg);
-      box-shadow:
-        inset 0 -0.16rem 0.28rem
-          color-mix(in srgb, currentColor 22%, transparent),
-        inset 0 0.12rem 0 color-mix(in srgb, white 32%, transparent);
+      background: color-mix(
+        in srgb,
+        var(--_sticker-bg) 54%,
+        var(--cad-surface, #fff)
+      );
+      border: 1.5px solid color-mix(in srgb, currentColor 76%, transparent);
+      box-shadow: none;
       font-family: var(--cad-font-hand, cursive);
-      font-size: 0.78rem;
+      font-size: var(--cad-hand-sm, 1.05rem);
       font-weight: var(--cad-hand-weight-strong, 700);
       line-height: 1.1;
+    }
+    .surface::after {
+      position: absolute;
+      inset: 0.12rem -0.1rem -0.08rem 0.1rem;
+      border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+      content: '';
+      pointer-events: none;
+      transform: rotate(0.7deg);
     }
     :host([size='sm']) .surface {
       min-height: 1.65rem;
       padding: 0.27rem 0.52rem 0.3rem;
-      font-size: 0.67rem;
+      font-size: 0.88rem;
     }
     :host([shape='round']) .base,
     :host([shape='round']) .surface {
@@ -152,6 +161,10 @@ export class CadSticker extends LitElement {
         42% 12%
       );
     }
+    :host([shape='burst']) .surface::after,
+    :host([shape='banner']) .surface::after {
+      border: 0;
+    }
     :host([shape='burst']) .surface {
       flex-direction: column;
       min-width: 5.6rem;
@@ -161,7 +174,7 @@ export class CadSticker extends LitElement {
     }
     :host([shape='banner']) .base,
     :host([shape='banner']) .surface {
-      border-radius: 0.45rem 0 0 0.45rem;
+      border-radius: 0;
       clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%);
     }
     :host([shape='banner']) .surface {
@@ -172,7 +185,7 @@ export class CadSticker extends LitElement {
     }
     :host([shape='bubble']) .base,
     :host([shape='bubble']) .surface {
-      border-radius: 1rem 1.1rem 1rem 1rem;
+      border-radius: 0;
     }
     :host([shape='bubble'])::after {
       position: absolute;

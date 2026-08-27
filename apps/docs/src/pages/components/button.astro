@@ -5,11 +5,24 @@ import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
-const usage = `<cad-button tone="mint">
-  <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
+const usage = `<cad-button tone="blue">
+  <cad-icon aria-hidden="true" name="check" size="18" slot="start"></cad-icon>
   Save review
 </cad-button>
-<cad-button href="/components" variant="secondary">Browse components</cad-button>
+
+<cad-button tone="lemon" variant="secondary">
+  <cad-icon aria-hidden="true" name="spark" size="18" slot="start"></cad-icon>
+  Save draft
+</cad-button>
+
+<cad-button href="/components/" variant="ghost">
+  Browse components
+  <cad-icon aria-hidden="true" name="arrow-right" size="18" slot="end"></cad-icon>
+</cad-button>
+
+<cad-button size="sm" tone="coral" variant="link">
+  Read the contract
+</cad-button>
 
 <script type="module">
   import '@caderno-ui/elements/button'
@@ -18,26 +31,21 @@ const usage = `<cad-button tone="mint">
 ---
 
 <DocsLayout
-  description="CadButton renders a native button or anchor with notebook styling and form-aware submit behavior."
+  description="Trigger an action, submit a form, or navigate to a page. Add icons through slots."
   title="Button"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-button&gt;</p>
-    <h1>Make the action obvious without losing native behavior.</h1>
+    <h1>Button</h1>
     <p>
-      Button selects a native button or anchor from its contract, supports form
-      submission across the shadow boundary, and keeps disabled links out of the
-      tab order. Leading and trailing content are slots, so Button does not load
-      the icon catalog unless the application chooses one.
+      Trigger an action, submit a form, or navigate to a page. Add icons through
+      slots.
     </p>
   </header>
 
-  <DemoFrame
-    title="A realistic action group"
-    description="Primary save, secondary draft, navigation, and a low-emphasis reference use native semantics."
-  >
+  <DemoFrame title="Actions">
     <div class="demo-row">
-      <cad-button tone="mint">
+      <cad-button tone="blue">
         <cad-icon aria-hidden="true" name="check" size="18" slot="start"
         ></cad-icon>
         Save review
@@ -62,11 +70,13 @@ const usage = `<cad-button tone="mint">
   <ApiReference tagName="cad-button" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
-    <h2 id="accessibility-title">Accessibility</h2>
+    <h2 id="accessibility-title">Usage and accessibility</h2>
     <p>
-      Visible text is the preferred accessible name. Supply <code>label</code>
-      for icon-only actions. Use <code>href</code> for navigation and a button without
-      <code>href</code> for actions; visual variants never change that semantic distinction.
+      Use visible text, or <code>label</code> for icon-only buttons. Set <code
+        >href</code
+      > for navigation and <code>type="submit"</code> or <code
+        >type="reset"</code
+      > for form actions. Disabled buttons and links cannot be activated.
     </p>
   </section>
 

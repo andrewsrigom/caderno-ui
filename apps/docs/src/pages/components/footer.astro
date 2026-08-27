@@ -1,0 +1,443 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-footer label="Caderno UI footer" variant="light">
+  <div class="footer-brand" slot="brand">
+    <a class="footer-logo" href="/" aria-label="Caderno UI home">
+      <cad-icon name="book" size="32"></cad-icon>
+      <strong>CADERNO UI</strong>
+    </a>
+    <p>Notebook-native components for products with a human voice.</p>
+    <form class="footer-newsletter" data-footer-newsletter>
+      <label for="footer-email">Get updates, not spam.</label>
+      <div class="footer-newsletter-row">
+        <cad-input
+          id="footer-email"
+          name="email"
+          placeholder="you@example.com"
+          type="email"
+        ></cad-input>
+        <cad-button size="sm" type="submit">Join</cad-button>
+      </div>
+    </form>
+  </div>
+
+  <cad-footer-group heading="Product">
+    <cad-link href="/components/">Components</cad-link>
+    <cad-link href="/theming/">Theming</cad-link>
+    <cad-link href="/motion/">Motion</cad-link>
+    <cad-link href="/integrations/">Integrations</cad-link>
+  </cad-footer-group>
+  <cad-footer-group heading="Resources">
+    <cad-link href="/getting-started/">Getting started</cad-link>
+    <cad-link href="/composition/">Composition</cad-link>
+    <cad-link href="/components/code-block/">Code examples</cad-link>
+    <cad-link href="/components/icon/">Icon catalog</cad-link>
+  </cad-footer-group>
+  <cad-footer-group heading="Company">
+    <cad-link href="#about">About</cad-link>
+    <cad-link href="#principles">Principles</cad-link>
+    <cad-link href="#roadmap">Roadmap</cad-link>
+    <cad-link href="#contact">Contact</cad-link>
+  </cad-footer-group>
+  <cad-footer-group heading="Legal">
+    <cad-link href="#privacy">Privacy</cad-link>
+    <cad-link href="#terms">Terms</cad-link>
+    <cad-link href="#security">Security</cad-link>
+    <cad-link href="#licenses">Licenses</cad-link>
+  </cad-footer-group>
+
+  <div class="footer-social" slot="social">
+    <cad-link external href="https://github.com/andrewsrigom/caderno-ui" label="GitHub" variant="plain">GH</cad-link>
+    <cad-link href="#linkedin" label="LinkedIn" variant="plain">in</cad-link>
+    <cad-link href="#youtube" label="YouTube" variant="plain">YT</cad-link>
+  </div>
+  <p class="footer-aside" slot="aside">Built in public.<br />You can too.</p>
+
+  <div class="footer-meta" slot="bottom">
+    <span>© 2026 Caderno UI. MIT licensed.</span>
+    <cad-link href="#language" variant="plain">English (US)</cad-link>
+    <span><i class="footer-status-dot"></i> All systems operational</span>
+  </div>
+  <cad-link href="#top" slot="back-to-top" variant="plain">
+    Back to top
+    <cad-icon class="footer-back-icon" name="arrow-right" size="18" slot="end"></cad-icon>
+  </cad-link>
+</cad-footer>
+
+<style>
+  .footer-brand, .footer-newsletter { display: grid; gap: .75rem; }
+  .footer-logo, .footer-newsletter-row, .footer-meta, .footer-social {
+    display: flex; gap: .75rem; align-items: center; flex-wrap: wrap;
+  }
+  .footer-logo { color: inherit; letter-spacing: .14em; text-decoration: none; }
+  .footer-newsletter-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+  .footer-social cad-link::part(base) {
+    display: grid; width: 2.25rem; height: 2.25rem; padding: 0;
+    place-items: center; border: 1px solid currentColor; border-radius: 50%;
+  }
+  .footer-aside { padding: .8rem; border: 1px solid var(--cad-link); transform: rotate(-1deg); }
+  .footer-status-dot { display: inline-block; width: .55rem; height: .55rem; background: var(--cad-success-ink); border-radius: 50%; }
+  .footer-back-icon { transform: rotate(-90deg); }
+</style>
+
+<script type="module">
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/footer'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/link'
+
+  document.querySelector('[data-footer-newsletter]')?.addEventListener('submit', (event) => {
+    event.preventDefault()
+  })
+</script>`
+
+const variantsUsage = `<cad-footer label="Dark footer" variant="dark">
+  <div class="footer-brand" slot="brand">
+    <strong>CADERNO UI</strong>
+    <p>Notebook-native components.</p>
+  </div>
+  <cad-footer-group heading="Product">
+    <cad-link href="/components/">Components</cad-link>
+    <cad-link href="/theming/">Theming</cad-link>
+  </cad-footer-group>
+  <span slot="bottom">MIT licensed.</span>
+</cad-footer>
+
+<cad-footer label="Elevated footer" variant="elevated">
+  <div class="footer-brand" slot="brand">
+    <strong>CADERNO UI</strong>
+    <p>Notebook-native components.</p>
+  </div>
+  <cad-footer-group heading="Product">
+    <cad-link href="/components/">Components</cad-link>
+    <cad-link href="/theming/">Theming</cad-link>
+  </cad-footer-group>
+  <span slot="bottom">MIT licensed.</span>
+</cad-footer>
+
+<cad-footer label="Minimal footer" variant="minimal">
+  <div class="footer-brand" slot="brand">
+    <strong>CADERNO UI</strong>
+    <p>Notebook-native components.</p>
+  </div>
+  <cad-footer-group heading="Product">
+    <cad-link href="/components/">Components</cad-link>
+    <cad-link href="/theming/">Theming</cad-link>
+  </cad-footer-group>
+  <span slot="bottom">MIT licensed.</span>
+</cad-footer>`
+---
+
+<DocsLayout
+  description="Group links and supporting information at the bottom of the page. Link groups can collapse on small screens."
+  title="Footer"
+>
+  <header class="page-header" id="top">
+    <p class="eyebrow">&lt;cad-footer&gt; + &lt;cad-footer-group&gt;</p>
+    <h1>Footer</h1>
+    <p>
+      Group links and supporting information at the bottom of the page. Link
+      groups can collapse on small screens.
+    </p>
+  </header>
+
+  <DemoFrame title="Product footer">
+    <cad-footer label="Caderno UI footer" variant="light">
+      <div class="footer-brand" slot="brand">
+        <a class="footer-logo" href="/" aria-label="Caderno UI home">
+          <cad-icon name="book" size="32"></cad-icon>
+          <strong>CADERNO UI</strong>
+        </a>
+        <p>Notebook-native components for products with a human voice.</p>
+        <form class="footer-newsletter" data-footer-newsletter>
+          <label for="footer-email">Get updates, not spam.</label>
+          <div class="footer-newsletter-row">
+            <cad-input
+              id="footer-email"
+              name="email"
+              placeholder="you@example.com"
+              type="email"></cad-input>
+            <cad-button size="sm" type="submit">Join</cad-button>
+          </div>
+        </form>
+      </div>
+
+      <cad-footer-group heading="Product">
+        <cad-link href="/components/">Components</cad-link>
+        <cad-link href="/theming/">Theming</cad-link>
+        <cad-link href="/motion/">Motion</cad-link>
+        <cad-link href="/integrations/">Integrations</cad-link>
+      </cad-footer-group>
+      <cad-footer-group heading="Resources">
+        <cad-link href="/getting-started/">Getting started</cad-link>
+        <cad-link href="/composition/">Composition</cad-link>
+        <cad-link href="/components/code-block/">Code examples</cad-link>
+        <cad-link href="/components/icon/">Icon catalog</cad-link>
+      </cad-footer-group>
+      <cad-footer-group heading="Company">
+        <cad-link href="#about">About</cad-link>
+        <cad-link href="#principles">Principles</cad-link>
+        <cad-link href="#roadmap">Roadmap</cad-link>
+        <cad-link href="#contact">Contact</cad-link>
+      </cad-footer-group>
+      <cad-footer-group heading="Legal">
+        <cad-link href="#privacy">Privacy</cad-link>
+        <cad-link href="#terms">Terms</cad-link>
+        <cad-link href="#security">Security</cad-link>
+        <cad-link href="#licenses">Licenses</cad-link>
+      </cad-footer-group>
+
+      <div class="footer-social" slot="social">
+        <cad-link
+          external
+          href="https://github.com/andrewsrigom/caderno-ui"
+          label="GitHub"
+          variant="plain">GH</cad-link
+        >
+        <cad-link href="#linkedin" label="LinkedIn" variant="plain">in</cad-link
+        >
+        <cad-link href="#youtube" label="YouTube" variant="plain">YT</cad-link>
+      </div>
+      <p class="footer-aside" slot="aside">
+        Built in public.<br />You can too.
+      </p>
+
+      <div class="footer-meta" slot="bottom">
+        <span>© 2026 Caderno UI. MIT licensed.</span>
+        <cad-link href="#language" variant="plain">English (US)</cad-link>
+        <span><i class="footer-status-dot"></i> All systems operational</span>
+      </div>
+      <cad-link href="#top" slot="back-to-top" variant="plain">
+        Back to top
+        <cad-icon
+          class="footer-back-icon"
+          name="arrow-right"
+          size="18"
+          slot="end"></cad-icon>
+      </cad-link>
+    </cad-footer>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    id="footer-variants-title"
+    title="Variants"
+    description="Light is shown above."
+  >
+    <ExampleCard title="Dark" wide>
+      <cad-footer class="gallery-footer" label="Dark footer" variant="dark">
+        <div class="footer-brand" slot="brand">
+          <strong>CADERNO UI</strong>
+          <p>Notebook-native components.</p>
+        </div>
+        <cad-footer-group heading="Product">
+          <cad-link href="/components/">Components</cad-link>
+          <cad-link href="/theming/">Theming</cad-link>
+        </cad-footer-group>
+        <span slot="bottom">MIT licensed.</span>
+      </cad-footer>
+    </ExampleCard>
+    <ExampleCard title="Elevated" wide>
+      <cad-footer
+        class="gallery-footer"
+        label="Elevated footer"
+        variant="elevated"
+      >
+        <div class="footer-brand" slot="brand">
+          <strong>CADERNO UI</strong>
+          <p>Notebook-native components.</p>
+        </div>
+        <cad-footer-group heading="Product">
+          <cad-link href="/components/">Components</cad-link>
+          <cad-link href="/theming/">Theming</cad-link>
+        </cad-footer-group>
+        <span slot="bottom">MIT licensed.</span>
+      </cad-footer>
+    </ExampleCard>
+    <ExampleCard title="Minimal" wide>
+      <cad-footer
+        class="gallery-footer"
+        label="Minimal footer"
+        variant="minimal"
+      >
+        <div class="footer-brand" slot="brand">
+          <strong>CADERNO UI</strong>
+          <p>Notebook-native components.</p>
+        </div>
+        <cad-footer-group heading="Product">
+          <cad-link href="/components/">Components</cad-link>
+          <cad-link href="/theming/">Theming</cad-link>
+        </cad-footer-group>
+        <span slot="bottom">MIT licensed.</span>
+      </cad-footer>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="composition-title">
+    <h2 id="composition-title">Composition</h2>
+    <p>
+      Use <code>cad-footer-group</code> for link groups. Add branding, forms, social
+      links, status, and other content through Footer slots. Your application handles
+      their actions.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="variants-guidance-title">
+    <h2 id="variants-guidance-title">Variants</h2>
+    <p>
+      <code>light</code> is the default. <code>dark</code> uses a dark surface, <code
+        >elevated</code
+      > adds a shadow, and <code>minimal</code> removes the frame and fold.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="responsive-title">
+    <h2 id="responsive-title">Responsive layout</h2>
+    <p>
+      Columns stack as space narrows. At 48rem and below, link groups collapse
+      into toggles while utility links remain visible.
+    </p>
+  </section>
+
+  <ApiReference tagName="cad-footer" />
+  <ApiReference tagName="cad-footer-group" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      The footer contains named navigation regions. Group buttons expose <code
+        >aria-expanded</code
+      > and <code>aria-controls</code>. Collapsed links leave the tab order; all
+      links remain available without JavaScript.
+    </p>
+  </section>
+</DocsLayout>
+
+<style>
+  .footer-brand,
+  .footer-newsletter {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .footer-brand > p,
+  .footer-aside,
+  .footer-meta {
+    margin: 0;
+  }
+
+  .footer-logo,
+  .footer-newsletter-row,
+  .footer-meta,
+  .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .footer-logo {
+    width: fit-content;
+    color: inherit;
+    font-family: var(--cad-font-book);
+    letter-spacing: 0.14em;
+    text-decoration: none;
+  }
+
+  .footer-logo:focus-visible {
+    outline: 1.5px dashed var(--cad-focus-ring);
+    outline-offset: 4px;
+  }
+
+  .footer-newsletter {
+    margin-top: 0.35rem;
+    padding: 0.8rem;
+    border: 1px dashed color-mix(in srgb, var(--cad-link) 38%, transparent);
+  }
+
+  .footer-newsletter-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .footer-newsletter cad-input {
+    min-width: 0;
+  }
+
+  .footer-social cad-link::part(base) {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-family: var(--cad-font-hand);
+  }
+
+  .footer-aside {
+    padding: 0.8rem;
+    background: color-mix(in srgb, var(--cad-post-it-blue-bg) 36%, transparent);
+    border: 1px solid var(--cad-link);
+    font-family: var(--cad-font-hand);
+    transform: rotate(-1deg);
+  }
+
+  .footer-meta {
+    gap: 0.65rem 1.5rem;
+    color: var(--cad-ink-soft);
+    font-size: 0.82rem;
+  }
+
+  .footer-status-dot {
+    display: inline-block;
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-inline-end: 0.35rem;
+    background: var(--cad-success-ink);
+    border-radius: 50%;
+  }
+
+  .footer-back-icon {
+    transform: rotate(-90deg);
+  }
+
+  .gallery-footer {
+    width: 100%;
+  }
+
+  @container (width <= 48rem) {
+    .footer-newsletter-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer-newsletter cad-button {
+      justify-self: start;
+    }
+
+    .footer-meta {
+      display: grid;
+      gap: 0.55rem;
+    }
+  }
+</style>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/footer'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/link'
+
+  document
+    .querySelector('[data-footer-newsletter]')
+    ?.addEventListener('submit', (event) => event.preventDefault())
+</script>

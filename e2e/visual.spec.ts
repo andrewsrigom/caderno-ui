@@ -11,6 +11,15 @@ test.beforeEach(async ({ browserName, page }) => {
       '*, *::before, *::after { animation: none !important; caret-color: transparent !important; transition: none !important; }',
   })
   await page.evaluate(() => document.fonts.ready)
+  await page.locator('*').evaluateAll((elements) => {
+    for (const element of elements) {
+      if (!element.shadowRoot) continue
+      const style = document.createElement('style')
+      style.textContent =
+        '*, *::before, *::after { animation: none !important; caret-color: transparent !important; transition: none !important; }'
+      element.shadowRoot.append(style)
+    }
+  })
 })
 
 for (const theme of ['light', 'dark'] as const) {
@@ -21,6 +30,15 @@ for (const theme of ['light', 'dark'] as const) {
         (element, value) => element.setAttribute('data-theme', value),
         theme,
       )
+    await page.locator('cad-progress:not([value])').evaluateAll((elements) => {
+      for (const element of elements) element.setAttribute('value', '0')
+    })
+    await expect(
+      page.locator('cad-header[data-component="header"]'),
+    ).toHaveScreenshot(`laboratory-header-${theme}.png`, {
+      animations: 'disabled',
+      scale: 'css',
+    })
     const laboratory = page.locator('main')
     await laboratory.evaluate((element) => {
       element.style.height = `${Math.ceil(element.getBoundingClientRect().height)}px`

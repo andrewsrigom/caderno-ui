@@ -9,4 +9,7 @@ export const CadBlockquote = createComponent({
   tagName: 'cad-blockquote',
 })
 
-export type { CadBlockquoteTone } from '@caderno-ui/elements/blockquote'
+export type {
+  CadBlockquoteTone,
+  CadBlockquoteVariant,
+} from '@caderno-ui/elements/blockquote'

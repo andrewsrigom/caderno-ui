@@ -1,6 +1,7 @@
 import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
 
 export type CadInputSize = 'lg' | 'md' | 'sm'
+export type CadInputLayout = 'block' | 'inline'
 export type CadInputTone =
   'blue' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
 export type CadInputType =
@@ -38,6 +39,7 @@ export class CadInput extends LitElement {
     inputMode: { attribute: 'inputmode', type: String },
     invalid: { reflect: true, type: Boolean },
     label: { type: String },
+    layout: { reflect: true, type: String },
     maxLength: { attribute: 'maxlength', type: Number },
     minLength: { attribute: 'minlength', type: Number },
     name: { reflect: true, type: String },
@@ -53,24 +55,23 @@ export class CadInput extends LitElement {
 
   static override styles = css`
     :host {
-      --_input-focus: var(
-        --cad-input-focus,
-        var(--cad-post-it-blue-ink, #18345d)
-      );
+      --_input-focus: var(--cad-input-focus, var(--cad-link, #005bac));
       --_input-line: var(
         --cad-input-line,
-        color-mix(in srgb, var(--_input-focus) 55%, transparent)
+        var(
+          --cad-border-ink,
+          color-mix(in srgb, var(--_input-focus) 72%, transparent)
+        )
       );
       display: block;
       color: var(--cad-ink, #25202a);
+      max-width: 100%;
     }
 
     :host([tone='coral']),
     :host([invalid]) {
-      --_input-focus: var(
-        --cad-input-focus,
-        var(--cad-post-it-coral-ink, #633b32)
-      );
+      --_input-focus: var(--cad-input-focus, var(--cad-danger-ink, #d52f3f));
+      --_input-line: var(--cad-input-line, var(--cad-danger-ink, #d52f3f));
     }
 
     :host([tone='lemon']) {
@@ -104,15 +105,21 @@ export class CadInput extends LitElement {
     .base {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: 0.35rem;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    :host([layout='inline']) .base {
+      grid-template-columns: minmax(4.75rem, auto) minmax(0, 1fr);
+      column-gap: 1rem;
     }
 
     .label {
       color: var(--_input-focus);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
-      letter-spacing: 0.02em;
+      font-family: var(--cad-type-label-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-label-size, var(--cad-hand-sm, 1.05rem));
+      font-weight: var(--cad-hand-weight-regular, 500);
+      letter-spacing: 0;
     }
 
     .required {
@@ -121,28 +128,64 @@ export class CadInput extends LitElement {
     }
 
     .field {
+      position: relative;
       display: flex;
-      gap: 0.4rem;
-      align-items: baseline;
-      padding: 0.3rem 0.15rem 0.55rem;
-      background-image: repeating-linear-gradient(
-        90deg,
-        var(--_input-line) 0,
-        var(--_input-line) 5px,
-        transparent 5px,
-        transparent 10px
-      );
-      background-repeat: no-repeat;
-      background-position: 0 100%;
-      background-size: 100% 1.5px;
+      gap: 0.55rem;
+      align-items: center;
+      min-height: 2.55rem;
+      padding: 0.42rem 0.72rem 0.48rem;
+      background: var(--cad-surface, #fff);
+      border: var(--cad-border-width, 1.5px) var(--cad-border-style, dashed)
+        var(--_input-line);
+      border-radius: 0;
+      box-shadow: 0.3px 0.5px 0
+        color-mix(in srgb, var(--_input-line) 26%, transparent);
+      transform: rotate(-0.08deg);
+      transition: border-color var(--cad-duration-fast, 140ms) ease;
     }
 
     .field:focus-within {
-      background-image: linear-gradient(
-        90deg,
-        var(--_input-focus),
-        var(--_input-focus)
-      );
+      border-color: var(--_input-focus);
+      box-shadow: 0.4px 0.6px 0
+        color-mix(in srgb, var(--_input-focus) 28%, transparent);
+    }
+
+    .field::after {
+      position: absolute;
+      top: 50%;
+      right: -1.55rem;
+      width: 1rem;
+      height: 1.5rem;
+      background:
+        linear-gradient(
+            18deg,
+            transparent 45%,
+            var(--_input-focus) 47% 54%,
+            transparent 56%
+          )
+          0 0 / 0.72rem 0.42rem no-repeat,
+        linear-gradient(
+            90deg,
+            transparent 44%,
+            var(--_input-focus) 46% 54%,
+            transparent 56%
+          )
+          0 50% / 0.82rem 0.42rem no-repeat,
+        linear-gradient(
+            162deg,
+            transparent 45%,
+            var(--_input-focus) 47% 54%,
+            transparent 56%
+          )
+          0 100% / 0.72rem 0.42rem no-repeat;
+      content: '';
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+
+    .field:focus-within::after {
+      opacity: 1;
     }
 
     .control {
@@ -154,8 +197,8 @@ export class CadInput extends LitElement {
       background: transparent;
       border: 0;
       font: inherit;
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-md, 1.2rem);
+      font-family: var(--cad-type-control-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-label-size, var(--cad-hand-sm, 1.05rem));
       line-height: 1.35;
     }
 
@@ -173,7 +216,7 @@ export class CadInput extends LitElement {
         var(--cad-ink-muted, currentColor) 78%,
         transparent
       );
-      font-style: italic;
+      font-style: normal;
     }
 
     .control:focus {
@@ -181,9 +224,7 @@ export class CadInput extends LitElement {
     }
 
     .control:focus-visible {
-      border-radius: 0.2rem;
-      outline: 2px dashed var(--cad-focus-ring, var(--_input-focus));
-      outline-offset: 4px;
+      outline: none;
     }
 
     .control:disabled {
@@ -194,19 +235,77 @@ export class CadInput extends LitElement {
     .hint {
       margin: 0;
       color: var(--cad-ink-muted, currentColor);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-      line-height: 1.3;
+      font-family: var(--cad-type-meta-font, var(--cad-font-book, serif));
+      font-size: var(--cad-type-meta-size, 0.82rem);
+      line-height: var(--cad-type-meta-line-height, 1.45);
     }
 
+    :host([layout='inline']) .hint {
+      grid-column: 2;
+    }
+
+    :host([tone='coral']) .hint,
     :host([invalid]) .hint {
-      color: var(--cad-post-it-coral-ink, #633b32);
+      color: var(--cad-danger-ink, #bd1f32);
+    }
+
+    :host([tone='coral']) .label,
+    :host([invalid]) .label {
+      color: var(--cad-danger-ink, #bd1f32);
+    }
+
+    .status {
+      position: relative;
+      flex: 0 0 1rem;
+      width: 1rem;
+      height: 1rem;
+      color: var(--cad-danger-ink, #d52f3f);
+    }
+
+    .status::before,
+    .status::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 1rem;
+      height: 1.5px;
+      background: currentColor;
+      content: '';
+    }
+
+    .status::before {
+      transform: rotate(47deg);
+    }
+
+    .status::after {
+      transform: rotate(-44deg);
+    }
+
+    @media (max-width: 34rem) {
+      :host([layout='inline']) .base {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      :host([layout='inline']) .hint {
+        grid-column: 1;
+      }
+
+      .field::after {
+        right: -1.1rem;
+        transform: translateY(-50%) scale(0.75);
+      }
     }
 
     @media (forced-colors: active) {
       .field {
         border-bottom: 1px solid CanvasText;
         background: none;
+      }
+
+      .label,
+      .hint,
+      .status {
+        color: CanvasText;
       }
     }
   `
@@ -218,6 +317,7 @@ export class CadInput extends LitElement {
   declare inputMode: string
   declare invalid: boolean
   declare label: string
+  declare layout: CadInputLayout
   declare maxLength: number
   declare minLength: number
   declare name: string
@@ -245,6 +345,7 @@ export class CadInput extends LitElement {
     this.inputMode = ''
     this.invalid = false
     this.label = ''
+    this.layout = 'block'
     this.maxLength = -1
     this.minLength = -1
     this.name = ''
@@ -369,6 +470,7 @@ export class CadInput extends LitElement {
             @change=${this.handleChange}
             @input=${this.handleInput}
           />
+          ${this.invalid ? html`<span aria-hidden="true" class="status"></span>` : nothing}
         </div>
         ${
           message

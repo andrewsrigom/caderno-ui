@@ -2,44 +2,83 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
+import Table from '@caderno-ui/astro/Table.astro'
 
-const usage = `<cad-table caption="Interview preparation" min-width="38rem" zebra>
+const usage = `<cad-table caption="Interview notes — week 34" min-width="40rem">
   <cad-table-column key="chapter" label="Chapter"></cad-table-column>
   <cad-table-column key="status" label="Status"></cad-table-column>
+  <cad-table-column key="owner" label="Owner"></cad-table-column>
   <cad-table-column key="minutes" label="Est. minutes"></cad-table-column>
 
   <cad-table-row>
     <cad-table-cell column="chapter">System design fundamentals</cad-table-cell>
     <cad-table-cell column="status">In review</cad-table-cell>
+    <cad-table-cell column="owner">Andrews</cad-table-cell>
     <cad-table-cell column="minutes">45</cad-table-cell>
+  </cad-table-row>
+  <cad-table-row>
+    <cad-table-cell column="chapter">Behavioral story bank</cad-table-cell>
+    <cad-table-cell column="status">Ready</cad-table-cell>
+    <cad-table-cell column="owner">Andrews</cad-table-cell>
+    <cad-table-cell column="minutes">30</cad-table-cell>
+  </cad-table-row>
+  <cad-table-row>
+    <cad-table-cell column="chapter">Concurrency trade-offs</cad-table-cell>
+    <cad-table-cell column="status">Planned</cad-table-cell>
+    <cad-table-cell column="owner">—</cad-table-cell>
+    <cad-table-cell column="minutes">60</cad-table-cell>
   </cad-table-row>
 </cad-table>
 
 <script type="module">
   import '@caderno-ui/elements/table'
 </script>`
+
+const variantsUsage = `<cad-table caption="Review queue" density="compact" min-width="20rem" variant="ruled">
+  <cad-table-column key="note" label="Note"></cad-table-column>
+  <cad-table-column key="status" label="Status"></cad-table-column>
+  <cad-table-row>
+    <cad-table-cell column="note">Caching trade-offs</cad-table-cell>
+    <cad-table-cell column="status">Ready</cad-table-cell>
+  </cad-table-row>
+  <cad-table-row>
+    <cad-table-cell column="note">Queue semantics</cad-table-cell>
+    <cad-table-cell column="status">Draft</cad-table-cell>
+  </cad-table-row>
+</cad-table>
+
+<cad-table caption="Release owners" min-width="20rem" variant="grid" zebra>
+  <cad-table-column key="package" label="Package"></cad-table-column>
+  <cad-table-column key="owner" label="Owner"></cad-table-column>
+  <cad-table-row>
+    <cad-table-cell column="package">Elements</cad-table-cell>
+    <cad-table-cell column="owner">Andrews</cad-table-cell>
+  </cad-table-row>
+  <cad-table-row>
+    <cad-table-cell column="package">Astro</cad-table-cell>
+    <cad-table-cell column="owner">Andrews</cad-table-cell>
+  </cad-table-row>
+</cad-table>`
 ---
 
 <DocsLayout
-  description="Responsive native data tables with declarative columns, rows, and notebook variants."
+  description="Display rows and columns in a handwritten style. Wide tables scroll horizontally."
   title="Table"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-table&gt; family</p>
-    <h1>Structured evidence that remains a real table.</h1>
+    <h1>Table</h1>
     <p>
-      Table turns declarative column and row children into native table
-      semantics, keeps wide datasets scrollable, and covers both grid and ruled
-      notebook treatments without duplicating an implementation.
+      Display rows and columns in a handwritten style. Wide tables scroll
+      horizontally.
     </p>
   </header>
 
-  <DemoFrame
-    title="Interview preparation tracker"
-    description="A realistic dataset with scan-friendly status and numeric columns."
-  >
-    <cad-table caption="Interview preparation" min-width="40rem" zebra>
+  <DemoFrame title="Interview preparation tracker">
+    <cad-table caption="Interview notes — week 34" min-width="40rem">
       <cad-table-column key="chapter" label="Chapter"></cad-table-column>
       <cad-table-column key="status" label="Status"></cad-table-column>
       <cad-table-column key="owner" label="Owner"></cad-table-column>
@@ -69,39 +108,123 @@ const usage = `<cad-table caption="Interview preparation" min-width="38rem" zebr
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
-  <DemoFrame
-    title="Ruled comparison notes"
-    description="The same semantic component can use a lighter notebook treatment."
+  <ExampleGallery
+    id="table-variants-title"
+    title="Density and row styles"
+    description="Ruled removes vertical lines. Zebra alternates row backgrounds."
   >
-    <cad-table caption="Storage trade-offs" variant="ruled">
-      <cad-table-column key="option" label="Option"></cad-table-column>
-      <cad-table-column key="strength" label="Best when"></cad-table-column>
-      <cad-table-column key="cost" label="Trade-off"></cad-table-column>
-      <cad-table-row>
-        <cad-table-cell column="option">Relational database</cad-table-cell>
-        <cad-table-cell column="strength"
-          >Integrity and rich queries matter</cad-table-cell
-        >
-        <cad-table-cell column="cost">Schema coordination</cad-table-cell>
-      </cad-table-row>
-      <cad-table-row>
-        <cad-table-cell column="option">Document store</cad-table-cell>
-        <cad-table-cell column="strength"
-          >Aggregate shape changes often</cad-table-cell
-        >
-        <cad-table-cell column="cost">Cross-document guarantees</cad-table-cell>
-      </cad-table-row>
-    </cad-table>
-  </DemoFrame>
+    <ExampleCard title="Compact · ruled">
+      <cad-table
+        class="gallery-table"
+        caption="Review queue"
+        density="compact"
+        min-width="20rem"
+        variant="ruled"
+      >
+        <cad-table-column key="note" label="Note"></cad-table-column>
+        <cad-table-column key="status" label="Status"></cad-table-column>
+        <cad-table-row>
+          <cad-table-cell column="note">Caching trade-offs</cad-table-cell>
+          <cad-table-cell column="status">Ready</cad-table-cell>
+        </cad-table-row>
+        <cad-table-row>
+          <cad-table-cell column="note">Queue semantics</cad-table-cell>
+          <cad-table-cell column="status">Draft</cad-table-cell>
+        </cad-table-row>
+      </cad-table>
+    </ExampleCard>
+    <ExampleCard title="Regular · zebra grid">
+      <cad-table
+        class="gallery-table"
+        caption="Release owners"
+        min-width="20rem"
+        variant="grid"
+        zebra
+      >
+        <cad-table-column key="package" label="Package"></cad-table-column>
+        <cad-table-column key="owner" label="Owner"></cad-table-column>
+        <cad-table-row>
+          <cad-table-cell column="package">Elements</cad-table-cell>
+          <cad-table-cell column="owner">Andrews</cad-table-cell>
+        </cad-table-row>
+        <cad-table-row>
+          <cad-table-cell column="package">Astro</cad-table-cell>
+          <cad-table-cell column="owner">Andrews</cad-table-cell>
+        </cad-table-row>
+      </cad-table>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="technical-data-title">
+    <h2 id="technical-data-title">Technical data</h2>
+    <p>
+      Use <code>typography="body"</code> for dense data and <code
+        >format="code"</code
+      > on columns containing identifiers.
+    </p>
+    <Table
+      caption="Configuration"
+      typography="body"
+      density="compact"
+      variant="ruled"
+      columns={[
+        { key: 'name', label: 'Property', format: 'code' },
+        { key: 'type', label: 'Type', format: 'code' },
+        { key: 'description', label: 'Purpose' },
+      ]}
+      rows={[
+        {
+          name: 'copyable',
+          type: 'boolean',
+          description: 'Show a copy button.',
+        },
+        {
+          name: 'copy-label',
+          type: 'string',
+          description: 'Set the copy button label.',
+        },
+      ]}
+    />
+    <CodeBlock
+      collapsible
+      language="html"
+      code={`<cad-table caption="Configuration" typography="body" density="compact" variant="ruled">
+  <cad-table-column key="name" label="Property" format="code"></cad-table-column>
+  <cad-table-column key="type" label="Type" format="code"></cad-table-column>
+  <cad-table-column key="description" label="Purpose"></cad-table-column>
+  <cad-table-row>
+    <cad-table-cell column="name">copyable</cad-table-cell>
+    <cad-table-cell column="type">boolean</cad-table-cell>
+    <cad-table-cell column="description">Show a copy button.</cad-table-cell>
+  </cad-table-row>
+  <cad-table-row>
+    <cad-table-cell column="name">copy-label</cad-table-cell>
+    <cad-table-cell column="type">string</cad-table-cell>
+    <cad-table-cell column="description">Set the copy button label.</cad-table-cell>
+  </cad-table-row>
+</cad-table>
+
+<script type="module">
+  import '@caderno-ui/elements/table'
+</script>`}
+    />
+  </section>
 
   <ApiReference tagName="cad-table" />
+
+  <style>
+    .gallery-table {
+      width: 100%;
+    }
+  </style>
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Provide a concise caption that identifies the dataset. Column keys connect
-      declarative cells to native scoped headers; the visual overflow container
-      preserves the table rather than replacing it with non-semantic cards.
+      Provide a caption that names the data. Column keys connect cells to their
+      headers. Wide tables scroll without changing the table structure. Focus
+      the table to scroll with the arrow keys.
     </p>
   </section>
 </DocsLayout>

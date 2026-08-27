@@ -4,60 +4,171 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-toast-host label="Notifications"></cad-toast-host>
+const usage = `<cad-toast-host
+  id="app-toaster"
+  max-visible="3"
+  placement="top-right"
+></cad-toast-host>
 
 <script type="module">
-  import '@caderno-ui/elements/toast'
+  import { toast } from '@caderno-ui/elements/toast'
 
-  document.querySelector('cad-toast-host').show({
-    heading: 'Published',
-    message: 'The component contract is public.',
-    variant: 'success'
+  toast.success('Changes saved successfully.', {
+    description: 'The review is ready for the team.',
+    hostId: 'app-toaster'
+  })
+
+  toast.promise(publishReview(), {
+    hostId: 'app-toaster',
+    loading: 'Publishing review...',
+    success: ({ version }) => \`\${version} published.\`,
+    successDescription: 'The public contract is now available.',
+    error: 'Could not publish the review.'
+  })
+
+  toast.accent('Draft saved.', {
+    action: {
+      label: 'View draft',
+      onClick: () => openDraft()
+    },
+    description: 'You can continue editing anytime.',
+    hostId: 'app-toaster'
   })
 </script>`
 ---
 
 <DocsLayout
-  description="CadToast and CadToastHost provide safe, named notifications with composed dismissal events."
+  description="Show a temporary notification. Call toast() for messages, actions, loading states, and promise results."
   title="Toast"
 >
   <header class="page-header">
-    <p class="eyebrow">&lt;cad-toast&gt; · &lt;cad-toast-host&gt;</p>
-    <h1>Announce the outcome and let the reader dismiss it.</h1>
+    <p class="eyebrow">&lt;cad-toast&gt; · toast()</p>
+    <h1>Toast</h1>
     <p>
-      Render a toast declaratively or ask a host to create one from plain text.
-      Timers pause while the notification is hovered or focused.
+      Show a temporary notification. Call toast() for messages, actions, loading
+      states, and promise results.
     </p>
   </header>
 
-  <DemoFrame title="Notification variants">
-    <div class="toast-stack">
-      <cad-toast heading="Contract saved" variant="success">
-        The review is available to the whole team.
-      </cad-toast>
-      <cad-toast heading="Check the trade-off" variant="warning">
-        The bundle grew beyond the previous baseline.
-      </cad-toast>
+  <DemoFrame title="Try notifications">
+    <div class="toast-controls">
+      <cad-button data-toast-success type="button">Success</cad-button>
+      <cad-button data-toast-promise type="button" variant="secondary">
+        Promise
+      </cad-button>
+      <cad-button data-toast-action type="button" variant="secondary">
+        With action
+      </cad-button>
+      <cad-button
+        data-toast-error
+        tone="coral"
+        type="button"
+        variant="secondary"
+      >
+        Error
+      </cad-button>
+      <cad-button data-toast-dismiss type="button" variant="link">
+        Dismiss all
+      </cad-button>
     </div>
+    <cad-toast-host
+      id="docs-toaster"
+      label="Example notifications"
+      max-visible="3"
+      placement="top-right"></cad-toast-host>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="controller-title">
+    <h2 id="controller-title">Toast API</h2>
+    <p>
+      Use <code>toast.success()</code>, <code>toast.info()</code>, <code
+        >toast.warning()</code
+      >, <code>toast.error()</code>, or <code>toast.neutral()</code> for status messages.
+      <code>toast.loading()</code> returns an id for <code>toast.update()</code
+      >. <code>toast.promise()</code> follows an asynchronous result. Set actions
+      and placement in the options, or close notifications with <code
+        >toast.dismiss()</code
+      >.
+    </p>
+    <p>
+      React can import the same API from <code>@caderno-ui/react/toast</code>.
+      No provider is required.
+    </p>
+  </section>
+
   <ApiReference tagName="cad-toast" />
   <ApiReference tagName="cad-toast-host" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Information uses a polite status; danger uses an assertive alert. Set
-      <code>duration="0"</code> for persistent content and avoid timing critical actions
-      inside notifications.
+      Informational messages use polite announcements; errors use alerts. Timers
+      pause on hover or focus. Persistent notifications stay dismissible, with
+      named close buttons.
     </p>
   </section>
 
   <style>
-    .toast-stack {
-      display: grid;
-      gap: 1rem;
-      justify-items: start;
+    .toast-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import { toast } from '@caderno-ui/elements/toast'
+
+  const hostId = 'docs-toaster'
+  const select = (selector: string) => document.querySelector(selector)
+
+  select('[data-toast-success]')?.addEventListener('click', () => {
+    toast.success('Changes saved successfully.', {
+      description: 'The review is ready for the team.',
+      hostId,
+    })
+  })
+
+  select('[data-toast-promise]')?.addEventListener('click', () => {
+    toast.promise(
+      new Promise<{ version: string }>((resolve) => {
+        window.setTimeout(() => resolve({ version: 'v0.4' }), 1200)
+      }),
+      {
+        error: 'Could not publish the review.',
+        hostId,
+        loading: 'Publishing review...',
+        success: ({ version }) => `${version} published.`,
+        successDescription: 'The public contract is now available.',
+      },
+    )
+  })
+
+  select('[data-toast-action]')?.addEventListener('click', () => {
+    toast.accent('Draft saved.', {
+      action: {
+        label: 'View draft',
+        onClick: () => {
+          toast.info('Draft opened.', { hostId })
+        },
+      },
+      description: 'You can continue editing anytime.',
+      hostId,
+    })
+  })
+
+  select('[data-toast-error]')?.addEventListener('click', () => {
+    toast.error('Failed to save changes.', {
+      description: 'Check the connection and try again.',
+      hostId,
+    })
+  })
+
+  select('[data-toast-dismiss]')?.addEventListener('click', () => {
+    toast.dismiss(undefined, { hostId })
+  })
+</script>

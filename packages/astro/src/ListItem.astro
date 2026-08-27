@@ -1,0 +1,39 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = {
+  class?: string
+  current?: boolean
+  disabled?: boolean
+  href?: string
+  rel?: string
+  target?: string
+  value?: string
+}
+
+const {
+  class: className,
+  current = false,
+  disabled = false,
+  href,
+  rel,
+  target,
+  value,
+} = Astro.props
+---
+
+<cad-list-item
+  class={className}
+  current={current}
+  disabled={disabled}
+  href={href}
+  rel={rel}
+  target={target}
+  value={value}
+>
+  <slot />
+</cad-list-item>
+
+<script>
+  import '@caderno-ui/elements/list'
+</script>

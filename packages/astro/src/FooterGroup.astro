@@ -1,0 +1,27 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+type Props = {
+  class?: string
+  heading: string
+  open?: boolean
+}
+
+const { class: className, heading, open = false } = Astro.props
+const hasHeading = Astro.slots.has('heading')
+---
+
+<cad-footer-group class={className} heading={heading} open={open}>
+  {
+    hasHeading && (
+      <Fragment slot="heading">
+        <slot name="heading" />
+      </Fragment>
+    )
+  }
+  <slot />
+</cad-footer-group>
+
+<script>
+  import '@caderno-ui/elements/footer'
+</script>

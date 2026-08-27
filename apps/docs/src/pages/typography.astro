@@ -1,0 +1,287 @@
+---
+import CodeBlock from '../components/CodeBlock.astro'
+import DemoFrame from '../components/DemoFrame.astro'
+import ExampleCard from '../components/ExampleCard.astro'
+import ExampleGallery from '../components/ExampleGallery.astro'
+import DocsLayout from '../layouts/DocsLayout.astro'
+
+const tokensUsage = `/* One reading family, one handwritten emphasis family, one code family. */
+.page-title {
+  font: 700 var(--cad-type-display-size) / var(--cad-type-display-line-height)
+    var(--cad-type-display-font);
+}
+
+.component-title {
+  font: var(--cad-hand-weight-strong) var(--cad-type-title-size) /
+    var(--cad-type-title-line-height) var(--cad-type-title-font);
+}
+
+.body-copy {
+  font: var(--cad-type-body-size) / var(--cad-type-body-line-height)
+    var(--cad-type-body-font);
+}
+
+.metadata {
+  font: var(--cad-type-meta-size) / var(--cad-type-meta-line-height)
+    var(--cad-type-meta-font);
+}
+
+code {
+  font-family: var(--cad-type-code-font);
+  font-size: var(--cad-type-code-size);
+}`
+
+const listUsage = `<cad-list label="Architecture topics">
+  <cad-list-item href="#latency">Query latency</cad-list-item>
+  <cad-list-item current href="#indexing">Search indexing</cad-list-item>
+  <cad-list-item href="#recovery">Failure recovery</cad-list-item>
+</cad-list>
+
+<cad-list label="Decision sequence" variant="numbered">
+  <cad-list-item>Frame the question</cad-list-item>
+  <cad-list-item current>Compare the evidence</cad-list-item>
+  <cad-list-item>Record the decision</cad-list-item>
+</cad-list>`
+---
+
+<DocsLayout
+  description="Shared fonts, text sizes, and list styles for Caderno UI."
+  title="Typography"
+>
+  <header class="page-header">
+    <h1>Typography</h1>
+    <p>
+      Three font families: one for reading and UI, one for handwritten labels
+      and emphasis, and one for code.
+    </p>
+  </header>
+
+  <section class="content-section" aria-labelledby="font-families-title">
+    <h2 id="font-families-title">Font families</h2>
+    <ul>
+      <li>
+        <code>--cad-font-text</code>: body text and UI. <code
+          >--cad-font-ui</code
+        > and <code>--cad-font-book</code> are aliases.
+      </li>
+      <li>
+        <code>--cad-font-hand</code>: annotations, labels, and component titles.
+      </li>
+      <li><code>--cad-font-mono</code>: code and technical values.</li>
+    </ul>
+    <p>
+      The theme defines font stacks, not font files. Load your chosen fonts in
+      the application to keep the appearance consistent across devices.
+    </p>
+  </section>
+
+  <DemoFrame
+    title="Typographic roles"
+    description="Use these tokens in components and page content."
+  >
+    <div class="type-specimens">
+      <div class="type-specimen type-display">
+        <span>Display</span>
+        <p>Search indexing strategy</p>
+      </div>
+      <div class="type-specimen type-heading">
+        <span>Section heading</span>
+        <p>Evidence before implementation</p>
+      </div>
+      <div class="type-specimen type-title">
+        <span>Component title</span>
+        <p>Query latency by option</p>
+      </div>
+      <div class="type-specimen type-label">
+        <span>Label and emphasis</span>
+        <p>Review confidence</p>
+      </div>
+      <div class="type-specimen type-body">
+        <span>Body and UI</span>
+        <p>
+          Compare query speed, storage cost, and recovery time before choosing
+          an index.
+        </p>
+      </div>
+      <div class="type-specimen type-meta">
+        <span>Metadata</span>
+        <p>Updated today · 6 minutes to review</p>
+      </div>
+      <div class="type-specimen type-code">
+        <span>Code</span>
+        <p><code>latencyP95 &lt; 100</code></p>
+      </div>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={tokensUsage} collapsible language="css" />
+
+  <ExampleGallery
+    id="structured-lists-title"
+    title="Lists"
+    description="Use bullets to group related items and numbers to show order."
+  >
+    <ExampleCard title="Bullet list">
+      <cad-list label="Architecture topics">
+        <cad-list-item href="#latency">Query latency</cad-list-item>
+        <cad-list-item current href="#indexing">Search indexing</cad-list-item>
+        <cad-list-item href="#recovery">Failure recovery</cad-list-item>
+      </cad-list>
+    </ExampleCard>
+    <ExampleCard title="Numbered list">
+      <cad-list label="Decision sequence" variant="numbered">
+        <cad-list-item>Frame the question</cad-list-item>
+        <cad-list-item current>Compare the evidence</cad-list-item>
+        <cad-list-item>Record the decision</cad-list-item>
+      </cad-list>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={listUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="stroke-title">
+    <h2 id="stroke-title">Borders and underlines</h2>
+    <div class="stroke-grid">
+      <div class="stroke-sample dashed">
+        <strong>Dashed blue</strong>
+        <span>Frames, fields, selection, and keyboard focus.</span>
+      </div>
+      <div class="stroke-sample solid">
+        <strong>Solid blue</strong>
+        <span>Action buttons.</span>
+      </div>
+      <div class="stroke-sample underline">
+        <strong>Coral underline</strong>
+        <span>Links and breadcrumb links.</span>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .type-specimens {
+      display: grid;
+      width: 100%;
+      gap: 0;
+    }
+
+    .type-specimen {
+      display: grid;
+      grid-template-columns: minmax(8.5rem, 0.3fr) minmax(0, 1fr);
+      gap: 1rem;
+      align-items: baseline;
+      padding-block: 1rem;
+      border-bottom: var(--cad-frame-border-subtle);
+    }
+
+    .type-specimen:last-child {
+      border-bottom: 0;
+    }
+
+    .type-specimen > span {
+      color: var(--cad-ink-muted);
+      font: var(--cad-type-meta-size) / var(--cad-type-meta-line-height)
+        var(--cad-type-meta-font);
+    }
+
+    .type-specimen p {
+      margin: 0;
+    }
+
+    .type-display p {
+      font-family: var(--cad-type-display-font);
+      font-size: clamp(2.25rem, 6vw, 4.25rem);
+      font-weight: 700;
+      line-height: var(--cad-type-display-line-height);
+      letter-spacing: -0.04em;
+    }
+
+    .type-heading p {
+      font-family: var(--cad-type-heading-font);
+      font-size: var(--cad-type-heading-size);
+      font-weight: 700;
+      line-height: var(--cad-type-heading-line-height);
+    }
+
+    .type-title p {
+      color: var(--cad-link);
+      font-family: var(--cad-type-title-font);
+      font-size: var(--cad-type-title-size);
+      font-weight: var(--cad-hand-weight-strong);
+      line-height: var(--cad-type-title-line-height);
+    }
+
+    .type-label p {
+      color: var(--cad-link);
+      font-family: var(--cad-type-label-font);
+      font-size: var(--cad-type-label-size);
+      font-weight: var(--cad-hand-weight-strong);
+    }
+
+    .type-body p {
+      max-width: 58ch;
+      font: var(--cad-type-body-size) / var(--cad-type-body-line-height)
+        var(--cad-type-body-font);
+    }
+
+    .type-meta p {
+      color: var(--cad-ink-muted);
+      font: var(--cad-type-meta-size) / var(--cad-type-meta-line-height)
+        var(--cad-type-meta-font);
+    }
+
+    .type-code code {
+      font-family: var(--cad-type-code-font);
+      font-size: var(--cad-type-code-size);
+    }
+
+    .stroke-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .stroke-sample {
+      position: relative;
+      display: grid;
+      gap: 0.35rem;
+      min-height: 8rem;
+      align-content: center;
+      padding: 1.1rem;
+      color: var(--cad-link);
+      background: var(--cad-surface);
+    }
+
+    .stroke-sample strong {
+      font-family: var(--cad-type-title-font);
+      font-size: var(--cad-type-label-size);
+    }
+
+    .stroke-sample span {
+      color: var(--cad-ink-muted);
+      font-family: var(--cad-type-meta-font);
+      font-size: var(--cad-type-meta-size);
+    }
+
+    .stroke-sample.dashed {
+      border: var(--cad-frame-border);
+    }
+
+    .stroke-sample.solid {
+      border: var(--cad-border-width) solid var(--cad-border-ink);
+    }
+
+    .stroke-sample.underline {
+      border-bottom: 3px solid var(--cad-link-mark);
+    }
+
+    @media (width <= 44rem) {
+      .type-specimen,
+      .stroke-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/list'
+</script>

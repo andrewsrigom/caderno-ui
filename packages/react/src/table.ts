@@ -36,6 +36,8 @@ export const CadTableCell = createComponent({
 })
 
 export type {
+  CadTableColumnFormat,
   CadTableDensity,
+  CadTableTypography,
   CadTableVariant,
 } from '@caderno-ui/elements/table'

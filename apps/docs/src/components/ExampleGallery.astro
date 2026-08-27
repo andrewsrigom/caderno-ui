@@ -1,0 +1,81 @@
+---
+type Props = {
+  columns?: 2 | 3
+  description?: string
+  id: string
+  label?: string
+  title: string
+}
+
+const { columns = 2, description, id, label, title } = Astro.props
+---
+
+<section aria-labelledby={id} class="example-gallery content-section">
+  <header class="example-gallery__header">
+    {label && <p class="example-gallery__label">{label}</p>}
+    <h2 id={id}>{title}</h2>
+    {description && <p>{description}</p>}
+  </header>
+  <div class:list={['example-gallery__grid', `columns-${columns}`]}>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .example-gallery {
+    margin-block: 4rem 3rem;
+  }
+
+  .example-gallery__header {
+    max-width: 50rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .example-gallery__label,
+  .example-gallery__header h2,
+  .example-gallery__header p {
+    margin: 0;
+  }
+
+  .example-gallery__label {
+    color: var(--cad-link);
+    font-family: var(--cad-type-label-font);
+    font-size: var(--cad-type-control-size);
+    font-weight: var(--cad-hand-weight-strong);
+  }
+
+  .example-gallery__header h2 {
+    font-family: var(--cad-type-heading-font);
+    font-size: var(--cad-type-heading-size);
+    letter-spacing: -0.03em;
+  }
+
+  .example-gallery__header > p:last-child:not(.example-gallery__label) {
+    max-width: 64ch;
+    margin-top: 0.45rem;
+    color: var(--cad-ink-soft);
+  }
+
+  .example-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .example-gallery__grid.columns-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (width <= 58rem) {
+    .example-gallery__grid.columns-3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (width <= 42rem) {
+    .example-gallery__grid,
+    .example-gallery__grid.columns-3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

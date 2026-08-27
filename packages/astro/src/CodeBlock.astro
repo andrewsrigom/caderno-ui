@@ -5,6 +5,10 @@ import type { CadCodeBlockTone } from '@caderno-ui/elements/code-block'
 type Props = {
   class?: string
   code?: string
+  copyable?: boolean
+  copyLabel?: string
+  copiedLabel?: string
+  copyErrorLabel?: string
   filename?: string
   language?: string
   showLineNumbers?: boolean
@@ -14,6 +18,10 @@ type Props = {
 const {
   class: className,
   code,
+  copyable = false,
+  copyLabel,
+  copiedLabel,
+  copyErrorLabel,
   filename,
   language,
   showLineNumbers = false,
@@ -24,11 +32,24 @@ const {
 <cad-code-block
   class={className}
   code={code}
+  copyable={copyable || undefined}
+  copy-label={copyLabel}
+  copied-label={copiedLabel}
+  copy-error-label={copyErrorLabel}
   filename={filename}
   language={language}
   show-line-numbers={showLineNumbers || undefined}
-  tone={tone}><slot /></cad-code-block
+  tone={tone}
 >
+  <slot />
+  {
+    Astro.slots.has('actions') && (
+      <span slot="actions">
+        <slot name="actions" />
+      </span>
+    )
+  }
+</cad-code-block>
 
 <script>
   import '@caderno-ui/elements/code-block'

@@ -1,4 +1,5 @@
 ---
+import CodeSample from '@caderno-ui/astro/CodeBlock.astro'
 type Props = {
   code: string
   collapsible?: boolean
@@ -20,37 +21,43 @@ const {
 
 {
   collapsible ? (
-    <details class="code-disclosure" open={open}>
-      <summary>
-        <span class="when-closed">Show code</span>
-        <span class="when-open">Hide code</span>
-        <small>{language}</small>
-      </summary>
-      <div class="code-block">
-        <cad-code-block
-          code={code}
-          filename={filename}
-          language={language}
-          show-line-numbers={showLineNumbers || undefined}
-        >
-          <button data-copy-code slot="actions" type="button">
-            Copy
-          </button>
-        </cad-code-block>
-      </div>
-    </details>
-  ) : (
-    <div class="code-block">
-      <cad-code-block
+    <cad-accordion-item
+      class="code-disclosure"
+      data-code-disclosure
+      heading={open ? 'Hide code' : 'Show code'}
+      open={open || undefined}
+      animation="none"
+    >
+      <CodeSample
         code={code}
         filename={filename}
         language={language}
-        show-line-numbers={showLineNumbers || undefined}
-      >
-        <button data-copy-code slot="actions" type="button">
-          Copy
-        </button>
-      </cad-code-block>
+        showLineNumbers={showLineNumbers}
+        copyable
+      />
+    </cad-accordion-item>
+  ) : (
+    <div class="code-block">
+      <CodeSample
+        code={code}
+        filename={filename}
+        language={language}
+        showLineNumbers={showLineNumbers}
+        copyable
+      />
     </div>
   )
 }
+
+<script>
+  import '@caderno-ui/elements/accordion'
+  import type { CadAccordionItem } from '@caderno-ui/elements/accordion'
+
+  for (const disclosure of document.querySelectorAll<CadAccordionItem>(
+    '[data-code-disclosure]',
+  )) {
+    disclosure.addEventListener('cad-accordion-toggle', () => {
+      disclosure.heading = disclosure.open ? 'Hide code' : 'Show code'
+    })
+  }
+</script>

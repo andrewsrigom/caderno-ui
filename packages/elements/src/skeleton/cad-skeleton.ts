@@ -27,6 +27,12 @@ export class CadSkeleton extends LitElement {
 
   static override styles = css`
     :host {
+      --_skeleton-ink: var(--cad-skeleton-bg, var(--cad-link, #005bac));
+      --_skeleton-wash: color-mix(
+        in srgb,
+        var(--_skeleton-ink) 8%,
+        transparent
+      );
       display: block;
       min-width: 0;
     }
@@ -49,16 +55,34 @@ export class CadSkeleton extends LitElement {
       width: 100%;
       height: var(--cad-skeleton-height, 6rem);
       overflow: hidden;
-      background: var(
-        --cad-skeleton-bg,
-        color-mix(in srgb, var(--cad-ink, #162033) 13%, transparent)
-      );
-      border-radius: var(--cad-skeleton-radius, 0.65rem 0.8rem 0.7rem 0.75rem);
+      background:
+        repeating-linear-gradient(
+          -12deg,
+          transparent 0 0.28rem,
+          color-mix(in srgb, var(--_skeleton-ink) 11%, transparent) 0.3rem
+            0.36rem
+        ),
+        var(--_skeleton-wash);
+      border: 1px dashed
+        color-mix(in srgb, var(--_skeleton-ink) 44%, transparent);
+      border-radius: var(--cad-skeleton-radius, 0);
+      transform: rotate(-0.12deg);
     }
 
     :host([shape='text']) .item {
-      height: var(--cad-skeleton-height, 0.85em);
-      border-radius: var(--cad-skeleton-radius, 0.35rem 0.5rem 0.4rem 0.45rem);
+      height: var(--cad-skeleton-height, 0.72em);
+      background: linear-gradient(
+        178deg,
+        transparent 0 54%,
+        color-mix(in srgb, var(--_skeleton-ink) 24%, transparent) 56% 78%,
+        transparent 80%
+      );
+      border: 0;
+      border-radius: var(--cad-skeleton-radius, 0);
+    }
+
+    :host([shape='text']) .item:nth-child(even) {
+      transform: rotate(0.18deg);
     }
 
     :host([shape='text']) .item.last {
@@ -86,7 +110,7 @@ export class CadSkeleton extends LitElement {
         transparent 20%,
         var(
             --cad-skeleton-highlight,
-            color-mix(in srgb, var(--cad-ink, #162033) 8%, transparent)
+            color-mix(in srgb, var(--_skeleton-ink) 18%, transparent)
           )
           50%,
         transparent 80%
@@ -118,7 +142,11 @@ export class CadSkeleton extends LitElement {
     @media (forced-colors: active) {
       .item {
         background: Canvas;
-        border: 1px solid GrayText;
+        border: 1px dashed GrayText;
+      }
+
+      :host([shape='text']) .item {
+        border-block-end: 2px solid GrayText;
       }
 
       .item::after {

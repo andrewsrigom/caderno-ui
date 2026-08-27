@@ -2,12 +2,14 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<p class="loading-status" role="status">Loading profile…</p>
-<section aria-busy="true" aria-label="Profile">
-  <cad-skeleton shape="circle"></cad-skeleton>
-  <cad-skeleton animation="wave" lines="3"></cad-skeleton>
+const usage = `<span class="loading-status" role="status">Loading profile…</span>
+<section aria-busy="true" aria-label="Profile" class="profile-loading">
+  <cad-skeleton class="avatar-placeholder" shape="circle"></cad-skeleton>
+  <cad-skeleton animation="wave" class="profile-copy" lines="3"></cad-skeleton>
 </section>
 
 <script type="module">
@@ -15,57 +17,73 @@ const usage = `<p class="loading-status" role="status">Loading profile…</p>
 </script>
 
 <style>
-  cad-skeleton[shape='circle'] {
+  .profile-loading { display: flex; gap: 1rem; align-items: center; }
+  .avatar-placeholder {
     --cad-skeleton-width: 3.5rem;
   }
+  .profile-copy { --cad-skeleton-width: min(100%, 22rem); flex: 1; }
+</style>`
+
+const shapesUsage = `<cad-skeleton class="block-placeholder" shape="rectangle"></cad-skeleton>
+<cad-skeleton class="circle-placeholder" shape="circle"></cad-skeleton>
+<cad-skeleton animation="pulse" class="copy-placeholder" lines="4"></cad-skeleton>
+
+<style>
+  .block-placeholder { --cad-skeleton-width: 12rem; --cad-skeleton-height: 6rem; }
+  .circle-placeholder { --cad-skeleton-width: 4.5rem; }
+  .copy-placeholder { --cad-skeleton-width: 100%; }
 </style>`
 ---
 
 <DocsLayout
-  description="CadSkeleton reserves loading geometry with composable text, rectangle, and circle placeholders."
+  description="Reserve space while content loads. Combine text, rectangle, and circle placeholders to match the expected layout."
   title="Skeleton"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-skeleton&gt;</p>
-    <h1>Reserve the shape of content while it loads.</h1>
+    <h1>Skeleton</h1>
     <p>
-      Skeleton is one decorative primitive with three shapes. Compose it around
-      the layout users are about to receive instead of publishing a separate
-      skeleton component for every card, list, or profile.
+      Reserve space while content loads. Combine text, rectangle, and circle
+      placeholders to match the expected layout.
     </p>
   </header>
 
-  <DemoFrame
-    title="A composed note preview"
-    description="Circle, text lines, and rectangles share the same primitive."
-  >
+  <DemoFrame title="Loading a profile">
     <span class="loading-status" role="status">Loading note preview…</span>
-    <article aria-busy="true" aria-label="Note preview" class="loading-card">
-      <div class="identity-placeholder">
-        <cad-skeleton class="avatar-placeholder" shape="circle"></cad-skeleton>
-        <cad-skeleton animation="wave" class="identity-copy" lines="2"
-        ></cad-skeleton>
-      </div>
-      <cad-skeleton animation="wave" lines="4"></cad-skeleton>
-      <cad-skeleton class="media-placeholder" shape="rectangle"></cad-skeleton>
-      <div class="action-placeholders">
-        <cad-skeleton class="action-placeholder" shape="rectangle"
-        ></cad-skeleton>
-        <cad-skeleton class="action-placeholder short" shape="rectangle"
-        ></cad-skeleton>
-      </div>
-    </article>
+    <section aria-busy="true" aria-label="Profile" class="profile-loading">
+      <cad-skeleton class="avatar-placeholder" shape="circle"></cad-skeleton>
+      <cad-skeleton animation="wave" class="profile-copy" lines="3"
+      ></cad-skeleton>
+    </section>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    columns={3}
+    id="skeleton-shapes-title"
+    title="Shapes"
+    description="Match the shape of the content being loaded."
+  >
+    <ExampleCard title="Rectangle">
+      <cad-skeleton class="block-placeholder" shape="rectangle"></cad-skeleton>
+    </ExampleCard>
+    <ExampleCard title="Circle">
+      <cad-skeleton class="circle-placeholder" shape="circle"></cad-skeleton>
+    </ExampleCard>
+    <ExampleCard title="Text lines">
+      <cad-skeleton animation="pulse" class="copy-placeholder" lines="4"
+      ></cad-skeleton>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={shapesUsage} collapsible language="html" />
 
   <ApiReference tagName="cad-skeleton" />
 
   <section class="content-section" aria-labelledby="choosing-title">
-    <h2 id="choosing-title">Choose the honest loading signal</h2>
+    <h2 id="choosing-title">Which loading indicator?</h2>
     <ul>
       <li>
-        Use <strong>Skeleton</strong> for an initial load whose final geometry is
-        predictable.
+        Use <strong>Skeleton</strong> for an initial load whose final layout is predictable.
       </li>
       <li>
         Use <strong>Spinner</strong> for compact indeterminate work such as a button
@@ -82,41 +100,28 @@ const usage = `<p class="loading-status" role="status">Loading profile…</p>
   </section>
 
   <section class="content-section" aria-labelledby="sizing-title">
-    <h2 id="sizing-title">Match the final geometry</h2>
+    <h2 id="sizing-title">Size</h2>
     <p>
-      Set <code>--cad-skeleton-width</code> and
-      <code>--cad-skeleton-height</code> in application CSS. Text can render up to
-      20 lines, and <code>--cad-skeleton-last-line-width</code> adjusts the final
-      line. Recipes stay local because their dimensions belong to the content layout,
-      not to the primitive.
+      Set <code>--cad-skeleton-width</code> and <code
+        >--cad-skeleton-height</code
+      > to match the expected content. Text supports up to 20 lines; adjust the last
+      with <code>--cad-skeleton-last-line-width</code>.
     </p>
   </section>
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Skeleton items are decorative and hidden from the accessibility tree. Set
-      <code>aria-busy="true"</code> on the region being updated and provide one concise
-      status message for the operation. Both animations become static when reduced
-      motion is requested.
+      Skeletons are decorative. Set <code>aria-busy="true"</code> on the updating
+      region and provide one status message. Animation stops with reduced-motion preferences.
     </p>
   </section>
 
   <style>
-    .loading-card {
-      display: grid;
-      width: min(100%, 34rem);
-      gap: 1.25rem;
-      padding: 1.25rem;
-      background: var(--cad-surface);
-      border: 1px dashed var(--cad-line-strong);
-      border-radius: var(--cad-radius-md);
-    }
-
-    .identity-placeholder,
-    .action-placeholders {
+    .profile-loading {
       display: flex;
-      gap: 0.85rem;
+      width: min(100%, 32rem);
+      gap: 1rem;
       align-items: center;
     }
 
@@ -126,24 +131,25 @@ const usage = `<p class="loading-status" role="status">Loading profile…</p>
       flex: 0 0 auto;
     }
 
-    .identity-copy {
-      --cad-skeleton-width: min(100%, 14rem);
-      --cad-skeleton-height: 0.75rem;
+    .profile-copy {
+      --cad-skeleton-width: min(100%, 22rem);
 
       flex: 1;
     }
 
-    .media-placeholder {
-      --cad-skeleton-height: 9rem;
+    .block-placeholder {
+      --cad-skeleton-width: min(100%, 12rem);
+      --cad-skeleton-height: 6rem;
     }
 
-    .action-placeholder {
-      --cad-skeleton-width: 7rem;
-      --cad-skeleton-height: 2.5rem;
+    .circle-placeholder {
+      --cad-skeleton-width: 4.5rem;
     }
 
-    .action-placeholder.short {
-      --cad-skeleton-width: 5rem;
+    .copy-placeholder {
+      --cad-skeleton-width: 100%;
+
+      width: 100%;
     }
 
     .loading-status {
@@ -159,3 +165,7 @@ const usage = `<p class="loading-status" role="status">Loading profile…</p>
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/skeleton'
+</script>

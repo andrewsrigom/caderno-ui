@@ -46,8 +46,12 @@ function renderReactEntry(entry) {
     entry.typeExports.length > 0
       ? `\n\nexport type {\n${quoteList(entry.typeExports)}\n} from '@caderno-ui/elements/${entry.name}'`
       : ''
+  const valueExports =
+    entry.valueExports?.length > 0
+      ? `\n\nexport {\n${quoteList(entry.valueExports)}\n} from '@caderno-ui/elements/${entry.name}'`
+      : ''
 
-  return `import {\n${quoteList(imports)}\n} from '@caderno-ui/elements/${entry.name}'\n${litReactImport}\nimport React from 'react'\n\n${components}${typeExports}\n`
+  return `import {\n${quoteList(imports)}\n} from '@caderno-ui/elements/${entry.name}'\n${litReactImport}\nimport React from 'react'\n\n${components}${typeExports}${valueExports}\n`
 }
 
 function renderIndex(entries) {

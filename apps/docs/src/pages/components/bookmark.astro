@@ -1,6 +1,8 @@
 ---
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import ApiReference from '../../components/ApiReference.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
@@ -18,18 +20,23 @@ const eventCode = `bookmark.addEventListener('cad-bookmark-change', (event) => {
   const { active, id } = event.detail
   console.log({ active, id })
 })`
+const statesUsage = `<cad-bookmark label="Save note"></cad-bookmark>
+<cad-bookmark
+  active-label="Remove saved note"
+  bookmarked
+  label="Save note"
+></cad-bookmark>`
 ---
 
 <DocsLayout
-  description="CadBookmark is an accessible pressed-state control with optional local persistence."
+  description="Save or unsave an item. Optionally remember the choice on this device."
   title="Bookmark"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-bookmark&gt;</p>
-    <h1>Save a place without hiding the state.</h1>
+    <h1>Bookmark</h1>
     <p>
-      Bookmark wraps a native toggle button, exposes its pressed state, and can
-      optionally remember that state in local storage.
+      Save or unsave an item. Optionally remember the choice on this device.
     </p>
   </header>
 
@@ -39,7 +46,7 @@ const eventCode = `bookmark.addEventListener('cad-bookmark-change', (event) => {
   >
     <cad-bookmark
       active-label="Remove saved note"
-      bookmark-id="docs-bookmark-demo"
+      bookmark-id="architecture-notes"
       label="Save note"
       persist></cad-bookmark>
     <output class="event-output" data-bookmark-output aria-live="polite">
@@ -48,13 +55,30 @@ const eventCode = `bookmark.addEventListener('cad-bookmark-change', (event) => {
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
+  <ExampleGallery
+    id="bookmark-states-title"
+    title="Saved and unsaved"
+    description="Saving to local storage is optional."
+  >
+    <ExampleCard title="Not saved">
+      <cad-bookmark label="Save note"></cad-bookmark>
+    </ExampleCard>
+    <ExampleCard title="Saved">
+      <cad-bookmark
+        active-label="Remove saved note"
+        bookmarked
+        label="Save note"></cad-bookmark>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={statesUsage} collapsible language="html" />
+
   <ApiReference tagName="cad-bookmark" />
 
   <section class="content-section" aria-labelledby="events-title">
     <h2 id="events-title">Events</h2>
     <p>
-      <code class="inline-code">cad-bookmark-change</code> exposes
-      <code class="inline-code">{'{ active, id }'}</code> and crosses the shadow boundary.
+      <code>cad-bookmark-change</code> reports <code>{'{ active, id }'}</code> and
+      bubbles to parent elements.
     </p>
     <CodeBlock code={eventCode} language="typescript" />
   </section>
@@ -62,16 +86,14 @@ const eventCode = `bookmark.addEventListener('cad-bookmark-change', (event) => {
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Bookmark uses a native button and exposes its state with
-      <code>aria-pressed</code>. The inactive and active labels should describe
-      the resulting action, and the fallback keeps that action readable before
-      upgrade.
+      The button exposes <code>aria-pressed</code>. Give both states clear
+      labels, such as “Save note” and “Remove saved note”.
     </p>
   </section>
 
   <script>
     const bookmark = document.querySelector(
-      'cad-bookmark[bookmark-id="docs-bookmark-demo"]',
+      'cad-bookmark[bookmark-id="architecture-notes"]',
     )
     const output = document.querySelector('[data-bookmark-output]')
     bookmark?.addEventListener('cad-bookmark-change', (event) => {
@@ -80,3 +102,7 @@ const eventCode = `bookmark.addEventListener('cad-bookmark-change', (event) => {
     })
   </script>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/bookmark'
+</script>

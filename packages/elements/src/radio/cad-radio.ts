@@ -41,7 +41,7 @@ export class CadRadio extends LitElement {
   static override styles = css`
     :host {
       --_radio-bg: var(--cad-radio-bg, var(--cad-post-it-blue-bg, #cfe2ff));
-      --_radio-ink: var(--cad-radio-ink, var(--cad-post-it-blue-ink, #20375d));
+      --_radio-ink: var(--cad-radio-ink, var(--cad-link, #005bac));
       display: inline-block;
       max-width: 100%;
       color: var(--cad-ink, #25202a);
@@ -78,7 +78,7 @@ export class CadRadio extends LitElement {
     .base {
       display: inline-grid;
       grid-template-columns: auto minmax(0, 1fr);
-      gap: 0.6rem;
+      gap: 1rem;
       align-items: start;
       max-width: 100%;
       cursor: pointer;
@@ -103,27 +103,42 @@ export class CadRadio extends LitElement {
     }
 
     .ring {
+      position: relative;
       display: inline-grid;
       place-items: center;
       box-sizing: border-box;
       width: 1.5rem;
       height: 1.5rem;
-      margin-top: 0.15rem;
+      margin-top: 0.1rem;
+      color: var(--_radio-ink);
       background: transparent;
-      border: 2px solid color-mix(in srgb, var(--_radio-ink) 55%, transparent);
-      border-radius: 54% 46% 52% 48%;
+      border: 1.5px solid color-mix(in srgb, var(--_radio-ink) 88%, transparent);
+      border-radius: 53% 47% 51% 49%;
       transition: transform
         var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
         var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
-      transform: rotate(-3deg);
+      transform: rotate(-2deg);
+    }
+
+    .ring::after {
+      position: absolute;
+      inset: 0.12rem -0.1rem -0.08rem 0.08rem;
+      border: 1px solid color-mix(in srgb, var(--_radio-ink) 54%, transparent);
+      border-radius: 47% 53% 49% 51%;
+      content: '';
+      opacity: 0;
+      pointer-events: none;
+      transform: rotate(5deg);
     }
 
     .dot {
       display: block;
-      width: 0.85rem;
-      height: 0.85rem;
+      width: 0.72rem;
+      height: 0.72rem;
       background: var(--_radio-ink);
-      border-radius: 52% 48% 54% 46%;
+      border-radius: 48% 52% 46% 54%;
+      box-shadow: 0.08rem 0.04rem 0
+        color-mix(in srgb, var(--_radio-ink) 35%, transparent);
       opacity: 0;
       transition:
         opacity
@@ -136,8 +151,12 @@ export class CadRadio extends LitElement {
     }
 
     .control:checked + .ring {
-      background: color-mix(in srgb, var(--_radio-bg) 40%, transparent);
+      background: color-mix(in srgb, var(--_radio-bg) 32%, transparent);
       border-color: var(--_radio-ink);
+    }
+
+    .control:checked + .ring::after {
+      opacity: 1;
     }
 
     .control:checked + .ring .dot {
@@ -151,28 +170,28 @@ export class CadRadio extends LitElement {
     }
 
     .base:hover .ring {
-      transform: rotate(-3deg) translateY(-1px);
+      transform: rotate(-2deg) translateY(-1px);
     }
 
     :host([disabled]) .base:hover .ring {
-      transform: rotate(-3deg);
+      transform: rotate(-2deg);
     }
 
     .body {
       display: inline-grid;
       gap: 0.15rem;
       min-width: 0;
-      padding-top: 0.15rem;
+      padding-top: 0.1rem;
     }
 
     .label {
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-md, 1.2rem);
+      font-size: var(--cad-hand-md, 1.25rem);
       line-height: 1.25;
     }
 
     .hint {
-      color: var(--cad-ink-muted, currentColor);
+      color: var(--cad-ink-muted, #6f6a64);
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-sm, 1.05rem);
       line-height: 1.3;

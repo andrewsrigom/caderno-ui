@@ -22,4 +22,5 @@ export type {
   CadModalCloseEvent,
   CadModalOpenEvent,
   CadModalSize,
+  CadModalTone,
 } from '@caderno-ui/elements/modal'

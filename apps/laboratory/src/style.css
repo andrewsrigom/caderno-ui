@@ -26,6 +26,46 @@ button {
   font: inherit;
 }
 
+.laboratory-header,
+.laboratory-footer {
+  display: block;
+  width: min(100% - 2rem, 70rem);
+  margin-inline: auto;
+}
+
+.laboratory-header {
+  margin-top: 1rem;
+}
+
+.laboratory-header-brand {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  min-width: 0;
+  color: inherit;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.laboratory-header cad-button::part(base) {
+  min-width: 2.75rem;
+  padding-inline: 0.5rem;
+}
+
+.laboratory-header cad-button[slot='user'] cad-avatar::part(copy) {
+  display: none;
+}
+
+@media (width <= 36rem) {
+  .laboratory-header-brand strong {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
 main {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -357,7 +397,7 @@ section {
   color: var(--cad-ink);
   background: var(--cad-surface);
   border: 1px dashed var(--cad-line-strong);
-  border-radius: 0.65rem;
+  border-radius: 0;
 }
 
 .event-log {
@@ -365,6 +405,40 @@ section {
   box-shadow: 0 0.8rem 2rem rgb(var(--cad-shadow-rgb) / 20%);
   font-family: var(--cad-font-mono);
   font-size: 0.85rem;
+}
+
+.laboratory-footer {
+  width: min(calc(100% - 2rem), 76rem);
+  margin: 4rem auto 2rem;
+}
+
+.laboratory-footer-brand {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.laboratory-footer-brand strong {
+  letter-spacing: 0.14em;
+}
+
+.laboratory-footer-brand p {
+  margin: 0;
+}
+
+.laboratory-footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.laboratory-footer-social cad-link::part(base) {
+  display: grid;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
 }
 
 @media (width <= 700px) {

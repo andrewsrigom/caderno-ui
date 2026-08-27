@@ -29,63 +29,76 @@ export class CadBreadcrumbItem extends LitElement {
 
     .item {
       display: inline-flex;
-      gap: 0.35rem;
+      gap: 0.45rem;
       align-items: center;
       min-width: 0;
-      color: var(--cad-ink-muted, currentColor);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1rem);
+      color: var(--cad-link, #005bac);
+      font-family: var(--cad-type-control-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-label-size, var(--cad-hand-sm, 1.05rem));
       font-weight: var(--cad-hand-weight-regular, 500);
-      line-height: 1.1;
+      line-height: var(--cad-type-title-line-height, 1.15);
     }
 
     a,
     .current {
+      position: relative;
+      box-sizing: border-box;
+      padding: 0.12rem 0.08rem 0.18rem;
       color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
       overflow-wrap: anywhere;
+      transform: none;
     }
 
     a {
-      text-decoration: underline;
-      text-decoration-color: color-mix(
-        in srgb,
-        var(--cad-link, currentColor) 48%,
-        transparent
-      );
-      text-decoration-style: wavy;
-      text-underline-offset: 0.2rem;
+      text-decoration: none;
+    }
+
+    a::after {
+      position: absolute;
+      right: 0.04rem;
+      bottom: 0;
+      left: 0.04rem;
+      height: 2px;
+      background: var(--cad-link-mark, #ef4d4f);
+      content: '';
+      transform: rotate(-0.7deg);
+      transform-origin: left center;
     }
 
     a:hover {
       color: var(--cad-link, currentColor);
     }
+
+    a:hover::after {
+      height: 3px;
+      transform: rotate(0.25deg);
+    }
+
     a:focus-visible {
-      outline: 2px dashed var(--cad-focus-ring, currentColor);
+      outline: var(
+        --cad-focus-outline,
+        2px dashed var(--cad-focus-ring, currentColor)
+      );
       outline-offset: 3px;
     }
 
     .current {
-      color: var(--cad-ink, currentColor);
-      background: linear-gradient(
-        transparent 62%,
-        color-mix(in srgb, var(--cad-post-it-blue-bg, #cfe2ff) 65%, transparent)
-          63%,
-        color-mix(in srgb, var(--cad-post-it-blue-bg, #cfe2ff) 65%, transparent)
-          94%,
-        transparent 95%
-      );
+      color: var(--cad-ink-muted, #68738c);
       font-weight: var(--cad-hand-weight-strong, 700);
     }
 
     .separator {
       display: inline-grid;
-      color: var(--cad-ink-muted, currentColor);
-      transform: rotate(-2deg);
+      color: color-mix(in srgb, var(--cad-link, currentColor) 72%, transparent);
+      transform: rotate(-1deg) translateY(0.02rem);
     }
 
     .separator svg {
-      width: 0.95rem;
-      height: 0.95rem;
+      width: 0.9rem;
+      height: 0.9rem;
     }
 
     :host([variant='compact']) {
@@ -98,22 +111,31 @@ export class CadBreadcrumbItem extends LitElement {
     }
 
     :host([variant='compact']) .item {
-      font-family: var(--cad-font-text, var(--cad-font-book, serif));
+      font-family: var(--cad-type-meta-font, var(--cad-font-book, serif));
       font-size: 0.75rem;
       font-weight: 500;
       line-height: 1.35;
     }
 
     :host([variant='compact']) a {
+      padding: 0;
+      background: none;
+      border: 0;
+      border-radius: 0;
       text-decoration: none;
+      transform: none;
     }
 
     :host([variant='compact']) .current {
+      padding: 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       background: none;
+      border: 0;
+      border-radius: 0;
       font-weight: 600;
+      transform: none;
     }
 
     :host([variant='compact']) .separator {
@@ -155,7 +177,7 @@ export class CadBreadcrumbItem extends LitElement {
     const label = html`<slot></slot>`
     return html`
       <span class="item" part="base" role="listitem">
-        ${this.first ? null : html`<span aria-hidden="true" class="separator" part="separator">${renderSystemIcon('arrow-right')}</span>`}
+        ${this.first ? null : html`<span aria-hidden="true" class="separator" part="separator">${renderSystemIcon('chevron-right')}</span>`}
         ${this.href && !this.current ? html`<a href=${this.href} part="link" rel=${this.rel || undefined} target=${this.target || undefined}>${label}</a>` : html`<span aria-current=${this.current ? 'page' : undefined} class="current" part="current">${label}</span>`}
       </span>
     `

@@ -40,14 +40,14 @@ export class CadAccordionItem extends LitElement {
 
   static override styles = css`
     :host {
-      --_accordion-bg: var(--cad-surface-raised, #f7f0dc);
-      --_accordion-ink: var(--cad-ink, #25202a);
+      --_accordion-bg: var(--cad-post-it-blue-bg, #cfe2ff);
+      --_accordion-ink: var(--cad-link, #005bac);
       display: block;
     }
 
     :host([tone='blue']) {
       --_accordion-bg: var(--cad-post-it-blue-bg, #cfe2ff);
-      --_accordion-ink: var(--cad-post-it-blue-ink, #20375d);
+      --_accordion-ink: var(--cad-link, #005bac);
     }
 
     :host([tone='coral']) {
@@ -71,19 +71,26 @@ export class CadAccordionItem extends LitElement {
     }
 
     .base {
+      position: relative;
       overflow: hidden;
       color: var(--_accordion-ink);
       background: color-mix(
         in srgb,
-        var(--_accordion-bg) 58%,
+        var(--_accordion-bg) 20%,
         var(--cad-surface, white)
       );
-      border: 1.5px solid
-        color-mix(in srgb, var(--_accordion-ink) 28%, transparent);
-      border-radius: 0.55rem 0.8rem 0.6rem 0.75rem;
+      border: var(--cad-border-width, 1.5px) var(--cad-border-style, dashed)
+        color-mix(in srgb, var(--_accordion-ink) 78%, transparent);
+      border-radius: 0;
+    }
+
+    .base::before {
+      content: none;
     }
 
     .summary {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 0.75rem;
@@ -92,7 +99,7 @@ export class CadAccordionItem extends LitElement {
       padding: 0.75rem 0.95rem;
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-md, 1.2rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
+      font-weight: var(--cad-hand-weight-regular, 500);
       cursor: pointer;
       list-style: none;
       -webkit-tap-highlight-color: transparent;
@@ -103,7 +110,7 @@ export class CadAccordionItem extends LitElement {
     }
 
     .summary:hover {
-      background: color-mix(in srgb, var(--_accordion-bg) 34%, transparent);
+      background: color-mix(in srgb, var(--_accordion-bg) 26%, transparent);
     }
 
     .summary:focus-visible {
@@ -121,9 +128,6 @@ export class CadAccordionItem extends LitElement {
       height: 0.72rem;
       border-right: 2px solid currentColor;
       border-bottom: 2px solid currentColor;
-      transition: transform
-        var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
-        var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
       transform: rotate(45deg) translate(-0.1rem, 0.1rem);
     }
 
@@ -132,13 +136,16 @@ export class CadAccordionItem extends LitElement {
     }
 
     .content {
+      position: relative;
+      z-index: 1;
       box-sizing: border-box;
-      padding: 0.95rem;
+      padding: 0.65rem 0.95rem 0.8rem;
       overflow: clip;
       border-top: 1px dashed
-        color-mix(in srgb, var(--_accordion-ink) 26%, transparent);
-      font-family: var(--cad-font-book, serif);
-      line-height: 1.6;
+        color-mix(in srgb, var(--_accordion-ink) 42%, transparent);
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-sm, 1.05rem);
+      line-height: 1.4;
       transform-origin: top center;
     }
 
@@ -180,7 +187,7 @@ export class CadAccordionItem extends LitElement {
     this.disabled = false
     this.heading = ''
     this.open = false
-    this.tone = 'paper'
+    this.tone = 'blue'
   }
 
   override disconnectedCallback(): void {

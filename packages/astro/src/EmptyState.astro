@@ -1,18 +1,28 @@
 ---
 import '@caderno-ui/elements/fallback.css'
-import type { CadEmptyStateVariant } from '@caderno-ui/elements/empty-state'
+import type {
+  CadEmptyStateSize,
+  CadEmptyStateTone,
+  CadEmptyStateVariant,
+} from '@caderno-ui/elements/empty-state'
 
 type Props = {
   class?: string
   description?: string
+  eyebrow?: string
+  size?: CadEmptyStateSize
   title?: string
+  tone?: CadEmptyStateTone
   variant?: CadEmptyStateVariant
 }
 
 const {
   class: className,
   description,
+  eyebrow,
+  size = 'comfortable',
   title,
+  tone = 'neutral',
   variant = 'no-data',
 } = Astro.props
 ---
@@ -20,13 +30,19 @@ const {
 <cad-empty-state
   class={className}
   description={description}
+  eyebrow={eyebrow}
+  size={size}
   title={title}
+  tone={tone}
   variant={variant}
 >
   <slot name="icon" slot="icon" />
+  <slot name="eyebrow" slot="eyebrow" />
   <slot name="title" slot="title" />
   <slot name="description" slot="description" />
+  <slot name="primary" slot="primary" />
   <slot name="actions" slot="actions" />
+  <slot name="secondary" slot="secondary" />
 </cad-empty-state>
 
 <script>

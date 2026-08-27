@@ -15,7 +15,12 @@
           ]
         }
       ],
-      "typeExports": ["CadAlertVariant", "CadDismissDetail", "CadDismissEvent"],
+      "typeExports": [
+        "CadAlertSize",
+        "CadAlertVariant",
+        "CadDismissDetail",
+        "CadDismissEvent"
+      ],
       "astroFacades": ["Alert.astro"],
       "docsPage": "alert.astro"
     },
@@ -186,9 +191,27 @@
           "events": []
         }
       ],
-      "typeExports": ["CadLinkTone", "CadLinkVariant"],
+      "typeExports": ["CadLinkCurrent", "CadLinkTone", "CadLinkVariant"],
       "astroFacades": ["Link.astro"],
       "docsPage": "link.astro"
+    },
+    {
+      "name": "list",
+      "elements": [
+        {
+          "className": "CadList",
+          "tagName": "cad-list",
+          "events": []
+        },
+        {
+          "className": "CadListItem",
+          "tagName": "cad-list-item",
+          "events": []
+        }
+      ],
+      "typeExports": ["CadListVariant"],
+      "astroFacades": ["List.astro", "ListItem.astro"],
+      "docsPage": "list.astro"
     },
     {
       "name": "note",
@@ -212,7 +235,7 @@
           "events": []
         }
       ],
-      "typeExports": ["CadProgressTone", "CadProgressVariant"],
+      "typeExports": ["CadProgressSize", "CadProgressTone"],
       "astroFacades": ["Progress.astro"],
       "docsPage": "progress.astro"
     },
@@ -279,7 +302,12 @@
           "events": []
         }
       ],
-      "typeExports": ["CadTableDensity", "CadTableVariant"],
+      "typeExports": [
+        "CadTableColumnFormat",
+        "CadTableDensity",
+        "CadTableTypography",
+        "CadTableVariant"
+      ],
       "astroFacades": ["Table.astro"],
       "docsPage": "table.astro"
     },
@@ -321,6 +349,49 @@
       ],
       "name": "checkbox",
       "typeExports": ["CadCheckboxTone"]
+    },
+    {
+      "astroFacades": ["Switch.astro"],
+      "docsPage": "switch.astro",
+      "elements": [
+        {
+          "className": "CadSwitch",
+          "events": [],
+          "tagName": "cad-switch"
+        }
+      ],
+      "name": "switch",
+      "typeExports": ["CadSwitchSize"]
+    },
+    {
+      "astroFacades": ["Slider.astro"],
+      "docsPage": "slider.astro",
+      "elements": [
+        {
+          "className": "CadSlider",
+          "events": [
+            {
+              "eventName": "cad-slider-input",
+              "propName": "onSliderInput",
+              "typeName": "CadSliderInputEvent"
+            },
+            {
+              "eventName": "cad-slider-change",
+              "propName": "onSliderChange",
+              "typeName": "CadSliderChangeEvent"
+            }
+          ],
+          "tagName": "cad-slider"
+        }
+      ],
+      "name": "slider",
+      "typeExports": [
+        "CadSliderChangeDetail",
+        "CadSliderChangeEvent",
+        "CadSliderInputEvent",
+        "CadSliderThumb",
+        "CadSliderTone"
+      ]
     },
     {
       "astroFacades": ["Radio.astro"],
@@ -389,7 +460,7 @@
         }
       ],
       "name": "spinner",
-      "typeExports": ["CadSpinnerSize", "CadSpinnerTone"]
+      "typeExports": ["CadSpinnerSize", "CadSpinnerTone", "CadSpinnerVariant"]
     },
     {
       "astroFacades": ["Tooltip.astro"],
@@ -403,6 +474,121 @@
       ],
       "name": "tooltip",
       "typeExports": ["CadTooltipPosition"]
+    },
+    {
+      "astroFacades": ["Popover.astro"],
+      "docsPage": "popover.astro",
+      "elements": [
+        {
+          "className": "CadPopover",
+          "events": [
+            {
+              "eventName": "cad-popover-close",
+              "propName": "onPopoverClose",
+              "typeName": "CadPopoverCloseEvent"
+            },
+            {
+              "eventName": "cad-popover-open",
+              "propName": "onPopoverOpen",
+              "typeName": "CadPopoverOpenEvent"
+            }
+          ],
+          "tagName": "cad-popover"
+        }
+      ],
+      "name": "popover",
+      "typeExports": [
+        "CadPopoverCloseDetail",
+        "CadPopoverCloseEvent",
+        "CadPopoverCloseReason",
+        "CadPopoverOpenDetail",
+        "CadPopoverOpenEvent",
+        "CadPopoverPlacement",
+        "CadPopoverSize"
+      ]
+    },
+    {
+      "astroFacades": ["Drawer.astro"],
+      "docsPage": "drawer.astro",
+      "elements": [
+        {
+          "className": "CadDrawer",
+          "events": [
+            {
+              "eventName": "cad-drawer-close",
+              "propName": "onDrawerClose",
+              "typeName": "CadDrawerCloseEvent"
+            },
+            {
+              "eventName": "cad-drawer-open",
+              "propName": "onDrawerOpen",
+              "typeName": "CadDrawerOpenEvent"
+            }
+          ],
+          "tagName": "cad-drawer"
+        }
+      ],
+      "name": "drawer",
+      "typeExports": [
+        "CadDrawerCloseDetail",
+        "CadDrawerCloseEvent",
+        "CadDrawerCloseReason",
+        "CadDrawerOpenDetail",
+        "CadDrawerOpenEvent",
+        "CadDrawerPlacement",
+        "CadDrawerSize"
+      ]
+    },
+    {
+      "astroFacades": ["Footer.astro", "FooterGroup.astro"],
+      "docsPage": "footer.astro",
+      "elements": [
+        {
+          "className": "CadFooter",
+          "events": [],
+          "tagName": "cad-footer"
+        },
+        {
+          "className": "CadFooterGroup",
+          "events": [
+            {
+              "eventName": "cad-footer-group-toggle",
+              "propName": "onFooterGroupToggle",
+              "typeName": "CadFooterGroupToggleEvent"
+            }
+          ],
+          "tagName": "cad-footer-group"
+        }
+      ],
+      "name": "footer",
+      "typeExports": [
+        "CadFooterGroupToggleDetail",
+        "CadFooterGroupToggleEvent",
+        "CadFooterVariant"
+      ]
+    },
+    {
+      "astroFacades": ["Header.astro"],
+      "docsPage": "header.astro",
+      "elements": [
+        {
+          "className": "CadHeader",
+          "events": [
+            {
+              "eventName": "cad-header-menu-toggle",
+              "propName": "onHeaderMenuToggle",
+              "typeName": "CadHeaderMenuToggleEvent"
+            }
+          ],
+          "tagName": "cad-header"
+        }
+      ],
+      "name": "header",
+      "typeExports": [
+        "CadHeaderMenuToggleDetail",
+        "CadHeaderMenuToggleEvent",
+        "CadHeaderVariant"
+      ]
     },
     {
       "astroFacades": ["Modal.astro"],
@@ -430,7 +616,8 @@
         "CadModalCloseDetail",
         "CadModalCloseEvent",
         "CadModalOpenEvent",
-        "CadModalSize"
+        "CadModalSize",
+        "CadModalTone"
       ]
     },
     {
@@ -456,13 +643,20 @@
       ],
       "name": "toast",
       "typeExports": [
+        "CadToastAction",
+        "CadToastCallOptions",
         "CadToastDismissDetail",
         "CadToastDismissEvent",
         "CadToastDismissReason",
+        "CadToastFunction",
+        "CadToastId",
         "CadToastOptions",
         "CadToastPlacement",
+        "CadToastPromiseMessage",
+        "CadToastPromiseOptions",
         "CadToastVariant"
-      ]
+      ],
+      "valueExports": ["toast"]
     },
     {
       "astroFacades": ["Breadcrumb.astro", "BreadcrumbItem.astro"],
@@ -493,7 +687,7 @@
         }
       ],
       "name": "pagination",
-      "typeExports": []
+      "typeExports": ["CadPaginationVariant"]
     },
     {
       "astroFacades": ["Avatar.astro"],
@@ -509,6 +703,19 @@
       "typeExports": ["CadAvatarSize", "CadAvatarStatus"]
     },
     {
+      "astroFacades": ["DoodleAvatar.astro"],
+      "docsPage": "doodle-avatar.astro",
+      "elements": [
+        {
+          "className": "CadDoodleAvatar",
+          "events": [],
+          "tagName": "cad-doodle-avatar"
+        }
+      ],
+      "name": "doodle-avatar",
+      "typeExports": ["CadDoodleAvatarSize", "CadDoodleAvatarVariant"]
+    },
+    {
       "astroFacades": ["Highlight.astro"],
       "docsPage": "highlight.astro",
       "elements": [
@@ -520,19 +727,6 @@
       ],
       "name": "highlight",
       "typeExports": ["CadHighlightTone", "CadHighlightVariant"]
-    },
-    {
-      "astroFacades": ["Tape.astro"],
-      "docsPage": "tape.astro",
-      "elements": [
-        {
-          "className": "CadTape",
-          "events": [],
-          "tagName": "cad-tape"
-        }
-      ],
-      "name": "tape",
-      "typeExports": ["CadTapeSize", "CadTapeTone"]
     },
     {
       "astroFacades": ["Sticker.astro"],
@@ -558,7 +752,7 @@
         }
       ],
       "name": "blockquote",
-      "typeExports": ["CadBlockquoteTone"]
+      "typeExports": ["CadBlockquoteTone", "CadBlockquoteVariant"]
     },
     {
       "astroFacades": ["Checklist.astro", "ChecklistItem.astro"],
@@ -588,12 +782,22 @@
       "elements": [
         {
           "className": "CadCodeBlock",
-          "events": [],
+          "events": [
+            {
+              "eventName": "cad-code-copy",
+              "propName": "onCodeCopy",
+              "typeName": "CadCodeCopyEvent"
+            }
+          ],
           "tagName": "cad-code-block"
         }
       ],
       "name": "code-block",
-      "typeExports": ["CadCodeBlockTone"]
+      "typeExports": [
+        "CadCodeBlockTone",
+        "CadCodeCopyDetail",
+        "CadCodeCopyEvent"
+      ]
     },
     {
       "astroFacades": ["EmptyState.astro"],
@@ -606,7 +810,11 @@
         }
       ],
       "name": "empty-state",
-      "typeExports": ["CadEmptyStateVariant"]
+      "typeExports": [
+        "CadEmptyStateSize",
+        "CadEmptyStateTone",
+        "CadEmptyStateVariant"
+      ]
     },
     {
       "astroFacades": [
@@ -651,25 +859,7 @@
         }
       ],
       "name": "steps",
-      "typeExports": ["CadStepTone", "CadStepsOrientation"]
-    },
-    {
-      "astroFacades": ["Paper.astro"],
-      "docsPage": "paper.astro",
-      "elements": [
-        {
-          "className": "CadPaper",
-          "events": [],
-          "tagName": "cad-paper"
-        }
-      ],
-      "name": "paper",
-      "typeExports": [
-        "CadPaperElevation",
-        "CadPaperPattern",
-        "CadPaperSpacing",
-        "CadPaperTone"
-      ]
+      "typeExports": ["CadStepStatus", "CadStepsOrientation"]
     }
   ]
 }

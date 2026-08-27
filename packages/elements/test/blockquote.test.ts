@@ -18,9 +18,13 @@ describe('cad-blockquote', () => {
 
     const blockquote = quote.shadowRoot?.querySelector('blockquote')
     const link = quote.shadowRoot?.querySelector('figcaption a')
+    const author = quote.shadowRoot?.querySelector('.author')
+    const mark = quote.shadowRoot?.querySelector('[part="mark"]')
     expect(blockquote?.getAttribute('cite')).toBe('/decisions/search-index')
     expect(link?.getAttribute('href')).toBe('/decisions/search-index')
     expect(link?.textContent).toContain('Decision record')
+    expect(author?.textContent).toBe('— Architecture review')
+    expect(mark?.getAttribute('aria-hidden')).toBe('true')
   })
 
   it('omits an empty caption', async () => {
@@ -29,5 +33,15 @@ describe('cad-blockquote', () => {
     document.body.append(quote)
     await quote.updateComplete
     expect(quote.shadowRoot?.querySelector('figcaption')).toBeNull()
+  })
+
+  it('reflects the highlight variant', async () => {
+    const quote = document.createElement('cad-blockquote')
+    quote.variant = 'highlight'
+    quote.textContent = 'A highlighted principle.'
+    document.body.append(quote)
+    await quote.updateComplete
+
+    expect(quote.getAttribute('variant')).toBe('highlight')
   })
 })

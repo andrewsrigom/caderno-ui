@@ -2,56 +2,48 @@
 import '@caderno-ui/elements/fallback.css'
 
 import type {
+  CadProgressSize,
   CadProgressTone,
-  CadProgressVariant,
 } from '@caderno-ui/elements/progress'
 
 type Props = {
   class?: string
-  current?: number
   label: string
   max?: number
   showValue?: boolean
-  steps?: number
+  size?: CadProgressSize
   tone?: CadProgressTone
   value?: number
   valueLabel?: string
-  variant?: CadProgressVariant
 }
 
 const {
   class: className,
-  current = 0,
   label,
   max = 100,
   showValue = true,
-  steps = 0,
+  size = 'md',
   tone = 'blue',
   value,
   valueLabel,
-  variant = 'bar',
 } = Astro.props
-const normalizedMax =
-  variant === 'steps' && steps > 0 ? steps : max > 0 ? max : 100
-const normalizedValue = variant === 'steps' ? current : value
+const normalizedMax = max > 0 ? max : 100
 const fallbackValue =
   valueLabel ??
-  (normalizedValue === undefined
+  (value === undefined
     ? 'In progress'
-    : `${Math.round((normalizedValue / normalizedMax) * 100)}%`)
+    : `${Math.round((value / normalizedMax) * 100)}%`)
 ---
 
 <cad-progress
   class={className}
-  current={current}
   label={label}
   max={normalizedMax}
   show-value={showValue || undefined}
-  steps={steps}
+  size={size}
   tone={tone}
   value={value}
   value-label={valueLabel}
-  variant={variant}
 >
   <span slot="fallback">{label}: {fallbackValue}</span>
 </cad-progress>

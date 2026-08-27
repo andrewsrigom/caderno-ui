@@ -2,49 +2,87 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-blockquote author="Platform team" source="Decision 014" tone="violet">
-  The component boundary should describe a capability, not one screen's current layout.
+const usage = `<cad-blockquote
+  author="Austin Freeman"
+  source="The Engineer's Notebook (1923)"
+>
+  Simplicity is the soul of efficiency.
 </cad-blockquote>
 
 <script type="module">
   import '@caderno-ui/elements/blockquote'
 </script>`
+
+const variantsUsage = `<cad-blockquote author="Unknown">
+  Good engineering is also about communicating clearly.
+</cad-blockquote>
+
+<cad-blockquote author="Alan Kay" tone="lemon" variant="highlight">
+  The best way to predict the future is to invent it.
+</cad-blockquote>`
 ---
 
 <DocsLayout
-  description="Semantic quotations and decision excerpts with optional attribution."
+  description="Display a quotation with optional author and source."
   title="Blockquote"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-blockquote&gt;</p>
-    <h1>Keep the quotation semantic and the attribution optional.</h1>
-    <p>
-      Blockquote renders a native figure, blockquote, and figcaption without
-      forcing a testimonial-shaped content model.
-    </p>
+    <h1>Blockquote</h1>
+    <p>Display a quotation with optional author and source.</p>
   </header>
 
-  <DemoFrame
-    title="Architecture decision excerpt"
-    description="A review note attributed to the team and decision that established the boundary."
-  >
-    <cad-blockquote author="Platform team" source="Decision 014" tone="violet">
-      The component boundary should describe a capability, not one screen’s
-      current layout. Product-specific copy and actions stay in the application.
+  <DemoFrame title="With source">
+    <cad-blockquote
+      author="Austin Freeman"
+      source="The Engineer's Notebook (1923)"
+    >
+      Simplicity is the soul of efficiency.
     </cad-blockquote>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
+  <ExampleGallery id="quote-variants-title" title="Attribution and emphasis">
+    <ExampleCard title="Simple attribution">
+      <cad-blockquote class="gallery-quote" author="Unknown">
+        Good engineering is also about communicating clearly.
+      </cad-blockquote>
+    </ExampleCard>
+    <ExampleCard title="Highlighted takeaway">
+      <cad-blockquote
+        class="gallery-quote"
+        author="Alan Kay"
+        tone="lemon"
+        variant="highlight"
+      >
+        The best way to predict the future is to invent it.
+      </cad-blockquote>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="quote-highlight">
+    <h2 id="quote-highlight">Highlight</h2>
+    <p>Use <code>variant="highlight"</code> to emphasize a key quotation.</p>
+  </section>
+
   <ApiReference tagName="cad-blockquote" />
+
+  <style>
+    .gallery-quote {
+      width: 100%;
+    }
+  </style>
 
   <section class="content-section" aria-labelledby="quote-accessibility">
     <h2 id="quote-accessibility">Accessibility</h2>
     <p>
-      Use this element only for quoted material. Use the caption slot when the
-      attribution needs richer markup, and provide <code>cite</code> when a stable
-      source URL exists.
+      Use Blockquote for quoted material. Use the <code>caption</code> slot for formatted
+      attribution and <code>cite</code> for the source URL.
     </p>
   </section>
 </DocsLayout>

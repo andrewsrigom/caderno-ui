@@ -7,7 +7,46 @@
     <title>Caderno UI · Laboratory</title>
     <script type="module" src="/src/main.ts"></script>
   </head>
-  <body>
+  <body id="top">
+    <cad-header
+      class="laboratory-header"
+      data-component="header"
+      label="Caderno UI laboratory header"
+      navigation-label="Laboratory navigation"
+      variant="surface"
+    >
+      <a
+        aria-label="Caderno UI laboratory home"
+        class="laboratory-header-brand"
+        href="#top"
+        slot="brand"
+      >
+        <cad-icon aria-hidden="true" name="book" size="26"></cad-icon>
+        <strong>CADERNO UI</strong>
+      </a>
+      <cad-link aria-current="page" href="#top">Overview</cad-link>
+      <cad-link href="#cards" variant="plain">Components</cad-link>
+      <cad-link href="#charts" variant="plain">Charts</cad-link>
+      <cad-button
+        label="Search laboratory"
+        size="sm"
+        slot="search"
+        variant="ghost"
+      >
+        <cad-icon aria-hidden="true" name="search" size="20"></cad-icon>
+      </cad-button>
+      <cad-button label="Saved items" size="sm" slot="actions" variant="ghost">
+        <cad-icon aria-hidden="true" name="bookmark" size="20"></cad-icon>
+      </cad-button>
+      <cad-button
+        label="Account: Andrews"
+        size="sm"
+        slot="user"
+        variant="ghost"
+      >
+        <cad-avatar name="Andrews Rigom" size="sm"></cad-avatar>
+      </cad-button>
+    </cad-header>
     <main>
       <header class="hero">
         <div>
@@ -223,6 +262,29 @@
           >
             <span slot="label">Review notes</span>
           </cad-textarea>
+          <cad-slider
+            hint="Choose how much detail this review should include."
+            label="Review depth"
+            name="review-depth"
+            show-value
+            ticks="0,25,50,75,100"
+            value="64"
+          >
+            <span slot="label">Review depth</span>
+            <span slot="hint">
+              Choose how much detail this review should include.
+            </span>
+          </cad-slider>
+          <cad-switch
+            checked
+            hint="Save local changes while you work."
+            label="Auto-save"
+            name="auto-save"
+            value="enabled"
+          >
+            <span slot="label">Auto-save</span>
+            <span slot="hint">Save local changes while you work.</span>
+          </cad-switch>
           <div class="choice-grid">
             <fieldset>
               <legend>Checklist</legend>
@@ -314,13 +376,23 @@
           <div class="feedback-sample">
             <h3>Busy states</h3>
             <div class="cluster">
-              <cad-spinner label="Syncing note" size="sm" tone="mint">
+              <cad-spinner
+                label="Syncing note"
+                size="sm"
+                tone="mint"
+                variant="dots"
+              >
                 Syncing note
               </cad-spinner>
               <cad-spinner label="Indexing notebook" tone="blue">
                 Indexing notebook
               </cad-spinner>
-              <cad-spinner label="Publishing release" size="lg" tone="violet">
+              <cad-spinner
+                label="Publishing release"
+                size="lg"
+                tone="red"
+                variant="segmented"
+              >
                 Publishing release
               </cad-spinner>
             </div>
@@ -353,6 +425,57 @@
                 Confirm review
               </cad-button>
             </cad-modal>
+          </div>
+          <div class="feedback-sample">
+            <h3>Edge task</h3>
+            <cad-drawer heading="Task details" placement="right" size="sm">
+              <cad-button slot="trigger" variant="secondary">
+                <cad-icon
+                  aria-hidden="true"
+                  name="pencil"
+                  slot="start"
+                ></cad-icon>
+                Open task details
+              </cad-button>
+              <p>
+                Review the assignee, due date, and release priority without
+                losing the laboratory context.
+              </p>
+              <cad-button
+                data-drawer-cancel
+                slot="footer"
+                type="button"
+                variant="link"
+              >
+                Cancel
+              </cad-button>
+              <cad-button data-drawer-save slot="footer" type="button">
+                Save task
+              </cad-button>
+            </cad-drawer>
+          </div>
+          <div class="feedback-sample">
+            <h3>Anchored context</h3>
+            <cad-button
+              id="laboratory-popover-trigger"
+              type="button"
+              variant="secondary"
+            >
+              Release context
+            </cad-button>
+            <cad-popover
+              anchor="laboratory-popover-trigger"
+              heading="Release contract"
+              placement="bottom-start"
+            >
+              <p>
+                The surface stays near its trigger without blocking the rest of
+                the laboratory.
+              </p>
+              <cad-button size="sm" slot="actions" variant="link">
+                Browse contract
+              </cad-button>
+            </cad-popover>
           </div>
         </div>
         <div class="toast-demo">
@@ -440,7 +563,12 @@
               size="lg"
               status="online"
               status-label="Available"
-            ></cad-avatar>
+            >
+              <cad-doodle-avatar
+                slot="image"
+                variant="happy"
+              ></cad-doodle-avatar>
+            </cad-avatar>
           </div>
           <div class="annotation-sample">
             <h3>Inline emphasis</h3>
@@ -448,7 +576,7 @@
               Keep the
               <cad-highlight tone="mint">contract explicit</cad-highlight> and
               test
-              <cad-highlight tone="violet" variant="double"
+              <cad-highlight tone="lavender" variant="double"
                 >every boundary</cad-highlight
               >.
             </p>
@@ -456,7 +584,6 @@
           <div class="annotation-sample">
             <h3>Decorative language</h3>
             <div class="cluster">
-              <cad-tape aria-hidden="true" tone="paper"></cad-tape>
               <cad-sticker tone="mint">
                 <cad-icon
                   aria-hidden="true"
@@ -489,37 +616,29 @@
         <h2>Progress</h2>
         <div class="progress-stack">
           <cad-progress
-            label="Reading plan"
-            max="8"
+            label="Uploading file"
+            max="100"
             show-value
-            tone="mint"
-            value="5"
+            tone="blue"
+            value="72"
           >
-            <span slot="fallback">Reading plan: 63%</span>
+            <span slot="fallback">Uploading file: 72%</span>
           </cad-progress>
-          <cad-progress label="Indexing notes" show-value tone="blue">
-            <span slot="fallback">Indexing notes: in progress</span>
+          <cad-progress label="Data synced" show-value tone="mint" value="100">
+            <span slot="fallback">Data synced: 100%</span>
           </cad-progress>
-          <div class="cluster">
-            <cad-progress
-              current="3"
-              label="Interview stages"
-              steps="5"
-              tone="violet"
-              variant="steps"
-            >
-              <span slot="fallback">Interview stages: 60%</span>
-            </cad-progress>
-            <cad-progress
-              label="Review confidence"
-              max="10"
-              tone="pink"
-              value="8"
-              variant="ring"
-            >
-              <span slot="fallback">Review confidence: 80%</span>
-            </cad-progress>
-          </div>
+          <cad-progress
+            label="Storage almost full"
+            show-value
+            size="sm"
+            tone="amber"
+            value="85"
+          >
+            <span slot="fallback">Storage almost full: 85%</span>
+          </cad-progress>
+          <cad-progress label="Syncing" size="xs" tone="blue">
+            <span slot="fallback">Syncing: in progress</span>
+          </cad-progress>
         </div>
       </section>
 
@@ -527,7 +646,7 @@
         <h2>Tabs</h2>
         <cad-tabs default-value="contract">
           <cad-tabs-list label="Component design stages">
-            <cad-tab-trigger label="Problem" tone="coral" value="problem">
+            <cad-tab-trigger label="Problem" value="problem">
               <cad-icon
                 aria-hidden="true"
                 name="question"
@@ -535,7 +654,7 @@
               ></cad-icon>
               Problem
             </cad-tab-trigger>
-            <cad-tab-trigger label="Contract" tone="lemon" value="contract">
+            <cad-tab-trigger active label="Contract" value="contract">
               <cad-icon
                 aria-hidden="true"
                 name="brackets"
@@ -543,7 +662,7 @@
               ></cad-icon>
               Contract
             </cad-tab-trigger>
-            <cad-tab-trigger label="Proof" tone="mint" value="proof">
+            <cad-tab-trigger label="Proof" value="proof">
               <cad-icon aria-hidden="true" name="check" slot="start"></cad-icon>
               Proof
             </cad-tab-trigger>
@@ -612,27 +731,6 @@
             </cad-checklist-item>
           </cad-checklist>
         </div>
-        <div class="grid">
-          <cad-paper elevation="raised" margin pattern="ruled">
-            <article>
-              <h3>Release notebook</h3>
-              <p>
-                A neutral paper surface keeps headings, lists, and application
-                semantics outside the primitive.
-              </p>
-              <ul>
-                <li>Contracts remain typed.</li>
-                <li>Entrypoints remain selective.</li>
-              </ul>
-            </article>
-          </cad-paper>
-          <cad-paper pattern="grid" tone="blue">
-            <article>
-              <h3>Architecture sketch</h3>
-              <p>tokens → elements → adapters → products</p>
-            </article>
-          </cad-paper>
-        </div>
         <cad-empty-state
           description="Try a broader owner or status filter."
           title="No matching decisions"
@@ -655,15 +753,15 @@
       <section data-component="planning-patterns">
         <h2>Planning patterns</h2>
         <cad-steps label="Package release" orientation="horizontal">
-          <cad-step title="Verify contracts" tone="blue">
+          <cad-step status="complete" title="Verify contracts">
             Run type, browser, accessibility, and bundle checks.
             <span slot="meta">Automated · 8 min</span>
           </cad-step>
-          <cad-step title="Publish packages" tone="violet">
+          <cad-step status="current" title="Publish packages">
             Publish the synchronized public package versions.
             <span slot="meta">Owner · maintainer</span>
           </cad-step>
-          <cad-step title="Validate consumers" tone="mint">
+          <cad-step status="pending" title="Validate consumers">
             Install the release in SeniorPath and rerun critical flows.
             <span slot="meta">Required before announcement</span>
           </cad-step>
@@ -736,5 +834,37 @@
       <cad-toast-host label="Laboratory notifications" data-toast-host>
       </cad-toast-host>
     </main>
+    <cad-footer
+      class="laboratory-footer"
+      data-component="footer"
+      label="Caderno UI laboratory footer"
+      links-label="Laboratory footer links"
+      variant="light"
+    >
+      <div class="laboratory-footer-brand" slot="brand">
+        <strong>CADERNO UI</strong>
+        <p>Notebook-native components with explicit contracts.</p>
+      </div>
+      <cad-footer-group heading="Product">
+        <cad-link href="#components">Components</cad-link>
+        <cad-link href="#forms">Forms</cad-link>
+        <cad-link href="#charts">Charts</cad-link>
+      </cad-footer-group>
+      <cad-footer-group heading="Resources">
+        <cad-link href="#feedback">Feedback</cad-link>
+        <cad-link href="#navigation">Navigation</cad-link>
+        <cad-link href="#planning">Planning</cad-link>
+      </cad-footer-group>
+      <div class="laboratory-footer-social" slot="social">
+        <cad-link href="#github" label="GitHub" variant="plain">GH</cad-link>
+        <cad-link href="#community" label="Community" variant="plain"
+          >CO</cad-link
+        >
+      </div>
+      <small slot="bottom">© 2026 Caderno UI · MIT licensed</small>
+      <cad-link href="#top" slot="back-to-top" variant="plain">
+        Back to top
+      </cad-link>
+    </cad-footer>
   </body>
 </html>

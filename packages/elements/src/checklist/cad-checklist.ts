@@ -27,12 +27,13 @@ export class CadChecklistItem extends LitElement {
 
     .item {
       display: grid;
-      grid-template-columns: 1.7rem minmax(0, 1fr);
-      gap: 0.55rem;
+      grid-template-columns: 1.65rem minmax(0, 1fr);
+      gap: 0.75rem;
       align-items: start;
       color: var(--cad-ink, currentColor);
-      font-family: var(--cad-font-book, serif);
-      line-height: 1.5;
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-sm, 1.05rem);
+      line-height: 1.4;
     }
 
     .mark {
@@ -41,17 +42,23 @@ export class CadChecklistItem extends LitElement {
       width: 1.5rem;
       height: 1.5rem;
       color: var(--_check-accent, currentColor);
-      transform: rotate(-3deg);
+      border: 1.5px solid color-mix(in srgb, currentColor 82%, transparent);
+      transform: rotate(-2deg);
     }
 
     .mark svg {
-      width: 1.2rem;
-      height: 1.2rem;
+      width: 1rem;
+      height: 1rem;
     }
 
     :host([kind='cross']) .item,
     :host([data-resolved-kind='cross']) .item {
-      color: var(--cad-ink-muted, currentColor);
+      color: var(--cad-ink, currentColor);
+    }
+
+    :host([kind='cross']) .mark,
+    :host([data-resolved-kind='cross']) .mark {
+      transform: rotate(2deg);
     }
   `
 
@@ -99,9 +106,10 @@ export class CadChecklist extends LitElement {
 
   static override styles = css`
     :host {
-      --_check-accent: var(--cad-post-it-mint-ink, #274f41);
-      --_check-bg: var(--cad-post-it-mint-bg, #d8ffec);
+      --_check-accent: var(--cad-link, #005bac);
+      --_check-bg: var(--cad-post-it-blue-bg, #cfe2ff);
       display: block;
+      color: var(--cad-ink, #162033);
     }
 
     :host([tone='blue']) {
@@ -130,22 +138,38 @@ export class CadChecklist extends LitElement {
     }
 
     .base {
+      position: relative;
       display: grid;
-      gap: 0.85rem;
-      padding: 1.15rem 1.25rem 1.2rem;
-      background: color-mix(in srgb, var(--_check-bg) 26%, transparent);
-      border: 1.5px dashed
-        color-mix(in srgb, var(--_check-accent) 35%, transparent);
-      border-radius: 0.9rem 1.2rem 0.85rem 1.05rem;
+      gap: 1rem;
+      padding: 1.15rem 1.25rem 1.25rem;
+      background: color-mix(
+        in srgb,
+        var(--_check-bg) 8%,
+        var(--cad-surface, #fff)
+      );
+      border: var(--cad-frame-border, 1.5px dashed var(--cad-border-ink));
+      border-radius: 0;
     }
 
     .title {
+      position: relative;
+      width: fit-content;
       color: var(--_check-accent);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
+      font-family: var(--cad-type-title-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-title-size, var(--cad-hand-md, 1.25rem));
       font-weight: var(--cad-hand-weight-strong, 700);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      line-height: var(--cad-type-title-line-height, 1.15);
+    }
+
+    .title::after {
+      position: absolute;
+      right: 8%;
+      bottom: -0.22rem;
+      left: 0;
+      height: 2px;
+      background: color-mix(in srgb, var(--_check-accent) 72%, transparent);
+      content: '';
+      transform: rotate(-1deg);
     }
 
     .title[hidden] {
@@ -154,7 +178,7 @@ export class CadChecklist extends LitElement {
 
     .list {
       display: grid;
-      gap: 0.6rem;
+      gap: 0.75rem;
     }
 
     @media (forced-colors: active) {
@@ -171,7 +195,7 @@ export class CadChecklist extends LitElement {
   constructor() {
     super()
     this.title = ''
-    this.tone = 'mint'
+    this.tone = 'blue'
     this.variant = 'mixed'
   }
 

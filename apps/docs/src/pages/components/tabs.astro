@@ -4,17 +4,33 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-tabs default-value="notes">
-  <cad-tabs-list label="Implementation workspace">
-    <cad-tab-trigger label="Notes" tone="lemon" value="notes">
-      <cad-icon aria-hidden="true" name="note" slot="start"></cad-icon>
+const usage = `<cad-tabs default-value="overview">
+  <cad-tabs-list label="Architecture review workspace">
+    <cad-tab-trigger active label="Overview" value="overview">
+      <cad-icon aria-hidden="true" name="book" size="20" slot="start"></cad-icon>
+      Overview
+    </cad-tab-trigger>
+    <cad-tab-trigger label="Evidence" value="evidence">
+      <cad-icon aria-hidden="true" name="gauge" size="20" slot="start"></cad-icon>
+      Evidence
+    </cad-tab-trigger>
+    <cad-tab-trigger label="Notes" value="notes">
+      <cad-icon aria-hidden="true" name="note" size="20" slot="start"></cad-icon>
       Notes
     </cad-tab-trigger>
-    <cad-tab-trigger label="Code" tone="mint" value="code">Code</cad-tab-trigger>
+    <cad-tab-trigger label="Rollout" value="rollout">
+      <cad-icon aria-hidden="true" name="rocket" size="20" slot="start"></cad-icon>
+      Rollout
+    </cad-tab-trigger>
   </cad-tabs-list>
 
-  <cad-tab-content value="notes">Document the invariant first.</cad-tab-content>
-  <cad-tab-content value="code">Implement the smallest complete path.</cad-tab-content>
+  <cad-tab-content value="overview">
+    <h2>Use an asynchronous search index</h2>
+    <p>Keep the transactional database authoritative and expose index lag as an observable product state.</p>
+  </cad-tab-content>
+  <cad-tab-content value="evidence">Evidence collected during the architecture review.</cad-tab-content>
+  <cad-tab-content value="notes">Notes, assumptions, and unresolved questions.</cad-tab-content>
+  <cad-tab-content value="rollout">A reversible rollout plan with observable checkpoints.</cad-tab-content>
 </cad-tabs>
 
 <script type="module">
@@ -24,41 +40,41 @@ const usage = `<cad-tabs default-value="notes">
 ---
 
 <DocsLayout
-  description="Compound keyboard-accessible tabs with composable triggers and panels."
+  description="Switch between related panels without leaving the page."
   title="Tabs"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-tabs&gt; family</p>
-    <h1>Compose the controls and content as explicit peers.</h1>
-    <p>
-      Tabs coordinates a list, native trigger buttons, and matching content
-      panels by value. Trigger visuals are ordinary slots, so tabs never import
-      or prescribe the icon library.
-    </p>
+    <h1>Tabs</h1>
+    <p>Switch between related panels without leaving the page.</p>
   </header>
 
-  <DemoFrame
-    title="Architecture review workspace"
-    description="Switch between the decision, evidence, and rollout plan with arrow keys, Home, or End."
-  >
-    <cad-tabs default-value="decision">
+  <DemoFrame title="Architecture review workspace">
+    <cad-tabs default-value="overview">
       <cad-tabs-list label="Architecture review workspace">
-        <cad-tab-trigger label="Decision" tone="lemon" value="decision">
-          <cad-icon aria-hidden="true" name="note" size="16" slot="start"
+        <cad-tab-trigger active label="Overview" value="overview">
+          <cad-icon aria-hidden="true" name="book" size="20" slot="start"
           ></cad-icon>
-          Decision
+          Overview
         </cad-tab-trigger>
-        <cad-tab-trigger label="Evidence" tone="mint" value="evidence">
-          <cad-icon aria-hidden="true" name="gauge" size="16" slot="start"
+        <cad-tab-trigger label="Evidence" value="evidence">
+          <cad-icon aria-hidden="true" name="gauge" size="20" slot="start"
           ></cad-icon>
           Evidence
         </cad-tab-trigger>
-        <cad-tab-trigger label="Rollout" tone="violet" value="rollout">
+        <cad-tab-trigger label="Notes" value="notes">
+          <cad-icon aria-hidden="true" name="note" size="20" slot="start"
+          ></cad-icon>
+          Notes
+        </cad-tab-trigger>
+        <cad-tab-trigger label="Rollout" value="rollout">
+          <cad-icon aria-hidden="true" name="rocket" size="20" slot="start"
+          ></cad-icon>
           Rollout
         </cad-tab-trigger>
       </cad-tabs-list>
 
-      <cad-tab-content value="decision">
+      <cad-tab-content value="overview">
         <h2>Use an asynchronous search index</h2>
         <p>
           Keep the transactional database authoritative and expose index lag as
@@ -66,31 +82,28 @@ const usage = `<cad-tabs default-value="notes">
         </p>
       </cad-tab-content>
       <cad-tab-content value="evidence">
-        <h2>What supports the decision</h2>
-        <p>
-          Peak query latency fell while write throughput remained inside the
-          recovery budget.
-        </p>
+        Evidence collected during the architecture review.
+      </cad-tab-content>
+      <cad-tab-content value="notes">
+        Notes, assumptions, and unresolved questions.
       </cad-tab-content>
       <cad-tab-content value="rollout">
-        <h2>How to ship it safely</h2>
-        <p>
-          Dual-read a sampled cohort, compare result sets, then expand behind a
-          reversible flag.
-        </p>
+        A reversible rollout plan with observable checkpoints.
       </cad-tab-content>
     </cad-tabs>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
   <ApiReference tagName="cad-tabs" />
+  <ApiReference tagName="cad-tabs-list" />
+  <ApiReference tagName="cad-tab-trigger" />
+  <ApiReference tagName="cad-tab-content" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Trigger labels provide both visible and accessible names. The controller
-      implements roving focus and skips disabled triggers; content stays a named
-      tab panel and fails open when values are missing or duplicated.
+      Arrow keys, Home, and End move focus between enabled tabs. Each tab is
+      linked to its panel.
     </p>
   </section>
 </DocsLayout>

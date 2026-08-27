@@ -34,46 +34,57 @@ export class CadBookmark extends LitElement {
     :host {
       --_bookmark-bg: var(
         --cad-bookmark-bg,
-        var(--cad-post-it-blue-bg, #293f64)
+        var(--cad-post-it-blue-bg, #cfe2ff)
       );
-      --_bookmark-ink: var(
-        --cad-bookmark-ink,
-        var(--cad-post-it-blue-ink, #deebff)
-      );
+      --_bookmark-ink: var(--cad-bookmark-ink, var(--cad-link, #005bac));
       display: inline-flex;
     }
 
     button {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.55rem;
       min-height: 2.75rem;
-      padding: 0.45rem 0.75rem 0.5rem 0.55rem;
+      padding: 0.35rem 0.35rem 0.42rem;
       color: var(--_bookmark-ink);
-      background: color-mix(
-        in srgb,
-        var(--_bookmark-bg) 32%,
-        var(--cad-surface, #1f2335)
-      );
-      border: 1.5px dashed
-        color-mix(in srgb, var(--_bookmark-ink) 45%, transparent);
-      border-radius: 0.45rem 0.6rem 0.45rem 0.55rem;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
+      font-size: var(--cad-hand-md, 1.2rem);
+      font-weight: var(--cad-hand-weight-regular, 500);
+      line-height: 1.1;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    button[aria-pressed='true'] {
-      background: var(--_bookmark-bg);
-      border-style: solid;
+    button::after {
+      position: absolute;
+      right: 0.2rem;
+      bottom: 0.22rem;
+      left: 2.2rem;
+      height: 2px;
+      background: var(--cad-post-it-coral-bg, #ff665c);
+      content: '';
+      opacity: 0.72;
+      pointer-events: none;
+      transform: rotate(-0.8deg) scaleX(0.72);
+      transform-origin: left center;
+      transition: transform var(--cad-duration-fast, 140ms) ease;
     }
 
     button:hover {
-      background: color-mix(
-        in srgb,
-        var(--_bookmark-bg) 66%,
-        var(--cad-surface, #1f2335)
-      );
+      background: color-mix(in srgb, var(--_bookmark-bg) 22%, transparent);
+    }
+
+    button:hover::after,
+    button[aria-pressed='true']::after {
+      transform: rotate(0.35deg) scaleX(1);
+    }
+
+    button[aria-pressed='true'] {
+      background: color-mix(in srgb, var(--_bookmark-bg) 38%, transparent);
     }
 
     button:focus-visible {
@@ -82,6 +93,7 @@ export class CadBookmark extends LitElement {
     }
 
     .icon {
+      position: relative;
       width: 1.35rem;
       height: 1.35rem;
       transition: transform
@@ -89,8 +101,19 @@ export class CadBookmark extends LitElement {
         var(--cad-motion-ease-feedback, var(--cad-transition-smooth, ease));
     }
 
+    .icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: transparent;
+    }
+
     button[aria-pressed='true'] .icon {
-      transform: translateY(0.15rem);
+      transform: translateY(0.1rem) rotate(-4deg);
+    }
+
+    button[aria-pressed='true'] .icon svg {
+      fill: currentColor;
     }
 
     @media (prefers-reduced-motion: reduce) {

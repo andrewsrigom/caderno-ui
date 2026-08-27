@@ -2,15 +2,19 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-empty-state
-  title="No matching decisions"
-  description="Try a broader owner or status filter."
-  variant="no-results"
+  eyebrow="No projects yet"
+  title="You haven't created a project"
+  description="Projects help you organize work, track decisions, and collaborate with your team in one place."
+  tone="blue"
 >
-  <cad-icon name="search" size="56" slot="icon"></cad-icon>
-  <cad-button slot="actions">Clear filters</cad-button>
+  <cad-icon name="folder" slot="icon"></cad-icon>
+  <cad-button slot="primary" variant="primary">+ Create project</cad-button>
+  <cad-button slot="secondary" variant="link">Browse templates →</cad-button>
 </cad-empty-state>
 
 <script type="module">
@@ -18,49 +22,144 @@ const usage = `<cad-empty-state
   import '@caderno-ui/elements/icon'
   import '@caderno-ui/elements/button'
 </script>`
+
+const variantsUsage = `<cad-empty-state
+  description="Try another term or clear the current filters."
+  size="compact"
+  title="No results found"
+  tone="blue"
+  variant="no-results"
+>
+  <cad-icon name="search" slot="icon"></cad-icon>
+  <cad-button slot="primary" variant="link">Clear filters</cad-button>
+</cad-empty-state>
+
+<cad-empty-state
+  description="Create the first note when you are ready."
+  size="minimal"
+  title="No notes yet"
+  tone="neutral"
+  variant="no-data"
+>
+  <cad-icon name="note" slot="icon"></cad-icon>
+  <cad-button slot="primary" variant="link">+ Create note</cad-button>
+</cad-empty-state>
+
+<cad-empty-state
+  description="Ask a workspace owner to grant access."
+  size="compact"
+  title="Access required"
+  tone="red"
+  variant="no-access"
+>
+  <cad-icon name="lock" slot="icon"></cad-icon>
+  <cad-button slot="primary" variant="link">Request access</cad-button>
+</cad-empty-state>`
 ---
 
 <DocsLayout
-  description="Composable empty collection, search, and access states with explicit recovery actions."
+  description="Explain what is missing and offer a next step. Add your own illustration, text, and actions."
   title="Empty state"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-empty-state&gt;</p>
-    <h1>Explain what is absent and give the next useful action.</h1>
+    <h1>Empty state</h1>
     <p>
-      Empty state owns layout, not product illustration or recovery behavior.
-      Those concerns enter through explicit slots and selective imports.
+      Explain what is missing and offer a next step. Add your own illustration,
+      text, and actions.
     </p>
   </header>
 
-  <DemoFrame
-    title="Filtered decision log"
-    description="The collection exists, but the current owner and status filters produce no results."
-  >
-    <cad-empty-state
-      title="No matching decisions"
-      description="Try a broader owner or status filter."
-      variant="no-results"
-    >
-      <cad-icon name="search" size="56" slot="icon"></cad-icon>
-      <cad-button slot="actions" variant="secondary">
-        <cad-icon name="reset" size="18" slot="start"></cad-icon>
-        Clear filters
-      </cad-button>
-    </cad-empty-state>
+  <DemoFrame title="First project">
+    <div class="empty-state-stage">
+      <cad-empty-state
+        eyebrow="No projects yet"
+        title="You haven't created a project"
+        description="Projects help you organize work, track decisions, and collaborate with your team in one place."
+        tone="blue"
+      >
+        <cad-icon name="folder" slot="icon"></cad-icon>
+        <cad-button slot="primary" variant="primary">
+          + Create project
+        </cad-button>
+        <cad-button slot="secondary" variant="link">
+          Browse templates →
+        </cad-button>
+      </cad-empty-state>
+    </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    columns={3}
+    id="empty-state-variants-title"
+    title="Sizes and use cases"
+  >
+    <ExampleCard title="Compact · no results">
+      <cad-empty-state
+        description="Try another term or clear the current filters."
+        size="compact"
+        title="No results found"
+        tone="blue"
+        variant="no-results"
+      >
+        <cad-icon name="search" slot="icon"></cad-icon>
+        <cad-button slot="primary" variant="link">Clear filters</cad-button>
+      </cad-empty-state>
+    </ExampleCard>
+    <ExampleCard title="Minimal · no data">
+      <cad-empty-state
+        description="Create the first note when you are ready."
+        size="minimal"
+        title="No notes yet"
+        tone="neutral"
+        variant="no-data"
+      >
+        <cad-icon name="note" slot="icon"></cad-icon>
+        <cad-button slot="primary" variant="link">+ Create note</cad-button>
+      </cad-empty-state>
+    </ExampleCard>
+    <ExampleCard title="Compact · no access">
+      <cad-empty-state
+        description="Ask a workspace owner to grant access."
+        size="compact"
+        title="Access required"
+        tone="red"
+        variant="no-access"
+      >
+        <cad-icon name="lock" slot="icon"></cad-icon>
+        <cad-button slot="primary" variant="link">Request access</cad-button>
+      </cad-empty-state>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="empty-layout-title">
+    <h2 id="empty-layout-title">Size and tone</h2>
+    <p>
+      Use <code>comfortable</code> for a full-page empty state, <code
+        >compact</code
+      > in a panel, and <code>minimal</code> without a surrounding surface. Choose
+      the tone to match the message.
+    </p>
+  </section>
 
   <ApiReference tagName="cad-empty-state" />
 
   <section class="content-section" aria-labelledby="empty-accessibility">
     <h2 id="empty-accessibility">Accessibility</h2>
     <p>
-      Empty state is static content, not an alert. Move focus only when a user
-      action replaces a focused collection, and keep action labels specific to
-      the recovery they perform.
+      This is static content, not an alert. Use specific action labels. Move
+      focus only when a user action removes the previously focused content.
     </p>
   </section>
+
+  <style>
+    .empty-state-stage {
+      display: grid;
+      place-items: center;
+    }
+  </style>
 </DocsLayout>
 
 <script>

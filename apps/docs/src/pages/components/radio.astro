@@ -2,54 +2,80 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-radio checked label="Architecture" name="track" value="architecture"></cad-radio>
-<cad-radio label="Algorithms" name="track" value="algorithms"></cad-radio>
+const usage = `<div aria-label="Interview track" role="radiogroup">
+  <cad-radio checked label="Architecture" name="track" value="architecture"></cad-radio>
+  <cad-radio label="Algorithms" name="track" value="algorithms"></cad-radio>
+  <cad-radio
+    hint="Choose exactly one track."
+    label="Behavioral"
+    name="track"
+    required
+    value="behavioral"
+  ></cad-radio>
+</div>
 
 <script type="module">
   import '@caderno-ui/elements/radio'
 </script>`
+
+const statesUsage = `<cad-radio label="Available" name="state-a" value="available"></cad-radio>
+<cad-radio checked label="Selected" name="state-b" value="selected"></cad-radio>
+<cad-radio disabled label="Unavailable" name="state-c" value="unavailable"></cad-radio>`
 ---
 
 <DocsLayout
-  description="CadRadio is a form-associated notebook radio that coordinates grouping and arrow keys across shadow roots."
+  description="Choose one option from a group. Use the same name for radios in the same form."
   title="Radio"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-radio&gt;</p>
-    <h1>Choose one option across real shadow boundaries.</h1>
+    <h1>Radio</h1>
     <p>
-      Radios with the same <code>name</code> and form coordinate selection even though
-      each control owns a shadow root. Arrow keys move and select within the group.
+      Choose one option from a group. Use the same name for radios in the same
+      form.
     </p>
   </header>
 
   <DemoFrame title="Interview track">
     <div aria-label="Interview track" class="choice-stack" role="radiogroup">
-      <cad-radio
-        checked
-        label="Architecture"
-        name="track"
-        tone="blue"
-        value="architecture"></cad-radio>
-      <cad-radio label="Algorithms" name="track" tone="mint" value="algorithms"
+      <cad-radio checked label="Architecture" name="track" value="architecture"
       ></cad-radio>
+      <cad-radio label="Algorithms" name="track" value="algorithms"></cad-radio>
       <cad-radio
+        hint="Choose exactly one track."
         label="Behavioral"
         name="track"
-        tone="violet"
+        required
         value="behavioral"></cad-radio>
     </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+  <ExampleGallery columns={3} id="radio-states-title" title="States">
+    <ExampleCard title="Available">
+      <cad-radio label="Available" name="state-a" value="available"></cad-radio>
+    </ExampleCard>
+    <ExampleCard title="Selected">
+      <cad-radio checked label="Selected" name="state-b" value="selected"
+      ></cad-radio>
+    </ExampleCard>
+    <ExampleCard title="Disabled">
+      <cad-radio disabled label="Unavailable" name="state-c" value="unavailable"
+      ></cad-radio>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={statesUsage} collapsible language="html" />
   <ApiReference tagName="cad-radio" />
 
   <section class="content-section" aria-labelledby="keyboard-title">
     <h2 id="keyboard-title">Keyboard and validation</h2>
     <p>
-      Left/Up and Right/Down move cyclically among enabled peers. If any peer is
-      required, the group remains invalid until one value is selected.
+      Arrow keys move and select among enabled options. If any radio is <code
+        >required</code
+      >, the group is invalid until one is selected.
     </p>
   </section>
 
@@ -60,3 +86,7 @@ const usage = `<cad-radio checked label="Architecture" name="track" value="archi
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/radio'
+</script>

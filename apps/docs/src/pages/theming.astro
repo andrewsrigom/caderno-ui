@@ -3,71 +3,71 @@ import CodeBlock from '../components/CodeBlock.astro'
 import DemoFrame from '../components/DemoFrame.astro'
 import DocsLayout from '../layouts/DocsLayout.astro'
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const themeImport = `import '@caderno-ui/tokens/notebook.css'`
+const scrollbarImport = `import '@caderno-ui/elements/scrollbar.css'`
 const override = `.product-surface {
-  --cad-font-text: Charter, Georgia, serif;
   --cad-link: #6d35c5;
   --cad-post-it-blue-bg: #d9c8ff;
-  --cad-post-it-blue-ink: #321b59;
 }`
 const partExample = `cad-alert.release-note::part(base) {
   border-width: 2px;
-  box-shadow: 0.35rem 0.4rem 0 rgb(16 24 40 / 0.14);
 }
 
 cad-alert.release-note::part(title) {
-  text-decoration: underline wavy;
-  text-underline-offset: 0.25em;
+  font-weight: 700;
 }`
 
 const colorTokens = [
-  ['Lemon', 'var(--cad-post-it-lemon-bg)', 'var(--cad-post-it-lemon-ink)'],
-  ['Pink', 'var(--cad-post-it-pink-bg)', 'var(--cad-post-it-pink-ink)'],
-  ['Mint', 'var(--cad-post-it-mint-bg)', 'var(--cad-post-it-mint-ink)'],
-  ['Blue', 'var(--cad-post-it-blue-bg)', 'var(--cad-post-it-blue-ink)'],
-  ['Coral', 'var(--cad-post-it-coral-bg)', 'var(--cad-post-it-coral-ink)'],
-  ['Violet', 'var(--cad-sticker-violet-bg)', 'var(--cad-sticker-violet-ink)'],
+  ['Lemon', '--cad-post-it-lemon-bg', '--cad-post-it-lemon-ink'],
+  ['Pink', '--cad-post-it-pink-bg', '--cad-post-it-pink-ink'],
+  ['Mint', '--cad-post-it-mint-bg', '--cad-post-it-mint-ink'],
+  ['Blue', '--cad-post-it-blue-bg', '--cad-post-it-blue-ink'],
+  ['Coral', '--cad-post-it-coral-bg', '--cad-post-it-coral-ink'],
+  ['Violet', '--cad-sticker-violet-bg', '--cad-sticker-violet-ink'],
 ] as const
 ---
 
 <DocsLayout
-  description="Theme Caderno UI with portable CSS custom properties and precise CSS parts."
+  description="Customize colors, fonts, and spacing. White by default, with optional dark mode."
   title="Theming"
 >
   <header class="page-header">
-    <p class="eyebrow">Design tokens</p>
-    <h1>Keep the character. Change the voice.</h1>
+    <h1>Theming</h1>
     <p>
-      Every visual decision is exposed through CSS custom properties. Start with
-      the notebook defaults, override tokens at any scope, then reach for CSS
-      parts when a component needs surgical styling.
+      Change colors, fonts, and spacing with CSS variables. Use CSS parts to
+      style specific parts of a component.
     </p>
   </header>
 
   <section class="content-section" aria-labelledby="defaults-title">
-    <h2 id="defaults-title">Load the defaults</h2>
+    <h2 id="defaults-title">Choose a theme</h2>
     <p>
-      Import the token sheet once near your application root. It defines a dark
-      default and a light palette for <code class="inline-code"
-        >data-theme="light"</code
-      >.
+      Import the theme once. The default is white, regardless of system
+      preferences. Set <code>data-theme="dark"</code> on <code
+        >&lt;html&gt;</code
+      > for dark mode. Remove the attribute or set it to <code>light</code> to return
+      to white.
     </p>
     <CodeBlock code={themeImport} language="typescript" />
   </section>
 
   <section class="content-section" aria-labelledby="palette-title">
-    <h2 id="palette-title">Notebook palette</h2>
+    <h2 id="palette-title">Color pairs</h2>
     <p>
-      Post-it and sticker pairs include a background and a foreground, keeping
-      text contrast part of the token contract. The shipped pairs are checked in
-      both themes at 4.5:1 or better; override both values together.
+      Each pair defines a background and text color. Change them together and
+      check contrast in both themes.
     </p>
     <div class="token-grid">
       {
         colorTokens.map(([name, background, color]) => (
-          <article class="token-swatch" style={{ background, color }}>
+          <article
+            class="token-swatch"
+            style={{ background: `var(${background})`, color: `var(${color})` }}
+          >
             <strong>{name}</strong>
-            <code>--cad-{name.toLowerCase()}</code>
+            <code>{background}</code>
+            <code>{color}</code>
           </article>
         ))
       }
@@ -75,26 +75,23 @@ const colorTokens = [
   </section>
 
   <section class="content-section" aria-labelledby="scope-title">
-    <h2 id="scope-title">Override at the right scope</h2>
+    <h2 id="scope-title">Override variables</h2>
     <p>
-      Put brand tokens on the application root, a feature boundary, or one
-      component. Shadow DOM inherits custom properties without leaking internal
-      selectors. When changing a color, test the resulting pair in every theme
-      where that scope can appear.
+      Set variables on the page, a container, or one component. Children inherit
+      them.
     </p>
     <p>
-      Typography has three roles: <code>--cad-font-text</code> for both UI and reading,
-      <code>--cad-font-hand</code> for annotations and emphasis, and
-      <code>--cad-font-mono</code> for code. The legacy
-      <code>--cad-font-ui</code> and <code>--cad-font-book</code> names remain as
-      aliases to the shared text family.
+      Use <code>--cad-font-text</code> for reading and UI,
+      <code>--cad-font-hand</code> for annotations, and <code
+        >--cad-font-mono</code
+      >
+      for code. See <a href={`${base}/typography/`}>Typography</a> for the full set.
     </p>
     <CodeBlock code={override} language="css" />
     <DemoFrame title="A locally themed alert">
       <div class="product-surface">
         <cad-alert heading="Scoped tokens" variant="info">
-          This component inherits a product-specific blue without changing the
-          rest of the page.
+          Only this alert uses the purple accent.
         </cad-alert>
       </div>
     </DemoFrame>
@@ -103,16 +100,36 @@ const colorTokens = [
   <section class="content-section" aria-labelledby="parts-title">
     <h2 id="parts-title">Style public parts</h2>
     <p>
-      Parts are stable styling hooks, not access to implementation markup. Each
-      component page lists its supported parts.
+      Use <code>::part()</code> to style the parts listed in each component’s API.
     </p>
     <CodeBlock code={partExample} language="css" />
   </section>
 
+  <section class="content-section" aria-labelledby="scrollbars-title">
+    <h2 id="scrollbars-title">Scrollbars</h2>
+    <p>
+      Import once for blue scrollbars on the page and inside components.
+      Scrolling stays native. Touch devices and high-contrast mode keep platform
+      controls.
+    </p>
+    <CodeBlock code={scrollbarImport} language="typescript" />
+    <p>
+      Customize <code>--cad-scrollbar-thumb</code>,
+      <code>--cad-scrollbar-thumb-hover</code>,
+      <code>--cad-scrollbar-track</code>, and
+      <code>--cad-scrollbar-size</code> (10px by default). Firefox uses its native
+      thin width and shape.
+    </p>
+  </section>
+
   <style>
     .product-surface {
+      --cad-link: #6d35c5;
       --cad-post-it-blue-bg: #d9c8ff;
-      --cad-post-it-blue-ink: #321b59;
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/alert'
+</script>

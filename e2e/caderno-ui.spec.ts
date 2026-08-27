@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-import { cadIconCategories } from '../packages/icons/src/index'
+import { cadIconCategories, cadIcons } from '../packages/icons/src/index'
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/')
@@ -46,7 +46,12 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-checklist-item',
       'cad-code-block',
       'cad-divider',
+      'cad-drawer',
+      'cad-doodle-avatar',
       'cad-empty-state',
+      'cad-footer',
+      'cad-footer-group',
+      'cad-header',
       'cad-highlight',
       'cad-icon',
       'cad-input',
@@ -57,13 +62,16 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-modal',
       'cad-note',
       'cad-pagination',
+      'cad-popover',
       'cad-progress',
       'cad-radio',
       'cad-skeleton',
+      'cad-slider',
       'cad-spinner',
       'cad-step',
       'cad-steps',
       'cad-sticker',
+      'cad-switch',
       'cad-tab-content',
       'cad-tab-trigger',
       'cad-tabs',
@@ -72,7 +80,6 @@ test('loads and registers the public custom elements without browser errors', as
       'cad-table-cell',
       'cad-table-column',
       'cad-table-row',
-      'cad-tape',
       'cad-textarea',
       'cad-toast',
       'cad-toast-host',
@@ -87,11 +94,12 @@ test('loads and registers the public custom elements without browser errors', as
 test('renders the extracted SeniorPath primitives with native semantics', async ({
   page,
 }) => {
+  const actions = page.locator('[data-component="actions"]')
   await expect(
-    page.locator('cad-button').first().getByRole('button'),
+    actions.locator('cad-button').first().getByRole('button'),
   ).toHaveAccessibleName('Save review')
   await expect(
-    page.locator('cad-link').first().getByRole('link'),
+    actions.locator('cad-link').first().getByRole('link'),
   ).toHaveAttribute('href', '#charts')
   await expect(
     page.locator('cad-card[href="#charts"]').getByRole('link'),
@@ -126,6 +134,22 @@ test('exposes the complete typed icon palette', async ({ page }) => {
   ).toEqual(expectedNames)
 })
 
+test('keeps every icon in one category with safe SVG path data', () => {
+  const categorizedNames = Object.values(cadIconCategories).flat()
+
+  expect(new Set(categorizedNames).size).toBe(categorizedNames.length)
+  expect([...categorizedNames].sort()).toEqual(Object.keys(cadIcons).sort())
+  expect(categorizedNames.every((name) => !name.startsWith('avatar-'))).toBe(
+    true,
+  )
+
+  for (const paths of Object.values(cadIcons)) {
+    expect(paths.length).toBeGreaterThan(0)
+    expect(paths.every((path) => path.startsWith('M'))).toBe(true)
+    expect(paths.every((path) => !path.includes('<'))).toBe(true)
+  }
+})
+
 test('supports accessible tab keyboard navigation and composed events', async ({
   page,
 }) => {
@@ -156,6 +180,12 @@ test('submits form-associated controls and coordinates radio groups', async ({
   await page
     .getByRole('textbox', { name: 'Review notes' })
     .fill('Prefer an explicit consistency trade-off.')
+  const reviewDepth = page.getByRole('slider', { name: 'Review depth' })
+  await expect(reviewDepth).toHaveValue('64')
+  await reviewDepth.focus()
+  await reviewDepth.press('Shift+ArrowRight')
+  await expect(reviewDepth).toHaveValue('74')
+  await expect(page.getByRole('switch', { name: 'Auto-save' })).toBeChecked()
   await page
     .locator('cad-checkbox[label="Keyboard flow verified"] > [slot="label"]')
     .click()
@@ -166,6 +196,8 @@ test('submits form-associated controls and coordinates radio groups', async ({
   await expect(result).toContainText('Distributed systems')
   await expect(result).toContainText('"track":"algorithms"')
   await expect(result).toContainText('"keyboard":"yes"')
+  await expect(result).toContainText('"review-depth":"74"')
+  await expect(result).toContainText('"auto-save":"enabled"')
 })
 
 test('coordinates native accordion disclosures and composed events', async ({
@@ -219,7 +251,7 @@ test('draws charts when they enter the viewport and supports replay', async ({
   await expect.poll(animationCount).toBeGreaterThan(0)
 })
 
-test('coordinates tooltip, modal, and hosted toast behavior', async ({
+test('coordinates tooltip, popover, drawer, modal, and hosted toast behavior', async ({
   page,
 }) => {
   const tooltip = page.locator('cad-tooltip')
@@ -231,6 +263,34 @@ test('coordinates tooltip, modal, and hosted toast behavior', async ({
   )
   await tooltipTrigger.press('Escape')
   await expect(tooltip).not.toHaveAttribute('open', '')
+
+  const popover = page.locator('cad-popover')
+  const popoverTrigger = page.getByRole('button', { name: 'Release context' })
+  await popoverTrigger.click()
+  await expect(popover).toHaveAttribute('open', '')
+  await expect(popover).toHaveAttribute('data-positioned', '')
+  const popoverAction = popover.getByRole('button', { name: 'Browse contract' })
+  await expect(popoverAction).toBeFocused()
+  await popoverAction.press('Escape')
+  await expect(popover).not.toHaveAttribute('open', '')
+  await expect(popoverTrigger).toBeFocused()
+  await expect(page.locator('[data-event-log]')).toContainText(
+    'cad-popover-close',
+  )
+
+  const drawer = page.locator('cad-drawer')
+  const drawerTrigger = drawer.getByRole('button', {
+    name: 'Open task details',
+  })
+  await drawerTrigger.click()
+  await expect(drawer.locator('dialog')).toHaveAttribute('open', '')
+  await expect(drawer.locator('dialog')).toHaveAttribute('aria-modal', 'true')
+  await drawer.getByRole('button', { name: 'Save task' }).click()
+  await expect(drawer.locator('dialog')).not.toHaveAttribute('open', '')
+  await expect(drawerTrigger).toBeFocused()
+  await expect(page.locator('[data-event-log]')).toContainText(
+    'cad-drawer-close',
+  )
 
   const modal = page.locator('cad-modal')
   await modal.getByRole('button', { name: 'Open review' }).click()
@@ -280,6 +340,70 @@ test('renders native navigation and semantic annotation primitives', async ({
     'aria-label',
     'Available',
   )
+  await expect(
+    section.locator('cad-avatar cad-doodle-avatar [part="drawing"]'),
+  ).toBeVisible()
+})
+
+test('turns footer groups into accessible mobile disclosures', async ({
+  page,
+}) => {
+  await page.setViewportSize({ height: 844, width: 390 })
+
+  const footer = page.locator('cad-footer[data-component="footer"]')
+  await expect(
+    footer.getByRole('contentinfo', {
+      name: 'Caderno UI laboratory footer',
+    }),
+  ).toBeVisible()
+  await expect(
+    footer.getByRole('navigation', { name: 'Laboratory footer links' }),
+  ).toBeVisible()
+
+  const product = footer.locator('cad-footer-group[heading="Product"]')
+  const toggle = product.getByRole('button', { name: 'Product' })
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(product.getByRole('link', { name: 'Components' })).toBeHidden()
+
+  await toggle.click()
+
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  await expect(product.getByRole('link', { name: 'Components' })).toBeVisible()
+  await expect(page.locator('[data-event-log]')).toContainText(
+    'cad-footer-group-toggle',
+  )
+})
+
+test('turns header navigation into a compact accessible menu', async ({
+  page,
+}) => {
+  await page.setViewportSize({ height: 844, width: 390 })
+
+  const header = page.locator('cad-header[data-component="header"]')
+  await expect(
+    header.getByRole('banner', { name: 'Caderno UI laboratory header' }),
+  ).toBeVisible()
+  const navigation = header.getByRole('navigation', {
+    name: 'Laboratory navigation',
+  })
+  await expect(navigation).toBeHidden()
+
+  const toggle = header.locator('[part="menu-toggle"]')
+  await expect(toggle).toHaveAccessibleName('Open menu')
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await toggle.click()
+
+  await expect(toggle).toHaveAccessibleName('Close menu')
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  await expect(navigation).toBeVisible()
+  await expect(header.getByRole('link', { name: 'Components' })).toBeVisible()
+  await expect(page.locator('[data-event-log]')).toContainText(
+    'cad-header-menu-toggle',
+  )
+
+  await page.keyboard.press('Escape')
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(toggle).toBeFocused()
 })
 
 test('persists bookmarks and restores them after navigation', async ({
@@ -331,7 +455,7 @@ test.describe('without JavaScript', () => {
     await expect(
       page.getByText('Keep data contracts declarative'),
     ).toBeVisible()
-    await expect(page.getByText('Reading plan: 63%')).toBeVisible()
+    await expect(page.getByText('Uploading file: 72%')).toBeVisible()
     await expect(page.getByText('Thu: 9')).toBeVisible()
     await expect(page.getByText('No matching decisions')).toBeVisible()
     await expect(page.getByText('Validate selective bundles')).toBeVisible()

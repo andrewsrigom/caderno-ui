@@ -10,7 +10,7 @@ type Props = {
   tone?: CadHighlightTone
   variant?: CadHighlightVariant
 }
-const { class: className, tone = 'lemon', variant = 'marker' } = Astro.props
+const { class: className, tone = 'yellow', variant = 'marker' } = Astro.props
 ---
 
 <cad-highlight class={className} tone={tone} variant={variant}

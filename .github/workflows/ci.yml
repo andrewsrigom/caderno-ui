@@ -188,6 +188,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm docs:check
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:docs
 
   security:
     name: Dependency and supply chain

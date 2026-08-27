@@ -2,104 +2,135 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
 const usage = `<cad-progress
-  label="Reading plan"
-  max="8"
-  tone="mint"
-  value="5"
+  label="Uploading file"
+  max="100"
   show-value
+  tone="blue"
+  value="72"
 >
-  <span slot="fallback">Reading plan: 63%</span>
+  <span slot="fallback">Uploading file: 72%</span>
 </cad-progress>
-
-<cad-progress
-  current="3"
-  label="Interview stages"
-  steps="5"
-  variant="steps"
-></cad-progress>
 
 <script type="module">
   import '@caderno-ui/elements/progress'
 </script>`
+
+const variantsUsage = `<cad-progress label="Data synced" show-value tone="mint" value="100"></cad-progress>
+<cad-progress label="Storage almost full" show-value tone="amber" value="85"></cad-progress>
+<cad-progress label="Import failed" show-value tone="red" value="40"></cad-progress>
+<cad-progress label="Connecting to server"></cad-progress>
+<cad-progress label="Processing items" max="50" size="sm" value="34" value-label="34 of 50"></cad-progress>`
 ---
 
 <DocsLayout
-  description="CadProgress preserves native progress semantics across bar, steps, and ring visualizations."
+  description="Show how much of a task is complete, or indicate that work is still running."
   title="Progress"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-progress&gt;</p>
-    <h1>Show how far the page has turned.</h1>
+    <h1>Progress</h1>
     <p>
-      Progress uses a native element for every variant, supports determinate and
-      indeterminate work, and keeps visible and accessible values aligned.
+      Show how much of a task is complete, or indicate that work is still
+      running.
     </p>
   </header>
 
-  <DemoFrame title="Determinate and indeterminate work">
-    <div class="progress-stack">
-      <cad-progress
-        label="Reading plan"
-        max="8"
-        tone="mint"
-        value="5"
-        show-value
-      >
-        <span slot="fallback">Reading plan: 63%</span>
-      </cad-progress>
-      <cad-progress label="Indexing notes" tone="blue" show-value>
-        <span slot="fallback">Indexing notes: in progress</span>
-      </cad-progress>
-      <cad-progress
-        label="Review confidence"
-        max="10"
-        tone="lemon"
-        value="8"
-        value-label="Ready"
-        show-value
-      >
-        <span slot="fallback">Review confidence: ready</span>
-      </cad-progress>
-      <cad-progress
-        current="3"
-        label="Interview stages"
-        steps="5"
-        tone="violet"
-        variant="steps"
-      >
-        <span slot="fallback">Interview stages: 60%</span>
-      </cad-progress>
-      <cad-progress
-        label="Review confidence"
-        max="10"
-        tone="pink"
-        value="8"
-        variant="ring"
-      >
-        <span slot="fallback">Review confidence: 80%</span>
-      </cad-progress>
-    </div>
+  <DemoFrame title="Uploading file">
+    <cad-progress
+      label="Uploading file"
+      max="100"
+      show-value
+      tone="blue"
+      value="72"
+    >
+      <span slot="fallback">Uploading file: 72%</span>
+    </cad-progress>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
+  <ExampleGallery
+    id="progress-variants-title"
+    title="States and sizes"
+    description="Omit value when progress is unknown."
+  >
+    <ExampleCard title="Success">
+      <cad-progress
+        class="gallery-progress"
+        label="Data synced"
+        show-value
+        tone="mint"
+        value="100"></cad-progress>
+    </ExampleCard>
+    <ExampleCard title="Warning">
+      <cad-progress
+        class="gallery-progress"
+        label="Storage almost full"
+        show-value
+        tone="amber"
+        value="85"></cad-progress>
+    </ExampleCard>
+    <ExampleCard title="Error">
+      <cad-progress
+        class="gallery-progress"
+        label="Import failed"
+        show-value
+        tone="red"
+        value="40"></cad-progress>
+    </ExampleCard>
+    <ExampleCard title="Indeterminate">
+      <cad-progress class="gallery-progress" label="Connecting to server"
+      ></cad-progress>
+    </ExampleCard>
+    <ExampleCard title="Small · count" wide>
+      <cad-progress
+        class="gallery-progress"
+        label="Processing items"
+        max="50"
+        size="sm"
+        value="34"
+        value-label="34 of 50"></cad-progress>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="sizes-tones-title">
+    <h2 id="sizes-tones-title">Sizes and values</h2>
+    <p>
+      Sizes are default, <code>sm</code>, and <code>xs</code>. Blue is standard
+      progress; mint, amber, and red indicate success, warning, and error.
+      Neutral is also available.
+    </p>
+    <p>
+      Omit <code>value</code> when progress is unknown. Use <code
+        >value-label</code
+      > for counts such as “34 of 50”; the same text is visible and accessible.
+    </p>
+  </section>
+
   <ApiReference tagName="cad-progress" />
+
+  <style>
+    .gallery-progress {
+      width: 100%;
+    }
+  </style>
 
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      A native <code>progress</code> element remains in the accessibility tree for
-      bar, steps, and ring variants. Omit <code>value</code> while duration is unknown
-      and use <code>value-label</code> when words communicate the state better.
+      Uses native <code>&lt;progress&gt;</code>. Set <code>value</code> and <code
+        >max</code
+      > for measured progress. Omit <code>value</code> for ongoing work without a
+      known percentage.
     </p>
   </section>
-
-  <style>
-    .progress-stack {
-      display: grid;
-      gap: 1.25rem;
-    }
-  </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/progress'
+</script>

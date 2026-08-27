@@ -13,6 +13,7 @@ const { class: className, heading, variant = 'info' } = Astro.props
 ---
 
 <cad-callout class={className} heading={heading} variant={variant}>
+  <slot name="action" slot="action" />
   <slot name="icon" slot="icon" />
   <slot name="title" slot="title" />
   <slot />

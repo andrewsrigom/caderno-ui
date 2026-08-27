@@ -129,7 +129,13 @@ for (const packageDirectory of packageDirectories) {
         '--no-emoji',
         '--no-color',
         ...(packageDirectory === 'elements'
-          ? ['--exclude-entrypoints', './fallback.css', './prose.css']
+          ? [
+              '--exclude-entrypoints',
+              './fallback.css',
+              './navigation.css',
+              './prose.css',
+              './scrollbar.css',
+            ]
           : []),
       ])
     } catch {

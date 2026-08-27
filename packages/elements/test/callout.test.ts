@@ -38,4 +38,22 @@ describe('cad-callout', () => {
     ).not.toBeNull()
     expect(customElements.get('cad-icon')).toBeUndefined()
   })
+
+  it('composes an optional editorial action without a live region', async () => {
+    const element = document.createElement('cad-callout')
+    const action = document.createElement('a')
+    action.slot = 'action'
+    action.href = '/composition'
+    action.textContent = 'Read more'
+    element.append('Supporting guidance.', action)
+    document.body.append(element)
+    await element.updateComplete
+
+    expect(
+      element.shadowRoot
+        ?.querySelector<HTMLSlotElement>('slot[name="action"]')
+        ?.assignedElements(),
+    ).toEqual([action])
+    expect(element.shadowRoot?.querySelector('[role]')).toBeNull()
+  })
 })

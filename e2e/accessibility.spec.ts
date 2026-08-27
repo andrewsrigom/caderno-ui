@@ -64,9 +64,22 @@ test('interactive states expose names, roles, states, and relationships', async 
     page.locator('cad-alert[variant="danger"]').getByRole('alert'),
   ).toBeVisible()
 
-  const progress = page.getByRole('progressbar', { name: 'Reading plan' })
-  await expect(progress).toHaveAttribute('value', '5')
-  await expect(progress).toHaveAttribute('max', '8')
+  const progress = page.getByRole('progressbar', { name: 'Uploading file' })
+  await expect(progress).toHaveAttribute('value', '72')
+  await expect(progress).toHaveAttribute('max', '100')
+
+  const slider = page.getByRole('slider', { name: 'Review depth' })
+  await expect(slider).toHaveAttribute('min', '0')
+  await expect(slider).toHaveAttribute('max', '100')
+  await expect(slider).toHaveValue('64')
+
+  const autoSave = page.getByRole('switch', { name: 'Auto-save' })
+  await expect(autoSave).toBeChecked()
+  await autoSave.focus()
+  await autoSave.press('Space')
+  await expect(autoSave).not.toBeChecked()
+  await autoSave.press('Space')
+  await expect(autoSave).toBeChecked()
 
   const chartTable = page
     .locator('cad-chart[heading="Notes reviewed"]')
@@ -81,8 +94,22 @@ test('interactive states expose names, roles, states, and relationships', async 
 test('all interactive component controls are reachable by keyboard', async ({
   page,
 }) => {
-  await page.keyboard.press('Tab')
-  await expect(page.getByRole('button', { name: 'Toggle theme' })).toBeFocused()
+  const header = page.locator('cad-header[data-component="header"]')
+  const headerSequence = [
+    header.getByRole('link', { name: 'Caderno UI laboratory home' }),
+    header.getByRole('link', { name: 'Overview' }),
+    header.getByRole('link', { name: 'Components' }),
+    header.getByRole('link', { name: 'Charts' }),
+    header.getByRole('button', { name: 'Search laboratory' }),
+    header.getByRole('button', { name: 'Saved items' }),
+    header.getByRole('button', { name: 'Account: Andrews' }),
+    page.getByRole('button', { name: 'Toggle theme' }),
+  ]
+
+  for (const control of headerSequence) {
+    await page.keyboard.press('Tab')
+    await expect(control).toBeFocused()
+  }
 
   await page.keyboard.press('Tab')
   await expect(page.getByRole('button', { name: 'Save review' })).toBeFocused()
@@ -106,6 +133,12 @@ test('all interactive component controls are reachable by keyboard', async ({
   await expect(
     page.getByRole('textbox', { name: 'Review notes' }),
   ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('slider', { name: 'Review depth' })).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('switch', { name: 'Auto-save' })).toBeFocused()
 
   await page.keyboard.press('Tab')
   await expect(
@@ -149,6 +182,16 @@ test('all interactive component controls are reachable by keyboard', async ({
 
   await page.keyboard.press('Tab')
   await expect(page.getByRole('button', { name: 'Open review' })).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('button', { name: 'Open task details' }),
+  ).toBeFocused()
+
+  await page.keyboard.press('Tab')
+  await expect(
+    page.getByRole('button', { name: 'Release context' }),
+  ).toBeFocused()
 
   await page.keyboard.press('Tab')
   await expect(

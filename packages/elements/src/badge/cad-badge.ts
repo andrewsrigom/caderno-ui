@@ -1,17 +1,19 @@
 import { css, html, LitElement } from 'lit'
 
-export type CadBadgeTone = 'blue' | 'coral' | 'lemon' | 'mint' | 'neutral'
+export type CadBadgeTone =
+  'blue' | 'coral' | 'lemon' | 'mint' | 'neutral' | 'violet'
 export type CadBadgeVariant = 'outline' | 'solid'
 
 /**
- * A compact notebook label for statuses, categories, and metadata.
+ * A compact, non-interactive status annotation with an ink marker.
  *
  * @slot - Badge label.
- * @slot start - Optional leading visual.
+ * @slot start - Optional leading visual, replacing the decorative status marker.
  * @csspart base - Badge container.
  * @csspart label - Badge text.
  * @csspart start - Leading composition slot.
- * @cssprop --cad-badge-bg - Per-instance badge color.
+ * @csspart marker - Decorative status marker, used when the start slot is empty.
+ * @cssprop --cad-badge-bg - Marker-wash color.
  * @cssprop --cad-badge-ink - Per-instance foreground color.
  */
 export class CadBadge extends LitElement {
@@ -22,54 +24,110 @@ export class CadBadge extends LitElement {
 
   static override styles = css`
     :host {
-      --_badge-bg: var(--cad-badge-bg, var(--cad-surface-raised, #f7f0dc));
-      --_badge-ink: var(--cad-badge-ink, var(--cad-ink, #25202a));
+      --_badge-bg: var(
+        --cad-badge-bg,
+        color-mix(in srgb, var(--_badge-mark) 16%, transparent)
+      );
+      --_badge-ink: var(--cad-badge-ink, var(--cad-ink-soft, #6b7280));
+      --_badge-mark: var(--cad-badge-ink, var(--cad-ink-muted, #6b7280));
       display: inline-flex;
       max-width: 100%;
       vertical-align: middle;
     }
 
     :host([tone='blue']) {
-      --_badge-bg: var(--cad-badge-bg, var(--cad-post-it-blue-bg, #cfe2ff));
-      --_badge-ink: var(--cad-badge-ink, var(--cad-post-it-blue-ink, #20375d));
+      --_badge-ink: var(--cad-badge-ink, var(--cad-link, #005bac));
+      --_badge-mark: var(--cad-badge-ink, var(--cad-link, #005bac));
     }
 
     :host([tone='coral']) {
-      --_badge-bg: var(--cad-badge-bg, var(--cad-post-it-coral-bg, #ffd8ce));
-      --_badge-ink: var(--cad-badge-ink, var(--cad-post-it-coral-ink, #633b32));
+      --_badge-ink: var(--cad-badge-ink, var(--cad-post-it-coral-ink, #a32935));
+      --_badge-mark: var(--cad-badge-ink, var(--cad-danger-ink, #d52f3f));
     }
 
     :host([tone='lemon']) {
-      --_badge-bg: var(--cad-badge-bg, var(--cad-post-it-lemon-bg, #fff1ac));
-      --_badge-ink: var(--cad-badge-ink, var(--cad-post-it-lemon-ink, #51491f));
+      --_badge-ink: var(--cad-badge-ink, var(--cad-post-it-lemon-ink, #8b5b12));
+      --_badge-mark: var(--cad-badge-ink, var(--cad-warning-ink, #b45f00));
     }
 
     :host([tone='mint']) {
-      --_badge-bg: var(--cad-badge-bg, var(--cad-post-it-mint-bg, #d8ffec));
-      --_badge-ink: var(--cad-badge-ink, var(--cad-post-it-mint-ink, #274f41));
+      --_badge-ink: var(--cad-badge-ink, var(--cad-post-it-mint-ink, #087a4f));
+      --_badge-mark: var(--cad-badge-ink, var(--cad-success-ink, #07875f));
+    }
+
+    :host([tone='violet']) {
+      --_badge-ink: var(
+        --cad-badge-ink,
+        var(--cad-sticker-violet-ink, #6f2dbd)
+      );
+      --_badge-mark: var(--cad-badge-ink, var(--cad-violet-ink, #8b45d4));
     }
 
     .base {
+      position: relative;
+      isolation: isolate;
       display: inline-flex;
-      gap: 0.35rem;
+      gap: 0.4rem;
       align-items: center;
-      min-height: 1.75rem;
       max-width: 100%;
-      padding: 0.16rem 0.62rem 0.22rem;
+      min-width: 0;
+      padding: 0.1rem 0.2rem;
       color: var(--_badge-ink);
-      background: var(--_badge-bg);
-      border: 1.5px solid color-mix(in srgb, var(--_badge-ink) 54%, transparent);
-      border-radius: 999px 940px 990px 920px;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-sm, 1rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
-      line-height: 1;
-      transform: rotate(-0.25deg);
+      font-weight: var(--cad-hand-weight-regular, 500);
+      line-height: 1.35;
+      cursor: inherit;
     }
 
-    :host([variant='outline']) .base {
-      background: color-mix(in srgb, var(--_badge-bg) 18%, transparent);
-      border-style: dashed;
+    .base::after {
+      position: absolute;
+      z-index: -1;
+      inset: 52% 0 0.14rem;
+      content: '';
+      background: var(--_badge-bg);
+      clip-path: polygon(
+        1% 12%,
+        96% 0,
+        100% 14%,
+        98% 88%,
+        4% 100%,
+        0 82%,
+        2% 48%,
+        0 28%
+      );
+      pointer-events: none;
+    }
+
+    .start {
+      display: inline-flex;
+      flex: none;
+      align-items: center;
+      color: var(--_badge-mark);
+    }
+
+    .marker {
+      box-sizing: border-box;
+      width: 0.42rem;
+      height: 0.42rem;
+      border: 1.25px solid currentColor;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    :host([variant='outline']) .base::after {
+      display: none;
+    }
+
+    :host([variant='outline']) .marker {
+      background: transparent;
+    }
+
+    ::slotted([slot='start']) {
+      flex: none;
     }
 
     .label {
@@ -81,8 +139,14 @@ export class CadBadge extends LitElement {
     @media (forced-colors: active) {
       .base {
         color: CanvasText;
-        background: Canvas;
-        border-color: CanvasText;
+      }
+
+      .base::after {
+        display: none;
+      }
+
+      .start {
+        color: CanvasText;
       }
     }
   `
@@ -99,7 +163,9 @@ export class CadBadge extends LitElement {
   override render() {
     return html`
       <span class="base" part="base">
-        <slot name="start" part="start"></slot>
+        <slot name="start" class="start" part="start">
+          <span aria-hidden="true" class="marker" part="marker"></span>
+        </slot>
         <span class="label" part="label"><slot></slot></span>
       </span>
     `

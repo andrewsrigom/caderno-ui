@@ -4,16 +4,14 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<form>
-  <cad-input
-    label="Interview topic"
-    name="topic"
-    placeholder="System design"
-    required
-  >
-    <cad-icon aria-hidden="true" name="search" slot="prefix"></cad-icon>
+const usage = `<div class="field-board">
+  <cad-input label="Default" layout="inline" placeholder="Type something…"></cad-input>
+  <cad-input label="Focus" layout="inline" placeholder="Type something…"></cad-input>
+  <cad-input label="With icon" layout="inline" placeholder="Search…">
+    <cad-icon aria-hidden="true" name="search" size="18" slot="prefix"></cad-icon>
   </cad-input>
-</form>
+  <cad-input invalid label="Error" layout="inline" placeholder="Enter a valid value…"></cad-input>
+</div>
 
 <script type="module">
   import '@caderno-ui/elements/input'
@@ -22,39 +20,30 @@ const usage = `<form>
 ---
 
 <DocsLayout
-  description="CadInput is a form-associated notebook input with native validation, reset, and composed events."
+  description="Collect a single line of text, with labels, hints, and validation."
   title="Input"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-input&gt;</p>
-    <h1>Keep the notebook line and the native form contract.</h1>
-    <p>
-      Input uses <code>ElementInternals</code>, so its value participates in
-      <code>FormData</code>, constraint validation, fieldset disabling, and form
-      reset across the shadow boundary.
-    </p>
+    <h1>Input</h1>
+    <p>Collect a single line of text, with labels, hints, and validation.</p>
   </header>
 
-  <DemoFrame title="Sizes, hints, and validation">
-    <div class="field-stack">
-      <cad-input
-        hint="Use a concrete subject."
-        label="Interview topic"
-        name="topic"
-        placeholder="System design"
-        required
-      >
+  <DemoFrame title="Field states">
+    <div class="field-board">
+      <cad-input label="Default" layout="inline" placeholder="Type something…"
+      ></cad-input>
+      <cad-input label="Focus" layout="inline" placeholder="Type something…"
+      ></cad-input>
+      <cad-input label="With icon" layout="inline" placeholder="Search…">
         <cad-icon aria-hidden="true" name="search" size="18" slot="prefix"
         ></cad-icon>
       </cad-input>
       <cad-input
-        error="Use a valid address."
         invalid
-        label="Contact email"
-        name="email"
-        tone="coral"
-        type="email"
-        value="review@"></cad-input>
+        label="Error"
+        layout="inline"
+        placeholder="Enter a valid value…"></cad-input>
     </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
@@ -63,19 +52,18 @@ const usage = `<form>
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility and forms</h2>
     <p>
-      Always provide a visible <code>label</code>. The internal native input
-      owns focus and validation semantics; <code>input</code> and <code
-        >change</code
-      >
-      leave the shadow root as composed events.
+      Give every field a visible label. Invalid fields expose <code
+        >aria-invalid</code
+      >; pair the visual error mark with a helpful error message.
     </p>
   </section>
 
   <style>
-    .field-stack {
+    .field-board {
       display: grid;
-      gap: 1.25rem;
-      max-width: 34rem;
+      gap: 0.9rem;
+      max-width: 42rem;
+      padding-inline-end: 1.25rem;
     }
   </style>
 </DocsLayout>

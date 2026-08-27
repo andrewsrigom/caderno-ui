@@ -4,13 +4,11 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-textarea
-  hint="Name the trade-off and the evidence."
-  label="Review notes"
-  name="notes"
-  required
-  rows="5"
-></cad-textarea>
+const usage = `<div class="field-board">
+  <cad-textarea label="Default" layout="inline" placeholder="Write your notes here…" rows="3"></cad-textarea>
+  <cad-textarea label="Focus" layout="inline" placeholder="Write your notes here…" rows="3"></cad-textarea>
+  <cad-textarea invalid label="Error" layout="inline" placeholder="Write your notes here…" rows="3"></cad-textarea>
+</div>
 
 <script type="module">
   import '@caderno-ui/elements/textarea'
@@ -18,27 +16,34 @@ const usage = `<cad-textarea
 ---
 
 <DocsLayout
-  description="CadTextarea is a form-associated ruled writing surface with native validation and reset behavior."
+  description="Collect longer text with labels, hints, validation, and resizing."
   title="Textarea"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-textarea&gt;</p>
-    <h1>Give longer answers a ruled writing surface.</h1>
-    <p>
-      Textarea preserves native editing, selection, validation, and resize
-      behavior while contributing its value directly to a containing form.
-    </p>
+    <h1>Textarea</h1>
+    <p>Collect longer text with labels, hints, validation, and resizing.</p>
   </header>
 
-  <DemoFrame title="Ruled response">
-    <cad-textarea
-      hint="Name the decision, evidence, and trade-off."
-      label="Review notes"
-      name="notes"
-      placeholder="The simpler option works here because…"
-      required
-      rows="5"
-      tone="mint"></cad-textarea>
+  <DemoFrame title="Writing states">
+    <div class="field-board">
+      <cad-textarea
+        label="Default"
+        layout="inline"
+        placeholder="Write your notes here…"
+        rows="3"></cad-textarea>
+      <cad-textarea
+        label="Focus"
+        layout="inline"
+        placeholder="Write your notes here…"
+        rows="3"></cad-textarea>
+      <cad-textarea
+        invalid
+        label="Error"
+        layout="inline"
+        placeholder="Write your notes here…"
+        rows="3"></cad-textarea>
+    </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
   <ApiReference tagName="cad-textarea" />
@@ -46,9 +51,22 @@ const usage = `<cad-textarea
   <section class="content-section" aria-labelledby="forms-title">
     <h2 id="forms-title">Form behavior</h2>
     <p>
-      <code>FormData</code>, reset, required validation, disabled fieldsets, and
-      custom validity work through <code>ElementInternals</code>. Use
-      <code>resize</code> only when the surrounding layout genuinely needs a constraint.
+      Supports <code>FormData</code>, reset, required validation, disabled
+      fieldsets, custom validity, and resizing. Pair invalid state with a
+      helpful error message.
     </p>
   </section>
+
+  <style>
+    .field-board {
+      display: grid;
+      gap: 0.9rem;
+      max-width: 48rem;
+      padding-inline-end: 1.25rem;
+    }
+  </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/textarea'
+</script>

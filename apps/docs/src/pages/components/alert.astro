@@ -1,16 +1,35 @@
 ---
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import ApiReference from '../../components/ApiReference.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-alert heading="Review the API" variant="warning" dismissible>
-  Public behavior needs a public contract.
+const usage = `<cad-alert dismissible heading="Heads up" variant="info">
+  We've updated our terms of service. Please review the changes.
+  <button slot="action" type="button">Learn more</button>
 </cad-alert>
 
 <script type="module">
   import '@caderno-ui/elements/alert'
 </script>`
+
+const variantsUsage = `<cad-alert heading="Saved" size="compact" variant="success">
+  Your changes are ready.
+</cad-alert>
+<cad-alert heading="Review needed" size="compact" variant="warning">
+  Two fields still need attention.
+</cad-alert>
+<cad-alert heading="Could not save" size="compact" variant="error">
+  Check the connection and try again.
+</cad-alert>
+<cad-alert heading="Archived" size="compact" variant="neutral">
+  This item is now read-only.
+</cad-alert>
+<cad-alert heading="Complete your profile" size="compact" variant="accent">
+  Add a photo so collaborators recognize you.
+</cad-alert>`
 
 const eventCode = `document.addEventListener('cad-dismiss', (event) => {
   console.log(event.detail.variant) // "warning"
@@ -18,41 +37,103 @@ const eventCode = `document.addEventListener('cad-dismiss', (event) => {
 ---
 
 <DocsLayout
-  description="CadAlert displays notebook-styled status messages with semantic roles and optional dismissal."
+  description="Show a status message, with an optional action and close button."
   title="Alert"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-alert&gt;</p>
-    <h1>A note that earns attention.</h1>
-    <p>
-      Alert communicates informational, successful, cautionary, and dangerous
-      states. Its semantic role follows the urgency of the selected variant.
-    </p>
+    <h1>Alert</h1>
+    <p>Show a status message, with an optional action and close button.</p>
   </header>
 
-  <DemoFrame title="Alert variants">
-    <cad-alert heading="Information" variant="info">
-      Useful context that does not interrupt the workflow.
-    </cad-alert>
-    <cad-alert heading="Everything passed" variant="success">
-      The package contract and browser behavior agree.
-    </cad-alert>
-    <cad-alert dismissible heading="Review this" variant="warning">
-      A cautionary state announces itself as an alert.
-    </cad-alert>
-    <cad-alert heading="Build failed" variant="danger">
-      A blocking problem that requires action.
+  <DemoFrame title="Status with an action">
+    <cad-alert dismissible heading="Heads up" variant="info">
+      We’ve updated our terms of service. Please review the changes.
+      <button slot="action" type="button">Learn more</button>
     </cad-alert>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    columns={2}
+    id="alert-variants-title"
+    title="Status variants"
+    description="Choose the variant that matches the message."
+  >
+    <ExampleCard title="Success">
+      <cad-alert
+        class="gallery-alert"
+        heading="Saved"
+        size="compact"
+        variant="success"
+      >
+        Your changes are ready.
+      </cad-alert>
+    </ExampleCard>
+    <ExampleCard title="Warning">
+      <cad-alert
+        class="gallery-alert"
+        heading="Review needed"
+        size="compact"
+        variant="warning"
+      >
+        Two fields still need attention.
+      </cad-alert>
+    </ExampleCard>
+    <ExampleCard title="Error">
+      <cad-alert
+        class="gallery-alert"
+        heading="Could not save"
+        size="compact"
+        variant="error"
+      >
+        Check the connection and try again.
+      </cad-alert>
+    </ExampleCard>
+    <ExampleCard title="Neutral">
+      <cad-alert
+        class="gallery-alert"
+        heading="Archived"
+        size="compact"
+        variant="neutral"
+      >
+        This item is now read-only.
+      </cad-alert>
+    </ExampleCard>
+    <ExampleCard title="Accent" wide>
+      <cad-alert
+        class="gallery-alert"
+        heading="Complete your profile"
+        size="compact"
+        variant="accent"
+      >
+        Add a photo so collaborators recognize you.
+      </cad-alert>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="alert-guidance-title">
+    <h2 id="alert-guidance-title">Variants</h2>
+    <p>
+      Choose a variant that matches the message. Use <code>accent</code> for a next
+      step and <code>size="compact"</code> for alerts within content.
+    </p>
+  </section>
+
+  <style>
+    .gallery-alert {
+      width: 100%;
+    }
+  </style>
 
   <ApiReference tagName="cad-alert" />
 
   <section class="content-section" aria-labelledby="events-title">
     <h2 id="events-title">Events</h2>
     <p>
-      <code class="inline-code">cad-dismiss</code> bubbles and is composed. Its detail
-      is <code class="inline-code">{'{ variant }'}</code>.
+      <code>cad-dismiss</code> reports <code>{'{ variant }'}</code> and bubbles to
+      parent elements.
     </p>
     <CodeBlock code={eventCode} language="typescript" />
   </section>
@@ -60,9 +141,13 @@ const eventCode = `document.addEventListener('cad-dismiss', (event) => {
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      Informational and successful notes use <code>status</code>; warning and
-      danger variants use <code>alert</code>. Give dismissible alerts a concise
-      dismiss label, and do not use color as the only description of urgency.
+      Info, success, neutral, and accent use <code>role="status"</code>.
+      Warning, error, and danger use <code>role="alert"</code>. Name dismiss
+      buttons and explain urgency in text, not just color.
     </p>
   </section>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/alert'
+</script>

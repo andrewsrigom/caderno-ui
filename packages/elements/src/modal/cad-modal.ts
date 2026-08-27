@@ -1,8 +1,17 @@
-import { css, html, LitElement, type PropertyValues } from 'lit'
+import { css, html, LitElement, nothing, type PropertyValues } from 'lit'
 
+import {
+  deepActiveElement,
+  focusElement,
+  focusTargetFromEvent,
+  lockDocumentScroll,
+  trapDialogFocus,
+  unlockDocumentScroll,
+} from '../internal/dialog-layer.js'
 import { renderSystemIcon } from '../internal/system-icon.js'
 
 export type CadModalSize = 'lg' | 'md' | 'sm'
+export type CadModalTone = 'danger' | 'default'
 
 export type CadModalCloseDetail = {
   returnValue: string
@@ -25,8 +34,8 @@ export type CadModalOpenEvent = CustomEvent<void>
  * @csspart close-button - Native close button.
  * @csspart footer - Dialog action area.
  * @csspart header - Dialog heading area.
+ * @csspart icon - Destructive dialog status icon.
  * @csspart paper - Notebook paper surface.
- * @csspart tape - Decorative tape strip.
  * @csspart title - Dialog heading.
  * @csspart trigger - Trigger slot container.
  */
@@ -36,6 +45,7 @@ export class CadModal extends LitElement {
     heading: { type: String },
     open: { reflect: true, type: Boolean },
     size: { reflect: true, type: String },
+    tone: { reflect: true, type: String },
     closeOnBackdrop: {
       attribute: 'close-on-backdrop',
       reflect: true,
@@ -53,27 +63,38 @@ export class CadModal extends LitElement {
     }
 
     .base {
-      width: min(calc(100% - 2rem), 36rem);
+      width: min(calc(100% - 2rem), 30rem);
       max-width: none;
       max-height: min(82vh, 46rem);
       padding: 0;
       overflow: visible;
-      color: var(--cad-ink, #25202a);
+      color: var(--cad-link, #005bac);
       background: transparent;
       border: 0;
+      border-radius: 0;
+      font-family: var(--cad-font-hand, cursive);
     }
 
     :host([size='sm']) .base {
-      width: min(calc(100% - 2rem), 26rem);
+      width: min(calc(100% - 2rem), 24rem);
     }
 
     :host([size='lg']) .base {
-      width: min(calc(100% - 2rem), 52rem);
+      width: min(calc(100% - 2rem), 42rem);
     }
 
     .base::backdrop {
-      background: rgb(var(--cad-shadow-rgb, 0 0 0) / 0.48);
-      backdrop-filter: blur(3px);
+      background-color: color-mix(
+        in srgb,
+        var(--cad-link, #005bac) 9%,
+        rgb(255 255 255 / 0.84)
+      );
+      background-image: repeating-linear-gradient(
+        -14deg,
+        transparent 0 5px,
+        color-mix(in srgb, var(--cad-link, #005bac) 5%, transparent) 5px 6px
+      );
+      backdrop-filter: blur(1.5px);
     }
 
     .base[open]::backdrop {
@@ -88,11 +109,18 @@ export class CadModal extends LitElement {
       grid-template-columns: minmax(0, 1fr);
       max-height: min(82vh, 46rem);
       overflow: hidden;
-      background: var(--cad-surface, #fffdf5);
-      border: 1.5px solid var(--cad-line-strong, #665f52);
-      border-radius: 0.9rem 1.15rem 0.85rem 1rem;
-      box-shadow: 0 1.2rem 3rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.28);
-      transform: rotate(-0.25deg);
+      background: var(--cad-surface, #fff);
+      border: var(--cad-frame-border, 1.5px dashed var(--cad-link, #005bac));
+      border-radius: 0;
+      box-shadow:
+        0.28rem 0.35rem 0
+          color-mix(in srgb, var(--cad-link, #005bac) 9%, transparent),
+        0 1rem 2.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
+      transform: rotate(-0.04deg);
+    }
+
+    .paper::before {
+      content: none;
     }
 
     .base[open] .paper {
@@ -102,39 +130,45 @@ export class CadModal extends LitElement {
       transform-origin: center 42%;
     }
 
-    .tape {
-      position: absolute;
-      z-index: 1;
-      top: -0.2rem;
-      left: 50%;
-      width: 5.4rem;
-      height: 1rem;
-      background: color-mix(
-        in srgb,
-        var(--cad-tape-paper-bg, #f2e6bd) 72%,
-        transparent
-      );
-      transform: translateX(-50%) rotate(0.25deg);
+    .header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.85rem;
+      align-items: center;
+      min-width: 0;
+      padding: 1.35rem 1.35rem 0.55rem;
     }
 
-    .header {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: space-between;
-      min-width: 0;
-      padding: 1.45rem 1.5rem 0.85rem;
-      border-bottom: 1px dashed var(--cad-line-strong, #665f52);
+    .header.has-icon {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .status-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      color: var(--cad-danger, #d52f3f);
+      transform: rotate(-1.5deg);
+    }
+
+    .status-icon svg {
+      width: 1.8rem;
+      height: 1.8rem;
     }
 
     .title {
       min-width: 0;
       margin: 0;
       overflow-wrap: anywhere;
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-xl, 2rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
-      line-height: 1;
+      font-family: var(--cad-type-title-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-title-size, 1.55rem);
+      font-weight: var(--cad-hand-weight-regular, 500);
+      line-height: 1.2;
+    }
+
+    :host([tone='danger']) .title {
+      color: var(--cad-danger, #d52f3f);
     }
 
     .title ::slotted(*) {
@@ -142,18 +176,22 @@ export class CadModal extends LitElement {
       font: inherit;
     }
 
+    .title:focus {
+      outline: 0;
+    }
+
     .close {
       display: inline-grid;
       flex: 0 0 auto;
       place-items: center;
-      width: 2.75rem;
-      height: 2.75rem;
+      width: 2.25rem;
+      height: 2.25rem;
       padding: 0;
       color: inherit;
       cursor: pointer;
       background: transparent;
       border: 0;
-      border-radius: 50%;
+      border-radius: 0;
       transition:
         background-color
           var(--cad-motion-duration-feedback, var(--cad-duration-fast, 140ms))
@@ -173,7 +211,10 @@ export class CadModal extends LitElement {
     }
 
     .close:focus-visible {
-      outline: 2px dashed var(--cad-focus-ring, currentColor);
+      outline: var(
+        --cad-focus-outline,
+        2px dashed var(--cad-focus-ring, currentColor)
+      );
       outline-offset: 3px;
     }
 
@@ -184,10 +225,12 @@ export class CadModal extends LitElement {
 
     .body {
       min-width: 0;
-      padding: 1.25rem 1.5rem;
+      padding: 0.75rem 1.35rem 1.25rem;
       overflow: auto;
-      font-family: var(--cad-font-book, serif);
-      line-height: 1.65;
+      color: var(--cad-ink, #162033);
+      font-family: var(--cad-type-body-font, var(--cad-font-book, serif));
+      font-size: var(--cad-type-body-size, 1rem);
+      line-height: var(--cad-type-body-line-height, 1.6);
     }
 
     ::slotted(:first-child) {
@@ -202,25 +245,31 @@ export class CadModal extends LitElement {
       display: flex;
       flex-wrap: wrap;
       gap: 0.7rem;
-      justify-content: flex-end;
-      padding: 0.9rem 1.5rem 1.25rem;
-      border-top: 1px dashed var(--cad-line-strong, #665f52);
+      justify-content: space-between;
+      margin-inline: 0.85rem;
+      padding: 0.85rem 0.5rem 1rem;
+      border-top: 1px dashed
+        color-mix(in srgb, var(--cad-link, #005bac) 52%, transparent);
     }
 
     .footer[hidden] {
       display: none;
     }
 
+    ::slotted([slot='footer']:only-child) {
+      margin-inline-start: auto;
+    }
+
     @keyframes cad-modal-paper-enter {
       from {
         opacity: 0;
         transform: translateY(var(--cad-motion-distance-md, 0.85rem))
-          rotate(-1.1deg) scale(0.965);
+          rotate(-0.45deg) scale(0.975);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0) rotate(-0.25deg) scale(1);
+        transform: translateY(0) rotate(-0.04deg) scale(1);
       }
     }
 
@@ -231,8 +280,12 @@ export class CadModal extends LitElement {
       }
 
       to {
-        background: rgb(var(--cad-shadow-rgb, 0 0 0) / 0.48);
-        backdrop-filter: blur(3px);
+        background-color: color-mix(
+          in srgb,
+          var(--cad-link, #005bac) 9%,
+          rgb(255 255 255 / 0.84)
+        );
+        backdrop-filter: blur(1.5px);
       }
     }
 
@@ -268,9 +321,11 @@ export class CadModal extends LitElement {
   declare heading: string
   declare open: boolean
   declare size: CadModalSize
+  declare tone: CadModalTone
 
   private hasFooter = false
   private returnFocus: HTMLElement | undefined
+  private scrollLocked = false
   private triggerBound = false
 
   constructor() {
@@ -280,6 +335,12 @@ export class CadModal extends LitElement {
     this.heading = ''
     this.open = false
     this.size = 'md'
+    this.tone = 'default'
+  }
+
+  override disconnectedCallback(): void {
+    this.releaseScrollLock()
+    super.disconnectedCallback()
   }
 
   get dialog(): HTMLDialogElement | null {
@@ -287,17 +348,13 @@ export class CadModal extends LitElement {
   }
 
   showModal(): void {
-    if (this.open) return
-    this.returnFocus =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : undefined
-    this.open = true
+    this.openModal(deepActiveElement())
   }
 
   close(returnValue = ''): void {
     const dialog = this.dialog
     this.open = false
+    this.releaseScrollLock()
     if (dialog?.open) dialog.close(returnValue)
   }
 
@@ -315,6 +372,10 @@ export class CadModal extends LitElement {
         this.returnFocus = document.activeElement
       }
       dialog.showModal()
+      this.renderRoot
+        .querySelector<HTMLElement>('.title')
+        ?.focus({ preventScroll: true })
+      this.acquireScrollLock()
       this.dispatchEvent(
         new CustomEvent<void>('cad-modal-open', {
           bubbles: true,
@@ -327,6 +388,7 @@ export class CadModal extends LitElement {
   }
 
   override render() {
+    const destructive = this.tone === 'danger'
     return html`
       <span class="trigger" part="trigger">
         <slot name="trigger"></slot>
@@ -335,13 +397,23 @@ export class CadModal extends LitElement {
         aria-labelledby="modal-title"
         class="base"
         part="base"
+        @keydown=${this.handleKeyDown}
         @pointerdown=${this.handleBackdropClick}
         @close=${this.handleNativeClose}
       >
         <div class="paper" part="paper">
-          <span aria-hidden="true" class="tape" part="tape"></span>
-          <header class="header" part="header">
-            <div class="title" id="modal-title" part="title">
+          <header
+            class=${`header${destructive ? ' has-icon' : ''}`}
+            part="header"
+          >
+            ${
+              destructive
+                ? html`<span aria-hidden="true" class="status-icon" part="icon"
+                    >${renderSystemIcon('warning')}</span
+                  >`
+                : nothing
+            }
+            <div class="title" id="modal-title" part="title" tabindex="-1">
               <slot name="title"><strong>${this.heading}</strong></slot>
             </div>
             <button
@@ -367,12 +439,19 @@ export class CadModal extends LitElement {
     this.close()
   }
 
-  private handleTriggerClick = (): void => {
-    this.showModal()
+  private handleTriggerClick = (event: Event): void => {
+    this.openModal(focusTargetFromEvent(event) ?? deepActiveElement())
   }
 
   private handleBackdropClick(event: MouseEvent): void {
     if (this.closeOnBackdrop && event.target === this.dialog) this.close()
+  }
+
+  private handleKeyDown(event: KeyboardEvent): void {
+    trapDialogFocus(event)
+    if (event.key !== 'Escape' || event.defaultPrevented) return
+    event.preventDefault()
+    this.close()
   }
 
   private handleFooterChange(event: Event): void {
@@ -393,6 +472,7 @@ export class CadModal extends LitElement {
     const dialog = event.currentTarget
     if (!(dialog instanceof HTMLDialogElement)) return
     this.open = false
+    this.releaseScrollLock()
     this.dispatchEvent(
       new CustomEvent<CadModalCloseDetail>('cad-modal-close', {
         bubbles: true,
@@ -402,7 +482,25 @@ export class CadModal extends LitElement {
     )
     const returnFocus = this.returnFocus
     this.returnFocus = undefined
-    returnFocus?.focus()
+    if (returnFocus) focusElement(returnFocus)
+  }
+
+  private openModal(returnFocus: HTMLElement | undefined): void {
+    if (this.open) return
+    this.returnFocus = returnFocus
+    this.open = true
+  }
+
+  private acquireScrollLock(): void {
+    if (this.scrollLocked) return
+    lockDocumentScroll()
+    this.scrollLocked = true
+  }
+
+  private releaseScrollLock(): void {
+    if (!this.scrollLocked) return
+    unlockDocumentScroll()
+    this.scrollLocked = false
   }
 }
 

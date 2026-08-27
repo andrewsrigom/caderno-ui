@@ -46,12 +46,16 @@ describe('cad-bookmark', () => {
     await bookmark.updateComplete
     const button =
       bookmark.shadowRoot?.querySelector<HTMLButtonElement>('button')
+    const icon = bookmark.shadowRoot?.querySelector<SVGElement>('.icon svg')
     expect(button).toBeDefined()
+    expect(icon).toBeDefined()
+    expect(getComputedStyle(icon!).fill).toBe('rgba(0, 0, 0, 0)')
     await userEvent.click(button!)
     await bookmark.updateComplete
 
     expect(bookmark.bookmarked).toBe(true)
     expect(bookmark.hasAttribute('bookmarked')).toBe(true)
+    expect(getComputedStyle(icon!).fill).toBe(getComputedStyle(button!).color)
     expect(localStorage.getItem('caderno-ui:bookmark:web-components')).toBe(
       'true',
     )

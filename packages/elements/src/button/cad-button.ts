@@ -35,11 +35,8 @@ export class CadButton extends LitElement {
 
   static override styles = css`
     :host {
-      --_button-bg: var(--cad-button-bg, var(--cad-post-it-blue-bg, #b8d5ff));
-      --_button-ink: var(
-        --cad-button-ink,
-        var(--cad-post-it-blue-ink, #18345d)
-      );
+      --_button-bg: var(--cad-button-bg, var(--cad-post-it-blue-bg, #cfe2ff));
+      --_button-ink: var(--cad-button-ink, var(--cad-link, #005bac));
       display: inline-flex;
       max-width: 100%;
       vertical-align: middle;
@@ -86,25 +83,23 @@ export class CadButton extends LitElement {
     }
 
     .base {
+      position: relative;
       display: inline-flex;
       gap: 0.45rem;
       align-items: center;
       justify-content: center;
-      min-height: 2.55rem;
+      min-height: 2.75rem;
       max-width: 100%;
       padding: 0.5rem 1rem 0.58rem;
       color: var(--_button-ink);
       background: var(--_button-bg);
-      border: 1.5px solid
-        color-mix(in srgb, var(--_button-ink) 42%, transparent);
-      border-radius: 0.7rem 0.95rem 0.7rem 0.9rem;
-      box-shadow:
-        0 0.35rem 0.75rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.14),
-        inset 0 -0.16rem 0.28rem
-          color-mix(in srgb, var(--_button-ink) 18%, transparent);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-md, 1.2rem);
-      font-weight: var(--cad-hand-weight-strong, 700);
+      border: var(--cad-border-width, 1.5px) solid
+        color-mix(in srgb, var(--_button-ink) 82%, transparent);
+      border-radius: 0;
+      box-shadow: none;
+      font-family: var(--cad-type-control-font, var(--cad-font-hand, cursive));
+      font-size: var(--cad-type-control-size, var(--cad-hand-md, 1.2rem));
+      font-weight: var(--cad-hand-weight-regular, 500);
       line-height: 1.05;
       text-decoration: none;
       cursor: pointer;
@@ -120,7 +115,7 @@ export class CadButton extends LitElement {
     }
 
     :host([size='sm']) .base {
-      min-height: 2rem;
+      min-height: 2.75rem;
       padding: 0.32rem 0.72rem 0.38rem;
       font-size: var(--cad-hand-sm, 1.05rem);
     }
@@ -128,17 +123,29 @@ export class CadButton extends LitElement {
     :host([size='lg']) .base {
       min-height: 3.2rem;
       padding: 0.7rem 1.3rem 0.78rem;
-      border-radius: 0.85rem 1.1rem 0.85rem 1.05rem;
+      border-radius: 0;
       font-size: var(--cad-hand-lg, 1.55rem);
     }
 
     :host([variant='secondary']) .base {
       background: transparent;
-      border-style: dashed;
+      border-style: var(--cad-border-style, dashed);
+      border-color: color-mix(in srgb, var(--_button-ink) 68%, transparent);
       box-shadow: none;
+      transform: rotate(0.25deg);
+    }
+
+    :host([variant='primary']) .base {
+      background: color-mix(
+        in srgb,
+        var(--_button-bg) 66%,
+        var(--cad-surface, #fff)
+      );
     }
 
     :host([variant='ghost']) .base {
+      padding-inline: 0.35rem;
+      color: var(--cad-link, #005bac);
       background: transparent;
       border-color: transparent;
       box-shadow: none;
@@ -148,50 +155,63 @@ export class CadButton extends LitElement {
     :host([variant='link']) .base {
       min-height: auto;
       padding: 0.1rem 0.2rem;
-      color: var(--cad-ink, currentColor);
-      background: linear-gradient(
-        180deg,
-        transparent 66%,
-        color-mix(in srgb, var(--_button-bg) 76%, transparent) 67%,
-        color-mix(in srgb, var(--_button-bg) 76%, transparent) 93%,
-        transparent 94%
-      );
+      color: var(--cad-link, #005bac);
+      background: transparent;
       border: 0;
       border-radius: 0;
       box-shadow: none;
       transform: none;
     }
 
+    :host([variant='link']) .base::after {
+      position: absolute;
+      inset-inline: 0.15rem 0.08rem;
+      inset-block-end: -0.08rem;
+      height: 2px;
+      background: var(--cad-link-mark, #ef4d4f);
+      content: '';
+      pointer-events: none;
+      transform: rotate(-0.8deg);
+      transform-origin: left center;
+    }
+
     .base:not([aria-disabled='true']):hover {
       transform: rotate(-0.4deg) translateY(-1px);
-      box-shadow: 0 0.55rem 1.1rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.18);
+      background-color: color-mix(
+        in srgb,
+        var(--_button-bg) 82%,
+        var(--_button-ink)
+      );
+      box-shadow: none;
     }
 
     :host(:not([variant='link'])) .base:not([aria-disabled='true']):active {
       transform: rotate(-0.15deg) translateY(1px) scale(0.98);
-      box-shadow: 0 0.18rem 0.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
+      box-shadow: none;
     }
 
     :host([variant='ghost']) .base:not([aria-disabled='true']):hover,
     :host([variant='secondary']) .base:not([aria-disabled='true']):hover {
-      background: color-mix(in srgb, var(--_button-bg) 30%, transparent);
+      background: color-mix(in srgb, var(--_button-bg) 42%, transparent);
       box-shadow: none;
     }
 
     :host([variant='link']) .base:not([aria-disabled='true']):hover {
-      background: linear-gradient(
-        180deg,
-        transparent 56%,
-        color-mix(in srgb, var(--_button-bg) 90%, transparent) 57%,
-        color-mix(in srgb, var(--_button-bg) 90%, transparent) 93%,
-        transparent 94%
-      );
+      background: transparent;
       box-shadow: none;
       transform: none;
     }
 
+    :host([variant='link']) .base:not([aria-disabled='true']):hover::after {
+      height: 3px;
+      transform: rotate(0.35deg);
+    }
+
     .base:focus-visible {
-      outline: 2px dashed var(--cad-focus-ring, currentColor);
+      outline: var(
+        --cad-focus-outline,
+        2px dashed var(--cad-focus-ring, currentColor)
+      );
       outline-offset: 3px;
     }
 

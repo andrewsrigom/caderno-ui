@@ -9,4 +9,8 @@ export const CadEmptyState = createComponent({
   tagName: 'cad-empty-state',
 })
 
-export type { CadEmptyStateVariant } from '@caderno-ui/elements/empty-state'
+export type {
+  CadEmptyStateSize,
+  CadEmptyStateTone,
+  CadEmptyStateVariant,
+} from '@caderno-ui/elements/empty-state'

@@ -4,9 +4,9 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-note folded heading="Architecture note" tone="lemon">
-  Keep data contracts declarative and rendering deterministic.
-  <small slot="footer">Reviewed today</small>
+const usage = `<cad-note heading="Keep it simple.">
+  Write what matters.<br />
+  Leave room to think.
 </cad-note>
 
 <script type="module">
@@ -15,31 +15,22 @@ const usage = `<cad-note folded heading="Architecture note" tone="lemon">
 ---
 
 <DocsLayout
-  description="CadNote groups supporting content in a notebook-styled semantic note."
+  description="Add a handwritten annotation or reminder. Use Alert for status messages."
   title="Note"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-note&gt;</p>
-    <h1>Give supporting context its own piece of paper.</h1>
+    <h1>Note</h1>
     <p>
-      Note is a calm content container for annotations, examples, and related
-      context. Use Alert instead when information needs status semantics.
+      Add a handwritten annotation or reminder. Use Alert for status messages.
     </p>
   </header>
 
-  <DemoFrame title="Notebook tones">
-    <div class="note-grid">
-      <cad-note folded heading="Architecture note" tone="lemon">
-        Keep data contracts declarative and rendering deterministic.
-        <small slot="footer">Reviewed today</small>
-      </cad-note>
-      <cad-note heading="Research note" tone="blue">
-        Rough.js supplies drawing primitives; Caderno UI owns chart semantics.
-      </cad-note>
-      <cad-note heading="Decision" tone="mint">
-        The accessible table and visual plot always share the same source data.
-      </cad-note>
-    </div>
+  <DemoFrame title="A note in the margin">
+    <cad-note heading="Keep it simple.">
+      Write what matters.<br />
+      Leave room to think.
+    </cad-note>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
@@ -48,16 +39,12 @@ const usage = `<cad-note folded heading="Architecture note" tone="lemon">
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      The container exposes <code>role="note"</code>. Give every note a concise
-      heading and do not rely on its paper color to communicate meaning.
+      Uses <code>role="note"</code>. Give it a short heading and explain the
+      meaning in text, not just color.
     </p>
   </section>
-
-  <style>
-    .note-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-      gap: 1rem;
-    }
-  </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/note'
+</script>

@@ -10,6 +10,6 @@ export const CadProgress = createComponent({
 })
 
 export type {
+  CadProgressSize,
   CadProgressTone,
-  CadProgressVariant,
 } from '@caderno-ui/elements/progress'

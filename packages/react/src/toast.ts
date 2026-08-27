@@ -24,10 +24,18 @@ export const CadToastHost = createComponent({
 })
 
 export type {
+  CadToastAction,
+  CadToastCallOptions,
   CadToastDismissDetail,
   CadToastDismissEvent,
   CadToastDismissReason,
+  CadToastFunction,
+  CadToastId,
   CadToastOptions,
   CadToastPlacement,
+  CadToastPromiseMessage,
+  CadToastPromiseOptions,
   CadToastVariant,
 } from '@caderno-ui/elements/toast'
+
+export { toast } from '@caderno-ui/elements/toast'

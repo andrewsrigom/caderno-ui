@@ -21,16 +21,16 @@ const {
   disabled = false,
   open = false,
   title,
-  tone = 'paper',
+  tone = 'blue',
 } = Astro.props
 ---
 
 <cad-accordion-item
   animation={animation}
   class={className}
-  disabled={disabled}
+  disabled={disabled || undefined}
   heading={title}
-  open={open}
+  open={open || undefined}
   tone={tone}
 >
   <span slot="title">{title}</span>

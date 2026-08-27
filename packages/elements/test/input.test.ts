@@ -49,4 +49,17 @@ describe('cad-input', () => {
     await element.updateComplete
     expect(element.value).toBe('draft')
   })
+
+  it('supports an inline label and exposes a visual invalid mark', async () => {
+    const element = document.createElement('cad-input')
+    element.label = 'Error'
+    element.layout = 'inline'
+    element.invalid = true
+    document.body.append(element)
+    await element.updateComplete
+
+    expect(element.getAttribute('layout')).toBe('inline')
+    expect(element.shadowRoot?.querySelector('input')?.ariaInvalid).toBe('true')
+    expect(element.shadowRoot?.querySelector('.status')).not.toBeNull()
+  })
 })

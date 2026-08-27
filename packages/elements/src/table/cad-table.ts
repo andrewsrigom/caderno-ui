@@ -2,8 +2,11 @@ import { css, html, LitElement, nothing } from 'lit'
 
 export type CadTableDensity = 'compact' | 'regular'
 export type CadTableVariant = 'grid' | 'ruled'
+export type CadTableTypography = 'body' | 'hand'
+export type CadTableColumnFormat = 'code' | 'text'
 
 type TableColumn = {
+  format: CadTableColumnFormat
   key: string
   label: string
 }
@@ -13,12 +16,14 @@ type TableRow = {
 }
 
 /**
- * A declarative column consumed by `cad-table`.
+ * A declarative column consumed by `cad-table`. Use `format="code"` for
+ * technical values, rendered as escaped text inside native code elements.
  *
  * @slot - Progressive fallback label.
  */
 export class CadTableColumn extends LitElement {
   static override properties = {
+    format: { reflect: true, type: String },
     key: { reflect: true, type: String },
     label: { reflect: true, type: String },
   }
@@ -29,11 +34,13 @@ export class CadTableColumn extends LitElement {
     }
   `
 
+  declare format: CadTableColumnFormat
   declare key: string
   declare label: string
 
   constructor() {
     super()
+    this.format = 'text'
     this.key = ''
     this.label = ''
   }
@@ -109,6 +116,7 @@ export class CadTable extends LitElement {
     density: { reflect: true, type: String },
     emptyText: { attribute: 'empty-text', type: String },
     minWidth: { attribute: 'min-width', type: String },
+    typography: { reflect: true, type: String },
     variant: { reflect: true, type: String },
     zebra: { reflect: true, type: Boolean },
   }
@@ -123,20 +131,27 @@ export class CadTable extends LitElement {
           transparent
         )
       );
-      --_table-ink: var(--cad-table-ink, var(--cad-ink, #25202a));
-      --_table-paper: var(--cad-table-paper, var(--cad-surface, #fffdf7));
+      --_table-ink: var(--cad-table-ink, var(--cad-link, #005bac));
+      --_table-paper: var(--cad-table-paper, var(--cad-surface, #fff));
       display: block;
       min-width: 0;
       color: var(--_table-ink);
     }
 
     .base {
+      position: relative;
       max-width: 100%;
       overflow-x: auto;
       background: var(--_table-paper);
-      border: 1.5px solid var(--_table-grid);
-      border-radius: 0.65rem 0.85rem 0.7rem 0.8rem;
-      box-shadow: 0 0.55rem 1.2rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.08);
+      border-block-end: 1px solid var(--_table-grid);
+      border-inline: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .base:focus-visible {
+      outline: var(--cad-focus-outline, 2px dashed var(--_table-ink));
+      outline-offset: -2px;
     }
 
     table {
@@ -144,17 +159,45 @@ export class CadTable extends LitElement {
       min-width: var(--_table-min-width, 32rem);
       border-collapse: collapse;
       color: inherit;
-      font-family: var(--cad-font-book, serif);
+      font-family: var(--cad-font-hand, cursive);
+      font-size: var(--cad-hand-sm, 1.05rem);
       font-variant-numeric: tabular-nums;
     }
 
+    :host([typography='body']) table {
+      color: var(--cad-ink, currentColor);
+      font-family: var(--cad-type-body-font, var(--cad-font-book, serif));
+      font-size: var(--cad-type-body-size, 1rem);
+      line-height: var(--cad-type-body-line-height, 1.5);
+    }
+
+    code {
+      font-family: var(--cad-type-code-font, var(--cad-font-mono, monospace));
+      font-size: 0.85em;
+      font-weight: normal;
+      overflow-wrap: anywhere;
+    }
+
+    :host([typography='body']) th {
+      font-family: var(--cad-type-body-font, serif);
+      font-size: var(--cad-book-sm, 0.95rem);
+      letter-spacing: normal;
+    }
+
+    :host([typography='body']) caption {
+      font-family: var(--cad-type-title-font, cursive);
+      font-size: var(--cad-type-title-size, 1.5rem);
+      transform: none;
+    }
+
     caption {
-      padding: 0.9rem 1rem 0.65rem;
+      padding: 1rem 1rem 0.8rem;
       color: var(--_table-ink);
       font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
+      font-size: var(--cad-hand-lg, 1.55rem);
       font-weight: var(--cad-hand-weight-strong, 700);
       text-align: left;
+      transform: rotate(-0.25deg);
     }
 
     th,
@@ -162,25 +205,29 @@ export class CadTable extends LitElement {
       padding: 0.78rem 0.9rem;
       text-align: left;
       vertical-align: top;
-      border-block-start: 1px solid var(--_table-grid);
     }
 
     th {
+      border: 0;
       color: var(--_table-ink);
       background: color-mix(
         in srgb,
-        var(--cad-post-it-blue-bg, #b8d5ff) 16%,
+        var(--_table-ink) 10%,
         var(--_table-paper)
       );
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-sm, 1.05rem);
       font-weight: var(--cad-hand-weight-strong, 700);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.02em;
     }
 
-    :host([variant='grid']) th:not(:last-child),
+    tbody tr + tr td {
+      border-block-start: 1px solid var(--_table-grid);
+    }
+
     :host([variant='grid']) td:not(:last-child) {
-      border-inline-end: 1px dashed var(--_table-grid);
+      border-inline-end: 1px solid
+        color-mix(in srgb, var(--_table-ink) 58%, transparent);
     }
 
     :host([variant='ruled']) .base {
@@ -189,23 +236,16 @@ export class CadTable extends LitElement {
       box-shadow: none;
     }
 
-    :host([variant='ruled']) th {
-      background: transparent;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    :host([variant='ruled']) th,
-    :host([variant='ruled']) td {
-      border-block-start-style: dashed;
-    }
-
     :host([zebra]) tbody tr:nth-child(even) td {
-      background: color-mix(
-        in srgb,
-        var(--cad-post-it-lemon-bg, #fff1a8) 13%,
-        transparent
-      );
+      background: color-mix(in srgb, var(--_table-ink) 3%, transparent);
+    }
+
+    tbody tr:hover td {
+      background: color-mix(in srgb, var(--_table-ink) 8%, var(--_table-paper));
+    }
+
+    tbody td:first-child {
+      font-weight: var(--cad-hand-weight-strong, 700);
     }
 
     :host([density='compact']) th,
@@ -237,6 +277,7 @@ export class CadTable extends LitElement {
   declare density: CadTableDensity
   declare emptyText: string
   declare minWidth: string
+  declare typography: CadTableTypography
   declare variant: CadTableVariant
   declare zebra: boolean
 
@@ -251,6 +292,7 @@ export class CadTable extends LitElement {
     this.density = 'regular'
     this.emptyText = 'No data'
     this.minWidth = '32rem'
+    this.typography = 'hand'
     this.variant = 'grid'
     this.zebra = false
   }
@@ -276,6 +318,7 @@ export class CadTable extends LitElement {
         (child): child is CadTableColumn => child instanceof CadTableColumn,
       )
       .map((column) => ({
+        format: column.format,
         key: column.key.trim(),
         label: column.label.trim() || column.textContent?.trim() || column.key,
       }))
@@ -306,7 +349,7 @@ export class CadTable extends LitElement {
     const style = `--_table-min-width: ${this.minWidth || '32rem'}`
 
     return html`
-      <div class="base" part="base" style=${style}>
+      <div class="base" part="base" style=${style} tabindex="0">
         <table part="table">
           ${
             this.caption || this.querySelector('[slot="caption"]')
@@ -338,7 +381,13 @@ export class CadTable extends LitElement {
                         ${columns.map(
                           (column) =>
                             html`<td part="cell">
-                              ${row.cells.get(column.key) ?? ''}
+                              ${
+                                column.format === 'code'
+                                  ? html`<code
+                                      >${row.cells.get(column.key) ?? ''}</code
+                                    >`
+                                  : (row.cells.get(column.key) ?? '')
+                              }
                             </td>`,
                         )}
                       </tr>`,

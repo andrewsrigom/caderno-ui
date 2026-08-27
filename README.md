@@ -1,6 +1,6 @@
 # Caderno UI
 
-Caderno UI is a notebook-inspired, framework-agnostic interface system. Its canonical components are standards-based custom elements implemented with Lit. Framework packages only adapt those elements to each ecosystem.
+Simple, intuitive UI components inspired by handwritten notes and pen on white paper. Works in HTML, React, Astro, Vue, Svelte, and whatever comes next.
 
 [![CI](https://github.com/andrewsrigom/caderno-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/andrewsrigom/caderno-ui/actions/workflows/ci.yml)
 [![Documentation](https://github.com/andrewsrigom/caderno-ui/actions/workflows/pages.yml/badge.svg)](https://andrewsrigom.github.io/caderno-ui/)
@@ -82,7 +82,7 @@ Astro facades keep useful server-rendered content before the custom element upgr
 import Alert from '@caderno-ui/astro/Alert.astro'
 ---
 
-<Alert title="Review the contract" variant="warning">
+<Alert heading="Review the contract" variant="warning">
   <p>The contract and implementation have diverged.</p>
 </Alert>
 ```
@@ -91,9 +91,9 @@ Vue, Svelte, and other frameworks can consume the `cad-*` custom elements direct
 
 ## Themes and extension
 
-Import `@caderno-ui/tokens/notebook.css` for the defaults, set `data-theme="light"` on the document root for light mode, or override the `--cad-*` variables from your application. Components expose CSS parts for targeted visual customization while keeping their behavior canonical.
+Import `@caderno-ui/tokens/notebook.css` for a white background by default. Dark mode requires `data-theme="dark"` on `<html>`; system preferences do not change the theme. Override `--cad-*` CSS variables to customize colors, fonts, and spacing, or use the CSS parts listed in each component’s API.
 
-This follows the useful part of the shadcn model—clear, composable primitives and ownership-friendly styling—without copying component implementations into every application. Consumers install versioned packages and extend them through tokens, slots, events, and CSS parts.
+Install versioned packages and compose your content through slots. Component behavior stays in the library.
 
 ## Releases
 

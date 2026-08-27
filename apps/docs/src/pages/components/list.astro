@@ -1,0 +1,115 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-list label="System design topics">
+  <cad-list-item href="#fundamentals">System design fundamentals</cad-list-item>
+  <cad-list-item href="#stories">Behavioral story bank</cad-list-item>
+  <cad-list-item current href="#trade-offs">Concurrency trade-offs</cad-list-item>
+  <cad-list-item href="#caching">Caching strategies</cad-list-item>
+  <cad-list-item disabled>Failure modes</cad-list-item>
+</cad-list>
+
+<cad-list label="Decision process" variant="numbered">
+  <cad-list-item href="#understand">Understand the problem</cad-list-item>
+  <cad-list-item href="#requirements">Define the requirements</cad-list-item>
+  <cad-list-item href="#options">Explore solution options</cad-list-item>
+  <cad-list-item current href="#direction">Choose a direction</cad-list-item>
+  <cad-list-item disabled>Review the outcome</cad-list-item>
+</cad-list>
+
+<script type="module">
+  import '@caderno-ui/elements/list'
+</script>`
+---
+
+<DocsLayout
+  description="Group related items with bullets, or use numbers when order matters. Items can include links."
+  title="List"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-list&gt; family</p>
+    <h1>List</h1>
+    <p>
+      Group related items with bullets, or use numbers when order matters. Items
+      can include links.
+    </p>
+  </header>
+
+  <DemoFrame title="List variants">
+    <div class="list-examples">
+      <section aria-labelledby="bullet-list-title">
+        <h2 id="bullet-list-title">Bullet list</h2>
+        <cad-list label="System design topics">
+          <cad-list-item href="#fundamentals"
+            >System design fundamentals</cad-list-item
+          >
+          <cad-list-item href="#stories">Behavioral story bank</cad-list-item>
+          <cad-list-item current href="#trade-offs"
+            >Concurrency trade-offs</cad-list-item
+          >
+          <cad-list-item href="#caching">Caching strategies</cad-list-item>
+          <cad-list-item disabled>Failure modes</cad-list-item>
+        </cad-list>
+      </section>
+
+      <section aria-labelledby="numbered-list-title">
+        <h2 id="numbered-list-title">Numbered list</h2>
+        <cad-list label="Decision process" variant="numbered">
+          <cad-list-item href="#understand"
+            >Understand the problem</cad-list-item
+          >
+          <cad-list-item href="#requirements"
+            >Define the requirements</cad-list-item
+          >
+          <cad-list-item href="#options">Explore solution options</cad-list-item
+          >
+          <cad-list-item current href="#direction"
+            >Choose a direction</cad-list-item
+          >
+          <cad-list-item disabled>Review the outcome</cad-list-item>
+        </cad-list>
+      </section>
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ApiReference tagName="cad-list" />
+  <ApiReference tagName="cad-list-item" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Items expose list semantics. Linked rows use native anchors; the current
+      destination uses <code>aria-current</code>. Disabled rows cannot navigate.
+    </p>
+  </section>
+
+  <style>
+    .list-examples {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .list-examples section {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .list-examples h2 {
+      width: fit-content;
+      margin: 0;
+      color: var(--cad-link);
+      border-bottom: 3px solid
+        color-mix(in srgb, var(--cad-link) 55%, transparent);
+      font-family: var(--cad-font-hand);
+      font-size: var(--cad-hand-lg);
+    }
+  </style>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/list'
+</script>

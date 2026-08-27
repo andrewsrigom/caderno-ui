@@ -2,58 +2,162 @@
 import ApiReference from '../../components/ApiReference.astro'
 import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-spinner label="Indexing notes" size="md" tone="blue">
-  Indexing notes
-</cad-spinner>
+const usage = `<div class="sync-status">
+  <cad-spinner label="Syncing data" size="md" tone="mint">
+    Syncing data
+  </cad-spinner>
+  <span>
+    <strong>Syncing data...</strong>
+    <small>Almost done.</small>
+  </span>
+</div>
 
 <script type="module">
   import '@caderno-ui/elements/spinner'
-</script>`
+</script>
+
+<style>
+  .sync-status {
+    display: inline-flex;
+    gap: 0.8rem;
+    align-items: center;
+    color: var(--cad-success-ink, #07875f);
+    font-family: var(--cad-font-hand);
+  }
+
+  .sync-status span {
+    display: grid;
+    gap: 0.08rem;
+  }
+
+  .sync-status strong {
+    font-size: 1.05rem;
+  }
+
+  .sync-status small {
+    color: var(--cad-ink-muted);
+    font-family: var(--cad-font-book);
+    font-size: 0.78rem;
+  }
+</style>`
+
+const variantsUsage = `<cad-spinner label="Loading" variant="ring">Loading</cad-spinner>
+<cad-spinner label="Loading" variant="dashed">Loading</cad-spinner>
+<cad-spinner label="Loading" variant="segmented">Loading</cad-spinner>
+<cad-spinner label="Loading" variant="gradient">Loading</cad-spinner>
+<cad-spinner label="Loading" variant="dots">Loading</cad-spinner>
+<cad-spinner label="Loading" variant="pulse">Loading</cad-spinner>
+<cad-spinner label="Loading" variant="bounce">Loading</cad-spinner>`
 ---
 
 <DocsLayout
-  description="CadSpinner is a named indeterminate status with reduced-motion support."
+  description="Show that work is running when its progress is unknown. Use Progress when you can measure completion."
   title="Spinner"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-spinner&gt;</p>
-    <h1>Show indeterminate work without losing its name.</h1>
+    <h1>Spinner</h1>
     <p>
-      Spinner exposes a polite status, scales without layout assumptions, and
-      stops rotating when the user prefers reduced motion.
+      Show that work is running when its progress is unknown. Use Progress when
+      you can measure completion.
     </p>
   </header>
 
-  <DemoFrame title="Sizes and tones">
-    <div class="spinner-row">
-      <cad-spinner label="Small sync" size="sm" tone="mint"
-        >Small sync</cad-spinner
-      >
-      <cad-spinner label="Indexing notes" size="md">Indexing notes</cad-spinner>
-      <cad-spinner label="Publishing release" size="lg" tone="violet">
-        Publishing release
+  <DemoFrame title="Syncing data">
+    <div class="sync-status">
+      <cad-spinner label="Syncing data" size="md" tone="mint">
+        Syncing data
       </cad-spinner>
+      <span>
+        <strong>Syncing data...</strong>
+        <small>Almost done.</small>
+      </span>
     </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery columns={3} id="spinner-variants-title" title="Motion styles">
+    <ExampleCard title="Ring">
+      <cad-spinner label="Loading" variant="ring">Loading</cad-spinner>
+    </ExampleCard>
+    <ExampleCard title="Dashed">
+      <cad-spinner label="Loading" variant="dashed">Loading</cad-spinner>
+    </ExampleCard>
+    <ExampleCard title="Segmented">
+      <cad-spinner label="Loading" variant="segmented">Loading</cad-spinner>
+    </ExampleCard>
+    <ExampleCard title="Gradient">
+      <cad-spinner label="Loading" variant="gradient">Loading</cad-spinner>
+    </ExampleCard>
+    <ExampleCard title="Dots">
+      <cad-spinner label="Loading" variant="dots">Loading</cad-spinner>
+    </ExampleCard>
+    <ExampleCard title="Pulse">
+      <cad-spinner label="Loading" variant="pulse">Loading</cad-spinner>
+    </ExampleCard>
+    <ExampleCard title="Bounce">
+      <cad-spinner label="Loading" variant="bounce">Loading</cad-spinner>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="treatments-title">
+    <h2 id="treatments-title">Variants and sizes</h2><p>
+      Choose a motion style from the examples above. <code>ring</code> is the default.
+      Sizes are <code>xs</code>, <code>sm</code>, <code>md</code>, and <code
+        >lg</code
+      >; tones are blue, mint, amber, red, and neutral.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="usage-title">
+    <h2 id="usage-title">When to use it</h2><p>
+      Use Progress when you know the completed amount. Avoid showing a spinner
+      for work that finishes almost immediately.
+    </p>
+  </section>
+
   <ApiReference tagName="cad-spinner" />
 
   <section class="content-section" aria-labelledby="accessibility-title">
-    <h2 id="accessibility-title">Accessibility</h2>
-    <p>
-      Provide a concise <code>label</code>. The same text can remain in the
-      default slot as a meaningful pre-upgrade fallback.
+    <h2 id="accessibility-title">Accessibility</h2><p>
+      Provide a short <code>label</code>. The spinner uses <code
+        >role="status"</code
+      >. Repeat the label in the default slot for a readable fallback before
+      JavaScript loads, and keep visible context beside the indicator.
     </p>
   </section>
 
   <style>
-    .spinner-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
+    .sync-status {
+      display: inline-flex;
+      gap: 0.8rem;
       align-items: center;
+      color: var(--cad-success-ink, #07875f);
+      font-family: var(--cad-font-hand);
+    }
+
+    .sync-status span {
+      display: grid;
+      gap: 0.08rem;
+    }
+
+    .sync-status strong {
+      font-size: 1.05rem;
+    }
+
+    .sync-status small {
+      color: var(--cad-ink-muted);
+      font-family: var(--cad-font-book);
+      font-size: 0.78rem;
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/spinner'
+</script>

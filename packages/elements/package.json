@@ -66,6 +66,18 @@
       "types": "./dist/divider/cad-divider.d.ts",
       "import": "./dist/divider/cad-divider.js"
     },
+    "./drawer": {
+      "types": "./dist/drawer/cad-drawer.d.ts",
+      "import": "./dist/drawer/cad-drawer.js"
+    },
+    "./footer": {
+      "types": "./dist/footer/cad-footer.d.ts",
+      "import": "./dist/footer/cad-footer.js"
+    },
+    "./header": {
+      "types": "./dist/header/cad-header.d.ts",
+      "import": "./dist/header/cad-header.js"
+    },
     "./icon": {
       "types": "./dist/icon/cad-icon.d.ts",
       "import": "./dist/icon/cad-icon.js"
@@ -95,6 +107,9 @@
       "import": "./dist/table/cad-table.js"
     },
     "./fallback.css": "./src/styles/fallback.css",
+    "./navigation.css": "./src/styles/navigation.css",
+    "./scrollbar.css": "./src/styles/scrollbar.css",
+    "./custom-elements.json": "./custom-elements.json",
     "./prose.css": "./src/styles/prose.css",
     "./input": {
       "types": "./dist/input/cad-input.d.ts",
@@ -107,6 +122,14 @@
     "./checkbox": {
       "types": "./dist/checkbox/cad-checkbox.d.ts",
       "import": "./dist/checkbox/cad-checkbox.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/cad-switch.d.ts",
+      "import": "./dist/switch/cad-switch.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/cad-slider.d.ts",
+      "import": "./dist/slider/cad-slider.js"
     },
     "./radio": {
       "types": "./dist/radio/cad-radio.d.ts",
@@ -128,6 +151,10 @@
       "types": "./dist/tooltip/cad-tooltip.d.ts",
       "import": "./dist/tooltip/cad-tooltip.js"
     },
+    "./popover": {
+      "types": "./dist/popover/cad-popover.d.ts",
+      "import": "./dist/popover/cad-popover.js"
+    },
     "./modal": {
       "types": "./dist/modal/cad-modal.d.ts",
       "import": "./dist/modal/cad-modal.js"
@@ -148,13 +175,13 @@
       "types": "./dist/avatar/cad-avatar.d.ts",
       "import": "./dist/avatar/cad-avatar.js"
     },
+    "./doodle-avatar": {
+      "types": "./dist/doodle-avatar/cad-doodle-avatar.d.ts",
+      "import": "./dist/doodle-avatar/cad-doodle-avatar.js"
+    },
     "./highlight": {
       "types": "./dist/highlight/cad-highlight.d.ts",
       "import": "./dist/highlight/cad-highlight.js"
-    },
-    "./tape": {
-      "types": "./dist/tape/cad-tape.d.ts",
-      "import": "./dist/tape/cad-tape.js"
     },
     "./sticker": {
       "types": "./dist/sticker/cad-sticker.d.ts",
@@ -180,13 +207,13 @@
       "types": "./dist/kanban/cad-kanban.d.ts",
       "import": "./dist/kanban/cad-kanban.js"
     },
+    "./list": {
+      "types": "./dist/list/cad-list.d.ts",
+      "import": "./dist/list/cad-list.js"
+    },
     "./steps": {
       "types": "./dist/steps/cad-steps.d.ts",
       "import": "./dist/steps/cad-steps.js"
-    },
-    "./paper": {
-      "types": "./dist/paper/cad-paper.d.ts",
-      "import": "./dist/paper/cad-paper.js"
     }
   },
   "sideEffects": [

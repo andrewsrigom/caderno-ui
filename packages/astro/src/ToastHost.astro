@@ -5,18 +5,28 @@ import type { CadToastPlacement } from '@caderno-ui/elements/toast'
 
 type Props = {
   class?: string
+  duration?: number
   label?: string
+  maxVisible?: number
   placement?: CadToastPlacement
 }
 
 const {
   class: className,
+  duration = 4000,
   label = 'Notifications',
+  maxVisible = 3,
   placement = 'top-right',
 }: Props = Astro.props
 ---
 
-<cad-toast-host class={className} label={label} placement={placement}>
+<cad-toast-host
+  class={className}
+  duration={duration}
+  label={label}
+  max-visible={maxVisible}
+  placement={placement}
+>
   <slot />
 </cad-toast-host>
 

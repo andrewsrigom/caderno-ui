@@ -3,10 +3,16 @@ import '@caderno-ui/elements/fallback.css'
 
 import type {
   CadTableDensity,
+  CadTableColumnFormat,
+  CadTableTypography,
   CadTableVariant,
 } from '@caderno-ui/elements/table'
 
-export type TableColumn = { key: string; label: string }
+export type TableColumn = {
+  key: string
+  label: string
+  format?: CadTableColumnFormat
+}
 export type TableRow = Record<
   string,
   boolean | number | string | null | undefined
@@ -20,6 +26,7 @@ type Props = {
   emptyText?: string
   minWidth?: string
   rows?: readonly TableRow[]
+  typography?: CadTableTypography
   variant?: CadTableVariant
   zebra?: boolean
 }
@@ -32,6 +39,7 @@ const {
   emptyText,
   minWidth,
   rows = [],
+  typography = 'hand',
   variant = 'grid',
   zebra = false,
 } = Astro.props
@@ -43,12 +51,17 @@ const {
   density={density}
   empty-text={emptyText}
   min-width={minWidth}
+  typography={typography}
   variant={variant}
   zebra={zebra || undefined}
 >
   {
     columns.map((column) => (
-      <cad-table-column key={column.key} label={column.label} />
+      <cad-table-column
+        key={column.key}
+        label={column.label}
+        format={column.format}
+      />
     ))
   }
   {

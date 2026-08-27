@@ -1,6 +1,9 @@
 ---
 import '@caderno-ui/elements/fallback.css'
-import type { CadBlockquoteTone } from '@caderno-ui/elements/blockquote'
+import type {
+  CadBlockquoteTone,
+  CadBlockquoteVariant,
+} from '@caderno-ui/elements/blockquote'
 
 type Props = {
   author?: string
@@ -8,9 +11,17 @@ type Props = {
   class?: string
   source?: string
   tone?: CadBlockquoteTone
+  variant?: CadBlockquoteVariant
 }
 
-const { author, cite, class: className, source, tone = 'accent' } = Astro.props
+const {
+  author,
+  cite,
+  class: className,
+  source,
+  tone = 'accent',
+  variant = 'default',
+} = Astro.props
 ---
 
 <cad-blockquote
@@ -19,6 +30,7 @@ const { author, cite, class: className, source, tone = 'accent' } = Astro.props
   class={className}
   source={source}
   tone={tone}
+  variant={variant}
 >
   <slot />
   <slot name="caption" slot="caption" />

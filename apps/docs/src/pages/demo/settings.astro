@@ -1,0 +1,178 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const toUrl = (href: string) => `${base}${href}`
+---
+
+<DemoLayout
+  description="Interactive workspace settings composed with Caderno UI form controls."
+  title="Settings"
+>
+  <cad-breadcrumb label="Settings workspace path">
+    <cad-breadcrumb-item href={toUrl('/demo/')}>Demo</cad-breadcrumb-item>
+    <cad-breadcrumb-item current>Settings</cad-breadcrumb-item>
+  </cad-breadcrumb>
+
+  <header class="demo-page-heading">
+    <p class="demo-eyebrow">Local demo preferences</p>
+    <h1>Settings that explain what changes.</h1>
+    <p>
+      This page exercises form controls in a real hierarchy: profile, workspace
+      behavior, review rhythm, and visible feedback after saving.
+    </p>
+  </header>
+
+  <div class="demo-grid demo-grid-split">
+    <form class="demo-form demo-panel" data-settings-form>
+      <section class="demo-form-section" aria-labelledby="profile-title">
+        <h2 id="profile-title">Profile</h2>
+        <p>Used on project ownership and review activity.</p>
+        <div class="demo-form-grid">
+          <cad-input label="Display name" name="name" value="Andrews Rigom">
+          </cad-input>
+          <cad-input
+            label="Email"
+            name="email"
+            type="email"
+            value="andrews@example.com"></cad-input>
+        </div>
+        <cad-textarea
+          label="Review focus"
+          name="focus"
+          rows="4"
+          value="Architecture trade-offs, public component contracts, and clear examples."
+        ></cad-textarea>
+      </section>
+
+      <section class="demo-form-section" aria-labelledby="workspace-title">
+        <h2 id="workspace-title">Workspace behavior</h2>
+        <p>Each switch describes the outcome, not the implementation.</p>
+        <div class="demo-setting-row">
+          <div class="demo-setting-copy">
+            <strong>Auto-save notes</strong>
+            <span>Keep drafts locally while you write.</span>
+          </div>
+          <cad-switch checked label="Auto-save notes" name="autosave" size="sm"
+          ></cad-switch>
+        </div>
+        <div class="demo-setting-row">
+          <div class="demo-setting-copy">
+            <strong>Weekly review reminder</strong>
+            <span>Show a quiet reminder every Friday morning.</span>
+          </div>
+          <cad-switch
+            checked
+            label="Weekly review reminder"
+            name="weekly-review"
+            size="sm"></cad-switch>
+        </div>
+        <div class="demo-setting-row">
+          <div class="demo-setting-copy">
+            <strong>Use dark paper</strong>
+            <span>Switch the demo canvas without changing component APIs.</span>
+          </div>
+          <cad-switch
+            data-dark-paper
+            label="Use dark paper"
+            name="dark-paper"
+            size="sm"></cad-switch>
+        </div>
+      </section>
+
+      <section class="demo-form-section" aria-labelledby="rhythm-title">
+        <h2 id="rhythm-title">Review rhythm</h2>
+        <p>
+          Choose a weekly target that remains visible and keyboard adjustable.
+        </p>
+        <cad-slider
+          hint="A target, not a quota."
+          label="Notes to review each week"
+          max="20"
+          max-label="20"
+          min="2"
+          min-label="2"
+          show-value
+          step="2"
+          value="8"></cad-slider>
+      </section>
+
+      <div class="demo-actions">
+        <cad-button data-save-settings type="button">Save settings</cad-button>
+        <cad-button data-reset-settings type="button" variant="link">
+          Restore demo defaults
+        </cad-button>
+      </div>
+    </form>
+
+    <aside class="demo-panel" aria-labelledby="preview-title">
+      <div class="demo-panel-heading">
+        <div>
+          <p class="demo-kicker">Live sample</p>
+          <h2 id="preview-title">What these settings affect</h2>
+        </div>
+      </div>
+      <cad-note heading="Friday review" tone="lemon">
+        Review eight notes, close one open decision, and save the strongest
+        evidence for next week.
+      </cad-note>
+      <cad-alert heading="Auto-save is on" size="compact" variant="success">
+        Drafts stay local while you work in this demo.
+      </cad-alert>
+      <cad-progress
+        label="Weekly review target"
+        max="8"
+        show-value
+        value="5"
+        value-label="5 of 8"></cad-progress>
+    </aside>
+  </div>
+</DemoLayout>
+
+<script>
+  import '@caderno-ui/elements/switch'
+  import { toast } from '@caderno-ui/elements/toast'
+  import type { CadSwitch } from '@caderno-ui/elements/switch'
+
+  const root = document.documentElement
+  const darkPaper = document.querySelector<CadSwitch>('[data-dark-paper]')
+
+  if (darkPaper) darkPaper.checked = root.dataset.theme === 'dark'
+
+  darkPaper?.addEventListener('change', () => {
+    root.dataset.theme = darkPaper.checked ? 'dark' : 'light'
+    localStorage.setItem('caderno-ui:demo-theme', root.dataset.theme)
+  })
+
+  document
+    .querySelector('[data-save-settings]')
+    ?.addEventListener('click', () => {
+      toast.success('Settings saved.', {
+        description: 'Your Field Notes preferences are ready.',
+        hostId: 'demo-toasts',
+      })
+    })
+
+  document
+    .querySelector('[data-reset-settings]')
+    ?.addEventListener('click', () => {
+      root.dataset.theme = 'light'
+      localStorage.setItem('caderno-ui:demo-theme', 'light')
+      if (darkPaper) darkPaper.checked = false
+      toast.neutral('Demo defaults restored.', {
+        description: 'No personal data was changed.',
+        hostId: 'demo-toasts',
+      })
+    })
+</script>
+
+<script>
+  import '@caderno-ui/elements/alert'
+  import '@caderno-ui/elements/breadcrumb'
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/note'
+  import '@caderno-ui/elements/progress'
+  import '@caderno-ui/elements/slider'
+  import '@caderno-ui/elements/textarea'
+</script>

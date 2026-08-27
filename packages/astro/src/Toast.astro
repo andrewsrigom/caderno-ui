@@ -5,6 +5,7 @@ import type { CadToastVariant } from '@caderno-ui/elements/toast'
 
 type Props = {
   class?: string
+  description?: string
   dismissible?: boolean
   dismissLabel?: string
   duration?: number
@@ -15,6 +16,7 @@ type Props = {
 
 const {
   class: className,
+  description,
   dismissible = true,
   dismissLabel = 'Dismiss notification',
   duration = 0,
@@ -26,6 +28,7 @@ const {
 
 <cad-toast
   class={className}
+  description={description}
   dismiss-label={dismissLabel}
   dismissible={dismissible || undefined}
   duration={duration}
@@ -33,7 +36,9 @@ const {
   open={open || undefined}
   variant={variant}
 >
+  <slot name="title" slot="title" />
   <slot />
+  <slot name="action" slot="action" />
 </cad-toast>
 
 <script>

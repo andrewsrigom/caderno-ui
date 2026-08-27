@@ -4,8 +4,14 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-link href="/architecture" tone="lemon">Read the architecture</cad-link>
-<cad-link external href="https://example.com" variant="underline">External reference</cad-link>
+const usage = `<cad-link href="#contract">Read the contract</cad-link>
+<cad-link external href="https://example.com">Open in help center</cad-link>
+<cad-link disabled href="#unavailable">Unavailable reference</cad-link>
+
+<cad-link href="#rollout">Go to rollout plan <span aria-hidden="true" slot="end">→</span></cad-link>
+<cad-link href="#overview"><span aria-hidden="true" slot="start">←</span>Back to overview</cad-link>
+<cad-link download="report.pdf" href="/report.pdf">Download report <span aria-hidden="true" slot="end">⇩</span></cad-link>
+<cad-link href="#delete" tone="coral">Delete this item <span aria-hidden="true" slot="end">✳</span></cad-link>
 
 <script type="module">
   import '@caderno-ui/elements/link'
@@ -13,32 +19,104 @@ const usage = `<cad-link href="/architecture" tone="lemon">Read the architecture
 ---
 
 <DocsLayout
-  description="CadLink renders a native anchor with marker, underline, or plain treatments."
+  description="Navigate with blue text and a coral underline. Supports external links and downloads."
   title="Link"
 >
   <header class="page-header">
     <p class="eyebrow">&lt;cad-link&gt;</p>
-    <h1>Mark the reference, not the whole paragraph.</h1>
+    <h1>Link</h1>
     <p>
-      Link preserves native anchor behavior and adds notebook emphasis without
-      making navigation look like an action button.
+      Navigate with blue text and a coral underline. Supports external links and
+      downloads.
     </p>
   </header>
 
-  <DemoFrame title="Treatments">
-    <p class="link-demo">
-      <cad-link href="/architecture" tone="lemon"
-        >Read the architecture</cad-link
-      >,
-      <cad-link href="/components" tone="mint" variant="underline"
-        >compare components</cad-link
-      >, or <cad-link
-        external
-        href="https://example.com"
-        tone="violet"
-        variant="plain">open a reference</cad-link
-      >.
-    </p>
+  <DemoFrame title="Link states">
+    <div class="link-board">
+      <div class="state-table">
+        <strong>State</strong>
+        <strong>Example</strong>
+        <strong>Notes</strong>
+
+        <span>Default</span>
+        <cad-link href="#contract">Read the contract</cad-link>
+        <span>Coral underline marks the destination.</span>
+
+        <span>Interactive</span>
+        <cad-link href="#keyboard">Read the contract</cad-link>
+        <span>Hover, press, and keyboard focus are native.</span>
+
+        <span>External</span>
+        <cad-link external href="https://example.com"
+          >Open in help center</cad-link
+        >
+        <span>The drawn external mark is visible and ignored by AT.</span>
+
+        <span>Disabled</span>
+        <cad-link disabled href="#unavailable">Unavailable reference</cad-link>
+        <span>Gray, unfocusable, and non-interactive.</span>
+      </div>
+
+      <div class="pattern-grid">
+        <div>
+          <small>Forward</small>
+          <cad-link href="#rollout"
+            >Go to rollout plan <span aria-hidden="true" slot="end">→</span
+            ></cad-link
+          >
+        </div>
+        <div>
+          <small>Back</small>
+          <cad-link href="#overview"
+            ><span aria-hidden="true" slot="start">←</span>Back to overview</cad-link
+          >
+        </div>
+        <div>
+          <small>Inline</small>
+          <p>
+            Review the <cad-link href="#plan">rollout plan</cad-link> for more details.
+          </p>
+        </div>
+        <div>
+          <small>Download</small>
+          <cad-link download="report.pdf" href="/report.pdf"
+            >Download report <span aria-hidden="true" slot="end">⇩</span
+            ></cad-link
+          >
+        </div>
+        <div>
+          <small>Destructive</small>
+          <cad-link href="#delete" tone="coral"
+            >Delete this item <span aria-hidden="true" slot="end">✳</span
+            ></cad-link
+          >
+        </div>
+      </div>
+
+      <div class="emphasis-row">
+        <span>Primary actions with emphasis</span>
+        <cad-link href="#create" variant="highlight">
+          <cad-icon aria-hidden="true" name="spark" size="22" slot="start"
+          ></cad-icon>
+          Create new plan
+        </cad-link>
+        <cad-link href="#publish" variant="highlight">
+          <cad-icon aria-hidden="true" name="star" size="22" slot="start"
+          ></cad-icon>
+          Publish release
+        </cad-link>
+        <cad-link href="#approve" variant="highlight">
+          <cad-icon aria-hidden="true" name="check" size="22" slot="start"
+          ></cad-icon>
+          Approve changes
+        </cad-link>
+        <cad-link href="#permanent" tone="coral" variant="highlight">
+          <cad-icon aria-hidden="true" name="exclamation" size="22" slot="start"
+          ></cad-icon>
+          Delete permanently
+        </cad-link>
+      </div>
+    </div>
   </DemoFrame>
   <CodeBlock code={usage} collapsible language="html" />
 
@@ -47,17 +125,132 @@ const usage = `<cad-link href="/architecture" tone="lemon">Read the architecture
   <section class="content-section" aria-labelledby="accessibility-title">
     <h2 id="accessibility-title">Accessibility</h2>
     <p>
-      External links receive safe target and relationship defaults plus a
-      visible indicator. Link text should describe the destination without
-      relying on color or decoration.
+      Use text that describes the destination. External links receive safe
+      target and relationship defaults. Disabled links cannot navigate and leave
+      the tab order.
     </p>
   </section>
 
   <style>
-    .link-demo {
+    .link-board {
+      display: grid;
+      gap: 1.5rem;
+      color: var(--cad-link);
+      font-family: var(--cad-font-hand);
+    }
+
+    .state-table {
+      display: grid;
+      grid-template-columns: minmax(6rem, 0.7fr) minmax(12rem, 1.2fr) minmax(
+          15rem,
+          1fr
+        );
+      gap: 0;
+      align-items: center;
+    }
+
+    .state-table > * {
+      min-height: 2.85rem;
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid
+        color-mix(in srgb, var(--cad-link) 28%, transparent);
+    }
+
+    .state-table > :nth-child(3n) {
+      color: var(--cad-ink-muted);
+    }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(11rem, 1fr));
+      border-block: 1.5px solid var(--cad-link);
+    }
+
+    .pattern-grid > div {
+      display: grid;
+      gap: 0.55rem;
+      align-content: start;
+      min-height: 5.5rem;
+      padding: 0.8rem 1rem;
+      border-inline-end: 1px dashed
+        color-mix(in srgb, var(--cad-link) 45%, transparent);
+    }
+
+    .pattern-grid > div:last-child {
+      border-inline-end: 0;
+    }
+
+    .pattern-grid cad-link,
+    .emphasis-row cad-link {
+      white-space: nowrap;
+    }
+
+    .pattern-grid small {
+      color: var(--cad-link);
+      font-size: 0.9rem;
+    }
+
+    .pattern-grid p {
       margin: 0;
-      font-size: 1.1rem;
-      line-height: 2;
+      color: var(--cad-ink);
+      font-family: var(--cad-font-book);
+      line-height: 1.5;
+    }
+
+    .emphasis-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(11rem, 1fr));
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem;
+      border: 1.5px dashed var(--cad-link);
+    }
+
+    .emphasis-row > :first-child {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 58rem) {
+      .state-table {
+        grid-template-columns: minmax(5rem, 0.65fr) minmax(10rem, 1fr);
+      }
+
+      .state-table > :nth-child(3n) {
+        display: none;
+      }
+
+      .pattern-grid,
+      .emphasis-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .emphasis-row > :first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 34rem) {
+      .state-table,
+      .pattern-grid,
+      .emphasis-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .state-table > strong:first-child,
+      .state-table > span:nth-of-type(odd) {
+        display: none;
+      }
+
+      .pattern-grid > div {
+        border-inline-end: 0;
+        border-bottom: 1px dashed
+          color-mix(in srgb, var(--cad-link) 45%, transparent);
+      }
     }
   </style>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/link'
+</script>

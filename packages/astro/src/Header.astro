@@ -1,0 +1,84 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type { CadHeaderVariant } from '@caderno-ui/elements/header'
+
+type Props = {
+  class?: string
+  closeMenuLabel?: string
+  label?: string
+  menuLabel?: string
+  navigationLabel?: string
+  open?: boolean
+  sticky?: boolean
+  variant?: CadHeaderVariant
+}
+
+const {
+  class: className,
+  closeMenuLabel = 'Close menu',
+  label = 'Site header',
+  menuLabel = 'Open menu',
+  navigationLabel = 'Primary navigation',
+  open = false,
+  sticky = false,
+  variant = 'surface',
+} = Astro.props
+
+const hasActions = Astro.slots.has('actions')
+const hasBrand = Astro.slots.has('brand')
+const hasContext = Astro.slots.has('context')
+const hasSearch = Astro.slots.has('search')
+const hasUser = Astro.slots.has('user')
+---
+
+<cad-header
+  class={className}
+  close-menu-label={closeMenuLabel}
+  label={label}
+  menu-label={menuLabel}
+  navigation-label={navigationLabel}
+  open={open || undefined}
+  sticky={sticky || undefined}
+  variant={variant}
+>
+  {
+    hasBrand && (
+      <div slot="brand">
+        <slot name="brand" />
+      </div>
+    )
+  }
+  {
+    hasContext && (
+      <div slot="context">
+        <slot name="context" />
+      </div>
+    )
+  }
+  <slot />
+  {
+    hasSearch && (
+      <div slot="search">
+        <slot name="search" />
+      </div>
+    )
+  }
+  {
+    hasActions && (
+      <div slot="actions">
+        <slot name="actions" />
+      </div>
+    )
+  }
+  {
+    hasUser && (
+      <div slot="user">
+        <slot name="user" />
+      </div>
+    )
+  }
+</cad-header>
+
+<script>
+  import '@caderno-ui/elements/header'
+</script>

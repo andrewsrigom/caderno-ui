@@ -46,13 +46,9 @@ function references(value) {
 
 function themeBlock(source, theme) {
   const blocks = Array.from(source.matchAll(/([^{}]+)\{([^{}]*)\}/gs))
-  const match = blocks.find(([, selector]) => {
-    if (theme === 'light') return selector.includes(":root[data-theme='light']")
-    return (
-      selector.includes(':root') &&
-      selector.includes(":root[data-theme='dark']")
-    )
-  })
+  const match = blocks.find(([, selector]) =>
+    selector.includes(`:root[data-theme='${theme}']`),
+  )
 
   if (!match) throw new Error(`Missing ${theme} theme block in semantic.css`)
   return match[2]
@@ -194,6 +190,39 @@ const cycles = detectCycles(graph)
 const primitives = mapDeclarations(primitiveSource)
 const themes = {}
 const errors = []
+const defaultThemeBlock = Array.from(
+  semanticSource.matchAll(/([^{}]+)\{([^{}]*)\}/gs),
+).find(([, selector]) =>
+  selector.split(',').some((part) => part.trim() === ':root'),
+)?.[2]
+
+if (
+  !defaultThemeBlock ||
+  !/color-scheme\s*:\s*light\s*;/.test(defaultThemeBlock)
+) {
+  errors.push('The default :root theme must be light; dark mode is explicit.')
+} else {
+  const defaultValues = new Map([
+    ...primitives,
+    ...mapDeclarations(defaultThemeBlock),
+  ])
+  for (const token of ['--cad-bg', '--cad-surface']) {
+    if (resolveColor(token, defaultValues).some((channel) => channel !== 255)) {
+      errors.push(`${token} must be white by default.`)
+    }
+  }
+}
+const squareRadiusTokens = [
+  '--cad-radius-sm',
+  '--cad-radius-md',
+  '--cad-radius-lg',
+]
+
+for (const token of squareRadiusTokens) {
+  if (primitives.get(token) !== '0') {
+    errors.push(`${token} must remain 0 to preserve the square design language`)
+  }
+}
 
 for (const theme of ['dark', 'light']) {
   const block = themeBlock(semanticSource, theme)

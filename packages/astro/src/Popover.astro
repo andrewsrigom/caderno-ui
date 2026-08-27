@@ -1,0 +1,72 @@
+---
+import '@caderno-ui/elements/fallback.css'
+
+import type {
+  CadPopoverPlacement,
+  CadPopoverSize,
+} from '@caderno-ui/elements/popover'
+
+type Props = {
+  anchor: string
+  class?: string
+  closeLabel?: string
+  dismissible?: boolean
+  heading?: string
+  id?: string
+  offset?: number
+  open?: boolean
+  placement?: CadPopoverPlacement
+  role?: 'dialog' | 'menu'
+  size?: CadPopoverSize
+}
+
+const {
+  anchor,
+  class: className,
+  closeLabel = 'Close popover',
+  dismissible = true,
+  heading,
+  id,
+  offset = 10,
+  open = false,
+  placement = 'bottom',
+  role = 'dialog',
+  size = 'md',
+}: Props = Astro.props
+const hasActions = Astro.slots.has('actions')
+const hasHeading = Astro.slots.has('heading')
+---
+
+<cad-popover
+  anchor={anchor}
+  class={className}
+  close-label={closeLabel}
+  dismissible={dismissible || undefined}
+  heading={heading}
+  id={id}
+  offset={offset}
+  open={open || undefined}
+  placement={placement}
+  role={role}
+  size={size}
+>
+  {
+    hasHeading ? (
+      <span slot="heading">
+        <slot name="heading" />
+      </span>
+    ) : null
+  }
+  <slot />
+  {
+    hasActions ? (
+      <span slot="actions">
+        <slot name="actions" />
+      </span>
+    ) : null
+  }
+</cad-popover>
+
+<script>
+  import '@caderno-ui/elements/popover'
+</script>

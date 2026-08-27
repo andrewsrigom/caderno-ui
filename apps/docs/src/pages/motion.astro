@@ -42,22 +42,20 @@ const feedbackExample = `.interactive-paper {
 ---
 
 <DocsLayout
-  description="Build tactile component feedback and accessible GSAP choreography with Caderno UI."
+  description="Add optional page animations, scroll reveals, and shared transition timing."
   title="Motion"
 >
   <header class="page-header">
-    <p class="eyebrow">Interaction language</p>
-    <h1>Motion that feels like paper, not a presentation.</h1>
+    <h1>Motion</h1>
     <p>
-      Caderno UI owns the timings, component feedback, and reusable GSAP
-      presets. Applications decide where a sequence belongs without creating a
-      second animation system.
+      Components use CSS transitions. For page animations and scroll reveals,
+      import the optional motion package.
     </p>
   </header>
 
   <DemoFrame
-    description="The same scoped entrance API can be replayed or cleaned up without leaving inline styles behind."
-    title="A short paper-settling sequence"
+    description="Replay the entrance animation."
+    title="Entrance animation"
   >
     <div class="motion-demo">
       <div class="motion-stage" data-motion-stage>
@@ -81,11 +79,10 @@ const feedbackExample = `.interactive-paper {
   </DemoFrame>
 
   <section class="content-section" aria-labelledby="layers-title">
-    <h2 id="layers-title">One system, three layers</h2>
+    <h2 id="layers-title">Choose what to import</h2>
     <p>
-      The dependency boundary follows the size and responsibility of the
-      interaction. Import GSAP-backed motion only when page choreography needs
-      it.
+      CSS transitions need no motion package. Page animations use GSAP; scroll
+      reveals use a separate import.
     </p>
     <div class="motion-layer-grid">
       <article class="motion-layer" data-motion-layer>
@@ -97,52 +94,47 @@ const feedbackExample = `.interactive-paper {
       </article>
       <article class="motion-layer" data-motion-layer>
         <span>Core</span>
-        <h3>Scoped choreography</h3>
+        <h3>Page animations</h3>
         <p>Enter, exit, stagger, replay, and lifecycle cleanup.</p>
       </article>
       <article class="motion-layer" data-motion-layer>
         <span>Scroll</span>
-        <h3>Optional ScrollTrigger</h3>
+        <h3>Scroll reveals</h3>
         <p>One-time section reveals without adding weight to other pages.</p>
       </article>
     </div>
   </section>
 
   <section class="content-section" aria-labelledby="feedback-title">
-    <h2 id="feedback-title">Keep direct feedback in CSS</h2>
+    <h2 id="feedback-title">CSS transitions</h2>
     <p>
-      State changes inside a component should remain fast, interruptible, and
-      available without JavaScript choreography. Semantic tokens preserve one
-      rhythm across every custom element.
+      Use shared timing tokens for hover and press feedback. Respect
+      reduced-motion preferences.
     </p>
     <CodeBlock code={feedbackExample} language="css" />
   </section>
 
   <section class="content-section" aria-labelledby="core-title">
-    <h2 id="core-title">Compose entrances from Caderno UI</h2>
+    <h2 id="core-title">Animate a group</h2>
     <p>
-      The application selects meaningful targets. The package supplies the
-      gesture, stagger, reduced-motion behavior, and cleanup contract.
+      Choose the elements to animate. Call <code>revert()</code> when the page unmounts
+      to restore their original styles.
     </p>
     <CodeBlock code={coreExample} language="typescript" />
   </section>
 
   <section class="content-section" aria-labelledby="scroll-title">
-    <h2 id="scroll-title">Pay for scroll choreography only when needed</h2>
+    <h2 id="scroll-title">Reveal on scroll</h2>
     <p>
-      ScrollTrigger lives in a separate export. Prefer one-time reveals and
-      avoid scroll hijacking or long pinned reading passages.
+      Import scroll reveals separately. Keep reading content visible and avoid
+      taking control of scrolling.
     </p>
     <CodeBlock code={scrollExample} language="typescript" />
   </section>
 
-  <cad-callout
-    heading="Reduced motion is a state, not an edge case"
-    variant="info"
-  >
-    Content starts visible in the document. When reduced motion is requested,
-    the package applies state changes without spatial animation, and component
-    transitions collapse to an effectively instant duration.
+  <cad-callout heading="Reduced motion" variant="info">
+    Content starts visible. Reduced-motion preferences disable movement and
+    shorten transitions.
   </cad-callout>
 
   <style>
@@ -167,7 +159,7 @@ const feedbackExample = `.interactive-paper {
         ),
         var(--cad-surface-sunken);
       border: 1px dashed var(--cad-line-strong);
-      border-radius: 0.75rem 1.2rem 0.85rem 1rem;
+      border-radius: 0;
       overflow: hidden;
     }
 
@@ -180,7 +172,7 @@ const feedbackExample = `.interactive-paper {
       padding: 1.15rem;
       color: #21324d;
       border: 1px solid rgb(33 50 77 / 18%);
-      border-radius: 0.35rem 0.7rem 0.4rem 0.65rem;
+      border-radius: 0;
       box-shadow: 0.45rem 0.55rem 0 rgb(var(--cad-shadow-rgb) / 12%);
     }
 
@@ -243,7 +235,7 @@ const feedbackExample = `.interactive-paper {
         transparent
       );
       border: 1px solid var(--cad-line);
-      border-radius: 0.55rem 0.85rem 0.65rem 0.95rem;
+      border-radius: 0;
       box-shadow: 0.25rem 0.3rem 0 rgb(var(--cad-shadow-rgb) / 8%);
     }
 
@@ -315,3 +307,8 @@ const feedbackExample = `.interactive-paper {
     )
   </script>
 </DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/callout'
+</script>

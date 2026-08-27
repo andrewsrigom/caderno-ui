@@ -9,4 +9,8 @@ export const CadLink = createComponent({
   tagName: 'cad-link',
 })
 
-export type { CadLinkTone, CadLinkVariant } from '@caderno-ui/elements/link'
+export type {
+  CadLinkCurrent,
+  CadLinkTone,
+  CadLinkVariant,
+} from '@caderno-ui/elements/link'

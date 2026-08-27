@@ -8,3 +8,5 @@ export const CadPagination = createComponent({
   react: React,
   tagName: 'cad-pagination',
 })
+
+export type { CadPaginationVariant } from '@caderno-ui/elements/pagination'

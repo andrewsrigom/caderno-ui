@@ -1,0 +1,368 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-header
+  label="Caderno UI documentation header"
+  navigation-label="Documentation"
+  variant="surface"
+>
+  <a class="header-brand" href="/" slot="brand" aria-label="Caderno UI home">
+    <cad-icon name="book" size="28"></cad-icon>
+    <strong>CADERNO UI</strong>
+  </a>
+
+  <span slot="context">Documentation</span>
+  <cad-link aria-current="page" href="/" variant="underline">Home</cad-link>
+  <cad-link href="/components/" variant="plain">Components</cad-link>
+  <cad-link href="/theming/" variant="plain">Theming</cad-link>
+  <cad-link href="/motion/" variant="plain">Motion</cad-link>
+
+  <form class="header-search" role="search" slot="search">
+    <cad-input label="Search documentation" placeholder="Search...">
+      <cad-icon aria-hidden="true" name="search" size="18" slot="prefix"></cad-icon>
+    </cad-input>
+  </form>
+
+  <div class="header-actions" slot="actions">
+    <cad-button label="Theme" size="sm" variant="ghost">
+      <cad-icon aria-hidden="true" name="spark" size="20"></cad-icon>
+    </cad-button>
+    <cad-button label="Notifications" size="sm" variant="ghost">
+      <cad-icon aria-hidden="true" name="bookmark" size="20"></cad-icon>
+    </cad-button>
+  </div>
+
+  <cad-button label="Account: Andrews" size="sm" slot="user" variant="ghost">
+    <cad-avatar name="Andrews Rigom" size="sm"></cad-avatar>
+  </cad-button>
+</cad-header>
+
+<style>
+  .header-brand, .header-actions { display: flex; gap: .6rem; align-items: center; }
+  .header-brand { color: inherit; letter-spacing: .13em; text-decoration: none; }
+  .header-search { min-width: 0; margin: 0; }
+  .header-search cad-input { width: min(13rem, 28vw); }
+  .header-search cad-input::part(label) {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);
+  }
+  .header-actions cad-button::part(base), cad-button[slot="user"]::part(base) {
+    min-width: 2.75rem; padding-inline: .55rem;
+  }
+  cad-button[slot="user"] cad-avatar::part(copy) { display: none; }
+  @media (max-width: 36rem) {
+    .header-search cad-input { width: 2.75rem; }
+    .header-search cad-input::part(control) { width: 0; padding-inline: 0; }
+  }
+</style>
+
+<script type="module">
+  import '@caderno-ui/elements/avatar'
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/header'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/link'
+
+  document.querySelector('.header-search')?.addEventListener('submit', (event) => {
+    event.preventDefault()
+  })
+</script>`
+
+const variantsUsage = `<!-- Glass -->
+<cad-header label="Glass header" navigation-label="Primary" variant="glass">
+  <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+  <cad-link aria-current="page" href="/" variant="underline">Home</cad-link>
+  <cad-link href="/components/" variant="plain">Components</cad-link>
+  <cad-button label="Notifications" slot="actions" variant="ghost">
+    <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+  </cad-button>
+</cad-header>
+
+<!-- Elevated -->
+<cad-header label="Elevated header" navigation-label="Primary" variant="elevated">
+  <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+  <cad-link aria-current="page" href="/" variant="underline">Home</cad-link>
+  <cad-link href="/components/" variant="plain">Components</cad-link>
+  <cad-button label="Notifications" slot="actions" variant="ghost">
+    <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+  </cad-button>
+</cad-header>
+
+<!-- Bold -->
+<cad-header label="Bold header" navigation-label="Primary" variant="bold">
+  <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+  <cad-link aria-current="page" href="/" variant="underline">Home</cad-link>
+  <cad-link href="/components/" variant="plain">Components</cad-link>
+  <cad-button label="Notifications" slot="actions" variant="ghost">
+    <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+  </cad-button>
+</cad-header>
+
+<!-- Minimal -->
+<cad-header label="Minimal header" navigation-label="Primary" variant="minimal">
+  <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+  <cad-link aria-current="page" href="/" variant="underline">Home</cad-link>
+  <cad-link href="/components/" variant="plain">Components</cad-link>
+  <cad-button label="Notifications" slot="actions" variant="ghost">
+    <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+  </cad-button>
+</cad-header>`
+---
+
+<DocsLayout
+  description="Place your brand, navigation, and actions at the top of the page. Add search or account controls when needed."
+  title="Header"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-header&gt;</p>
+    <h1>Header</h1>
+    <p>
+      Place your brand, navigation, and actions at the top of the page. Add
+      search or account controls when needed.
+    </p>
+  </header>
+
+  <DemoFrame title="Product header">
+    <cad-header
+      label="Caderno UI documentation header"
+      navigation-label="Documentation"
+      variant="surface"
+    >
+      <a
+        class="header-brand"
+        href="/"
+        slot="brand"
+        aria-label="Caderno UI home"
+      >
+        <cad-icon name="book" size="28"></cad-icon>
+        <strong>CADERNO UI</strong>
+      </a>
+
+      <span slot="context">Documentation</span>
+      <cad-link aria-current="page" href="/" variant="underline">Home</cad-link>
+      <cad-link href="/components/" variant="plain">Components</cad-link>
+      <cad-link href="/theming/" variant="plain">Theming</cad-link>
+      <cad-link href="/motion/" variant="plain">Motion</cad-link>
+
+      <form class="header-search" role="search" slot="search">
+        <cad-input label="Search documentation" placeholder="Search...">
+          <cad-icon aria-hidden="true" name="search" size="18" slot="prefix"
+          ></cad-icon>
+        </cad-input>
+      </form>
+
+      <div class="header-actions" slot="actions">
+        <cad-button label="Theme" size="sm" variant="ghost">
+          <cad-icon aria-hidden="true" name="spark" size="20"></cad-icon>
+        </cad-button>
+        <cad-button label="Notifications" size="sm" variant="ghost">
+          <cad-icon aria-hidden="true" name="bookmark" size="20"></cad-icon>
+        </cad-button>
+      </div>
+
+      <cad-button
+        label="Account: Andrews"
+        size="sm"
+        slot="user"
+        variant="ghost"
+      >
+        <cad-avatar name="Andrews Rigom" size="sm"></cad-avatar>
+      </cad-button>
+    </cad-header>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery
+    id="header-variants-title"
+    title="Variants"
+    description="Surface is shown above."
+  >
+    <ExampleCard title="Glass" wide>
+      <cad-header
+        class="gallery-header"
+        label="Glass header"
+        navigation-label="Primary"
+        variant="glass"
+      >
+        <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+        <cad-link aria-current="page" href="/" variant="underline"
+          >Home</cad-link
+        >
+        <cad-link href="/components/" variant="plain">Components</cad-link>
+        <cad-button label="Notifications" slot="actions" variant="ghost">
+          <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+        </cad-button>
+      </cad-header>
+    </ExampleCard>
+    <ExampleCard title="Elevated" wide>
+      <cad-header
+        class="gallery-header"
+        label="Elevated header"
+        navigation-label="Primary"
+        variant="elevated"
+      >
+        <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+        <cad-link aria-current="page" href="/" variant="underline"
+          >Home</cad-link
+        >
+        <cad-link href="/components/" variant="plain">Components</cad-link>
+        <cad-button label="Notifications" slot="actions" variant="ghost">
+          <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+        </cad-button>
+      </cad-header>
+    </ExampleCard>
+    <ExampleCard title="Bold" wide>
+      <cad-header
+        class="gallery-header"
+        label="Bold header"
+        navigation-label="Primary"
+        variant="bold"
+      >
+        <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+        <cad-link aria-current="page" href="/" variant="underline"
+          >Home</cad-link
+        >
+        <cad-link href="/components/" variant="plain">Components</cad-link>
+        <cad-button label="Notifications" slot="actions" variant="ghost">
+          <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+        </cad-button>
+      </cad-header>
+    </ExampleCard>
+    <ExampleCard title="Minimal" wide>
+      <cad-header
+        class="gallery-header"
+        label="Minimal header"
+        navigation-label="Primary"
+        variant="minimal"
+      >
+        <a class="header-brand" href="/" slot="brand">CADERNO UI</a>
+        <cad-link aria-current="page" href="/" variant="underline"
+          >Home</cad-link
+        >
+        <cad-link href="/components/" variant="plain">Components</cad-link>
+        <cad-button label="Notifications" slot="actions" variant="ghost">
+          <cad-icon aria-hidden="true" name="bookmark"></cad-icon>
+        </cad-button>
+      </cad-header>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="composition-title">
+    <h2 id="composition-title">Composition</h2>
+    <p>
+      Fill the brand, navigation, context, search, actions, and user slots with
+      your content. Your application handles search, notifications, theme
+      changes, and account menus.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="variants-guidance-title">
+    <h2 id="variants-guidance-title">Variants</h2>
+    <p>
+      <code>surface</code> is the default. <code>glass</code> is translucent, <code
+        >elevated</code
+      > adds a shadow, <code>bold</code> uses a dark surface, and <code
+        >minimal</code
+      > keeps only the bottom border.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="responsive-title">
+    <h2 id="responsive-title">Responsive layout</h2>
+    <p>
+      Navigation collapses into a menu when the container becomes narrow. Brand,
+      search, actions, and account controls remain visible. The breakpoint
+      follows the container, not the viewport.
+    </p>
+  </section>
+
+  <ApiReference tagName="cad-header" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      The compact menu exposes <code>aria-expanded</code> and <code
+        >aria-controls</code
+      >. Escape closes it and restores focus. Navigation stays visible before
+      JavaScript loads. Name any icon-only actions you add.
+    </p>
+  </section>
+</DocsLayout>
+
+<style>
+  .header-brand,
+  .header-actions {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .header-brand {
+    color: inherit;
+    letter-spacing: 0.13em;
+    text-decoration: none;
+  }
+
+  .header-search {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .header-search cad-input {
+    width: min(13rem, 28vw);
+  }
+
+  .header-search cad-input::part(label) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .header-actions cad-button::part(base),
+  cad-button[slot='user']::part(base) {
+    min-width: 2.75rem;
+    padding-inline: 0.55rem;
+  }
+
+  cad-button[slot='user'] cad-avatar::part(copy) {
+    display: none;
+  }
+
+  .gallery-header {
+    width: 100%;
+  }
+
+  @media (width <= 36rem) {
+    .header-search cad-input {
+      width: 2.75rem;
+    }
+
+    .header-search cad-input::part(control) {
+      width: 0;
+      padding-inline: 0;
+    }
+  }
+</style>
+
+<script>
+  import '@caderno-ui/elements/avatar'
+  import '@caderno-ui/elements/button'
+  import '@caderno-ui/elements/header'
+  import '@caderno-ui/elements/icon'
+  import '@caderno-ui/elements/input'
+  import '@caderno-ui/elements/link'
+
+  document
+    .querySelector('.header-search')
+    ?.addEventListener('submit', (event) => {
+      event.preventDefault()
+    })
+</script>

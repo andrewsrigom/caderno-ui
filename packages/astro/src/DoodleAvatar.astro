@@ -1,0 +1,23 @@
+---
+import '@caderno-ui/elements/fallback.css'
+import type {
+  CadDoodleAvatarSize,
+  CadDoodleAvatarVariant,
+} from '@caderno-ui/elements/doodle-avatar'
+
+type Props = {
+  class?: string
+  label?: string
+  size?: CadDoodleAvatarSize
+  variant?: CadDoodleAvatarVariant
+}
+
+const { class: className, label, size = 'md', variant = 'happy' } = Astro.props
+---
+
+<cad-doodle-avatar class={className} label={label} size={size} variant={variant}
+></cad-doodle-avatar>
+
+<script>
+  import '@caderno-ui/elements/doodle-avatar'
+</script>

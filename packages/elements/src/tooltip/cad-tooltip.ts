@@ -25,14 +25,8 @@ export class CadTooltip extends LitElement {
 
   static override styles = css`
     :host {
-      --_tooltip-bg: var(
-        --cad-tooltip-bg,
-        var(--cad-post-it-lemon-bg, #fff1ac)
-      );
-      --_tooltip-ink: var(
-        --cad-tooltip-ink,
-        var(--cad-post-it-lemon-ink, #51491f)
-      );
+      --_tooltip-bg: var(--cad-tooltip-bg, var(--cad-surface, #fff));
+      --_tooltip-ink: var(--cad-tooltip-ink, var(--cad-link, #005bac));
       display: inline-flex;
     }
 
@@ -48,17 +42,19 @@ export class CadTooltip extends LitElement {
       display: none;
       width: max-content;
       max-width: min(16rem, 76vw);
-      padding: 0.45rem 0.7rem 0.5rem;
+      padding: 0.55rem 0.72rem 0.58rem;
       color: var(--_tooltip-ink);
       visibility: hidden;
       background: var(--_tooltip-bg);
-      border: 1px solid color-mix(in srgb, var(--_tooltip-ink) 34%, transparent);
-      border-radius: 0.45rem 0.6rem 0.4rem 0.55rem;
-      box-shadow: 0 0.45rem 0.9rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.14);
+      border: 1.5px solid
+        color-mix(in srgb, var(--_tooltip-ink) 78%, transparent);
+      border-radius: 0;
+      box-shadow: 0.18rem 0.2rem 0
+        color-mix(in srgb, var(--_tooltip-ink) 12%, transparent);
       font-family: var(--cad-font-hand, cursive);
       font-size: var(--cad-hand-sm, 1.05rem);
       font-weight: var(--cad-hand-weight-regular, 500);
-      line-height: 1.2;
+      line-height: 1.3;
       opacity: 0;
       pointer-events: none;
       transition:
@@ -79,11 +75,29 @@ export class CadTooltip extends LitElement {
       transition-delay: 0s;
     }
 
+    .bubble::after {
+      position: absolute;
+      width: 0.55rem;
+      height: 0.55rem;
+      background: var(--_tooltip-bg);
+      content: '';
+      pointer-events: none;
+    }
+
     :host([position='top']) .bubble,
     :host(:not([position])) .bubble {
       bottom: calc(100% + 0.55rem);
       left: 50%;
       transform: translate(-50%, 0.25rem) rotate(-0.3deg);
+    }
+
+    :host([position='top']) .bubble::after,
+    :host(:not([position])) .bubble::after {
+      bottom: -0.35rem;
+      left: 50%;
+      border-right: 1.5px solid var(--_tooltip-ink);
+      border-bottom: 1.5px solid var(--_tooltip-ink);
+      transform: translateX(-50%) rotate(45deg);
     }
 
     :host([position='bottom']) .bubble {
@@ -92,16 +106,40 @@ export class CadTooltip extends LitElement {
       transform: translate(-50%, -0.25rem) rotate(0.3deg);
     }
 
+    :host([position='bottom']) .bubble::after {
+      top: -0.35rem;
+      left: 50%;
+      border-top: 1.5px solid var(--_tooltip-ink);
+      border-left: 1.5px solid var(--_tooltip-ink);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
     :host([position='left']) .bubble {
       top: 50%;
       right: calc(100% + 0.55rem);
       transform: translate(0.25rem, -50%) rotate(-0.3deg);
     }
 
+    :host([position='left']) .bubble::after {
+      top: 50%;
+      right: -0.35rem;
+      border-top: 1.5px solid var(--_tooltip-ink);
+      border-right: 1.5px solid var(--_tooltip-ink);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
     :host([position='right']) .bubble {
       top: 50%;
       left: calc(100% + 0.55rem);
       transform: translate(-0.25rem, -50%) rotate(0.3deg);
+    }
+
+    :host([position='right']) .bubble::after {
+      top: 50%;
+      left: -0.35rem;
+      border-bottom: 1.5px solid var(--_tooltip-ink);
+      border-left: 1.5px solid var(--_tooltip-ink);
+      transform: translateY(-50%) rotate(45deg);
     }
 
     :host([open][position='top']) .bubble,

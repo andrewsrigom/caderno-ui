@@ -1,0 +1,92 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const variants = [
+  'happy',
+  'calm',
+  'curious',
+  'thinking',
+  'focused',
+  'wink',
+  'reading',
+  'coding',
+] as const
+const usage = `<cad-doodle-avatar variant="happy" size="lg" label="Happy profile"></cad-doodle-avatar>
+
+<script type="module">
+  import '@caderno-ui/elements/doodle-avatar'
+</script>`
+---
+
+<DocsLayout
+  description="Add a hand-drawn face on its own or inside an Avatar."
+  title="Doodle avatar"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-doodle-avatar&gt;</p>
+    <h1>Doodle avatar</h1>
+    <p>Add a hand-drawn face on its own or inside an Avatar.</p>
+  </header>
+
+  <DemoFrame title="Character variants">
+    <div class="doodle-grid">
+      {
+        variants.map((variant) => (
+          <figure>
+            <cad-doodle-avatar size="lg" variant={variant} />
+            <figcaption>{variant}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="composition-title">
+    <h2 id="composition-title">With Avatar</h2>
+    <cad-avatar
+      description="Notebook author"
+      name="Ada Lovelace"
+      status="online"
+      status-label="Available"
+    >
+      <cad-doodle-avatar slot="image" variant="happy"></cad-doodle-avatar>
+    </cad-avatar>
+  </section>
+
+  <ApiReference tagName="cad-doodle-avatar" />
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2>
+    <p>
+      Decorative by default. Add <code>label</code> only when the face conveys information
+      not already in nearby text. Leave it unlabelled inside Avatar.
+    </p>
+  </section>
+
+  <style>
+    .doodle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    figure {
+      display: grid;
+      gap: 0.5rem;
+      justify-items: center;
+      margin: 0;
+      font-family: var(--cad-font-ui, sans-serif);
+      font-size: 0.78rem;
+    }
+  </style>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/avatar'
+  import '@caderno-ui/elements/doodle-avatar'
+</script>

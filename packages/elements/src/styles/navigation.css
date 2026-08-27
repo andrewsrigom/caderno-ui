@@ -1,0 +1,62 @@
+/* Navigation for native HTML. No registration or client-side upgrade required.
+ * Apply cad-navigation to a nav, cad-navigation-group to each section, and
+ * cad-navigation-title to its heading. Links retain native URL semantics.
+ */
+.cad-navigation {
+  display: grid;
+  gap: 1.5rem;
+  font-family: var(--cad-type-body-font, serif);
+  font-size: var(--cad-book-sm, 0.95rem);
+  line-height: var(--cad-type-body-line-height, 1.6);
+}
+
+.cad-navigation-group {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.cad-navigation-title {
+  margin: 0 0 0.35rem;
+  padding-inline: 0.65rem;
+  color: var(--cad-ink);
+  font: inherit;
+  font-weight: 700;
+}
+
+.cad-navigation a {
+  display: block;
+  min-width: 0;
+  padding: 0.35rem 0.65rem;
+  overflow-wrap: anywhere;
+  color: var(--cad-ink-soft);
+  text-decoration: none;
+  border-inline-start: 2px solid transparent;
+}
+
+.cad-navigation a:hover {
+  color: var(--cad-link);
+  background: var(--cad-control-hover);
+  text-decoration: underline;
+  text-decoration-color: var(--cad-link-mark);
+  text-underline-offset: 0.2em;
+}
+
+.cad-navigation a[aria-current='page'] {
+  color: var(--cad-link);
+  background: color-mix(in srgb, var(--cad-link) 8%, transparent);
+  border-inline-start-color: var(--cad-link);
+  font-weight: 700;
+}
+
+.cad-navigation a:focus-visible {
+  outline: var(--cad-focus-outline, 2px dashed var(--cad-link));
+  outline-offset: -2px;
+}
+
+@media (forced-colors: active) {
+  .cad-navigation a[aria-current='page'] {
+    color: LinkText;
+    border-inline-start-color: Highlight;
+  }
+}

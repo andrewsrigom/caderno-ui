@@ -41,4 +41,15 @@ describe('cad-textarea', () => {
     element.setCustomValidity('Review this answer.')
     expect(element.validationMessage).toBe('Review this answer.')
   })
+
+  it('supports an inline label and exposes its composed field frame', async () => {
+    const element = document.createElement('cad-textarea')
+    element.label = 'Notes'
+    element.layout = 'inline'
+    document.body.append(element)
+    await element.updateComplete
+
+    expect(element.getAttribute('layout')).toBe('inline')
+    expect(element.shadowRoot?.querySelector('[part="field"]')).not.toBeNull()
+  })
 })

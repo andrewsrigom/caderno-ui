@@ -2,6 +2,8 @@ import { css, html, LitElement, nothing } from 'lit'
 
 export type CadCodeBlockTone =
   'accent' | 'coral' | 'lemon' | 'mint' | 'pink' | 'violet'
+export type CadCodeCopyDetail = { success: boolean }
+export type CadCodeCopyEvent = CustomEvent<CadCodeCopyDetail>
 
 type SyntaxTokenKind =
   | 'attribute'
@@ -152,6 +154,8 @@ function tokenize(line: string, language: string): SyntaxToken[] {
  *
  * @slot - Progressive code content used when `code` is not set.
  * @slot actions - Optional actions such as an application-owned copy button.
+ * @fires cad-code-copy - Reports whether the source was copied to the clipboard.
+ * @csspart copy - Optional compact copy button.
  * @csspart base - Native figure.
  * @csspart code - Native code element.
  * @csspart header - Filename and language metadata.
@@ -170,6 +174,12 @@ function tokenize(line: string, language: string): SyntaxToken[] {
 export class CadCodeBlock extends LitElement {
   static override properties = {
     code: { type: String },
+    copyable: { reflect: true, type: Boolean },
+    copyLabel: { attribute: 'copy-label', type: String },
+    copiedLabel: { attribute: 'copied-label', type: String },
+    copyErrorLabel: { attribute: 'copy-error-label', type: String },
+    copying: { attribute: false, state: true },
+    copyMessage: { attribute: false, state: true },
     filename: { type: String },
     language: { type: String },
     showLineNumbers: {
@@ -217,39 +227,37 @@ export class CadCodeBlock extends LitElement {
       margin: 0;
     }
 
-    figure.has-header {
-      padding-top: 1.2rem;
-    }
-
     .header {
       position: absolute;
       z-index: 1;
-      top: 0;
-      left: 1rem;
-      display: inline-flex;
-      gap: 0.65rem;
+      top: 0.65rem;
+      right: 0.65rem;
+      left: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
       align-items: center;
-      max-width: calc(100% - 2rem);
-      padding: 0.35rem 0.75rem;
-      overflow: hidden;
-      color: var(--_code-accent-ink);
-      background: var(--_code-accent);
-      border-radius: 0.25rem 0.45rem 0.3rem 0.4rem;
-      box-shadow: 0 0.25rem 0.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.12);
-      font-family: var(--cad-font-hand, cursive);
-      font-size: var(--cad-hand-sm, 1.05rem);
-      transform: rotate(-0.5deg);
+      min-width: 0;
+      padding: 0;
+      color: color-mix(in srgb, var(--cad-code-ink, #edf1ff) 72%, transparent);
+      font-family: var(--cad-font-mono, monospace);
+      font-size: 0.7rem;
     }
 
     .filename {
       overflow: hidden;
+      margin-inline-end: auto;
       font-weight: 700;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .language {
+      letter-spacing: 0.06em;
       text-transform: uppercase;
+    }
+
+    .language:first-child {
+      margin-inline-start: auto;
     }
 
     .actions {
@@ -259,14 +267,39 @@ export class CadCodeBlock extends LitElement {
       margin-inline-start: auto;
     }
 
-    ::slotted([slot='actions']) {
-      padding: 0.2rem 0.45rem;
-      color: inherit;
-      background: color-mix(in srgb, currentColor 8%, transparent);
-      border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
-      border-radius: 0.3rem;
+    .copy,
+    ::slotted(button[slot='actions']) {
+      min-height: 1.65rem;
+      min-width: 3.25rem;
+      padding: 0.15rem 0.5rem;
+      color: var(--_code-accent-ink);
+      background: var(--_code-accent);
+      border: 1px solid
+        color-mix(in srgb, var(--_code-accent-ink) 30%, transparent);
+      border-radius: 0;
       cursor: pointer;
-      font: inherit;
+      font-family: var(--cad-font-ui, sans-serif);
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .copy:focus-visible {
+      outline: var(--cad-focus-outline, 2px dashed currentColor);
+      outline-offset: 2px;
+    }
+
+    .copy:disabled {
+      cursor: progress;
+    }
+
+    .copy-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
 
     pre {
@@ -277,9 +310,13 @@ export class CadCodeBlock extends LitElement {
       color: var(--cad-code-ink, #edf1ff);
       background: var(--cad-code-bg, #22283a);
       border: 1px solid color-mix(in srgb, var(--_code-accent) 35%, #22283a);
-      border-radius: 0.65rem 0.85rem 0.7rem 0.8rem;
+      border-radius: 0;
       box-shadow: 0 0.65rem 1.4rem rgb(var(--cad-shadow-rgb, 0 0 0) / 0.16);
       tab-size: 2;
+    }
+
+    figure.has-header pre {
+      padding-top: 3rem;
     }
 
     code {
@@ -336,6 +373,11 @@ export class CadCodeBlock extends LitElement {
     }
 
     @media (forced-colors: active) {
+      .header {
+        color: CanvasText;
+        forced-color-adjust: none;
+      }
+
       pre {
         color: CanvasText;
         background: Canvas;
@@ -350,24 +392,82 @@ export class CadCodeBlock extends LitElement {
   `
 
   declare code: string
+  declare copyable: boolean
+  declare copyLabel: string
+  declare copiedLabel: string
+  declare copyErrorLabel: string
+  declare private copying: boolean
+  declare private copyMessage: string
   declare filename: string
   declare language: string
   declare showLineNumbers: boolean
   declare tone: CadCodeBlockTone
+  private copyTimer: ReturnType<typeof setTimeout> | undefined
 
   constructor() {
     super()
     this.code = ''
+    this.copyable = false
+    this.copyLabel = 'Copy'
+    this.copiedLabel = 'Copied'
+    this.copyErrorLabel = 'Copy failed'
+    this.copying = false
+    this.copyMessage = ''
     this.filename = ''
     this.language = ''
     this.showLineNumbers = false
     this.tone = 'accent'
   }
 
+  override disconnectedCallback(): void {
+    clearTimeout(this.copyTimer)
+    super.disconnectedCallback()
+  }
+
+  async copy(): Promise<boolean> {
+    if (this.copying) return false
+    this.copying = true
+    clearTimeout(this.copyTimer)
+    let success: boolean
+    const source =
+      this.code ||
+      [...this.childNodes]
+        .filter(
+          (node) => !(node instanceof Element) || !node.getAttribute('slot'),
+        )
+        .map((node) => node.textContent ?? '')
+        .join('')
+    try {
+      await navigator.clipboard.writeText(source)
+      success = true
+    } catch {
+      success = false
+    } finally {
+      this.copying = false
+    }
+    this.copyMessage = success ? this.copiedLabel : this.copyErrorLabel
+    this.dispatchEvent(
+      new CustomEvent<CadCodeCopyDetail>('cad-code-copy', {
+        bubbles: true,
+        composed: true,
+        detail: { success },
+      }),
+    )
+    if (this.isConnected) {
+      this.copyTimer = setTimeout(() => {
+        this.copyMessage = ''
+      }, 1800)
+    }
+    return success
+  }
+
   override render() {
     const lines = this.code.replace(/\n$/, '').split('\n')
     const hasHeader =
-      this.filename || this.language || this.querySelector('[slot="actions"]')
+      this.copyable ||
+      this.filename ||
+      this.language ||
+      this.querySelector('[slot="actions"]')
     return html`
       <figure class=${hasHeader ? 'has-header' : ''} part="base">
         <figcaption ?hidden=${!hasHeader} class="header" part="header">
@@ -382,12 +482,26 @@ export class CadCodeBlock extends LitElement {
               : nothing
           }
           <span class="actions">
+            ${
+              this.copyable
+                ? html`<button
+                    class="copy"
+                    part="copy"
+                    type="button"
+                    ?disabled=${this.copying}
+                    @click=${() => this.copy()}
+                  >
+                    ${this.copyMessage || this.copyLabel}
+                  </button>`
+                : nothing
+            }
             <slot
               name="actions"
               @slotchange=${() => this.requestUpdate()}
             ></slot>
           </span>
         </figcaption>
+        <span class="copy-status" role="status">${this.copyMessage}</span>
         <pre part="pre"><code part="code">${
           this.code
             ? this.showLineNumbers

@@ -1,0 +1,139 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-slider
+  hint="Choose how much detail the review should include."
+  label="Review depth"
+  max="100"
+  min="0"
+  name="review-depth"
+  show-value
+  ticks="0,25,50,75,100"
+  value="64"
+></cad-slider>
+
+<script type="module">
+  import '@caderno-ui/elements/slider'
+</script>`
+
+const variantsUsage = `<cad-slider
+  label="Price"
+  max="500"
+  max-label="$500+"
+  min="0"
+  min-label="$0"
+  show-value
+  step="20"
+  ticks="0,100,200,300,400,500"
+  value="120"
+  value-prefix="$"
+></cad-slider>
+
+<cad-slider
+  end-value="80"
+  label="Confidence interval"
+  max="100"
+  min="0"
+  range
+  show-value
+  ticks="0,25,50,75,100"
+  value="20"
+></cad-slider>`
+---
+
+<DocsLayout
+  description="Choose a number or range by dragging a thumb or using the keyboard."
+  title="Slider"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-slider&gt;</p>
+    <h1>Slider</h1>
+    <p>Choose a number or range by dragging a thumb or using the keyboard.</p>
+  </header>
+
+  <DemoFrame title="Review depth">
+    <cad-slider
+      hint="Choose how much detail the review should include."
+      label="Review depth"
+      max="100"
+      min="0"
+      name="review-depth"
+      show-value
+      ticks="0,25,50,75,100"
+      value="64"></cad-slider>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery id="slider-variants-title" title="Units and ranges">
+    <ExampleCard title="Value with units" wide>
+      <cad-slider
+        class="gallery-slider"
+        label="Price"
+        max="500"
+        max-label="$500+"
+        min="0"
+        min-label="$0"
+        show-value
+        step="20"
+        ticks="0,100,200,300,400,500"
+        value="120"
+        value-prefix="$"></cad-slider>
+    </ExampleCard>
+    <ExampleCard title="Two-thumb range" wide>
+      <cad-slider
+        class="gallery-slider"
+        end-value="80"
+        label="Confidence interval"
+        max="100"
+        min="0"
+        range
+        show-value
+        ticks="0,25,50,75,100"
+        value="20"></cad-slider>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="range-title">
+    <h2 id="range-title">Range selection</h2><p>
+      Add <code>range</code> and <code>end-value</code> for two thumbs. Both values
+      submit under the same <code>name</code>; read them with <code
+        >FormData.getAll(name)</code
+      >. Thumbs can meet but cannot cross.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="format-title">
+    <h2 id="format-title">Labels and units</h2><p>
+      Use <code>ticks</code> for stops, <code>min-label</code> and <code
+        >max-label</code
+      > for bounds, and value prefixes or suffixes for units. Labels do not change
+      the numeric value. For exact, unbounded values, use Input.
+    </p>
+  </section>
+
+  <ApiReference tagName="cad-slider" />
+
+  <style>
+    .gallery-slider {
+      width: 100%;
+    }
+  </style>
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2><p>
+      Each thumb uses native <code>input type="range"</code>. Arrows move one
+      step; Shift + Arrow moves ten. Home and End reach the bounds. In range
+      mode, the controls are named minimum and maximum.
+    </p>
+  </section>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/slider'
+</script>

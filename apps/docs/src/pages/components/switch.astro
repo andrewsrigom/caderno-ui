@@ -1,0 +1,120 @@
+---
+import ApiReference from '../../components/ApiReference.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import DemoFrame from '../../components/DemoFrame.astro'
+import ExampleCard from '../../components/ExampleCard.astro'
+import ExampleGallery from '../../components/ExampleGallery.astro'
+import DocsLayout from '../../layouts/DocsLayout.astro'
+
+const usage = `<cad-switch
+  checked
+  hint="Save changes while you work."
+  label="Auto-save"
+  name="auto-save"
+  value="enabled"
+></cad-switch>
+
+<script type="module">
+  import '@caderno-ui/elements/switch'
+</script>`
+
+const variantsUsage = `<cad-switch label="Small off" name="small-off" size="sm"></cad-switch>
+<cad-switch checked label="Small on" name="small-on" size="sm"></cad-switch>
+<cad-switch label="Medium off" name="medium-off" size="md"></cad-switch>
+<cad-switch checked label="Medium on" name="medium-on" size="md"></cad-switch>
+<cad-switch label="Large off" name="large-off" size="lg"></cad-switch>
+<cad-switch checked label="Large on" name="large-on" size="lg"></cad-switch>`
+---
+
+<DocsLayout
+  description="Turn a setting on or off immediately. Use Checkbox for choices submitted with a form."
+  title="Switch"
+>
+  <header class="page-header">
+    <p class="eyebrow">&lt;cad-switch&gt;</p>
+    <h1>Switch</h1>
+    <p>
+      Turn a setting on or off immediately. Use Checkbox for choices submitted
+      with a form.
+    </p>
+  </header>
+
+  <DemoFrame title="Auto-save">
+    <cad-switch
+      checked
+      hint="Save changes while you work."
+      label="Auto-save"
+      name="auto-save"
+      value="enabled"></cad-switch>
+  </DemoFrame>
+  <CodeBlock code={usage} collapsible language="html" />
+
+  <ExampleGallery columns={3} id="switch-sizes-title" title="Sizes">
+    <ExampleCard title="Small">
+      <div class="switch-pair">
+        <cad-switch label="Small off" name="small-off" size="sm"></cad-switch>
+        <cad-switch checked label="Small on" name="small-on" size="sm"
+        ></cad-switch>
+      </div>
+    </ExampleCard>
+    <ExampleCard title="Medium">
+      <div class="switch-pair">
+        <cad-switch label="Medium off" name="medium-off" size="md"></cad-switch>
+        <cad-switch checked label="Medium on" name="medium-on" size="md"
+        ></cad-switch>
+      </div>
+    </ExampleCard>
+    <ExampleCard title="Large">
+      <div class="switch-pair">
+        <cad-switch label="Large off" name="large-off" size="lg"></cad-switch>
+        <cad-switch checked label="Large on" name="large-on" size="lg"
+        ></cad-switch>
+      </div>
+    </ExampleCard>
+  </ExampleGallery>
+  <CodeBlock code={variantsUsage} collapsible language="html" />
+
+  <section class="content-section" aria-labelledby="intent-title">
+    <h2 id="intent-title">When to use it</h2><p>
+      Use Switch for immediate settings, Checkbox for choices submitted
+      together, and Radio for one choice from a group. Never use a switch to
+      confirm an irreversible action.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="appearance-title">
+    <h2 id="appearance-title">Sizes</h2><p>
+      Sizes are <code>sm</code>, <code>md</code>, and <code>lg</code>. Checked
+      is blue; unchecked is neutral. Prefer one size per interface.
+    </p>
+  </section>
+
+  <section class="content-section" aria-labelledby="async-title">
+    <h2 id="async-title">Saving a change</h2><p>
+      Disable the switch while saving. Add a labeled Spinner beside it if
+      feedback is needed; loading is not a Switch state.
+    </p>
+  </section>
+
+  <ApiReference tagName="cad-switch" />
+
+  <style>
+    .switch-pair {
+      display: grid;
+      gap: 0.75rem;
+      justify-self: stretch;
+    }
+  </style>
+
+  <section class="content-section" aria-labelledby="accessibility-title">
+    <h2 id="accessibility-title">Accessibility</h2><p>
+      Uses <code>role="switch"</code> with a visible label and Space-key activation.
+      Supports native form validation and reset. The hit target stays at least 44
+      pixels high, including at the small size.
+    </p>
+  </section>
+</DocsLayout>
+
+<script>
+  import '@caderno-ui/elements/switch'
+</script>

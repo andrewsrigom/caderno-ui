@@ -1,5 +1,39 @@
 # @caderno-ui/astro
 
+## 0.5.0
+
+### Minor Changes
+
+- e18736b: Preserve the default handwritten blue list, individual dashed borders, solid bullets, and circled numbers. Add `compact` to remove row frames and extra spacing without changing the markers. Native editorial lists keep their existing styles.
+
+  Add an `action` slot for a native anchor or button, including router links. The control owns the entire row and its behavior; the list keeps the border and decorative trailing arrow without nesting or proxying controls. Static items have no arrow. The native `href` shortcut remains available. Documentation and React Router integration tests cover static content, navigation, and asynchronous actions.
+
+- e18736b: Consolidate framework integration without changing the visual direction.
+
+  - Require Node 22.12 or newer; verify Node 22/24 and React 18/19.
+  - Publish React component entrypoints with `use client` for App Router consumers.
+  - Map native form `input` and `change` events explicitly. React `onInput` reports editing; `onChange` reports native commitment, unlike React's native text inputs.
+  - Reset form controls to initial properties as well as initial HTML attributes.
+  - Synchronize checkbox state and FormData before dispatching `input`; keep checkbox and switch edit/commit events consistent even when React rerenders between native events.
+  - Do not recreate dismissed toasts or unmounted hosts when asynchronous tasks settle.
+  - Add an isolated Next.js notes example and packed React, Next, Vue and Svelte consumers.
+  - Keep feedback and link inks readable across themes, without out-of-sync palette transitions.
+  - Self-host the existing Caveat typeface in the documentation and examples instead of relying on local font installation.
+
+  See the migration guide for event handling, selective imports and SSR limitations.
+
+### Patch Changes
+
+- e18736b: Expose shared typography classes and align editorial content with component text roles. Code blocks now highlight native server-rendered pre/code content while preserving the source for copying and no-JavaScript reading. Buttons and list links delegate programmatic focus to their native controls.
+
+  Omit false boolean attributes in Astro adapters so breadcrumb links, list items, and form controls keep their intended state.
+
+- Updated dependencies [e18736b]
+- Updated dependencies [e18736b]
+- Updated dependencies [e18736b]
+  - @caderno-ui/elements@0.5.0
+  - @caderno-ui/icons@0.5.0
+
 ## 0.4.1
 
 ### Patch Changes

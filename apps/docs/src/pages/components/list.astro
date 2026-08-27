@@ -4,112 +4,197 @@ import CodeBlock from '../../components/CodeBlock.astro'
 import DemoFrame from '../../components/DemoFrame.astro'
 import DocsLayout from '../../layouts/DocsLayout.astro'
 
-const usage = `<cad-list label="System design topics">
-  <cad-list-item href="#fundamentals">System design fundamentals</cad-list-item>
-  <cad-list-item href="#stories">Behavioral story bank</cad-list-item>
-  <cad-list-item current href="#trade-offs">Concurrency trade-offs</cad-list-item>
-  <cad-list-item href="#caching">Caching strategies</cad-list-item>
-  <cad-list-item disabled>Failure modes</cad-list-item>
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const bullet = `<cad-list label="Review checklist">
+  <cad-list-item>Clear inputs</cad-list-item>
+  <cad-list-item>Predictable results</cad-list-item>
+  <cad-list-item>Useful examples</cad-list-item>
+</cad-list>`
+const numbered = `<cad-list label="Review order" variant="numbered">
+  <cad-list-item>Read the contract.</cad-list-item>
+  <cad-list-item>Check the implementation.</cad-list-item>
+  <cad-list-item>Write down the trade-offs.</cad-list-item>
+</cad-list>`
+const compact = bullet.replace(
+  'label="Review checklist"',
+  'label="Compact checklist" compact',
+)
+const compactNumbered = numbered.replace(
+  'label="Review order"',
+  'label="Compact order" compact',
+)
+const links = `<cad-list label="Related documentation">
+  <cad-list-item><a slot="action" href="${base}/typography/">Typography</a></cad-list-item>
+  <cad-list-item><a slot="action" href="${base}/components/link/">Links</a></cad-list-item>
+  <cad-list-item>
+    <a slot="action" href="${base}/components/">Browse components</a>
+  </cad-list-item>
+</cad-list>`
+const actions = `<cad-list label="Review actions">
+  <cad-list-item><button slot="action" id="list-add-note" type="button">Add note</button></cad-list-item>
+  <cad-list-item><button slot="action" type="button" disabled>Publish review</button></cad-list-item>
 </cad-list>
-
-<cad-list label="Decision process" variant="numbered">
-  <cad-list-item href="#understand">Understand the problem</cad-list-item>
-  <cad-list-item href="#requirements">Define the requirements</cad-list-item>
-  <cad-list-item href="#options">Explore solution options</cad-list-item>
-  <cad-list-item current href="#direction">Choose a direction</cad-list-item>
-  <cad-list-item disabled>Review the outcome</cad-list-item>
-</cad-list>
+<p class="cad-type-meta" id="list-action-status" role="status"></p>`
+const actionScript = `document.querySelector('#list-add-note')?.addEventListener('click', () => {
+  const status = document.querySelector('#list-action-status')
+  if (status) status.textContent = 'Note added.'
+})`
+const imports = {
+  list: "import '@caderno-ui/elements/list'",
+}
+const source = (
+  markup: string,
+  modules: (keyof typeof imports)[] = ['list'],
+  script = '',
+) => `${markup}
 
 <script type="module">
-  import '@caderno-ui/elements/list'
+${modules.map((name) => `  ${imports[name]}`).join('\n')}${script ? `\n\n${script}` : ''}
 </script>`
+const react = `import { Link, useNavigate } from 'react-router'
+import { CadList, CadListItem } from '@caderno-ui/react/list'
+
+// Render inside your router. The application owns saving and navigation.
+export function ReviewActions({ saveReview }: { saveReview: () => Promise<void> }) {
+  const navigate = useNavigate()
+
+  async function saveAndContinue() {
+    await saveReview()
+    navigate('/reviews')
+  }
+
+  return (
+    <CadList label="Review actions">
+      <CadListItem>Two notes ready for review.</CadListItem>
+      <CadListItem><Link slot="action" to="/notes">Open notes</Link></CadListItem>
+      <CadListItem>
+        <button slot="action" type="button" onClick={saveAndContinue}>
+          Save and continue
+        </button>
+      </CadListItem>
+    </CadList>
+  )
+}`
+const astro = `---
+import List from '@caderno-ui/astro/List.astro'
+import ListItem from '@caderno-ui/astro/ListItem.astro'
+---
+
+<List label="Notes">
+  <ListItem>
+    <a {...{ slot: 'action' }} href="/notes">Open notes</a>
+  </ListItem>
+</List>`
 ---
 
 <DocsLayout
-  description="Group related items with bullets, or use numbers when order matters. Items can include links."
+  description="Group related content. Add links or buttons only when an item needs them."
   title="List"
 >
   <header class="page-header">
-    <p class="eyebrow">&lt;cad-list&gt; family</p>
     <h1>List</h1>
     <p>
-      Group related items with bullets, or use numbers when order matters. Items
-      can include links.
+      Group related content. Add links or buttons only when an item needs them.
     </p>
   </header>
 
-  <DemoFrame title="List variants">
-    <div class="list-examples">
-      <section aria-labelledby="bullet-list-title">
-        <h2 id="bullet-list-title">Bullet list</h2>
-        <cad-list label="System design topics">
-          <cad-list-item href="#fundamentals"
-            >System design fundamentals</cad-list-item
-          >
-          <cad-list-item href="#stories">Behavioral story bank</cad-list-item>
-          <cad-list-item current href="#trade-offs"
-            >Concurrency trade-offs</cad-list-item
-          >
-          <cad-list-item href="#caching">Caching strategies</cad-list-item>
-          <cad-list-item disabled>Failure modes</cad-list-item>
-        </cad-list>
-      </section>
-
-      <section aria-labelledby="numbered-list-title">
-        <h2 id="numbered-list-title">Numbered list</h2>
-        <cad-list label="Decision process" variant="numbered">
-          <cad-list-item href="#understand"
-            >Understand the problem</cad-list-item
-          >
-          <cad-list-item href="#requirements"
-            >Define the requirements</cad-list-item
-          >
-          <cad-list-item href="#options">Explore solution options</cad-list-item
-          >
-          <cad-list-item current href="#direction"
-            >Choose a direction</cad-list-item
-          >
-          <cad-list-item disabled>Review the outcome</cad-list-item>
-        </cad-list>
-      </section>
-    </div>
+  <DemoFrame title="Bullets" description="Group related points.">
+    <Fragment set:html={bullet} />
   </DemoFrame>
-  <CodeBlock code={usage} collapsible language="html" />
+  <CodeBlock code={source(bullet)} collapsible language="html" />
 
-  <ApiReference tagName="cad-list" />
-  <ApiReference tagName="cad-list-item" />
+  <DemoFrame title="Numbered" description="Use numbers when order matters.">
+    <Fragment set:html={numbered} />
+  </DemoFrame>
+  <CodeBlock code={source(numbered)} collapsible language="html" />
 
-  <section class="content-section" aria-labelledby="accessibility-title">
-    <h2 id="accessibility-title">Accessibility</h2>
+  <DemoFrame
+    title="Compact bullets"
+    description="Keep the bullets and handwriting. Remove only the borders and extra spacing."
+  >
+    <Fragment set:html={compact} />
+  </DemoFrame>
+  <CodeBlock code={source(compact)} collapsible language="html" />
+
+  <DemoFrame
+    title="Compact numbered"
+    description="The same circled numbers, without the row frames."
+  >
+    <Fragment set:html={compactNumbered} />
+  </DemoFrame>
+  <CodeBlock code={source(compactNumbered)} collapsible language="html" />
+
+  <DemoFrame
+    title="With links"
+    description="Put your link in the action slot. The whole row is the link; the arrow is decorative."
+  >
+    <Fragment set:html={links} />
+  </DemoFrame>
+  <CodeBlock code={source(links)} collapsible language="html" />
+
+  <DemoFrame
+    title="With an action"
+    description="The same framed row with a native button. Your handler owns the action."
+  >
+    <div class="action-example"><Fragment set:html={actions} /></div>
+  </DemoFrame>
+  <CodeBlock
+    code={source(actions, ['list'], actionScript)}
+    collapsible
+    language="html"
+  />
+
+  <section class="content-section" aria-labelledby="react-title">
+    <h2 id="react-title">React and routing</h2>
     <p>
-      Items expose list semantics. Linked rows use native anchors; the current
-      destination uses <code>aria-current</code>. Disabled rows cannot navigate.
+      Put your router’s <code>Link</code> in <code>slot="action"</code>. It
+      remains the actual link, including open-in-new-tab behavior. Use a button
+      when an action needs to run before navigation.
+    </p>
+    <CodeBlock code={react} collapsible language="tsx" />
+  </section>
+
+  <section class="content-section" aria-labelledby="composition-title">
+    <h2 id="composition-title">Composition</h2>
+    <p>
+      Use the default slot for text. The <code>action</code> slot accepts one native
+      anchor or button, including router components that render one. It takes precedence
+      over <code>href</code>; no nested control is created. Set disabled and
+      current states on your control.
+    </p>
+    <p>
+      Static items are not focusable. Native anchors, including server-rendered
+      router links, also work before JavaScript loads.
     </p>
   </section>
 
-  <style>
-    .list-examples {
-      display: grid;
-      gap: 2.5rem;
-    }
+  <section class="content-section" aria-labelledby="astro-title">
+    <h2 id="astro-title">Astro</h2>
+    <p>
+      With the Astro adapter, spread the native slot attribute so Astro does not
+      consume it. With <code>cad-list-item</code> directly, use <code
+        >slot="action"</code
+      > as usual.
+    </p>
+    <CodeBlock code={astro} collapsible language="astro" />
+  </section>
 
-    .list-examples section {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .list-examples h2 {
-      width: fit-content;
-      margin: 0;
-      color: var(--cad-link);
-      border-bottom: 3px solid
-        color-mix(in srgb, var(--cad-link) 55%, transparent);
-      font-family: var(--cad-font-hand);
-      font-size: var(--cad-hand-lg);
-    }
-  </style>
+  <ApiReference tagName="cad-list" />
+  <ApiReference tagName="cad-list-item" />
 </DocsLayout>
+
+<style>
+  .action-example {
+    display: grid;
+    gap: 0.5rem;
+  }
+</style>
 
 <script>
   import '@caderno-ui/elements/list'
+
+  document.querySelector('#list-add-note')?.addEventListener('click', () => {
+    const status = document.querySelector('#list-action-status')
+    if (status) status.textContent = 'Note added.'
+  })
 </script>

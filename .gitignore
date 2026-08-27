@@ -8,5 +8,9 @@ test-results/
 .vitest-attachments/
 **/temp/
 packages/elements/test/__screenshots__/
+packages/react/test/__screenshots__/
 .artifacts/
 *.tsbuildinfo
+.next/
+out/
+next-env.d.ts

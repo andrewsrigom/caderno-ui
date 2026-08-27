@@ -9,6 +9,7 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@fontsource/caveat": "^5.3.0",
     "@caderno-ui/elements": "workspace:^",
     "@caderno-ui/icons": "workspace:^",
     "@caderno-ui/tokens": "workspace:^"

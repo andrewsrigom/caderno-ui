@@ -27,7 +27,7 @@ pnpm verify
 pnpm dev
 ```
 
-Node.js 20 or newer is required. Published packages are ESM-only.
+Node.js 22.12 or newer is required. Published packages are ESM-only.
 
 See the [support policy](./docs/support.md) for the tested Node, browser,
 React, Astro, TypeScript, and compatibility matrix.

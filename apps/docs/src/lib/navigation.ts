@@ -9,11 +9,16 @@ export const navigation = [
       { href: '/motion/', label: 'Motion' },
       { href: '/composition/', label: 'Composition' },
       { href: '/integrations/', label: 'Integrations' },
+      { href: '/quality/', label: 'Validation' },
+      { href: '/case-study/', label: 'Case study' },
     ],
   },
   {
     label: 'Product demo',
-    items: [{ href: '/demo/', label: 'Field Notes' }],
+    items: [
+      { href: '/demo/', label: 'Field Notes' },
+      { href: '/examples/react/', label: 'React / Next.js notes' },
+    ],
   },
   {
     label: 'Components',

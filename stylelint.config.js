@@ -3,6 +3,9 @@ export default {
   ignoreFiles: [
     '**/coverage/**',
     '**/dist/**',
+    '**/out/**',
+    '**/.next/**',
+    '**/.artifacts/**',
     '**/node_modules/**',
     '**/playwright-report/**',
     '**/test-results/**',

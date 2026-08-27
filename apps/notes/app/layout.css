@@ -1,0 +1,50 @@
+/* Page layout only. Component appearance and text roles come from Caderno UI. */
+body {
+  margin: 0;
+}
+
+.notes-main {
+  max-width: 52rem;
+  min-height: 65vh;
+  padding: 2rem 1.25rem;
+  margin-inline: auto;
+}
+
+.notes-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.notes-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notes-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notes-field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.notes-preview {
+  white-space: pre-wrap;
+}
+
+.notes-status {
+  margin: 0;
+}
+
+@media (width <= 30rem) {
+  .notes-main {
+    padding: 1.5rem 1rem;
+  }
+}

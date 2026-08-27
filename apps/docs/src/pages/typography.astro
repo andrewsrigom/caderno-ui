@@ -4,42 +4,38 @@ import DemoFrame from '../components/DemoFrame.astro'
 import ExampleCard from '../components/ExampleCard.astro'
 import ExampleGallery from '../components/ExampleGallery.astro'
 import DocsLayout from '../layouts/DocsLayout.astro'
+import '@caderno-ui/elements/prose.css'
 
-const tokensUsage = `/* One reading family, one handwritten emphasis family, one code family. */
-.page-title {
-  font: 700 var(--cad-type-display-size) / var(--cad-type-display-line-height)
-    var(--cad-type-display-font);
-}
+const proseUsage = `<article class="cad-prose">
+  <h2>Record the decision</h2>
+  <p>Use a <code>Map</code> when repeated lookups need a clear index.</p>
+  <h3>Check the contract</h3>
+  <ul>
+    <li>Define the input.</li>
+    <li>Keep the result predictable.</li>
+  </ul>
+</article>`
 
-.component-title {
-  font: var(--cad-hand-weight-strong) var(--cad-type-title-size) /
-    var(--cad-type-title-line-height) var(--cad-type-title-font);
-}
+const tokensUsage = `<link rel="stylesheet" href="@caderno-ui/tokens/notebook.css" />
+<link rel="stylesheet" href="@caderno-ui/elements/typography.css" />
 
-.body-copy {
-  font: var(--cad-type-body-size) / var(--cad-type-body-line-height)
-    var(--cad-type-body-font);
-}
-
-.metadata {
-  font: var(--cad-type-meta-size) / var(--cad-type-meta-line-height)
-    var(--cad-type-meta-font);
-}
-
-code {
-  font-family: var(--cad-type-code-font);
-  font-size: var(--cad-type-code-size);
-}`
+<h1 class="cad-type-display">Search indexing strategy</h1>
+<h2 class="cad-type-heading">Evidence before implementation</h2>
+<h3 class="cad-type-title">Query latency by option</h3>
+<p class="cad-type-label">Review confidence</p>
+<p class="cad-type-body">Compare query speed, storage cost, and recovery time before choosing an index.</p>
+<p class="cad-type-meta">Updated today · 6 minutes to review</p>
+<code class="cad-type-code">latencyP95 &lt; 100</code>`
 
 const listUsage = `<cad-list label="Architecture topics">
-  <cad-list-item href="#latency">Query latency</cad-list-item>
-  <cad-list-item current href="#indexing">Search indexing</cad-list-item>
-  <cad-list-item href="#recovery">Failure recovery</cad-list-item>
+  <cad-list-item>Query latency</cad-list-item>
+  <cad-list-item>Search indexing</cad-list-item>
+  <cad-list-item>Failure recovery</cad-list-item>
 </cad-list>
 
 <cad-list label="Decision sequence" variant="numbered">
   <cad-list-item>Frame the question</cad-list-item>
-  <cad-list-item current>Compare the evidence</cad-list-item>
+  <cad-list-item>Compare the evidence</cad-list-item>
   <cad-list-item>Record the decision</cad-list-item>
 </cad-list>`
 ---
@@ -77,43 +73,43 @@ const listUsage = `<cad-list label="Architecture topics">
 
   <DemoFrame
     title="Typographic roles"
-    description="Use these tokens in components and page content."
+    description="Import typography.css and apply a text role to any HTML element."
   >
     <div class="type-specimens">
-      <div class="type-specimen type-display">
+      <div class="type-specimen">
         <span>Display</span>
-        <p>Search indexing strategy</p>
+        <p class="cad-type-display">Search indexing strategy</p>
       </div>
-      <div class="type-specimen type-heading">
+      <div class="type-specimen">
         <span>Section heading</span>
-        <p>Evidence before implementation</p>
+        <p class="cad-type-heading">Evidence before implementation</p>
       </div>
-      <div class="type-specimen type-title">
+      <div class="type-specimen">
         <span>Component title</span>
-        <p>Query latency by option</p>
+        <p class="cad-type-title">Query latency by option</p>
       </div>
-      <div class="type-specimen type-label">
+      <div class="type-specimen">
         <span>Label and emphasis</span>
-        <p>Review confidence</p>
+        <p class="cad-type-label">Review confidence</p>
       </div>
-      <div class="type-specimen type-body">
+      <div class="type-specimen">
         <span>Body and UI</span>
-        <p>
+        <p class="cad-type-body">
           Compare query speed, storage cost, and recovery time before choosing
           an index.
         </p>
       </div>
-      <div class="type-specimen type-meta">
+      <div class="type-specimen">
         <span>Metadata</span>
-        <p>Updated today · 6 minutes to review</p>
+        <p class="cad-type-meta">Updated today · 6 minutes to review</p>
       </div>
-      <div class="type-specimen type-code">
+      <div class="type-specimen">
         <span>Code</span>
-        <p><code>latencyP95 &lt; 100</code></p>
+        <p class="cad-type-code"><code>latencyP95 &lt; 100</code></p>
       </div>
     </div>
   </DemoFrame>
-  <CodeBlock code={tokensUsage} collapsible language="css" />
+  <CodeBlock code={tokensUsage} collapsible language="html" />
 
   <ExampleGallery
     id="structured-lists-title"
@@ -122,20 +118,31 @@ const listUsage = `<cad-list label="Architecture topics">
   >
     <ExampleCard title="Bullet list">
       <cad-list label="Architecture topics">
-        <cad-list-item href="#latency">Query latency</cad-list-item>
-        <cad-list-item current href="#indexing">Search indexing</cad-list-item>
-        <cad-list-item href="#recovery">Failure recovery</cad-list-item>
+        <cad-list-item>Query latency</cad-list-item>
+        <cad-list-item>Search indexing</cad-list-item>
+        <cad-list-item>Failure recovery</cad-list-item>
       </cad-list>
     </ExampleCard>
     <ExampleCard title="Numbered list">
       <cad-list label="Decision sequence" variant="numbered">
         <cad-list-item>Frame the question</cad-list-item>
-        <cad-list-item current>Compare the evidence</cad-list-item>
+        <cad-list-item>Compare the evidence</cad-list-item>
         <cad-list-item>Record the decision</cad-list-item>
       </cad-list>
     </ExampleCard>
   </ExampleGallery>
   <CodeBlock code={listUsage} collapsible language="html" />
+
+  <DemoFrame
+    title="Article content"
+    description="Import prose.css for headings, paragraphs, links, and native lists. Use components for notes, code blocks, and accordions."
+  >
+    <article
+      class="cad-prose"
+      set:html={proseUsage.replace(/^<article[^>]*>\n|\n<\/article>$/g, '')}
+    />
+  </DemoFrame>
+  <CodeBlock code={proseUsage} collapsible language="html" />
 
   <section class="content-section" aria-labelledby="stroke-title">
     <h2 id="stroke-title">Borders and underlines</h2>
@@ -183,53 +190,6 @@ const listUsage = `<cad-list label="Architecture topics">
 
     .type-specimen p {
       margin: 0;
-    }
-
-    .type-display p {
-      font-family: var(--cad-type-display-font);
-      font-size: clamp(2.25rem, 6vw, 4.25rem);
-      font-weight: 700;
-      line-height: var(--cad-type-display-line-height);
-      letter-spacing: -0.04em;
-    }
-
-    .type-heading p {
-      font-family: var(--cad-type-heading-font);
-      font-size: var(--cad-type-heading-size);
-      font-weight: 700;
-      line-height: var(--cad-type-heading-line-height);
-    }
-
-    .type-title p {
-      color: var(--cad-link);
-      font-family: var(--cad-type-title-font);
-      font-size: var(--cad-type-title-size);
-      font-weight: var(--cad-hand-weight-strong);
-      line-height: var(--cad-type-title-line-height);
-    }
-
-    .type-label p {
-      color: var(--cad-link);
-      font-family: var(--cad-type-label-font);
-      font-size: var(--cad-type-label-size);
-      font-weight: var(--cad-hand-weight-strong);
-    }
-
-    .type-body p {
-      max-width: 58ch;
-      font: var(--cad-type-body-size) / var(--cad-type-body-line-height)
-        var(--cad-type-body-font);
-    }
-
-    .type-meta p {
-      color: var(--cad-ink-muted);
-      font: var(--cad-type-meta-size) / var(--cad-type-meta-line-height)
-        var(--cad-type-meta-font);
-    }
-
-    .type-code code {
-      font-family: var(--cad-type-code-font);
-      font-size: var(--cad-type-code-size);
     }
 
     .stroke-grid {

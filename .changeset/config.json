@@ -13,7 +13,11 @@
       "@caderno-ui/tokens"
     ]
   ],
-  "ignore": ["@caderno-ui/docs", "@caderno-ui/laboratory"],
+  "ignore": [
+    "@caderno-ui/docs",
+    "@caderno-ui/laboratory",
+    "@caderno-ui/notes-example"
+  ],
   "linked": [],
   "privatePackages": {
     "tag": false,

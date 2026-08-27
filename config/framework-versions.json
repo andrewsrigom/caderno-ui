@@ -1,0 +1,10 @@
+{
+  "react": "19.2.8",
+  "reactMinimum": "18.3.1",
+  "next": "16.3.3",
+  "vue": "3.5.42",
+  "svelte": "5.56.10",
+  "vuePlugin": "6.0.8",
+  "sveltePlugin": "7.3.0",
+  "vite": "8.2.2"
+}

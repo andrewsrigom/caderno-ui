@@ -1,108 +1,35 @@
 ---
-import CodeBlock from '../components/CodeBlock.astro'
 import DocsLayout from '../layouts/DocsLayout.astro'
-
-const nativeExample = `<cad-alert heading="Saved" variant="success">
-  Your notes have been saved.
-</cad-alert>
-
-<script type="module">
-  import '@caderno-ui/tokens/notebook.css'
-  import '@caderno-ui/elements/alert'
-</script>`
-
-const reactExample = `import { CadAlert } from '@caderno-ui/react/alert'
-import { CadBookmark } from '@caderno-ui/react/bookmark'
-import '@caderno-ui/tokens/notebook.css'
-
-export function Notes() {
-  return (
-    <>
-      <CadAlert heading="Saved" variant="success">
-        Your notes have been saved.
-      </CadAlert>
-      <CadBookmark
-        bookmarkId="react-notes"
-        label="Save note"
-        onBookmarkChange={(event) => console.log(event.detail)}
-      />
-    </>
-  )
-}`
-
-const astroExample = `---
-import Alert from '@caderno-ui/astro/Alert.astro'
-import Bookmark from '@caderno-ui/astro/Bookmark.astro'
-import '@caderno-ui/tokens/notebook.css'
----
-
-<Alert heading="Review reminder" variant="info">
-  Review your notes before the meeting.
-</Alert>
-<Bookmark bookmarkId="astro-notes" label="Save note" />`
-
-const vueExample = `// vite.config.ts
-import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('cad-'),
-        },
-      },
-    }),
-  ],
-})
-
-// main.ts
-import '@caderno-ui/elements/alert'
-import '@caderno-ui/tokens/notebook.css'`
+import { integrations } from '../lib/integrations'
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 ---
 
 <DocsLayout
-  description="Use Caderno UI as native custom elements or through its React and Astro adapters."
   title="Integrations"
+  description="Choose a framework. Keep one component implementation."
 >
   <header class="page-header">
-    <h1>Integrations</h1>
-    <p>
-      Use <code>cad-*</code> elements in HTML, Vue, or Svelte. React and Astro also
-      have dedicated adapters.
+    <h1>Integrations</h1><p>
+      Choose a framework. The components, tokens and behavior stay the same.
     </p>
   </header>
-
-  <section class="content-section" aria-labelledby="native-title">
-    <h2 id="native-title">HTML &amp; JavaScript</h2>
-    <p>
-      These examples use a build tool that resolves package imports, such as
-      Vite.
-    </p>
-    <CodeBlock code={nativeExample} language="html" />
+  <section class="content-section" aria-label="Frameworks">
+    <ul>
+      {
+        Object.entries(integrations).map(([key, guide]) => (
+          <li>
+            <a href={`${base}/integrations/${key}/`}>{guide.title}</a> —{' '}
+            {guide.description}
+          </li>
+        ))
+      }
+    </ul>
   </section>
-
-  <section class="content-section" aria-labelledby="react-title">
-    <h2 id="react-title">React</h2>
-    <p>Use the React adapter for typed properties and event callbacks.</p>
-    <CodeBlock code={reactExample} language="tsx" />
-  </section>
-
-  <section class="content-section" aria-labelledby="astro-title">
-    <h2 id="astro-title">Astro</h2>
-    <p>
-      Astro adapters render fallback HTML and register the components they use.
+  <section class="content-section">
+    <h2>Working examples</h2><p>
+      <a href={`${base}/examples/react/`}>React / Next.js notes</a> · <a
+        href={`${base}/integrations/recipes/`}>Copyable recipes</a
+      > · <a href={`${base}/quality/`}>Validation and limitations</a>
     </p>
-    <CodeBlock code={astroExample} language="astro" />
-  </section>
-
-  <section class="content-section" aria-labelledby="vue-title">
-    <h2 id="vue-title">Vue</h2>
-    <p>
-      Configure the <code>cad-</code> prefix as custom elements, then use the tags
-      in Vue templates.
-    </p>
-    <CodeBlock code={vueExample} language="typescript" />
   </section>
 </DocsLayout>

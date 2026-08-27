@@ -13,6 +13,9 @@ export default tseslint.config(
       '**/coverage/**',
       '**/dist/**',
       '**/.astro/**',
+      '**/.next/**',
+      '**/out/**',
+      '**/next-env.d.ts',
       '**/.artifacts/**',
       '**/node_modules/**',
       '**/playwright-report/**',
@@ -58,7 +61,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['fixtures/consumers/**/*.{cts,mts,ts,tsx}'],
+    files: ['fixtures/**/*.{cts,mts,ts,tsx}'],
     ...tseslint.configs.disableTypeChecked,
   },
   {

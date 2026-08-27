@@ -1,0 +1,93 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+const form = `'use client'
+import { useState } from 'react'
+import { CadInput } from '@caderno-ui/react/input'
+import { CadButton } from '@caderno-ui/react/button'
+
+export function NoteForm() {
+  const [title, setTitle] = useState('')
+  return <form onReset={() => setTitle('')} onSubmit={(event) => {
+    event.preventDefault()
+    console.log(Object.fromEntries(new FormData(event.currentTarget)))
+  }}>
+    <CadInput label="Title" name="title" required value={title}
+      onInput={(event) => setTitle(event.currentTarget.value)} />
+    <CadButton type="reset">Reset</CadButton>
+    <CadButton type="submit">Save</CadButton>
+  </form>
+}`
+const navigation = `import { Link, useNavigate } from 'react-router'
+import { CadList, CadListItem } from '@caderno-ui/react/list'
+
+// Render inside your application's Router.
+export function NoteLinks() {
+  const navigate = useNavigate()
+  return <CadList label="Notes">
+    <CadListItem>A plain item, without navigation.</CadListItem>
+    <CadListItem><Link slot="action" to="/notes">Open notes</Link></CadListItem>
+    <CadListItem><button slot="action" onClick={() => navigate('/new')}>Create note</button></CadListItem>
+  </CadList>
+}`
+const modal = `'use client'
+import { useState } from 'react'
+import { CadButton } from '@caderno-ui/react/button'
+import { CadModal } from '@caderno-ui/react/modal'
+
+export function Review() {
+  const [open, setOpen] = useState(false)
+  return <>
+    <CadButton onClick={() => setOpen(true)}>Review note</CadButton>
+    <CadModal heading="Review note" open={open} onModalClose={() => setOpen(false)}>
+      <p>Check the title before saving.</p>
+      <CadButton slot="footer" onClick={() => setOpen(false)}>Keep editing</CadButton>
+    </CadModal>
+  </>
+}`
+const feedback = `'use client'
+import { CadButton } from '@caderno-ui/react/button'
+import { CadToastHost, toast } from '@caderno-ui/react/toast'
+
+export function Save({ save }: { save: () => Promise<void> }) {
+  return <>
+    <CadToastHost id="save-feedback" />
+    <CadButton onClick={() => toast.promise(save, {
+      hostId: 'save-feedback', loading: 'Saving…',
+      success: 'Saved', error: 'Could not save. Try again.',
+    })}>Save</CadButton>
+  </>
+}`
+---
+
+<DocsLayout
+  title="Recipes"
+  description="Forms, navigation, modal and async feedback with the public React API."
+>
+  <header class="page-header">
+    <h1>Recipes</h1><p>
+      Import shared styles once. These examples use the public React API.
+    </p>
+  </header>
+  <section class="content-section">
+    <h2>Controlled form</h2><p>
+      Use onInput for editing. Keep the form’s reset state in sync.
+    </p><CodeBlock code={form} language="tsx" />
+  </section>
+  <section class="content-section">
+    <h2>Consumer-owned navigation</h2><p>
+      The action slot adds row layout, not navigation logic.
+    </p><CodeBlock code={navigation} language="tsx" />
+  </section>
+  <section class="content-section">
+    <h2>Modal</h2><p>
+      Escape and the close button emit onModalClose. The library restores focus.
+    </p><CodeBlock code={modal} language="tsx" />
+  </section>
+  <section class="content-section">
+    <h2>Async toast</h2><p>
+      One notification moves from loading to success or error. Dismissing it or
+      unmounting its host prevents it from reappearing when the task finishes.
+    </p><CodeBlock code={feedback} language="tsx" />
+  </section>
+</DocsLayout>

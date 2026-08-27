@@ -1,0 +1,64 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'
+import CodeBlock from '../../components/CodeBlock.astro'
+import { integrations, styles } from '../../lib/integrations'
+
+export function getStaticPaths() {
+  return Object.entries(integrations).map(([framework, guide]) => ({
+    params: { framework },
+    props: { guide, framework },
+  }))
+}
+const { guide, framework } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+---
+
+<DocsLayout title={guide.title} description={guide.description}>
+  <header class="page-header">
+    <h1>{guide.title}</h1><p>{guide.description}</p>
+  </header>
+  <section class="content-section">
+    <h2>Install</h2><CodeBlock code={guide.install} language="bash" />
+  </section>
+  <section class="content-section">
+    <h2>Styles and fonts</h2>
+    <p>
+      Load once at the application root. White is the default; set
+      data-theme="dark" for dark mode. Typography comes from the shared tokens.
+    </p>
+    <CodeBlock code={styles} language="typescript" />
+  </section>
+  <section class="content-section">
+    <h2>Contract</h2><ul>{guide.notes.map((note) => <li>{note}</li>)}</ul>
+  </section>
+  {
+    (framework === 'react' || framework === 'next') && (
+      <section class="content-section">
+        <>
+          <h2>Try it</h2>
+          <p>
+            <a href={`${base}/examples/react/`}>
+              Open the React / Next.js notes example
+            </a>
+            . Create, edit and delete notes stored only in this browser.
+          </p>
+        </>
+        <p>
+          <a href={`${base}/integrations/recipes/`}>
+            Form, navigation, modal and async toast recipes
+          </a>
+        </p>
+      </section>
+    )
+  }
+  <section class="content-section">
+    <h2>Example</h2><CodeBlock code={guide.example} language={guide.language} />
+  </section>
+  <section class="content-section">
+    <h2>Scope</h2><p>
+      Import components individually. Charts and motion remain optional. See <a
+        href={`${base}/quality/`}>validation and limitations</a
+      > for the tested combinations.
+    </p>
+  </section>
+</DocsLayout>

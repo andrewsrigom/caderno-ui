@@ -1,0 +1,55 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+---
+
+<DocsLayout
+  title="Building Caderno UI"
+  description="From a product's notebook interface to a shared component library."
+>
+  <header class="page-header">
+    <h1>Building Caderno UI</h1><p>
+      A shared library for interfaces that feel like personal notes on white
+      paper.
+    </p>
+  </header>
+  <section class="content-section">
+    <h2>The problem</h2><p>
+      SeniorPath needed a consistent reading and annotation interface. Keeping a
+      separate catalog and local component styles in the app made changes
+      diverge.
+    </p>
+  </section>
+  <section class="content-section">
+    <h2>The decisions</h2><ul>
+      <li>
+        Keep behavior and styling in Lit custom elements. React and Astro
+        translate framework contracts; they do not duplicate components.
+      </li>
+      <li>
+        Use slots for product content and consumer-owned navigation. A list item
+        should not decide which router an app uses.
+      </li>
+      <li>
+        Share white surfaces, blue ink, handwriting and border tokens. Preserve
+        readable native content before JavaScript.
+      </li>
+      <li>
+        Offer selective imports. Charts and motion are optional dependencies of
+        the experience, not every button.
+      </li>
+    </ul>
+  </section>
+  <section class="content-section">
+    <h2>Use and evidence</h2><p>
+      SeniorPath is the real Astro consumer. This documentation also uses the
+      library. A <a href={`${base}/examples/react/`}
+        >small React / Next.js notes app</a
+      > exercises forms, navigation, confirmation and feedback.
+    </p><p>
+      <a href={`${base}/quality/`}
+        >See the validation scope and remaining limits</a
+      >. Package, browser and integration checks run before publication.
+    </p>
+  </section>
+</DocsLayout>

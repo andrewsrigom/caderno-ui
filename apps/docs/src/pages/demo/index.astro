@@ -225,14 +225,18 @@ const toUrl = (href: string) => `${base}${href}`
           <cad-link href={toUrl('/demo/notes/')}>View all</cad-link>
         </div>
         <cad-list label="Latest notes">
-          <cad-list-item href={toUrl('/demo/notes/#index-rollout')}>
-            Index rollout boundary
+          <cad-list-item>
+            <a href={toUrl('/demo/notes/#index-rollout')}
+              >Index rollout boundary</a
+            >
           </cad-list-item>
-          <cad-list-item href={toUrl('/demo/notes/#story-bank-rule')}>
-            Story bank rule
+          <cad-list-item>
+            <a href={toUrl('/demo/notes/#story-bank-rule')}>Story bank rule</a>
           </cad-list-item>
-          <cad-list-item href={toUrl('/demo/notes/#examples-contract')}>
-            Examples are contracts
+          <cad-list-item>
+            <a href={toUrl('/demo/notes/#examples-contract')}
+              >Examples are contracts</a
+            >
           </cad-list-item>
         </cad-list>
       </div>

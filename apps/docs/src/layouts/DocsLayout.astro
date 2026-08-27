@@ -1,6 +1,11 @@
 ---
+import '@fontsource/caveat/latin-500.css'
+import '@fontsource/caveat/latin-700.css'
+import handRegular from '@fontsource/caveat/files/caveat-latin-500-normal.woff2?url'
+import handStrong from '@fontsource/caveat/files/caveat-latin-700-normal.woff2?url'
 import '@caderno-ui/tokens/notebook.css'
 import '@caderno-ui/elements/scrollbar.css'
+import '@caderno-ui/elements/typography.css'
 import '../styles/global.css'
 
 import Button from '@caderno-ui/astro/Button.astro'
@@ -31,6 +36,20 @@ const socialImage = new URL(`${base}/og.png`, Astro.site)
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#ffffff" />
+    <link
+      rel="preload"
+      href={handRegular}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={handStrong}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="canonical" href={Astro.url} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />

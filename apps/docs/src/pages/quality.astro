@@ -1,0 +1,63 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro'
+---
+
+<DocsLayout
+  title="Validation"
+  description="Tested contracts and the limits of this release."
+>
+  <header class="page-header">
+    <h1>Validation</h1><p>Compatibility is tested, not assumed.</p>
+  </header>
+  <section class="content-section">
+    <h2>Release checks</h2><ul>
+      <li>
+        Packaged exports, types and selective imports. Consumers install
+        tarballs outside the workspace.
+      </li>
+      <li>
+        React 18/19: controlled forms, native events, reset, FormData, refs,
+        router links and Strict Mode cleanup.
+      </li>
+      <li>
+        Next.js 16 / React 19: App Router, request-time SSR, hydration and the
+        complete notes flow.
+      </li>
+      <li>
+        Vue 3 / Svelte 5: properties, events and slots in executable Vite
+        consumers.
+      </li>
+      <li>
+        Chromium, Firefox and WebKit: keyboard, focus and component behavior.
+        Automated accessibility checks accompany visual regression tests.
+      </li>
+      <li>Node 22/24 in CI; minimum tooling version 22.12.</li>
+    </ul><p>
+      <a
+        href="https://github.com/andrewsrigom/caderno-ui/actions/workflows/ci.yml"
+        >Inspect CI results</a
+      >
+    </p>
+  </section>
+  <section class="content-section">
+    <h2>Limits</h2><ul>
+      <li>
+        Client boundaries preserve server-rendered slotted HTML, not Lit
+        shadow-root SSR. Internal form controls need JavaScript.
+      </li>
+      <li>
+        The public notes app is a static export, not a running Next.js server.
+        Its local data never leaves the browser.
+      </li>
+      <li>
+        Nuxt, SvelteKit, new framework adapters and 1.0 API stability are not
+        part of this release.
+      </li>
+      <li>
+        Automated accessibility checks do not establish screen-reader
+        compatibility. NVDA, VoiceOver and JAWS combinations are not advertised
+        as verified without a recorded manual session.
+      </li>
+    </ul>
+  </section>
+</DocsLayout>

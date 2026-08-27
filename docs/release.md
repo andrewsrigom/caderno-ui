@@ -11,6 +11,11 @@ Run `pnpm release:dry-run` locally before a high-risk release. Local execution
 can never publish; the publishing path requires the trusted GitHub Actions
 environment.
 
+Before publishing, the release script also runs the production documentation
+tests and packed consumer checks for React 18 / Astro 5 / TypeScript 5 and
+React 19 / Astro 7 / TypeScript 6. Compatibility failures stop the release;
+they must not rely only on the separate CI workflow.
+
 ## Failure and recovery
 
 npm versions are immutable, so there is no transactional rollback across the

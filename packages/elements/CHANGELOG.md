@@ -4,6 +4,9 @@
 
 ### Minor Changes
 
+- Keep form-control declarations compatible with TypeScript 5 and 6 by using
+  the platform `ShadowRootInit` contract for focus delegation.
+
 - 64d9a4a: Add `cad-drawer` as a modal edge panel with four placements, three sizes, focus restoration, scroll locking, and typed lifecycle events across Elements, React, and Astro.
 
   Add the standalone `cad-doodle-avatar`, composable `cad-list`, form-associated `cad-switch`, single-value or range `cad-slider`, and top-layer `cad-popover` components, expose them through the Elements, React, and Astro entrypoints, refine the notebook visual language across form controls, navigation, content, and data-display components, rework `cad-highlight` with native marker, underline, and double-stroke treatments in seven tones, redesign `cad-spinner` with semantic tones, four sizes, and seven indeterminate motion treatments, rebuild `cad-steps` around explicit progress states, circular markers, responsive orientations, and composable marker and status slots, simplify `cad-progress` around native horizontal progress with sizes and semantic tones, and remove the redundant `cad-paper` and `cad-tape` public components.

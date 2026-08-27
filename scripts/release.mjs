@@ -15,8 +15,12 @@ const packageDirectories = [
   'tokens',
 ]
 
-function run(command, arguments_) {
-  execFileSync(command, arguments_, { cwd: root, stdio: 'inherit' })
+function run(command, arguments_, environment = {}) {
+  execFileSync(command, arguments_, {
+    cwd: root,
+    env: { ...process.env, ...environment },
+    stdio: 'inherit',
+  })
 }
 
 function isPublished(name, version) {
@@ -33,6 +37,12 @@ function isPublished(name, version) {
 }
 
 run('pnpm', ['verify'])
+run('pnpm', ['test:docs'])
+run('pnpm', ['test:consumers'])
+run('pnpm', ['test:consumers'], {
+  ASTRO_VERSION: '5.18.2',
+  REACT_VERSION: '18.3.1',
+})
 
 const packsDirectory = path.join(root, '.artifacts/packs')
 const packedFiles = (await readdir(packsDirectory))

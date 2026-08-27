@@ -664,14 +664,7 @@ export class CadCheckbox extends LitElement {
     // (undocumented)
     setCustomValidity(message: string): void;
     // (undocumented)
-    static shadowRootOptions: {
-        delegatesFocus: boolean;
-        clonable?: boolean;
-        customElementRegistry?: CustomElementRegistry | null;
-        mode: ShadowRootMode;
-        serializable?: boolean;
-        slotAssignment?: SlotAssignmentMode;
-    };
+    static shadowRootOptions: ShadowRootInit;
     // (undocumented)
     static styles: CSSResult;
     // (undocumented)
@@ -1459,14 +1452,7 @@ export class CadInput extends LitElement {
     // (undocumented)
     setCustomValidity(message: string): void;
     // (undocumented)
-    static shadowRootOptions: {
-        delegatesFocus: boolean;
-        clonable?: boolean;
-        customElementRegistry?: CustomElementRegistry | null;
-        mode: ShadowRootMode;
-        serializable?: boolean;
-        slotAssignment?: SlotAssignmentMode;
-    };
+    static shadowRootOptions: ShadowRootInit;
     // (undocumented)
     size: CadInputSize;
     // (undocumented)
@@ -2177,14 +2163,7 @@ export class CadRadio extends LitElement {
     // (undocumented)
     setCustomValidity(message: string): void;
     // (undocumented)
-    static shadowRootOptions: {
-        delegatesFocus: boolean;
-        clonable?: boolean;
-        customElementRegistry?: CustomElementRegistry | null;
-        mode: ShadowRootMode;
-        serializable?: boolean;
-        slotAssignment?: SlotAssignmentMode;
-    };
+    static shadowRootOptions: ShadowRootInit;
     // (undocumented)
     static styles: CSSResult;
     // (undocumented)
@@ -2358,14 +2337,7 @@ export class CadSlider extends LitElement {
     // (undocumented)
     setCustomValidity(message: string): void;
     // (undocumented)
-    static shadowRootOptions: {
-        delegatesFocus: boolean;
-        clonable?: boolean;
-        customElementRegistry?: CustomElementRegistry | null;
-        mode: ShadowRootMode;
-        serializable?: boolean;
-        slotAssignment?: SlotAssignmentMode;
-    };
+    static shadowRootOptions: ShadowRootInit;
     // (undocumented)
     showValue: boolean;
     // (undocumented)
@@ -2650,14 +2622,7 @@ export class CadSwitch extends LitElement {
     // (undocumented)
     setCustomValidity(message: string): void;
     // (undocumented)
-    static shadowRootOptions: {
-        delegatesFocus: boolean;
-        clonable?: boolean;
-        customElementRegistry?: CustomElementRegistry | null;
-        mode: ShadowRootMode;
-        serializable?: boolean;
-        slotAssignment?: SlotAssignmentMode;
-    };
+    static shadowRootOptions: ShadowRootInit;
     // (undocumented)
     size: CadSwitchSize;
     // (undocumented)
@@ -3083,14 +3048,7 @@ export class CadTextarea extends LitElement {
     // (undocumented)
     setCustomValidity(message: string): void;
     // (undocumented)
-    static shadowRootOptions: {
-        delegatesFocus: boolean;
-        clonable?: boolean;
-        customElementRegistry?: CustomElementRegistry | null;
-        mode: ShadowRootMode;
-        serializable?: boolean;
-        slotAssignment?: SlotAssignmentMode;
-    };
+    static shadowRootOptions: ShadowRootInit;
     // (undocumented)
     static styles: CSSResult;
     // (undocumented)

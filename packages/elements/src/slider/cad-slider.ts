@@ -40,7 +40,7 @@ let sliderId = 0
 export class CadSlider extends LitElement {
   static formAssociated = true
 
-  static override shadowRootOptions = {
+  static override shadowRootOptions: ShadowRootInit = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   }

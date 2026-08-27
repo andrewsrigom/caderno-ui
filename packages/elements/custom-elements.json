@@ -3316,7 +3316,7 @@
               "kind": "field",
               "name": "shadowRootOptions",
               "type": {
-                "text": "object"
+                "text": "ShadowRootInit"
               },
               "static": true,
               "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
@@ -6906,7 +6906,7 @@
               "kind": "field",
               "name": "shadowRootOptions",
               "type": {
-                "text": "object"
+                "text": "ShadowRootInit"
               },
               "static": true,
               "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
@@ -10675,7 +10675,7 @@
               "kind": "field",
               "name": "shadowRootOptions",
               "type": {
-                "text": "object"
+                "text": "ShadowRootInit"
               },
               "static": true,
               "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
@@ -11391,7 +11391,7 @@
               "kind": "field",
               "name": "shadowRootOptions",
               "type": {
-                "text": "object"
+                "text": "ShadowRootInit"
               },
               "static": true,
               "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
@@ -13165,7 +13165,7 @@
               "kind": "field",
               "name": "shadowRootOptions",
               "type": {
-                "text": "object"
+                "text": "ShadowRootInit"
               },
               "static": true,
               "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
@@ -14748,7 +14748,7 @@
               "kind": "field",
               "name": "shadowRootOptions",
               "type": {
-                "text": "object"
+                "text": "ShadowRootInit"
               },
               "static": true,
               "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"

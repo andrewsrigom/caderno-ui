@@ -23,7 +23,7 @@ let switchId = 0
 export class CadSwitch extends LitElement {
   static formAssociated = true
 
-  static override shadowRootOptions = {
+  static override shadowRootOptions: ShadowRootInit = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   }

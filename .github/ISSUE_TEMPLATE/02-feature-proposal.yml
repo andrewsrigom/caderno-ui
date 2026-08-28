@@ -1,0 +1,33 @@
+name: Feature proposal
+description: Describe a use case that the current API does not cover.
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please write in English and check existing issues first.
+        Proposals are open for discussion, not commitments to implement. Agree on scope with a maintainer before starting a new component or API change.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should this solve?
+      description: Describe a reusable UI need, independent of a particular application.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example use case
+      description: Show a small example or explain how someone would use the feature.
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Suggested approach
+      description: Optional API or behavior ideas. A complete design is not required.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Can existing components, slots, or native HTML cover the use case? What is missing?

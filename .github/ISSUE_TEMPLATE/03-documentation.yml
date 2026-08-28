@@ -1,0 +1,28 @@
+name: Documentation or example
+description: Report unclear guidance or suggest a useful example.
+labels: ['documentation']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please write in English and check existing issues first.
+        Keep examples self-contained and based on public Caderno UI APIs.
+  - type: input
+    id: location
+    attributes:
+      label: Page, component, or topic
+      description: Link to the page, name the component, or describe the missing topic.
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: What should improve?
+      description: Explain what is unclear, incorrect, or missing and what the reader should be able to do.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Suggested example or wording
+      description: Optional code or replacement text. Include the framework and version when relevant.

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://andrewsrigom.github.io/caderno-ui/
+    about: Component APIs, framework guides, and working examples.
+  - name: Report a security vulnerability
+    url: https://github.com/andrewsrigom/caderno-ui/security/advisories/new
+    about: Report vulnerabilities privately. Do not include secrets or personal data.

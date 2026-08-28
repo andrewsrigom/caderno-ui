@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a reproducible problem with a component or package.
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please write in English and check existing issues first.
+        Share only public code and non-sensitive data. For security vulnerabilities, use [private reporting](https://github.com/andrewsrigom/caderno-ui/security/advisories/new).
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Describe what happened and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How can we reproduce it?
+      description: Include a small code example or public reproduction link, plus the steps to trigger the problem.
+    validations:
+      required: true
+  - type: input
+    id: packages
+    attributes:
+      label: Caderno UI packages and versions
+      description: Include the affected component or import path. For unreleased code, provide the commit.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser or Node.js version, operating system, and framework/version if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional details
+      description: Optional screenshots, errors, or accessibility details such as keyboard steps and screen-reader version.

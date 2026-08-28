@@ -14,10 +14,6 @@ Built with web components. React and Astro have dedicated adapters; Vue and Svel
 
 ## Install
 
-The docs and demos include the upcoming 0.5 release. npm currently provides
-0.4.1; see the [release status](https://github.com/andrewsrigom/caderno-ui/pull/3)
-before using the new integration contracts.
-
 For an existing Vite project, with Node.js 22.12 or newer:
 
 ```sh

@@ -39,8 +39,9 @@ Documentation can deploy before npm publication. Keep the release-status
 notice in the README and Getting started page until the candidate is published;
 remove it after confirming all six package versions on npm.
 
-See the [0.5.0 candidate validation record](validation/0.5.0.md) for the local
-results and outstanding manual verification.
+See the [0.5.1 release record](validation/0.5.1.md) for delivery evidence and
+the maintainer-approved exception for unperformed manual accessibility checks.
+The [0.5.0 candidate record](validation/0.5.0.md) retains the earlier results.
 
 `pnpm docs:check` includes the Next.js static export under
 `/caderno-ui/examples/react/`. The hosted example must not be described as an

@@ -96,6 +96,7 @@ export class CadKanbanColumn extends LitElement {
       color: var(--cad-link, #005bac);
     }
     .column {
+      box-sizing: border-box;
       position: relative;
       min-height: 100%;
       padding: 0.75rem 0.9rem 0.95rem 1rem;
@@ -204,6 +205,7 @@ export class CadKanban extends LitElement {
   static override styles = css`
     :host {
       display: block;
+      min-width: 0;
       max-width: 100%;
     }
     .board {

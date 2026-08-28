@@ -185,7 +185,7 @@ export class CadButton extends LitElement {
       background-color: color-mix(
         in srgb,
         var(--_button-bg) 82%,
-        var(--_button-ink)
+        var(--cad-surface, #fff)
       );
       box-shadow: none;
     }

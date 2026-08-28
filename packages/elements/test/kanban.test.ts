@@ -40,4 +40,31 @@ describe('cad-kanban', () => {
     await nextFrame()
     expect(column.count).toBe(1)
   })
+
+  it('contains horizontal overflow inside a grid without adding vertical scrolling', async () => {
+    const container = document.createElement('div')
+    container.style.cssText = 'display: grid; width: 320px;'
+    const board = document.createElement('cad-kanban')
+    for (const title of ['To do', 'In progress', 'Done']) {
+      const column = document.createElement('cad-kanban-column')
+      column.title = title
+      board.append(column)
+    }
+    container.append(board)
+    document.body.append(container)
+    await nextFrame()
+
+    const viewport =
+      board.shadowRoot!.querySelector<HTMLElement>('[part="board"]')!
+    expect(container.scrollWidth).toBeLessThanOrEqual(container.clientWidth)
+    expect(viewport.scrollWidth).toBeGreaterThan(viewport.clientWidth)
+    expect(viewport.scrollHeight).toBeLessThanOrEqual(viewport.clientHeight + 1)
+
+    const card = document.createElement('cad-kanban-card')
+    card.textContent = 'A task with enough detail to wrap inside the column.'
+    board.querySelector('cad-kanban-column')!.append(card)
+    await nextFrame()
+    expect(container.scrollWidth).toBeLessThanOrEqual(container.clientWidth)
+    expect(viewport.scrollHeight).toBeLessThanOrEqual(viewport.clientHeight + 1)
+  })
 })

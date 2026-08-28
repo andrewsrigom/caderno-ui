@@ -53,9 +53,9 @@ project is below `1.0`.
 
 React component entrypoints are client boundaries, not a Lit SSR renderer.
 Server output preserves slotted HTML; internal controls require browser upgrade.
-The hosted notes example is a static export. A separate request-time Next.js
-server fixture proves the SSR path. Nuxt, SvelteKit and additional adapters are
-not included in this matrix.
+The hosted notes app and Kanban board are static exports. A separate
+request-time Next.js server fixture tests the SSR path. Nuxt, SvelteKit and
+additional adapters are not included in this matrix.
 
 Screen-reader combinations require recorded manual verification. Automated axe,
 keyboard and platform tests do not establish NVDA, VoiceOver or JAWS support.

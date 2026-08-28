@@ -1,5 +1,15 @@
 # @caderno-ui/astro
 
+## 0.5.1
+
+### Patch Changes
+
+- 54d511a: Clarify package READMEs and replace abstract example text with note-taking scenarios. No API, style, or behavior changes.
+- Updated dependencies [4976e28]
+- Updated dependencies [54d511a]
+  - @caderno-ui/elements@0.5.1
+  - @caderno-ui/icons@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes

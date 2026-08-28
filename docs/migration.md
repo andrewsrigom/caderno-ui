@@ -1,4 +1,4 @@
-# SeniorPath migration
+# Migration guide
 
 ## Upgrading from 0.4 to 0.5
 
@@ -26,7 +26,7 @@
 ## Upgrading from 0.3 to 0.4
 
 Update all installed `@caderno-ui/*` packages to `0.4.0` together. Keep imports
-selective and use the published packages in SeniorPath; a local link is only
+selective and use the published packages in your application; a local link is only
 an opt-in development workflow.
 
 - White is now the default theme. Set `data-theme="dark"` explicitly for dark
@@ -56,9 +56,10 @@ directory or reuse the developer's browser storage.
 
 ## Consumer boundary
 
-SeniorPath keeps product content, routes and application layout. Components,
-typography, tokens and interactions come from Caderno UI. New shared fixes must
-land in the library and be demonstrated there before updating the consumer.
+Applications own product content, routes, and layout. Components, typography,
+tokens, and interactions come from Caderno UI. Report shared defects with a
+self-contained reproduction using the public library API, without requiring
+access to a particular application.
 Vue and Svelte currently use native custom elements, without new adapters.
 
 ## Acceptance checks for every component

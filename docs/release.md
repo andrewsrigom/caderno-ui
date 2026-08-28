@@ -19,17 +19,13 @@ they must not rely only on the separate CI workflow.
 The gate also runs React 18/19 browser consumers and Next.js 16 static/SSR
 consumers, plus Vue 3 and Svelte 5 property/event/slot checks in Chromium,
 Firefox and WebKit. All consumers install exact tarballs in fresh OS temporary
-directories. Laboratory tests use port 5198, docs use 5187, framework consumers
-use 5192–5194, and the isolated SeniorPath candidate uses 5196.
+directories. Laboratory tests use port 5198, docs use 5187, and framework
+consumers use 5192–5194. All release checks run from this repository's public
+fixtures; no consuming application or private content is required.
 
-Before publication, run `node scripts/check-senior-consumer.mjs <checkout>`.
-It copies tracked/non-ignored SeniorPath source, installs the candidate tarballs,
-and exercises the library integration with disposable content. It does not run
-the separate editorial-catalog unit suite against private production data.
-Documentation tests also serve a disposable copy of the build, without taking
-over the developer's Astro preview.
-After publication, update the product's dependencies and remove development
-overrides. Never run fixture generation against the user's active content.
+Documentation tests serve a disposable copy of the build, without taking over
+an interactive preview. Downstream applications own their integration checks
+and dependency upgrades. Never run fixture generation against real user data.
 
 The automated gate does not replace the [manual accessibility checks](accessibility.md).
 Record their results before authorizing publication. A successful dry run is a

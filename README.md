@@ -67,7 +67,7 @@ During 0.x, minor releases may include breaking changes. Check the [migration gu
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for local setup, checks, and changesets. You do not need to clone this repository to use the library.
+Start with a [good first issue](https://github.com/andrewsrigom/caderno-ui/labels/good%20first%20issue), or help with examples, tests, and accessibility checks. See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup and pull request guidance.
 
 ## License
 

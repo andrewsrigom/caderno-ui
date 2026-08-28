@@ -2,6 +2,13 @@
 
 This repository is the canonical implementation and distribution workspace for Caderno UI.
 
+## Library independence
+
+- Runtime code, contribution instructions, and release checks must not depend on a particular consuming application or private repository.
+- Use the public documentation, examples, and isolated fixtures in this repository to reproduce and verify changes. Downstream applications own their integration checks.
+- Write documentation, issues, templates, and pull requests in English. Keep proposals separate from accepted contribution tasks.
+- Historical case studies and validation records may identify consumers; they are evidence, not prerequisites for working on the library.
+
 ## Public contracts
 
 - Custom-element tags use the `cad-` prefix.
@@ -21,7 +28,7 @@ This repository is the canonical implementation and distribution workspace for C
 - Build the documentation shell and reusable UI with published Caderno UI components or public CSS patterns. Keep page content, layout, and demo scenarios local.
 - Fix missing behavior in the canonical element and its adapters, not with documentation-only component overrides.
 - Use selective runtime imports. A type-only import does not register an element.
-- Run `pnpm docs:check` and `pnpm test:docs` after shared documentation changes. The latter uses an isolated production preview on port 5187 and fresh browser contexts; never seed, clear, or reuse the developer's SeniorPath or demo storage.
+- Run `pnpm docs:check` and `pnpm test:docs` after shared documentation changes. The latter uses an isolated production preview on port 5187 and fresh browser contexts; never seed, clear, or reuse a developer's application or demo storage.
 
 ## Documentation writing
 

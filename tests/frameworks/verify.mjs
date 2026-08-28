@@ -4,6 +4,7 @@ import { mkdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { chromium, firefox, webkit, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+import { verifyKanbanFlow } from './kanban.mjs'
 
 export async function verifyFrameworks({ evidence, next }) {
   await mkdir(evidence, { recursive: true })
@@ -23,7 +24,11 @@ export async function verifyFrameworks({ evidence, next }) {
     const contexts = [context]
     let page = await context.newPage()
     const errors = []
+    const failedRequests = []
     const observeErrors = (observed) => {
+      observed.on('requestfailed', (request) => {
+        failedRequests.push({ url: request.url(), failure: request.failure() })
+      })
       observed.on('pageerror', (error) => errors.push(error.message))
       observed.on('console', (message) => {
         if (message.type() === 'error')
@@ -198,6 +203,7 @@ export async function verifyFrameworks({ evidence, next }) {
         }
       }
       if (next) {
+        await verifyKanbanFlow(page, 'http://127.0.0.1:5193/')
         await page.goto('http://127.0.0.1:5193/server-check/')
         await expect(
           page.getByRole('textbox', { name: 'Server value' }),
@@ -376,6 +382,10 @@ export async function verifyFrameworks({ evidence, next }) {
         contexts.push(staticContext)
         page = await staticContext.newPage()
         observeErrors(page)
+        await verifyKanbanFlow(
+          page,
+          'http://127.0.0.1:5194/caderno-ui/examples/react/',
+        )
         await page.goto('http://127.0.0.1:5194/caderno-ui/examples/react/')
         await expect(
           page.getByRole('heading', { name: 'No notes yet' }),
@@ -413,7 +423,7 @@ export async function verifyFrameworks({ evidence, next }) {
       }
       assert.deepEqual(errors, [], `${name}: console or hydration errors`)
       console.log(
-        `${name}: React, Vue, Svelte${next ? ', Next SSR and notes flow' : ''} passed.`,
+        `${name}: React, Vue, Svelte${next ? ', Next SSR, notes and Kanban flows' : ''} passed.`,
       )
     } catch (error) {
       await page.screenshot({
@@ -421,6 +431,7 @@ export async function verifyFrameworks({ evidence, next }) {
         fullPage: true,
       })
       console.error('Browser errors:', errors)
+      console.error('Failed requests:', failedRequests)
       throw error
     } finally {
       await Promise.all(contexts.map((item) => item.close()))

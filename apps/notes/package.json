@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "test": "node --experimental-strip-types --test test/storage.test.mjs",
+    "test": "node --experimental-strip-types --test test/*.test.mjs",
     "build": "next build",
     "dev": "next dev --hostname 127.0.0.1 --port 5190",
     "typecheck": "tsc --noEmit"

@@ -18,6 +18,7 @@ export const navigation = [
     items: [
       { href: '/demo/', label: 'Field Notes' },
       { href: '/examples/react/', label: 'React / Next.js notes' },
+      { href: '/examples/react/kanban/', label: 'React / Next.js Kanban' },
     ],
   },
   {

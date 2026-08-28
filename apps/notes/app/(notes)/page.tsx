@@ -1,4 +1,4 @@
-import { NotesList } from './notes-list'
+import { NotesList } from '../notes-list'
 
 export default function Page() {
   return (

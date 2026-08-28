@@ -10,7 +10,6 @@ import '@caderno-ui/elements/fallback.css'
 import '@caderno-ui/elements/prose.css'
 import '@caderno-ui/elements/scrollbar.css'
 import './layout.css'
-import { NotesProvider } from './notes-provider'
 
 export const metadata: Metadata = {
   title: { default: 'Notes · Caderno UI', template: '%s · Caderno UI Notes' },
@@ -27,6 +26,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             Caderno Notes
           </Link>
           <Link href="/">All notes</Link>
+          <Link href="/kanban/">Kanban</Link>
           <a
             slot="actions"
             href="https://andrewsrigom.github.io/caderno-ui/integrations/react/"
@@ -35,11 +35,12 @@ export default function Layout({ children }: { children: ReactNode }) {
           </a>
         </CadHeader>
         <main id="content" className="notes-main">
-          <NotesProvider>{children}</NotesProvider>
+          {children}
         </main>
         <CadFooter variant="minimal" label="About this example">
           <p slot="bottom" className="cad-type-meta">
-            Built with Caderno UI + Next.js. Notes stay in this browser.
+            Built with Caderno UI + Next.js. Notes and tasks stay in this
+            browser.
           </p>
         </CadFooter>
       </body>

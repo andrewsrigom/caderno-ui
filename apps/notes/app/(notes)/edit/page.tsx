@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { NoteEditor } from './note-editor'
+import { NoteEditor } from '../../edit/note-editor'
 
 export const metadata = { title: 'Edit note' }
 

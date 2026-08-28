@@ -51,7 +51,7 @@ Each guide covers installation, styles, events, slots, and limitations:
 - [Astro](https://andrewsrigom.github.io/caderno-ui/integrations/astro/)
 - [Vue](https://andrewsrigom.github.io/caderno-ui/integrations/vue/) and [Svelte](https://andrewsrigom.github.io/caderno-ui/integrations/svelte/)
 
-For a complete example, try the [React / Next.js notes app](https://andrewsrigom.github.io/caderno-ui/examples/react/). It stores notes locally in your browser.
+Try the React / Next.js [notes app](https://andrewsrigom.github.io/caderno-ui/examples/react/) or [Kanban board](https://andrewsrigom.github.io/caderno-ui/examples/react/kanban/). Both store data locally in your browser.
 
 ## Customization
 

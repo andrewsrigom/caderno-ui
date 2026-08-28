@@ -12,7 +12,9 @@ body {
 
 .notes-stack {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .notes-actions {
@@ -41,6 +43,23 @@ body {
 
 .notes-status {
   margin: 0;
+}
+
+.notes-main:has(.kanban-page) {
+  max-width: 76rem;
+}
+
+.kanban-card-content {
+  display: grid;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.kanban-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
 }
 
 @media (width <= 30rem) {

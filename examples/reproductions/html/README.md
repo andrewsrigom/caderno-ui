@@ -15,7 +15,7 @@ A standalone starter project for reproducing Caderno UI bugs without cloning or 
    npm install
    ```
 
-   *(or `pnpm install` / `yarn install`)*
+   _(or `pnpm install` / `yarn install`)_
 
 3. Start the Vite development server:
 

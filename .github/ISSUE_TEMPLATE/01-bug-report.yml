@@ -18,7 +18,7 @@ body:
     id: reproduction
     attributes:
       label: How can we reproduce it?
-      description: Include a small code example or public reproduction link, plus the steps to trigger the problem.
+      description: Include a small code example or public reproduction link, plus the steps to trigger the problem. You can copy the [HTML reproduction starter](https://github.com/andrewsrigom/caderno-ui/tree/main/examples/reproductions/html) as a standalone sandbox or minimal base.
     validations:
       required: true
   - type: input

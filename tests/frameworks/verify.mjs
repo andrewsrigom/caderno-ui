@@ -209,11 +209,13 @@ export async function verifyFrameworks({ evidence, next }) {
           page.getByRole('textbox', { name: 'Server value' }),
         ).toHaveValue('From the server')
         const first = await page.locator('[data-server-render]').textContent()
+        await page.waitForLoadState('networkidle')
         await page.reload()
         assert.notEqual(
           await page.locator('[data-server-render]').textContent(),
           first,
         )
+        await page.waitForLoadState('networkidle')
         await page.goto('http://127.0.0.1:5193/')
         await expect(
           page.getByRole('heading', { name: 'No notes yet' }),
@@ -235,6 +237,7 @@ export async function verifyFrameworks({ evidence, next }) {
         await expect(
           page.getByRole('link', { name: 'A useful decision', exact: true }),
         ).toBeVisible()
+        await page.waitForLoadState('networkidle')
         await page.reload()
         await page
           .getByRole('link', { name: 'A useful decision', exact: true })
@@ -290,6 +293,7 @@ export async function verifyFrameworks({ evidence, next }) {
         await expect(
           page.getByRole('heading', { name: 'No notes yet' }),
         ).toBeVisible()
+        await page.waitForLoadState('networkidle')
         await page.reload()
         await expect(
           page.getByRole('heading', { name: 'No notes yet' }),
@@ -335,6 +339,7 @@ export async function verifyFrameworks({ evidence, next }) {
         await expect(
           failurePage.getByRole('textbox', { name: 'Title', exact: true }),
         ).toHaveValue('Keep my draft')
+        await failurePage.waitForLoadState('networkidle')
         await failureContext.close()
 
         const corruptContext = await browser.newContext()
@@ -370,11 +375,13 @@ export async function verifyFrameworks({ evidence, next }) {
           ),
           'invalid data',
         )
+        await corruptPage.waitForLoadState('networkidle')
         await corruptContext.close()
 
         // The actual static hosting path must work with reload and client navigation.
         // It is a different deployment, not a cross-origin navigation inside the
         // SSR app. Finish its page before starting a separate browsing context.
+        await page.waitForLoadState('networkidle')
         await page.close()
         const staticContext = await browser.newContext({
           viewport: { width: 1280, height: 900 },
@@ -401,6 +408,7 @@ export async function verifyFrameworks({ evidence, next }) {
         await expect(
           page.getByRole('link', { name: 'Static export note', exact: true }),
         ).toBeVisible()
+        await page.waitForLoadState('networkidle')
         await page.reload()
         await page
           .getByRole('link', { name: 'Static export note', exact: true })
@@ -411,6 +419,7 @@ export async function verifyFrameworks({ evidence, next }) {
         await expect(
           page.getByRole('textbox', { name: 'Title', exact: true }),
         ).toHaveValue('Static export note')
+        await page.waitForLoadState('networkidle')
         await page.reload()
         await expect(
           page.getByRole('textbox', { name: 'Title', exact: true }),

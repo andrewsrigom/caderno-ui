@@ -65,6 +65,9 @@ export async function verifyKanbanFlow(page, base) {
   await expect(
     page.getByRole('button', { name: 'Edit Review the examples', exact: true }),
   ).toBeFocused()
+  // Assertions above establish UI readiness. Finish pending route requests before
+  // deliberately unloading the document; console errors remain checked separately.
+  await page.waitForLoadState('networkidle')
   await page.reload()
   await expect(done.locator('cad-kanban-card')).toHaveCount(1)
   await expect(done.getByText('Check the copyable snippets.')).toBeVisible()
@@ -88,6 +91,8 @@ export async function verifyKanbanFlow(page, base) {
   await expect(
     page.getByRole('button', { name: 'New task', exact: true }),
   ).toBeFocused()
+  await page.waitForLoadState('networkidle')
   await page.reload()
   await expect(page.getByText('No tasks yet.', { exact: false })).toBeVisible()
+  await page.waitForLoadState('networkidle')
 }

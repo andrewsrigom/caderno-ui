@@ -71,4 +71,10 @@ export default tseslint.config(
       globals: globals.node,
     },
   },
+  {
+    files: ['examples/reproductions/html/**/*.js'],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
 )

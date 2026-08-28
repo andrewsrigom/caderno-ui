@@ -1,5 +1,11 @@
 # @caderno-ui/tokens
 
+## 0.5.1
+
+### Patch Changes
+
+- 54d511a: Clarify package READMEs and replace abstract example text with note-taking scenarios. No API, style, or behavior changes.
+
 ## 0.5.0
 
 ### Minor Changes

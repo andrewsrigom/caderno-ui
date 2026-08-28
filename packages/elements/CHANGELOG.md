@@ -1,5 +1,13 @@
 # @caderno-ui/elements
 
+## 0.5.1
+
+### Patch Changes
+
+- 4976e28: Keep primary button text readable on hover. Fix unnecessary vertical scrolling in Kanban columns and allow boards to shrink inside grid layouts.
+- 54d511a: Clarify package READMEs and replace abstract example text with note-taking scenarios. No API, style, or behavior changes.
+- @caderno-ui/icons@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes

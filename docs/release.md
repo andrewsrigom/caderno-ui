@@ -35,6 +35,10 @@ The automated gate does not replace the [manual accessibility checks](accessibil
 Record their results before authorizing publication. A successful dry run is a
 package verification result, not evidence of NVDA or VoiceOver testing.
 
+Documentation can deploy before npm publication. Keep the release-status
+notice in the README and Getting started page until the candidate is published;
+remove it after confirming all six package versions on npm.
+
 See the [0.5.0 candidate validation record](validation/0.5.0.md) for the local
 results and outstanding manual verification.
 

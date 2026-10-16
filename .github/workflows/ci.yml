@@ -47,7 +47,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm check:packages
       - name: Upload validated tarballs
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: packed-packages
           path: .artifacts/packs/*.tgz
@@ -131,7 +131,7 @@ jobs:
       - run: pnpm test:visual
       - name: Upload failure evidence
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: visual-failure
           path: test-results
@@ -178,7 +178,7 @@ jobs:
           REACT_VERSION: ${{ matrix.react }}
       - name: Upload framework evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: framework-react-${{ matrix.react }}
           path: .artifacts/framework-*/evidence

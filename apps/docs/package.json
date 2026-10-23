@@ -17,8 +17,8 @@
     "@caderno-ui/tokens": "workspace:^"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "astro": "^7.2.4",
-    "typescript": "^6.0.3"
+    "@astrojs/check": "^0.9.11",
+    "astro": "^7.4.1",
+    "typescript": "^7.0.2"
   }
 }
